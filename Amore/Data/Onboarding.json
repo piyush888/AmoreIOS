@@ -1,0 +1,20 @@
+[
+ {
+     "id":"OnboardingView1",
+     "onboardingtitle" : "Algorithm",
+     "onboardingtext" : "Users going through a vetting process to ensure you never match with bots",
+     "image":"onboarding_girl1",
+ },
+ {
+     "id":"OnboardingView2",
+     "onboardingtitle" : "Matches",
+     "onboardingtext" : "We match you with people that have a large array of similar interests",
+     "image":"onboarding_girl2",
+ },
+ {
+     "id":"OnboardingView3",
+     "onboardingtitle" : "Premium",
+     "onboardingtext" : "Sign up today and enjoy the first month of premium benefits on us",
+     "image":"onboarding_girl3",
+ }
+]
