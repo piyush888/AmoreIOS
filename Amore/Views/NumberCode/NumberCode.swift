@@ -22,8 +22,27 @@ struct NumberCode: View {
                     .font(.BoardingTitle)
                     .padding(.bottom, 10)
                 
-                Text("\(phoneNumber)")
-                    .foregroundColor(.pink)
+                HStack {
+                        
+                    Button {
+                        //TODO
+                    } label: {
+                        Text("\(phoneNumber)")
+                            .foregroundColor(.pink)
+                    }
+                    
+                    Spacer()
+                    
+                    Button {
+                        //TODO
+                    } label: {
+                        Text("Send Again")
+                         .foregroundColor(.black)
+                    }
+                }.padding(.top,20)
+                
+                
+                
             }
             .padding(.top, 100)
             
@@ -46,7 +65,7 @@ struct NumberCode: View {
             
             Spacer()
         }
-        .padding(.horizontal,80)
+        .padding(.horizontal,130)
         
     }
 }

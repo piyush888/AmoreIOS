@@ -14,7 +14,8 @@ struct AmoreApp: App {
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
 //           Number(viewType: "Sign Up")
-            NumberCode(phoneNumber: "5516971888")
+//            NumberCode(phoneNumber: "5516971888")
+            ProfileView()
         }
     }
 }
