@@ -13,7 +13,8 @@ struct AmoreApp: App {
         WindowGroup {
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
-            Number(viewType: "Sign Up")
+//           Number(viewType: "Sign Up")
+            NumberCode(phoneNumber: "5516971888")
         }
     }
 }

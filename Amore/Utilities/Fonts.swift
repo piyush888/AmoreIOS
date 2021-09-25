@@ -13,6 +13,10 @@ extension Font {
     public static var BoardingTitle: Font {
         return Font.custom("Sk-Modernist-Bold", size: 24)
     }
+    
+    public static var BoardingTitle2: Font {
+        return Font.custom("Sk-Modernist-Bold", size: 20)
+    }
 
     public static var BoardingSubHeading: Font {
         return Font.custom("Sk-Modernist-Regular", size: 14)

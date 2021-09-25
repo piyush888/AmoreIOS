@@ -12,8 +12,6 @@ import SwiftUI
 
 struct Number: View {
     
-    var viewType: String
-    
     @State var phoneNumber = String()
     let phoneNumberKit = PhoneNumberKit()
     @State private var validationError = false
@@ -22,7 +20,7 @@ struct Number: View {
     var body: some View {
         
         VStack(alignment:.leading) {
-            Text(viewType)
+            Text("My number is")
                 .font(.BoardingTitle)
                 .padding(.bottom,20)
             
@@ -76,6 +74,6 @@ struct Number: View {
 
 struct Number_Previews: PreviewProvider {
     static var previews: some View {
-        Number(viewType:"Sign Up")
+        Number()
     }
 }
