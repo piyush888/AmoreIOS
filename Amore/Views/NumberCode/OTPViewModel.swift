@@ -8,13 +8,20 @@
 import SwiftUI
 class OTPViewModel: ObservableObject {
     
+    var verificationCode: Binding<String> = .constant("")
+    
+    func updateEnteredVerificationCode() {
+        self.verificationCode.wrappedValue = String(Array(otpField))
+    }
+    
     @Published var otpField = "" {
         didSet {
-            guard otpField.count <= 4,
+            guard otpField.count <= 6,
                   otpField.last?.isNumber ?? true else {
                 otpField = oldValue
                 return
             }
+            updateEnteredVerificationCode()
         }
     }
     var otp1: String {
@@ -41,7 +48,18 @@ class OTPViewModel: ObservableObject {
         }
         return String(Array(otpField)[3])
     }
-    
+    var otp5: String {
+        guard otpField.count >= 5 else {
+            return ""
+        }
+        return String(Array(otpField)[4])
+    }
+    var otp6: String {
+        guard otpField.count >= 6 else {
+            return ""
+        }
+        return String(Array(otpField)[5])
+    }
    
     @Published var borderColor: Color = .pink
     @Published var isTextFieldDisabled = false
