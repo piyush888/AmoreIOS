@@ -17,6 +17,7 @@ struct ProfileView: View {
     
     @State var lastName: String = ""
     @State var firstName: String = ""
+    @State var userEmail: String = ""
     @State var birthDate = Date()
     
     var body: some View {
@@ -91,7 +92,21 @@ struct ProfileView: View {
                     .padding()
             }
             
-            // Last Name
+            // User Email
+            ZStack{
+                Rectangle()
+                    .cornerRadius(5.0)
+                    .frame(height:45)
+                    .foregroundColor(.white)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.pink, lineWidth: 1))
+                    
+                TextField("Email", text: $userEmail)
+                    .textContentType(.emailAddress)
+                    .padding()
+            }
+            
+            // Birthday picker
             ZStack{
                 Rectangle()
                     .cornerRadius(5.0)
