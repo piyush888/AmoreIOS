@@ -38,7 +38,7 @@ struct ShowMe: View {
             Button{
                 // TODO
                 // Save the Show me
-                print(userChoice)
+                print(userChoice!)
             } label : {
                 ZStack{
                     Rectangle()
