@@ -97,7 +97,6 @@ struct SexualOrientation: View {
             
         }
         .padding(20)
-        
     }
 }
 
