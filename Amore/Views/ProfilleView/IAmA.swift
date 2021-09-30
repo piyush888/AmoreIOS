@@ -36,9 +36,7 @@ struct IAmA: View {
             }.frame(height:180)
             
             // Show this view if user chooses other
-            //            if selectedGender == "other" {
-            if true {
-                // Second Name
+            if selectedGender == "other" {
                 ZStack{
                     Rectangle()
                         .cornerRadius(5.0)
