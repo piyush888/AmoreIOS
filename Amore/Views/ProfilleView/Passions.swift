@@ -100,9 +100,6 @@ struct Passions: View {
                         .font(.BoardingButton)
                 }
             }.padding(.bottom, 10)
-            
-            
-            
         }
         .padding(20)
     }
