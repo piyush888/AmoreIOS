@@ -6,5 +6,5 @@ target 'Amore' do
   use_frameworks!
 
   # Pods for Amore
-
+  pod 'Firebase/Auth'
 end

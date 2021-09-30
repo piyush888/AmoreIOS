@@ -9,16 +9,18 @@ import SwiftUI
 
 struct OTPKeyCode: View {
     
+    @Binding var verificationCode: String
     @StateObject var viewModel = OTPViewModel()
     @State var isFocused = false
   
-    let textBoxWidth = UIScreen.main.bounds.width / 8
+    let textBoxWidth = UIScreen.main.bounds.width / 10
     let textBoxHeight = UIScreen.main.bounds.width / 8
     let spaceBetweenBoxes: CGFloat = 10
     let paddingOfBox: CGFloat = 1
     var textFieldOriginalWidth: CGFloat {
         (textBoxWidth*6)+(spaceBetweenBoxes*3)+((paddingOfBox*2)*3)
     }
+    
     
     var body: some View {
         VStack {
@@ -30,8 +32,8 @@ struct OTPKeyCode: View {
                       otpText(text: viewModel.otp2)
                       otpText(text: viewModel.otp3)
                       otpText(text: viewModel.otp4)
-                      //otpText(text: viewModel.otp5)
-                      //otpText(text: viewModel.otp6)
+                      otpText(text: viewModel.otp5)
+                      otpText(text: viewModel.otp6)
                   }
                   
                   
@@ -43,12 +45,14 @@ struct OTPKeyCode: View {
                   .accentColor(.clear)
                   .background(Color.clear)
                   .keyboardType(.numberPad)
+                
               }
       }
+
     }
     
     private func otpText(text: String) -> some View {
-              
+        viewModel.verificationCode = $verificationCode
               return Text(text)
                   .font(.title)
                 .foregroundColor(.pink)
@@ -67,6 +71,6 @@ struct OTPKeyCode: View {
 
 struct NumberCode2_Previews: PreviewProvider {
     static var previews: some View {
-        OTPKeyCode()
+        OTPKeyCode(verificationCode: Binding.constant(""))
     }
 }
