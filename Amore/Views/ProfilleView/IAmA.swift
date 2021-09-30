@@ -9,8 +9,12 @@ import SwiftUI
 
 struct IAmA: View {
     
-    let fruit = ["male", "female", "other"]
-    @State var selectedFruit: String? = nil
+    let genders = ["male", "female", "other"]
+    @State var selectedGender: String? = nil
+    @State var customGender: String = ""
+    
+    @State private var validationError = false
+    @State private var errorDesc = Text("")
     
     var body: some View {
         
@@ -23,80 +27,118 @@ struct IAmA: View {
             }
             
             List {
-                ForEach(fruit, id: \.self) { item in
+                ForEach(genders, id: \.self) { item in
                     SelectionCell(
-                         fruit: item,
-                         selectedFruit: self.$selectedFruit)
-                    }
-                    //.listRowSeparator(.hidden) - Uncomment for iOS 15
-            }
-            
-            
-           
-            Spacer()
-            
-            Button{
-                // TODO
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                        
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
+                        gender: item,
+                        selectedGender: self.$selectedGender)
                 }
-            }.padding(.bottom, 10)
+                //.listRowSeparator(.hidden) - Uncomment for iOS 15
+            }.frame(height:180)
             
-        }
-        .padding(20)
-    }
-}
-
-struct SelectionCell: View {
-
-    let fruit: String
-    @Binding var selectedFruit: String?
-
-    var body: some View {
-        
-            
-            Button{
-                // TODO
-            } label : {
+            // Show this view if user chooses other
+            //            if selectedGender == "other" {
+            if true {
+                // Second Name
                 ZStack{
                     Rectangle()
                         .cornerRadius(5.0)
                         .frame(height:45)
                         .foregroundColor(.white)
                         .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.pink, lineWidth: 1))
-                        
-                    HStack {
-                        Text(fruit)
-                            .foregroundColor(.pink)
-                            .bold()
-                            .font(.BoardingButton)
-                            .padding(.horizontal,10)
-                        
-                        Spacer()
-                        
-                        if fruit == selectedFruit {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.accentColor)
-                                .padding(.horizontal,10)
+                                    .stroke(Color.pink, lineWidth: 1))
+                    
+                    TextField("Please fill in your gender", text: $customGender)
+                        .padding()
+                }.padding(.horizontal,25)
+            }
+            
+            Spacer()
+            
+            Button{
+                // Store the gender in the firebase
+                if selectedGender != nil {
+                    if selectedGender == "other" {
+                        if customGender != "" {
+                            // Store the customGender in the firebase
+                            print(customGender)
+                        } else {
+                            self.validationError = true
+                            self.errorDesc = Text("Other gender can't be empty")
+                            print("Other gender can't be empty")
                         }
-                        
+                    } else {
+                        // Store the customGender in the firebase
+                        print(selectedGender!)
+                    }
+                } else {
+                    self.validationError = true
+                    self.errorDesc = Text("Please select genders")
+                    print("Please select genders")
+                }
+            } label : {
+                ZStack{
+                    Rectangle()
+                        .frame(height:45)
+                        .cornerRadius(5.0)
+                        .foregroundColor(.pink)
+                    
+                    Text("Continue")
+                        .foregroundColor(.white)
+                        .bold()
+                        .font(.BoardingButton)
+                }
+            }
+            .padding(.bottom, 10)
+            
+        }
+        .alert(isPresented: self.$validationError) {
+            Alert(title: Text(""), message: self.errorDesc, dismissButton: .default(Text("OK")))
+        }
+        .padding(20)
+    }
+}
+
+struct SelectionCell: View {
+    
+    let gender: String
+    @Binding var selectedGender: String?
+    
+    var body: some View {
+        
+        
+        Button{
+            // TODO
+        } label : {
+            ZStack{
+                Rectangle()
+                    .cornerRadius(5.0)
+                    .frame(height:45)
+                    .foregroundColor(.white)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.pink, lineWidth: 1))
+                
+                HStack {
+                    Text(gender)
+                        .foregroundColor(.pink)
+                        .bold()
+                        .font(.BoardingButton)
+                        .padding(.horizontal,10)
+                    
+                    Spacer()
+                    
+                    if gender == selectedGender {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.accentColor)
+                            .padding(.horizontal,10)
                     }
                     
                 }
+                
             }
-            .onTapGesture {
-                self.selectedFruit = self.fruit
-            }
+        }
+        .onTapGesture {
+            self.selectedGender = self.gender
+        }
     }
 }
 
