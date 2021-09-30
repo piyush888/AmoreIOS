@@ -10,6 +10,13 @@
 		1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
+		1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE012705CC5D00F0137E /* AddSchool.swift */; };
+		1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE022705CC5E00F0137E /* SexualOrientation.swift */; };
+		1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE032705CC5E00F0137E /* ShowMe.swift */; };
+		1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE042705CC5E00F0137E /* IAmA.swift */; };
+		1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE052705CC5E00F0137E /* AddWork.swift */; };
+		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
+		1BC8BE0E2705CD7C00F0137E /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* ProfileModel.swift */; };
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
@@ -53,6 +60,13 @@
 		1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmoreDebug.entitlements; sourceTree = "<group>"; };
 		1BBB485127031F65004D42A3 /* Amore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amore.entitlements; sourceTree = "<group>"; };
 		1BBB485327035B2F004D42A3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1BC8BE012705CC5D00F0137E /* AddSchool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSchool.swift; sourceTree = "<group>"; };
+		1BC8BE022705CC5E00F0137E /* SexualOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexualOrientation.swift; sourceTree = "<group>"; };
+		1BC8BE032705CC5E00F0137E /* ShowMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMe.swift; sourceTree = "<group>"; };
+		1BC8BE042705CC5E00F0137E /* IAmA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAmA.swift; sourceTree = "<group>"; };
+		1BC8BE052705CC5E00F0137E /* AddWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWork.swift; sourceTree = "<group>"; };
+		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
+		1BC8BE0D2705CD7C00F0137E /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig"; sourceTree = "<group>"; };
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,8 +162,8 @@
 		E291A1EA26FF5BCA000D8A2C /* NumberCode */ = {
 			isa = PBXGroup;
 			children = (
+				E291A1E426FE3711000D8A2C /* Number.swift */,
 				E291A1E626FE8FE6000D8A2C /* NumberCode.swift */,
-				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E291A1ED26FF5C06000D8A2C /* OTPKeyCode.swift */,
 			);
 			path = NumberCode;
@@ -164,12 +178,18 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		E291A1F026FF98A1000D8A2C /* ProfilleView */ = {
+		E291A1F026FF98A1000D8A2C /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				1BC8BE012705CC5D00F0137E /* AddSchool.swift */,
+				1BC8BE052705CC5E00F0137E /* AddWork.swift */,
+				1BC8BE042705CC5E00F0137E /* IAmA.swift */,
+				1BC8BE062705CC5E00F0137E /* Passions.swift */,
+				1BC8BE022705CC5E00F0137E /* SexualOrientation.swift */,
+				1BC8BE032705CC5E00F0137E /* ShowMe.swift */,
 				E291A1F126FF98B3000D8A2C /* ProfileView.swift */,
 			);
-			path = ProfilleView;
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		E2F8AA4426F9427F00CC7A72 = {
@@ -224,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				E283677E26FAB79800EEA049 /* Onboarding.swift */,
+				1BC8BE0D2705CD7C00F0137E /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,11 +253,10 @@
 			isa = PBXGroup;
 			children = (
 				1BBB485227035B14004D42A3 /* HomeView */,
-				E291A1F026FF98A1000D8A2C /* ProfilleView */,
+				E291A1F026FF98A1000D8A2C /* ProfileView */,
 				E291A1EF26FF9826000D8A2C /* Onboarding */,
 				E291A1EA26FF5BCA000D8A2C /* NumberCode */,
 				E237CED826FD391D004F20AB /* SignUp.swift */,
-				E291A1E426FE3711000D8A2C /* Number.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,6 +264,7 @@
 		E2F8AA6126F947CA00CC7A72 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 			);
 			path = ViewModels;
@@ -390,13 +411,20 @@
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
+				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
+				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
+				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* Number.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* OTPKeyCode.swift in Sources */,
+				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* NumberCode.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
+				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
+				1BC8BE0E2705CD7C00F0137E /* ProfileModel.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* ProfileView.swift in Sources */,
+				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
