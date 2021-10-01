@@ -9,6 +9,9 @@ import SwiftUI
 
 struct Passions: View {
     
+    @ObservedObject var profileModel: ProfileViewModel
+    @State var isPassionsSelectionDone: Bool = false
+    
     var passions = ["Photography", "Shopping", "Yoga","Cooking",
                     "Travelling","Cricket","Running","Swimming","Art","Extreme",
                     "Music","Drink","Gaming","Partying","Workout","Pets","Sports",
@@ -22,16 +25,30 @@ struct Passions: View {
                                              spacing: 5,
                                              alignment: .center),count: 2)
     
+    func checkPassionsSelectionDone() {
+        if (passionSelected.count > 0) {
+            addInputToProfile()
+            isPassionsSelectionDone = true
+        }
+        else {
+            isPassionsSelectionDone = false
+        }
+    }
+    
+    func addInputToProfile() {
+        profileModel.userProfile?.interests = passionSelected
+    }
+    
     var body: some View {
         
         VStack(alignment:.leading) {
             
-            HStack {
-                Text("Choose 5 interest")
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 10)
-                Spacer()
-            }
+//            HStack {
+//                Text("Choose 5 interest")
+//                    .font(.BoardingTitle)
+//                    .padding(.bottom, 10)
+//                Spacer()
+//            }
             
             Text("Select a few of your interests and let everyone know what you're passionate about")
                 .font(.BoardingSubHeading)
@@ -84,29 +101,36 @@ struct Passions: View {
             Spacer()
             
             // Continue to next view
-            Button{
-                // TODO
-                // Save the passions to firebase
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                        
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-            }.padding(.bottom, 10)
+            
+            NavigationLink(
+                destination: IAmA(profileModel: profileModel),
+                isActive: $isPassionsSelectionDone,
+                label: {
+                    Button{
+                        checkPassionsSelectionDone()
+                    } label : {
+                        ZStack{
+                            Rectangle()
+                                .frame(height:45)
+                                .cornerRadius(5.0)
+                                .foregroundColor(.pink)
+                                
+                            Text("Continue")
+                                .foregroundColor(.white)
+                                .bold()
+                                .font(.BoardingButton)
+                        }
+                    }.padding(.bottom, 10)
+                })
+            
         }
         .padding(20)
+        .navigationBarTitle("Choose upto 5 interests")
     }
 }
 
 struct Passions_Previews: PreviewProvider {
     static var previews: some View {
-        Passions()
+        Passions(profileModel: ProfileViewModel())
     }
 }

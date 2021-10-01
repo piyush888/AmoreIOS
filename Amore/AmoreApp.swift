@@ -46,7 +46,6 @@ struct AmoreApp: App {
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
             ProfileView()
-
         }
     }
 }

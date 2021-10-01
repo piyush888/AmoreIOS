@@ -14,18 +14,27 @@ struct ProfileView: View {
         formatter.dateStyle = .long
         return formatter
     }
-//    @State var userProfile: Profile
+    
+    @StateObject var profileModel = ProfileViewModel()
+    
     @State var lastName: String = ""
     @State var firstName: String = ""
-    @State var userEmail: String = ""
-    @State var birthDate: Date = Date()
+    @State var email: String = ""
+    @State var dateOfBirth: Date = Date()
     @State var allFieldsFilled: Bool = false
     @State var errorDesc: String?
     
     var isEmailValid: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: userEmail)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    func addInputToProfile() {
+        profileModel.userProfile?.lastName = lastName
+        profileModel.userProfile?.firstName = firstName
+        profileModel.userProfile?.email = email
+        profileModel.userProfile?.dateOfBirth = dateOfBirth
     }
     
     func whitespaceTrimmer (str: String) -> String {
@@ -35,8 +44,8 @@ struct ProfileView: View {
     func checkallFieldsFilled () {
         firstName = whitespaceTrimmer(str: firstName)
         lastName = whitespaceTrimmer(str: lastName)
-        userEmail = whitespaceTrimmer(str: userEmail)
-        if lastName=="" || firstName=="" || userEmail=="" {
+        email = whitespaceTrimmer(str: email)
+        if lastName=="" || firstName=="" || email=="" {
             allFieldsFilled = false
             errorDesc = "Please fill all the above details"
         }
@@ -46,6 +55,7 @@ struct ProfileView: View {
         }
         else {
             errorDesc = nil
+            addInputToProfile()
             allFieldsFilled = true
         }
     }
@@ -131,7 +141,7 @@ struct ProfileView: View {
                         .overlay(RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.pink, lineWidth: 1))
                     
-                    TextField("Email", text: $userEmail)
+                    TextField("Email", text: $email)
                         .textContentType(.emailAddress)
                         .padding()
                 }
@@ -146,7 +156,7 @@ struct ProfileView: View {
                             .overlay(RoundedRectangle(cornerRadius: 5)
                                         .stroke(Color.pink, lineWidth: 1))
                         
-                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                        DatePicker(selection: $dateOfBirth, in: ...Date(), displayedComponents: .date) {
                             
                             HStack {
                                 Image(systemName:"calendar")
@@ -169,11 +179,10 @@ struct ProfileView: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions(),
+                    destination: Passions(profileModel: profileModel),
                     isActive: $allFieldsFilled,
                     label: {
                         Button{
-                            // TODO
                             checkallFieldsFilled()
                         } label : {
                             ZStack{

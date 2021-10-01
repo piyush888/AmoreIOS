@@ -9,19 +9,32 @@ import SwiftUI
 
 struct ShowMe: View {
     
+    @ObservedObject var profileModel: ProfileViewModel
     let showMeList = ["Women", "Men", "Everyone"]
     @State var userChoice: String? = nil
+    @State var inputTaken: Bool = false
+    
+    func checkInputTaken () {
+        if let userChoice = userChoice {
+            profileModel.userProfile?.showMePreference = userChoice
+            inputTaken = true
+        }
+        else {
+            inputTaken = false
+        }
+    }
+    
     
     var body: some View {
         
         
         VStack(alignment:.leading) {
-            HStack {
-                Text("Show Me")
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 10)
-                Spacer()
-            }
+//            HStack {
+//                Text("Show Me")
+//                    .font(.BoardingTitle)
+//                    .padding(.bottom, 10)
+//                Spacer()
+//            }
             
             List {
                 ForEach(showMeList, id: \.self) { item in
@@ -35,25 +48,29 @@ struct ShowMe: View {
             Spacer()
             
             // Continue to next view
-            Button{
-                // TODO
-                // Save the Show me
-                print(userChoice!)
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                        
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-            }.padding(.bottom, 10)
+            NavigationLink(destination: AddWork(profileModel: profileModel),
+                           isActive: $inputTaken,
+                           label: {
+                Button{
+                    checkInputTaken()
+                } label : {
+                    ZStack{
+                        Rectangle()
+                            .frame(height:45)
+                            .cornerRadius(5.0)
+                            .foregroundColor(.pink)
+                            
+                        Text("Continue")
+                            .foregroundColor(.white)
+                            .bold()
+                            .font(.BoardingButton)
+                    }
+                }.padding(.bottom, 10)
+            })
+            
         }
         .padding(20)
+        .navigationBarTitle("Show me")
     }
 }
 
@@ -104,6 +121,6 @@ struct SelectionCellShowMe: View {
 
 struct ShowMe_Previews: PreviewProvider {
     static var previews: some View {
-        ShowMe()
+        ShowMe(profileModel: ProfileViewModel())
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 
-class Profile: Identifiable, Decodable {
-    
+struct Profile: Identifiable, Codable {
+    var id: String
     var firstName: String
     var lastName: String
     var email: String
@@ -17,7 +17,8 @@ class Profile: Identifiable, Decodable {
     var interests: [String]
     var genderIdentity: String
     var sexualOrientation: [String]
-    var sexualPreference: [String]
+    var sexualOrientationVisible: Bool
+    var showMePreference: String
     var work: String?
-    var education: String?
+    var school: String?
 }

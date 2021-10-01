@@ -9,23 +9,40 @@ import SwiftUI
 
 struct SexualOrientation: View {
     
+    @ObservedObject var profileModel: ProfileViewModel
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
                                     "Queer","Questioning"]
     
     @State var orientationsSelected = [String]()
     @State var showMyOrientation: Bool = false
+    @State var sexualOrientationDataTaken: Bool = false
+    
+    func checkInputDone () {
+        if (orientationsSelected.count > 0) {
+            sexualOrientationDataTaken = true
+            addInputToProfile()
+        }
+        else {
+            sexualOrientationDataTaken = false
+        }
+    }
+    
+    func addInputToProfile () {
+        profileModel.userProfile?.sexualOrientation = orientationsSelected
+        profileModel.userProfile?.sexualOrientationVisible = showMyOrientation
+    }
     
     var body: some View {
         
         VStack(alignment:.leading) {
             
-            HStack {
-                Text("My Sexual Orientation")
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 10)
-                Spacer()
-            }
+//            HStack {
+//                Text("My Sexual Orientation")
+//                    .font(.BoardingTitle)
+//                    .padding(.bottom, 10)
+//                Spacer()
+//            }
             
             HStack {
                 Text("Select up to 3")
@@ -65,7 +82,6 @@ struct SexualOrientation: View {
                 }
             }
             
-            
             Spacer()
             
             // Ask user if they want to show the orientation on profile
@@ -78,25 +94,29 @@ struct SexualOrientation: View {
             .toggleStyle(CheckboxStyle())
             
             // Continue to next view
-            Button{
-                // TODO
-                // Save the sexual orientation in firebase here
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                    
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-            }.padding(.bottom, 10)
-            
+            NavigationLink(destination: ShowMe(profileModel: profileModel),
+                           isActive: $sexualOrientationDataTaken,
+                           label: {
+                Button{
+                    checkInputDone()
+                } label : {
+                    ZStack{
+                        Rectangle()
+                            .frame(height:45)
+                            .cornerRadius(5.0)
+                            .foregroundColor(.pink)
+                        
+                        Text("Continue")
+                            .foregroundColor(.white)
+                            .bold()
+                            .font(.BoardingButton)
+                    }
+                }.padding(.bottom, 10)
+            })
+
         }
         .padding(20)
+        .navigationBarTitle("My Sexual Orientation")
     }
 }
 
@@ -125,6 +145,6 @@ struct CheckboxStyle: ToggleStyle {
 
 struct SexualOrientation_Previews: PreviewProvider {
     static var previews: some View {
-        SexualOrientation()
+        SexualOrientation(profileModel: ProfileViewModel())
     }
 }

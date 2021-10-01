@@ -113,6 +113,9 @@ struct NumberCode: View {
                         authErrorDesc =  authError.localizedDescription
                     }
                     else {
+                        if let authRes = authResult {
+                            UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                        }
                         loginFormVisible = false
                     }
                 }

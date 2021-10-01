@@ -9,22 +9,52 @@ import SwiftUI
 
 struct IAmA: View {
     
+    @ObservedObject var profileModel: ProfileViewModel
+    
     let genders = ["male", "female", "other"]
     @State var selectedGender: String? = nil
     @State var customGender: String = ""
     
     @State private var validationError = false
     @State private var errorDesc = Text("")
+    @State var isGenderSet = false
+    
+    func addInputToProfile() {
+        if let selected_Gender = selectedGender {
+            if selected_Gender == "other" {
+                if customGender != "" {
+                    // Store the customGender in the firebase
+                    print(customGender)
+                    profileModel.userProfile?.genderIdentity = customGender
+                    isGenderSet = true
+                } else {
+                    self.validationError = true
+                    self.errorDesc = Text("Other gender can't be empty")
+                    print("Other gender can't be empty")
+                }
+            } else {
+                // Store the customGender in the firebase
+                print(selected_Gender)
+                profileModel.userProfile?.genderIdentity = selected_Gender
+                isGenderSet = true
+            }
+        }
+        else {
+            self.validationError = true
+            self.errorDesc = Text("Please select genders")
+            print("Please select genders")
+        }
+    }
     
     var body: some View {
         
         VStack(alignment:.leading) {
-            HStack {
-                Text("I am a")
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 10)
-                Spacer()
-            }
+//            HStack {
+//                Text("I am a")
+//                    .font(.BoardingTitle)
+//                    .padding(.bottom, 10)
+//                Spacer()
+//            }
             
             List {
                 ForEach(genders, id: \.self) { item in
@@ -52,47 +82,33 @@ struct IAmA: View {
             
             Spacer()
             
-            Button{
-                // Store the gender in the firebase
-                if selectedGender != nil {
-                    if selectedGender == "other" {
-                        if customGender != "" {
-                            // Store the customGender in the firebase
-                            print(customGender)
-                        } else {
-                            self.validationError = true
-                            self.errorDesc = Text("Other gender can't be empty")
-                            print("Other gender can't be empty")
-                        }
-                    } else {
-                        // Store the customGender in the firebase
-                        print(selectedGender!)
+            NavigationLink(destination: SexualOrientation(profileModel: profileModel),
+                           isActive: $isGenderSet,
+                           label: {
+                Button{
+                    addInputToProfile()
+                } label : {
+                    ZStack{
+                        Rectangle()
+                            .frame(height:45)
+                            .cornerRadius(5.0)
+                            .foregroundColor(.pink)
+                        
+                        Text("Continue")
+                            .foregroundColor(.white)
+                            .bold()
+                            .font(.BoardingButton)
                     }
-                } else {
-                    self.validationError = true
-                    self.errorDesc = Text("Please select genders")
-                    print("Please select genders")
                 }
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                    
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-            }
-            .padding(.bottom, 10)
+                .padding(.bottom, 10)
+            })
             
         }
         .alert(isPresented: self.$validationError) {
             Alert(title: Text(""), message: self.errorDesc, dismissButton: .default(Text("OK")))
         }
         .padding(20)
+        .navigationBarTitle("I am a")
     }
 }
 
@@ -142,6 +158,6 @@ struct SelectionCell: View {
 
 struct IAmA_Previews: PreviewProvider {
     static var previews: some View {
-        IAmA()
+        IAmA(profileModel: ProfileViewModel())
     }
 }
