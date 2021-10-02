@@ -45,7 +45,9 @@ struct AmoreApp: App {
         WindowGroup {
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
-            ProfileView()
+//            ProfileView()
+            LocationView()
+                .environmentObject(LocationModel())
         }
     }
 }

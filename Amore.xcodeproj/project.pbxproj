@@ -20,6 +20,10 @@
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
+		E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3D2707B19800FC5129 /* LocationModel.swift */; };
+		E226CF402707B19800FC5129 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3E2707B19800FC5129 /* LocationView.swift */; };
+		E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF412707D78C00FC5129 /* LocationHomeView.swift */; };
+		E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF432708ADAE00FC5129 /* LocationDenied.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
@@ -74,6 +78,10 @@
 		5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig"; sourceTree = "<group>"; };
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
+		E226CF3D2707B19800FC5129 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		E226CF3E2707B19800FC5129 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		E226CF412707D78C00FC5129 /* LocationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHomeView.swift; sourceTree = "<group>"; };
+		E226CF432708ADAE00FC5129 /* LocationDenied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDenied.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
@@ -115,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1BBB485327035B2F004D42A3 /* HomeView.swift */,
+				E226CF412707D78C00FC5129 /* LocationHomeView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -134,6 +143,15 @@
 				70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E226CF3C2707B18A00FC5129 /* LocationView */ = {
+			isa = PBXGroup;
+			children = (
+				E226CF3E2707B19800FC5129 /* LocationView.swift */,
+				E226CF432708ADAE00FC5129 /* LocationDenied.swift */,
+			);
+			path = LocationView;
 			sourceTree = "<group>";
 		};
 		E283677126F9531E00EEA049 /* Fonts */ = {
@@ -257,6 +275,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E226CF3C2707B18A00FC5129 /* LocationView */,
 				1BBB485227035B14004D42A3 /* HomeView */,
 				E291A1F026FF98A1000D8A2C /* ProfileView */,
 				E291A1EF26FF9826000D8A2C /* Onboarding */,
@@ -269,6 +288,7 @@
 		E2F8AA6126F947CA00CC7A72 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E226CF3D2707B19800FC5129 /* LocationModel.swift */,
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileModel.swift */,
@@ -411,14 +431,17 @@
 			files = (
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
+				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				E2F8AA6326F9481400CC7A72 /* OnboardingView.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
+				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
+				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* Number.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
@@ -433,6 +456,7 @@
 				E291A1F226FF98B3000D8A2C /* ProfileView.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
+				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
