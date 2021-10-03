@@ -46,8 +46,9 @@ struct AmoreApp: App {
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
 //            ProfileView()
-            LocationView()
-                .environmentObject(LocationModel())
+//            LocationView()
+//                .environmentObject(LocationModel())
+            EnableNotifications()
         }
     }
 }

@@ -24,6 +24,7 @@
 		E226CF402707B19800FC5129 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3E2707B19800FC5129 /* LocationView.swift */; };
 		E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF412707D78C00FC5129 /* LocationHomeView.swift */; };
 		E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF432708ADAE00FC5129 /* LocationDenied.swift */; };
+		E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF462708C8D500FC5129 /* EnableNotifications.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
@@ -82,6 +83,7 @@
 		E226CF3E2707B19800FC5129 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E226CF412707D78C00FC5129 /* LocationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHomeView.swift; sourceTree = "<group>"; };
 		E226CF432708ADAE00FC5129 /* LocationDenied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDenied.swift; sourceTree = "<group>"; };
+		E226CF462708C8D500FC5129 /* EnableNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotifications.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
@@ -152,6 +154,14 @@
 				E226CF432708ADAE00FC5129 /* LocationDenied.swift */,
 			);
 			path = LocationView;
+			sourceTree = "<group>";
+		};
+		E226CF452708C8BB00FC5129 /* NotificationsView */ = {
+			isa = PBXGroup;
+			children = (
+				E226CF462708C8D500FC5129 /* EnableNotifications.swift */,
+			);
+			path = NotificationsView;
 			sourceTree = "<group>";
 		};
 		E283677126F9531E00EEA049 /* Fonts */ = {
@@ -275,6 +285,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E226CF452708C8BB00FC5129 /* NotificationsView */,
 				E226CF3C2707B18A00FC5129 /* LocationView */,
 				1BBB485227035B14004D42A3 /* HomeView */,
 				E291A1F026FF98A1000D8A2C /* ProfileView */,
@@ -440,6 +451,7 @@
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
+				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
