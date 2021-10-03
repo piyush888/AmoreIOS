@@ -48,7 +48,8 @@ struct AmoreApp: App {
 //            ProfileView()
 //            LocationView()
 //                .environmentObject(LocationModel())
-            EnableNotifications()
+//            EnableNotifications()
+            AddPhotosView()
         }
     }
 }
