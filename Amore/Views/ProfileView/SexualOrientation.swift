@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SexualOrientation: View {
     
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
                                     "Queer","Questioning"]
@@ -29,8 +29,8 @@ struct SexualOrientation: View {
     }
     
     func addInputToProfile () {
-        profileModel.userProfile?.sexualOrientation = orientationsSelected
-        profileModel.userProfile?.sexualOrientationVisible = showMyOrientation
+        profileModel.userProfile.sexualOrientation = orientationsSelected
+        profileModel.userProfile.sexualOrientationVisible = showMyOrientation
     }
     
     var body: some View {
@@ -94,7 +94,7 @@ struct SexualOrientation: View {
             .toggleStyle(CheckboxStyle())
             
             // Continue to next view
-            NavigationLink(destination: ShowMe(profileModel: profileModel),
+            NavigationLink(destination: ShowMe().environmentObject(profileModel),
                            isActive: $sexualOrientationDataTaken,
                            label: {
                 Button{
@@ -145,6 +145,6 @@ struct CheckboxStyle: ToggleStyle {
 
 struct SexualOrientation_Previews: PreviewProvider {
     static var previews: some View {
-        SexualOrientation(profileModel: ProfileViewModel())
+        SexualOrientation().environmentObject(ProfileViewModel())
     }
 }

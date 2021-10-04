@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddSchool: View {
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var schoolName : String = ""
     @State var continueToNext: Bool = false
     var buttonText: String {
@@ -22,7 +22,10 @@ struct AddSchool: View {
     
     func addInputToProfile () {
         if (schoolName.count > 0) {
-            profileModel.userProfile?.school = schoolName
+            profileModel.userProfile.school = schoolName
+        }
+        else {
+            profileModel.userProfile.school = "NA"
         }
     }
     
@@ -61,7 +64,9 @@ struct AddSchool: View {
                 Button{
                     addInputToProfile()
                     // Execute "Create Profile Document in Firestore"
-                    continueToNext = true
+                    let status = profileModel.createUserProfile()
+                    continueToNext = status
+                    print("Profile Saved: \(status)")
                 } label : {
                     ZStack{
                         Rectangle()
@@ -85,6 +90,6 @@ struct AddSchool: View {
 
 struct AddSchool_Previews: PreviewProvider {
     static var previews: some View {
-        AddSchool(profileModel: ProfileViewModel())
+        AddSchool().environmentObject(ProfileViewModel())
     }
 }

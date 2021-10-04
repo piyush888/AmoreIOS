@@ -43,13 +43,13 @@ struct AmoreApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-//            OnboardingView()
-//                .environmentObject(OnboardingModel())
+            OnboardingView()
+                .environmentObject(OnboardingModel())
 //            ProfileView()
 //            LocationView()
 //                .environmentObject(LocationModel())
 //            EnableNotifications()
-            AddPhotosView()
+//            AddPhotosView()
         }
     }
 }

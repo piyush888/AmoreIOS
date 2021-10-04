@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ShowMe: View {
     
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     let showMeList = ["Women", "Men", "Everyone"]
     @State var userChoice: String? = nil
     @State var inputTaken: Bool = false
     
     func checkInputTaken () {
         if let userChoice = userChoice {
-            profileModel.userProfile?.showMePreference = userChoice
+            profileModel.userProfile.showMePreference = userChoice
             inputTaken = true
         }
         else {
@@ -48,7 +48,7 @@ struct ShowMe: View {
             Spacer()
             
             // Continue to next view
-            NavigationLink(destination: AddWork(profileModel: profileModel),
+            NavigationLink(destination: AddWork().environmentObject(profileModel),
                            isActive: $inputTaken,
                            label: {
                 Button{
@@ -121,6 +121,6 @@ struct SelectionCellShowMe: View {
 
 struct ShowMe_Previews: PreviewProvider {
     static var previews: some View {
-        ShowMe(profileModel: ProfileViewModel())
+        ShowMe().environmentObject(ProfileViewModel())
     }
 }

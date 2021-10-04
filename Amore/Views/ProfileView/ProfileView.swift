@@ -14,8 +14,7 @@ struct ProfileView: View {
         formatter.dateStyle = .long
         return formatter
     }
-    
-    @StateObject var profileModel = ProfileViewModel()
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     @State var lastName: String = ""
     @State var firstName: String = ""
@@ -31,10 +30,11 @@ struct ProfileView: View {
     }
     
     func addInputToProfile() {
-        profileModel.userProfile?.lastName = lastName
-        profileModel.userProfile?.firstName = firstName
-        profileModel.userProfile?.email = email
-        profileModel.userProfile?.dateOfBirth = dateOfBirth
+        profileModel.userProfile.lastName = lastName
+        profileModel.userProfile.firstName = firstName
+        profileModel.userProfile.email = email
+        profileModel.userProfile.dateOfBirth = dateOfBirth
+        profileModel.userProfile.id = UserDefaults.standard.string(forKey: "userUID")
     }
     
     func whitespaceTrimmer (str: String) -> String {
@@ -179,7 +179,7 @@ struct ProfileView: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions(profileModel: profileModel),
+                    destination: Passions().environmentObject(profileModel),
                     isActive: $allFieldsFilled,
                     label: {
                         Button{

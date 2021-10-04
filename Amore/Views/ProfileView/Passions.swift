@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct Passions: View {
     
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var isPassionsSelectionDone: Bool = false
     
     var passions = ["Photography", "Shopping", "Yoga","Cooking",
@@ -36,7 +37,7 @@ struct Passions: View {
     }
     
     func addInputToProfile() {
-        profileModel.userProfile?.interests = passionSelected
+        profileModel.userProfile.interests = passionSelected
     }
     
     var body: some View {
@@ -103,7 +104,7 @@ struct Passions: View {
             // Continue to next view
             
             NavigationLink(
-                destination: IAmA(profileModel: profileModel),
+                destination: IAmA().environmentObject(profileModel),
                 isActive: $isPassionsSelectionDone,
                 label: {
                     Button{
@@ -131,6 +132,6 @@ struct Passions: View {
 
 struct Passions_Previews: PreviewProvider {
     static var previews: some View {
-        Passions(profileModel: ProfileViewModel())
+        Passions().environmentObject(ProfileViewModel())
     }
 }

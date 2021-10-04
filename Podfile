@@ -7,4 +7,6 @@ target 'Amore' do
 
   # Pods for Amore
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 end
