@@ -41,6 +41,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct AmoreApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
 //            OnboardingView()
@@ -49,7 +50,9 @@ struct AmoreApp: App {
 //            LocationView()
 //                .environmentObject(LocationModel())
 //            EnableNotifications()
-            AddPhotosView()
+//            AddPhotosView()
+            TestCropper()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

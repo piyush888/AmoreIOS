@@ -17,7 +17,8 @@ struct UploadPhotoWindow: View {
         ZStack{
             Image(uiImage: self.image)
                 .resizable()
-                .frame(height:170)
+                .aspectRatio(contentMode: .fit)
+                .frame(height:170, alignment: .center)
                 .cornerRadius(5.0)
                 .background(Color.pink.opacity(0.2))
                 .shadow(color: Color("onboarding-pink"),

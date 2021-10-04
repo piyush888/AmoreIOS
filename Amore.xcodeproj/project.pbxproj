@@ -28,6 +28,12 @@
 		E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF492709F76800FC5129 /* AddPhotosView.swift */; };
 		E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF4D2709FD9A00FC5129 /* ImagePicker.swift */; };
 		E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF4F270A178600FC5129 /* UploadPhotoWindow.swift */; };
+		E226CF75270B3FBC00FC5129 /* ImageCroppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF74270B3FBC00FC5129 /* ImageCroppingView.swift */; };
+		E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF76270B3FEA00FC5129 /* Persistence.swift */; };
+		E226CF7B270B410200FC5129 /* TestCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF7A270B410200FC5129 /* TestCropper.swift */; };
+		E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */; };
+		E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */; };
+		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
@@ -90,6 +96,12 @@
 		E226CF492709F76800FC5129 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
 		E226CF4D2709FD9A00FC5129 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E226CF4F270A178600FC5129 /* UploadPhotoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoWindow.swift; sourceTree = "<group>"; };
+		E226CF74270B3FBC00FC5129 /* ImageCroppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCroppingView.swift; sourceTree = "<group>"; };
+		E226CF76270B3FEA00FC5129 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		E226CF7A270B410200FC5129 /* TestCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCropper.swift; sourceTree = "<group>"; };
+		E226CF7D270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AmoreCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
@@ -176,6 +188,8 @@
 				E226CF492709F76800FC5129 /* AddPhotosView.swift */,
 				E226CF4D2709FD9A00FC5129 /* ImagePicker.swift */,
 				E226CF4F270A178600FC5129 /* UploadPhotoWindow.swift */,
+				E226CF74270B3FBC00FC5129 /* ImageCroppingView.swift */,
+				E226CF7A270B410200FC5129 /* TestCropper.swift */,
 			);
 			path = AddPhotosView;
 			sourceTree = "<group>";
@@ -193,6 +207,8 @@
 		E283677A26FAA6E200EEA049 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */,
+				E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */,
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
 			);
 			path = Data;
@@ -272,11 +288,13 @@
 				E2F8AA6126F947CA00CC7A72 /* ViewModels */,
 				E283677126F9531E00EEA049 /* Fonts */,
 				E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */,
+				E226CF76270B3FEA00FC5129 /* Persistence.swift */,
 				E2F8AA5226F9427F00CC7A72 /* ContentView.swift */,
 				E2F8AA5426F9428100CC7A72 /* Assets.xcassets */,
 				E2F8AA5926F9428100CC7A72 /* Info.plist */,
 				1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */,
 				E2F8AA5626F9428100CC7A72 /* Preview Content */,
+				E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */,
 			);
 			path = Amore;
 			sourceTree = "<group>";
@@ -457,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E226CF75270B3FBC00FC5129 /* ImageCroppingView.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
@@ -471,8 +490,10 @@
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
+				E226CF7B270B410200FC5129 /* TestCropper.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
+				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* Number.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
@@ -480,11 +501,14 @@
 				1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* NumberCode.swift in Sources */,
+				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
+				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* ProfileView.swift in Sources */,
+				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
@@ -699,6 +723,19 @@
 			productName = iPhoneNumberField;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E226CF7D270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = E226CF7D270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodel */;
+			path = AmoreCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E2F8AA4526F9427F00CC7A72 /* Project object */;
 }
