@@ -51,8 +51,8 @@ struct AmoreApp: App {
 //                .environmentObject(LocationModel())
 //            EnableNotifications()
 //            AddPhotosView()
-            TestCropper()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            TestCropper()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
