@@ -6,12 +6,9 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class FirestoreServices {
-    
-    static func createProfile () -> Bool {
-        // Example implementation, Firestore Write Implementation
-        return true
-    }
-    
+
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IAmA: View {
     
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     let genders = ["male", "female", "other"]
     @State var selectedGender: String? = nil
@@ -25,7 +25,7 @@ struct IAmA: View {
                 if customGender != "" {
                     // Store the customGender in the firebase
                     print(customGender)
-                    profileModel.userProfile?.genderIdentity = customGender
+                    profileModel.userProfile.genderIdentity = customGender
                     isGenderSet = true
                 } else {
                     self.validationError = true
@@ -35,7 +35,7 @@ struct IAmA: View {
             } else {
                 // Store the customGender in the firebase
                 print(selected_Gender)
-                profileModel.userProfile?.genderIdentity = selected_Gender
+                profileModel.userProfile.genderIdentity = selected_Gender
                 isGenderSet = true
             }
         }
@@ -82,7 +82,7 @@ struct IAmA: View {
             
             Spacer()
             
-            NavigationLink(destination: SexualOrientation(profileModel: profileModel),
+            NavigationLink(destination: SexualOrientation().environmentObject(profileModel),
                            isActive: $isGenderSet,
                            label: {
                 Button{
@@ -158,6 +158,6 @@ struct SelectionCell: View {
 
 struct IAmA_Previews: PreviewProvider {
     static var previews: some View {
-        IAmA(profileModel: ProfileViewModel())
+        IAmA().environmentObject(ProfileViewModel())
     }
 }

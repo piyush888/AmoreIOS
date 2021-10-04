@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddWork: View {
     
-    @ObservedObject var profileModel: ProfileViewModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var workName : String = ""
     @State var continueToNext: Bool = false
     var buttonText: String {
@@ -23,7 +23,10 @@ struct AddWork: View {
     
     func addInputToProfile () {
         if (workName.count > 0) {
-            profileModel.userProfile?.work = workName
+            profileModel.userProfile.work = workName
+        }
+        else {
+            profileModel.userProfile.work = "NA"
         }
         continueToNext = true
     }
@@ -54,7 +57,7 @@ struct AddWork: View {
             Spacer()
             
             // Continue to next view
-            NavigationLink(destination: AddSchool(profileModel: profileModel),
+            NavigationLink(destination: AddSchool().environmentObject(profileModel),
                            isActive: $continueToNext,
                            label: {
                 Button{
@@ -84,6 +87,6 @@ struct AddWork: View {
 
 struct AddWork_Previews: PreviewProvider {
     static var previews: some View {
-        AddWork(profileModel: ProfileViewModel())
+        AddWork().environmentObject(ProfileViewModel())
     }
 }

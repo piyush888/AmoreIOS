@@ -10,15 +10,28 @@ import FirebaseAuth
 
 
 struct OnboardingView: View {
-    
+    @StateObject var profileModel = ProfileViewModel()
     @EnvironmentObject var model: OnboardingModel
     @State var tabSelectionIndex = 0
     @State var loggedIn: Bool = false
     @State var loginFormVisible = false
+    @State var oldUser: Bool = false
     
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false : true
         print("Logged In: "+String(loggedIn))
+    }
+    
+    func checkOldUser() {
+        let mirror = Mirror(reflecting: profileModel.userProfile)
+        for elem in mirror.children {
+            if elem.label != nil {
+                oldUser = true
+            }
+            else {
+                oldUser = false
+            }
+        }
     }
     
     var body: some View {
@@ -81,7 +94,19 @@ struct OnboardingView: View {
         }
         else {
             // Home View/Profile View -- Logged In
-            HomeView(loggedIn: $loggedIn)
+            //            HomeView(loggedIn: $loggedIn)
+            ZStack {
+                if oldUser {
+                    HomeView(loggedIn: $loggedIn)
+                }
+                else {
+                    ProfileView()
+                        .environmentObject(profileModel)
+                }
+            }.onAppear{
+                checkOldUser()
+            }
+            
         }
         
     }
