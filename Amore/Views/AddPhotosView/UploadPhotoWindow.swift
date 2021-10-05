@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CropViewController
 
 enum ActiveSheet: Identifiable {
     case imageChoose, cropImage
@@ -16,20 +17,21 @@ enum ActiveSheet: Identifiable {
 
 struct UploadPhotoWindow: View {
     
-    @State var uploadedImage = UIImage()
-    @State var displayImage = UIImage()
-    
+    @State var image : UIImage?
     @State private var showSheet = false
-    
-    var originalImage = UIImage(named: "food")
-    @State var croppedImage:UIImage?
     @State var activeSheet: ActiveSheet? = .imageChoose
     
+    
+    func imageCropped(image: UIImage){
+       self.image = image
+        showSheet = false
+     }
+
     var body: some View {
         
         VStack {
             
-            Image(uiImage: displayImage)
+            Image(uiImage: image!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height:170, alignment: .center)
@@ -59,29 +61,25 @@ struct UploadPhotoWindow: View {
                         activeSheet = .cropImage
                 }
             }
-        }.sheet(isPresented: $showSheet, onDismiss: {
-            if self.activeSheet == .imageChoose {
-                displayImage = uploadedImage
-            }
-            else if self.activeSheet == .cropImage {
-                displayImage = croppedImage!
-            }
-        }) {
+        }.sheet(isPresented: $showSheet) {
             if self.activeSheet == .imageChoose {
                 // Pick an image from the photo library:
-                //  If you wish to take a photo from camera instead:
+                // If you wish to take a photo from camera instead:
                 // ImagePicker(sourceType: .camera, selectedImage: self.$image)
-                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$uploadedImage)
+                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
             }
             else if self.activeSheet == .cropImage {
-                ImageCroppingView(shown: $showSheet, image: self.uploadedImage, croppedImage: $croppedImage)
+                // Option to Crop the image
+                ImageCropper(image: self.$image, visible: self.$showSheet, done: self.imageCropped)
+                    .zIndex(10)
             }
         }
     }
 }
 
+
 struct UploadPhotoWindow_Previews: PreviewProvider {
     static var previews: some View {
-        UploadPhotoWindow(displayImage: UIImage())
+        UploadPhotoWindow(image: UIImage())
     }
 }

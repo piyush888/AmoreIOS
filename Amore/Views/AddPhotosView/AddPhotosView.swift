@@ -43,12 +43,12 @@ struct AddPhotosView: View {
             
             // Give the user options to add photos
             LazyVGrid(columns: adaptivecolumns, content: {
-                UploadPhotoWindow(displayImage: image1)
-                UploadPhotoWindow(displayImage: image2)
-                UploadPhotoWindow(displayImage: image3)
-                UploadPhotoWindow(displayImage: image4)
-                UploadPhotoWindow(displayImage: image5)
-                UploadPhotoWindow(displayImage: image6)
+                UploadPhotoWindow(image: image1)
+                UploadPhotoWindow(image: image2)
+                UploadPhotoWindow(image: image3)
+                UploadPhotoWindow(image: image4)
+                UploadPhotoWindow(image: image5)
+                UploadPhotoWindow(image: image6)
             })
             .padding(.horizontal)
          
