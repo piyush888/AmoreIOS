@@ -33,8 +33,11 @@ struct UploadPhotoWindow: View {
             
             Image(uiImage: image!)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height:170, alignment: .center)
+                //.aspectRatio(contentMode: .fit)
+                //.frame(height:170, alignment: .center)
+                .scaledToFill()
+                .frame(width: 115, height: 170, alignment: .center)
+                .clipped()
                 .cornerRadius(5.0)
                 .background(Color.pink.opacity(0.2))
                 .shadow(color: Color("onboarding-pink"),
@@ -71,7 +74,7 @@ struct UploadPhotoWindow: View {
             else if self.activeSheet == .cropImage {
                 // Option to Crop the image
                 ImageCropper(image: self.$image, visible: self.$showSheet, done: self.imageCropped)
-                    .zIndex(10)
+                    .edgesIgnoringSafeArea(.all)
             }
         }
     }
