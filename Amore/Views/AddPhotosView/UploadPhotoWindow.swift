@@ -17,7 +17,7 @@ enum ActiveSheet: Identifiable {
 
 struct UploadPhotoWindow: View {
     
-    @State var image : UIImage?
+    @Binding var image : UIImage?
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
     
@@ -31,39 +31,62 @@ struct UploadPhotoWindow: View {
         
         VStack {
             
-            Image(uiImage: image!)
-                .resizable()
-                //.aspectRatio(contentMode: .fit)
-                //.frame(height:170, alignment: .center)
-                .scaledToFill()
-                .frame(width: 115, height: 170, alignment: .center)
-                .clipped()
-                .cornerRadius(5.0)
-                .background(Color.pink.opacity(0.2))
-                .shadow(color: Color("onboarding-pink"),
-                        radius: 2, x: 3, y: 3)
-                .clipShape(Rectangle())
+            if image != nil {
+                Image(uiImage: image!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 115, height: 170, alignment: .center)
+                    .clipped()
+                    .cornerRadius(5.0)
+                    .background(Color.pink.opacity(0.2))
+                    .shadow(color: Color("onboarding-pink"),
+                            radius: 2, x: 3, y: 3)
+                    .clipShape(Rectangle())
+            } else {
+                Image(uiImage: UIImage())
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 115, height: 170, alignment: .center)
+                    .clipped()
+                    .cornerRadius(5.0)
+                    .background(Color.pink.opacity(0.2))
+                    .shadow(color: Color("onboarding-pink"),
+                            radius: 2, x: 3, y: 3)
+                    .clipShape(Rectangle())
+            }
+            
         
-           
-            HStack {
+           HStack {
                 Image(systemName:"plus.circle.fill")
                     .resizable()
-                    .frame(width:30, height:30)
+                    .frame(width:20, height:20)
                     .foregroundColor(.pink)
                     .onTapGesture {
                         showSheet = true
                         activeSheet = .imageChoose
                     }
                 
-                Image(systemName:"pencil.circle.fill")
-                    .resizable()
-                    .frame(width:30, height:30)
-                    .foregroundColor(.pink)
-                    .onTapGesture {
-                        showSheet = true
-                        activeSheet = .cropImage
+                // Don't show if the image is nil
+                if image != nil {
+                    Image(systemName:"pencil.circle.fill")
+                        .resizable()
+                        .frame(width:20, height:20)
+                        .foregroundColor(.pink)
+                        .onTapGesture {
+                            showSheet = true
+                            activeSheet = .cropImage
+                        }
+                    
+                    Image(systemName:"trash.circle.fill")
+                        .resizable()
+                        .frame(width:20, height:20)
+                        .foregroundColor(.pink)
+                        .onTapGesture {
+                            image = nil
+                        }
                 }
             }
+            
         }.sheet(isPresented: $showSheet) {
             if self.activeSheet == .imageChoose {
                 // Pick an image from the photo library:
@@ -81,8 +104,3 @@ struct UploadPhotoWindow: View {
 }
 
 
-struct UploadPhotoWindow_Previews: PreviewProvider {
-    static var previews: some View {
-        UploadPhotoWindow(image: UIImage())
-    }
-}
