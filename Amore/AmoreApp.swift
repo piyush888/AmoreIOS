@@ -46,6 +46,8 @@ struct AmoreApp: App {
         WindowGroup {
             OnboardingView()
                 .environmentObject(OnboardingModel())
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            ProfileView()
 //            BasicUserInfo()
 //            LocationView()
 //                .environmentObject(LocationModel())

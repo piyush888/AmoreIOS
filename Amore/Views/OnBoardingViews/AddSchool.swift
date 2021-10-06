@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AddSchool: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @Binding var oldUser: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var schoolName : String = ""
     @State var continueToNext: Bool = false
@@ -58,29 +60,50 @@ struct AddSchool: View {
             
             
             // Continue/Skip to next view
-            NavigationLink(destination: HomeView(loggedIn: Binding.constant(true)),
-                           isActive: $continueToNext,
-                           label: {
-                Button{
-                    addInputToProfile()
-                    // Execute "Create Profile Document in Firestore"
-                    let status = profileModel.createUserProfile()
-                    continueToNext = status
-                    print("Profile Saved: \(status)")
-                } label : {
-                    ZStack{
-                        Rectangle()
-                            .frame(height:45)
-                            .cornerRadius(5.0)
-                            .foregroundColor(.pink)
-                            
-                        Text(buttonText)
-                            .foregroundColor(.white)
-                            .bold()
-                            .font(.BoardingButton)
-                    }
-                }.padding(.bottom, 10)
-            })
+            Button{
+                addInputToProfile()
+                // Execute "Create Profile Document in Firestore"
+                let status = profileModel.createUserProfile(context: viewContext)
+                continueToNext = status
+                print("Profile Saved: \(status)")
+                oldUser = true
+            } label : {
+                ZStack{
+                    Rectangle()
+                        .frame(height:45)
+                        .cornerRadius(5.0)
+                        .foregroundColor(.pink)
+                        
+                    Text(buttonText)
+                        .foregroundColor(.white)
+                        .bold()
+                        .font(.BoardingButton)
+                }
+            }.padding(.bottom, 10)
+            
+//            NavigationLink(destination: HomeView(loggedIn: Binding.constant(true)),
+//                           isActive: $continueToNext,
+//                           label: {
+//                Button{
+//                    addInputToProfile()
+//                    // Execute "Create Profile Document in Firestore"
+//                    let status = profileModel.createUserProfile(context: viewContext)
+//                    continueToNext = status
+//                    print("Profile Saved: \(status)")
+//                } label : {
+//                    ZStack{
+//                        Rectangle()
+//                            .frame(height:45)
+//                            .cornerRadius(5.0)
+//                            .foregroundColor(.pink)
+//
+//                        Text(buttonText)
+//                            .foregroundColor(.white)
+//                            .bold()
+//                            .font(.BoardingButton)
+//                    }
+//                }.padding(.bottom, 10)
+//            })
             
         }
         .padding(20)
@@ -90,6 +113,6 @@ struct AddSchool: View {
 
 struct AddSchool_Previews: PreviewProvider {
     static var previews: some View {
-        AddSchool().environmentObject(ProfileViewModel())
+        AddSchool(oldUser: Binding.constant(false)).environmentObject(ProfileViewModel())
     }
 }

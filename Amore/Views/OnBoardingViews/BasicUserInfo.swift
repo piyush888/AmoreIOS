@@ -14,8 +14,8 @@ struct BasicUserInfo: View {
         formatter.dateStyle = .long
         return formatter
     }
+    @Binding var oldUser: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
-    
     @State var lastName: String = ""
     @State var firstName: String = ""
     @State var email: String = ""
@@ -179,7 +179,7 @@ struct BasicUserInfo: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions().environmentObject(profileModel),
+                    destination: Passions(oldUser: $oldUser).environmentObject(profileModel),
                     isActive: $allFieldsFilled,
                     label: {
                         Button{
@@ -210,6 +210,6 @@ struct BasicUserInfo: View {
 
 struct BasicUserInfo_Previews: PreviewProvider {
     static var previews: some View {
-        BasicUserInfo()
+        BasicUserInfo(oldUser: Binding.constant(false))
     }
 }

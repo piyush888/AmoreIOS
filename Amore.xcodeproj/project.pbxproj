@@ -11,6 +11,8 @@
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileModel.swift */; };
+		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
+		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
 		1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE012705CC5D00F0137E /* AddSchool.swift */; };
 		1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE022705CC5E00F0137E /* SexualOrientation.swift */; };
@@ -75,6 +77,8 @@
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmoreDebug.entitlements; sourceTree = "<group>"; };
 		1BBB485127031F65004D42A3 /* Amore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amore.entitlements; sourceTree = "<group>"; };
 		1BBB485327035B2F004D42A3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 		E283677A26FAA6E200EEA049 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */,
+				1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */,
 				E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */,
 				E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */,
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
@@ -499,6 +505,7 @@
 				E2F8AA6326F9481400CC7A72 /* OnboardingView.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
+				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
@@ -525,6 +532,7 @@
 				E291A1F226FF98B3000D8A2C /* BasicUserInfo.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
+				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,

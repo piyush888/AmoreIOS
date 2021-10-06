@@ -10,12 +10,31 @@ import FirebaseAuth
 
 
 struct OnboardingView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var profileModel = ProfileViewModel()
     @EnvironmentObject var model: OnboardingModel
     @State var tabSelectionIndex = 0
     @State var loggedIn: Bool = false
     @State var loginFormVisible = false
     @State var oldUser: Bool = false
+    @State var profileCores = [ProfileCore]()
+    
+    func fetchProfileCoreData () {
+        let request = ProfileCore.fetchRequest()
+        request.sortDescriptors = []
+        if let currentUserId = Auth.auth().currentUser?.uid{
+            print("Looking for: \(currentUserId)")
+            request.predicate = NSPredicate(format: "id contains[c] %@", currentUserId)
+        }
+        do {
+            let results = try viewContext.fetch(request)
+            self.profileCores = results
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
     
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false : true
@@ -23,14 +42,16 @@ struct OnboardingView: View {
     }
     
     func checkOldUser() {
-        let mirror = Mirror(reflecting: profileModel.userProfile)
-        for elem in mirror.children {
-            if elem.label != nil {
-                oldUser = true
-            }
-            else {
-                oldUser = false
-            }
+        var profileCore: ProfileCore?
+        if (profileCores.count>0){
+            profileCore = profileCores[0]
+        }
+        print("Info from Core Data Store : Profile Email=\(profileCore?.email ?? "default value")")
+        if profileCore?.email != nil {
+            oldUser = true
+        }
+        else {
+            oldUser = false
         }
     }
     
@@ -100,10 +121,13 @@ struct OnboardingView: View {
                     HomeView(loggedIn: $loggedIn)
                 }
                 else {
-                    BasicUserInfo()
+                    BasicUserInfo(oldUser: $oldUser)
                         .environmentObject(profileModel)
                 }
-            }.onAppear{
+            }
+            .onAppear{
+                profileModel.getUserProfile(context: viewContext)
+                self.fetchProfileCoreData()
                 checkOldUser()
             }
             
