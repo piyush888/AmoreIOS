@@ -13,18 +13,32 @@ import SwiftUI
 struct AddPhotosView: View {
     
     // All the 6 images that we give user an option to upload
-    @State private var image1 = UIImage()
-    @State private var image2 = UIImage()
-    @State private var image3 = UIImage()
-    @State private var image4 = UIImage()
-    @State private var image5 = UIImage()
-    @State private var image6 = UIImage()
+    @State var image1 : UIImage?
+    @State var image2 : UIImage?
+    @State var image3 : UIImage?
+    @State var image4 : UIImage?
+    @State var image5 : UIImage?
+    @State var image6 : UIImage?
     
-    @State private var disableButton = true
+    @State private var disableButton = false
+    @State private var counter = 0
+    
+    @State var showsAlert = false
+    
+    func imagesUploadedByUser() {
+        counter = 0
+        counter = counter + (image1 != nil ? 1 : 0)
+        counter = counter + (image2 != nil ? 1 : 0)
+        counter = counter + (image3 != nil ? 1 : 0)
+        counter = counter + (image4 != nil ? 1 : 0)
+        counter = counter + (image5 != nil ? 1 : 0)
+        counter = counter + (image6 != nil ? 1 : 0)
+    }
     
     let adaptivecolumns = Array(repeating:
                                 GridItem(.adaptive(minimum: 150),spacing: 5,
                                          alignment: .center),count: 3)
+    
     
     var body: some View {
         
@@ -43,20 +57,28 @@ struct AddPhotosView: View {
             
             // Give the user options to add photos
             LazyVGrid(columns: adaptivecolumns, content: {
-                UploadPhotoWindow(displayImage: image1)
-                UploadPhotoWindow(displayImage: image2)
-                UploadPhotoWindow(displayImage: image3)
-                UploadPhotoWindow(displayImage: image4)
-                UploadPhotoWindow(displayImage: image5)
-                UploadPhotoWindow(displayImage: image6)
+                UploadPhotoWindow(image: self.$image1)
+                UploadPhotoWindow(image: self.$image2)
+                UploadPhotoWindow(image: self.$image3)
+                UploadPhotoWindow(image: self.$image4)
+                UploadPhotoWindow(image: self.$image5)
+                UploadPhotoWindow(image: self.$image6)
             })
             .padding(.horizontal)
          
             Spacer()
             
             Button{
+                // Update the counter
+                imagesUploadedByUser()
                 // Store the images in the firestore database
-                print(disableButton)
+                if counter >= 2 {
+                    // Update to firestore
+                    print("Update to firestore")
+                } else {
+                    showsAlert = true
+                    print("Alert atleast 2 photos are required")
+                }
             } label : {
                 ZStack{
                     Rectangle()
@@ -73,6 +95,9 @@ struct AddPhotosView: View {
             .disabled(disableButton)
             .padding(.horizontal,50)
         }
+        .alert(isPresented: self.$showsAlert) {
+                   Alert(title: Text(""),message: Text("Atleast 2 photos are required"))
+               }
         .padding(20)
     }
 }

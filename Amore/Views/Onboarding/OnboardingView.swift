@@ -121,7 +121,7 @@ struct OnboardingView: View {
                     HomeView(loggedIn: $loggedIn)
                 }
                 else {
-                    ProfileView(oldUser: $oldUser)
+                    BasicUserInfo(oldUser: $oldUser)
                         .environmentObject(profileModel)
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  BasicUserInfo.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 9/25/21.
@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ProfileView: View {
-    @Binding var oldUser: Bool
+struct BasicUserInfo: View {
+    
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
     }
+    @Binding var oldUser: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var lastName: String = ""
     @State var firstName: String = ""
@@ -207,8 +208,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct BasicUserInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(oldUser: Binding.constant(false))
+        BasicUserInfo(oldUser: Binding.constant(false))
     }
 }
