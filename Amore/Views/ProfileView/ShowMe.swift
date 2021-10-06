@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShowMe: View {
-    
+    @Binding var oldUser: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     let showMeList = ["Women", "Men", "Everyone"]
     @State var userChoice: String? = nil
@@ -48,7 +48,7 @@ struct ShowMe: View {
             Spacer()
             
             // Continue to next view
-            NavigationLink(destination: AddWork().environmentObject(profileModel),
+            NavigationLink(destination: AddWork(oldUser: $oldUser).environmentObject(profileModel),
                            isActive: $inputTaken,
                            label: {
                 Button{
@@ -121,6 +121,6 @@ struct SelectionCellShowMe: View {
 
 struct ShowMe_Previews: PreviewProvider {
     static var previews: some View {
-        ShowMe().environmentObject(ProfileViewModel())
+        ShowMe(oldUser: Binding.constant(false)).environmentObject(ProfileViewModel())
     }
 }

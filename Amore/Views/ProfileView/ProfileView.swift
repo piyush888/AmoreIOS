@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
+    @Binding var oldUser: Bool
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
     }
     @EnvironmentObject var profileModel: ProfileViewModel
-    
     @State var lastName: String = ""
     @State var firstName: String = ""
     @State var email: String = ""
@@ -179,7 +178,7 @@ struct ProfileView: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions().environmentObject(profileModel),
+                    destination: Passions(oldUser: $oldUser).environmentObject(profileModel),
                     isActive: $allFieldsFilled,
                     label: {
                         Button{
@@ -210,6 +209,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(oldUser: Binding.constant(false))
     }
 }
