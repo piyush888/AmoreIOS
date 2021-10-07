@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct BasicUserInfo: View {
     
@@ -34,7 +35,7 @@ struct BasicUserInfo: View {
         profileModel.userProfile.firstName = firstName
         profileModel.userProfile.email = email
         profileModel.userProfile.dateOfBirth = dateOfBirth
-        profileModel.userProfile.id = UserDefaults.standard.string(forKey: "userUID")
+        profileModel.userProfile.id = Auth.auth().currentUser?.uid
     }
     
     func whitespaceTrimmer (str: String) -> String {

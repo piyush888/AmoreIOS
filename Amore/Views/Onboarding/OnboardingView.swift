@@ -21,6 +21,7 @@ struct OnboardingView: View {
     @State var profileCores = [ProfileCore]()
     
     func fetchProfileCoreData () {
+        profileModel.getUserProfile(context: viewContext)
         let request = ProfileCore.profileFetchRequest()
         request.sortDescriptors = []
         if let currentUserId = Auth.auth().currentUser?.uid{
@@ -128,9 +129,18 @@ struct OnboardingView: View {
                     }
                 }
                 .onAppear{
+                    print("Primary profile refresh: \(profileModel.profileRefreshDone)")
                     self.fetchProfileCoreData()
                     checkOldUser()
                 }
+            }
+            else {
+                Text("Please Wait...")
+                    .onAppear{
+                        print("Secondary profile refresh: \(profileModel.profileRefreshDone)")
+                        self.fetchProfileCoreData()
+                        checkOldUser()
+                    }
             }
             
         }

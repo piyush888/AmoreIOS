@@ -76,9 +76,8 @@ class ProfileViewModel: ObservableObject {
     
     func getUserProfile(context: NSManagedObjectContext) {
         // Example function, Firestore Read Implementation
-        profileRefreshDone = false
         let collectionRef = db.collection("Profiles")
-        if let documentId = UserDefaults.standard.string(forKey: "userUID") {
+        if let documentId = Auth.auth().currentUser?.uid {
             let docRef = collectionRef.document(documentId)
             
             docRef.getDocument { document, error in
@@ -95,12 +94,9 @@ class ProfileViewModel: ObservableObject {
                                 var profileCore: ProfileCore?
                                 if (self.profileCores.count>0) {
                                     profileCore = self.profileCores[0]
+                                    self.updateProfileCore(profileCore: profileCore!)
+                                    try context.save()
                                 }
-                                else {
-                                    profileCore = ProfileCore(context: context)
-                                }
-                                self.updateProfileCore(profileCore: profileCore!)
-                                try context.save()
                                 self.profileRefreshDone = true
                                 print("Profile Refresh done...")
                             }
@@ -112,8 +108,10 @@ class ProfileViewModel: ObservableObject {
                         catch {
                             print(error)
                         }
+                        
                     }
                 }
+                self.profileRefreshDone = true
             }
         }
     }
