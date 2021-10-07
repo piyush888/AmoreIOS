@@ -12,7 +12,7 @@ import CoreData
 
 extension ProfileCore {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<ProfileCore> {
+    @nonobjc public class func profileFetchRequest() -> NSFetchRequest<ProfileCore> {
         return NSFetchRequest<ProfileCore>(entityName: "ProfileCore")
     }
 

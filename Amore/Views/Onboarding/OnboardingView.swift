@@ -21,7 +21,7 @@ struct OnboardingView: View {
     @State var profileCores = [ProfileCore]()
     
     func fetchProfileCoreData () {
-        let request = ProfileCore.fetchRequest()
+        let request = ProfileCore.profileFetchRequest()
         request.sortDescriptors = []
         if let currentUserId = Auth.auth().currentUser?.uid{
             print("Looking for: \(currentUserId)")
