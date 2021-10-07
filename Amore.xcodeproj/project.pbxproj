@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
+		1B4ED877270F345E00290FFF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED870270F345E00290FFF /* AboutView.swift */; };
+		1B4ED878270F345E00290FFF /* PassionsCombinedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED871270F345E00290FFF /* PassionsCombinedString.swift */; };
+		1B4ED879270F345E00290FFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED872270F345E00290FFF /* ProfileView.swift */; };
+		1B4ED87A270F345E00290FFF /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED873270F345E00290FFF /* ImageCarousel.swift */; };
+		1B4ED87B270F345E00290FFF /* LocationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED874270F345E00290FFF /* LocationInfoView.swift */; };
+		1B4ED87C270F345E00290FFF /* PhotosViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED875270F345E00290FFF /* PhotosViewCarousel.swift */; };
+		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileModel.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
@@ -81,6 +88,13 @@
 /* Begin PBXFileReference section */
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
+		1B4ED870270F345E00290FFF /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		1B4ED871270F345E00290FFF /* PassionsCombinedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassionsCombinedString.swift; sourceTree = "<group>"; };
+		1B4ED872270F345E00290FFF /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1B4ED873270F345E00290FFF /* ImageCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
+		1B4ED874270F345E00290FFF /* LocationInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfoView.swift; sourceTree = "<group>"; };
+		1B4ED875270F345E00290FFF /* PhotosViewCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewCarousel.swift; sourceTree = "<group>"; };
+		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -155,6 +169,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B4ED86E270F33BD00290FFF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E23E416F270D03BC0065E6E4 /* ProfileView.swift */,
+				E23E4177270E604C0065E6E4 /* AboutView.swift */,
+				E23E417B270E690E0065E6E4 /* PhotosViewCarousel.swift */,
+				E23E4175270E5F2D0065E6E4 /* LocationInfoView.swift */,
+				E23E4173270E5A4E0065E6E4 /* PassionsCombinedString.swift */,
+				E23E4179270E68DC0065E6E4 /* ImageCarousel.swift */,
+				E23E4171270E473A0065E6E4 /* LikeDislikeSuperLike.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		1B4ED86F270F345E00290FFF /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				1B4ED870270F345E00290FFF /* AboutView.swift */,
+				1B4ED871270F345E00290FFF /* PassionsCombinedString.swift */,
+				1B4ED872270F345E00290FFF /* ProfileView.swift */,
+				1B4ED873270F345E00290FFF /* ImageCarousel.swift */,
+				1B4ED874270F345E00290FFF /* LocationInfoView.swift */,
+				1B4ED875270F345E00290FFF /* PhotosViewCarousel.swift */,
+				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		1BBB485227035B14004D42A3 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,20 +249,6 @@
 				E2C59092270CA225001F78E7 /* ImageCropper.swift */,
 			);
 			path = AddPhotosView;
-			sourceTree = "<group>";
-		};
-		E23E416D270CFE880065E6E4 /* ProfileView */ = {
-			isa = PBXGroup;
-			children = (
-				E23E416F270D03BC0065E6E4 /* ProfileView.swift */,
-				E23E4171270E473A0065E6E4 /* LikeDislikeSuperLike.swift */,
-				E23E4173270E5A4E0065E6E4 /* PassionsCombinedString.swift */,
-				E23E4175270E5F2D0065E6E4 /* LocationInfoView.swift */,
-				E23E4177270E604C0065E6E4 /* AboutView.swift */,
-				E23E4179270E68DC0065E6E4 /* ImageCarousel.swift */,
-				E23E417B270E690E0065E6E4 /* PhotosViewCarousel.swift */,
-			);
-			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		E23E416E270CFEB00065E6E4 /* ExtraViews */ = {
@@ -303,6 +331,7 @@
 				E2F8AA4E26F9427F00CC7A72 /* Products */,
 				D987353B195ECCF6216A7BEF /* Pods */,
 				8146232F1123BB8CE8350BEF /* Frameworks */,
+				1B4ED86E270F33BD00290FFF /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,6 +387,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B4ED86F270F345E00290FFF /* ProfileView */,
 				E23E416E270CFEB00065E6E4 /* ExtraViews */,
 				E226CF482709F75900FC5129 /* AddPhotosView */,
 				E226CF452708C8BB00FC5129 /* NotificationsView */,
@@ -529,7 +559,9 @@
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
+				1B4ED87A270F345E00290FFF /* ImageCarousel.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
+				1B4ED877270F345E00290FFF /* AboutView.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
@@ -537,6 +569,7 @@
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* Number.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
+				1B4ED87C270F345E00290FFF /* PhotosViewCarousel.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* OTPKeyCode.swift in Sources */,
 				1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
@@ -545,8 +578,11 @@
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
+				1B4ED87B270F345E00290FFF /* LocationInfoView.swift in Sources */,
+				1B4ED879270F345E00290FFF /* ProfileView.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
+				1B4ED878270F345E00290FFF /* PassionsCombinedString.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfo.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
@@ -555,6 +591,7 @@
 				E23E417C270E690E0065E6E4 /* PhotosViewCarousel.swift in Sources */,
 				E23E4176270E5F2D0065E6E4 /* LocationInfoView.swift in Sources */,
 				E23E4174270E5A4E0065E6E4 /* PassionsCombinedString.swift in Sources */,
+				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
