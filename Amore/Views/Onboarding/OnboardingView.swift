@@ -101,6 +101,7 @@ struct OnboardingView: View {
                         checkLogin()
                     }) {
                         Number(loginFormVisible: $loginFormVisible)
+                            .environmentObject(profileModel)
                     }
                 }
                 .padding(.horizontal,44)
@@ -116,19 +117,20 @@ struct OnboardingView: View {
         else {
             // Home View/Profile View -- Logged In
             //            HomeView(loggedIn: $loggedIn)
-            ZStack {
-                if oldUser {
-                    HomeView(loggedIn: $loggedIn)
+            if (profileModel.profileRefreshDone) {
+                ZStack {
+                    if oldUser {
+                        HomeView(loggedIn: $loggedIn)
+                    }
+                    else {
+                        BasicUserInfo(oldUser: $oldUser)
+                            .environmentObject(profileModel)
+                    }
                 }
-                else {
-                    BasicUserInfo(oldUser: $oldUser)
-                        .environmentObject(profileModel)
+                .onAppear{
+                    self.fetchProfileCoreData()
+                    checkOldUser()
                 }
-            }
-            .onAppear{
-                profileModel.getUserProfile(context: viewContext)
-                self.fetchProfileCoreData()
-                checkOldUser()
             }
             
         }

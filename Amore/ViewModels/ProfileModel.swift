@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     var userProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
+    @Published var profileRefreshDone = false
     
     func fetchProfileCoreData (viewContext: NSManagedObjectContext) {
         let request = ProfileCore.fetchRequest()
@@ -31,10 +32,8 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func updateProfileCore (profileCore: ProfileCore, updateFlag: Bool) {
-        if !updateFlag {
-            profileCore.id = userProfile.id
-        }
+    func updateProfileCore (profileCore: ProfileCore) {
+        profileCore.id = userProfile.id
         profileCore.firstName = userProfile.firstName
         profileCore.lastName = userProfile.lastName
         profileCore.email = userProfile.email
@@ -51,7 +50,7 @@ class ProfileViewModel: ObservableObject {
     func createUserProfile(context: NSManagedObjectContext) -> Bool {
         do {
             let profileCore = ProfileCore(context: context)
-            self.updateProfileCore(profileCore: profileCore, updateFlag: false)
+            self.updateProfileCore(profileCore: profileCore)
             try context.save()
         }
         catch {
@@ -77,6 +76,7 @@ class ProfileViewModel: ObservableObject {
     
     func getUserProfile(context: NSManagedObjectContext) {
         // Example function, Firestore Read Implementation
+        profileRefreshDone = false
         let collectionRef = db.collection("Profiles")
         if let documentId = UserDefaults.standard.string(forKey: "userUID") {
             let docRef = collectionRef.document(documentId)
@@ -89,7 +89,7 @@ class ProfileViewModel: ObservableObject {
                     if let document = document {
                         do {
                             self.userProfile = try document.data(as: Profile.self) ?? Profile()
-                            
+
                             self.fetchProfileCoreData(viewContext: context)
                             do {
                                 var profileCore: ProfileCore?
@@ -99,20 +99,21 @@ class ProfileViewModel: ObservableObject {
                                 else {
                                     profileCore = ProfileCore(context: context)
                                 }
-                                self.updateProfileCore(profileCore: profileCore!, updateFlag: true)
+                                self.updateProfileCore(profileCore: profileCore!)
                                 try context.save()
+                                self.profileRefreshDone = true
+                                print("Profile Refresh done...")
                             }
                             catch {
                                 print("Core Data Storing failed during profile fetch...:\(error)")
                             }
-                            
+
                         }
                         catch {
                             print(error)
                         }
                     }
                 }
-                
             }
         }
     }

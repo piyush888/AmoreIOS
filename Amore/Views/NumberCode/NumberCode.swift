@@ -10,7 +10,8 @@ import Combine
 import FirebaseAuth
 
 struct NumberCode: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var phoneNumber: String
     @Binding var verification_Id : String
     @State var verificationCode: String = ""
@@ -115,6 +116,7 @@ struct NumberCode: View {
                     else {
                         if let authRes = authResult {
                             UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                            profileModel.getUserProfile(context: viewContext)
                         }
                         loginFormVisible = false
                     }

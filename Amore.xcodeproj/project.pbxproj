@@ -195,13 +195,6 @@
 			path = AddPhotosView;
 			sourceTree = "<group>";
 		};
-		E23E416D270CFE880065E6E4 /* ProfileView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ProfileView;
-			sourceTree = "<group>";
-		};
 		E23E416E270CFEB00065E6E4 /* ExtraViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				E23E416E270CFEB00065E6E4 /* ExtraViews */,
-				E23E416D270CFE880065E6E4 /* ProfileView */,
 				E226CF482709F75900FC5129 /* AddPhotosView */,
 				E226CF452708C8BB00FC5129 /* NotificationsView */,
 				E226CF3C2707B18A00FC5129 /* LocationView */,
@@ -381,7 +373,7 @@
 				E2F8AA4A26F9427F00CC7A72 /* Frameworks */,
 				E2F8AA4B26F9427F00CC7A72 /* Resources */,
 				E237CEE626FD531F004F20AB /* Embed Frameworks */,
-				082B5C316BAA37AF9F7F1DA5 /* [CP] Embed Pods Frameworks */,
+				A9479CF1E6D7593E8F3E0764 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -448,7 +440,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		082B5C316BAA37AF9F7F1DA5 /* [CP] Embed Pods Frameworks */ = {
+		A9479CF1E6D7593E8F3E0764 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

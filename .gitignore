@@ -593,3 +593,5 @@ Pods/Target Support Files/Pods-Amore/Pods-Amore-frameworks-Debug-input-files.xcf
 Pods/Target Support Files/Pods-Amore/Pods-Amore-frameworks-Release-input-files.xcfilelist
 Pods/Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig
 Pods/Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig
+/Pods/
+/.idea/
