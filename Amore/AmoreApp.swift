@@ -44,9 +44,9 @@ struct AmoreApp: App {
     let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
-                .environmentObject(OnboardingModel())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            OnboardingView()
+//                .environmentObject(OnboardingModel())
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            ProfileView()
 //            BasicUserInfo()
 //            LocationView()
@@ -54,6 +54,7 @@ struct AmoreApp: App {
 //            EnableNotifications()
 //            AddPhotosView()
 //            SomeView()
+            ProfileView()
 //            TestCropper()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

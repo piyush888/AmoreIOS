@@ -17,7 +17,7 @@ class ProfileViewModel: ObservableObject {
     var profileCores = [ProfileCore]()
     
     func fetchProfileCoreData (viewContext: NSManagedObjectContext) {
-        let request = ProfileCore.fetchRequest()
+        let request = ProfileCore.profileFetchRequest()
         request.sortDescriptors = []
         if let id = Auth.auth().currentUser?.uid {
             request.predicate = NSPredicate(format: "id contains %@", id)

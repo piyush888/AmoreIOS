@@ -36,6 +36,12 @@
 		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E23E4170270D03BC0065E6E4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E416F270D03BC0065E6E4 /* ProfileView.swift */; };
+		E23E4172270E473A0065E6E4 /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E4171270E473A0065E6E4 /* LikeDislikeSuperLike.swift */; };
+		E23E4174270E5A4E0065E6E4 /* PassionsCombinedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E4173270E5A4E0065E6E4 /* PassionsCombinedString.swift */; };
+		E23E4176270E5F2D0065E6E4 /* LocationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E4175270E5F2D0065E6E4 /* LocationInfoView.swift */; };
+		E23E4178270E604C0065E6E4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E4177270E604C0065E6E4 /* AboutView.swift */; };
+		E23E417A270E68DC0065E6E4 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E4179270E68DC0065E6E4 /* ImageCarousel.swift */; };
+		E23E417C270E690E0065E6E4 /* PhotosViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E417B270E690E0065E6E4 /* PhotosViewCarousel.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
 		E283677726F9534200EEA049 /* Sk-Modernist-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */; };
@@ -106,6 +112,12 @@
 		E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E23E416F270D03BC0065E6E4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E23E4171270E473A0065E6E4 /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
+		E23E4173270E5A4E0065E6E4 /* PassionsCombinedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassionsCombinedString.swift; sourceTree = "<group>"; };
+		E23E4175270E5F2D0065E6E4 /* LocationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoView.swift; sourceTree = "<group>"; };
+		E23E4177270E604C0065E6E4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		E23E4179270E68DC0065E6E4 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
+		E23E417B270E690E0065E6E4 /* PhotosViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewCarousel.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
 		E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Regular.otf"; sourceTree = "<group>"; };
@@ -201,6 +213,12 @@
 			isa = PBXGroup;
 			children = (
 				E23E416F270D03BC0065E6E4 /* ProfileView.swift */,
+				E23E4171270E473A0065E6E4 /* LikeDislikeSuperLike.swift */,
+				E23E4173270E5A4E0065E6E4 /* PassionsCombinedString.swift */,
+				E23E4175270E5F2D0065E6E4 /* LocationInfoView.swift */,
+				E23E4177270E604C0065E6E4 /* AboutView.swift */,
+				E23E4179270E68DC0065E6E4 /* ImageCarousel.swift */,
+				E23E417B270E690E0065E6E4 /* PhotosViewCarousel.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -501,6 +519,7 @@
 				E23E4170270D03BC0065E6E4 /* ProfileView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
+				E23E4178270E604C0065E6E4 /* AboutView.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				E2F8AA6326F9481400CC7A72 /* OnboardingView.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
@@ -534,10 +553,15 @@
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
+				E23E417C270E690E0065E6E4 /* PhotosViewCarousel.swift in Sources */,
+				E23E4176270E5F2D0065E6E4 /* LocationInfoView.swift in Sources */,
+				E23E4174270E5A4E0065E6E4 /* PassionsCombinedString.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
+				E23E417A270E68DC0065E6E4 /* ImageCarousel.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
+				E23E4172270E473A0065E6E4 /* LikeDislikeSuperLike.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
