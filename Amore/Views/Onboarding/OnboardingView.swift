@@ -17,42 +17,19 @@ struct OnboardingView: View {
     @State var tabSelectionIndex = 0
     @State var loggedIn: Bool = false
     @State var loginFormVisible = false
-    @State var oldUser: Bool = false
-    @State var profileCores = [ProfileCore]()
-    
-    func fetchProfileCoreData () {
-        profileModel.getUserProfile(context: viewContext)
-        let request = ProfileCore.profileFetchRequest()
-        request.sortDescriptors = []
-        if let currentUserId = Auth.auth().currentUser?.uid{
-            print("Looking for: \(currentUserId)")
-            request.predicate = NSPredicate(format: "id contains[c] %@", currentUserId)
-        }
-        do {
-            let results = try viewContext.fetch(request)
-            self.profileCores = results
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
+    @State var profileCreationDone: Bool = false
     
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false : true
         print("Logged In: "+String(loggedIn))
     }
     
-    func checkOldUser() {
-        var profileCore: ProfileCore?
-        if (profileCores.count>0){
-            profileCore = profileCores[0]
-        }
-        print("Info from Core Data Store : Profile Email=\(profileCore?.email ?? "default value")")
-        if profileCore?.email != nil {
-            oldUser = true
+    func checkProfileCreationDone() {
+        if profileModel.userProfile.email != nil {
+            profileCreationDone = true
         }
         else {
-            oldUser = false
+            profileCreationDone = false
         }
     }
     
@@ -116,30 +93,28 @@ struct OnboardingView: View {
             }
         }
         else {
-            // Home View/Profile View -- Logged In
-            //            HomeView(loggedIn: $loggedIn)
-            if (profileModel.profileRefreshDone) {
+            // Logged In
+            // If User Profile Data pulled from Firestore
+            if profileModel.profileFetchedAndReady {
                 ZStack {
-                    if oldUser {
+                    // If User profile already created
+                    if profileCreationDone {
                         HomeView(loggedIn: $loggedIn)
                     }
+                    // Else User profile creation process
                     else {
-                        BasicUserInfo(oldUser: $oldUser)
+                        BasicUserInfo(profileCreationDone: $profileCreationDone)
                             .environmentObject(profileModel)
                     }
                 }
-                .onAppear{
-                    print("Primary profile refresh: \(profileModel.profileRefreshDone)")
-                    self.fetchProfileCoreData()
-                    checkOldUser()
+                .onAppear {
+                    checkProfileCreationDone()
                 }
             }
             else {
                 Text("Please Wait...")
-                    .onAppear{
-                        print("Secondary profile refresh: \(profileModel.profileRefreshDone)")
-                        self.fetchProfileCoreData()
-                        checkOldUser()
+                    .onAppear {
+                        profileModel.getUserProfile(context: viewContext)
                     }
             }
             

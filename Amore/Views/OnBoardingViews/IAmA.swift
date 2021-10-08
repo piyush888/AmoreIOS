@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IAmA: View {
-    @Binding var oldUser: Bool
+    @Binding var profileCreationDone: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     
     let genders = ["male", "female", "other"]
@@ -82,7 +82,7 @@ struct IAmA: View {
             
             Spacer()
             
-            NavigationLink(destination: SexualOrientation(oldUser: $oldUser).environmentObject(profileModel),
+            NavigationLink(destination: SexualOrientation(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
                            isActive: $isGenderSet,
                            label: {
                 Button{
@@ -158,6 +158,6 @@ struct SelectionCell: View {
 
 struct IAmA_Previews: PreviewProvider {
     static var previews: some View {
-        IAmA(oldUser: Binding.constant(false)).environmentObject(ProfileViewModel())
+        IAmA(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
     }
 }

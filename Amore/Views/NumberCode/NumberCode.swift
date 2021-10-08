@@ -116,6 +116,9 @@ struct NumberCode: View {
                     else {
                         if let authRes = authResult {
                             UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                            if profileModel.profileFetchedAndReady {
+                                profileModel.profileFetchedAndReady = false
+                            }
                             profileModel.getUserProfile(context: viewContext)
                         }
                         loginFormVisible = false

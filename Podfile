@@ -11,4 +11,5 @@ target 'Amore' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'CropViewController'
+  pod 'Firebase/Storage'
 end
