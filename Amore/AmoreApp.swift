@@ -47,16 +47,6 @@ struct AmoreApp: App {
             OnboardingView()
                 .environmentObject(OnboardingModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            ProfileView()
-//            BasicUserInfo()
-//            LocationView()
-//                .environmentObject(LocationModel())
-//            EnableNotifications()
-//            AddPhotosView()
-//            SomeView()
-//            ProfileView()
-//            TestCropper()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

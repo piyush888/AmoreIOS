@@ -76,7 +76,7 @@ struct Passions: View {
                                 passionSelected.append(item)
                             }
                             
-                            print(passionSelected)
+                            //print(passionSelected)
                             
                             // Load the passionSelected to firebase
                         }) {
@@ -90,8 +90,7 @@ struct Passions: View {
                                     
                                 
                                 Text("\(item)")
-                                    .foregroundColor(passionChoosen == true ? .white : .pink)
-                                    .bold()
+                                    .foregroundColor(passionChoosen == true ? .white : .black)
                                     .font(.BoardingSubHeading)
                             }
                         }

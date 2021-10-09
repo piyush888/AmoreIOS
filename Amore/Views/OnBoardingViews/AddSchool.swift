@@ -63,7 +63,7 @@ struct AddSchool: View {
             Button{
                 addInputToProfile()
                 // Execute "Create Profile Document in Firestore"
-                let status = profileModel.createUserProfile(context: viewContext)
+                let status = profileModel.createUserProfile()
                 continueToNext = status
                 print("Profile Saved: \(status)")
                 profileCreationDone = true
@@ -80,31 +80,6 @@ struct AddSchool: View {
                         .font(.BoardingButton)
                 }
             }.padding(.bottom, 10)
-            
-//            NavigationLink(destination: HomeView(loggedIn: Binding.constant(true)),
-//                           isActive: $continueToNext,
-//                           label: {
-//                Button{
-//                    addInputToProfile()
-//                    // Execute "Create Profile Document in Firestore"
-//                    let status = profileModel.createUserProfile(context: viewContext)
-//                    continueToNext = status
-//                    print("Profile Saved: \(status)")
-//                } label : {
-//                    ZStack{
-//                        Rectangle()
-//                            .frame(height:45)
-//                            .cornerRadius(5.0)
-//                            .foregroundColor(.pink)
-//
-//                        Text(buttonText)
-//                            .foregroundColor(.white)
-//                            .bold()
-//                            .font(.BoardingButton)
-//                    }
-//                }.padding(.bottom, 10)
-//            })
-            
         }
         .padding(20)
         .navigationBarTitle("My School is")

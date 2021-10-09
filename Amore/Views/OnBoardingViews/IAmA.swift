@@ -49,22 +49,39 @@ struct IAmA: View {
     var body: some View {
         
         VStack(alignment:.leading) {
-//            HStack {
-//                Text("I am a")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
-            
-            List {
-                ForEach(genders, id: \.self) { item in
-                    SelectionCell(
-                        gender: item,
-                        selectedGender: self.$selectedGender)
+
+            ForEach(genders, id: \.self) { gender in
+                Button{
+                    self.selectedGender = gender
+                } label : {
+                    ZStack{
+                        Rectangle()
+                            .cornerRadius(5.0)
+                            .frame(height:45)
+                            .foregroundColor(.white)
+                            .overlay(RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.pink, lineWidth: 1))
+                        
+                        HStack {
+                            Text(gender)
+                                .foregroundColor(.black)
+                                .font(.BoardingSubHeading)
+                                .padding(.horizontal,10)
+                            
+                            Spacer()
+                            
+                            if gender == self.selectedGender {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.accentColor)
+                                    .padding(.horizontal,10)
+                            }
+                            
+                        }
+                        
+                    }
                 }
-                //.listRowSeparator(.hidden) - Uncomment for iOS 15
-            }.frame(height:180)
-            
+            }
+        
             // Show this view if user chooses other
             if selectedGender == "other" {
                 ZStack{
@@ -107,52 +124,8 @@ struct IAmA: View {
         .alert(isPresented: self.$validationError) {
             Alert(title: Text(""), message: self.errorDesc, dismissButton: .default(Text("OK")))
         }
-        .padding(20)
+        .padding(40)
         .navigationBarTitle("I am a")
-    }
-}
-
-struct SelectionCell: View {
-    
-    let gender: String
-    @Binding var selectedGender: String?
-    
-    var body: some View {
-        
-        
-        Button{
-            // TODO
-        } label : {
-            ZStack{
-                Rectangle()
-                    .cornerRadius(5.0)
-                    .frame(height:45)
-                    .foregroundColor(.white)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.pink, lineWidth: 1))
-                
-                HStack {
-                    Text(gender)
-                        .foregroundColor(.pink)
-                        .bold()
-                        .font(.BoardingButton)
-                        .padding(.horizontal,10)
-                    
-                    Spacer()
-                    
-                    if gender == selectedGender {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.accentColor)
-                            .padding(.horizontal,10)
-                    }
-                    
-                }
-                
-            }
-        }
-        .onTapGesture {
-            self.selectedGender = self.gender
-        }
     }
 }
 

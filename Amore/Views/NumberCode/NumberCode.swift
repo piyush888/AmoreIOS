@@ -10,7 +10,7 @@ import Combine
 import FirebaseAuth
 
 struct NumberCode: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    
     @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var phoneNumber: String
     @Binding var verification_Id : String
@@ -47,9 +47,6 @@ struct NumberCode: View {
                          .foregroundColor(.black)
                     }
                 }.padding(.top,20)
-                
-                
-                
             }
             .padding(.top, 100)
             
@@ -96,7 +93,7 @@ struct NumberCode: View {
             .padding(.top, 80)
             Spacer()
         }
-        .padding(.horizontal,130)
+        .padding(.horizontal,40)
         
     }
     
@@ -119,7 +116,7 @@ struct NumberCode: View {
                             if profileModel.profileFetchedAndReady {
                                 profileModel.profileFetchedAndReady = false
                             }
-                            profileModel.getUserProfile(context: viewContext)
+                            profileModel.getUserProfile()
                         }
                         loginFormVisible = false
                     }

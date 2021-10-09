@@ -74,35 +74,6 @@ struct BasicUserInfo: View {
                 Spacer()
                 
                 // Upload a pic
-                VStack {
-                    
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(.pink)
-                    
-                    // Provide User To LogIn, If they already have an account
-                    Button{
-                        // TODO
-                    } label : {
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(5.0)
-                                .frame(height:30)
-                                .foregroundColor(.white)
-                                .overlay(RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.pink, lineWidth: 1))
-                                .padding(.horizontal,90)
-                            
-                            Text("Upload a photo")
-                                .foregroundColor(.pink)
-                                .bold()
-                                .font(.BoardingButton)
-                        }
-                    }
-                }
-                .padding(.bottom, 20)
-                
                 Spacer()
                 
                 // First Name

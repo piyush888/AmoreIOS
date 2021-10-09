@@ -31,21 +31,38 @@ struct ShowMe: View {
         
         
         VStack(alignment:.leading) {
-//            HStack {
-//                Text("Show Me")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
             
-            List {
-                ForEach(showMeList, id: \.self) { item in
-                    SelectionCellShowMe(
-                        gender: item,
-                        userChoice: self.$userChoice)
+                ForEach(showMeList, id: \.self) { gender in
+                    Button{
+                        userChoice = gender
+                    } label : {
+                        ZStack{
+                            Rectangle()
+                                .cornerRadius(5.0)
+                                .frame(height:45)
+                                .foregroundColor(.white)
+                                .overlay(RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.pink, lineWidth: 1))
+                            
+                            HStack {
+                                Text(gender)
+                                    .foregroundColor(.black)
+                                    .font(.BoardingSubHeading)
+                                    .padding(.horizontal,10)
+                                
+                                Spacer()
+                                
+                                if gender == userChoice {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.accentColor)
+                                        .padding(.horizontal,10)
+                                }
+                                
+                            }
+                            
+                        }
+                    }
                 }
-                //.listRowSeparator(.hidden) - Uncomment for iOS 15
-            }.frame(height:180)
             
             Spacer()
             
@@ -73,50 +90,6 @@ struct ShowMe: View {
         }
         .padding(20)
         .navigationBarTitle("Show me")
-    }
-}
-
-
-struct SelectionCellShowMe: View {
-    
-    let gender: String
-    @Binding var userChoice: String?
-    
-    var body: some View {
-        
-        Button{
-            // TODO
-        } label : {
-            ZStack{
-                Rectangle()
-                    .cornerRadius(5.0)
-                    .frame(height:45)
-                    .foregroundColor(.white)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.pink, lineWidth: 1))
-                
-                HStack {
-                    Text(gender)
-                        .foregroundColor(.pink)
-                        .bold()
-                        .font(.BoardingButton)
-                        .padding(.horizontal,10)
-                    
-                    Spacer()
-                    
-                    if gender == userChoice {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.accentColor)
-                            .padding(.horizontal,10)
-                    }
-                    
-                }
-                
-            }
-        }
-        .onTapGesture {
-            self.userChoice = self.gender
-        }
     }
 }
 

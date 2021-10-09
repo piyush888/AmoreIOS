@@ -17,7 +17,9 @@ class ProfileViewModel: ObservableObject {
     var profileCores = [ProfileCore]()
     @Published var profileFetchedAndReady = false
     
-    func fetchProfileCoreData (viewContext: NSManagedObjectContext) {
+    let viewContext = PersistenceController.shared.container.viewContext
+    
+    func fetchProfileCoreData () {
         let request = ProfileCore.profileFetchRequest()
         request.sortDescriptors = []
         if let id = Auth.auth().currentUser?.uid {
@@ -51,11 +53,11 @@ class ProfileViewModel: ObservableObject {
         profileCore.school = userProfile.school
     }
     
-    func createUserProfile(context: NSManagedObjectContext) -> Bool {
+    func createUserProfile() -> Bool {
         do {
-            let profileCore = ProfileCore(context: context)
+            let profileCore = ProfileCore(context: viewContext)
             self.updateProfileCore(profileCore: profileCore)
-            try context.save()
+            try viewContext.save()
         }
         catch {
             print("Core Data Storing failed during profile creation...:\(error)")
@@ -80,13 +82,13 @@ class ProfileViewModel: ObservableObject {
         return false
     }
     
-    func getUserProfile(context: NSManagedObjectContext) {
+    func getUserProfile() {
         // Example function, Firestore Read Implementation
         let collectionRef = db.collection("Profiles")
         if let documentId = Auth.auth().currentUser?.uid {
             let docRef = collectionRef.document(documentId)
             // Get Data from Firestore. Network Action -- Async Behaviour at this point
-            docRef.getDocument { document, error in
+            docRef.getDocument { [self] document, error in
                 if let error = error as NSError? {
                     print("Error getting document: \(error.localizedDescription)")
                 }
@@ -96,7 +98,7 @@ class ProfileViewModel: ObservableObject {
                             // Get User Profile from Firestore.
                             self.userProfile = try document.data(as: Profile.self) ?? Profile()
 
-                            self.fetchProfileCoreData(viewContext: context)
+                            self.fetchProfileCoreData()
                             do {
                                 var profileCore: ProfileCore?
                                 // If Core Data already exists, update Core Data
@@ -106,12 +108,12 @@ class ProfileViewModel: ObservableObject {
                                 // Create new Core Data Record -- When profile data available in Firestore but not yet stored in Core Data
                                 // Example: User Registered -> Profile Exists in Firestore -> Uninstalled -> Installed -> Signed In
                                 else {
-                                    profileCore = ProfileCore(context: context)
+                                    profileCore = ProfileCore(context: viewContext)
                                 }
                                 self.updateProfileCore(profileCore: profileCore!)
                                 // Save Profile data in Core Data Store only if Profile not empty
                                 if profileCore?.email != nil {
-                                    try context.save()
+                                    try viewContext.save()
                                 }
                                 self.profileFetchedAndReady = true
                                 print("Profile Refresh done...")

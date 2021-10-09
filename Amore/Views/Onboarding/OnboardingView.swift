@@ -11,7 +11,6 @@ import FirebaseAuth
 
 struct OnboardingView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var profileModel = ProfileViewModel()
     @EnvironmentObject var model: OnboardingModel
     @State var tabSelectionIndex = 0
@@ -114,7 +113,7 @@ struct OnboardingView: View {
             else {
                 Text("Please Wait...")
                     .onAppear {
-                        profileModel.getUserProfile(context: viewContext)
+                        profileModel.getUserProfile()
                     }
             }
             
