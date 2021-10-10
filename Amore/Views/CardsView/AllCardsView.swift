@@ -1,5 +1,5 @@
 //
-//  MainCardsView.swift
+//  AllCardsView.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 10/9/21.
@@ -14,24 +14,30 @@ struct User: Hashable, CustomStringConvertible {
     let firstName: String
     let lastName: String
     let age: Int
-    let mutualFriends: Int
-    let imageName: String
+    let profileDistanceFromUser: Int
+    let imageName1: String
+    let imageName2: String
+    let imageName3: String
+    let imageName4: String
+    let imageName5: String
+    let imageName6: String
     let occupation: String
-    
-    var description: String {
-        return "\(firstName), id: \(id)"
-    }
+    let passions: [String]
+    let height: String
+    let education: String
+    let religion: String
+    let politics: String
+    let location: String
+    let description: String
 }
 
-struct MainCardsView: View {
+struct AllCardsView: View {
     /// List of users
     @State var users: [User] = [
-        User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, mutualFriends: 4, imageName: "image1", occupation: "Coach"),
-        User(id: 1, firstName: "Mark", lastName: "Bennett", age: 27, mutualFriends: 0, imageName: "image2", occupation: "Insurance Agent"),
-        User(id: 2, firstName: "Clayton", lastName: "Delaney", age: 20, mutualFriends: 1, imageName: "image3", occupation: "Food Scientist"),
-        User(id: 3, firstName: "Brittni", lastName: "Watson", age: 19, mutualFriends: 4, imageName: "image4", occupation: "Historian"),
-        User(id: 4, firstName: "Archie", lastName: "Prater", age: 22, mutualFriends:18, imageName: "image5", occupation: "Substance Abuse Counselor"),
-        User(id: 5, firstName: "James", lastName: "Braun", age: 24, mutualFriends: 3, imageName: "image6", occupation: "Marketing Manager")
+        User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "image1",imageName2: "image2",imageName3: "image3",imageName4: "image4",imageName5: "image5",imageName6: "image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise"),
+        User(id: 1, firstName: "Mark", lastName: "Bennett", age: 27, profileDistanceFromUser: 0, imageName1: "image1",imageName2: "image2",imageName3: "image3",imageName4: "image4",imageName5: "image5",imageName6: "image6", occupation: "Insurance Agent", passions: ["Drink","Gaming","Partying"], height: "6 1''", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Delhi, IN",
+             description:"You are strong because you are imperfect"),
+        User(id: 2, firstName: "Clayton", lastName: "Delaney", age: 20, profileDistanceFromUser: 1, imageName1: "image1",imageName2: "image2",imageName3: "image3",imageName4: "image4",imageName5: "image5",imageName6: "image6", occupation: "Food Scientist", passions: ["Photography","Drink","Gaming","Partying"], height: "10 1", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Bangalore, IN",description:"Here is a women who is always tired, because she lives a life where too much is required")
     ]
     
     /// Return the CardViews width for the given offset in the array
@@ -59,7 +65,6 @@ struct MainCardsView: View {
         VStack {
             GeometryReader { geometry in
                 
-                
                 VStack(spacing: 24) {
                     ZStack {
                         ForEach(self.users, id: \.self) { user in
@@ -69,13 +74,12 @@ struct MainCardsView: View {
                             
                             if (self.maxID - 3)...self.maxID ~= user.id {
                                 // Normal Card View being rendered here.
-                                CardView(user: user, onRemove: { removedUser in
+                                SingleCardView(user: user, onRemove: { removedUser in
                                    // Remove that user from our array
                                    self.users.removeAll { $0.id == removedUser.id }
                                   })
                                   .animation(.spring())
-                                  .frame(width: self.getCardWidth(geometry, id: user.id), height: 800)
-                                  .offset(x: 0, y: self.getCardOffset(geometry, id: user.id))
+                                  .frame(width: self.getCardWidth(geometry, id: user.id))
                             }
                         }
                     }
@@ -87,9 +91,9 @@ struct MainCardsView: View {
     }
 }
 
-struct MainCardsView_Previews: PreviewProvider {
+struct AllCardsView_Previews: PreviewProvider {
     static var previews: some View {
-        MainCardsView()
+        AllCardsView()
     }
 }
 

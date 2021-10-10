@@ -44,12 +44,21 @@ struct AmoreApp: App {
     let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
+            /* Starts the application with Onboarding View*/
 //            OnboardingView()
 //                .environmentObject(OnboardingModel())
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            ProfileView()
-//            CardView().padding(.horizontal)
-            MainCardsView()
+
+            /* View to upload photos after add school view */
+//            AddPhotosView()
+
+            /* Just see how cards will look like when swipping */
+            AllCardsView()
+            
+            /* Shows Location View After Pic Images Views in Onboading*/
+//            LocationView()
+//                .environmentObject(LocationModel())
+            
         }
     }
 }

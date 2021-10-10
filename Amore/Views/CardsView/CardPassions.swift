@@ -1,5 +1,5 @@
 //
-//  PassionsCombinedString.swift
+//  CardPassions.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 10/6/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PassionsCombinedString: View {
+struct CardPassions: View {
     
     var passions: [String] = [""]
     @State private var passionsCombinedString = ""
@@ -34,6 +34,6 @@ struct PassionsCombinedString: View {
 
 struct PassionsCombinedString_Previews: PreviewProvider {
     static var previews: some View {
-        PassionsCombinedString(passions: ["Hello","World"])
+        CardPassions(passions: ["Hello","World"])
     }
 }
