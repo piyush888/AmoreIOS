@@ -34,13 +34,6 @@ struct AddSchool: View {
     var body: some View {
         
         VStack(alignment:.leading) {
-//            HStack {
-//                Text("My School is")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
-//            .padding(.bottom,80)
             // School Name
             ZStack{
                 Rectangle()

@@ -32,8 +32,12 @@ struct ProfileView: View {
         ScrollView {
             VStack {
                 
-                PhotosViewCarousel(images: images)
-                    .padding(.top,30)
+                // Photo Carousel not to be used
+//                PhotosViewCarousel(images: images)
+//                    .padding(.top,30)
+                Image("image1")
+                    .resizable()
+                    .aspectRatio(contentMode:.fill)
                 
                 // VStack for all the profile details
                 VStack {

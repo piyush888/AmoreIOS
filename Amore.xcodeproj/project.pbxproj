@@ -42,6 +42,8 @@
 		E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */; };
 		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
+		E24A0F16271256C4001640CA /* MainCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* MainCardsView.swift */; };
+		E24A0F1827125727001640CA /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* CardView.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
 		E283677726F9534200EEA049 /* Sk-Modernist-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */; };
@@ -118,6 +120,8 @@
 		E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		E24A0F15271256C4001640CA /* MainCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCardsView.swift; sourceTree = "<group>"; };
+		E24A0F1727125727001640CA /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
 		E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Regular.otf"; sourceTree = "<group>"; };
@@ -229,6 +233,15 @@
 				E237CED826FD391D004F20AB /* SignUp.swift */,
 			);
 			path = ExtraViews;
+			sourceTree = "<group>";
+		};
+		E24A0F14271256A7001640CA /* CardsView */ = {
+			isa = PBXGroup;
+			children = (
+				E24A0F15271256C4001640CA /* MainCardsView.swift */,
+				E24A0F1727125727001640CA /* CardView.swift */,
+			);
+			path = CardsView;
 			sourceTree = "<group>";
 		};
 		E283677126F9531E00EEA049 /* Fonts */ = {
@@ -358,6 +371,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E24A0F14271256A7001640CA /* CardsView */,
 				1B4ED86F270F345E00290FFF /* ProfileView */,
 				E23E416E270CFEB00065E6E4 /* ExtraViews */,
 				E226CF482709F75900FC5129 /* AddPhotosView */,
@@ -543,6 +557,7 @@
 				1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* NumberCode.swift in Sources */,
+				E24A0F1827125727001640CA /* CardView.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
@@ -558,6 +573,7 @@
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
 				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
+				E24A0F16271256C4001640CA /* MainCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
