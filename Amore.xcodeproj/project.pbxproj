@@ -57,6 +57,7 @@
 		E291A1F226FF98B3000D8A2C /* BasicUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1F126FF98B3000D8A2C /* BasicUserInfo.swift */; };
 		E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0D2713350900C82174 /* CardBasicInfo.swift */; };
 		E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0F2713534200C82174 /* CardGalleryImages.swift */; };
+		E298BA142713A85500C82174 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA132713A85500C82174 /* ControlCenter.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
@@ -133,6 +134,7 @@
 		E291A1F126FF98B3000D8A2C /* BasicUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUserInfo.swift; sourceTree = "<group>"; };
 		E298BA0D2713350900C82174 /* CardBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBasicInfo.swift; sourceTree = "<group>"; };
 		E298BA0F2713534200C82174 /* CardGalleryImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGalleryImages.swift; sourceTree = "<group>"; };
+		E298BA132713A85500C82174 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
@@ -161,7 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				1BBB485327035B2F004D42A3 /* HomeView.swift */,
-				E226CF412707D78C00FC5129 /* LocationHomeView.swift */,
+				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
+				E298BA132713A85500C82174 /* ControlCenter.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 		E226CF3C2707B18A00FC5129 /* LocationView */ = {
 			isa = PBXGroup;
 			children = (
+				E226CF412707D78C00FC5129 /* LocationHomeView.swift */,
 				E226CF3E2707B19800FC5129 /* LocationView.swift */,
 				E226CF432708ADAE00FC5129 /* LocationDenied.swift */,
 			);
@@ -229,7 +233,6 @@
 				E298BA0D2713350900C82174 /* CardBasicInfo.swift */,
 				E298BA0F2713534200C82174 /* CardGalleryImages.swift */,
 				1B4ED871270F345E00290FFF /* CardPassions.swift */,
-				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
 			);
 			path = CardsView;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			files = (
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
+				E298BA142713A85500C82174 /* ControlCenter.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				E2F8AA6326F9481400CC7A72 /* OnboardingView.swift in Sources */,

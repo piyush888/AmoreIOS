@@ -42,22 +42,28 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct AmoreApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let persistenceController = PersistenceController.shared
+    
+    @State var loggedIn: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             /* Starts the application with Onboarding View*/
-//            OnboardingView()
-//                .environmentObject(OnboardingModel())
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            OnboardingView()
+                .environmentObject(OnboardingModel())
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
             /* View to upload photos after add school view */
 //            AddPhotosView()
 
             /* Just see how cards will look like when swipping */
-            AllCardsView()
+//            AllCardsView()
             
             /* Shows Location View After Pic Images Views in Onboading*/
 //            LocationView()
 //                .environmentObject(LocationModel())
+            
+            /* Home View For Integrating */
+//            HomeView(loggedIn:$loggedIn)
             
         }
     }

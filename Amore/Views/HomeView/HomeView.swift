@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseAuth
 
 struct HomeView: View {
     
@@ -14,13 +13,17 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            Text("Welcome!")
-            Button {
-                try! Auth.auth().signOut()
-                loggedIn = false
-            } label: {
-                Text("Sign Out")
-            }
+            // Control Center
+            ControlCenter(loggedIn:$loggedIn)
+                .padding()
+            
+            // Update new cards over here
+            AllCardsView()
+            
+            // Undo, Dislike, Star, Like, Boost
+            LikeDislikeSuperLike()
+                .padding()
+            
         }.navigationBarHidden(true)
     }
 }

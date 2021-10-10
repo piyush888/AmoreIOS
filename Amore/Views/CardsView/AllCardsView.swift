@@ -79,15 +79,14 @@ struct AllCardsView: View {
                                    self.users.removeAll { $0.id == removedUser.id }
                                   })
                                   .animation(.spring())
-                                  .frame(width: self.getCardWidth(geometry, id: user.id))
+                                  .frame(width: geometry.size.width)
                             }
                         }
                     }
-                    Spacer()
                 }
                 
             }
-        }.padding()
+        }.padding(.horizontal)
     }
 }
 

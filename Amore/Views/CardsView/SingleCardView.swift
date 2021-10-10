@@ -135,10 +135,7 @@ struct SingleCardView: View {
                     .padding(.horizontal)
                     
                 }
-                .padding(.bottom)
                 .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 40)
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 25), anchor: .bottom)
@@ -165,8 +162,9 @@ struct SingleCardView: View {
                         }
                 )
             }
-            
-            
+            .cornerRadius(10)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.pink, lineWidth: 0.5))
         }
     }
 }
