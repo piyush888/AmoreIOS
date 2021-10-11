@@ -37,7 +37,7 @@ struct SingleCardView: View {
         GeometryReader { geometry in
             
             ScrollView(showsIndicators: false) {
-                LazyVStack(alignment: .leading) {
+                VStack(alignment: .leading) {
                     
                     // User Start Image
                      ZStack(alignment: self.swipeStatus == .like ? .topLeading : .topTrailing) {
@@ -164,7 +164,7 @@ struct SingleCardView: View {
             }
             .cornerRadius(10)
             .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.pink, lineWidth: 0.5))
+                        .stroke(Color.black, lineWidth: 0.1))
         }
     }
 }
