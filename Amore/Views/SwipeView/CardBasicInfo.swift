@@ -27,6 +27,7 @@ struct CardBasicInfo: View {
             Text("About me")
                 .font(.BoardingTitle2)
             
+            
             LazyVGrid(columns: adaptivecolumns, alignment: .leading, spacing: 8, content: {
                 // Height of the profile
                 HStack {

@@ -9,21 +9,39 @@ import SwiftUI
 
 struct HomeView: View {
     
+    // Passed from the onboarding view
     @Binding var loggedIn: Bool
+    
+    @State var currentPage: ViewTypes = .swipeView
     
     var body: some View {
         VStack {
+            
             // Control Center
-            ControlCenter(loggedIn:$loggedIn)
+            ControlCenter(currentPage:$currentPage)
                 .padding()
             
-            // Update new cards over here
-            AllCardsView()
             
-            // Undo, Dislike, Star, Like, Boost
-            LikeDislikeSuperLike()
-                .padding()
-            
+            switch currentPage {
+                
+                case .messagingView:
+                    MessageView()
+                    
+                case .likesTopPicksView:
+                    LikesTopPicksHome()
+                    
+                case .swipeView:
+                    AllCardsView()
+                    LikeDislikeSuperLike()
+                    .padding()
+                    
+                case .filterSettingsView:
+                    FilterSettings()
+                    
+                case .userSettingsView:
+                    UserSettings(loggedIn: $loggedIn)
+            }
+                        
         }.navigationBarHidden(true)
     }
 }

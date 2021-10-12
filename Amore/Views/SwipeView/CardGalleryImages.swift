@@ -15,9 +15,6 @@ struct CardGalleryImages: View {
         
         VStack(alignment:.leading) {
             
-            Text("Gallery")
-                .font(.BoardingTitle2)
-            
             HStack {
                     Image("image2")
                         .resizable()

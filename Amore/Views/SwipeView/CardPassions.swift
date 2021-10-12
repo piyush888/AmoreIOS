@@ -19,12 +19,15 @@ struct CardPassions: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            Text("Interests")
-                .font(.BoardingTitle2)
-            
-            Text(passionsCombinedString)
-                .font(.subheadline)
+        HStack {
+            VStack(alignment: .leading) {
+                    Text("Interests")
+                        .font(.BoardingTitle2)
+                    
+                    Text(passionsCombinedString)
+                        .font(.subheadline)
+            }
+            Spacer()
         }
         .onAppear {
             combineString()

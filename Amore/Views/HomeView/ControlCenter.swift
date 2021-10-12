@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import FirebaseAuth
 
 struct ControlCenter: View {
     
-    @Binding var loggedIn: Bool
+    @Binding var currentPage: ViewTypes
     
     var controlCenterColor = Color(UIColor.lightGray)
     
@@ -21,36 +20,45 @@ struct ControlCenter: View {
                 .imageScale(.large)
                 .foregroundColor(controlCenterColor)
                 .padding(.horizontal)
+                .onTapGesture {
+                    currentPage = .messagingView
+                }
                 
             Spacer()
             Image(systemName: "sparkles")
                 .imageScale(.large)
                 .foregroundColor(controlCenterColor)
                 .padding(.horizontal)
+                .onTapGesture {
+                    currentPage = .likesTopPicksView
+                }
                 
             Spacer()
             Image(systemName: "bonjour")
                 .imageScale(.large)
                 .foregroundColor(controlCenterColor)
                 .padding(.horizontal)
+                .onTapGesture {
+                    currentPage = .swipeView
+                }
                 
             Spacer()
             Image(systemName: "slider.vertical.3")
                 .imageScale(.large)
                 .foregroundColor(controlCenterColor)
                 .padding(.horizontal)
+                .onTapGesture {
+                    currentPage = .filterSettingsView
+                }
             
             Spacer()
-            Button {
-                try! Auth.auth().signOut()
-                loggedIn = false
-            } label: {
-                Image(systemName: "person.fill")
-                    .imageScale(.large)
-                    .foregroundColor(controlCenterColor)
-                    .padding(.horizontal)
-            }
-            
+            Image(systemName: "person.fill")
+                .imageScale(.large)
+                .foregroundColor(controlCenterColor)
+                .padding(.horizontal)
+                .onTapGesture {
+                    currentPage = .userSettingsView
+                }
         }
     }
 }
