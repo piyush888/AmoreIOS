@@ -35,6 +35,22 @@ struct AddPhotosView: View {
         counter = counter + (image6 != nil ? 1 : 0)
     }
     
+    func resizeImagesAndUpload() {
+        let images = [image1, image2, image3, image4, image5, image6]
+        for (index, image) in images.enumerated() {
+            if image != nil {
+//                guard let image = image?.compressedData() else { return }
+                do {
+                    guard let imageData = try image?.heicData(compressionQuality: CGFloat(0.6)) else { return }
+                    FirestoreServices.uploadImage(imageData: imageData, filename: "image\(index+1)")
+                }
+                catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
     let adaptivecolumns = Array(repeating:
                                 GridItem(.adaptive(minimum: 150),spacing: 5,
                                          alignment: .center),count: 3)
@@ -74,7 +90,8 @@ struct AddPhotosView: View {
                 // Store the images in the firestore database
                 if counter >= 2 {
                     // Update to firestore
-                    print("Update to firestore")
+                    print("Updating to firestore...")
+                    resizeImagesAndUpload()
                 } else {
                     showsAlert = true
                     print("Alert atleast 2 photos are required")

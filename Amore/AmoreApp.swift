@@ -48,12 +48,12 @@ struct AmoreApp: App {
     var body: some Scene {
         WindowGroup {
             /* Starts the application with Onboarding View*/
-            OnboardingView()
-                .environmentObject(OnboardingModel())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            OnboardingView()
+//                .environmentObject(OnboardingModel())
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
             /* View to upload photos after add school view */
-//            AddPhotosView()
+            AddPhotosView()
 
             /* Just see how cards will look like when swipping */
 //            AllCardsView()

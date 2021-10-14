@@ -20,6 +20,20 @@ struct UploadPhotoWindow: View {
     @Binding var image : UIImage?
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
+    var downsampledImage: UIImage {
+        if image != nil {
+            do {
+                return try ImageService.downsample(imageAt: image?.heicData(compressionQuality: 1.0) ?? Data(), to: CGSize(width: 115, height: 170)) ?? UIImage()
+            }
+            catch {
+                print(error)
+                return UIImage()
+            }
+        }
+        else {
+            return UIImage()
+        }
+    }
     
     
     func imageCropped(image: UIImage){
@@ -32,7 +46,7 @@ struct UploadPhotoWindow: View {
         VStack {
             
             if image != nil {
-                Image(uiImage: image!)
+                Image(uiImage: downsampledImage)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 115, height: 170, alignment: .center)
@@ -103,4 +117,8 @@ struct UploadPhotoWindow: View {
     }
 }
 
-
+struct UploadPhotoWindow_Previews: PreviewProvider {
+    static var previews: some View {
+        UploadPhotoWindow(image: Binding.constant(UIImage()))
+    }
+}

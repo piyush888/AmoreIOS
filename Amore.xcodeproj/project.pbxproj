@@ -13,6 +13,8 @@
 		1B4ED87A270F345E00290FFF /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED873270F345E00290FFF /* ImageCarousel.swift */; };
 		1B4ED87C270F345E00290FFF /* PhotosViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED875270F345E00290FFF /* PhotosViewCarousel.swift */; };
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
+		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
+		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileModel.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
@@ -87,6 +89,8 @@
 		1B4ED873270F345E00290FFF /* ImageCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		1B4ED875270F345E00290FFF /* PhotosViewCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewCarousel.swift; sourceTree = "<group>"; };
 		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
+		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -392,6 +396,8 @@
 			isa = PBXGroup;
 			children = (
 				E2F8AA6526F948BD00CC7A72 /* Fonts.swift */,
+				1B58A44E27144FA800565429 /* UIImageExtension.swift */,
+				1B58A4502715E35300565429 /* ImageServices.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 			files = (
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
+				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
 				E298BA142713A85500C82174 /* ControlCenter.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
@@ -564,6 +571,7 @@
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
+				1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */,
 				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
