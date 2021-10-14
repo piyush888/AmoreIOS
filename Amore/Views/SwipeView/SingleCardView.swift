@@ -37,7 +37,7 @@ struct SingleCardView: View {
         GeometryReader { geometry in
             
             ScrollView(showsIndicators: false) {
-                LazyVStack(alignment: .leading) {
+                LazyVStack {
                     
                     // User Start Image
                      ZStack(alignment: self.swipeStatus == .like ? .topLeading : .topTrailing) {
@@ -45,7 +45,7 @@ struct SingleCardView: View {
                          Image(self.user.imageName1)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                            //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
                             .clipped()
                         
                         if self.swipeStatus == .like {
@@ -73,67 +73,69 @@ struct SingleCardView: View {
                         }
                     }
                     
-                    // Profile Names and age
-                    // Profile Bio
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("\(self.user.firstName) \(self.user.lastName), \(self.user.age)")
-                            .font(.title2)
-                            .bold()
-                        Text(self.user.description)
-                            .font(.subheadline)
-                    
-                        // User Location and distance
-                        ZStack {
-                            HStack {
-                                Image(systemName: "mappin.and.ellipse")
-                                    .resizable()
-                                    .frame(width:20, height:20)
-                                    .foregroundColor(.black)
-                                
-                                Text("\(self.user.profileDistanceFromUser) km away")
-                                    .foregroundColor(.black)
+                    VStack {
+                        // Profile Names and age
+                        // Profile Bio
+                        HStack {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("\(self.user.firstName) \(self.user.lastName), \(self.user.age)")
+                                    .font(.title2)
+                                    .bold()
+                                Text(self.user.description)
                                     .font(.subheadline)
+                            
+                                // User Location and distance
+                                ZStack {
+                                    HStack {
+                                        Image(systemName: "mappin.and.ellipse")
+                                            .resizable()
+                                            .frame(width:20, height:20)
+                                            .foregroundColor(.black)
+                                        
+                                        Text("\(self.user.profileDistanceFromUser) km away")
+                                            .foregroundColor(.black)
+                                            .font(.subheadline)
+                                    }
+                                }
                             }
+                            Spacer()
                         }
+                        
+                        
+                        // Profile Height, Education, Job, Religion, Location
+                        CardBasicInfo(height: self.user.height,
+                                       work: self.user.occupation,
+                                       education: self.user.education,
+                                       religion: self.user.religion,
+                                       politics: self.user.politics,
+                                       location: self.user.location)
+                            .padding(.top,10)
+                            
+                        
+                        // Profile Passions
+                        CardPassions(passions: self.user.passions)
+                        .padding(.top,10)
+                        
+                        
+                        // Gallery
+                        CardGalleryImages(deviceWidth:(geometry.size.width - 25))
+                        .padding(.top,10)
+                        
+                        
+                        // Report the profile
+                        HStack {
+                            Spacer()
+                            Button {
+                                // TODO - Report a Person
+                            } label : {
+                                Text("Report \(self.user.firstName)")
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                        }
+                        .padding([.top,.bottom],30)
                     }
                     .padding(.horizontal,10)
-                        
-                    
-                    // Profile Height, Education, Job, Religion, Location
-                        
-                    CardBasicInfo(height: self.user.height,
-                                   work: self.user.occupation,
-                                   education: self.user.education,
-                                   religion: self.user.religion,
-                                   politics: self.user.politics,
-                                   location: self.user.location)
-                        .padding([.top, .bottom])
-                        .padding(.horizontal,20)
-                    
-                    // Profile Passions
-                    CardPassions(passions: self.user.passions)
-                    .padding([.top,.horizontal], 10)
-                    
-                    
-                    // Gallery
-                    CardGalleryImages(deviceWidth:(geometry.size.width - 25))
-                    .padding([.top,.horizontal],10)
-                    
-                    
-                    // Report the profile
-                    HStack {
-                        Spacer()
-                        Button {
-                            // TODO - Report a Person
-                        } label : {
-                            Text("Report \(self.user.firstName)")
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                    }
-                    .padding([.top,.bottom],30)
-                    .padding(.horizontal)
-                    
                 }
                 .background(Color.white)
                 .animation(.interactiveSpring())
@@ -164,7 +166,7 @@ struct SingleCardView: View {
             }
             .cornerRadius(10)
             .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.pink, lineWidth: 0.5))
+                        .stroke(Color.black, lineWidth: 0.1))
         }
     }
 }
@@ -178,7 +180,5 @@ struct SingleCardView_Previews: PreviewProvider {
                  onRemove: { _ in
                     // do nothing
             })
-            .frame(height: 800)
-            .padding()
     }
 }

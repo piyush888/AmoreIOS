@@ -62,29 +62,24 @@ struct AllCardsView: View {
     }
     
     var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                
-                VStack(spacing: 24) {
-                    ZStack {
-                        ForEach(self.users, id: \.self) { user in
-                            
-                            /// Using the pattern-match operator ~=, we can determine if our
-                            /// user.id falls within the range of 6...9
-                            
-                            if (self.maxID - 3)...self.maxID ~= user.id {
-                                // Normal Card View being rendered here.
-                                SingleCardView(user: user, onRemove: { removedUser in
-                                   // Remove that user from our array
-                                   self.users.removeAll { $0.id == removedUser.id }
-                                  })
-                                  .animation(.spring())
-                                  .frame(width: geometry.size.width)
-                            }
-                        }
+        
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(self.users, id: \.self) { user in
+                    
+                    /// Using the pattern-match operator ~=, we can determine if our
+                    /// user.id falls within the range of 6...9
+                    
+                    if (self.maxID - 3)...self.maxID ~= user.id {
+                        // Normal Card View being rendered here.
+                        SingleCardView(user: user, onRemove: { removedUser in
+                            // Remove that user from our array
+                            self.users.removeAll { $0.id == removedUser.id }
+                        })
+                        .animation(.spring())
+                        .frame(width: geometry.size.width)
                     }
                 }
-                
             }
         }.padding(.horizontal)
     }

@@ -13,52 +13,46 @@ struct LikeDislikeSuperLike: View {
         
         HStack {
             
+            Image(systemName: "arrow.uturn.backward")
+                .resizable()
+                .frame(width:25, height:25)
+                .foregroundColor(.orange)
+            
             Spacer()
             
-            Image(systemName: "arrow.uturn.backward.circle.fill")
+            Image(systemName: "xmark.circle")
                 .resizable()
-                .frame(width:35, height:35)
-                .foregroundColor(.orange)
-                .shadow(color: .orange,
-                        radius: 0.5, x: 1, y: 1)
-                
-            
-            Image(systemName: "xmark.circle.fill")
-                .resizable()
-                .frame(width:40, height:40)
-                .foregroundColor(.red)
+                .frame(width:44, height:44)
+                .foregroundColor(.gray)
                 .padding(.horizontal)
-                .shadow(color: .red,
-                        radius: 0.5, x: 1, y: 1)
-                
+            
+            Spacer()
             
             Image(systemName: "star.circle")
                 .resizable()
                 .frame(width:35, height:35)
-                .foregroundColor(.purple)
-                .shadow(color: .purple,
-                        radius: 0.5, x: 1, y: 1)
+                .foregroundColor(Color("gold-star"))
                 
+            Spacer()
             
             Image(systemName: "heart.circle.fill")
                 .resizable()
-                .frame(width:40, height:40)
+                .frame(width:44, height:44)
                 .foregroundColor(.pink)
                 .padding(.horizontal)
                 .shadow(color: .pink,
-                        radius: 0.5, x: 1, y: 1)
-                
+                        radius: 0.1, x: 1, y: 1)
+            
+            Spacer()
             
             Image(systemName: "bolt.circle.fill")
                 .resizable()
                 .frame(width:35, height:35)
                 .foregroundColor(.blue)
                 .shadow(color: .blue,
-                        radius: 0.5, x: 1, y: 1)
+                        radius: 0.1, x: 1, y: 1)
                 
-            
-            Spacer()
-        }
+        }.padding(.horizontal,20)
     }
 }
 
