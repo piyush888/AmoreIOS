@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OTPKeyCode: View {
+struct LoginOTPKeyCodeChild: View {
     
     @Binding var verificationCode: String
     @StateObject var viewModel = OTPViewModel()
@@ -71,6 +71,6 @@ struct OTPKeyCode: View {
 
 struct NumberCode2_Previews: PreviewProvider {
     static var previews: some View {
-        OTPKeyCode(verificationCode: Binding.constant(""))
+        LoginOTPKeyCodeChild(verificationCode: Binding.constant(""))
     }
 }

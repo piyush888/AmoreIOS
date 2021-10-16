@@ -1,5 +1,5 @@
 //
-//  BasicUserInfo.swift
+//  BasicUserInfoForm.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 9/25/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-struct BasicUserInfo: View {
+struct BasicUserInfoForm: View {
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -180,8 +180,8 @@ struct BasicUserInfo: View {
     }
 }
 
-struct BasicUserInfo_Previews: PreviewProvider {
+struct BasicUserInfoForm_Previews: PreviewProvider {
     static var previews: some View {
-        BasicUserInfo(profileCreationDone: Binding.constant(false))
+        BasicUserInfoForm(profileCreationDone: Binding.constant(false))
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import FirebaseAuth
 
-struct NumberCode: View {
+struct LoginOTPKeyCodeParent: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var phoneNumber: String
@@ -52,18 +52,7 @@ struct NumberCode: View {
             
             // OTP Text Field
             VStack(alignment: .center) {
-                
-//                TextField("0000", text: $pin)
-//                    .keyboardType(.numberPad)
-//                    .font(Font.custom("Sk-Modernist-Bold", size: 40))
-//                    .onReceive(Just(pin)) { newValue in
-//                        let filtered = newValue.filter { "0123456789".contains($0) }
-//                        if filtered != newValue {
-//                            self.pin = filtered
-//                    }
-//                }
-//
-                OTPKeyCode(verificationCode: $verificationCode)
+                LoginOTPKeyCodeChild(verificationCode: $verificationCode)
             }
             .padding(.top, 130)
             
@@ -127,8 +116,8 @@ struct NumberCode: View {
 }
 
 
-struct NumberCode_Previews: PreviewProvider {
+struct LoginOTPKeyCodeParent_Previews: PreviewProvider {
     static var previews: some View {
-        NumberCode(phoneNumber: Binding.constant("551697188"), verification_Id: Binding.constant("551697188"), loginFormVisible: Binding.constant(false), otpGeneratedOnce: Binding.constant(true))
+        LoginOTPKeyCodeParent(phoneNumber: Binding.constant("551697188"), verification_Id: Binding.constant("551697188"), loginFormVisible: Binding.constant(false), otpGeneratedOnce: Binding.constant(true))
     }
 }

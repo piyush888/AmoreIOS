@@ -11,7 +11,7 @@ import SwiftUI
 import FirebaseAuth
 
 
-struct Number: View {
+struct LoginPhoneNumber: View {
     
     @State var phoneNumber = String()
     let phoneNumberKit = PhoneNumberKit()
@@ -46,7 +46,7 @@ struct Number: View {
                         .overlay(RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.pink, lineWidth: 1))
                     NavigationLink(
-                        destination: NumberCode(phoneNumber: $phoneNumber, verification_Id: $currentVerificationId, loginFormVisible: $loginFormVisible, otpGeneratedOnce: $otpGeneratedOnce),
+                        destination: LoginOTPKeyCodeParent(phoneNumber: $phoneNumber, verification_Id: $currentVerificationId, loginFormVisible: $loginFormVisible, otpGeneratedOnce: $otpGeneratedOnce),
                         isActive: $otpGeneratedOnce,
                         label: {
                             Button(action: {
@@ -96,8 +96,8 @@ struct Number: View {
 }
 
 
-struct Number_Previews: PreviewProvider {
+struct LoginPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
-        Number(loginFormVisible: Binding.constant(false))
+        LoginPhoneNumber(loginFormVisible: Binding.constant(false))
     }
 }
