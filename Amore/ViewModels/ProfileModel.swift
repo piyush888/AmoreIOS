@@ -27,6 +27,7 @@ class ProfileViewModel: ObservableObject {
     
     // Variables for alert
     @Published var profileFetchedAndReady = false
+    @Published var profileCreationDone = false
     @Published var loginFormVisible = false
     
     let viewContext = PersistenceController.shared.container.viewContext

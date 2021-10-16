@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AddSchool: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Binding var profileCreationDone: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var schoolName : String = ""
     @State var continueToNext: Bool = false
@@ -59,7 +58,6 @@ struct AddSchool: View {
                 let status = profileModel.createUserProfile()
                 continueToNext = status
                 print("Profile Saved: \(status)")
-                profileCreationDone = true
             } label : {
                 ZStack{
                     Rectangle()
@@ -81,6 +79,7 @@ struct AddSchool: View {
 
 struct AddSchool_Previews: PreviewProvider {
     static var previews: some View {
-        AddSchool(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
+        AddSchool()
+            .environmentObject(ProfileViewModel())
     }
 }

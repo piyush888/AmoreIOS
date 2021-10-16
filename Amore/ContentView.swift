@@ -13,20 +13,9 @@ struct ContentView: View {
     @StateObject var profileModel = ProfileViewModel()
     @State var loggedIn: Bool = false
     
-    @State var profileCreationDone: Bool = false
-    
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false : true
         print("Logged In: "+String(loggedIn))
-    }
-    
-    func checkProfileCreationDone() {
-        if profileModel.userProfile.email != nil {
-            profileCreationDone = true
-        }
-        else {
-            profileCreationDone = false
-        }
     }
     
     var body: some View {
@@ -56,18 +45,15 @@ struct ContentView: View {
             if profileModel.profileFetchedAndReady {
                 ZStack {
                     // If User profile already created
-                    if profileCreationDone {
+                    if profileModel.userProfile.email != nil {
                         HomeView(loggedIn: $loggedIn)
                     }
                     // Else user profile not created
                     // Show users forms to complete the profile
                     else {
-                        BasicUserInfoForm(profileCreationDone: $profileCreationDone)
+                        BasicUserInfoForm()
                             .environmentObject(profileModel)
                     }
-                }
-                .onAppear {
-                    checkProfileCreationDone()
                 }
             }
             else {

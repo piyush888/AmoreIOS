@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseFirestoreSwift
 
 struct Passions: View {
-    @Binding var profileCreationDone: Bool
+    
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var isPassionsSelectionDone: Bool = false
     
@@ -103,7 +103,8 @@ struct Passions: View {
             // Continue to next view
             
             NavigationLink(
-                destination: IAmA(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+                destination: IAmA()
+                    .environmentObject(profileModel),
                 isActive: $isPassionsSelectionDone,
                 label: {
                     Button{
@@ -131,6 +132,7 @@ struct Passions: View {
 
 struct Passions_Previews: PreviewProvider {
     static var previews: some View {
-        Passions(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
+        Passions()
+            .environmentObject(ProfileViewModel())
     }
 }

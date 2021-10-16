@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AddWork: View {
-    @Binding var profileCreationDone: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var workName : String = ""
     @State var continueToNext: Bool = false
@@ -57,7 +56,7 @@ struct AddWork: View {
             Spacer()
             
             // Continue to next view
-            NavigationLink(destination: AddSchool(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+            NavigationLink(destination: AddSchool().environmentObject(profileModel),
                            isActive: $continueToNext,
                            label: {
                 Button{
@@ -87,6 +86,7 @@ struct AddWork: View {
 
 struct AddWork_Previews: PreviewProvider {
     static var previews: some View {
-        AddWork(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
+        AddWork()
+            .environmentObject(ProfileViewModel())
     }
 }

@@ -10,7 +10,6 @@
 import SwiftUI
 
 struct ShowMe: View {
-    @Binding var profileCreationDone: Bool
     @EnvironmentObject var profileModel: ProfileViewModel
     let showMeList = ["Women", "Men", "Everyone"]
     @State var userChoice: String? = nil
@@ -67,7 +66,8 @@ struct ShowMe: View {
             Spacer()
             
             // Continue to next view
-            NavigationLink(destination: AddWork(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+            NavigationLink(destination: AddWork()
+                            .environmentObject(profileModel),
                            isActive: $inputTaken,
                            label: {
                 Button{
@@ -96,6 +96,7 @@ struct ShowMe: View {
 
 struct ShowMe_Previews: PreviewProvider {
     static var previews: some View {
-        ShowMe(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
+        ShowMe()
+            .environmentObject(ProfileViewModel())
     }
 }

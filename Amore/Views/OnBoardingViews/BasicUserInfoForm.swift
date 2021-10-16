@@ -15,7 +15,7 @@ struct BasicUserInfoForm: View {
         formatter.dateStyle = .long
         return formatter
     }
-    @Binding var profileCreationDone: Bool
+    
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var lastName: String = ""
     @State var firstName: String = ""
@@ -151,7 +151,8 @@ struct BasicUserInfoForm: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+                    destination: Passions()
+                        .environmentObject(profileModel),
                     isActive: $allFieldsFilled,
                     label: {
                         Button{
@@ -182,6 +183,6 @@ struct BasicUserInfoForm: View {
 
 struct BasicUserInfoForm_Previews: PreviewProvider {
     static var previews: some View {
-        BasicUserInfoForm(profileCreationDone: Binding.constant(false))
+        BasicUserInfoForm()
     }
 }
