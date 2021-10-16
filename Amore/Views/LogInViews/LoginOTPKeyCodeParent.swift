@@ -12,12 +12,7 @@ import FirebaseAuth
 struct LoginOTPKeyCodeParent: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    @Binding var phoneNumber: String
-    @Binding var verification_Id : String
-    @State var verificationCode: String = ""
-    @State var authErrorDesc: String?
-    @State var errorDesc = Text("")
-    @Binding var loginFormVisible: Bool
+    
     @Binding var otpGeneratedOnce: Bool
     
     var body: some View {
@@ -34,14 +29,14 @@ struct LoginOTPKeyCodeParent: View {
                     Button {
                         otpGeneratedOnce = false
                     } label: {
-                        Text("\(phoneNumber)")
+                        Text("\(profileModel.phoneNumber)")
                             .foregroundColor(.pink)
                     }
                     
                     Spacer()
                     
                     Button {
-                        verification_Id = FirebaseServices.requestOtp(phoneNumber: self.phoneNumber)
+                        profileModel.currentVerificationId = FirebaseServices.requestOtp(phoneNumber: profileModel.phoneNumber)
                     } label: {
                         Text("Send Again")
                          .foregroundColor(.black)
@@ -52,20 +47,13 @@ struct LoginOTPKeyCodeParent: View {
             
             // OTP Text Field
             VStack(alignment: .center) {
-                LoginOTPKeyCodeChild(verificationCode: $verificationCode)
+                LoginOTPKeyCodeChild(verificationCode: $profileModel.verificationCode)
             }
             .padding(.top, 130)
             
-            if authErrorDesc != nil {
-                Section {
-                    Text(authErrorDesc!)
-                }
-            }
-            
             // OTP Submit button
             Button(action: {
-                signIn()
-                
+                profileModel.signIn()
             }) {
                 ZStack{
                     Rectangle()
@@ -82,42 +70,16 @@ struct LoginOTPKeyCodeParent: View {
             .padding(.top, 80)
             Spacer()
         }
-        .padding(.horizontal,40)
-        
-    }
-    
-    func signIn (){
-
-        if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
-            print(verificationID+" in sign in!")
-            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
-
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        let authError = error as NSError
-                        print(authError.localizedDescription)
-                        authErrorDesc =  authError.localizedDescription
-                    }
-                    else {
-                        if let authRes = authResult {
-                            UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
-                            if profileModel.profileFetchedAndReady {
-                                profileModel.profileFetchedAndReady = false
-                            }
-                            profileModel.getUserProfile()
-                        }
-                        loginFormVisible = false
-                    }
-                }
-            }
+        .alert(isPresented: $profileModel.showAlert) {
+            Alert(title: Text(""), message: Text("The SMS verification code used to create the phone auth credential is invalid. Please resend the verification code SMS and be sure to use the verification code provided by the user."), dismissButton: .default(Text("OK")))
         }
+        .padding(.horizontal,40)
     }
 }
 
 
 struct LoginOTPKeyCodeParent_Previews: PreviewProvider {
     static var previews: some View {
-        LoginOTPKeyCodeParent(phoneNumber: Binding.constant("551697188"), verification_Id: Binding.constant("551697188"), loginFormVisible: Binding.constant(false), otpGeneratedOnce: Binding.constant(true))
+        LoginOTPKeyCodeParent(otpGeneratedOnce: Binding.constant(true))
     }
 }

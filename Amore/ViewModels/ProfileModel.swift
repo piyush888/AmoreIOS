@@ -15,7 +15,19 @@ class ProfileViewModel: ObservableObject {
     var userProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
+    
+    @Published var phoneNumber = String()
+    @Published var verificationCode = String()
+    @Published var currentVerificationId = String()
+    @Published var countryCode = String()
+    
+    // Alert...
+    @Published var showAlert = false
+    @Published var errorMsg = ""
+    
+    // Variables for alert
     @Published var profileFetchedAndReady = false
+    @Published var loginFormVisible = false
     
     let viewContext = PersistenceController.shared.container.viewContext
     
@@ -51,6 +63,34 @@ class ProfileViewModel: ObservableObject {
         profileCore.showMePreference = userProfile.showMePreference
         profileCore.work = userProfile.work
         profileCore.school = userProfile.school
+    }
+    
+    func signIn (){
+
+        if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
+            print(verificationID+" in sign in!")
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
+
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.showAlert = true
+                        print(error.localizedDescription)
+                        return
+                    }
+                    else {
+                        if let authRes = authResult {
+                            UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                            if self.profileFetchedAndReady {
+                                self.profileFetchedAndReady = false
+                            }
+                            self.getUserProfile()
+                        }
+                        self.loginFormVisible = false
+                    }
+                }
+            }
+        }
     }
     
     func createUserProfile() -> Bool {

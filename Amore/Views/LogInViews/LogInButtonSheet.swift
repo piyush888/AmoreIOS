@@ -10,7 +10,6 @@ import FirebaseAuth
 
 struct LogInSheetView: View {
     
-    @State var loginFormVisible = false
     @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var loggedIn: Bool
     
@@ -23,7 +22,7 @@ struct LogInSheetView: View {
         
         VStack{
             Button{
-                loginFormVisible = true
+                profileModel.loginFormVisible = true
             } label : {
                 ZStack{
                     Rectangle()
@@ -38,10 +37,10 @@ struct LogInSheetView: View {
                         .font(.BoardingButton)
                 }
             }
-            .sheet(isPresented: $loginFormVisible, onDismiss: {
+            .sheet(isPresented: $profileModel.loginFormVisible, onDismiss: {
                 checkLogin()
             }) {
-                LoginPhoneNumber(loginFormVisible: $loginFormVisible)
+                LoginPhoneNumber()
                     .environmentObject(profileModel)
             }
         }

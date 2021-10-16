@@ -13,14 +13,13 @@ import FirebaseAuth
 
 struct LoginPhoneNumber: View {
     
-    @State var phoneNumber = String()
+    @EnvironmentObject var profileModel: ProfileViewModel
+    
     let phoneNumberKit = PhoneNumberKit()
+    
     @State private var validationError = false
     @State private var errorDesc = Text("")
     @State private var otpGeneratedOnce = false
-    @State private var currentVerificationId = ""
-    @State var countryCode = ""
-    @Binding var loginFormVisible: Bool
     
     var body: some View {
         
@@ -35,34 +34,31 @@ struct LoginPhoneNumber: View {
                     .padding(.bottom,40)
                 
                 VStack{
-                    iPhoneNumberField(text: $phoneNumber)
+                    iPhoneNumberField(text: $profileModel.phoneNumber)
                         .flagHidden(false)
                         .flagSelectable(true)
                         .onNumberChange(perform: { inputNum in
-                            countryCode = String(inputNum?.countryCode ?? 91)
+                            profileModel.countryCode = String(inputNum?.countryCode ?? 91)
                         })
                         .font(UIFont(size: 20, design: .rounded))
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.pink, lineWidth: 1))
                     NavigationLink(
-                        destination: LoginOTPKeyCodeParent(phoneNumber: $phoneNumber, verification_Id: $currentVerificationId, loginFormVisible: $loginFormVisible, otpGeneratedOnce: $otpGeneratedOnce),
+                        destination: LoginOTPKeyCodeParent(otpGeneratedOnce: $otpGeneratedOnce),
                         isActive: $otpGeneratedOnce,
                         label: {
                             Button(action: {
                                 do {
-                                    _ = try self.phoneNumberKit.parse(self.phoneNumber)
-                                    if !self.phoneNumber.hasPrefix("+") {
-                                        self.phoneNumber = "+" + self.countryCode + self.phoneNumber
+                                    _ = try self.phoneNumberKit.parse(profileModel.phoneNumber)
+                                    if !profileModel.phoneNumber.hasPrefix("+") {
+                                        profileModel.phoneNumber = "+" + profileModel.countryCode + profileModel.phoneNumber
                                     }
-                                    self.phoneNumber = self.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
-                                    self.phoneNumber = self.phoneNumber.replacingOccurrences(of: " ", with: "")
-                                    print(self.phoneNumber)
+                                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
+                                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: " ", with: "")
+                                    print(profileModel.phoneNumber)
                                     // Integrate with firebase signup/login system here when no error occurs
-                                    currentVerificationId = FirebaseServices.requestOtp(phoneNumber: self.phoneNumber)
-//                                    if self.currentVerificationId != "" {
-//                                        otpGeneratedOnce = true
-//                                    }
+                                    profileModel.currentVerificationId = FirebaseServices.requestOtp(phoneNumber: profileModel.phoneNumber)
                                     otpGeneratedOnce = true
                                 } catch {
                                     self.validationError = true
@@ -98,6 +94,6 @@ struct LoginPhoneNumber: View {
 
 struct LoginPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
-        LoginPhoneNumber(loginFormVisible: Binding.constant(false))
+        LoginPhoneNumber()
     }
 }
