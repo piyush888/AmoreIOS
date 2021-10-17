@@ -13,6 +13,7 @@ struct ContentView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @StateObject var profileModel = ProfileViewModel()
+    @StateObject var streamModel = StreamViewModel()
     
     var body: some View {
         
@@ -27,6 +28,7 @@ struct ContentView: View {
                 // Signin/Sign Up Button - Mobile Number - OTP Login
                 LogInSheetView()
                     .environmentObject(profileModel)
+                    .environmentObject(streamModel)
                 
                 Spacer()
             }
@@ -43,12 +45,14 @@ struct ContentView: View {
                     // If User profile already created
                     if profileModel.userProfile.email != nil {
                         HomeView()
+                            .environmentObject(streamModel)
                     }
                     // Else user profile not created
                     // Show users forms to complete the profile
                     else {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
+                            .environmentObject(streamModel)
                     }
                 }
             }

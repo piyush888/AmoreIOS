@@ -15,7 +15,6 @@ import CoreData
 class ProfileViewModel: ObservableObject {
     
     @AppStorage("log_Status") var logStatus = false
-    @StateObject var streamObj = StreamViewModel()
     
     var userProfile = Profile()
     let db = Firestore.firestore()
@@ -71,7 +70,7 @@ class ProfileViewModel: ObservableObject {
         profileCore.school = userProfile.school
     }
     
-    func signIn() {
+    func signIn(streamObj: StreamViewModel) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
             print(verificationID+" in sign in!")
@@ -91,7 +90,7 @@ class ProfileViewModel: ObservableObject {
                                 self.profileFetchedAndReady = false
                             }
                             self.getUserProfile()
-                            self.streamObj.streamLogin(uid: authRes.user.uid)
+                            streamObj.streamLogin(uid: authRes.user.uid)
                         }
                         self.loginFormVisible = false
                     }

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct AddSchool: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
+    
     @State var schoolName : String = ""
     @State var continueToNext: Bool = false
     var buttonText: String {
@@ -56,6 +59,8 @@ struct AddSchool: View {
                 addInputToProfile()
                 // Execute "Create Profile Document in Firestore"
                 let status = profileModel.createUserProfile()
+                // Create Stream Chat User Profile - Only called once during profile creation
+                streamModel.createUserProfileInStream(userName: profileModel.userProfile.firstName ?? "No Name")
                 continueToNext = status
                 print("Profile Saved: \(status)")
             } label : {

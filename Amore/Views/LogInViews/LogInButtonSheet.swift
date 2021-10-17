@@ -13,6 +13,7 @@ struct LogInSheetView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
     
     var body: some View {
         
@@ -38,6 +39,7 @@ struct LogInSheetView: View {
             }) {
                 LoginPhoneNumber()
                     .environmentObject(profileModel)
+                    .environmentObject(streamModel)
             }
         }
         .padding(.horizontal,44)

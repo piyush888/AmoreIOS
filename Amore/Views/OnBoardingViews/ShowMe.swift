@@ -11,6 +11,8 @@ import SwiftUI
 
 struct ShowMe: View {
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
+    
     let showMeList = ["Women", "Men", "Everyone"]
     @State var userChoice: String? = nil
     @State var inputTaken: Bool = false
@@ -67,7 +69,8 @@ struct ShowMe: View {
             
             // Continue to next view
             NavigationLink(destination: AddWork()
-                            .environmentObject(profileModel),
+                            .environmentObject(profileModel)
+                            .environmentObject(streamModel),
                            isActive: $inputTaken,
                            label: {
                 Button{

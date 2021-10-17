@@ -10,36 +10,41 @@ import SwiftUI
 struct HomeView: View {
     
     @State var currentPage: ViewTypes = .swipeView
+    @EnvironmentObject var streamModel: StreamViewModel
     
     var body: some View {
-        VStack {
+        
+        NavigationView{
+        
+            VStack {
             
-            // Control Center
-            ControlCenter(currentPage:$currentPage)
-                .padding()
-            
-            
-            switch currentPage {
-                
-                case .messagingView:
-                    MessageView()
-                    
-                case .likesTopPicksView:
-                    LikesTopPicksHome()
-                    
-                case .swipeView:
-                    AllCardsView()
-                    LikeDislikeSuperLike()
+                // Control Center
+                ControlCenter(currentPage:$currentPage)
                     .padding()
-                    
-                case .filterSettingsView:
-                    FilterSettings()
-                    
-                case .userSettingsView:
-                    UserSettings()
-            }
+                
+                    switch currentPage {
                         
-        }.navigationBarHidden(true)
+                        case .messagingView:
+                            ChannelView()
+                                .environmentObject(streamModel)
+                            
+                        case .likesTopPicksView:
+                            LikesTopPicksHome()
+                            
+                        case .swipeView:
+                            AllCardsView()
+                            LikeDislikeSuperLike()
+                            .padding()
+                            
+                        case .filterSettingsView:
+                            FilterSettings()
+                            
+                        case .userSettingsView:
+                            UserSettings()
+                    }
+            
+            }.navigationBarHidden(true)
+        }
     }
 }
 

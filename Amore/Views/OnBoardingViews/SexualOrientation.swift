@@ -10,6 +10,8 @@ import SwiftUI
 struct SexualOrientation: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
+    
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
                                     "Queer","Questioning"]
@@ -95,7 +97,8 @@ struct SexualOrientation: View {
             
             // Continue to next view
             NavigationLink(destination: ShowMe()
-                            .environmentObject(profileModel),
+                            .environmentObject(profileModel)
+                            .environmentObject(streamModel),
                            isActive: $sexualOrientationDataTaken,
                            label: {
                 Button{
