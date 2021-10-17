@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import StreamChat
 
 @main
 struct AmoreApp: App {
@@ -43,11 +44,20 @@ struct AmoreApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     
     @AppStorage("log_Status") var logStatus = false
+    @StateObject var streamObj = StreamViewModel()
     
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         print("SwiftUI_2_Lifecycle_PhoneNumber_AuthApp application is starting up. ApplicationDelegate didFinishLaunchingWithOptions.")
+        
+        if logStatus {
+            guard let uid = Auth.auth().currentUser?.uid else{
+                return true
+            }
+            self.streamObj.streamLogin(uid:uid)
+        }
+        
         return true
     }
 
@@ -73,3 +83,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
+// stream API...
+extension ChatClient{
+    static var shared: ChatClient!
+}
