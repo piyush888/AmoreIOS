@@ -10,14 +10,14 @@ import FirebaseAuth
 
 struct UserSettings: View {
     
-    @Binding var loggedIn: Bool
-
+    @AppStorage("log_Status") var logStatus = false
+    
     var body: some View {
         
         VStack {
             Button {
                 try! Auth.auth().signOut()
-                loggedIn = false
+                logStatus = false
             } label: {
                 Text("Log Out")
             }
@@ -29,9 +29,7 @@ struct UserSettings: View {
 
 struct UserSettings_Previews: PreviewProvider {
     
-    @State var loggedIn: Bool = false
-    
     static var previews: some View {
-        UserSettings(loggedIn: Binding.constant(true))
+        UserSettings()
     }
 }

@@ -10,13 +10,9 @@ import FirebaseAuth
 
 struct LogInSheetView: View {
     
-    @EnvironmentObject var profileModel: ProfileViewModel
-    @Binding var loggedIn: Bool
+    @AppStorage("log_Status") var logStatus = false
     
-    func checkLogin() {
-        loggedIn = Auth.auth().currentUser == nil ? false : true
-        print("Logged In: "+String(loggedIn))
-    }
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
         
@@ -38,7 +34,7 @@ struct LogInSheetView: View {
                 }
             }
             .sheet(isPresented: $profileModel.loginFormVisible, onDismiss: {
-                checkLogin()
+                profileModel.checkLogin()
             }) {
                 LoginPhoneNumber()
                     .environmentObject(profileModel)
@@ -53,6 +49,6 @@ struct LogInSheetView: View {
 
 struct LogInSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        LogInSheetView(loggedIn: Binding.constant(false))
+        LogInSheetView()
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Piyush Garg on 01/10/21.
 //
 
+import SwiftUI
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
@@ -12,6 +13,9 @@ import FirebaseFirestoreSwift
 import CoreData
 
 class ProfileViewModel: ObservableObject {
+    
+    @AppStorage("log_Status") var logStatus = false
+    
     var userProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
@@ -122,6 +126,13 @@ class ProfileViewModel: ObservableObject {
         }
         return false
     }
+    
+    
+    func checkLogin() {
+        logStatus = Auth.auth().currentUser == nil ? false : true
+        print("Logged In: "+String(logStatus))
+    }
+    
     
     func getUserProfile() {
         // Example function, Firestore Read Implementation

@@ -9,9 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    // Passed from the onboarding view
-    @Binding var loggedIn: Bool
-    
     @State var currentPage: ViewTypes = .swipeView
     
     var body: some View {
@@ -39,7 +36,7 @@ struct HomeView: View {
                     FilterSettings()
                     
                 case .userSettingsView:
-                    UserSettings(loggedIn: $loggedIn)
+                    UserSettings()
             }
                         
         }.navigationBarHidden(true)
@@ -48,6 +45,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(loggedIn: Binding.constant(true))
+        HomeView()
     }
 }

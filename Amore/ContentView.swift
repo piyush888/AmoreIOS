@@ -10,43 +10,39 @@ import FirebaseAuth
 
 struct ContentView: View {
     
-    @StateObject var profileModel = ProfileViewModel()
-    @State var loggedIn: Bool = false
+    @AppStorage("log_Status") var logStatus = false
     
-    func checkLogin() {
-        loggedIn = Auth.auth().currentUser == nil ? false : true
-        print("Logged In: "+String(loggedIn))
-    }
+    @StateObject var profileModel = ProfileViewModel()
     
     var body: some View {
         
         // If User is Not Logged In Yet
-        if !loggedIn {
+        if !logStatus {
             // Onboarding View - Logged Out
             VStack {
                 Spacer()
                 // Onboarding Swipeable Cards
                 OnboardingAllCards()
                 
-                // Sign In/Sign Up Button
-                LogInSheetView(loggedIn: $loggedIn)
+                // Signin/Sign Up Button - Mobile Number - OTP Login
+                LogInSheetView()
                     .environmentObject(profileModel)
                 
                 Spacer()
             }
             .onAppear{
                 // As soon as the page loads check if user is already logged In
-                checkLogin()
+                profileModel.checkLogin()
             }
         }
         else {
-            // Logged In
+            // If logged In
             // If User Profile Data pulled from Firestore
             if profileModel.profileFetchedAndReady {
                 ZStack {
                     // If User profile already created
                     if profileModel.userProfile.email != nil {
-                        HomeView(loggedIn: $loggedIn)
+                        HomeView()
                     }
                     // Else user profile not created
                     // Show users forms to complete the profile
@@ -56,6 +52,7 @@ struct ContentView: View {
                     }
                 }
             }
+            // Pull profile data first
             else {
                 ProgressView()
                     .onAppear {
