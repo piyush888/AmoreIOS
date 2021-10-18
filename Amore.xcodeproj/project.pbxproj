@@ -54,6 +54,11 @@
 		E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712B271BFF360006F336 /* ChatModifiersView.swift */; };
 		E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712D271C967F0006F336 /* CreateNewChannel.swift */; };
 		E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712F271C972F0006F336 /* LoadingScreen.swift */; };
+		E2347132271DC3A00006F336 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347131271DC3A00006F336 /* TabButton.swift */; };
+		E2347134271DC4C30006F336 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347133271DC4C30006F336 /* Detail.swift */; };
+		E2347136271DC4E50006F336 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347135271DC4E50006F336 /* CardView.swift */; };
+		E2347138271DC5320006F336 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347137271DC5320006F336 /* CustomShape.swift */; };
+		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
@@ -149,6 +154,11 @@
 		E234712B271BFF360006F336 /* ChatModifiersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModifiersView.swift; sourceTree = "<group>"; };
 		E234712D271C967F0006F336 /* CreateNewChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannel.swift; sourceTree = "<group>"; };
 		E234712F271C972F0006F336 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
+		E2347131271DC3A00006F336 /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
+		E2347133271DC4C30006F336 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		E2347135271DC4E50006F336 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		E2347137271DC5320006F336 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
+		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
@@ -258,6 +268,10 @@
 			isa = PBXGroup;
 			children = (
 				E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */,
+				E2347131271DC3A00006F336 /* TabButton.swift */,
+				E2347133271DC4C30006F336 /* Detail.swift */,
+				E2347135271DC4E50006F336 /* CardView.swift */,
+				E2347137271DC5320006F336 /* CustomShape.swift */,
 			);
 			path = LikesTopPicksView;
 			sourceTree = "<group>";
@@ -446,6 +460,7 @@
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
 				E234711F271BE0030006F336 /* StreamViewModel.swift */,
+				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -621,9 +636,11 @@
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
+				E2347138271DC5320006F336 /* CustomShape.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */,
+				E2347134271DC4C30006F336 /* Detail.swift in Sources */,
 				E221EAAF2714FBDA00769234 /* UserSettings.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */,
@@ -655,6 +672,7 @@
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
+				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
@@ -664,7 +682,9 @@
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
+				E2347132271DC3A00006F336 /* TabButton.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
+				E2347136271DC4E50006F336 /* CardView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
