@@ -22,6 +22,8 @@ struct LoginPhoneNumber: View {
     @State private var errorDesc = Text("")
     @State private var otpGeneratedOnce = false
     
+    @State var selectionNumberIsCorrect: Int? = nil
+    
     var body: some View {
         
         NavigationView {
@@ -45,41 +47,47 @@ struct LoginPhoneNumber: View {
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.pink, lineWidth: 1))
+                        .padding(.bottom, 80)
+                    
                     NavigationLink(
                         destination: LoginOTPKeyCodeParent(otpGeneratedOnce: $otpGeneratedOnce),
-                        isActive: $otpGeneratedOnce,
-                        label: {
-                            Button(action: {
-                                do {
-                                    _ = try self.phoneNumberKit.parse(profileModel.phoneNumber)
-                                    if !profileModel.phoneNumber.hasPrefix("+") {
-                                        profileModel.phoneNumber = "+" + profileModel.countryCode + profileModel.phoneNumber
-                                    }
-                                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
-                                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: " ", with: "")
-                                    print(profileModel.phoneNumber)
-                                    // Integrate with firebase signup/login system here when no error occurs
-                                    profileModel.currentVerificationId = FirebaseServices.requestOtp(phoneNumber: profileModel.phoneNumber)
-                                    otpGeneratedOnce = true
-                                } catch {
-                                    self.validationError = true
-                                    self.errorDesc = Text("Please enter a valid phone number")
-                                }
-                            }) {
-                                ZStack{
-                                    Rectangle()
-                                        .frame(height:45)
-                                        .cornerRadius(5.0)
-                                        .foregroundColor(.pink)
-                                    
-                                    Text("Continue")
-                                        .foregroundColor(.white)
-                                        .bold()
-                                        .font(.BoardingButton)
-                                }
+                        tag:1,
+                        selection: $selectionNumberIsCorrect) {
+                            EmptyView()
+                        }
+                    
+                    Button {
+                        do {
+                            _ = try self.phoneNumberKit.parse(profileModel.phoneNumber)
+                            if !profileModel.phoneNumber.hasPrefix("+") {
+                                profileModel.phoneNumber = "+" + profileModel.countryCode + profileModel.phoneNumber
                             }
-                            .padding(.top, 80)
-                        })
+                            profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
+                            profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: " ", with: "")
+                            print(profileModel.phoneNumber)
+                            // Integrate with firebase signup/login system here when no error occurs
+                            profileModel.currentVerificationId = FirebaseServices.requestOtp(phoneNumber: profileModel.phoneNumber)
+                            otpGeneratedOnce = true
+                            self.selectionNumberIsCorrect = 1
+                        } catch {
+                            otpGeneratedOnce = false
+                            print(error.localizedDescription)
+                            self.validationError = true
+                            self.errorDesc = Text("Please enter a valid phone number")
+                        }
+                    } label: {
+                        ZStack{
+                            Rectangle()
+                                .frame(height:45)
+                                .cornerRadius(5.0)
+                                .foregroundColor(.pink)
+                            
+                            Text("Continue")
+                                .foregroundColor(.white)
+                                .bold()
+                                .font(.BoardingButton)
+                        }
+                    }
                     
                 }
                 .alert(isPresented: self.$validationError) {
@@ -94,7 +102,14 @@ struct LoginPhoneNumber: View {
 
 
 struct LoginPhoneNumber_Previews: PreviewProvider {
+    
+    static let profileModel = ProfileViewModel()
+    static let streamModel = StreamViewModel()
+    
     static var previews: some View {
+
         LoginPhoneNumber()
+            .environmentObject(profileModel)
+            .environmentObject(streamModel)
     }
 }
