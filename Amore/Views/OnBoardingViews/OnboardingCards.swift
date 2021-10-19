@@ -31,12 +31,13 @@ struct OnboardingCards: View {
                 
                 
                 Text(boardingtext)
-                    .padding(.top,10)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.black)
                     .font(.BoardingSubHeading)
+                    .padding(.bottom,10)
         }
         .padding(.horizontal,25)
+        .padding(.bottom,20)
     }
 }
 

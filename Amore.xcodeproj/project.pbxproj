@@ -59,6 +59,7 @@
 		E2347136271DC4E50006F336 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347135271DC4E50006F336 /* CardView.swift */; };
 		E2347138271DC5320006F336 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347137271DC5320006F336 /* CustomShape.swift */; };
 		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
+		E234713C271E8BDF0006F336 /* PlayGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713B271E8BDE0006F336 /* PlayGround.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
@@ -159,6 +160,7 @@
 		E2347135271DC4E50006F336 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E2347137271DC5320006F336 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
 		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
+		E234713B271E8BDE0006F336 /* PlayGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGround.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				E237CED826FD391D004F20AB /* SignUp.swift */,
+				E234713B271E8BDE0006F336 /* PlayGround.swift */,
 			);
 			path = ExtraViews;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
+				E234713C271E8BDF0006F336 /* PlayGround.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,

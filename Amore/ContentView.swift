@@ -22,6 +22,21 @@ struct ContentView: View {
             // Onboarding View - Logged Out
             VStack {
                 Spacer()
+                
+                // Amore heading
+                VStack {
+                    
+                    Text("Amore")
+                        .font(.title)
+                        .foregroundColor(Color.pink)
+                        .shadow(color: .pink, radius: 2, x: 0, y: 0)
+                        
+                    Text("The Indian Way of Dating")
+                        .font(.caption2)
+                        .italic()
+                }
+                .padding(.top,60)
+                
                 // Onboarding Swipeable Cards
                 OnboardingAllCards()
                 
