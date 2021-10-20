@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "iPhoneNumberField",
-        "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField",
+        "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField.git",
         "state": {
           "branch": null,
           "revision": "a6b5fcc6c9b085285932fe4fe754086ab92409cb",
@@ -12,7 +12,7 @@
       },
       {
         "package": "jwt-kit",
-        "repositoryURL": "https://github.com/vapor/jwt-kit",
+        "repositoryURL": "https://github.com/vapor/jwt-kit.git",
         "state": {
           "branch": null,
           "revision": "ca2edf69a613f3d89354114f56cfd9921d2727d5",
@@ -53,6 +53,9 @@
           "branch": null,
           "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
           "version": "2.0.2"
+        }
+      },
+      {
         "package": "Starscream",
         "repositoryURL": "https://github.com/daltoniam/Starscream.git",
         "state": {
