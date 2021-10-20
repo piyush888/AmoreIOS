@@ -5,6 +5,7 @@
 //  Created by Piyush Garg on 01/10/21.
 //
 
+import SwiftUI
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
@@ -12,10 +13,26 @@ import FirebaseFirestoreSwift
 import CoreData
 
 class ProfileViewModel: ObservableObject {
+    
+    @AppStorage("log_Status") var logStatus = false
+    
     var userProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
+    
+    @Published var phoneNumber = String()
+    @Published var verificationCode = String()
+    @Published var currentVerificationId = String()
+    @Published var countryCode = String()
+    
+    // Alert...
+    @Published var showAlert = false
+    @Published var errorMsg = ""
+    
+    // Variables for alert
     @Published var profileFetchedAndReady = false
+    @Published var profileCreationDone = false
+    @Published var loginFormVisible = false
     
     let viewContext = PersistenceController.shared.container.viewContext
     
@@ -53,6 +70,35 @@ class ProfileViewModel: ObservableObject {
         profileCore.school = userProfile.school
     }
     
+    func signIn(streamObj: StreamViewModel) {
+
+        if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
+            print(verificationID+" in sign in!")
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
+
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                DispatchQueue.main.async { [self] in
+                    if let error = error {
+                        self.showAlert = true
+                        print(error.localizedDescription)
+                        return
+                    }
+                    else {
+                        if let authRes = authResult {
+                            UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                            if self.profileFetchedAndReady {
+                                self.profileFetchedAndReady = false
+                            }
+                            self.getUserProfile()
+                            streamObj.streamLogin(uid: authRes.user.uid)
+                        }
+                        self.loginFormVisible = false
+                    }
+                }
+            }
+        }
+    }
+    
     func createUserProfile() -> Bool {
         do {
             let profileCore = ProfileCore(context: viewContext)
@@ -81,6 +127,13 @@ class ProfileViewModel: ObservableObject {
         }
         return false
     }
+    
+    
+    func checkLogin() {
+        logStatus = Auth.auth().currentUser == nil ? false : true
+        print("Logged In: "+String(logStatus))
+    }
+    
     
     func getUserProfile() {
         // Example function, Firestore Read Implementation
@@ -130,5 +183,8 @@ class ProfileViewModel: ObservableObject {
                 self.profileFetchedAndReady = true
             }
         }
+        
     }
+    
 }
+

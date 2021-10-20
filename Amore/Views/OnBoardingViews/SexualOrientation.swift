@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SexualOrientation: View {
-    @Binding var profileCreationDone: Bool
+    
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
+    
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
                                     "Queer","Questioning"]
@@ -94,7 +96,9 @@ struct SexualOrientation: View {
             .toggleStyle(CheckboxStyle())
             
             // Continue to next view
-            NavigationLink(destination: ShowMe(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+            NavigationLink(destination: ShowMe()
+                            .environmentObject(profileModel)
+                            .environmentObject(streamModel),
                            isActive: $sexualOrientationDataTaken,
                            label: {
                 Button{
@@ -145,6 +149,7 @@ struct CheckboxStyle: ToggleStyle {
 
 struct SexualOrientation_Previews: PreviewProvider {
     static var previews: some View {
-        SexualOrientation(profileCreationDone: Binding.constant(false)).environmentObject(ProfileViewModel())
+        SexualOrientation()
+            .environmentObject(ProfileViewModel())
     }
 }

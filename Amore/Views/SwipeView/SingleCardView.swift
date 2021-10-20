@@ -11,7 +11,7 @@ struct SingleCardView: View {
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: LikeDislike = .none
     
-    private var user: User
+    public var user: User
     private var onRemove: (_ user: User) -> Void
     
     private var thresholdPercentage: CGFloat = 0.25 // when the user has draged 50% the width of the screen in either direction
@@ -118,7 +118,8 @@ struct SingleCardView: View {
                         
                         
                         // Gallery
-                        CardGalleryImages(deviceWidth:(geometry.size.width - 25))
+                        CardGalleryImages(deviceWidth:(geometry.size.width - 25),
+                                          user:self.user)
                         .padding(.top,10)
                         
                         

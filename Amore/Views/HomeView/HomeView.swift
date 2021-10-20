@@ -9,45 +9,47 @@ import SwiftUI
 
 struct HomeView: View {
     
-    // Passed from the onboarding view
-    @Binding var loggedIn: Bool
-    
     @State var currentPage: ViewTypes = .swipeView
+    @EnvironmentObject var streamModel: StreamViewModel
     
     var body: some View {
-        VStack {
+        
+        NavigationView{
+        
+            VStack {
             
-            // Control Center
-            ControlCenter(currentPage:$currentPage)
-                .padding()
-            
-            
-            switch currentPage {
-                
-                case .messagingView:
-                    MessageView()
-                    
-                case .likesTopPicksView:
-                    LikesTopPicksHome()
-                    
-                case .swipeView:
-                    AllCardsView()
-                    LikeDislikeSuperLike()
+                // Control Center
+                ControlCenter(currentPage:$currentPage)
                     .padding()
-                    
-                case .filterSettingsView:
-                    FilterSettings()
-                    
-                case .userSettingsView:
-                    UserSettings(loggedIn: $loggedIn)
-            }
+                
+                    switch currentPage {
                         
-        }.navigationBarHidden(true)
+                        case .messagingView:
+                            ChannelView()
+                                .environmentObject(streamModel)
+                            
+                        case .likesTopPicksView:
+                            LikesTopPicksHome()
+                            
+                        case .swipeView:
+                            AllCardsView()
+                            LikeDislikeSuperLike()
+                            .padding()
+                            
+                        case .filterSettingsView:
+                            FilterSettings()
+                            
+                        case .userSettingsView:
+                            UserSettings()
+                    }
+            
+            }.navigationBarHidden(true)
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(loggedIn: Binding.constant(true))
+        HomeView()
     }
 }

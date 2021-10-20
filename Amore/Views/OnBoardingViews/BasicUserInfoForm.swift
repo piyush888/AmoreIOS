@@ -1,5 +1,5 @@
 //
-//  BasicUserInfo.swift
+//  BasicUserInfoForm.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 9/25/21.
@@ -8,15 +8,17 @@
 import SwiftUI
 import FirebaseAuth
 
-struct BasicUserInfo: View {
+struct BasicUserInfoForm: View {
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
     }
-    @Binding var profileCreationDone: Bool
+    
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var streamModel: StreamViewModel
+    
     @State var lastName: String = ""
     @State var firstName: String = ""
     @State var email: String = ""
@@ -151,7 +153,10 @@ struct BasicUserInfo: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: Passions(profileCreationDone: $profileCreationDone).environmentObject(profileModel),
+                    destination: Passions()
+                        .environmentObject(profileModel)
+                        .environmentObject(streamModel),
+                    
                     isActive: $allFieldsFilled,
                     label: {
                         Button{
@@ -180,8 +185,8 @@ struct BasicUserInfo: View {
     }
 }
 
-struct BasicUserInfo_Previews: PreviewProvider {
+struct BasicUserInfoForm_Previews: PreviewProvider {
     static var previews: some View {
-        BasicUserInfo(profileCreationDone: Binding.constant(false))
+        BasicUserInfoForm()
     }
 }
