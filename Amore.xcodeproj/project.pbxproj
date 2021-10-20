@@ -13,8 +13,14 @@
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
+		1B6AB336271DBE9600A45A82 /* UserProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AB335271DBE9600A45A82 /* UserProfilePhotosView.swift */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
+		1B7604BC2720555C00EC10B0 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7604BB2720555C00EC10B0 /* SDWebImageSwiftUI */; };
+		1B7604BF2720559800EC10B0 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7604BE2720559800EC10B0 /* iPhoneNumberField */; };
+		1B7604C2272055EF00EC10B0 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7604C1272055EF00EC10B0 /* JWTKit */; };
+		1B7604C5272056D500EC10B0 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7604C4272056D500EC10B0 /* StreamChat */; };
+		1B7604C7272056D500EC10B0 /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7604C6272056D500EC10B0 /* StreamChatUI */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
 		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
@@ -25,6 +31,8 @@
 		1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE052705CC5E00F0137E /* AddWork.swift */; };
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
+		1BF55ECB272025860027F78F /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF55ECA272025860027F78F /* Photo.swift */; };
+		1BF55ECD272025CC0027F78F /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF55ECC272025CC0027F78F /* PhotoModel.swift */; };
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
@@ -44,7 +52,6 @@
 		E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */; };
 		E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */; };
 		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
-		E234711E271BDA020006F336 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = E234711D271BDA020006F336 /* StreamChat */; };
 		E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234711F271BE0030006F336 /* StreamViewModel.swift */; };
 		E2347122271BE10E0006F336 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* Credentials.swift */; };
 		E2347124271BFDDA0006F336 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347123271BFDDA0006F336 /* ChatView.swift */; };
@@ -74,7 +81,6 @@
 		E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283677E26FAB79800EEA049 /* Onboarding.swift */; };
 		E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283678026FAB85400EEA049 /* OnboardingModel.swift */; };
 		E283678426FAB8C800EEA049 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283678326FAB8C800EEA049 /* DataService.swift */; };
-		E291A1E326FE3664000D8A2C /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = E291A1E226FE3664000D8A2C /* iPhoneNumberField */; };
 		E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */; };
 		E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */; };
 		E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */; };
@@ -89,7 +95,6 @@
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
 		E2F8AA5826F9428100CC7A72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5726F9428100CC7A72 /* Preview Assets.xcassets */; };
 		E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA6526F948BD00CC7A72 /* Fonts.swift */; };
-		E2FE1391271A3E8A005E2BB9 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = E2FE1390271A3E8A005E2BB9 /* JWTKit */; };
 		E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */; };
 		E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */; };
 /* End PBXBuildFile section */
@@ -320,7 +325,6 @@
 			isa = PBXGroup;
 			children = (
 				E237CED826FD391D004F20AB /* SignUp.swift */,
-				E234713B271E8BDE0006F336 /* PlayGround.swift */,
 			);
 			path = ExtraViews;
 			sourceTree = "<group>";
@@ -443,6 +447,7 @@
 			children = (
 				E283677E26FAB79800EEA049 /* Onboarding.swift */,
 				1BC8BE0D2705CD7C00F0137E /* Profile.swift */,
+				1BF55ECA272025860027F78F /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				E226CF3D2707B19800FC5129 /* LocationModel.swift */,
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
+				1BF55ECC272025CC0027F78F /* PhotoModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
 				E234711F271BE0030006F336 /* StreamViewModel.swift */,
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
@@ -643,6 +649,7 @@
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
+				1B6AB336271DBE9600A45A82 /* UserProfilePhotosView.swift in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
@@ -651,6 +658,7 @@
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				E2347138271DC5320006F336 /* CustomShape.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
+				1BF55ECD272025CC0027F78F /* PhotoModel.swift in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */,
 				E2347134271DC4C30006F336 /* Detail.swift in Sources */,
@@ -662,7 +670,6 @@
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
-				E234713C271E8BDF0006F336 /* PlayGround.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,
@@ -678,6 +685,7 @@
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
+				1BF55ECB272025860027F78F /* Photo.swift in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
@@ -894,7 +902,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E234711C271BDA020006F336 /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
+		1B7604BA2720555C00EC10B0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		1B7604BD2720559800EC10B0 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.1;
+			};
+		};
+		1B7604C0272055EF00EC10B0 /* XCRemoteSwiftPackageReference "jwt-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/jwt-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		1B7604C3272056D500EC10B0 /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/GetStream/stream-chat-swift.git";
 			requirement = {
@@ -902,39 +934,33 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		E291A1E126FE3663000D8A2C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.1;
-			};
-		};
-		E2FE138F271A3E8A005E2BB9 /* XCRemoteSwiftPackageReference "jwt-kit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vapor/jwt-kit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E234711D271BDA020006F336 /* StreamChat */ = {
+		1B7604BB2720555C00EC10B0 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E234711C271BDA020006F336 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
-			productName = StreamChat;
+			package = 1B7604BA2720555C00EC10B0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
-		E291A1E226FE3664000D8A2C /* iPhoneNumberField */ = {
+		1B7604BE2720559800EC10B0 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E291A1E126FE3663000D8A2C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			package = 1B7604BD2720559800EC10B0 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
 			productName = iPhoneNumberField;
 		};
-		E2FE1390271A3E8A005E2BB9 /* JWTKit */ = {
+		1B7604C1272055EF00EC10B0 /* JWTKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2FE138F271A3E8A005E2BB9 /* XCRemoteSwiftPackageReference "jwt-kit" */;
+			package = 1B7604C0272055EF00EC10B0 /* XCRemoteSwiftPackageReference "jwt-kit" */;
 			productName = JWTKit;
+		};
+		1B7604C4272056D500EC10B0 /* StreamChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B7604C3272056D500EC10B0 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChat;
+		};
+		1B7604C6272056D500EC10B0 /* StreamChatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B7604C3272056D500EC10B0 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
