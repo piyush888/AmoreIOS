@@ -18,7 +18,8 @@ struct OnboardingCards: View {
         VStack{
                 Image(image)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFill()
+                    .frame(height: 450, alignment: .center)
                     .cornerRadius(15)
                     .padding(.horizontal,40)
                     .shadow(color: Color("onboarding-pink"),

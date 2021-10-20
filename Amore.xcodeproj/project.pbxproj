@@ -60,6 +60,9 @@
 		E2347138271DC5320006F336 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347137271DC5320006F336 /* CustomShape.swift */; };
 		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
 		E234713C271E8BDF0006F336 /* PlayGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713B271E8BDE0006F336 /* PlayGround.swift */; };
+		E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713F271F4B5D0006F336 /* CommonContainer.swift */; };
+		E2347142271F4B970006F336 /* GenderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347141271F4B970006F336 /* GenderSettings.swift */; };
+		E2347144271F4C090006F336 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347143271F4C090006F336 /* AgeSettings.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
@@ -161,6 +164,9 @@
 		E2347137271DC5320006F336 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
 		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
 		E234713B271E8BDE0006F336 /* PlayGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGround.swift; sourceTree = "<group>"; };
+		E234713F271F4B5D0006F336 /* CommonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContainer.swift; sourceTree = "<group>"; };
+		E2347141271F4B970006F336 /* GenderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSettings.swift; sourceTree = "<group>"; };
+		E2347143271F4C090006F336 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
@@ -254,6 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				E221EAB22715066000769234 /* FilterSettings.swift */,
+				E234713F271F4B5D0006F336 /* CommonContainer.swift */,
+				E2347141271F4B970006F336 /* GenderSettings.swift */,
+				E2347143271F4C090006F336 /* AgeSettings.swift */,
 			);
 			path = FilterSettingsView;
 			sourceTree = "<group>";
@@ -623,6 +632,7 @@
 				E234712A271BFEDF0006F336 /* ChannelRowView.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
 				E2347124271BFDDA0006F336 /* ChatView.swift in Sources */,
+				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
@@ -663,6 +673,7 @@
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
 				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
 				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
+				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
@@ -671,6 +682,7 @@
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
+				E2347144271F4C090006F336 /* AgeSettings.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
