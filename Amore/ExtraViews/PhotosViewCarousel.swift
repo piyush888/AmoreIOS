@@ -31,3 +31,9 @@ struct PhotosViewCarousel: View {
         .padding()
     }
 }
+
+struct PhotosViewCarousel_Previews: PreviewProvider {
+    static var previews: some View {
+        PhotosViewCarousel()
+    }
+}

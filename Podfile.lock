@@ -338,7 +338,16 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - Nuke (10.4.1)
   - PromisesObjC (1.2.12)
+  - Starscream (4.0.4)
+  - StreamChat (4.1.0):
+    - Starscream (~> 4.0)
+  - StreamChatUI (4.1.0):
+    - Nuke (~> 10.0)
+    - StreamChat (= 4.1.0)
+    - SwiftyGif (~> 5.0)
+  - SwiftyGif (5.4.0)
 
 DEPENDENCIES:
   - CropViewController
@@ -347,6 +356,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseFirestoreSwift
+  - StreamChatUI (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -370,7 +380,12 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - Nuke
     - PromisesObjC
+    - Starscream
+    - StreamChat
+    - StreamChatUI
+    - SwiftyGif
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -393,8 +408,13 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  Nuke: fa2d83b3ee99bb88eccc62ab6c7590e207b50096
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  StreamChat: 3ae6b5f590069a64960a9ff50e34014dec595670
+  StreamChatUI: f629823f90ecf80992b0a03818393bfc297ca073
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
 
-PODFILE CHECKSUM: bacd5c93e7658b0956043cfcc57d90ca2bb2011b
+PODFILE CHECKSUM: b69e961aea33f04de20cbda24f212dbc66e43906
 
 COCOAPODS: 1.11.2

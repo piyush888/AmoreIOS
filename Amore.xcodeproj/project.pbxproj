@@ -15,6 +15,8 @@
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
+		1B6AB336271DBE9600A45A82 /* UserProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AB335271DBE9600A45A82 /* UserProfilePhotosView.swift */; };
+		1B6AB339271F248C00A45A82 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6AB338271F248C00A45A82 /* SDWebImageSwiftUI */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileModel.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
@@ -27,6 +29,8 @@
 		1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE052705CC5E00F0137E /* AddWork.swift */; };
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
+		1BF55ECB272025860027F78F /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF55ECA272025860027F78F /* Photo.swift */; };
+		1BF55ECD272025CC0027F78F /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF55ECC272025CC0027F78F /* PhotoModel.swift */; };
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
@@ -97,6 +101,7 @@
 		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
+		1B6AB335271DBE9600A45A82 /* UserProfilePhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotosView.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -111,6 +116,8 @@
 		1BC8BE052705CC5E00F0137E /* AddWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWork.swift; sourceTree = "<group>"; };
 		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
 		1BC8BE0D2705CD7C00F0137E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		1BF55ECA272025860027F78F /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		1BF55ECC272025CC0027F78F /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig"; sourceTree = "<group>"; };
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6AB339271F248C00A45A82 /* SDWebImageSwiftUI in Frameworks */,
 				684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */,
 				E291A1E326FE3664000D8A2C /* iPhoneNumberField in Frameworks */,
 			);
@@ -224,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				E221EAAE2714FBDA00769234 /* UserSettings.swift */,
+				1B6AB335271DBE9600A45A82 /* UserProfilePhotosView.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -409,6 +418,7 @@
 			children = (
 				E283677E26FAB79800EEA049 /* Onboarding.swift */,
 				1BC8BE0D2705CD7C00F0137E /* Profile.swift */,
+				1BF55ECA272025860027F78F /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -438,6 +448,7 @@
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileModel.swift */,
+				1BF55ECC272025CC0027F78F /* PhotoModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -473,6 +484,7 @@
 			name = Amore;
 			packageProductDependencies = (
 				E291A1E226FE3664000D8A2C /* iPhoneNumberField */,
+				1B6AB338271F248C00A45A82 /* SDWebImageSwiftUI */,
 			);
 			productName = Amore;
 			productReference = E2F8AA4D26F9427F00CC7A72 /* Amore.app */;
@@ -503,6 +515,7 @@
 			mainGroup = E2F8AA4426F9427F00CC7A72;
 			packageReferences = (
 				E291A1E126FE3663000D8A2C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				1B6AB337271F248C00A45A82 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = E2F8AA4E26F9427F00CC7A72 /* Products */;
 			projectDirPath = "";
@@ -587,6 +600,7 @@
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
+				1B6AB336271DBE9600A45A82 /* UserProfilePhotosView.swift in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
@@ -594,6 +608,7 @@
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
+				1BF55ECD272025CC0027F78F /* PhotoModel.swift in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				1B4ED87A270F345E00290FFF /* ImageCarousel.swift in Sources */,
 				E221EAAF2714FBDA00769234 /* UserSettings.swift in Sources */,
@@ -616,6 +631,7 @@
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
+				1BF55ECB272025860027F78F /* Photo.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				E221EAB52715068800769234 /* MessageView.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
@@ -826,6 +842,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1B6AB337271F248C00A45A82 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E291A1E126FE3663000D8A2C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
@@ -837,6 +861,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1B6AB338271F248C00A45A82 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B6AB337271F248C00A45A82 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		E291A1E226FE3664000D8A2C /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E291A1E126FE3663000D8A2C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;

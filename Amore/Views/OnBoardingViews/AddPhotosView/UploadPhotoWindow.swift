@@ -20,21 +20,21 @@ struct UploadPhotoWindow: View {
     @Binding var image : UIImage?
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
-    var downsampledImage: UIImage {
-        if image != nil {
+    @State var imageDownsampled: Bool = false
+    @State var downsampledImage: UIImage?
+    
+    func downsampleChosenImage() {
+        if !imageDownsampled{
             do {
-                return try ImageService.downsample(imageAt: image?.heicData(compressionQuality: 1.0) ?? Data(), to: CGSize(width: 115, height: 170)) ?? UIImage()
+                downsampledImage = try ImageService.downsample(imageAt: image?.heicData(compressionQuality: 1.0) ?? Data(), to: CGSize(width: 115, height: 170)) ?? UIImage()
+                imageDownsampled = true
             }
             catch {
-                print(error)
-                return UIImage()
+                print("Checkpoint 1: \(error.localizedDescription)")
+                downsampledImage = UIImage()
             }
         }
-        else {
-            return UIImage()
-        }
     }
-    
     
     func imageCropped(image: UIImage){
        self.image = image
@@ -46,7 +46,7 @@ struct UploadPhotoWindow: View {
         VStack {
             
             if image != nil {
-                Image(uiImage: downsampledImage)
+                Image(uiImage: downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
                     .frame(width: 115, height: 170, alignment: .center)
@@ -56,6 +56,9 @@ struct UploadPhotoWindow: View {
                     .shadow(color: Color("onboarding-pink"),
                             radius: 2, x: 3, y: 3)
                     .clipShape(Rectangle())
+                    .onAppear{
+                        downsampleChosenImage()
+                    }
             } else {
                 Image(uiImage: UIImage())
                     .resizable()
