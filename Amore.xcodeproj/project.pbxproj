@@ -71,6 +71,7 @@
 		E27AC5472720CA0A00EB50F7 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = E27AC5462720CA0A00EB50F7 /* JWTKit */; };
 		E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AC5482720CB5400EB50F7 /* PhotoModel.swift */; };
 		E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AC54A2720CB6200EB50F7 /* Photo.swift */; };
+		E27AC54D2721237500EB50F7 /* ReligionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AC54C2721237500EB50F7 /* ReligionSettings.swift */; };
 		E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */; };
 		E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */; };
 		E283677726F9534200EEA049 /* Sk-Modernist-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */; };
@@ -174,6 +175,7 @@
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
 		E27AC5482720CB5400EB50F7 /* PhotoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		E27AC54A2720CB6200EB50F7 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E27AC54C2721237500EB50F7 /* ReligionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReligionSettings.swift; sourceTree = "<group>"; };
 		E283677226F9534200EEA049 /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Bold.otf"; sourceTree = "<group>"; };
 		E283677326F9534200EEA049 /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Mono.otf"; sourceTree = "<group>"; };
 		E283677426F9534200EEA049 /* Sk-Modernist-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sk-Modernist-Regular.otf"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				E234713F271F4B5D0006F336 /* CommonContainer.swift */,
 				E2347141271F4B970006F336 /* GenderSettings.swift */,
 				E2347143271F4C090006F336 /* AgeSettings.swift */,
+				E27AC54C2721237500EB50F7 /* ReligionSettings.swift */,
 			);
 			path = FilterSettingsView;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */,
 				E2347136271DC4E50006F336 /* CardView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
+				E27AC54D2721237500EB50F7 /* ReligionSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

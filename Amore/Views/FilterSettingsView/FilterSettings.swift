@@ -22,17 +22,19 @@ struct FilterSettings: View {
     @State var realMinAge : String = String(format : "%.0f",(66.66 / (UIScreen.main.bounds.width - 60) * 100))
     @State var realMaxAge : String = String(format : "%.0f",(215.66 / (UIScreen.main.bounds.width - 60) * 100))
     
+    // Religious prefernce
+    @State var religionPreference = ["Any"]
+    
     
     var body: some View {
+        
         NavigationView {
             
             VStack(alignment: .leading) {
                 
-                Spacer()
-                
                 Text("Filters")
                     .foregroundColor(.orange)
-                
+                    
                 //
                 GenderSettings(genderPreference: $genderPreference)
                 
@@ -41,10 +43,15 @@ struct FilterSettings: View {
                             realMinAge: $realMinAge,
                             realMaxAge: $realMaxAge)
                 
+                
+                ReligionFilter(religionPreference: $religionPreference)
+                
+                
+                
                 Spacer()
              
             }
-            .padding(.top,20)
+            .padding(.top,10)
             .padding(.horizontal)
         }
     }

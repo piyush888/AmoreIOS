@@ -10,30 +10,79 @@ import SwiftUI
 struct GenderSettings: View {
     
     @Binding var genderPreference: String
-    @State private var previewIndex = 0
-    var previewOptions = ["Male", "Female", "All"]
     
     var body: some View {
         
-        ZStack{
-            
-            CommonContainer()
+            NavigationLink(
+              destination: ShowGenders(genderPreference:$genderPreference),
+              label: {
+                  ZStack{
+                  CommonContainer()
+                  HStack {
+                      
+                      Text("Gender")
+                          .font(.subheadline)
+                          .foregroundColor(Color.black)
+                      
+                      Spacer()
+                      
+                      Text("\(self.genderPreference)")
+                  }
+                  .padding(.horizontal,20)
+              }
+          })
         
-            HStack {
+    }
+}
+
+
+struct ShowGenders : View {
+    
+    @Binding var genderPreference: String
+    
+    var body: some View {
+        
+        VStack {
                 
-                Text("Gender")
-                    .font(.subheadline)
-                    
-                Spacer()
-                
-                Picker(selection: $previewIndex, label: Text("")) {
-                    ForEach(0 ..< previewOptions.count) {
-                        Text(self.previewOptions[$0])
+            Text("Gender")
+                .font(.title)
+            
+            ForEach(["Male", "Female", "All"], id: \.self) { gender in
+                Button{
+                    genderPreference = gender
+                } label : {
+                    ZStack{
+                        Rectangle()
+                            .cornerRadius(5.0)
+                            .frame(height:45)
+                            .foregroundColor(.white)
+                            .overlay(RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.pink, lineWidth: 1))
+                        
+                        HStack {
+                            Text(gender)
+                                .foregroundColor(.black)
+                                .font(.BoardingSubHeading)
+                                .padding(.horizontal,10)
+                            
+                            Spacer()
+                            
+                            if gender == genderPreference {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.accentColor)
+                                    .padding(.horizontal,10)
+                            }
+                            
+                        }
+                        
                     }
                 }
-            }.padding(.horizontal,20)
+            }
+            
+            Spacer()
+            
         }
-        
+        .padding(.horizontal,20)
     }
 }
 
