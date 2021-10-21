@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Nuke
 import CoreMedia
 import SDWebImageSwiftUI
 import Firebase

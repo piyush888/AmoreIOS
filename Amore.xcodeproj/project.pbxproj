@@ -28,6 +28,11 @@
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
 		1BF55ECB272025860027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1BF55ECD272025CC0027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1BFCBADA272151540002BA67 /* UserProfilePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFCBAD9272151540002BA67 /* UserProfilePhotosView.swift */; };
+		1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFCBADB2721AA820002BA67 /* CommunityFilter.swift */; };
+		1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */; };
+		1BFCBAE12721BBCA0002BA67 /* EducationFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFCBAE02721BBCA0002BA67 /* EducationFilter.swift */; };
+		1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFCBAE22721BD260002BA67 /* RaisedInFilter.swift */; };
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
@@ -132,6 +137,11 @@
 		1BC8BE052705CC5E00F0137E /* AddWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWork.swift; sourceTree = "<group>"; };
 		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
 		1BC8BE0D2705CD7C00F0137E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		1BFCBAD9272151540002BA67 /* UserProfilePhotosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilePhotosView.swift; sourceTree = "<group>"; };
+		1BFCBADB2721AA820002BA67 /* CommunityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFilter.swift; sourceTree = "<group>"; };
+		1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerFilter.swift; sourceTree = "<group>"; };
+		1BFCBAE02721BBCA0002BA67 /* EducationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationFilter.swift; sourceTree = "<group>"; };
+		1BFCBAE22721BD260002BA67 /* RaisedInFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisedInFilter.swift; sourceTree = "<group>"; };
 		5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig"; sourceTree = "<group>"; };
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +279,10 @@
 				E2347141271F4B970006F336 /* GenderSettings.swift */,
 				E2347143271F4C090006F336 /* AgeSettings.swift */,
 				E27AC54C2721237500EB50F7 /* ReligionSettings.swift */,
+				1BFCBADB2721AA820002BA67 /* CommunityFilter.swift */,
+				1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */,
+				1BFCBAE02721BBCA0002BA67 /* EducationFilter.swift */,
+				1BFCBAE22721BD260002BA67 /* RaisedInFilter.swift */,
 			);
 			path = FilterSettingsView;
 			sourceTree = "<group>";
@@ -276,6 +290,7 @@
 		E221EAA62714F39600769234 /* UserSettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				1BFCBAD9272151540002BA67 /* UserProfilePhotosView.swift */,
 				E221EAAE2714FBDA00769234 /* UserSettings.swift */,
 			);
 			path = UserSettingsView;
@@ -647,6 +662,7 @@
 				E2347128271BFE6F0006F336 /* ChatBubble.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
+				1BFCBADA272151540002BA67 /* UserProfilePhotosView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
 				1B6AB336271DBE9600A45A82 /* (null) in Sources */,
@@ -656,6 +672,7 @@
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
+				1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */,
 				E2347138271DC5320006F336 /* CustomShape.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
@@ -681,6 +698,7 @@
 				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
 				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
+				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
 				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
@@ -698,10 +716,12 @@
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
+				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
 				1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */,
+				1BFCBAE12721BBCA0002BA67 /* EducationFilter.swift in Sources */,
 				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,

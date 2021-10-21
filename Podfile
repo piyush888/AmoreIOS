@@ -12,5 +12,6 @@ target 'Amore' do
   pod 'FirebaseFirestoreSwift'
   pod 'CropViewController'
   pod 'Firebase/Storage'
-  pod 'StreamChat', '~> 3.1.11'   
+  pod 'StreamChat', '~> 3.1.11'
+  pod 'SDWebImageSwiftUI'
 end

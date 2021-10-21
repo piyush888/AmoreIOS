@@ -24,6 +24,10 @@ struct FilterSettings: View {
     
     // Religious prefernce
     @State var religionPreference = ["Any"]
+    @State var communityPreference = ["Any"]
+    @State var careerPreference = ["Any"]
+    @State var educationPreference = "Masters"
+    @State var countryPreference = "India"
     
     
     var body: some View {
@@ -45,6 +49,10 @@ struct FilterSettings: View {
                 
                 
                 ReligionFilter(religionPreference: $religionPreference)
+                CommunityFilter(communityPreference: $communityPreference)
+                CareerFilter(careerPreference: $careerPreference)
+                EducationFilter(educationPreference: $educationPreference)
+                RaisedInFilter(countryPreference: $countryPreference)
                 
                 
                 

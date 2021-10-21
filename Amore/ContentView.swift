@@ -14,6 +14,8 @@ struct ContentView: View {
     
     @StateObject var profileModel = ProfileViewModel()
     @StateObject var streamModel = StreamViewModel()
+    @StateObject var photoModel = PhotoModel()
+    
     
     var body: some View {
         
@@ -59,8 +61,32 @@ struct ContentView: View {
                 ZStack {
                     // If User profile already created
                     if profileModel.userProfile.email != nil {
-                        HomeView()
-                            .environmentObject(streamModel)
+                        // Wait while photo info fetched from firebase storage
+                        if photoModel.photosFetchedAndReady {
+                            // If 2 or more photos already added
+                            if photoModel.minUserPhotosAdded {
+                                HomeView()
+                                    .environmentObject(streamModel)
+                                    .onAppear {
+                                        photoModel.getPhotos()
+                                    }
+                            }
+                            else {
+                                AddPhotosView()
+                                    .environmentObject(photoModel)
+                                    .onAppear {
+                                        photoModel.getPhotos()
+                                    }
+                            }
+                        }
+                        // Progress Wheel while waiting for photo info to be fetched
+                        else {
+                            ProgressView()
+                                .onAppear {
+                                    photoModel.getPhotos()
+                                }
+                        }
+                        
                     }
                     // Else user profile not created
                     // Show users forms to complete the profile
@@ -68,6 +94,12 @@ struct ContentView: View {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
                             .environmentObject(streamModel)
+                            .onAppear {
+                                if photoModel.photosFetchedAndReady || photoModel.minUserPhotosAdded {
+                                    photoModel.photosFetchedAndReady = false
+                                    photoModel.minUserPhotosAdded = false
+                                }
+                            }
                     }
                 }
             }
@@ -75,6 +107,7 @@ struct ContentView: View {
             else {
                 ProgressView()
                     .onAppear {
+                        print("Checkpoint 2")
                         profileModel.getUserProfile()
                     }
             }

@@ -112,3 +112,8 @@ struct ReligionOptions : View {
     }
 }
 
+struct ReligionFilter_Previews: PreviewProvider {
+    static var previews: some View {
+        ReligionFilter(religionPreference: Binding.constant(["Hindu"]))
+    }
+}

@@ -5,27 +5,18 @@
         "package": "iPhoneNumberField",
         "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField.git",
         "state": {
-          "branch": null,
-          "revision": "a6b5fcc6c9b085285932fe4fe754086ab92409cb",
-          "version": "0.6.1"
+          "branch": "master",
+          "revision": "86d9267ee7e443d32d5309d47263b691fe1450d0",
+          "version": null
         }
       },
       {
         "package": "jwt-kit",
-        "repositoryURL": "https://github.com/vapor/jwt-kit.git",
+        "repositoryURL": "https://github.com/vapor/jwt-kit",
         "state": {
-          "branch": null,
+          "branch": "main",
           "revision": "ca2edf69a613f3d89354114f56cfd9921d2727d5",
-          "version": "4.2.6"
-        }
-      },
-      {
-        "package": "Nuke",
-        "repositoryURL": "https://github.com/kean/Nuke.git",
-        "state": {
-          "branch": null,
-          "revision": "7f73ceaeacd5df75a7994cd82e165ad9ff1815db",
-          "version": "9.6.1"
+          "version": null
         }
       },
       {
@@ -38,57 +29,12 @@
         }
       },
       {
-        "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
-        "state": {
-          "branch": null,
-          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-          "version": "5.12.1"
-        }
-      },
-      {
-        "package": "SDWebImageSwiftUI",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
-        "state": {
-          "branch": null,
-          "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
-          "version": "2.0.2"
-        }
-      },
-      {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/daltoniam/Starscream.git",
-        "state": {
-          "branch": null,
-          "revision": "df8d82047f6654d8e4b655d1b1525c64e1059d21",
-          "version": "4.0.4"
-        }
-      },
-      {
-        "package": "StreamChat",
-        "repositoryURL": "https://github.com/GetStream/stream-chat-swift.git",
-        "state": {
-          "branch": null,
-          "revision": "5f5bb3d38b93fb3e2b67f1082ce7eebc5fb9dc95",
-          "version": "3.1.11"
-        }
-      },
-      {
         "package": "swift-crypto",
         "repositoryURL": "https://github.com/apple/swift-crypto.git",
         "state": {
           "branch": null,
           "revision": "127d3745c37b5705e4bc8d16c7951c48dcc3332c",
           "version": "2.0.0"
-        }
-      },
-      {
-        "package": "SwiftyGif",
-        "repositoryURL": "https://github.com/kirualex/SwiftyGif.git",
-        "state": {
-          "branch": null,
-          "revision": "0cd770feed5807d9fd4fa8df5ad74b56b814b0c8",
-          "version": "5.4.0"
         }
       }
     ]

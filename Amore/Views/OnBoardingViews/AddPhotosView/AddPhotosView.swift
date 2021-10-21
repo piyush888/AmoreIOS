@@ -13,7 +13,7 @@ import SwiftUI
 struct AddPhotosView: View {
     
     // All the 6 images that we give user an option to upload
-    @StateObject var photoModel = PhotoModel()
+    @EnvironmentObject var photoModel: PhotoModel
     @State var images = [UIImage?](repeating: nil, count: 6)
     @State private var disableButton = false
     @State private var counter = 0

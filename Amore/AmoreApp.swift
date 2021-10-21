@@ -20,11 +20,11 @@ struct AmoreApp: App {
         
         WindowGroup {
             
-            FilterSettings()
+//            FilterSettings()
             
             /* Starts the application with Onboarding View*/
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
             /* View to upload photos after add school view */
 //            AddPhotosView()
@@ -38,6 +38,9 @@ struct AmoreApp: App {
             
             /* Home View For Integrating */
 //            HomeView()
+            
+            /* User Profile Photos View*/
+//            UserProfilePhotosView()
             
         }
     }
