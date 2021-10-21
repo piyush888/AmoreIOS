@@ -7,29 +7,36 @@
 
 import SwiftUI
 
+
+
 struct AgeSettings: View {
     
-    @Binding var minAge: CGFloat
-    @Binding var maxAge: CGFloat
+    @Binding var scaleMinAge: CGFloat
+    @Binding var scaleMaxAge: CGFloat
+    @Binding var realMinAge: String
+    @Binding var realMaxAge: String
+    
+    var MaxPossibleAge = UIScreen.main.bounds.width - 60
     
     var body: some View {
         
         ZStack{
-            
             CommonContainer()
-        
-            VStack {
-                
+            
+            HStack {
                 Text("Age")
                     .font(.subheadline)
-                    .fontWeight(.bold)
                     
                 Spacer()
-                
-                Text("\(self.minAge) - \(self.maxAge)")
-                
-                Slider(minAge: self.$minAge, maxAge: self.$maxAge)
-                
+                NavigationLink(
+                    destination: Slider(scaleMinAge: self.$scaleMinAge,
+                                        scaleMaxAge: self.$scaleMaxAge,
+                                        realMinAge: self.$realMinAge,
+                                        realMaxAge: self.$realMaxAge,
+                                        MaxPossibleAge: MaxPossibleAge),
+                    label: {
+                        Text("\(self.realMinAge) - \(self.realMaxAge)")
+                    })
             }.padding(.horizontal,20)
         }
         
@@ -38,76 +45,73 @@ struct AgeSettings: View {
 
 struct Slider : View {
     
-    @Binding var minAge: CGFloat
-    @Binding var maxAge: CGFloat
+    @Binding var scaleMinAge: CGFloat
+    @Binding var scaleMaxAge: CGFloat
+    @Binding var realMinAge: String
+    @Binding var realMaxAge: String
+    @State var MaxPossibleAge: CGFloat
     
-    var MaxPossibleAge = UIScreen.main.bounds.width - 60
     
     func RoundToString(val: CGFloat) -> String {
-        return String(format : "%.0f", val*100)
+        return String(format : "%.0f", val)
     }
-    
     
     var body : some View {
 
-        
-    VStack {
-        
-        Text("\(self.RoundToString(val:self.minAge / self.MaxPossibleAge)) - \(self.RoundToString(val:self.maxAge / self.MaxPossibleAge))")
-
-            .fontWeight(.bold)
-            .padding(.top)
-        
-        
-        ZStack(alignment: .leading) {
+        VStack {
             
-            Rectangle()
-                .fill(Color.black.opacity(0.20))
-                .frame(height:6)
+            Text("\(self.realMinAge) - \(self.realMaxAge)")
+                .fontWeight(.bold)
+                .padding(.top)
             
-            Rectangle()
-                .fill(Color.black)
-                .frame(width:self.maxAge - self.minAge, height: 6)
-                .offset(x:self.minAge + 18)
             
-            HStack(spacing:0) {
-                
-                Circle()
-                    .fill(Color.black)
-                    .frame(width:18, height:18)
-                    .offset(x:self.minAge)
-                    .gesture(
-                        DragGesture()
-                            .onChanged({ (value) in
-                                if value.location.x >= 0 && value.location.x <= self.maxAge {
-                                    self.minAge = value.location.x
-                                }
-                            })
-                    )
-                
-                Circle()
-                    .fill(Color.black)
-                    .frame(width:18, height:18)
-                    .offset(x:self.maxAge)
-                    .gesture(
-                        DragGesture()
-                            .onChanged({ (value) in
-                                if value.location.x <= self.MaxPossibleAge && value.location.x >= self.maxAge {
-                                    self.maxAge = value.location.x
-                                }
-                            })
-                    )
+                ZStack(alignment: .leading) {
+                    
+                    Rectangle()
+                        .fill(Color.black.opacity(0.20))
+                        .frame(height:6)
+                    
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width:self.scaleMaxAge - self.scaleMinAge, height: 6)
+                        .offset(x:self.scaleMinAge + 18)
+                    
+                    HStack(spacing:0) {
+                        
+                        Circle()
+                            .fill(Color.black)
+                            .frame(width:18, height:18)
+                            .offset(x:self.scaleMinAge)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged({ (value) in
+                                        if value.location.x >= (0.18 * self.MaxPossibleAge) && value.location.x <= self.scaleMaxAge {
+                                            self.scaleMinAge = value.location.x
+                                            self.realMinAge = RoundToString(val: self.scaleMinAge/self.MaxPossibleAge * 100)
+                                        }
+                                    })
+                            )
+                        
+                        Circle()
+                            .fill(Color.black)
+                            .frame(width:18, height:18)
+                            .offset(x:self.scaleMaxAge)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged({ (value) in
+                                        if value.location.x >= self.scaleMinAge && value.location.x <= (0.61 * self.MaxPossibleAge) {
+                                            self.scaleMaxAge = value.location.x
+                                            self.realMaxAge = RoundToString(val: self.scaleMaxAge/self.MaxPossibleAge * 100)
+                                        }
+                                    })
+                            )
+                    }
+                }
+                .padding()
             }
         }
-        .padding(.top,25)
-        }
-    }
-    
+        
     
 }
 
-struct AgeSettings_Previews: PreviewProvider {
-    static var previews: some View {
-        AgeSettings(minAge: Binding.constant(20), maxAge: Binding.constant(30))
-    }
-}
+
