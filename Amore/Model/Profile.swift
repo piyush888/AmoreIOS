@@ -21,4 +21,5 @@ struct Profile: Identifiable, Codable {
     var showMePreference: String?
     var work: String?
     var school: String?
+    var age: Int = 25
 }

@@ -162,7 +162,7 @@ struct PayLoad: JWTPayload,Equatable {
         case user_id
     }
     
-    var user_id: String
+    var user_id: String 
     
     func verify(using signer: JWTSigner) throws {
         

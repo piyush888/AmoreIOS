@@ -10,7 +10,7 @@ import SwiftUI
 struct CommunityFilter: View {
     
     @Binding var communityPreference: [String]
-    @State var displayCommunityInTab : String = ""
+    @State var displayCommunityInTab : String = "Modify community"
     
     var body: some View {
         NavigationLink(

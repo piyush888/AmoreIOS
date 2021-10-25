@@ -10,7 +10,7 @@ import SwiftUI
 struct ReligionFilter: View {
     
     @Binding var religionPreference: [String]
-    @State var displayReligionInTab : String = ""
+    @State var displayReligionInTab : String = "Modify religion"
     
     var body: some View {
         

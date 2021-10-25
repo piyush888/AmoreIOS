@@ -66,9 +66,12 @@ struct ContentView: View {
                             // If 2 or more photos already added
                             if photoModel.minUserPhotosAdded {
                                 HomeView()
+                                    .environmentObject(profileModel)
                                     .environmentObject(streamModel)
+                                    .environmentObject(photoModel)
                                     .onAppear {
                                         photoModel.getPhotos()
+                                        profileModel.getUserProfile()
                                     }
                             }
                             else {
@@ -107,7 +110,6 @@ struct ContentView: View {
             else {
                 ProgressView()
                     .onAppear {
-                        print("Checkpoint 2")
                         profileModel.getUserProfile()
                     }
             }

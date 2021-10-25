@@ -10,7 +10,7 @@ import SwiftUI
 struct CareerFilter: View {
     
     @Binding var careerPreference: [String]
-    @State var displayCareerInTab : String = ""
+    @State var displayCareerInTab : String = "Modify career"
     
     var body: some View {
         NavigationLink(

@@ -17,22 +17,22 @@ struct GenderSettings: View {
               destination: ShowGenders(genderPreference:$genderPreference),
               label: {
                   ZStack{
-                  CommonContainer()
-                  HStack {
-                      
-                      Text("Gender")
-                          .font(.subheadline)
-                          .foregroundColor(Color.black)
-                      
-                      Spacer()
-                      
-                      Text("\(self.genderPreference)")
+                      CommonContainer()
+                      HStack {
+                          
+                          Text("Gender")
+                              .font(.subheadline)
+                              .foregroundColor(Color.black)
+                          
+                          Spacer()
+                          
+                          Text("\(self.genderPreference)")
+                      }
+                      .padding(.horizontal,20)
                   }
-                  .padding(.horizontal,20)
-              }
-          })
-        
-    }
+                  .navigationBarHidden(true)
+              })
+        }
 }
 
 

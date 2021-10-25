@@ -14,3 +14,9 @@ enum ViewTypes {
     case filterSettingsView
     case userSettingsView
 }
+
+
+enum EditOrPreviewProfile {
+    case editProfile
+    case previewProfile
+}

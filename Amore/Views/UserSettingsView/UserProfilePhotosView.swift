@@ -14,7 +14,8 @@ struct UserProfilePhotosView: View {
     let adaptivecolumns = Array(repeating:
                                     GridItem(.adaptive(minimum: 150),spacing: 5,
                                              alignment: .center),count: 3)
-    @StateObject private var photoModel = PhotoModel()
+    
+    @EnvironmentObject var photoModel: PhotoModel
     
     var body: some View {
         // Give the user options to add photos
@@ -34,9 +35,6 @@ struct UserProfilePhotosView: View {
             }
             .frame(minWidth: geometry.size.width, idealWidth: geometry.size.width, maxWidth: geometry.size.width, minHeight: geometry.size.height/2, idealHeight: geometry.size.height/2, maxHeight: geometry.size.height/2, alignment: .center)
             .position(x: geometry.size.width/2, y: geometry.size.height/2)
-            .onAppear {
-                photoModel.getPhotos()
-            }
         }
     }
 }

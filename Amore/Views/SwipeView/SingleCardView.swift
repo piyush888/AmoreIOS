@@ -14,7 +14,7 @@ struct SingleCardView: View {
     public var user: User
     private var onRemove: (_ user: User) -> Void
     
-    private var thresholdPercentage: CGFloat = 0.25 // when the user has draged 50% the width of the screen in either direction
+    private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
     private enum LikeDislike: Int {
         case like, dislike, none

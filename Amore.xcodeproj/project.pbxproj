@@ -36,7 +36,7 @@
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
-		E221EAAF2714FBDA00769234 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserSettings.swift */; };
+		E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserProfile.swift */; };
 		E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */; };
 		E221EAB32715066000769234 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB22715066000769234 /* FilterSettings.swift */; };
 		E221EAB52715068800769234 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB42715068800769234 /* ChannelView.swift */; };
@@ -93,6 +93,11 @@
 		E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0D2713350900C82174 /* CardBasicInfo.swift */; };
 		E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0F2713534200C82174 /* CardGalleryImages.swift */; };
 		E298BA142713A85500C82174 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA132713A85500C82174 /* ControlCenter.swift */; };
+		E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B29382722B09400C38035 /* UserEditProfile.swift */; };
+		E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293A27234B6B00C38035 /* UserSettingView.swift */; };
+		E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293C27234B8900C38035 /* UserSafetyView.swift */; };
+		E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293E272461F400C38035 /* SubscriptionDetails.swift */; };
+		E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B2940272637B400C38035 /* EditCardInfo.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
@@ -147,7 +152,7 @@
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
 		E221EAAA2714F79A00769234 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		E221EAAC2714F84F00769234 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		E221EAAE2714FBDA00769234 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		E221EAAE2714FBDA00769234 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksHome.swift; sourceTree = "<group>"; };
 		E221EAB22715066000769234 /* FilterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
 		E221EAB42715068800769234 /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
@@ -202,6 +207,11 @@
 		E298BA0D2713350900C82174 /* CardBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBasicInfo.swift; sourceTree = "<group>"; };
 		E298BA0F2713534200C82174 /* CardGalleryImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGalleryImages.swift; sourceTree = "<group>"; };
 		E298BA132713A85500C82174 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
+		E29B29382722B09400C38035 /* UserEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditProfile.swift; sourceTree = "<group>"; };
+		E29B293A27234B6B00C38035 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		E29B293C27234B8900C38035 /* UserSafetyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSafetyView.swift; sourceTree = "<group>"; };
+		E29B293E272461F400C38035 /* SubscriptionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetails.swift; sourceTree = "<group>"; };
+		E29B2940272637B400C38035 /* EditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardInfo.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
@@ -290,8 +300,13 @@
 		E221EAA62714F39600769234 /* UserSettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				E221EAAE2714FBDA00769234 /* UserProfile.swift */,
 				1BFCBAD9272151540002BA67 /* UserProfilePhotosView.swift */,
-				E221EAAE2714FBDA00769234 /* UserSettings.swift */,
+				E29B29382722B09400C38035 /* UserEditProfile.swift */,
+				E29B293A27234B6B00C38035 /* UserSettingView.swift */,
+				E29B293C27234B8900C38035 /* UserSafetyView.swift */,
+				E29B293E272461F400C38035 /* SubscriptionDetails.swift */,
+				E29B2940272637B400C38035 /* EditCardInfo.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -648,9 +663,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E234712A271BFEDF0006F336 /* ChannelRowView.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
+				E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */,
 				E2347124271BFDDA0006F336 /* ChatView.swift in Sources */,
 				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
@@ -669,6 +686,7 @@
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
+				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
@@ -677,9 +695,10 @@
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
+				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */,
 				E2347134271DC4C30006F336 /* Detail.swift in Sources */,
-				E221EAAF2714FBDA00769234 /* UserSettings.swift in Sources */,
+				E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
@@ -703,6 +722,7 @@
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
+				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,

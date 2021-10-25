@@ -21,56 +21,61 @@ struct ChannelRowView: View {
         
         VStack(alignment: .trailing, spacing: 5, content: {
             
-            HStack(spacing: 12){
+            // Check if the channels is not nil. Happens When channels are not fetched
+            if let channel = listner.controller.channel {
                 
-                let channel = listner.controller.channel!
-                
-                Circle()
-                    .fill(Color.gray.opacity(0.4))
-                    .frame(width: 55, height: 55)
-                    .overlay(
+                HStack(spacing: 12){
                     
-                        // First Letter as Image...
-                        Text("\(String(channel.cid.id.first!))")
-                            .font(.title)
+//                    let channel = listner.controller.channel!
+                    
+                    Circle()
+                        .fill(Color.gray.opacity(0.4))
+                        .frame(width: 55, height: 55)
+                        .overlay(
+                        
+                            // First Letter as Image...
+                            Text("\(String(channel.cid.id.first!))")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                        )
+                    
+                    VStack(alignment: .leading, spacing: 8, content: {
+                        Text(channel.cid.id)
                             .fontWeight(.semibold)
                             .foregroundColor(.primary)
-                    )
-                
-                VStack(alignment: .leading, spacing: 8, content: {
-                    Text(channel.cid.id)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-                    
-                    // Last Msg...
-                    if let lastMsg = channel.latestMessages.first{
                         
-                        // showing the last user name...
-                        (
-                        
-                            Text(lastMsg.isSentByCurrentUser ? "Me: " : "\(lastMsg.author.id): ")
+                        // Last Msg...
+                        if let lastMsg = channel.latestMessages.first{
                             
-                            +
+                            // showing the last user name...
+                            (
                             
-                                Text(lastMsg.text)
-                        )
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
+                                Text(lastMsg.isSentByCurrentUser ? "Me: " : "\(lastMsg.author.id): ")
+                                
+                                +
+                                
+                                    Text(lastMsg.text)
+                            )
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
 
+                        }
+                    })
+                    
+                    Spacer(minLength: 10)
+                    
+                    // Time...
+                    if let time = channel.latestMessages.first?.createdAt{
+                        Text(time,style: checkIsDateToday(date: time) ? .time : .date)
+                            .font(.caption2)
+                            .foregroundColor(.gray)
                     }
-                })
-                
-                Spacer(minLength: 10)
-                
-                // Time...
-                if let time = channel.latestMessages.first?.createdAt{
-                    Text(time,style: checkIsDateToday(date: time) ? .time : .date)
-                        .font(.caption2)
-                        .foregroundColor(.gray)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
             
             Divider()
                 .padding(.leading,60)

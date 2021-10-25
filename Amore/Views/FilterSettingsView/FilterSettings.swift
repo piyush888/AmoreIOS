@@ -61,6 +61,7 @@ struct FilterSettings: View {
             }
             .padding(.top,10)
             .padding(.horizontal)
+            .navigationBarHidden(true)
         }
     }
 }

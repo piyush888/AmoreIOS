@@ -9,8 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var currentPage: ViewTypes = .swipeView
+    @State var currentPage: ViewTypes = .userSettingsView
+    
+    @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
+    @EnvironmentObject var photoModel: PhotoModel
     
     var body: some View {
         
@@ -40,7 +43,9 @@ struct HomeView: View {
                             FilterSettings()
                             
                         case .userSettingsView:
-                            UserSettings()
+                        UserProfile()
+                                .environmentObject(profileModel)
+                                .environmentObject(photoModel)
                     }
             
             }.navigationBarHidden(true)
