@@ -8,36 +8,16 @@
 
 import SwiftUI
 
-struct User: Hashable, CustomStringConvertible {
-    var id: Int
-    
-    let firstName: String
-    let lastName: String
-    let age: Int
-    let profileDistanceFromUser: Int
-    let imageName1: String
-    let imageName2: String
-    let imageName3: String
-    let imageName4: String
-    let imageName5: String
-    let imageName6: String
-    let occupation: String
-    let passions: [String]
-    let height: String
-    let education: String
-    let religion: String
-    let politics: String
-    let location: String
-    let description: String
-}
-
 struct AllCardsView: View {
     /// List of users
     @State var users: [User] = [
         User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise"),
         User(id: 1, firstName: "Mark", lastName: "Bennett", age: 27, profileDistanceFromUser: 0, imageName1: "girl2_image1",imageName2: "girl2_image2",imageName3: "girl2_image3", imageName4:"girl2_image4",imageName5: "girl2_image5",imageName6: "girl2_image6", occupation: "Insurance Agent", passions: ["Drink","Gaming","Partying"], height: "6 1''", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Delhi, IN",
              description:"You are strong because you are imperfect"),
-        User(id: 2, firstName: "Clayton", lastName: "Delaney", age: 20, profileDistanceFromUser: 1, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Food Scientist", passions: ["Photography","Drink","Gaming","Partying"], height: "10 1", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Bangalore, IN",description:"Here is a women who is always tired, because she lives a life where too much is required")
+        User(id: 2, firstName: "Clayton", lastName: "Delaney", age: 20, profileDistanceFromUser: 1, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Food Scientist", passions: ["Photography","Drink","Gaming","Partying"], height: "10 1", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Bangalore, IN",description:"Here is a women who is always tired, because she lives a life where too much is required"),
+        User(id: 3, firstName: "Clayton", lastName: "Delaney", age: 20, profileDistanceFromUser: 1, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Food Scientist", passions: ["Photography","Drink","Gaming","Partying"], height: "10 1", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Bangalore, IN",description:"Here is a women who is always tired, because she lives a life where too much is required"),
+        User(id: 4, firstName: "Clayton", lastName: "Delaney", age: 20, profileDistanceFromUser: 1, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Food Scientist", passions: ["Photography","Drink","Gaming","Partying"], height: "10 1", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Bangalore, IN",description:"Here is a women who is always tired, because she lives a life where too much is required")
+        
     ]
     
     enum LikeDislike: Int {

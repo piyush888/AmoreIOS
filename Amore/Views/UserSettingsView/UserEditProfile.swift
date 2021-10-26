@@ -11,6 +11,9 @@ struct EditProfile: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     
+    @State var user = User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise")
+    
+    
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var headingName = "Edit Info"
     
@@ -65,7 +68,7 @@ struct EditProfile: View {
                     EditCardInfo()
                 
                 case .previewProfile:
-                    PreviewProfile()
+                    PreviewProfile(user:user)
                 
                 
             }

@@ -23,3 +23,28 @@ struct Profile: Identifiable, Codable {
     var school: String?
     var age: Int = 25
 }
+
+
+// Temp User Model being used to display cards
+struct User: Hashable, CustomStringConvertible {
+    var id: Int
+    
+    let firstName: String
+    let lastName: String
+    let age: Int
+    let profileDistanceFromUser: Int
+    let imageName1: String
+    let imageName2: String
+    let imageName3: String
+    let imageName4: String
+    let imageName5: String
+    let imageName6: String
+    let occupation: String
+    let passions: [String]
+    let height: String
+    let education: String
+    let religion: String
+    let politics: String
+    let location: String
+    let description: String
+}
