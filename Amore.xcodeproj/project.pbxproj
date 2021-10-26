@@ -85,6 +85,10 @@
 		E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283677E26FAB79800EEA049 /* Onboarding.swift */; };
 		E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283678026FAB85400EEA049 /* OnboardingModel.swift */; };
 		E283678426FAB8C800EEA049 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E283678326FAB8C800EEA049 /* DataService.swift */; };
+		E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CAD272711C5005B19E1 /* PreviewProfile.swift */; };
+		E2851CB02727580C005B19E1 /* EditProfileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */; };
+		E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */; };
+		E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB327277D7A005B19E1 /* ContactSupport.swift */; };
 		E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */; };
 		E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */; };
 		E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */; };
@@ -199,6 +203,10 @@
 		E283677E26FAB79800EEA049 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		E283678026FAB85400EEA049 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		E283678326FAB8C800EEA049 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		E2851CAD272711C5005B19E1 /* PreviewProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProfile.swift; sourceTree = "<group>"; };
+		E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUtil.swift; sourceTree = "<group>"; };
+		E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileButton.swift; sourceTree = "<group>"; };
+		E2851CB327277D7A005B19E1 /* ContactSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupport.swift; sourceTree = "<group>"; };
 		E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPhoneNumber.swift; sourceTree = "<group>"; };
 		E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeParent.swift; sourceTree = "<group>"; };
 		E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
@@ -307,6 +315,9 @@
 				E29B293C27234B8900C38035 /* UserSafetyView.swift */,
 				E29B293E272461F400C38035 /* SubscriptionDetails.swift */,
 				E29B2940272637B400C38035 /* EditCardInfo.swift */,
+				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
+				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
+				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -521,6 +532,7 @@
 				1B58A44E27144FA800565429 /* UIImageExtension.swift */,
 				1B58A4502715E35300565429 /* ImageServices.swift */,
 				E234712F271C972F0006F336 /* LoadingScreen.swift */,
+				E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -705,6 +717,7 @@
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
+				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
@@ -718,6 +731,7 @@
 				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
+				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,
 				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
@@ -726,6 +740,7 @@
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
+				E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2347144271F4C090006F336 /* AgeSettings.swift in Sources */,
@@ -739,6 +754,7 @@
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
+				E2851CB02727580C005B19E1 /* EditProfileUtil.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
 				1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */,
 				1BFCBAE12721BBCA0002BA67 /* EducationFilter.swift in Sources */,

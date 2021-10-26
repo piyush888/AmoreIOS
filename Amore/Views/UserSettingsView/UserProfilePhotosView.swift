@@ -27,7 +27,7 @@ struct UserProfilePhotosView: View {
                     ForEach(photoModel.downloadedPhotosURLs.indices, id: \.self) {
                         WebImage(url: photoModel.downloadedPhotosURLs[$0].imageURL)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(contentMode: .fit) 
 //                            .frame(width: side, height: side)
 //                            .clipped()
                     }
@@ -40,8 +40,3 @@ struct UserProfilePhotosView: View {
 }
 
 
-struct UserProfilePhotosView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserProfilePhotosView()
-    }
-}
