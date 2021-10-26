@@ -6,23 +6,56 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
+import FirebaseFirestore
+import Firebase
 
 struct SingleCardView: View {
     @State private var translation: CGSize = .zero
-    @State private var swipeStatus: LikeDislike = .none
+    @Binding var swipeStatus: AllCardsView.LikeDislike
     
     public var user: User
     private var onRemove: (_ user: User) -> Void
     
     private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
-    private enum LikeDislike: Int {
-        case like, dislike, none
+    let db = Firestore.firestore()
+    
+    func saveLikeDislike() {
+        var ref: DocumentReference? = nil
+        var otherUser: String? {
+            switch self.swipeStatus{
+            case .like: return "likedUser"
+            case .dislike: return "dislikedUser"
+            case .none: return nil
+            }
+        }
+        var collectionName: String? {
+            switch self.swipeStatus{
+            case .like: return "Likes"
+            case .dislike: return "Dislikes"
+            case .none: return nil
+            }
+        }
+        if let collectionName = collectionName {
+            let collectionRef = db.collection(collectionName)
+            ref = collectionRef.addDocument(data: [
+                "currentUser": String(Auth.auth().currentUser?.uid ?? "testUser"),
+                otherUser!: user.id
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
+            }
+        }
     }
     
-    init(user: User, onRemove: @escaping (_ user: User) -> Void) {
+    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, user: User, onRemove: @escaping (_ user: User) -> Void) {
         self.user = user
         self.onRemove = onRemove
+        _swipeStatus = currentSwipeStatus
     }
     
     /// What percentage of our own width have we swipped
@@ -159,11 +192,28 @@ struct SingleCardView: View {
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
                                 self.onRemove(self.user)
+                                self.saveLikeDislike()
                             } else {
                                 self.translation = .zero
                             }
                         }
                 )
+                .onChange(of: self.swipeStatus) { newValue in
+                    if newValue == AllCardsView.LikeDislike.like {
+                        self.translation = .init(width: 100, height: 0)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+                                                    self.onRemove(self.user)
+                                                })
+                        self.saveLikeDislike()
+                    }
+                    else if newValue == AllCardsView.LikeDislike.dislike {
+                        self.translation = .init(width: -100, height: 0)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+                                                    self.onRemove(self.user)
+                                                })
+                        self.saveLikeDislike()
+                    }
+                }
             }
             .cornerRadius(10)
             .overlay(RoundedRectangle(cornerRadius: 10)
@@ -175,7 +225,7 @@ struct SingleCardView: View {
 // 7
 struct SingleCardView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleCardView(user: User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4,imageName1: "image1",imageName2: "image2",imageName3: "image3",imageName4: "image4",imageName5: "image5",imageName6: "image6", occupation: "Coach", passions: ["Photography", "Shopping", "Yoga","Cooking","Travelling","Drink","Gaming","Partying"],
+        SingleCardView(currentSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), user: User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4,imageName1: "image1",imageName2: "image2",imageName3: "image3",imageName4: "image4",imageName5: "image5",imageName6: "image6", occupation: "Coach", passions: ["Photography", "Shopping", "Yoga","Cooking","Travelling","Drink","Gaming","Partying"],
                             height: "5 55", education:"Bachelor",religion:"Hindu", politics:"Liberal", location:"Texas, US",
                             description:"You are strong because you are imperfect, you have doubts because you are wise"),
                  onRemove: { _ in

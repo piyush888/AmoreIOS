@@ -36,8 +36,6 @@ struct HomeView: View {
                             
                         case .swipeView:
                             AllCardsView()
-                            LikeDislikeSuperLike()
-                            .padding()
                             
                         case .filterSettingsView:
                             FilterSettings()
