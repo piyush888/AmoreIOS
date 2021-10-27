@@ -13,6 +13,7 @@ import Firebase
 struct SingleCardView: View {
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
+    @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
     
     public var user: User
     private var onRemove: (_ user: User) -> Void
@@ -21,17 +22,17 @@ struct SingleCardView: View {
     
     let db = Firestore.firestore()
     
-    func saveLikeDislike() {
+    func saveLikeDislike(givenSwipeStatus: AllCardsView.LikeDislike) {
         var ref: DocumentReference? = nil
         var otherUser: String? {
-            switch self.swipeStatus{
+            switch givenSwipeStatus{
             case .like: return "likedUser"
             case .dislike: return "dislikedUser"
             case .none: return nil
             }
         }
         var collectionName: String? {
-            switch self.swipeStatus{
+            switch givenSwipeStatus{
             case .like: return "Likes"
             case .dislike: return "Dislikes"
             case .none: return nil
@@ -181,18 +182,18 @@ struct SingleCardView: View {
                             self.translation = value.translation
                             
                             if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
-                                self.swipeStatus = .like
+                                self.dragSwipeStatus = .like
                             } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
-                                self.swipeStatus = .dislike
+                                self.dragSwipeStatus = .dislike
                             } else {
-                                self.swipeStatus = .none
+                                self.dragSwipeStatus = .none
                             }
                             
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
                                 self.onRemove(self.user)
-                                self.saveLikeDislike()
+                                self.saveLikeDislike(givenSwipeStatus: self.dragSwipeStatus)
                             } else {
                                 self.translation = .zero
                             }
@@ -204,14 +205,14 @@ struct SingleCardView: View {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
                                                     self.onRemove(self.user)
                                                 })
-                        self.saveLikeDislike()
+                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
                                                     self.onRemove(self.user)
                                                 })
-                        self.saveLikeDislike()
+                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                 }
             }
