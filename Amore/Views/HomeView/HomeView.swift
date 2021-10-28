@@ -41,7 +41,7 @@ struct HomeView: View {
                             FilterSettings()
                             
                         case .userSettingsView:
-                        UserProfile()
+                            UserProfile()
                                 .environmentObject(profileModel)
                                 .environmentObject(photoModel)
                     }

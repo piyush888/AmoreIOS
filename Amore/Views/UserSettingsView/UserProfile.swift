@@ -12,6 +12,7 @@ struct UserProfile: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @State var profileEditingToBeDone: Bool = false
+    @State var settingsDone: Bool = false
     
     func getUserAge() {
         let now = Date()
@@ -47,15 +48,19 @@ struct UserProfile: View {
                 // Settings, Edit Profile and Safety
                 HStack(spacing:50) {
                     
-                    NavigationLink(
-                        destination: UserSettingView(),
-                        label: {
+                    NavigationLink(isActive: $settingsDone) {
+                        return UserSettingView(settingsDone: $settingsDone)
+                    } label: {
+                        Button {
+                            settingsDone = true
+                        } label: {
                             Image(systemName: "gearshape.fill")
                                 .resizable()
                                 .frame(width:40, height:40)
                                 .foregroundColor(Color.purple)
                                 .padding(.bottom,20)
-                        })
+                        }
+                    }
                     
                     NavigationLink(isActive: $profileEditingToBeDone) {
                         return EditProfile(profileEditingToBeDone: $profileEditingToBeDone)

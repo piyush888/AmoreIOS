@@ -9,15 +9,12 @@ import SwiftUI
 
 struct SubscriptionDetails: View {
     
-    let skyBlue = Color(red: 0.80, green: 1.0, blue: 1.0)
-
-    
     var body: some View {
         
         ZStack {
             
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(skyBlue)
+                .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
             
             VStack {
                 

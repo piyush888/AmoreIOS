@@ -25,6 +25,7 @@ struct EditProfile: View {
         VStack {
             
             HStack {
+                
                 Spacer()
 
                 Button {
@@ -41,7 +42,7 @@ struct EditProfile: View {
             
             HStack {
                 Spacer()
-                Text("Edit")
+                Text("Edit Info")
                     .font(.title2)
                     .foregroundColor(headingName == "Edit Info" ? .red : .gray)
                     .onTapGesture {
@@ -51,7 +52,7 @@ struct EditProfile: View {
                     
                 Spacer()
                 
-                Text("Preview")
+                Text("Preview Profile")
                     .font(.title2)
                     .foregroundColor(headingName == "Preview Profile" ? .red : .gray)
                     .onTapGesture {

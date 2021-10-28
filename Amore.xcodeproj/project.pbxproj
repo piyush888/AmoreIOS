@@ -105,6 +105,12 @@
 		E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293E272461F400C38035 /* SubscriptionDetails.swift */; };
 		E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B2940272637B400C38035 /* EditCardInfo.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
+		E2DBC01D272B2FF4000630F5 /* SuperLikeBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */; };
+		E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01E272B30FB000630F5 /* AmoreGold.swift */; };
+		E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC020272B311B000630F5 /* AmorePlatinum.swift */; };
+		E2DBC023272B31AF000630F5 /* PhoneNumberEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC022272B31AF000630F5 /* PhoneNumberEmail.swift */; };
+		E2DBC025272B3621000630F5 /* ContactCommunityLegal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC024272B3621000630F5 /* ContactCommunityLegal.swift */; };
+		E2DBC027272B3BC0000630F5 /* SFSafariViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC026272B3BC0000630F5 /* SFSafariViewWrapper.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -225,6 +231,12 @@
 		E29B293E272461F400C38035 /* SubscriptionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetails.swift; sourceTree = "<group>"; };
 		E29B2940272637B400C38035 /* EditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardInfo.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
+		E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLikeBoost.swift; sourceTree = "<group>"; };
+		E2DBC01E272B30FB000630F5 /* AmoreGold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
+		E2DBC020272B311B000630F5 /* AmorePlatinum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
+		E2DBC022272B31AF000630F5 /* PhoneNumberEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberEmail.swift; sourceTree = "<group>"; };
+		E2DBC024272B3621000630F5 /* ContactCommunityLegal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCommunityLegal.swift; sourceTree = "<group>"; };
+		E2DBC026272B3BC0000630F5 /* SFSafariViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewWrapper.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -312,17 +324,13 @@
 		E221EAA62714F39600769234 /* UserSettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				E2DBC029272B3E99000630F5 /* ProfileUpdate */,
+				E2DBC028272B3E8E000630F5 /* Safety */,
+				E2DBC01B272B2F95000630F5 /* Settings */,
 				E221EAAE2714FBDA00769234 /* UserProfile.swift */,
 				1BFCBAD9272151540002BA67 /* UserProfilePhotosView.swift */,
-				E29B29382722B09400C38035 /* UserEditProfile.swift */,
-				E29B293A27234B6B00C38035 /* UserSettingView.swift */,
-				E29B293C27234B8900C38035 /* UserSafetyView.swift */,
 				E29B293E272461F400C38035 /* SubscriptionDetails.swift */,
-				E29B2940272637B400C38035 /* EditCardInfo.swift */,
-				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
-				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
-				1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -437,6 +445,39 @@
 			path = OnBoardingViews;
 			sourceTree = "<group>";
 		};
+		E2DBC01B272B2F95000630F5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E29B293A27234B6B00C38035 /* UserSettingView.swift */,
+				E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */,
+				E2DBC01E272B30FB000630F5 /* AmoreGold.swift */,
+				E2DBC020272B311B000630F5 /* AmorePlatinum.swift */,
+				E2DBC022272B31AF000630F5 /* PhoneNumberEmail.swift */,
+				E2DBC024272B3621000630F5 /* ContactCommunityLegal.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E2DBC028272B3E8E000630F5 /* Safety */ = {
+			isa = PBXGroup;
+			children = (
+				E29B293C27234B8900C38035 /* UserSafetyView.swift */,
+			);
+			path = Safety;
+			sourceTree = "<group>";
+		};
+		E2DBC029272B3E99000630F5 /* ProfileUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				E29B29382722B09400C38035 /* UserEditProfile.swift */,
+				E29B2940272637B400C38035 /* EditCardInfo.swift */,
+				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
+				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
+				1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */,
+			);
+			path = ProfileUpdate;
+			sourceTree = "<group>";
+		};
 		E2F8AA4426F9427F00CC7A72 = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +580,7 @@
 				E234712F271C972F0006F336 /* LoadingScreen.swift */,
 				E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */,
 				1B96B73E272A95840009683A /* OptionalExtension.swift */,
+				E2DBC026272B3BC0000630F5 /* SFSafariViewWrapper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -691,6 +733,7 @@
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
+				E2DBC01D272B2FF4000630F5 /* SuperLikeBoost.swift in Sources */,
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
 				E298BA142713A85500C82174 /* ControlCenter.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
@@ -700,11 +743,14 @@
 				1BFCBADA272151540002BA67 /* UserProfilePhotosView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
+				E2DBC027272B3BC0000630F5 /* SFSafariViewWrapper.swift in Sources */,
+				E2DBC023272B31AF000630F5 /* PhoneNumberEmail.swift in Sources */,
 				1B6AB336271DBE9600A45A82 /* (null) in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
 				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
+				E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
@@ -743,6 +789,7 @@
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
+				E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
@@ -773,6 +820,7 @@
 				E2347132271DC3A00006F336 /* TabButton.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
 				E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */,
+				E2DBC025272B3621000630F5 /* ContactCommunityLegal.swift in Sources */,
 				E2347136271DC4E50006F336 /* CardView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 				E27AC54D2721237500EB50F7 /* ReligionSettings.swift in Sources */,
