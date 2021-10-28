@@ -16,6 +16,8 @@
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
+		1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */; };
+		1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73E272A95840009683A /* OptionalExtension.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
 		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
@@ -134,6 +136,8 @@
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBasicInfo.swift; sourceTree = "<group>"; };
+		1B96B73E272A95840009683A /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmoreDebug.entitlements; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
 				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
+				1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 				1B58A4502715E35300565429 /* ImageServices.swift */,
 				E234712F271C972F0006F336 /* LoadingScreen.swift */,
 				E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */,
+				1B96B73E272A95840009683A /* OptionalExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -726,6 +732,7 @@
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
 				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
+				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
 				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
 				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
@@ -739,6 +746,7 @@
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
+				1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,

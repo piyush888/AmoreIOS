@@ -8,7 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct DownloadedPhoto: Identifiable, Codable {
+struct DownloadedPhotoURL: Identifiable, Codable {
     public var id: String?
     var imageURL: URL?
+}
+
+struct DownloadedPhoto: Identifiable {
+    public var id: String?
+    var image: UIImage?
 }

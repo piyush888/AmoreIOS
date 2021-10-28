@@ -6,41 +6,21 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct EditCardInfo: View {
-    
+    @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var images = [UIImage?](repeating: nil, count: 6)
     
-    @ObservedObject var headLine = TextBindingManager(limit: 20)
-    @ObservedObject var aboutMe = TextBindingManager(limit: 260)
-    @ObservedObject var jobTitle = TextBindingManager(limit: 20)
-    @ObservedObject var addCompany = TextBindingManager(limit: 20)
-    @ObservedObject var addSchool = TextBindingManager(limit: 20)
-    
-    
-    // Basic Info
-    @State var genderPreference = "Man"
-    // Age perference - Scales are according to screen
-    // 66.66(Scale on screen) / 368.0 (Max size of screen self.MaxPossibleAg) = 18
-    // 215.66(Scale on screen) / 368.0 (Max size of screen self.MaxPossibleAg) = 61
-    @State var scaleMinAge : CGFloat = 66.66
-    @State var scaleMaxAge : CGFloat = 215.66
-    @State var realMinAge : String = String(format : "%.0f",(66.66 / (UIScreen.main.bounds.width - 60) * 100))
-    @State var realMaxAge : String = String(format : "%.0f",(215.66 / (UIScreen.main.bounds.width - 60) * 100))
-    
-    // Religious prefernce
-    @State var religionPreference = ["Any"]
-    @State var communityPreference = ["Any"]
-    @State var careerPreference = ["Any"]
-    @State var educationPreference = "Masters"
-    @State var countryPreference = "India"
-    
-    //Discovery - Variable if user wants to hide the card from public view
-    @State private var discoveryStatus = false
-    
-    //Notification - turn on notificatoins on user device
-    @State private var notificationsStatus = false
-    
+    func populateImages() {
+        if photoModel.downloadedPhotos.count<2 {
+            photoModel.populatePhotos()
+        }
+        for (index, photo) in photoModel.downloadedPhotos.enumerated() {
+            self.images[index] = photo.image
+        }
+    }
     
     let adaptivecolumns = Array(repeating:
                                     GridItem(.adaptive(minimum: 150),spacing: 5,
@@ -59,55 +39,51 @@ struct EditCardInfo: View {
                     UploadPhotoWindow(image: self.$images[3])
                     UploadPhotoWindow(image: self.$images[4])
                     UploadPhotoWindow(image: self.$images[5])
-                })
+                }).onAppear {
+                    populateImages()
+                }
                 
                 
-                // Edit Headline
-                EditCardForm(formHeight: 40.0,
-                             formHeadLine: "Headline",
-                             formInput: headLine)
                 
-                // Edit About Me
-                EditCardForm(formHeight: 100.0,
-                             formHeadLine: "About Me",
-                             formInput: aboutMe)
-                
-                // Job title
-                EditCardForm(formHeight: 40.0,
-                             formHeadLine: "Job Title",
-                             formInput: jobTitle)
-                
-                
-                // Add Company
-                EditCardForm(formHeight: 40.0,
-                             formHeadLine: "Add Company",
-                             formInput: addCompany)
-                
-                // Add School
-                EditCardForm(formHeight: 40.0,
-                             formHeadLine: "Add School",
-                             formInput: addSchool)
+                Group {
+                    // Edit Headline
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "Headline",
+                                 formInput: $profileModel.userProfile.headline)
+                    
+                    // Edit About Me
+                    EditCardForm(formHeight: 100.0,
+                                 formHeadLine: "About Me",
+                                 formInput: $profileModel.userProfile.description)
+                    
+                    // Job title
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "Job Title",
+                                 formInput: $profileModel.userProfile.jobTitle)
+                    
+                    
+                    // Add Company
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "Add Company",
+                                 formInput: $profileModel.userProfile.work)
+                    
+                    // Add School
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "Add School",
+                                 formInput: $profileModel.userProfile.school)
+                }
                 
                 Group {
                     // Basic Info
                     Text("Basic Info")
                         .font(.headline)
-                    GenderSettings(genderPreference: $genderPreference)
-                    AgeSettings(scaleMinAge:$scaleMinAge,
-                                scaleMaxAge: $scaleMaxAge,
-                                realMinAge: $realMinAge,
-                                realMaxAge: $realMaxAge)
-                    ReligionFilter(religionPreference: $religionPreference)
-                    CommunityFilter(communityPreference: $communityPreference)
-                    CareerFilter(careerPreference: $careerPreference)
-                    EducationFilter(educationPreference: $educationPreference)
-                    RaisedInFilter(countryPreference: $countryPreference)
+                    UserProfileBasicInfo(genderPreference: $profileModel.userProfile.genderIdentity, religionPreference: $profileModel.userProfile.religion, communityPreference: $profileModel.userProfile.community, careerPreference: $profileModel.userProfile.workType, educationPreference: $profileModel.userProfile.education, countryPreference: $profileModel.userProfile.country)
                 }
                 
                 Group {
                     // Discovery
                     VStack(alignment: .leading) {
-                        Toggle(isOn: $discoveryStatus) {
+                        Toggle(isOn: $profileModel.userProfile.discoveryStatus.boundBool) {
                             Text("Discovery")
                                 .font(.subheadline)
                             Image(systemName: "magnifyingglass")
@@ -119,7 +95,7 @@ struct EditCardInfo: View {
                     
                     // Notifications
                     VStack(alignment: .leading) {
-                        Toggle(isOn: $notificationsStatus) {
+                        Toggle(isOn: $profileModel.userProfile.notificationsStatus.boundBool) {
                             Text("Notifications")
                                 .font(.subheadline)
                             Image(systemName: "bell.fill")
@@ -147,5 +123,7 @@ struct EditCardInfo: View {
 struct EditCardInfo_Previews: PreviewProvider {
     static var previews: some View {
         EditCardInfo()
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
     }
 }

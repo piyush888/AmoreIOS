@@ -21,7 +21,20 @@ struct Profile: Identifiable, Codable {
     var showMePreference: String?
     var work: String?
     var school: String?
-    var age: Int = 25
+    var age: Int? = 25
+    var headline: String?
+    var profileDistanceFromUser: Int? = 0
+    var jobTitle: String?
+    var workType: String?
+    var height: String?
+    var education: String?
+    var religion: String?
+    var community: String?
+    var location: String?
+    var description: String?
+    var country: String?
+    var discoveryStatus: Bool? = false
+    var notificationsStatus: Bool? = false
 }
 
 

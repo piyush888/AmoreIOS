@@ -11,6 +11,16 @@ struct UserProfile: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
+    @State var profileEditingToBeDone: Bool = false
+    
+    func getUserAge() {
+        let now = Date()
+        let birthday: Date = profileModel.userProfile.dateOfBirth ?? Date()
+        let calendar = Calendar.current
+        
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+        profileModel.userProfile.age = ageComponents.year!
+    }
     
     var body: some View {
         
@@ -26,8 +36,8 @@ struct UserProfile: View {
                         .clipShape(Circle())
                         .shadow(radius: 10)
                         .overlay(Circle().stroke(Color.red, lineWidth: 5))
-                        
-                    Text("\(profileModel.userProfile.firstName!),\(profileModel.userProfile.age)")
+                    
+                    Text("\(profileModel.userProfile.firstName ?? "temp"),\(profileModel.userProfile.age ?? 25)")
                         .font(.title)
                     
                     Spacer()
@@ -46,17 +56,21 @@ struct UserProfile: View {
                                 .foregroundColor(Color.purple)
                                 .padding(.bottom,20)
                         })
-                        
                     
-                    NavigationLink(
-                        destination: EditProfile().environmentObject(photoModel),
-                        label: {
+                    NavigationLink(isActive: $profileEditingToBeDone) {
+                        return EditProfile(profileEditingToBeDone: $profileEditingToBeDone)
+                            .environmentObject(photoModel)
+                            .environmentObject(profileModel)
+                    } label: {
+                        Button {
+                            profileEditingToBeDone = true
+                        } label: {
                             Image(systemName: "pencil.circle.fill")
                                 .resizable()
                                 .frame(width:45, height:45)
                                 .foregroundColor(Color.orange)
-                        })
-                        
+                        }
+                    }
                     
                     NavigationLink(
                         destination: UserSafetyView(),
@@ -67,7 +81,7 @@ struct UserProfile: View {
                                 .foregroundColor(Color.purple)
                                 .padding(.bottom,20)
                         })
-                
+                    
                 }
                 .padding(.bottom,30)
                 
@@ -77,7 +91,11 @@ struct UserProfile: View {
             }
             .padding(.horizontal,20)
             .navigationBarHidden(true)
+            .onAppear {
+                getUserAge()
+            }
         }
+        
     }
 }
 

@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct EditProfile: View {
     
     @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var profileModel: ProfileViewModel
+    @Binding var profileEditingToBeDone: Bool
     
     @State var user = User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise")
     
@@ -23,15 +26,11 @@ struct EditProfile: View {
             
             HStack {
                 Spacer()
-                
-//                Text("\(headingName)")
-//                    .font(.title2)
-//                    .multilineTextAlignment(.center)
-//
-//                Spacer()
-//
+
                 Button {
                     // Take Back to Profile View
+                    profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                    profileEditingToBeDone = false
                 } label: {
                     Text("Done")
                         .font(.title2)
@@ -65,7 +64,9 @@ struct EditProfile: View {
             switch currentPage {
                 
                 case .editProfile:
-                    EditCardInfo()
+                EditCardInfo()
+                    .environmentObject(photoModel)
+                    .environmentObject(profileModel)
                 
                 case .previewProfile:
                     PreviewProfile(user:user)
@@ -87,7 +88,7 @@ struct EditProfile: View {
 
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfile()
+        EditProfile(profileEditingToBeDone: Binding.constant(true))
             .environmentObject(PhotoModel())
     }
 }

@@ -16,7 +16,7 @@ class ProfileViewModel: ObservableObject {
     
     @AppStorage("log_Status") var logStatus = false
     
-    var userProfile = Profile()
+    @Published var userProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
     
@@ -184,6 +184,18 @@ class ProfileViewModel: ObservableObject {
             }
         }
         
+    }
+    
+    func updateUserProfile(profileId: String?) {
+        if let profileId = profileId {
+            do {
+                try db.collection("Profiles").document(profileId).setData(from: userProfile)
+            }
+            catch {
+                print("Error while updating Profile in Firestore: ")
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }

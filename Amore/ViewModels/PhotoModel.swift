@@ -8,14 +8,25 @@
 import Foundation
 import Firebase
 import UIKit
+import SDWebImageSwiftUI
 
 class PhotoModel: ObservableObject {
     
-    @Published var downloadedPhotosURLs = [DownloadedPhoto]()
+    @Published var downloadedPhotosURLs = [DownloadedPhotoURL]()
+    @Published var downloadedPhotos = [DownloadedPhoto]()
     @Published var minUserPhotosAdded = false
     
     @Published var photosFetchedAndReady: Bool = false
     let storage = Storage.storage()
+    
+    func populatePhotos() {
+        for (index, url) in self.downloadedPhotosURLs.enumerated() {
+            SDWebImageDownloader.shared.downloadImage(with: url.imageURL, completed: {image,_,_,_ in
+                self.downloadedPhotos.append(DownloadedPhoto(id: String(index), image: image))
+                print("Downloaded photos \(index+1)/\(self.downloadedPhotosURLs.count)")
+            })
+        }
+    }
     
     func checkMinUserPhotosAdded() {
         if photosFetchedAndReady {
@@ -48,9 +59,10 @@ class PhotoModel: ObservableObject {
                         print(error)
                     } else {
                         print("Download URL for \(String(describing: item.fullPath.split(separator: "/").last)): \(String(describing: url!))")
-                        self.downloadedPhotosURLs.append(DownloadedPhoto(id: String(item.fullPath.split(separator: "/").last!), imageURL: url!))
+                        self.downloadedPhotosURLs.append(DownloadedPhotoURL(id: String(item.fullPath.split(separator: "/").last!), imageURL: url!))
                         if result.items.count == self.downloadedPhotosURLs.count {
                             self.photosFetchedAndReady = true
+                            self.populatePhotos()
                             self.checkMinUserPhotosAdded()
                         }
                     }
@@ -88,7 +100,7 @@ class PhotoModel: ObservableObject {
                                 return
                             }
                             print("Download URL for \(filename) is \(downloadURL)")
-                            self.downloadedPhotosURLs.append(DownloadedPhoto(id: filename, imageURL: downloadURL))
+                            self.downloadedPhotosURLs.append(DownloadedPhotoURL(id: filename, imageURL: downloadURL))
                             if self.downloadedPhotosURLs.count>=2 {
                                 self.photosFetchedAndReady = true
                                 self.checkMinUserPhotosAdded()

@@ -27,7 +27,7 @@ struct EditCardForm: View {
     
     @State var formHeight: CGFloat
     @State var formHeadLine: String
-    @ObservedObject var formInput: TextBindingManager
+    @Binding var formInput: String?
     
     var body: some View {
     
@@ -42,14 +42,14 @@ struct EditCardForm: View {
             
             // If the size of form field is more than 50, then we need to make use of TextField instead of TextEditor
             if formHeight > 50.0 {
-                TextEditor(text: $formInput.text)
+                TextEditor(text: $formInput.bound)
                     .frame(height: formHeight)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 4)
                     .cornerRadius(16)
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
             } else {
-                TextField("", text: $formInput.text)
+                TextField("", text: $formInput.bound)
                     .frame(height: formHeight)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 4)
@@ -57,12 +57,12 @@ struct EditCardForm: View {
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
             }
                 
-            HStack {
-                Spacer()
-                Text("\(formInput.text.count) / \(formInput.characterLimit)")
-                    .font(.caption2)
-                    .multilineTextAlignment(.trailing)
-            }
+//            HStack {
+//                Spacer()
+//                Text("\(formInput.text.count) / \(formInput.characterLimit)")
+//                    .font(.caption2)
+//                    .multilineTextAlignment(.trailing)
+//            }
         }
         .padding(.top,10)
         
