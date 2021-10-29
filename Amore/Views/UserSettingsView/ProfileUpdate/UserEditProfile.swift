@@ -13,10 +13,6 @@ struct EditProfile: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var profileEditingToBeDone: Bool
-    
-    @State var user = User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise")
-    
-    
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var headingName = "Edit Info"
     
@@ -27,7 +23,7 @@ struct EditProfile: View {
             HStack {
                 
                 Spacer()
-
+                
                 Button {
                     // Take Back to Profile View
                     profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
@@ -49,7 +45,7 @@ struct EditProfile: View {
                         currentPage = .editProfile
                         headingName = "Edit Info"
                     }
-                    
+                
                 Spacer()
                 
                 Text("Preview Profile")
@@ -64,13 +60,15 @@ struct EditProfile: View {
             
             switch currentPage {
                 
-                case .editProfile:
+            case .editProfile:
                 EditCardInfo()
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
                 
-                case .previewProfile:
-                    PreviewProfile(user:user)
+            case .previewProfile:
+                PreviewProfile()
+                    .environmentObject(photoModel)
+                    .environmentObject(profileModel)
                 
                 
             }
@@ -81,8 +79,8 @@ struct EditProfile: View {
         .padding(.top)
         .navigationBarHidden(true)
         
-//        UserProfilePhotosView()
-//            .environmentObject(photoModel)
+        //        UserProfilePhotosView()
+        //            .environmentObject(photoModel)
         
     }
 }

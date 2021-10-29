@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PreviewProfile: View {
     
-    public var user: User
+    @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
         
@@ -20,7 +21,7 @@ struct PreviewProfile: View {
                 LazyVStack {
                     
                     VStack {
-                        Image(self.user.imageName1)
+                        Image(uiImage: photoModel.downloadedPhotos[0].image ?? UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
@@ -32,10 +33,10 @@ struct PreviewProfile: View {
                         // Profile Bio
                         HStack {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("\(self.user.firstName) \(self.user.lastName), \(self.user.age)")
+                                Text("\(profileModel.userProfile.firstName.bound) \(profileModel.userProfile.lastName.bound), \(profileModel.userProfile.age ?? 25)")
                                     .font(.title2)
                                     .bold()
-                                Text(self.user.description)
+                                Text(profileModel.userProfile.description.bound)
                                     .font(.subheadline)
                                 
                                 // User Location and distance
@@ -46,7 +47,7 @@ struct PreviewProfile: View {
                                             .frame(width:20, height:20)
                                             .foregroundColor(.black)
                                         
-                                        Text("\(self.user.profileDistanceFromUser) km away")
+                                        Text("\(profileModel.userProfile.profileDistanceFromUser ?? 2) km away")
                                             .foregroundColor(.black)
                                             .font(.subheadline)
                                     }
@@ -57,24 +58,23 @@ struct PreviewProfile: View {
                         
                         
                         // Profile Height, Education, Job, Religion, Location
-                        CardBasicInfo(height: self.user.height,
-                                      work: self.user.occupation,
-                                      education: self.user.education,
-                                      religion: self.user.religion,
-                                      politics: self.user.politics,
-                                      location: self.user.location)
+                        CardBasicInfo(height: profileModel.userProfile.height.bound,
+                                      work: profileModel.userProfile.work.bound,
+                                      education: profileModel.userProfile.education.bound,
+                                      religion: profileModel.userProfile.religion.bound,
+                                      politics: profileModel.userProfile.politics.bound,
+                                      location: profileModel.userProfile.location.bound)
                             .padding(.top,10)
                         
                         
                         // Profile Passions
-                        CardPassions(passions: self.user.passions)
+                        CardPassions(passions: profileModel.userProfile.interests ?? ["tempPassion"])
                             .padding(.top,10)
                         
                         
                         // Gallery
-                        CardGalleryImages(deviceWidth:(geometry.size.width - 25),
-                                          user:self.user)
-                            .padding(.top,10)
+                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.downloadedPhotos[1].image, image2: photoModel.downloadedPhotos[2].image, image3: photoModel.downloadedPhotos[3].image, image4: photoModel.downloadedPhotos[4].image, image5: photoModel.downloadedPhotos[5].image)
+                                .padding(.top,10)
                     }
                     .padding(.horizontal,10)
                 }
@@ -88,6 +88,8 @@ struct PreviewProfile: View {
 
 struct PreviewProfile_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewProfile(user: User(id: 0, firstName: "Cindy", lastName: "Jones", age: 23, profileDistanceFromUser: 4, imageName1: "girl1_image1",imageName2: "girl1_image2",imageName3: "girl1_image3",imageName4: "girl1_image4",imageName5: "girl1_image5",imageName6: "girl1_image6", occupation: "Coach", passions: ["Photography", "Shopping"], height: "5 55", education:"Bachelor",religion:"Hindu",politics:"Liberal", location:"Texas, US", description:"You are strong because you are imperfect, you have doubts because you are wise"))
+        PreviewProfile()
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
     }
 }

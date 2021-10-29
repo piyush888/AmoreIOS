@@ -14,15 +14,6 @@ struct UserProfile: View {
     @State var profileEditingToBeDone: Bool = false
     @State var settingsDone: Bool = false
     
-    func getUserAge() {
-        let now = Date()
-        let birthday: Date = profileModel.userProfile.dateOfBirth ?? Date()
-        let calendar = Calendar.current
-        
-        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
-        profileModel.userProfile.age = ageComponents.year!
-    }
-    
     var body: some View {
         
         NavigationView {
@@ -30,7 +21,7 @@ struct UserProfile: View {
             VStack(alignment:.center) {
                 
                 VStack {
-                    Image("onboarding_girl5")
+                    Image(uiImage: photoModel.downloadedPhotos.count == Array(Set(photoModel.downloadedPhotosURLs)).count ? photoModel.downloadedPhotos.sorted { $0.id! < $1.id! }[0].image! : UIImage())
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 200, alignment: .center)
@@ -96,9 +87,6 @@ struct UserProfile: View {
             }
             .padding(.horizontal,20)
             .navigationBarHidden(true)
-            .onAppear {
-                getUserAge()
-            }
         }
         
     }

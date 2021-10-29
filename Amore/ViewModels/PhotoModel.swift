@@ -20,6 +20,7 @@ class PhotoModel: ObservableObject {
     let storage = Storage.storage()
     
     func populatePhotos() {
+        self.downloadedPhotosURLs.sort { $0.id! < $1.id! }
         for (index, url) in self.downloadedPhotosURLs.enumerated() {
             SDWebImageDownloader.shared.downloadImage(with: url.imageURL, completed: {image,_,_,_ in
                 self.downloadedPhotos.append(DownloadedPhoto(id: String(index), image: image))
@@ -61,8 +62,8 @@ class PhotoModel: ObservableObject {
                         print("Download URL for \(String(describing: item.fullPath.split(separator: "/").last)): \(String(describing: url!))")
                         self.downloadedPhotosURLs.append(DownloadedPhotoURL(id: String(item.fullPath.split(separator: "/").last!), imageURL: url!))
                         if result.items.count == self.downloadedPhotosURLs.count {
-                            self.photosFetchedAndReady = true
                             self.populatePhotos()
+                            self.photosFetchedAndReady = true
                             self.checkMinUserPhotosAdded()
                         }
                     }
@@ -104,6 +105,9 @@ class PhotoModel: ObservableObject {
                             if self.downloadedPhotosURLs.count>=2 {
                                 self.photosFetchedAndReady = true
                                 self.checkMinUserPhotosAdded()
+                            }
+                            if self.downloadedPhotosURLs.count >= photos.count {
+                                self.populatePhotos()
                             }
                         }
                     }

@@ -17,6 +17,7 @@ struct EditCardInfo: View {
         if photoModel.downloadedPhotos.count<2 {
             photoModel.populatePhotos()
         }
+        photoModel.downloadedPhotos.sort { $0.id! < $1.id! }
         for (index, photo) in photoModel.downloadedPhotos.enumerated() {
             self.images[index] = photo.image
         }

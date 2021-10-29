@@ -74,7 +74,7 @@ struct SingleCardView: View {
                 LazyVStack {
                     
                     // User Start Image
-                     ZStack(alignment: self.swipeStatus == .like ? .topLeading : .topTrailing) {
+                     ZStack(alignment: self.swipeStatus == .like || self.dragSwipeStatus == .like ? .topLeading : .topTrailing) {
                         
                          Image(self.user.imageName1)
                             .resizable()
@@ -82,7 +82,7 @@ struct SingleCardView: View {
                             //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
                             .clipped()
                         
-                        if self.swipeStatus == .like {
+                        if self.swipeStatus == .like || self.dragSwipeStatus == .like {
                             Text("LIKE")
                                 .font(.title)
                                 .padding()
@@ -93,7 +93,7 @@ struct SingleCardView: View {
                                         .stroke(Color.green, lineWidth: 3.0)
                             ).padding(24)
                                 .rotationEffect(Angle.degrees(-45))
-                        } else if self.swipeStatus == .dislike {
+                        } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {
                             Text("DISLIKE")
                                 .font(.title)
                                 .padding()

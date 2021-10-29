@@ -36,6 +36,15 @@ class ProfileViewModel: ObservableObject {
     
     let viewContext = PersistenceController.shared.container.viewContext
     
+    func calculateUserAge() {
+        let now = Date()
+        let birthday: Date = self.userProfile.dateOfBirth ?? Date()
+        let calendar = Calendar.current
+        
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+        self.userProfile.age = ageComponents.year!
+    }
+    
     func fetchProfileCoreData () {
         let request = ProfileCore.profileFetchRequest()
         request.sortDescriptors = []
@@ -52,6 +61,7 @@ class ProfileViewModel: ObservableObject {
     }
     
     func updateProfileCore (profileCore: ProfileCore) {
+        calculateUserAge()
         if self.userProfile.id == nil {
             self.userProfile.id = Auth.auth().currentUser?.uid
         }

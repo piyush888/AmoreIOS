@@ -30,6 +30,7 @@ struct Profile: Identifiable, Codable {
     var education: String?
     var religion: String?
     var community: String?
+    var politics: String?
     var location: String?
     var description: String?
     var country: String?
