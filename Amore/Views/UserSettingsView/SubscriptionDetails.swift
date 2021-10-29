@@ -25,7 +25,7 @@ struct SubscriptionDetails: View {
                     Spacer()
                     
                     VStack {
-                        Image(systemName: "star.circle")
+                        Image(systemName: "star.circle.fill")
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(Color("gold-star"))
@@ -70,16 +70,19 @@ struct SubscriptionDetails: View {
                         .frame(height:45)
                         .foregroundColor(.clear)
                         .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.green, lineWidth: 1))
+                                .stroke(Color.pink, lineWidth: 1))
                         .padding(.horizontal,70)
                         
                     Text("My Amore")
-                        .foregroundColor(.green)
+                        .foregroundColor(.pink)
                         .bold()
                         .font(.BoardingButton)
                 }
                 Spacer()
                 
+                AmorePlatinum(width:300)
+                AmoreGold(width:300)
+                    .padding(.bottom,20)
             }
         }
     }

@@ -15,38 +15,41 @@ struct HomeView: View {
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     
+    
     var body: some View {
         
-        NavigationView{
+        
         
             VStack {
             
+                
+                switch currentPage {
+                    
+                    case .messagingView:
+                        ChannelView()
+                            .environmentObject(streamModel)
+                        
+                    case .likesTopPicksView:
+                        LikesTopPicksHome()
+                        
+                    case .swipeView:
+                        AllCardsView()
+                        
+                    case .filterSettingsView:
+                        FilterSettings()
+                        
+                    case .userSettingsView:
+                        UserProfile()
+                            .environmentObject(profileModel)
+                            .environmentObject(photoModel)
+                }
+                
                 // Control Center
                 ControlCenter(currentPage:$currentPage)
-                    .padding()
+                    .padding(.horizontal,30)
+                    .padding(.top,10)
+                    
                 
-                    switch currentPage {
-                        
-                        case .messagingView:
-                            ChannelView()
-                                .environmentObject(streamModel)
-                            
-                        case .likesTopPicksView:
-                            LikesTopPicksHome()
-                            
-                        case .swipeView:
-                            AllCardsView()
-                            
-                        case .filterSettingsView:
-                            FilterSettings()
-                            
-                        case .userSettingsView:
-                            UserProfile()
-                                .environmentObject(profileModel)
-                                .environmentObject(photoModel)
-                    }
-            
-            }.navigationBarHidden(true)
         }
     }
 }

@@ -12,65 +12,67 @@ struct ChannelView: View {
     @EnvironmentObject var streamModel: StreamViewModel
     
     var body: some View {
-        VStack {
-        // Message View...
-        ScrollView(.vertical, showsIndicators: false, content: {
-            
-            VStack(spacing: 20){
+        NavigationView {
+        
+            VStack {
+            // Message View...
+            ScrollView(.vertical, showsIndicators: false, content: {
                 
-                if let channels = streamModel.channels{
+                VStack(spacing: 20){
                     
-                    ForEach(channels,id: \.channel){listner in
+                    if let channels = streamModel.channels{
                         
-                        NavigationLink(
-                            destination: ChatView(listner: listner),
-                            label: {
-                                ChannelRowView(listner: listner)
-                            })
+                        ForEach(channels,id: \.channel){listner in
+                            
+                            NavigationLink(
+                                destination: ChatView(listner: listner),
+                                label: {
+                                    ChannelRowView(listner: listner)
+                                })
+                        }
+                    }
+                    else{
+                        // Progress View....
+                        ProgressView()
+                            .padding(.top,20)
                     }
                 }
-                else{
-                    // Progress View....
-                    ProgressView()
-                        .padding(.top,20)
+                .padding()
+            })
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        streamModel.channels = nil
+                        streamModel.fetchAllChannels()
+                    }, label: {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                    })
                 }
-            }
-            .padding()
-        })
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    streamModel.channels = nil
-                    streamModel.fetchAllChannels()
-                }, label: {
-                    Image(systemName: "arrow.clockwise.circle.fill")
-                })
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
                 
-                Button(action: {
-                    withAnimation{streamModel.createNewChannel.toggle()}
-                }, label: {
-                    Image(systemName: "square.and.pencil")
-                })
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    Button(action: {
+                        withAnimation{streamModel.createNewChannel.toggle()}
+                    }, label: {
+                        Image(systemName: "square.and.pencil")
+                    })
+                }
+            })
+            .onAppear(perform: {streamModel.fetchAllChannels()})
+            .overlay(
+                ZStack{
+                    
+                    
+                    // New Channel View....
+                    if streamModel.createNewChannel{CreateNewChannel()}
+                    
+                    // Lodaing Screen...
+                    if streamModel.isLoading{LoadingScreen()}
+                }
+            )
             }
-        })
-        .onAppear(perform: {streamModel.fetchAllChannels()})
-        .overlay(
-            ZStack{
-                
-                
-                // New Channel View....
-                if streamModel.createNewChannel{CreateNewChannel()}
-                
-                // Lodaing Screen...
-                if streamModel.isLoading{LoadingScreen()}
-            }
-        )
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
-        
     }
 }
 

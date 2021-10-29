@@ -35,7 +35,7 @@ struct EditProfile: View {
                 } label: {
                     Text("Done")
                         .font(.title2)
-                        .foregroundColor(.pink)
+                        .foregroundColor(Color.purple)
                 }
                 
             }
@@ -44,7 +44,7 @@ struct EditProfile: View {
                 Spacer()
                 Text("Edit Info")
                     .font(.title2)
-                    .foregroundColor(headingName == "Edit Info" ? .red : .gray)
+                    .foregroundColor(headingName == "Edit Info" ? .black : .gray)
                     .onTapGesture {
                         currentPage = .editProfile
                         headingName = "Edit Info"
@@ -54,7 +54,7 @@ struct EditProfile: View {
                 
                 Text("Preview Profile")
                     .font(.title2)
-                    .foregroundColor(headingName == "Preview Profile" ? .red : .gray)
+                    .foregroundColor(headingName == "Preview Profile" ? .black : .gray)
                     .onTapGesture {
                         currentPage = .previewProfile
                         headingName = "Preview Profile"

@@ -35,11 +35,17 @@ struct UserProfile: View {
                         .scaledToFill()
                         .frame(width: 200, height: 200, alignment: .center)
                         .clipShape(Circle())
-                        .shadow(radius: 10)
-                        .overlay(Circle().stroke(Color.red, lineWidth: 5))
+                        .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
+                        
                     
-                    Text("\(profileModel.userProfile.firstName ?? "temp"),\(profileModel.userProfile.age ?? 25)")
-                        .font(.title)
+                    Text("\(profileModel.userProfile.firstName ?? "Kshitiz"), \(profileModel.userProfile.age ?? 25)")
+                        .font(.title2)
+                    
+                    Text("\(profileModel.userProfile.jobTitle ?? "Software Developer") at \(profileModel.userProfile.work ?? "Amore")")
+                        .font(.caption)
+                    
+                    Text("Attended \(profileModel.userProfile.school ?? "Brightlands School")")
+                        .font(.caption)
                     
                     Spacer()
                 }.padding(.top,50)
@@ -54,11 +60,16 @@ struct UserProfile: View {
                         Button {
                             settingsDone = true
                         } label: {
-                            Image(systemName: "gearshape.fill")
-                                .resizable()
-                                .frame(width:40, height:40)
-                                .foregroundColor(Color.purple)
+                            
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.gray, Color.purple]),
+                                startPoint: .leading,
+                                endPoint: .trailing)
+                                .frame(width:60, height:60)
+                                .mask(Image(systemName: "gearshape.fill")
+                                        .font(.system(size:40)))
                                 .padding(.bottom,20)
+                            
                         }
                     }
                     
@@ -67,23 +78,28 @@ struct UserProfile: View {
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
                     } label: {
-                        Button {
-                            profileEditingToBeDone = true
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .resizable()
-                                .frame(width:45, height:45)
-                                .foregroundColor(Color.orange)
-                        }
+                        
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray, Color.purple]),
+                            startPoint: .leading,
+                            endPoint: .trailing)
+                            .frame(width:60, height:60)
+                            .mask(Image(systemName: "pencil.circle.fill")
+                                    .font(.system(size:40)))
+                       
                     }
                     
                     NavigationLink(
                         destination: UserSafetyView(),
                         label: {
-                            Image(systemName: "shield.fill")
-                                .resizable()
-                                .frame(width:40, height:40)
-                                .foregroundColor(Color.purple)
+                            
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.gray, Color.purple]),
+                                startPoint: .leading,
+                                endPoint: .trailing)
+                                .frame(width:60, height:60)
+                                .mask(Image(systemName: "shield.fill")
+                                        .font(.system(size:40)))
                                 .padding(.bottom,20)
                         })
                     

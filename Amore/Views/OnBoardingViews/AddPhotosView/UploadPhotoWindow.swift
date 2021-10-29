@@ -77,7 +77,7 @@ struct UploadPhotoWindow: View {
                 Image(systemName:"plus.circle.fill")
                     .resizable()
                     .frame(width:20, height:20)
-                    .foregroundColor(.pink)
+                    .foregroundColor(.green)
                     .onTapGesture {
                         showSheet = true
                         activeSheet = .imageChoose
@@ -88,7 +88,7 @@ struct UploadPhotoWindow: View {
                     Image(systemName:"pencil.circle.fill")
                         .resizable()
                         .frame(width:20, height:20)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.blue)
                         .onTapGesture {
                             showSheet = true
                             activeSheet = .cropImage
@@ -97,7 +97,7 @@ struct UploadPhotoWindow: View {
                     Image(systemName:"trash.circle.fill")
                         .resizable()
                         .frame(width:20, height:20)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.red)
                         .onTapGesture {
                             image = nil
                         }
