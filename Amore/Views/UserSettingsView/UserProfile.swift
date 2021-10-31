@@ -11,100 +11,109 @@ struct UserProfile: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
+    
     @State var profileEditingToBeDone: Bool = false
     @State var settingsDone: Bool = false
+    
+    @State var showModal = false
+    
+    @State var popUpCardSelection: PopUpCards = .superLikeCards
+    
     
     var body: some View {
         
         NavigationView {
             
-            VStack(alignment:.center) {
-                
-                VStack {
-                    Image(uiImage: photoModel.downloadedPhotos.count == Array(Set(photoModel.downloadedPhotosURLs)).count ? photoModel.downloadedPhotos.sorted { $0.id! < $1.id! }[0].image! : UIImage())
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200, alignment: .center)
-                        .clipShape(Circle())
-                        .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
-                        
+            ZStack {
+                VStack(alignment:.center) {
                     
-                    Text("\(profileModel.userProfile.firstName ?? "Kshitiz"), \(profileModel.userProfile.age ?? 25)")
-                        .font(.title2)
+                    // User Data
+                    /// Image
+                    /// Where user works
+                    /// School Attended
+                    UserSnapDetails()
+                        .environmentObject(photoModel)
+                        .environmentObject(profileModel)
                     
-                    Text("\(profileModel.userProfile.jobTitle ?? "Software Developer") at \(profileModel.userProfile.work ?? "Amore")")
-                        .font(.caption)
                     
-                    Text("Attended \(profileModel.userProfile.school ?? "Brightlands School")")
-                        .font(.caption)
+                    // User Setttings View
+                    /// Settings
+                    /// Edit Profile
+                    /// Safety
+                    SettingEditProfileSafety(settingsDone:$settingsDone,
+                                             profileEditingToBeDone:$profileEditingToBeDone)
+                        .environmentObject(photoModel)
+                        .environmentObject(profileModel)
+                        .padding(.bottom,20)
+                    
+                    // Subscription details
+                    /// SuperLike
+                    /// Number Of Boosst Left
+                    /// Upgrade
+                    SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                        showModal:$showModal,
+                                        bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
                     
                     Spacer()
-                }.padding(.top,50)
-                
-                
-                // Settings, Edit Profile and Safety
-                HStack(spacing:50) {
                     
-                    NavigationLink(isActive: $settingsDone) {
-                        return UserSettingView(settingsDone: $settingsDone)
-                    } label: {
-                        Button {
-                            settingsDone = true
-                        } label: {
-                            
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.gray, Color.purple]),
-                                startPoint: .leading,
-                                endPoint: .trailing)
-                                .frame(width:60, height:60)
-                                .mask(Image(systemName: "gearshape.fill")
-                                        .font(.system(size:40)))
-                                .padding(.bottom,20)
-                            
-                        }
-                    }
-                    
-                    NavigationLink(isActive: $profileEditingToBeDone) {
-                        return EditProfile(profileEditingToBeDone: $profileEditingToBeDone)
-                            .environmentObject(photoModel)
-                            .environmentObject(profileModel)
-                    } label: {
+                    // Subscription Options
+                    /// User subscription amore
+                    /// Amore Platinum Information
+                    ///  Amore Gold Information
+                    ZStack {
+                        Spacer()
                         
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.gray, Color.purple]),
-                            startPoint: .leading,
-                            endPoint: .trailing)
-                            .frame(width:60, height:60)
-                            .mask(Image(systemName: "pencil.circle.fill")
-                                    .font(.system(size:40)))
-                       
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
+                        VStack {
+                            MyAmore(width: 300,
+                                    popUpCardSelection:$popUpCardSelection,
+                                    showModal: $showModal)
+                            AmorePlatinum(width:300,
+                                          popUpCardSelection:$popUpCardSelection,
+                                          showModal:$showModal)
+                            AmoreGold(width:300,
+                                      popUpCardSelection:$popUpCardSelection,
+                                      showModal:$showModal)
+                                .padding(.bottom,10)
+                        }
+                        
+                        Spacer()
                     }
-                    
-                    NavigationLink(
-                        destination: UserSafetyView(),
-                        label: {
-                            
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.gray, Color.purple]),
-                                startPoint: .leading,
-                                endPoint: .trailing)
-                                .frame(width:60, height:60)
-                                .mask(Image(systemName: "shield.fill")
-                                        .font(.system(size:40)))
-                                .padding(.bottom,20)
-                        })
                     
                 }
-                .padding(.bottom,30)
+                .padding(.horizontal,20)
+                .navigationBarHidden(true)
                 
-                // Subscription details
-                SubscriptionDetails()
                 
+                if showModal {
+                    
+                    switch popUpCardSelection {
+                        
+                    case .superLikeCards :
+                        SuperLikeCard(showModal: $showModal)
+                        
+                    case .boostCards :
+                        BoostCard(showModal: $showModal)
+                    
+                    case .messagesCards:
+                        MessageCard(showModal: $showModal)
+                        
+                    case .myAmorecards:
+                        MyAmoreCard(showModal: $showModal,
+                                    popUpCardSelection:$popUpCardSelection)
+                        
+                    case .amorePlatinum:
+                        PlatinumCard(showModal: $showModal)
+                    
+                    case .amoreGold:
+                        GoldCard(showModal: $showModal)
+                        
+                    }
+                    
+                }
             }
-            .padding(.horizontal,20)
-            .navigationBarHidden(true)
         }
-        
     }
 }
 
@@ -112,8 +121,11 @@ struct UserProfile: View {
 struct UserProfile_Previews: PreviewProvider {
     
     static var previews: some View {
-        UserProfile()
-            .environmentObject(ProfileViewModel())
-            .environmentObject(PhotoModel())
+        
+        SuperLikeCard(showModal: Binding.constant(false))
+        
+        //        UserProfile()
+        //            .environmentObject(ProfileViewModel())
+        //            .environmentObject(PhotoModel())
     }
 }

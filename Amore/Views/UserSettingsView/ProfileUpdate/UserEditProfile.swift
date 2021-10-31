@@ -79,9 +79,6 @@ struct EditProfile: View {
         .padding(.top)
         .navigationBarHidden(true)
         
-        //        UserProfilePhotosView()
-        //            .environmentObject(photoModel)
-        
     }
 }
 

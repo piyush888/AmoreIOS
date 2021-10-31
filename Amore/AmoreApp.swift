@@ -36,12 +36,6 @@ struct AmoreApp: App {
 //            LocationView()
 //                .environmentObject(LocationModel())
             
-            /* Home View For Integrating */
-//            HomeView()
-            
-            /* User Profile Photos View*/
-//            UserProfilePhotosView()
-            
         }
     }
 }

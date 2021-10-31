@@ -9,12 +9,17 @@ import SwiftUI
 
 struct SubscriptionDetails: View {
     
+    @Binding var popUpCardSelection: PopUpCards
+    @Binding var showModal: Bool
+    @State var bgColor: Color
+    
     var body: some View {
         
         ZStack {
             
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
+                .foregroundColor(bgColor)
+
             
             VStack {
                 
@@ -24,72 +29,62 @@ struct SubscriptionDetails: View {
                 
                     Spacer()
                     
-                    VStack {
+                        
+                    Button {
+                        popUpCardSelection = .superLikeCards
+                        showModal = true
+                    } label: {
+                        VStack {
+                        
                         Image(systemName: "star.circle.fill")
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(Color("gold-star"))
                         Text("6 Super Likes")
                             .font(.caption2)
+                        }
                     }
                     
                     Spacer()
                     
-                    VStack {
-                        Image(systemName: "bolt.circle.fill")
-                            .resizable()
-                            .frame(width:50, height:50)
-                            .foregroundColor(.blue)
-                            .shadow(color: .blue,
-                                    radius: 0.1, x: 1, y: 1)
-                        Text("1 Boost")
-                            .font(.caption2)
+                    Button {
+                        popUpCardSelection = .boostCards
+                        showModal = true
+                    } label: {
+                        VStack {
+                            Image(systemName: "bolt.circle.fill")
+                                .resizable()
+                                .frame(width:50, height:50)
+                                .foregroundColor(.blue)
+                                .shadow(color: .blue,
+                                        radius: 0.1, x: 1, y: 1)
+                            Text("1 Boost")
+                                .font(.caption2)
+                        }
                     }
                     
                     Spacer()
                     
-                    VStack {
-                        Image(systemName: "bonjour")
-                            .resizable()
-                            .frame(width:42, height:42)
-                            .foregroundColor(.blue)
-                            .shadow(color: .blue,
-                                    radius: 0.1, x: 1, y: 1)
-                        Text("Upgrade")
-                            .font(.caption2)
+                    Button {
+                        popUpCardSelection = .messagesCards
+                        showModal = true
+                    } label: {
+                        VStack {
+                            Image(systemName: "message.circle.fill")
+                                .resizable()
+                                .frame(width:50, height:50)
+                                .foregroundColor(.pink)
+                            Text("3 messages ")
+                                .font(.caption2)
+                        }
                     }
                     
                     Spacer()
                 }
                 
                 Spacer()
-                
-                ZStack{
-                    Rectangle()
-                        .cornerRadius(10.0)
-                        .frame(height:45)
-                        .foregroundColor(.clear)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.pink, lineWidth: 1))
-                        .padding(.horizontal,70)
-                        
-                    Text("My Amore")
-                        .foregroundColor(.pink)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-                Spacer()
-                
-                AmorePlatinum(width:300)
-                AmoreGold(width:300)
-                    .padding(.bottom,20)
             }
         }
     }
 }
 
-struct SubscriptionDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        SubscriptionDetails()
-    }
-}

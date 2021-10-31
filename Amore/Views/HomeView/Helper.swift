@@ -15,8 +15,18 @@ enum ViewTypes {
     case userSettingsView
 }
 
-
 enum EditOrPreviewProfile {
     case editProfile
     case previewProfile
+}
+
+enum PopUpCards {
+    
+    case superLikeCards
+    case boostCards
+    case messagesCards
+    case myAmorecards
+    case amorePlatinum
+    case amoreGold
+
 }
