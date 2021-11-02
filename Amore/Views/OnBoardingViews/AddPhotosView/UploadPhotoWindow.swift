@@ -16,7 +16,7 @@ enum ActiveSheet: Identifiable {
 }
 
 struct UploadPhotoWindow: View {
-    
+//    @Binding var photoStruct: PhotoForUploadUpdate
     @Binding var image : UIImage?
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose

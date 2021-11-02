@@ -23,13 +23,13 @@ struct UserSnapDetails: View {
                 .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
             
             
-            Text("\(profileModel.userProfile.firstName ?? "Kshitiz"), \(profileModel.userProfile.age ?? 25)")
+            Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
                 .font(.title2)
             
-            Text("\(profileModel.userProfile.jobTitle ?? "Software Developer") at \(profileModel.userProfile.work ?? "Amore")")
+            Text("\(profileModel.editUserProfile.jobTitle ?? "Software Developer") at \(profileModel.editUserProfile.work ?? "Amore")")
                 .font(.caption)
             
-            Text("Attended \(profileModel.userProfile.school ?? "Brightlands School")")
+            Text("Attended \(profileModel.editUserProfile.school ?? "Brightlands School")")
                 .font(.caption)
             
             Spacer()

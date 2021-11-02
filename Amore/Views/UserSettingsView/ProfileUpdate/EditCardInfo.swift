@@ -50,41 +50,41 @@ struct EditCardInfo: View {
                     // Edit Headline
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Headline",
-                                 formInput: $profileModel.userProfile.headline)
+                                 formInput: $profileModel.editUserProfile.headline)
                     
                     // Edit About Me
                     EditCardForm(formHeight: 100.0,
                                  formHeadLine: "About Me",
-                                 formInput: $profileModel.userProfile.description)
+                                 formInput: $profileModel.editUserProfile.description)
                     
                     // Job title
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Job Title",
-                                 formInput: $profileModel.userProfile.jobTitle)
+                                 formInput: $profileModel.editUserProfile.jobTitle)
                     
                     
                     // Add Company
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add Company",
-                                 formInput: $profileModel.userProfile.work)
+                                 formInput: $profileModel.editUserProfile.work)
                     
                     // Add School
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add School",
-                                 formInput: $profileModel.userProfile.school)
+                                 formInput: $profileModel.editUserProfile.school)
                 }
                 
                 Group {
                     // Basic Info
                     Text("Basic Info")
                         .font(.headline)
-                    UserProfileBasicInfo(genderPreference: $profileModel.userProfile.genderIdentity, religionPreference: $profileModel.userProfile.religion, communityPreference: $profileModel.userProfile.community, careerPreference: $profileModel.userProfile.workType, educationPreference: $profileModel.userProfile.education, countryPreference: $profileModel.userProfile.country)
+                    UserProfileBasicInfo(genderPreference: $profileModel.editUserProfile.genderIdentity, religionPreference: $profileModel.editUserProfile.religion, communityPreference: $profileModel.editUserProfile.community, careerPreference: $profileModel.editUserProfile.workType, educationPreference: $profileModel.editUserProfile.education, countryPreference: $profileModel.editUserProfile.country)
                 }
                 
                 Group {
                     // Discovery
                     VStack(alignment: .leading) {
-                        Toggle(isOn: $profileModel.userProfile.discoveryStatus.boundBool) {
+                        Toggle(isOn: $profileModel.editUserProfile.discoveryStatus.boundBool) {
                             Text("Discovery")
                                 .font(.subheadline)
                             Image(systemName: "magnifyingglass")
@@ -96,7 +96,7 @@ struct EditCardInfo: View {
                     
                     // Notifications
                     VStack(alignment: .leading) {
-                        Toggle(isOn: $profileModel.userProfile.notificationsStatus.boundBool) {
+                        Toggle(isOn: $profileModel.editUserProfile.notificationsStatus.boundBool) {
                             Text("Notifications")
                                 .font(.subheadline)
                             Image(systemName: "bell.fill")

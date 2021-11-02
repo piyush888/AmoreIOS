@@ -11,6 +11,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var selectedImage: UIImage?
+//    @Binding var selectedPhoto: PhotoForUploadUpdate
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
 
@@ -42,6 +43,8 @@ struct ImagePicker: UIViewControllerRepresentable {
 
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.selectedImage = image.fixedOrientation
+//                parent.selectedPhoto.image = image.fixedOrientation
+//                parent.selectedPhoto.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

@@ -21,7 +21,7 @@ struct PreviewProfile: View {
                 LazyVStack {
                     
                     VStack {
-                        Image(uiImage: photoModel.downloadedPhotos[0].image ?? UIImage())
+                        Image(uiImage: photoModel.downloadedPhotos.count>0 ? photoModel.downloadedPhotos[0].image! : UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
@@ -33,10 +33,10 @@ struct PreviewProfile: View {
                         // Profile Bio
                         HStack {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("\(profileModel.userProfile.firstName.bound) \(profileModel.userProfile.lastName.bound), \(profileModel.userProfile.age ?? 25)")
+                                Text("\(profileModel.editUserProfile.firstName.bound) \(profileModel.editUserProfile.lastName.bound), \(profileModel.editUserProfile.age ?? 25)")
                                     .font(.title2)
                                     .bold()
-                                Text(profileModel.userProfile.description.bound)
+                                Text(profileModel.editUserProfile.description.bound)
                                     .font(.subheadline)
                                 
                                 // User Location and distance
@@ -47,7 +47,7 @@ struct PreviewProfile: View {
                                             .frame(width:20, height:20)
                                             .foregroundColor(.black)
                                         
-                                        Text("\(profileModel.userProfile.profileDistanceFromUser ?? 2) km away")
+                                        Text("\(profileModel.editUserProfile.profileDistanceFromUser ?? 2) km away")
                                             .foregroundColor(.black)
                                             .font(.subheadline)
                                     }
@@ -58,22 +58,22 @@ struct PreviewProfile: View {
                         
                         
                         // Profile Height, Education, Job, Religion, Location
-                        CardBasicInfo(height: profileModel.userProfile.height.bound,
-                                      work: profileModel.userProfile.work.bound,
-                                      education: profileModel.userProfile.education.bound,
-                                      religion: profileModel.userProfile.religion.bound,
-                                      politics: profileModel.userProfile.politics.bound,
-                                      location: profileModel.userProfile.location.bound)
+                        CardBasicInfo(height: profileModel.editUserProfile.height.bound,
+                                      work: profileModel.editUserProfile.work.bound,
+                                      education: profileModel.editUserProfile.education.bound,
+                                      religion: profileModel.editUserProfile.religion.bound,
+                                      politics: profileModel.editUserProfile.politics.bound,
+                                      location: profileModel.editUserProfile.location.bound)
                             .padding(.top,10)
                         
                         
                         // Profile Passions
-                        CardPassions(passions: profileModel.userProfile.interests ?? ["tempPassion"])
+                        CardPassions(passions: profileModel.editUserProfile.interests ?? ["tempPassion"])
                             .padding(.top,10)
                         
                         
                         // Gallery
-                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.downloadedPhotos[1].image, image2: photoModel.downloadedPhotos[2].image, image3: photoModel.downloadedPhotos[3].image, image4: photoModel.downloadedPhotos[4].image, image5: photoModel.downloadedPhotos[5].image)
+                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.downloadedPhotos.count>1 ? photoModel.downloadedPhotos[1].image : UIImage(), image2: photoModel.downloadedPhotos.count>2 ? photoModel.downloadedPhotos[2].image : UIImage(), image3: photoModel.downloadedPhotos.count>3 ? photoModel.downloadedPhotos[3].image : UIImage(), image4: photoModel.downloadedPhotos.count>4 ? photoModel.downloadedPhotos[4].image : UIImage(), image5: photoModel.downloadedPhotos.count>5 ? photoModel.downloadedPhotos[5].image : UIImage())
                                 .padding(.top,10)
                     }
                     .padding(.horizontal,10)
@@ -83,6 +83,7 @@ struct PreviewProfile: View {
             .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.black, lineWidth: 0.1))
         }
+        
     }
 }
 

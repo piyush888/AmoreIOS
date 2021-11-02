@@ -15,8 +15,8 @@ import CoreData
 class ProfileViewModel: ObservableObject {
     
     @AppStorage("log_Status") var logStatus = false
-    
-    @Published var userProfile = Profile()
+    var userProfile = Profile()
+    @Published var editUserProfile = Profile()
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
     
@@ -124,6 +124,7 @@ class ProfileViewModel: ObservableObject {
             do {
                 let newDocReference = try collectionRef.document(id).setData(from: userProfile)
                 print("Profile stored in firestore with new document reference: \(newDocReference)")
+                self.editUserProfile = self.userProfile
                 // Set profileFetchedAndReady = True, right after profile creation.
                 self.profileFetchedAndReady = true
                 return true
@@ -160,6 +161,7 @@ class ProfileViewModel: ObservableObject {
                         do {
                             // Get User Profile from Firestore.
                             self.userProfile = try document.data(as: Profile.self) ?? Profile()
+                            self.editUserProfile = self.userProfile
 
                             self.fetchProfileCoreData()
                             do {
@@ -198,15 +200,21 @@ class ProfileViewModel: ObservableObject {
     
     func updateUserProfile(profileId: String?) {
         if let profileId = profileId {
-            do {
-                try db.collection("Profiles").document(profileId).setData(from: userProfile)
+            if editUserProfile != userProfile {
+                do {
+                    print("Update Profile Information on Firestore...")
+                    try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
+                    userProfile = editUserProfile
+                }
+                catch {
+                    print("Error while updating Profile in Firestore: ")
+                    print(error.localizedDescription)
+                }
             }
-            catch {
-                print("Error while updating Profile in Firestore: ")
-                print(error.localizedDescription)
+            else {
+                print("No change in Profile Info...")
             }
         }
     }
-    
 }
 

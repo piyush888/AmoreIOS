@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Profile: Identifiable, Codable {
+struct Profile: Identifiable, Codable, Equatable {
     @DocumentID public var id: String?
     var firstName: String?
     var lastName: String?
@@ -36,6 +36,35 @@ struct Profile: Identifiable, Codable {
     var country: String?
     var discoveryStatus: Bool? = false
     var notificationsStatus: Bool? = false
+    
+    static func ==(lhs: Profile, rhs: Profile) -> Bool {
+        return(lhs.firstName == rhs.firstName &&
+        lhs.lastName == rhs.lastName &&
+        lhs.email == rhs.email &&
+        lhs.dateOfBirth == rhs.dateOfBirth &&
+        lhs.interests == rhs.interests &&
+        lhs.genderIdentity == rhs.genderIdentity &&
+        lhs.sexualOrientation == rhs.sexualOrientation &&
+        lhs.sexualOrientationVisible == rhs.sexualOrientationVisible &&
+        lhs.showMePreference == rhs.showMePreference &&
+        lhs.work == rhs.work &&
+        lhs.school == rhs.school &&
+        lhs.age == rhs.age &&
+        lhs.headline == rhs.headline &&
+        lhs.profileDistanceFromUser == rhs.profileDistanceFromUser &&
+        lhs.jobTitle == rhs.jobTitle &&
+        lhs.workType == rhs.workType &&
+        lhs.height == rhs.height &&
+        lhs.education == rhs.education &&
+        lhs.religion == rhs.religion &&
+        lhs.community == rhs.community &&
+        lhs.politics == rhs.politics &&
+        lhs.location == rhs.location &&
+        lhs.description == rhs.description &&
+        lhs.country == rhs.country &&
+        lhs.discoveryStatus == rhs.discoveryStatus &&
+        lhs.notificationsStatus == rhs.notificationsStatus)
+    }
 }
 
 

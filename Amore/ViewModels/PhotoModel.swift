@@ -14,19 +14,23 @@ class PhotoModel: ObservableObject {
     
     @Published var downloadedPhotosURLs = [DownloadedPhotoURL]()
     @Published var downloadedPhotos = [DownloadedPhoto]()
+//    @Published var photosForUploadUpdate = [PhotoForUploadUpdate](repeating: PhotoForUploadUpdate(), count: 6)
     @Published var minUserPhotosAdded = false
     
     @Published var photosFetchedAndReady: Bool = false
     let storage = Storage.storage()
     
     func populatePhotos() {
+        self.downloadedPhotos.removeAll()
         self.downloadedPhotosURLs.sort { $0.id! < $1.id! }
         for (index, url) in self.downloadedPhotosURLs.enumerated() {
             SDWebImageDownloader.shared.downloadImage(with: url.imageURL, completed: {image,_,_,_ in
                 self.downloadedPhotos.append(DownloadedPhoto(id: String(index), image: image))
                 print("Downloaded photos \(index+1)/\(self.downloadedPhotosURLs.count)")
+                self.downloadedPhotos = Array(Set(self.downloadedPhotos))
             })
         }
+        print("Count = \(Set(self.downloadedPhotos).count)")
     }
     
     func checkMinUserPhotosAdded() {
@@ -41,6 +45,7 @@ class PhotoModel: ObservableObject {
     }
     
     func getPhotos() {
+        var urls = [DownloadedPhotoURL]()
         let storageRef = storage.reference()
         let storageReference = storageRef.child("images/\(Auth.auth().currentUser?.uid ?? "tempUser")")
         storageReference.listAll { (result, error) in
@@ -60,8 +65,9 @@ class PhotoModel: ObservableObject {
                         print(error)
                     } else {
                         print("Download URL for \(String(describing: item.fullPath.split(separator: "/").last)): \(String(describing: url!))")
-                        self.downloadedPhotosURLs.append(DownloadedPhotoURL(id: String(item.fullPath.split(separator: "/").last!), imageURL: url!))
-                        if result.items.count == self.downloadedPhotosURLs.count {
+                        urls.append(DownloadedPhotoURL(id: String(item.fullPath.split(separator: "/").last!), imageURL: url!))
+                        if result.items.count == urls.count {
+                            self.downloadedPhotosURLs = urls
                             self.populatePhotos()
                             self.photosFetchedAndReady = true
                             self.checkMinUserPhotosAdded()

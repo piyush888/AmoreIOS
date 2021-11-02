@@ -13,7 +13,13 @@ struct DownloadedPhotoURL: Identifiable, Codable, Hashable {
     var imageURL: URL?
 }
 
-struct DownloadedPhoto: Identifiable {
+struct DownloadedPhoto: Identifiable, Hashable {
     public var id: String?
     var image: UIImage?
 }
+
+//struct PhotoForUploadUpdate: Identifiable, Hashable {
+//    public var id: String?
+//    var image: UIImage?
+//    var downsampledImage: UIImage?
+//}
