@@ -35,7 +35,7 @@ struct PlatinumCard: View {
                         .frame(width:60, height:60)
                         .foregroundColor(Color.white)
                     
-                    Text("Tinder Platinum")
+                    Text("Amore Platinum")
                         .font(.title2)
                         .foregroundColor(Color.white)
                     

@@ -29,41 +29,54 @@ struct UserProfileBasicInfo: View {
 struct GenderInfo: View {
     
     @Binding var genderPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
         
-            NavigationLink(
-              destination: ShowGendersInfo(genderPreference:$genderPreference),
-              label: {
-                  ZStack{
-                      CommonContainer()
-                      HStack {
-                          
-                          Text("Gender")
-                              .font(.subheadline)
-                              .foregroundColor(Color.black)
-                          
-                          Spacer()
-                          
-                          Text("\(self.genderPreference ?? "Modify Gender")")
-                      }
-                      .padding(.horizontal,20)
-                  }
-                  .navigationBarHidden(true)
-              })
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Gender")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.genderPreference ?? "Modify Gender")")
+                }
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            ShowGendersInfo(genderPreference:$genderPreference,
+                            showSheetView:$showingSheet)
         }
+    }
 }
 
 struct ShowGendersInfo : View {
     
     @Binding var genderPreference: String?
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
-                
-            Text("Gender")
-                .font(.title)
+            
+            HStack {
+                Text("Gender")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
             
             ForEach(["Male", "Female", "All"], id: \.self) { gender in
                 Button{
@@ -100,34 +113,38 @@ struct ShowGendersInfo : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
 }
 
 struct ReligionInfo: View {
     
     @Binding var religionPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
         
-        NavigationLink(
-            destination: ReligionInfoOptions(religionPreference:$religionPreference),
-            label: {
-                ZStack{
-                    CommonContainer()
-                    HStack {
-                        
-                        Text("Religion")
-                            .font(.subheadline)
-                            .foregroundColor(Color.black)
-                        
-                        Spacer()
-                        
-                        Text("\(self.religionPreference ?? "Modify Religion")")
-                    }
-                    .padding(.horizontal,20)
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Religion")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.religionPreference ?? "Modify Religion")")
                 }
-            })
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            ReligionInfoOptions(religionPreference:$religionPreference,
+                            showSheetView:$showingSheet)
+        }
     }
 }
 
@@ -135,14 +152,23 @@ struct ReligionInfoOptions : View {
     
     var religionsList = ["Any","Sikh","Hindu","Islam","Jain","Christian","Buddhist","Spiritual","Other","No Religion"]
     @Binding var religionPreference: String?
-    
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
                 
-            Text("Gender")
-                .font(.title)
+            HStack {
+                Text("Religion")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
             
             ForEach(religionsList, id: \.self) { religion in
                 Button{
@@ -179,33 +205,38 @@ struct ReligionInfoOptions : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
 }
 
 struct CommunityInfo: View {
     
     @Binding var communityPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
-        NavigationLink(
-            destination: CommunityInfoOptions(communityPreference:$communityPreference),
-            label: {
-                ZStack{
-                    CommonContainer()
-                    HStack {
-                        
-                        Text("Community")
-                            .font(.subheadline)
-                            .foregroundColor(Color.black)
-                        
-                        Spacer()
-                        
-                        Text("\(self.communityPreference ?? "Modify Community")")
-                    }
-                    .padding(.horizontal,20)
+        
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Community")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.communityPreference ?? "Modify Community")")
                 }
-            })
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            CommunityInfoOptions(communityPreference:$communityPreference,
+                            showSheetView:$showingSheet)
+        }
     }
 }
 
@@ -213,13 +244,22 @@ struct CommunityInfoOptions : View {
     
     var communityList = ["Any","Gujarati","Jatt","Punjabi","Sunni","Shia","Hindi Speaking","Sindhi","Bengali","Tamil", "Telugu", "Malayali", "Maharashtrian", "Kannada"]
     @Binding var communityPreference: String?
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
-                
-            Text("Community")
-                .font(.title)
+            HStack {
+                Text("Community")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
             
             ForEach(communityList, id: \.self) { community in
                 Button{
@@ -256,7 +296,7 @@ struct CommunityInfoOptions : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
     
 }
@@ -264,26 +304,32 @@ struct CommunityInfoOptions : View {
 struct CareerInfo: View {
     
     @Binding var careerPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
-        NavigationLink(
-            destination: CareerInfoOptions(careerPreference:$careerPreference),
-            label: {
-                ZStack{
-                    CommonContainer()
-                    HStack {
-                        
-                        Text("Career")
-                            .font(.subheadline)
-                            .foregroundColor(Color.black)
-                        
-                        Spacer()
-                        
-                        Text("\(self.careerPreference ?? "Modify Career")")
-                    }
-                    .padding(.horizontal,20)
+        
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Career")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.careerPreference ?? "Modify Career")")
                 }
-            })
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            CareerInfoOptions(careerPreference:$careerPreference,
+                            showSheetView:$showingSheet)
+        }
+        
     }
 }
 
@@ -291,13 +337,23 @@ struct CareerInfoOptions : View {
     
     var careerList = ["Any","Account Executive","Accountant","Actor","Aerospace Engineer","Agriculturist","Analyst","Anesthesiologist","Archeologist","Architect", "Artist", "Attorney", "Aviation Professional", "Banker"]
     @Binding var careerPreference: String?
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
                 
-            Text("Career")
-                .font(.title)
+            HStack {
+                Text("Career")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
             
             ForEach(careerList, id: \.self) { career in
                 Button{
@@ -334,48 +390,61 @@ struct CareerInfoOptions : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
 }
 
 struct EducationInfo: View {
     
     @Binding var educationPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
         
-            NavigationLink(
-              destination: ShowEducationClassesInfo(educationPreference:$educationPreference),
-              label: {
-                  ZStack{
-                  CommonContainer()
-                  HStack {
-                      
-                      Text("Education")
-                          .font(.subheadline)
-                          .foregroundColor(Color.black)
-                      
-                      Spacer()
-                      
-                      Text("\(self.educationPreference ?? "Modify Education")")
-                  }
-                  .padding(.horizontal,20)
-              }
-          })
-        
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Education")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.educationPreference ?? "Modify Education")")
+                }
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            ShowEducationClassesInfo(educationPreference:$educationPreference,
+                            showSheetView:$showingSheet)
+        }
     }
 }
 
 struct ShowEducationClassesInfo : View {
     
     @Binding var educationPreference: String?
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
-                
-            Text("Education")
-                .font(.title)
+            
+            HStack {
+                Text("Education")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
             
             ForEach(["Any", "Doctorate", "Masters", "Bachelors", "Associates", "Trade School", "High School", "No Education"], id: \.self) { gender in
                 Button{
@@ -412,49 +481,62 @@ struct ShowEducationClassesInfo : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
 }
 
 struct RaisedInInfo: View {
     
     @Binding var countryPreference: String?
+    @State private var showingSheet = false
     
     var body: some View {
         
-            NavigationLink(
-              destination: ShowCountriesInfo(countryPreference:$countryPreference),
-              label: {
-                  ZStack{
-                  CommonContainer()
-                  HStack {
-                      
-                      Text("Raised In")
-                          .font(.subheadline)
-                          .foregroundColor(Color.black)
-                      
-                      Spacer()
-                      
-                      Text("\(self.countryPreference ?? "Modify Country")")
-                  }
-                  .padding(.horizontal,20)
-              }
-          })
-        
+        Button {
+            showingSheet.toggle()
+        } label : {
+            ZStack{
+                CommonContainer()
+                HStack {
+                    
+                    Text("Raised In")
+                        .font(.subheadline)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                    Text("\(self.countryPreference ?? "Modify Country")")
+                }
+                .padding(.horizontal,20)
+            }
+        }.sheet(isPresented: $showingSheet) {
+            ShowCountriesInfo(countryPreference:$countryPreference,
+                            showSheetView:$showingSheet)
+        }
     }
 }
 
 struct ShowCountriesInfo : View {
     
     @Binding var countryPreference: String?
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
         VStack {
                 
-            Text("Raised In")
-                .font(.title)
-            
+            HStack {
+                Text("Raised In")
+                    .font(.title3)
+                Spacer()
+                Button {
+                    self.showSheetView = false
+                    
+                } label: {
+                    Text("Done")
+                }
+            }
+                    
             ForEach(["Any", "United States", "Canada", "United Kingdom", "Australia", "India", "United Arab Emirates", "Other"], id: \.self) { gender in
                 Button{
                     countryPreference = gender
@@ -490,7 +572,7 @@ struct ShowCountriesInfo : View {
             Spacer()
             
         }
-        .padding(.horizontal,20)
+        .padding(20)
     }
 }
 
