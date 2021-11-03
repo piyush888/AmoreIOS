@@ -35,7 +35,7 @@ struct GoldCard: View {
                             .frame(width:60, height:60)
                             .foregroundColor(Color("gold-star"))
                         
-                        Text("Tinder Gold")
+                        Text("Amore Gold")
                             .font(.title2)
                             .foregroundColor(Color.white)
                         

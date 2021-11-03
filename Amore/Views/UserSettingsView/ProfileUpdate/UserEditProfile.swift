@@ -75,7 +75,7 @@ struct EditProfile: View {
             
             Spacer()
         }
-        .padding(.horizontal,20)
+        
         .padding(.top)
         .navigationBarHidden(true)
         

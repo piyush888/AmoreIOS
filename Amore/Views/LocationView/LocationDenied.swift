@@ -15,7 +15,7 @@ struct LocationDenied: View {
             Text("Oops")
                 .font(.BoardingTitle)
             
-            Text("In order to use Tinder you need to enable your location")
+            Text("In order to use Amore you need to enable your location")
                 .font(.BoardingSubHeading)
                 .padding(.horizontal,60)
                 .multilineTextAlignment(.center)
