@@ -13,13 +13,12 @@ struct DownloadedPhotoURL: Identifiable, Codable, Hashable {
     var imageURL: URL?
 }
 
-struct DownloadedPhoto: Identifiable, Hashable {
+struct Photo: Identifiable, Hashable, Equatable {
     public var id: String?
     var image: UIImage?
+    var downsampledImage: UIImage?
+    
+    static func ==(lhs: Photo, rhs: Photo) -> Bool {
+        return(lhs.id == rhs.id)
+    }
 }
-
-//struct PhotoForUploadUpdate: Identifiable, Hashable {
-//    public var id: String?
-//    var image: UIImage?
-//    var downsampledImage: UIImage?
-//}

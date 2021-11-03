@@ -14,18 +14,24 @@ struct AddPhotosView: View {
     
     // All the 6 images that we give user an option to upload
     @EnvironmentObject var photoModel: PhotoModel
-    @State var images = [UIImage?](repeating: nil, count: 6)
     @State private var disableButton = false
     @State private var counter = 0
     
     @State var showsAlert = false
     
     func imagesUploadedByUser() {
-        counter = images.count
+        for photoObject in photoModel.photosForUploadUpdate {
+            if photoObject.image != nil {
+                counter += 1
+            }
+        }
     }
     
     func resizeImagesAndUpload() {
-        photoModel.uploadPhotos(photos: images)
+        for index in 0..<photoModel.photosForUploadUpdate.count {
+            photoModel.photosForUploadUpdate[index].id = String(index)
+        }
+        photoModel.uploadPhotos()
     }
     
     let adaptivecolumns = Array(repeating:
@@ -50,12 +56,8 @@ struct AddPhotosView: View {
             
             // Give the user options to add photos
             LazyVGrid(columns: adaptivecolumns, content: {
-                UploadPhotoWindow(image: self.$images[0])
-                UploadPhotoWindow(image: self.$images[1])
-                UploadPhotoWindow(image: self.$images[2])
-                UploadPhotoWindow(image: self.$images[3])
-                UploadPhotoWindow(image: self.$images[4])
-                UploadPhotoWindow(image: self.$images[5])
+                UploadWindowsGroup()
+                    .environmentObject(photoModel)
             })
             .padding(.horizontal)
          

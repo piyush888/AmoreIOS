@@ -16,28 +16,13 @@ enum ActiveSheet: Identifiable {
 }
 
 struct UploadPhotoWindow: View {
-//    @Binding var photoStruct: PhotoForUploadUpdate
-    @Binding var image : UIImage?
+    @Binding var photoStruct: Photo
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
-    @State var imageDownsampled: Bool = false
-    @State var downsampledImage: UIImage?
-    
-    func downsampleChosenImage() {
-        if !imageDownsampled{
-            do {
-                downsampledImage = try ImageService.downsample(imageAt: image?.heicData(compressionQuality: 1.0) ?? Data(), to: CGSize(width: 115, height: 170)) ?? UIImage()
-                imageDownsampled = true
-            }
-            catch {
-                print("Checkpoint 1: \(error.localizedDescription)")
-                downsampledImage = UIImage()
-            }
-        }
-    }
-    
+
     func imageCropped(image: UIImage){
-       self.image = image
+        self.photoStruct.image = image
+        self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
         showSheet = false
      }
 
@@ -45,8 +30,8 @@ struct UploadPhotoWindow: View {
         
         VStack {
             
-            if image != nil {
-                Image(uiImage: downsampledImage ?? UIImage())
+            if photoStruct.image != nil {
+                Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
                     .frame(width: 115, height: 170, alignment: .center)
@@ -56,9 +41,6 @@ struct UploadPhotoWindow: View {
                     .shadow(color: Color("onboarding-pink"),
                             radius: 2, x: 3, y: 3)
                     .clipShape(Rectangle())
-                    .onAppear{
-                        downsampleChosenImage()
-                    }
             } else {
                 Image(uiImage: UIImage())
                     .resizable()
@@ -84,7 +66,7 @@ struct UploadPhotoWindow: View {
                     }
                 
                 // Don't show if the image is nil
-                if image != nil {
+               if photoStruct.image != nil {
                     Image(systemName:"pencil.circle.fill")
                         .resizable()
                         .frame(width:20, height:20)
@@ -99,7 +81,8 @@ struct UploadPhotoWindow: View {
                         .frame(width:20, height:20)
                         .foregroundColor(.red)
                         .onTapGesture {
-                            image = nil
+                            self.photoStruct.image = nil
+                            self.photoStruct.downsampledImage = nil
                         }
                 }
             }
@@ -109,11 +92,11 @@ struct UploadPhotoWindow: View {
                 // Pick an image from the photo library:
                 // If you wish to take a photo from camera instead:
                 // ImagePicker(sourceType: .camera, selectedImage: self.$image)
-                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+                ImagePicker(sourceType: .photoLibrary, selectedPhoto: $photoStruct)
             }
             else if self.activeSheet == .cropImage {
                 // Option to Crop the image
-                ImageCropper(image: self.$image, visible: self.$showSheet, done: self.imageCropped)
+                ImageCropper(image: self.$photoStruct.image, visible: self.$showSheet, done: self.imageCropped)
                     .edgesIgnoringSafeArea(.all)
             }
         }
@@ -122,6 +105,6 @@ struct UploadPhotoWindow: View {
 
 struct UploadPhotoWindow_Previews: PreviewProvider {
     static var previews: some View {
-        UploadPhotoWindow(image: Binding.constant(UIImage()))
+        UploadPhotoWindow(photoStruct: Binding.constant(Photo()))
     }
 }

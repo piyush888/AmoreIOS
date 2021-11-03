@@ -11,16 +11,13 @@ import SDWebImageSwiftUI
 struct EditCardInfo: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
-    @State var images = [UIImage?](repeating: nil, count: 6)
     
     func populateImages() {
         if photoModel.downloadedPhotos.count<2 {
             photoModel.populatePhotos()
         }
         photoModel.downloadedPhotos.sort { $0.id! < $1.id! }
-        for (index, photo) in photoModel.downloadedPhotos.enumerated() {
-            self.images[index] = photo.image
-        }
+        photoModel.photosForUploadUpdate = photoModel.downloadedPhotos
     }
     
     let adaptivecolumns = Array(repeating:
@@ -34,12 +31,8 @@ struct EditCardInfo: View {
                 
                 // Display Photos
                 LazyVGrid(columns: adaptivecolumns, content: {
-                    UploadPhotoWindow(image: self.$images[0])
-                    UploadPhotoWindow(image: self.$images[1])
-                    UploadPhotoWindow(image: self.$images[2])
-                    UploadPhotoWindow(image: self.$images[3])
-                    UploadPhotoWindow(image: self.$images[4])
-                    UploadPhotoWindow(image: self.$images[5])
+                    UploadWindowsGroup()
+                        .environmentObject(photoModel)
                 }).onAppear {
                     populateImages()
                 }

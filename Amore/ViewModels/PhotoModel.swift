@@ -13,21 +13,45 @@ import SDWebImageSwiftUI
 class PhotoModel: ObservableObject {
     
     @Published var downloadedPhotosURLs = [DownloadedPhotoURL]()
-    @Published var downloadedPhotos = [DownloadedPhoto]()
-//    @Published var photosForUploadUpdate = [PhotoForUploadUpdate](repeating: PhotoForUploadUpdate(), count: 6)
+    @Published var downloadedPhotos = [Photo]()
+    @Published var photosForUploadUpdate = [Photo](repeating: Photo(), count: 6)
     @Published var minUserPhotosAdded = false
     
     @Published var photosFetchedAndReady: Bool = false
     let storage = Storage.storage()
+    
+    func getPhotosCount() -> Int {
+        var counter = 0
+        for photo in photosForUploadUpdate {
+            if photo.image != nil {
+                counter += 1
+            }
+        }
+        print("Total number of photos: \(counter)")
+        return counter
+    }
     
     func populatePhotos() {
         self.downloadedPhotos.removeAll()
         self.downloadedPhotosURLs.sort { $0.id! < $1.id! }
         for (index, url) in self.downloadedPhotosURLs.enumerated() {
             SDWebImageDownloader.shared.downloadImage(with: url.imageURL, completed: {image,_,_,_ in
-                self.downloadedPhotos.append(DownloadedPhoto(id: String(index), image: image))
-                print("Downloaded photos \(index+1)/\(self.downloadedPhotosURLs.count)")
-                self.downloadedPhotos = Array(Set(self.downloadedPhotos))
+                let isDuplicate = self.downloadedPhotos.contains(where: { photo in
+                    if photo.id == String(index) {
+                        return true
+                    }
+                    else {
+                        return false
+                    }
+                })
+                if !isDuplicate {
+                    self.downloadedPhotos.append(Photo(id: String(index), image: image, downsampledImage: image?.downsample(to: CGSize(width: 115, height: 170))))
+                    print("Downloaded photos \(index+1)/\(self.downloadedPhotosURLs.count)")
+                    if self.downloadedPhotos.count == Array(Set(self.downloadedPhotosURLs)).count {
+                        self.downloadedPhotos.sort { $0.id! < $1.id! }
+                        self.photosForUploadUpdate = self.downloadedPhotos
+                    }
+                }
             })
         }
         print("Count = \(Set(self.downloadedPhotos).count)")
@@ -51,6 +75,9 @@ class PhotoModel: ObservableObject {
         storageReference.listAll { (result, error) in
             if result.items.count == 0 {
                 self.photosFetchedAndReady = true
+                self.downloadedPhotosURLs.removeAll()
+                self.downloadedPhotos.removeAll()
+                self.photosForUploadUpdate = [Photo](repeating: Photo(), count: 6)
                 self.checkMinUserPhotosAdded()
             }
             if let error = error {
@@ -78,12 +105,12 @@ class PhotoModel: ObservableObject {
         }
     }
     
-    func uploadPhotos(photos: [UIImage?]) {
+    func uploadPhotos() {
         self.downloadedPhotosURLs.removeAll()
-        for (index, image) in photos.enumerated() {
-            if image != nil {
+        for (index, photo) in self.photosForUploadUpdate.enumerated() {
+            if photo.image != nil {
                 do {
-                    guard let imageData = try image?.heicData(compressionQuality: 0.6) else { return }
+                    guard let imageData = try photo.image?.heicData(compressionQuality: 0.6) else { return }
 
                     let storageRef = storage.reference()
                     let filename = "image\(index+1).heic"
@@ -112,7 +139,7 @@ class PhotoModel: ObservableObject {
                                 self.photosFetchedAndReady = true
                                 self.checkMinUserPhotosAdded()
                             }
-                            if self.downloadedPhotosURLs.count >= photos.count {
+                            if self.downloadedPhotosURLs.count >= self.getPhotosCount() {
                                 self.populatePhotos()
                             }
                         }
