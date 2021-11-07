@@ -71,13 +71,14 @@ struct EditCardInfo: View {
                     // Basic Info
                     HStack {
                         Text("Basic Info")
-                            .font(.headline)
+                            .font(.subheadline)
                             .frame(alignment: .leading)
                         Spacer()
                     }
                     
                     UserProfileBasicInfo(genderPreference: $profileModel.editUserProfile.genderIdentity, religionPreference: $profileModel.editUserProfile.religion, communityPreference: $profileModel.editUserProfile.community, careerPreference: $profileModel.editUserProfile.workType, educationPreference: $profileModel.editUserProfile.education, countryPreference: $profileModel.editUserProfile.country)
                 }
+                .padding(.top,10)
                 
                 Group {
                     // Discovery

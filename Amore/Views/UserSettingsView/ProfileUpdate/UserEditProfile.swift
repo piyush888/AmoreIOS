@@ -34,7 +34,7 @@ struct EditProfile: View {
                         .foregroundColor(Color.purple)
                 }
                 
-            }
+            }.padding(.horizontal,20)
             
             HStack {
                 Spacer()
