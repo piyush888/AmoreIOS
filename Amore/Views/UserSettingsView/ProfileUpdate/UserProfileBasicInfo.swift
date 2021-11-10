@@ -48,7 +48,7 @@ struct GenderInfo: View {
                     
                     Text("\(self.genderPreference ?? "Modify Gender")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             ShowGendersInfo(genderPreference:$genderPreference,
@@ -139,7 +139,7 @@ struct ReligionInfo: View {
                     
                     Text("\(self.religionPreference ?? "Modify Religion")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             ReligionInfoOptions(religionPreference:$religionPreference,
@@ -231,7 +231,7 @@ struct CommunityInfo: View {
                     
                     Text("\(self.communityPreference ?? "Modify Community")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             CommunityInfoOptions(communityPreference:$communityPreference,
@@ -323,7 +323,7 @@ struct CareerInfo: View {
                     
                     Text("\(self.careerPreference ?? "Modify Career")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             CareerInfoOptions(careerPreference:$careerPreference,
@@ -416,7 +416,7 @@ struct EducationInfo: View {
                     
                     Text("\(self.educationPreference ?? "Modify Education")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             ShowEducationClassesInfo(educationPreference:$educationPreference,
@@ -507,7 +507,7 @@ struct RaisedInInfo: View {
                     
                     Text("\(self.countryPreference ?? "Modify Country")")
                 }
-                .padding(.horizontal,20)
+                .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
             ShowCountriesInfo(countryPreference:$countryPreference,

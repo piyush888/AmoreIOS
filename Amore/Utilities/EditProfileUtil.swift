@@ -35,7 +35,7 @@ struct EditCardForm: View {
             
             HStack {
                 Text(formHeadLine)
-                    .font(.headline)
+                    .font(.subheadline)
                     .frame(alignment: .leading)
                 Spacer()
             }
@@ -45,16 +45,18 @@ struct EditCardForm: View {
                 TextEditor(text: $formInput.bound)
                     .frame(height: formHeight)
                     .textFieldStyle(PlainTextFieldStyle())
-                    .padding([.horizontal], 4)
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    .padding([.horizontal], 6)
+                    .cornerRadius(8)
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth:0.6))
+                    .font(.subheadline)
             } else {
                 TextField("", text: $formInput.bound)
                     .frame(height: formHeight)
                     .textFieldStyle(PlainTextFieldStyle())
-                    .padding([.horizontal], 4)
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    .padding([.horizontal], 10)
+                    .cornerRadius(8)
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth:0.6))
+                    .font(.subheadline)
             }
                 
 //            HStack {

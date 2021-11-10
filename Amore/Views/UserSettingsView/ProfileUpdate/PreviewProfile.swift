@@ -83,7 +83,7 @@ struct PreviewProfile: View {
             .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.black, lineWidth: 0.1))
         }
-        
+        .padding(.horizontal,20)
     }
 }
 
