@@ -11,12 +11,14 @@ import SwiftUI
 struct DownloadedPhotoURL: Identifiable, Codable, Hashable {
     public var id: String?
     var imageURL: URL?
+    var firebaseImagePath: String?
 }
 
 struct Photo: Identifiable, Hashable, Equatable {
     public var id: String?
     var image: UIImage?
     var downsampledImage: UIImage?
+    var firebaseImagePath: String?
     
     static func ==(lhs: Photo, rhs: Photo) -> Bool {
         return(lhs.id == rhs.id)

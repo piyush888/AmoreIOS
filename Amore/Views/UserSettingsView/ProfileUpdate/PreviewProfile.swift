@@ -21,7 +21,7 @@ struct PreviewProfile: View {
                 LazyVStack {
                     
                     VStack {
-                        Image(uiImage: photoModel.downloadedPhotos.count>0 ? photoModel.downloadedPhotos[0].image! : UIImage())
+                        Image(uiImage: photoModel.photosForUploadUpdate[0].image ?? UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
@@ -73,7 +73,7 @@ struct PreviewProfile: View {
                         
                         
                         // Gallery
-                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.downloadedPhotos.count>1 ? photoModel.downloadedPhotos[1].image : UIImage(), image2: photoModel.downloadedPhotos.count>2 ? photoModel.downloadedPhotos[2].image : UIImage(), image3: photoModel.downloadedPhotos.count>3 ? photoModel.downloadedPhotos[3].image : UIImage(), image4: photoModel.downloadedPhotos.count>4 ? photoModel.downloadedPhotos[4].image : UIImage(), image5: photoModel.downloadedPhotos.count>5 ? photoModel.downloadedPhotos[5].image : UIImage())
+                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.photosForUploadUpdate[1].image, image2: photoModel.photosForUploadUpdate[2].image, image3: photoModel.photosForUploadUpdate[3].image, image4: photoModel.photosForUploadUpdate[4].image, image5: photoModel.photosForUploadUpdate[5].image)
                                 .padding(.top,10)
                     }
                     .padding(.horizontal,10)

@@ -28,9 +28,7 @@ struct AddPhotosView: View {
     }
     
     func resizeImagesAndUpload() {
-        for index in 0..<photoModel.photosForUploadUpdate.count {
-            photoModel.photosForUploadUpdate[index].id = String(index)
-        }
+        photoModel.populateIdsForUploadUpdatePhotos()
         photoModel.uploadPhotos()
     }
     

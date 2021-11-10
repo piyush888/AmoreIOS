@@ -42,7 +42,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.selectedPhoto.image = image.fixedOrientation
-                parent.selectedPhoto.downsampledImage = parent.selectedPhoto.image!.downsample(to: CGSize(width: 115, height: 170))
+                parent.selectedPhoto.downsampledImage = image.fixedOrientation.downsample(to: CGSize(width: 115, height: 170))
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

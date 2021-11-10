@@ -27,6 +27,8 @@ struct EditProfile: View {
                 Button {
                     // Take Back to Profile View
                     profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                    photoModel.populateIdsForUploadUpdatePhotos()
+                    photoModel.updatePhotos()
                     profileEditingToBeDone = false
                 } label: {
                     Text("Done")

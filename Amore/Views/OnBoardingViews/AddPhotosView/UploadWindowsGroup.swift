@@ -12,12 +12,13 @@ struct UploadWindowsGroup: View {
     @EnvironmentObject var photoModel: PhotoModel
         
     var body: some View {
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>0 ? $photoModel.photosForUploadUpdate[0] : Binding.constant(Photo()))
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>1 ? $photoModel.photosForUploadUpdate[1] : Binding.constant(Photo()))
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>2 ? $photoModel.photosForUploadUpdate[2] : Binding.constant(Photo()))
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>3 ? $photoModel.photosForUploadUpdate[3] : Binding.constant(Photo()))
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>4 ? $photoModel.photosForUploadUpdate[4] : Binding.constant(Photo()))
-        UploadPhotoWindow(photoStruct: photoModel.photosForUploadUpdate.count>5 ? $photoModel.photosForUploadUpdate[5] : Binding.constant(Photo()))
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[0])
+            .environmentObject(photoModel)
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[1]).environmentObject(photoModel)
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[2]).environmentObject(photoModel)
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[3]).environmentObject(photoModel)
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[4]).environmentObject(photoModel)
+        UploadPhotoWindow(photoStruct: $photoModel.photosForUploadUpdate[5]).environmentObject(photoModel)
     }
 }
 

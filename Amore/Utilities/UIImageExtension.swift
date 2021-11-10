@@ -121,4 +121,8 @@ extension UIImage {
         // Return the downsampled image as UIImage
         return UIImage(cgImage: downsampledImage)
     }
+    
+    func isEqualPhoto(compareTo image: UIImage) -> Bool {
+        return self.fixedOrientation.pngData() == image.fixedOrientation.pngData()
+    }
 }

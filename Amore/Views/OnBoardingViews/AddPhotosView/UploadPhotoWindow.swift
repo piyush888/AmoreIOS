@@ -19,6 +19,7 @@ struct UploadPhotoWindow: View {
     @Binding var photoStruct: Photo
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
+    @EnvironmentObject var photoModel: PhotoModel
 
     func imageCropped(image: UIImage){
         self.photoStruct.image = image
@@ -81,8 +82,10 @@ struct UploadPhotoWindow: View {
                         .frame(width:20, height:20)
                         .foregroundColor(.red)
                         .onTapGesture {
+                            self.photoStruct.id = nil
                             self.photoStruct.image = nil
                             self.photoStruct.downsampledImage = nil
+                            photoModel.defragmentArray()
                         }
                 }
             }
