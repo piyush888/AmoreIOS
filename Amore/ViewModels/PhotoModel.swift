@@ -20,14 +20,9 @@ class PhotoModel: ObservableObject {
     @Published var photosFetchedAndReady: Bool = false
     let storage = Storage.storage()
     
-    func defragmentArray() {
+    /// Removes empty frames between photos
+    func defragmentArray(deleteIndex: Int?) {
         var newArray = photosForUploadUpdate
-        var toBeDeleted: [Photo] = []
-        for photo in newArray {
-            if photo.image == nil && photo.firebaseImagePath != nil {
-                toBeDeleted.append(photo)
-            }
-        }
         newArray.removeAll { photo in
             if photo.image == nil {
                 return true
@@ -36,13 +31,30 @@ class PhotoModel: ObservableObject {
                 return false
             }
         }
-        newArray.append(contentsOf: toBeDeleted)
+        if let deleteIndex = deleteIndex {
+            /// Delete the photos placed after the photo being deleted and re-upload them with rectified names and firebase storage paths
+            for missing in newArray[deleteIndex...] {
+                self.deleteMissingPhoto(missing: missing) {
+                    return
+                }
+            }
+            for index in deleteIndex..<newArray.count {
+                if newArray[index].firebaseImagePath != nil {
+                    newArray[index].firebaseImagePath = "images/\(Auth.auth().currentUser?.uid ?? "tempUser")/image\(index+1).heic"
+                }
+            }
+            self.uploadUpdateMultiplePhotos(photos: newArray[deleteIndex...])
+        }
         for _ in 0..<(6-newArray.count) {
             newArray.append(Photo())
+        }
+        for index in 0..<newArray.count {
+            newArray[index].id = String(index)
         }
         photosForUploadUpdate = newArray
     }
     
+    /// Get current no of valid photos
     func getPhotosCount() -> Int {
         var counter = 0
         for photo in photosForUploadUpdate {
@@ -53,6 +65,7 @@ class PhotoModel: ObservableObject {
         return counter
     }
     
+    /// Regenerate IDs for current photos
     func populateIdsForUploadUpdatePhotos() {
         for index in 0..<photosForUploadUpdate.count {
             if photosForUploadUpdate[index].image != nil {
@@ -61,6 +74,14 @@ class PhotoModel: ObservableObject {
         }
     }
     
+    /// Regenerate IDs for all photos (valid and empty)
+    func populateIdsForAllPhotos() {
+        for index in 0..<photosForUploadUpdate.count {
+            photosForUploadUpdate[index].id = String(index)
+        }
+    }
+    
+    /// Populate rest of the current frames with empty photos
     func populateWithEmptyPhotos() {
         if self.photosForUploadUpdate.count<6 {
             for _ in 0..<(6-photosForUploadUpdate.count) {
@@ -69,6 +90,7 @@ class PhotoModel: ObservableObject {
         }
     }
     
+    /// Download photos from firebase and populate the current photo arrays
     func populatePhotos() {
         self.downloadedPhotos.removeAll()
         self.downloadedPhotosURLs.sort { $0.id! < $1.id! }
@@ -77,6 +99,7 @@ class PhotoModel: ObservableObject {
                 guard let sself = self else { return }
 
                 if let err = error {
+                    print(err)
                     return
                 }
 
@@ -99,33 +122,16 @@ class PhotoModel: ObservableObject {
                         sself.downloadedPhotos.sort { $0.id! < $1.id! }
                         sself.photosForUploadUpdate = sself.downloadedPhotos
                         sself.populateWithEmptyPhotos()
+                        sself.populateIdsForAllPhotos()
                     }
                 }
             }
-            
-//            SDWebImageDownloader.shared.downloadImage(with: url.imageURL, completed: {image,_,_,_ in
-//                let isDuplicate = self.downloadedPhotos.contains(where: { photo in
-//                    if photo.id == String(index) {
-//                        return true
-//                    }
-//                    else {
-//                        return false
-//                    }
-//                })
-//                if !isDuplicate {
-//                    self.downloadedPhotos.append(Photo(id: String(index), image: image, downsampledImage: image?.downsample(to: CGSize(width: 115, height: 170)), firebaseImagePath: url.firebaseImagePath))
-//                    print("Downloaded photos \(index+1)/\(self.downloadedPhotosURLs.count)")
-//                    if self.downloadedPhotos.count == Array(Set(self.downloadedPhotosURLs)).count {
-//                        self.downloadedPhotos.sort { $0.id! < $1.id! }
-//                        self.photosForUploadUpdate = self.downloadedPhotos
-//                        self.populateWithEmptyPhotos()
-//                    }
-//                }
-//            })
+
         }
         print("Count = \(Set(self.downloadedPhotos).count)")
     }
     
+    /// To check if Minimum 2 photos for the user exists
     func checkMinUserPhotosAdded() {
         if photosFetchedAndReady {
             if downloadedPhotosURLs.count >= 2 {
@@ -137,6 +143,7 @@ class PhotoModel: ObservableObject {
         }
     }
     
+    /// Download photo URLs for photos saved in firebase and populatePhotos()
     func getPhotos() {
         var urls = [DownloadedPhotoURL]()
         let storageRef = storage.reference()
@@ -179,7 +186,8 @@ class PhotoModel: ObservableObject {
         }
     }
     
-    func firebaseStorageUpload(photo: Photo, filename: String, isUpdateProcess: Bool) {
+    /// Common code to be used for uploading a photo to firebase storage
+    func firebaseStorageUpload(photo: Photo, filename: String, isUpdateProcess: Bool, onFinish: @escaping () -> Void) {
         do {
             guard let imageData = try photo.image?.heicData(compressionQuality: 0.6) else { return }
             
@@ -225,6 +233,7 @@ class PhotoModel: ObservableObject {
             
             uploadTask.observe(.success) { snapshot in
                 print("Upload completed successfully")
+                onFinish()
             }
             
             uploadTask.observe(.failure) { snapshot in
@@ -256,6 +265,7 @@ class PhotoModel: ObservableObject {
         }
     }
     
+    /// Code to be used after upload/update of photo is complete
     func uploadCompletionCode(isUpdateProcess: Bool, downloadURL: URL, filename: String, newImagePath: String) {
         if isUpdateProcess {
             if let replaceIndex = self.downloadedPhotosURLs.firstIndex(where: { oldURL in
@@ -267,6 +277,9 @@ class PhotoModel: ObservableObject {
                 }
             }) {
                 self.downloadedPhotosURLs[replaceIndex].imageURL = downloadURL
+            }
+            else {
+                self.downloadedPhotosURLs.append(DownloadedPhotoURL(id: filename, imageURL: downloadURL, firebaseImagePath: newImagePath))
             }
             if self.downloadedPhotosURLs.count == self.getPhotosCount() {
                 self.populatePhotos()
@@ -284,83 +297,54 @@ class PhotoModel: ObservableObject {
         }
     }
     
+    /// Used for adding photos the first time user uploads photos
     func uploadPhotos() {
         self.downloadedPhotosURLs.removeAll()
         for (index, photo) in self.photosForUploadUpdate.enumerated() {
             if photo.image != nil {
                 let filename = "image\(index+1).heic"
-                self.firebaseStorageUpload(photo: photo, filename: filename, isUpdateProcess: false)
-            }
-        }
-    }
-    
-    func rectifyFirebaseImagePaths() {
-        for index in 0..<photosForUploadUpdate.count {
-            if photosForUploadUpdate[index].firebaseImagePath != nil {
-                photosForUploadUpdate[index].firebaseImagePath = "images/\(Auth.auth().currentUser?.uid ?? "tempUser")/image\(index+1).heic"
-            }
-        }
-    }
-    
-    func removeUpdatedDeletedImagesFromCache(photo: Photo) {
-        if let index = (photo.firebaseImagePath?.split(separator: "/").last?.split(separator: ".").first?.last?.wholeNumberValue) {
-            let url = downloadedPhotosURLs[index-1].imageURL?.absoluteString
-            SDImageCache.shared.removeImage(forKey: url) {
-                print("Removed URL: \(String(describing: url))")
-                print("Removed \(String(describing: photo.firebaseImagePath?.split(separator: "/").last)) from CACHE")
-            }
-        }
-    }
-    
-    func compareAllPhotosForChanges() -> [Int] {
-        var shouldClearImageCache = false
-        var changedPhotosIndexes = [Int]()
-        rectifyFirebaseImagePaths()
-        for (index, (photo1, photo2)) in (zip(downloadedPhotos, photosForUploadUpdate)).enumerated() {
-            if !(photo1.image?.isEqualPhoto(compareTo: photo2.image ?? UIImage()))! {
-                // removeUpdatedDeletedImagesFromCache(photo: photo1)
-                shouldClearImageCache = true
-                if photo2.image == nil && photo2.firebaseImagePath != nil {
-                    /// Trigger Delete
-                    print("TRIGGERING DELETE...")
-                    deleteMissingPhoto(missing: photo2)
+                self.firebaseStorageUpload(photo: photo, filename: filename, isUpdateProcess: false) {
+                    return
                 }
-                else {
-                    changedPhotosIndexes.append(index)
-                }
-                self.downloadedPhotosURLs.removeAll { url in
-                    if url.firebaseImagePath == photo1.firebaseImagePath { return true }
-                    else { return false }
-                }
-                
-            }
-        }
-        if shouldClearImageCache {
-            SDImageCache.shared.clearMemory()
-            SDImageCache.shared.clearDisk(onCompletion: nil)
-        }
-        return changedPhotosIndexes
-    }
-    
-    func updateChangedPhotos(indexes: [Int]) {
-        for index in indexes {
-            if photosForUploadUpdate[index].image != nil {
-                let filename = "image\(index+1).heic"
-                firebaseStorageUpload(photo: photosForUploadUpdate[index], filename: String(filename), isUpdateProcess: true)
             }
         }
     }
     
-    func updateNewPhotosAdded() {
-        for (index, photo) in zip(photosForUploadUpdate[(downloadedPhotos.count)...].indices, photosForUploadUpdate[(downloadedPhotos.count)...]) {
+    /// Upload new/Update Old photo from Profile page
+    func uploadUpdateSinglePhoto(photo: Photo, filename: String?, isUpdate: Bool, onFinish: @escaping () -> Void) {
+        if photo.image != nil {
+            if filename == nil {
+                if let filename = photo.firebaseImagePath?.split(separator: "/").last {
+                    self.firebaseStorageUpload(photo: photo, filename: String(filename), isUpdateProcess: isUpdate, onFinish: onFinish)
+                }
+            }
+            else {
+                self.firebaseStorageUpload(photo: photo, filename: String(filename!), isUpdateProcess: isUpdate, onFinish: onFinish)
+            }
+        }
+    }
+    
+    /// Used for re-uploading images placed after the deleted image, with rectified names and firebase storage paths
+    func uploadUpdateMultiplePhotos(photos: ArraySlice<Photo>) {
+        self.downloadedPhotosURLs.removeAll()
+        for (index, photo) in zip(photos.indices, photos) {
             if photo.image != nil {
                 let filename = "image\(index+1).heic"
-                self.firebaseStorageUpload(photo: photo, filename: filename, isUpdateProcess: false)
+                self.firebaseStorageUpload(photo: photo, filename: filename, isUpdateProcess: false) {
+                    return
+                }
             }
         }
     }
     
-    func deleteMissingPhoto(missing: Photo) {
+    /// Clear all images from SD Web Image Cache -- Generally on Delete/Update
+    func clearAllImageCache() {
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk(onCompletion: nil)
+    }
+    
+    /// To delete the given photo from Firebase Storage
+    func deleteMissingPhoto(missing: Photo, onFinish: @escaping () -> Void) {
         let storageRef = storage.reference()
         let deleteRef = storageRef.child(missing.firebaseImagePath!)
         
@@ -369,68 +353,12 @@ class PhotoModel: ObservableObject {
             if let error = error {
                 print("Couldn't delete \(String(describing: missing.firebaseImagePath?.split(separator: "/").last))")
                 print(error)
+                onFinish()
             } else {
                 print("Photo \(String(describing: missing.firebaseImagePath?.split(separator: "/").last)) was deleted.")
+                onFinish()
             }
         }
-    }
-    
-    func updatePhotos() {
-        if getPhotosCount() >= 2{
-            /// CASES WHERE UPDATE SHALL BE TRIGGERED.
-            print("checkpoint 0")
-            if downloadedPhotos.count < 6 {
-                print("checkpoint 1")
-                /// If less than 6 photos exist and a new photo is added -- Difference between size of photosForUploadUpdate and downloadedPhotos
-                if downloadedPhotos.count < getPhotosCount() {
-                    print("checkpoint 2")
-                    /// Get the new photo and upload
-                    updateNewPhotosAdded()
-                    /// Check if any other photo is different
-                    let changedPhotosIndexes = compareAllPhotosForChanges()
-                    if changedPhotosIndexes.count>0 {
-                        self.updateChangedPhotos(indexes: changedPhotosIndexes)
-                    }
-                    
-                }
-                /// If less than 6 photos exist and one of them is changed -- No difference between size of arrays, use isEqualPhoto to compare -- Only changed photos, None added
-                else if downloadedPhotos.count == getPhotosCount() {
-                    print("checkpoint 3")
-                    /// Check if any photo is different
-                    let changedPhotosIndexes = compareAllPhotosForChanges()
-                    if changedPhotosIndexes.count>0 {
-                        self.updateChangedPhotos(indexes: changedPhotosIndexes)
-                    }
-                }
-                /// If less than 6 photos exist and one or more are deleted -- Remove delete button if total count of photos == 2
-                else {
-                    /// Check if any other photo is different & Delete missing photos
-                    print("checkpoint 4")
-                    let changedPhotosIndexes = compareAllPhotosForChanges()
-                    if changedPhotosIndexes.count>0 {
-                        self.updateChangedPhotos(indexes: changedPhotosIndexes)
-                    }
-                }
-                
-            }
-            
-            else if downloadedPhotos.count == 6 {
-                /// If all 6 photos exist and one of them is changed -- use isEqualPhoto method to compare images between photosForUploadUpdate and downloadedPhotos
-                /// /// If all 6 photos existed and one or more are deleted
-                /// Check if any other photo is different & Delete missing photos
-                print("checkpoint 4")
-                let changedPhotosIndexes = compareAllPhotosForChanges()
-                if changedPhotosIndexes.count>0 {
-                    self.updateChangedPhotos(indexes: changedPhotosIndexes)
-                }
-            }
-            
-            else {
-                print("Logical error in photo update module")
-            }
-
-        }
-        self.getPhotos()
     }
     
 }

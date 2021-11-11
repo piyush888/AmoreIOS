@@ -19,6 +19,7 @@ struct Photo: Identifiable, Hashable, Equatable {
     var image: UIImage?
     var downsampledImage: UIImage?
     var firebaseImagePath: String?
+    var inProgress: Bool? = false
     
     static func ==(lhs: Photo, rhs: Photo) -> Bool {
         return(lhs.id == rhs.id)

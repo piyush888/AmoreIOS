@@ -15,7 +15,7 @@ struct UserSnapDetails: View {
     var body: some View {
         
         VStack {
-            Image(uiImage: photoModel.downloadedPhotos.count == Array(Set(photoModel.downloadedPhotosURLs)).count ? photoModel.downloadedPhotos.sorted { $0.id! < $1.id! }[0].image ?? UIImage() : UIImage())
+            Image(uiImage: photoModel.getPhotosCount() == Array(Set(photoModel.downloadedPhotosURLs)).count ? photoModel.photosForUploadUpdate.sorted { $0.id! < $1.id! }[0].image ?? UIImage() : UIImage())
                 .resizable()
                 .scaledToFill()
                 .frame(width: 200, height: 200, alignment: .center)
