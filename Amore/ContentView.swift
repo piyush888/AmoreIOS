@@ -15,7 +15,7 @@ struct ContentView: View {
     @StateObject var profileModel = ProfileViewModel()
     @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
-    
+    @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
     
     var body: some View {
         
@@ -46,6 +46,7 @@ struct ContentView: View {
                 LogInSheetView()
                     .environmentObject(profileModel)
                     .environmentObject(streamModel)
+                    .environmentObject(adminAuthenticationModel)
                 
                 Spacer()
             }
@@ -69,6 +70,7 @@ struct ContentView: View {
                                     .environmentObject(profileModel)
                                     .environmentObject(streamModel)
                                     .environmentObject(photoModel)
+                                    .environmentObject(adminAuthenticationModel)
                                     .onAppear {
                                         photoModel.getPhotos()
                                         profileModel.getUserProfile()

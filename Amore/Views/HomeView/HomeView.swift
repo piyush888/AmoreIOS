@@ -9,12 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var currentPage: ViewTypes = .userSettingsView
+    @State var currentPage: ViewTypes = .swipeView
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
-    
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     var body: some View {
         
@@ -31,6 +31,9 @@ struct HomeView: View {
                         
                     case .swipeView:
                         AllCardsView()
+                        .onAppear {
+                            adminAuthenticationModel.adminLogin()
+                        }
                         
                     case .filterSettingsView:
                         FilterSettings()

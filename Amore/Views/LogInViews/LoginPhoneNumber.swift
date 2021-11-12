@@ -15,6 +15,7 @@ struct LoginPhoneNumber: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     let phoneNumberKit = PhoneNumberKit()
     

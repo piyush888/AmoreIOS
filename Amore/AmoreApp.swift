@@ -20,22 +20,9 @@ struct AmoreApp: App {
         
         WindowGroup {
             
-//            FilterSettings()
-            
             /* Starts the application with Onboarding View*/
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
-            /* View to upload photos after add school view */
-//            AddPhotosView()
-
-            /* Just see how cards will look like when swipping */
-//            AllCardsView()
-            
-            /* Shows Location View After Pic Images Views in Onboading*/
-//            LocationView()
-//                .environmentObject(LocationModel())
-            
         }
     }
 }
@@ -48,62 +35,42 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        print("SwiftUI_2_Lifecycle_PhoneNumber_AuthApp application is starting up. ApplicationDelegate didFinishLaunchingWithOptions.")
         
-        
+        // Stream Chat SDK
         // if user already logged in...
         if logStatus {
-            
             // Reloading user if logged in...
             // Verifying if user is already in stream SDk or Not...
-            
             // for that we need to intialize the stream sdk with JWT Tokens...
             // AKA known as Authenticatiog with stream SDK....
-            
             // generating JWT Token...
-            
             let signers = JWTSigners()
             signers.use(.hs256(key: streamSecretKey.data(using: .utf8)!))
             
             // Creating Payload and inserting Userd ID to generate Token..
             // Here User ID will be Firebase UID....
             // Since its Unique...
-            
             guard let uid = Auth.auth().currentUser?.uid else{
                 return true
             }
-            
             let payload = PayLoad(user_id: uid)
-            
             // generating Token...
             do{
-                
                 let jwt = try signers.sign(payload)
-                
-                print(jwt)
-                
                 let config = ChatClientConfig(apiKeyString: streamAPIKey)
-                
                 let tokenProvider = TokenProvider.closure { client, completion in
-                    
                     guard let token = try? Token(rawValue: jwt) else{
                         return
                     }
-                    
                     completion(.success(token))
                 }
-                
                 ChatClient.shared = ChatClient(config: config, tokenProvider: tokenProvider)
                 ChatClient.shared.currentUserController().reloadUserIfNeeded()
-                
             }
             catch{
                 print(error.localizedDescription)
             }
         }
-        
-        
-        
         return true
     }
 

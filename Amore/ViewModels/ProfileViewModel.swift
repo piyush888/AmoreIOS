@@ -80,7 +80,7 @@ class ProfileViewModel: ObservableObject {
         profileCore.school = userProfile.school
     }
     
-    func signIn(streamObj: StreamViewModel) {
+    func signIn(streamObj: StreamViewModel, adminAuthenticationObj:AdminAuthenticationViewModel) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
             print(verificationID+" in sign in!")
@@ -101,6 +101,7 @@ class ProfileViewModel: ObservableObject {
                             }
                             self.getUserProfile()
                             streamObj.streamLogin(uid: authRes.user.uid)
+                            adminAuthenticationObj.adminLogin()
                         }
                         self.loginFormVisible = false
                     }

@@ -13,6 +13,7 @@ struct LoginOTPKeyCodeParent: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     @Binding var otpGeneratedOnce: Bool
     
@@ -54,7 +55,7 @@ struct LoginOTPKeyCodeParent: View {
             
             // OTP Submit button
             Button(action: {
-                profileModel.signIn(streamObj: streamModel)
+                profileModel.signIn(streamObj: streamModel, adminAuthenticationObj: adminAuthenticationModel)
             }) {
                 ZStack{
                     Rectangle()
