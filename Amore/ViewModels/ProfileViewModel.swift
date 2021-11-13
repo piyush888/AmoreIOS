@@ -101,7 +101,7 @@ class ProfileViewModel: ObservableObject {
                             }
                             self.getUserProfile()
                             streamObj.streamLogin(uid: authRes.user.uid)
-                            adminAuthenticationObj.adminLogin()
+                            adminAuthenticationObj.serverLogin()
                         }
                         self.loginFormVisible = false
                     }
