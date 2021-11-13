@@ -32,7 +32,7 @@ struct HomeView: View {
                     case .swipeView:
                         AllCardsView()
                         .onAppear {
-                            adminAuthenticationModel.adminLogin()
+                            adminAuthenticationModel.serverLogin()
                         }
                         
                     case .filterSettingsView:
