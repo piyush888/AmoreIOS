@@ -71,10 +71,6 @@ struct PreviewProfile: View {
                         CardPassions(passions: profileModel.editUserProfile.interests ?? ["tempPassion"])
                             .padding(.top,10)
                         
-                        
-                        // Gallery
-                        CardGalleryImages(deviceWidth: (geometry.size.width - 25), image1: photoModel.photosForUploadUpdate[1].image, image2: photoModel.photosForUploadUpdate[2].image, image3: photoModel.photosForUploadUpdate[3].image, image4: photoModel.photosForUploadUpdate[4].image, image5: photoModel.photosForUploadUpdate[5].image)
-                                .padding(.top,10)
                     }
                     .padding(.horizontal,10)
                 }

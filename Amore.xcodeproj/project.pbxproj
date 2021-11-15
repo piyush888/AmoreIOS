@@ -72,9 +72,15 @@
 		E2347142271F4B970006F336 /* GenderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347141271F4B970006F336 /* GenderSettings.swift */; };
 		E2347144271F4C090006F336 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347143271F4C090006F336 /* AgeSettings.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
+		E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */; };
+		E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = E23BAA982741D8A700F619D6 /* WrappingStack */; };
+		E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
 		E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */; };
+		E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */; };
+		E273C31C27415FEA00AA3359 /* CardImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C31B27415FE900AA3359 /* CardImages.swift */; };
+		E273C31E274170D200AA3359 /* ProfileBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C31D274170D200AA3359 /* ProfileBio.swift */; };
 		E27AC5442720C9BA00EB50F7 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = E27AC5432720C9BA00EB50F7 /* iPhoneNumberField */; };
 		E27AC5472720CA0A00EB50F7 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = E27AC5462720CA0A00EB50F7 /* JWTKit */; };
 		E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AC5482720CB5400EB50F7 /* PhotoModel.swift */; };
@@ -98,7 +104,6 @@
 		E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */; };
 		E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */; };
 		E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0D2713350900C82174 /* CardBasicInfo.swift */; };
-		E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0F2713534200C82174 /* CardGalleryImages.swift */; };
 		E298BA142713A85500C82174 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA132713A85500C82174 /* ControlCenter.swift */; };
 		E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B29382722B09400C38035 /* UserEditProfile.swift */; };
 		E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293A27234B6B00C38035 /* UserSettingView.swift */; };
@@ -210,9 +215,14 @@
 		E2347141271F4B970006F336 /* GenderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSettings.swift; sourceTree = "<group>"; };
 		E2347143271F4C090006F336 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAgeDistance.swift; sourceTree = "<group>"; };
+		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
 		E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAuthenticationViewModel.swift; sourceTree = "<group>"; };
+		E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeButtons.swift; sourceTree = "<group>"; };
+		E273C31B27415FE900AA3359 /* CardImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImages.swift; sourceTree = "<group>"; };
+		E273C31D274170D200AA3359 /* ProfileBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBio.swift; sourceTree = "<group>"; };
 		E27AC5482720CB5400EB50F7 /* PhotoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		E27AC54A2720CB6200EB50F7 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E27AC54C2721237500EB50F7 /* ReligionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReligionSettings.swift; sourceTree = "<group>"; };
@@ -234,7 +244,6 @@
 		E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeChild.swift; sourceTree = "<group>"; };
 		E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUserInfoForm.swift; sourceTree = "<group>"; };
 		E298BA0D2713350900C82174 /* CardBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBasicInfo.swift; sourceTree = "<group>"; };
-		E298BA0F2713534200C82174 /* CardGalleryImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGalleryImages.swift; sourceTree = "<group>"; };
 		E298BA132713A85500C82174 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E29B29382722B09400C38035 /* UserEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditProfile.swift; sourceTree = "<group>"; };
 		E29B293A27234B6B00C38035 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
@@ -276,6 +285,7 @@
 				E27AC5472720CA0A00EB50F7 /* JWTKit in Frameworks */,
 				684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */,
 				E27AC5442720C9BA00EB50F7 /* iPhoneNumberField in Frameworks */,
+				E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,9 +422,13 @@
 			children = (
 				E24A0F15271256C4001640CA /* AllCardsView.swift */,
 				E24A0F1727125727001640CA /* SingleCardView.swift */,
+				E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */,
 				E298BA0D2713350900C82174 /* CardBasicInfo.swift */,
-				E298BA0F2713534200C82174 /* CardGalleryImages.swift */,
 				1B4ED871270F345E00290FFF /* CardPassions.swift */,
+				E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */,
+				E273C31B27415FE900AA3359 /* CardImages.swift */,
+				E273C31D274170D200AA3359 /* ProfileBio.swift */,
+				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -656,6 +670,7 @@
 			packageProductDependencies = (
 				E27AC5432720C9BA00EB50F7 /* iPhoneNumberField */,
 				E27AC5462720CA0A00EB50F7 /* JWTKit */,
+				E23BAA982741D8A700F619D6 /* WrappingStack */,
 			);
 			productName = Amore;
 			productReference = E2F8AA4D26F9427F00CC7A72 /* Amore.app */;
@@ -687,6 +702,7 @@
 			packageReferences = (
 				E27AC5422720C9BA00EB50F7 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				E27AC5452720CA0A00EB50F7 /* XCRemoteSwiftPackageReference "jwt-kit" */,
+				E23BAA972741D8A700F619D6 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 			);
 			productRefGroup = E2F8AA4E26F9427F00CC7A72 /* Products */;
 			projectDirPath = "";
@@ -770,6 +786,7 @@
 				E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */,
 				E2347124271BFDDA0006F336 /* ChatView.swift in Sources */,
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
+				E273C31E274170D200AA3359 /* ProfileBio.swift in Sources */,
 				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
@@ -783,6 +800,7 @@
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
+				E273C31C27415FEA00AA3359 /* CardImages.swift in Sources */,
 				E2DBC027272B3BC0000630F5 /* SFSafariViewWrapper.swift in Sources */,
 				E2DBC023272B31AF000630F5 /* PhoneNumberEmail.swift in Sources */,
 				1B6AB336271DBE9600A45A82 /* (null) in Sources */,
@@ -808,7 +826,6 @@
 				E2DBC03C272DFCB0000630F5 /* GoldCard.swift in Sources */,
 				E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
-				E298BA102713534200C82174 /* CardGalleryImages.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
@@ -821,8 +838,10 @@
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */,
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
+				E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */,
 				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
+				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
 				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
@@ -856,6 +875,7 @@
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
+				E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */,
 				E2DBC031272DAF73000630F5 /* SuperLikeCard.swift in Sources */,
 				E2851CB02727580C005B19E1 /* EditProfileUtil.swift in Sources */,
 				E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */,
@@ -1064,6 +1084,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E23BAA972741D8A700F619D6 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E27AC5422720C9BA00EB50F7 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
@@ -1083,6 +1111,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E23BAA982741D8A700F619D6 /* WrappingStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23BAA972741D8A700F619D6 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
+			productName = WrappingStack;
+		};
 		E27AC5432720C9BA00EB50F7 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E27AC5422720C9BA00EB50F7 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;

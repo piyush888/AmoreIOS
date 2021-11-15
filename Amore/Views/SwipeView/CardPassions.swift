@@ -6,37 +6,43 @@
 //
 
 import SwiftUI
+import WrappingStack
 
 struct CardPassions: View {
     
     var passions: [String] = [""]
-    @State private var passionsCombinedString = ""
-    
-    
-    func combineString() {
-        passionsCombinedString = passions.joined(separator: ", ")
-    }
     
     var body: some View {
         
-        HStack {
-            VStack(alignment: .leading) {
-                    Text("Interests")
-                        .font(.BoardingTitle2)
-                    
-                    Text(passionsCombinedString)
-                        .font(.subheadline)
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Passions")
+                    .font(.BoardingTitle2)
+                Spacer()
             }
-            Spacer()
+            
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 5, verticalSpacing: 5) {
+                ForEach(passions, id: \.self) { passion in
+                    
+                    Text("#\(passion)")
+                        .font(.subheadline)
+                       .padding(10)
+                       .background(
+                           Rectangle()
+                               .stroke(Color.yellow)
+                               .background(Color.yellow)
+                               .cornerRadius(10.0)
+                               .opacity(0.1)
+                       )
+                }
+            }
         }
-        .onAppear {
-            combineString()
-        }
+        
     }
 }
 
-struct PassionsCombinedString_Previews: PreviewProvider {
+struct CardPassions_Previews: PreviewProvider {
     static var previews: some View {
-        CardPassions(passions: ["Hello","World"])
+        CardPassions(passions: ["Photography","Jumping","Writting","Running","Air","Hellophot"])
     }
 }

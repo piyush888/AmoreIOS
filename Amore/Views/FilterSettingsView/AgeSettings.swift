@@ -21,7 +21,7 @@ struct AgeSettings: View {
     var body: some View {
         
             NavigationLink(
-              destination: Slider(scaleMinAge: self.$scaleMinAge,
+              destination: AgeSlider(scaleMinAge: self.$scaleMinAge,
                                   scaleMaxAge: self.$scaleMaxAge,
                                   realMinAge: self.$realMinAge,
                                   realMaxAge: self.$realMaxAge,
@@ -45,7 +45,7 @@ struct AgeSettings: View {
     }
 }
 
-struct Slider : View {
+struct AgeSlider : View {
     
     @Binding var scaleMinAge: CGFloat
     @Binding var scaleMaxAge: CGFloat
