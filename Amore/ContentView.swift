@@ -62,34 +62,21 @@ struct ContentView: View {
                 ZStack {
                     // If User profile already created
                     if profileModel.userProfile.email != nil {
-                        // Wait while photo info fetched from firebase storage
-                        if photoModel.photosFetchedAndReady {
-                            // If 2 or more photos already added
-                            if photoModel.minUserPhotosAdded {
-                                HomeView()
-                                    .environmentObject(profileModel)
-                                    .environmentObject(streamModel)
-                                    .environmentObject(photoModel)
-                                    .environmentObject(adminAuthenticationModel)
-                                    .onAppear {
-                                        photoModel.getPhotos()
-                                        profileModel.getUserProfile()
-                                    }
-                            }
-                            else {
-                                AddPhotosView()
-                                    .environmentObject(photoModel)
-                                    .onAppear {
-                                        photoModel.getPhotos()
-                                    }
-                            }
-                        }
-                        // Progress Wheel while waiting for photo info to be fetched
-                        else {
-                            ProgressView()
+                        // If 2 or more photos already added
+                        if profileModel.numOfUserPhotosAdded() >= 2 {
+                            HomeView()
+                                .environmentObject(profileModel)
+                                .environmentObject(streamModel)
+                                .environmentObject(photoModel)
+                                .environmentObject(adminAuthenticationModel)
                                 .onAppear {
-                                    photoModel.getPhotos()
+                                    profileModel.getUserProfile()
                                 }
+                        }
+                        else {
+                            AddPhotosView()
+                                .environmentObject(photoModel)
+                                .environmentObject(profileModel)
                         }
                         
                     }
@@ -99,12 +86,6 @@ struct ContentView: View {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
                             .environmentObject(streamModel)
-                            .onAppear {
-                                if photoModel.photosFetchedAndReady || photoModel.minUserPhotosAdded {
-                                    photoModel.photosFetchedAndReady = false
-                                    photoModel.minUserPhotosAdded = false
-                                }
-                            }
                     }
                 }
             }

@@ -217,5 +217,39 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    func numOfUserPhotosAdded() -> Int {
+        var counter = 0
+        if userProfile.image1?.imageURL != nil { counter += 1 }
+        if userProfile.image2?.imageURL != nil { counter += 1 }
+        if userProfile.image3?.imageURL != nil { counter += 1 }
+        if userProfile.image4?.imageURL != nil { counter += 1 }
+        if userProfile.image5?.imageURL != nil { counter += 1 }
+        if userProfile.image6?.imageURL != nil { counter += 1 }
+        return counter
+    }
+    
+    func defragmentProfileImagesArray() {
+        /// **Defragment photos array#
+        /// -- ## profileImages = [im1, im2....im6]
+        /// -- ## remove non image elems
+        /// -- ## append non image elems
+        /// -- ## rewrite ids
+        /// -- ## assign back to im1, im2, im3,...im6
+        var profileImages = [editUserProfile.image1, editUserProfile.image2, editUserProfile.image3, editUserProfile.image4, editUserProfile.image5, editUserProfile.image6]
+        profileImages = profileImages.filter({ profileImage in
+            return (profileImage?.imageURL != nil)
+        })
+        for _ in 0..<6-profileImages.count {
+            profileImages.append(ProfileImage())
+        }
+        
+        editUserProfile.image1 = profileImages[0]
+        editUserProfile.image2 = profileImages[1]
+        editUserProfile.image3 = profileImages[2]
+        editUserProfile.image4 = profileImages[3]
+        editUserProfile.image5 = profileImages[4]
+        editUserProfile.image6 = profileImages[5]
+    }
 }
 

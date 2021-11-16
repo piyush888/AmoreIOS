@@ -14,23 +14,13 @@ struct AddPhotosView: View {
     
     // All the 6 images that we give user an option to upload
     @EnvironmentObject var photoModel: PhotoModel
-    @State private var disableButton = false
-    @State private var counter = 0
+    @EnvironmentObject var profileModel: ProfileViewModel
+    var disableButton: Bool {
+        if profileModel.numOfUserPhotosAdded() >= 2 { return true }
+        else { return false }
+    }
     
     @State var showsAlert = false
-    
-    func imagesUploadedByUser() {
-        for photoObject in photoModel.photosForUploadUpdate {
-            if photoObject.image != nil {
-                counter += 1
-            }
-        }
-    }
-    
-    func resizeImagesAndUpload() {
-        photoModel.populateIdsForUploadUpdatePhotos()
-        photoModel.uploadPhotos()
-    }
     
     let adaptivecolumns = Array(repeating:
                                 GridItem(.adaptive(minimum: 150),spacing: 5,
@@ -62,13 +52,10 @@ struct AddPhotosView: View {
             Spacer()
             
             Button{
-                // Update the counter
-                imagesUploadedByUser()
                 // Store the images in the firestore database
-                if counter >= 2 {
+                if profileModel.numOfUserPhotosAdded() >= 2 {
                     // Update to firestore
-                    print("Updating to firestore...")
-                    resizeImagesAndUpload()
+                    print("Continue to HomePage...")
                 } else {
                     showsAlert = true
                     print("Alert atleast 2 photos are required")

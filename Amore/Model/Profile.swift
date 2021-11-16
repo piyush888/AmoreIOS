@@ -36,34 +36,46 @@ struct Profile: Identifiable, Codable, Equatable {
     var country: String?
     var discoveryStatus: Bool? = false
     var notificationsStatus: Bool? = false
+    var image1: ProfileImage?
+    var image2: ProfileImage?
+    var image3: ProfileImage?
+    var image4: ProfileImage?
+    var image5: ProfileImage?
+    var image6: ProfileImage?
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
-        lhs.lastName == rhs.lastName &&
-        lhs.email == rhs.email &&
-        lhs.dateOfBirth == rhs.dateOfBirth &&
-        lhs.interests == rhs.interests &&
-        lhs.genderIdentity == rhs.genderIdentity &&
-        lhs.sexualOrientation == rhs.sexualOrientation &&
-        lhs.sexualOrientationVisible == rhs.sexualOrientationVisible &&
-        lhs.showMePreference == rhs.showMePreference &&
-        lhs.work == rhs.work &&
-        lhs.school == rhs.school &&
-        lhs.age == rhs.age &&
-        lhs.headline == rhs.headline &&
-        lhs.profileDistanceFromUser == rhs.profileDistanceFromUser &&
-        lhs.jobTitle == rhs.jobTitle &&
-        lhs.workType == rhs.workType &&
-        lhs.height == rhs.height &&
-        lhs.education == rhs.education &&
-        lhs.religion == rhs.religion &&
-        lhs.community == rhs.community &&
-        lhs.politics == rhs.politics &&
-        lhs.location == rhs.location &&
-        lhs.description == rhs.description &&
-        lhs.country == rhs.country &&
-        lhs.discoveryStatus == rhs.discoveryStatus &&
-        lhs.notificationsStatus == rhs.notificationsStatus)
+               lhs.lastName == rhs.lastName &&
+               lhs.email == rhs.email &&
+               lhs.dateOfBirth == rhs.dateOfBirth &&
+               lhs.interests == rhs.interests &&
+               lhs.genderIdentity == rhs.genderIdentity &&
+               lhs.sexualOrientation == rhs.sexualOrientation &&
+               lhs.sexualOrientationVisible == rhs.sexualOrientationVisible &&
+               lhs.showMePreference == rhs.showMePreference &&
+               lhs.work == rhs.work &&
+               lhs.school == rhs.school &&
+               lhs.age == rhs.age &&
+               lhs.headline == rhs.headline &&
+               lhs.profileDistanceFromUser == rhs.profileDistanceFromUser &&
+               lhs.jobTitle == rhs.jobTitle &&
+               lhs.workType == rhs.workType &&
+               lhs.height == rhs.height &&
+               lhs.education == rhs.education &&
+               lhs.religion == rhs.religion &&
+               lhs.community == rhs.community &&
+               lhs.politics == rhs.politics &&
+               lhs.location == rhs.location &&
+               lhs.description == rhs.description &&
+               lhs.country == rhs.country &&
+               lhs.discoveryStatus == rhs.discoveryStatus &&
+               lhs.notificationsStatus == rhs.notificationsStatus &&
+               lhs.image1 == rhs.image1 &&
+               lhs.image2 == rhs.image2 &&
+               lhs.image3 == rhs.image3 &&
+               lhs.image4 == rhs.image4 &&
+               lhs.image5 == rhs.image5 &&
+               lhs.image6 == rhs.image6)
     }
 }
 

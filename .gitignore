@@ -6,3 +6,4 @@ Amore.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 Podfile.lock
 Amore.xcworkspace/xcuserdata
 Amore.xcworkspace/xcshareddata/swiftpm/Package.resolved
+*.resolved

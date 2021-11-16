@@ -6,11 +6,28 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PreviewProfile: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    
+    
+    func getImage(onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
+        SDWebImageManager.shared.loadImage(with: profileModel.editUserProfile.image1?.imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
+            if let err = error {
+                print(err)
+                return
+            }
+            guard let image = image else {
+                // No image handle this error
+                onFailure()
+                return
+            }
+            onSuccess(image)
+        }
+    }
     
     var body: some View {
         
@@ -21,11 +38,33 @@ struct PreviewProfile: View {
                 LazyVStack {
                     
                     VStack {
-                        Image(uiImage: photoModel.photosForUploadUpdate[0].image ?? UIImage())
+                        Image(uiImage: photoModel.photo1.image ?? UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
                             .clipped()
+                    }
+                    .onAppear(perform: {
+                        if photoModel.photo1.image == nil {
+                            if profileModel.editUserProfile.image1?.imageURL != nil {
+                                getImage {
+                                    photoModel.photo1.image = nil
+                                    photoModel.photo1.downsampledImage = nil
+                                } onSuccess: { image in
+                                    photoModel.photo1.image = image
+                                    photoModel.photo1.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+                                }
+                            }
+                        }
+                    })
+                    .onChange(of: profileModel.editUserProfile.image1?.imageURL) { newValue in
+                        getImage {
+                            photoModel.photo1.image = nil
+                            photoModel.photo1.downsampledImage = nil
+                        } onSuccess: { image in
+                            photoModel.photo1.image = image
+                            photoModel.photo1.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+                        }
                     }
                     
                     VStack {

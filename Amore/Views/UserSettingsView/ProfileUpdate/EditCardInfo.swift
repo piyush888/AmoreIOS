@@ -26,9 +26,6 @@ struct EditCardInfo: View {
                     UploadWindowsGroup()
                         .environmentObject(photoModel)
                 })
-                .onChange(of: photoModel.getPhotosCount()) { newValue in
-                    photoModel.populateIdsForUploadUpdatePhotos()
-                }
                 
                 
                 
