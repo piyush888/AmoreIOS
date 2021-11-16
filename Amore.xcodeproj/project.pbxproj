@@ -77,6 +77,13 @@
 		E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
+		E268A454274335C50045F264 /* UserHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A453274335C50045F264 /* UserHeight.swift */; };
+		E268A456274335DA0045F264 /* DoYouWorkOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A455274335DA0045F264 /* DoYouWorkOut.swift */; };
+		E268A458274336260045F264 /* HighestEducation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A457274336260045F264 /* HighestEducation.swift */; };
+		E268A45A274336330045F264 /* DoYouDrink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A459274336330045F264 /* DoYouDrink.swift */; };
+		E268A45C2743363C0045F264 /* DoYouSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A45B2743363C0045F264 /* DoYouSmoke.swift */; };
+		E268A45E274336580045F264 /* YouWantBabies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A45D274336580045F264 /* YouWantBabies.swift */; };
+		E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */; };
 		E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */; };
 		E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */; };
 		E273C31C27415FEA00AA3359 /* CardImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C31B27415FE900AA3359 /* CardImages.swift */; };
@@ -219,6 +226,13 @@
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
+		E268A453274335C50045F264 /* UserHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeight.swift; sourceTree = "<group>"; };
+		E268A455274335DA0045F264 /* DoYouWorkOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoYouWorkOut.swift; sourceTree = "<group>"; };
+		E268A457274336260045F264 /* HighestEducation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighestEducation.swift; sourceTree = "<group>"; };
+		E268A459274336330045F264 /* DoYouDrink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoYouDrink.swift; sourceTree = "<group>"; };
+		E268A45B2743363C0045F264 /* DoYouSmoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoYouSmoke.swift; sourceTree = "<group>"; };
+		E268A45D274336580045F264 /* YouWantBabies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouWantBabies.swift; sourceTree = "<group>"; };
+		E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoForBetterMatch.swift; sourceTree = "<group>"; };
 		E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAuthenticationViewModel.swift; sourceTree = "<group>"; };
 		E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeButtons.swift; sourceTree = "<group>"; };
 		E273C31B27415FE900AA3359 /* CardImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImages.swift; sourceTree = "<group>"; };
@@ -433,6 +447,20 @@
 			path = SwipeView;
 			sourceTree = "<group>";
 		};
+		E268A452274335B00045F264 /* UserInformation */ = {
+			isa = PBXGroup;
+			children = (
+				E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */,
+				E268A453274335C50045F264 /* UserHeight.swift */,
+				E268A455274335DA0045F264 /* DoYouWorkOut.swift */,
+				E268A457274336260045F264 /* HighestEducation.swift */,
+				E268A459274336330045F264 /* DoYouDrink.swift */,
+				E268A45B2743363C0045F264 /* DoYouSmoke.swift */,
+				E268A45D274336580045F264 /* YouWantBabies.swift */,
+			);
+			path = UserInformation;
+			sourceTree = "<group>";
+		};
 		E283677126F9531E00EEA049 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +622,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E268A452274335B00045F264 /* UserInformation */,
 				E221EAA72714F3A400769234 /* LikesTopPicksView */,
 				E221EAA62714F39600769234 /* UserSettingsView */,
 				E221EAA32714F37400769234 /* FilterSettingsView */,
@@ -788,6 +817,7 @@
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBio.swift in Sources */,
 				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
+				E268A458274336260045F264 /* HighestEducation.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
@@ -810,6 +840,7 @@
 				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
 				E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
+				E268A45C2743363C0045F264 /* DoYouSmoke.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
@@ -840,6 +871,7 @@
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
 				E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */,
 				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,
+				E268A454274335C50045F264 /* UserHeight.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
@@ -849,11 +881,13 @@
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
 				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,
+				E268A456274335DA0045F264 /* DoYouWorkOut.swift in Sources */,
 				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */,
+				E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
@@ -862,6 +896,7 @@
 				E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */,
 				E2DBC03A272DFCA5000630F5 /* PlatinumCard.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
+				E268A45E274336580045F264 /* YouWantBabies.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2347144271F4C090006F336 /* AgeSettings.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
@@ -869,6 +904,7 @@
 				E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
+				E268A45A274336330045F264 /* DoYouDrink.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
