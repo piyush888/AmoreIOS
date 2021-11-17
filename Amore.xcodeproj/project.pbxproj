@@ -13,6 +13,8 @@
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
+		1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273C9274509D400590DD1 /* ProfileImageView.swift */; };
+		1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */; };
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
@@ -162,6 +164,8 @@
 		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
+		1B6273C9274509D400590DD1 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifiers.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBasicInfo.swift; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 				E29B293E272461F400C38035 /* SubscriptionDetails.swift */,
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
 				E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */,
+				1B6273C9274509D400590DD1 /* ProfileImageView.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -662,6 +667,7 @@
 				E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */,
 				1B96B73E272A95840009683A /* OptionalExtension.swift */,
 				E2DBC026272B3BC0000630F5 /* SFSafariViewWrapper.swift */,
+				1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -842,6 +848,7 @@
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				E268A45C2743363C0045F264 /* DoYouSmoke.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
+				1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */,
@@ -908,6 +915,7 @@
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
+				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,

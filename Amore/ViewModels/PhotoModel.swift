@@ -20,6 +20,7 @@ class PhotoModel: ObservableObject {
     @Published var photo4 = Photo()
     @Published var photo5 = Photo()
     @Published var photo6 = Photo()
+    @Published var photoAction = false
     
     /// **___________________________________________________________________________________________________________________________**
     

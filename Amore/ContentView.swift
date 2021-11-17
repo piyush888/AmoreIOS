@@ -63,7 +63,7 @@ struct ContentView: View {
                     // If User profile already created
                     if profileModel.userProfile.email != nil {
                         // If 2 or more photos already added
-                        if profileModel.numOfUserPhotosAdded() >= 2 {
+                        if profileModel.minPhotosAdded {
                             HomeView()
                                 .environmentObject(profileModel)
                                 .environmentObject(streamModel)
@@ -71,12 +71,16 @@ struct ContentView: View {
                                 .environmentObject(adminAuthenticationModel)
                                 .onAppear {
                                     profileModel.getUserProfile()
+                                    profileModel.checkMinNumOfPhotosUploaded()
                                 }
                         }
                         else {
                             AddPhotosView()
                                 .environmentObject(photoModel)
                                 .environmentObject(profileModel)
+                                .onAppear {
+                                    profileModel.checkMinNumOfPhotosUploaded()
+                                }
                         }
                         
                     }
@@ -94,6 +98,7 @@ struct ContentView: View {
                 ProgressView()
                     .onAppear {
                         profileModel.getUserProfile()
+                        profileModel.checkMinNumOfPhotosUploaded()
                     }
             }
             

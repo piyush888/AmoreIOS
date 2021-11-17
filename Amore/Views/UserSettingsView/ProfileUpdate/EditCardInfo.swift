@@ -21,11 +21,22 @@ struct EditCardInfo: View {
         ScrollView(.vertical, showsIndicators: false, content: {
             VStack {
                 
-                // Display Photos
-                LazyVGrid(columns: adaptivecolumns, content: {
-                    UploadWindowsGroup()
-                        .environmentObject(photoModel)
-                })
+                ZStack{
+                    // Display Photos
+                    LazyVGrid(columns: adaptivecolumns, content: {
+                        UploadWindowsGroup()
+                            .environmentObject(photoModel)
+                    })
+                        .disabled(photoModel.photoAction)
+                        .grayscale(photoModel.photoAction ? 0.5 : 0)
+                    
+                    if photoModel.photoAction {
+                        ProgressView()
+                            .scaleEffect(x: 3, y: 3, anchor: .center)
+                    }
+                }
+                
+                
                 
                 
                 

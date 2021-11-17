@@ -33,6 +33,7 @@ class ProfileViewModel: ObservableObject {
     @Published var profileFetchedAndReady = false
     @Published var profileCreationDone = false
     @Published var loginFormVisible = false
+    @Published var minPhotosAdded: Bool = false
     
     let viewContext = PersistenceController.shared.container.viewContext
     
@@ -227,6 +228,10 @@ class ProfileViewModel: ObservableObject {
         if userProfile.image5?.imageURL != nil { counter += 1 }
         if userProfile.image6?.imageURL != nil { counter += 1 }
         return counter
+    }
+    
+    func checkMinNumOfPhotosUploaded() {
+        minPhotosAdded = numOfUserPhotosAdded() >= 2 ? true : false
     }
     
     func defragmentProfileImagesArray() {

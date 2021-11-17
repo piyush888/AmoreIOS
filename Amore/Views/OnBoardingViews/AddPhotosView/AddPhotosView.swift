@@ -15,10 +15,6 @@ struct AddPhotosView: View {
     // All the 6 images that we give user an option to upload
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
-    var disableButton: Bool {
-        if profileModel.numOfUserPhotosAdded() >= 2 { return true }
-        else { return false }
-    }
     
     @State var showsAlert = false
     
@@ -43,10 +39,20 @@ struct AddPhotosView: View {
                 
             
             // Give the user options to add photos
-            LazyVGrid(columns: adaptivecolumns, content: {
-                UploadWindowsGroup()
-                    .environmentObject(photoModel)
-            })
+            ZStack{
+                // Display Photos
+                LazyVGrid(columns: adaptivecolumns, content: {
+                    UploadWindowsGroup()
+                        .environmentObject(photoModel)
+                })
+                    .disabled(photoModel.photoAction)
+                    .grayscale(photoModel.photoAction ? 0.5 : 0)
+                
+                if photoModel.photoAction {
+                    ProgressView()
+                        .scaleEffect(x: 3, y: 3, anchor: .center)
+                }
+            }
             .padding(.horizontal)
          
             Spacer()
@@ -56,6 +62,7 @@ struct AddPhotosView: View {
                 if profileModel.numOfUserPhotosAdded() >= 2 {
                     // Update to firestore
                     print("Continue to HomePage...")
+                    profileModel.checkMinNumOfPhotosUploaded()
                 } else {
                     showsAlert = true
                     print("Alert atleast 2 photos are required")
@@ -65,7 +72,7 @@ struct AddPhotosView: View {
                     Rectangle()
                         .frame(height:45)
                         .cornerRadius(5.0)
-                        .foregroundColor(disableButton ? .gray : .pink)
+                        .foregroundColor(profileModel.numOfUserPhotosAdded() < 2 ? .gray : .pink)
                         
                     Text("Continue")
                         .foregroundColor(.white)
@@ -73,7 +80,7 @@ struct AddPhotosView: View {
                         .font(.BoardingButton)
                 }
             }
-            .disabled(disableButton)
+            .disabled(profileModel.numOfUserPhotosAdded() < 2)
             .padding(.horizontal,50)
         }
         .alert(isPresented: self.$showsAlert) {

@@ -31,6 +31,7 @@ struct UploadPhotoWindow: View {
         self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
         showSheet = false
         var oldImagePath = ""
+        photoModel.photoAction = true
         photoStruct.inProgress = true
         if profileImage?.firebaseImagePath != nil {
             oldImagePath = (profileImage?.firebaseImagePath)!
@@ -53,6 +54,7 @@ struct UploadPhotoWindow: View {
     func onAddPhoto() {
         if newPhotoChosen {
             var oldImagePath = ""
+            photoModel.photoAction = true
             photoStruct.inProgress = true
             if profileImage?.firebaseImagePath != nil {
                 oldImagePath = (profileImage?.firebaseImagePath)!
@@ -69,12 +71,14 @@ struct UploadPhotoWindow: View {
             }
             newPhotoChosen = false
             if oldImagePath != "" {
+                print("DELETING OLD PHOTO...\(oldImagePath)")
                 photoModel.deletePhotoByPath(path: oldImagePath)
             }
         }
     }
     
     func onDelete() {
+        photoModel.photoAction = true
         photoStruct.inProgress = true
         photoModel.deleteTriggered = true
         photoModel.deleteSinglePhoto(profileImage: profileImage ?? ProfileImage()) {
@@ -93,70 +97,77 @@ struct UploadPhotoWindow: View {
         SDWebImageManager.shared.loadImage(with: profileImage?.imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
             if let err = error {
                 print(err)
+                photoModel.photoAction = false
                 return
             }
             guard let image = image else {
                 // No image handle this error
                 photoStruct.image = nil
                 photoStruct.downsampledImage = nil
+                photoModel.photoAction = false
                 return
             }
             photoStruct.image = image
             photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+            
+            if finished {
+                print("FINISHED LOADING IMAGE...")
+                photoModel.photoAction = false
+            }
         }
     }
     
     var body: some View {
         
-        if !(photoStruct.inProgress ?? false) {
-            VStack {
+        
+        VStack {
+            
+            if photoStruct.image != nil {
+                Image(uiImage: photoStruct.downsampledImage ?? UIImage())
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 115, height: 170, alignment: .center)
+                    .clipped()
+                    .cornerRadius(5.0)
+                    .background(Color.pink.opacity(0.2))
+                    .shadow(color: Color("onboarding-pink"),
+                            radius: 2, x: 3, y: 3)
+                    .clipShape(Rectangle())
+            } else {
+                Image(uiImage: UIImage())
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 115, height: 170, alignment: .center)
+                    .clipped()
+                    .cornerRadius(5.0)
+                    .background(Color.pink.opacity(0.2))
+                    .shadow(color: Color("onboarding-pink"),
+                            radius: 2, x: 3, y: 3)
+                    .clipShape(Rectangle())
+            }
+            
+            
+            HStack {
+                Image(systemName:"plus.circle.fill")
+                    .resizable()
+                    .frame(width:20, height:20)
+                    .foregroundColor(.green)
+                    .onTapGesture {
+                        showSheet = true
+                        activeSheet = .imageChoose
+                    }
                 
+                // Don't show if the image is nil
                 if photoStruct.image != nil {
-                    Image(uiImage: photoStruct.downsampledImage ?? UIImage())
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 115, height: 170, alignment: .center)
-                        .clipped()
-                        .cornerRadius(5.0)
-                        .background(Color.pink.opacity(0.2))
-                        .shadow(color: Color("onboarding-pink"),
-                                radius: 2, x: 3, y: 3)
-                        .clipShape(Rectangle())
-                } else {
-                    Image(uiImage: UIImage())
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 115, height: 170, alignment: .center)
-                        .clipped()
-                        .cornerRadius(5.0)
-                        .background(Color.pink.opacity(0.2))
-                        .shadow(color: Color("onboarding-pink"),
-                                radius: 2, x: 3, y: 3)
-                        .clipShape(Rectangle())
-                }
-                
-                
-                HStack {
-                    Image(systemName:"plus.circle.fill")
+                    Image(systemName:"pencil.circle.fill")
                         .resizable()
                         .frame(width:20, height:20)
-                        .foregroundColor(.green)
+                        .foregroundColor(.blue)
                         .onTapGesture {
                             showSheet = true
-                            activeSheet = .imageChoose
+                            activeSheet = .cropImage
                         }
-                    
-                    // Don't show if the image is nil
-                    if photoStruct.image != nil {
-                        Image(systemName:"pencil.circle.fill")
-                            .resizable()
-                            .frame(width:20, height:20)
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                showSheet = true
-                                activeSheet = .cropImage
-                            }
-                        
+                    if profileModel.numOfUserPhotosAdded() > 2 {
                         Image(systemName:"trash.circle.fill")
                             .resizable()
                             .frame(width:20, height:20)
@@ -164,55 +175,44 @@ struct UploadPhotoWindow: View {
                             .onTapGesture {
                                 onDelete()
                             }
-                        
-                        
                     }
+                    
                 }
-                
             }
-            .onAppear(perform: {
-                if photoStruct.image == nil {
-                    if profileImage?.imageURL != nil {
-                        getImage()
-                    }
-                }
-            })
-            .onChange(of: profileImage?.imageURL, perform: { newURL in
-                if photoModel.deleteTriggered {
-                    photoStruct.image = nil
-                    photoStruct.downsampledImage = nil
-                    photoModel.deleteTriggered = false
-                }
+            
+        }
+        .onAppear(perform: {
+            if photoStruct.image == nil {
                 if profileImage?.imageURL != nil {
                     getImage()
                 }
-                
-            })
-            .sheet(isPresented: $showSheet) {
-                if self.activeSheet == .imageChoose {
-                    // Pick an image from the photo library:
-                    // If you wish to take a photo from camera instead:
-                    // ImagePicker(sourceType: .camera, selectedImage: self.$image)
-                    ImagePicker(sourceType: .photoLibrary, selectedPhoto: $photoStruct, newPhotoChosen: $newPhotoChosen, done: onAddPhoto)
-                }
-                else if self.activeSheet == .cropImage {
-                    // Option to Crop the image
-                    ImageCropper(image: self.$photoStruct.image, visible: self.$showSheet, done: self.imageCropped)
-                        .edgesIgnoringSafeArea(.all)
-                }
+            }
+        })
+        .onChange(of: profileImage?.imageURL, perform: { newURL in
+            if photoModel.deleteTriggered {
+                photoStruct.image = nil
+                photoStruct.downsampledImage = nil
+                photoModel.deleteTriggered = false
+            }
+            if profileImage?.imageURL != nil {
+                getImage()
+            }
+            
+        })
+        .sheet(isPresented: $showSheet) {
+            if self.activeSheet == .imageChoose {
+                // Pick an image from the photo library:
+                // If you wish to take a photo from camera instead:
+                // ImagePicker(sourceType: .camera, selectedImage: self.$image)
+                ImagePicker(sourceType: .photoLibrary, selectedPhoto: $photoStruct, newPhotoChosen: $newPhotoChosen, done: onAddPhoto)
+            }
+            else if self.activeSheet == .cropImage {
+                // Option to Crop the image
+                ImageCropper(image: self.$photoStruct.image, visible: self.$showSheet, done: self.imageCropped)
+                    .edgesIgnoringSafeArea(.all)
             }
         }
-        else {
-            ProgressView()
-                .scaledToFill()
-                .frame(width: 115, height: 170, alignment: .center)
-                .clipped()
-                .cornerRadius(5.0)
-                .background(Color.pink.opacity(0.2))
-                .shadow(color: Color("onboarding-pink"),
-                        radius: 2, x: 3, y: 3)
-                .clipShape(Rectangle())
-        }
+        
         
     }
 }

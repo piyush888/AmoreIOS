@@ -31,34 +31,7 @@ struct UserSnapDetails: View {
     var body: some View {
         
         VStack {
-            Image(uiImage: photoModel.photo1.image ?? UIImage())
-                .resizable()
-                .scaledToFill()
-                .frame(width: 200, height: 200, alignment: .center)
-                .clipShape(Circle())
-                .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
-                .onAppear(perform: {
-                    if photoModel.photo1.image == nil {
-                        if profileModel.editUserProfile.image1?.imageURL != nil {
-                            getImage {
-                                photoModel.photo1.image = nil
-                                photoModel.photo1.downsampledImage = nil
-                            } onSuccess: { image in
-                                photoModel.photo1.image = image
-                                photoModel.photo1.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
-                            }
-                        }
-                    }
-                })
-                .onChange(of: profileModel.editUserProfile.image1?.imageURL) { newValue in
-                    getImage {
-                        photoModel.photo1.image = nil
-                        photoModel.photo1.downsampledImage = nil
-                    } onSuccess: { image in
-                        photoModel.photo1.image = image
-                        photoModel.photo1.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
-                    }
-                }
+            ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: UserSnapDetailsModifier())
             
             Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
                 .font(.title2)
