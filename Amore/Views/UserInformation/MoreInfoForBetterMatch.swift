@@ -9,14 +9,10 @@ import SwiftUI
 
 struct MoreInfoForBetterMatch: View {
     
+    @EnvironmentObject var profileModel: ProfileViewModel
+    
     @State var moreInfoView: MoreInformation = .introInfoHomeView
     @State private var progressStatus = 0.0
-    @State var userHeight = 5.3
-    @State var workoutSelection: String? = nil
-    @State var educationSelection: String? = nil
-    @State var drinkingSelection: String? = nil
-    @State var smokingSelection: String? = nil
-    @State var babiesSelection: String? = nil
     
     
     var body: some View {
@@ -43,22 +39,22 @@ struct MoreInfoForBetterMatch: View {
                                                    progressStatus:$progressStatus)
                             
                             case .userHeightView:
-                                UserHeight(userHeight:$userHeight,
+                            UserHeight(userHeight:$profileModel.editUserProfile.height.boundDouble,
                                            moreInfoView:$moreInfoView,
                                            progressStatus:$progressStatus)
                             
                             case .doYouWorkOutView:
                                 QuestionaireTemplate(question: "Do you workout?",
                                                      listOfOptions: ["Everyday", "Sometimes", "Never"],
-                                                     userChoice: $workoutSelection,
+                                                     userChoice: $profileModel.editUserProfile.doYouWorkOut,
                                                      moreInfoView:$moreInfoView,
-                                                     moreInfoViewStatus:.doYourDrinkView,
+                                                     moreInfoViewStatus:.highestEducationView,
                                                      progressStatus:$progressStatus)
                                 
                             case .highestEducationView:
                                 QuestionaireTemplate(question: "What's your highest education?",
                                                  listOfOptions: ["Doctor PhD", "Masters", "Professional Degree","Bachelors","High School"],
-                                                 userChoice: $educationSelection,
+                                                     userChoice: $profileModel.editUserProfile.education,
                                                  moreInfoView:$moreInfoView,
                                                  moreInfoViewStatus:.doYourDrinkView,
                                                  progressStatus:$progressStatus)
@@ -66,7 +62,7 @@ struct MoreInfoForBetterMatch: View {
                             case .doYourDrinkView:
                                 QuestionaireTemplate(question: "Do you drink?",
                                              listOfOptions: ["Sometimes", "Occasionally", "Never"],
-                                             userChoice: $drinkingSelection,
+                                                     userChoice: $profileModel.editUserProfile.doYouDrink,
                                              moreInfoView:$moreInfoView,
                                              moreInfoViewStatus:.doYouSmokeView,
                                              progressStatus:$progressStatus)
@@ -74,7 +70,7 @@ struct MoreInfoForBetterMatch: View {
                             case .doYouSmokeView:
                                 QuestionaireTemplate(question: "Do you smoke?",
                                          listOfOptions: ["Sometimes", "Never"],
-                                         userChoice: $smokingSelection,
+                                                     userChoice: $profileModel.editUserProfile.doYouSmoke,
                                          moreInfoView:$moreInfoView,
                                          moreInfoViewStatus:.doYouWantBabies,
                                          progressStatus:$progressStatus)
@@ -82,7 +78,7 @@ struct MoreInfoForBetterMatch: View {
                             case .doYouWantBabies:
                                 QuestionaireTemplate(question: "Do you ever want babies?",
                                      listOfOptions: ["Yes", "Maybe Someday","Never"],
-                                     userChoice: $babiesSelection,
+                                                     userChoice: $profileModel.editUserProfile.doYouWantBabies,
                                      moreInfoView:$moreInfoView,
                                      moreInfoViewStatus:.completed,
                                      progressStatus:$progressStatus)

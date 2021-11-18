@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct UserHeight: View {
-    
+    @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var userHeight: Double
     @Binding var moreInfoView: MoreInformation
     @Binding var progressStatus: Double
@@ -48,6 +49,7 @@ struct UserHeight: View {
             
             // Continue to move to next view
             Button{
+                profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                 moreInfoView = .doYouWorkOutView
                 progressStatus = 33.33
             } label : {

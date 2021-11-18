@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardBasicInfo: View {
     
-    let height: String
+    let height: Double
     let work: String
     let education: String
     let religion: String
@@ -33,7 +33,7 @@ struct CardBasicInfo: View {
                 HStack {
                     Image(systemName:"arrow.up.square.fill")
                         .foregroundColor(Color.blue)
-                    Text(height)
+                    Text(String(height))
                         .font(.caption)
                     Spacer()
                 }

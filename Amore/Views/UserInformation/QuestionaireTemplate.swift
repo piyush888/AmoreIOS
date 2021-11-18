@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct QuestionaireTemplate: View {
-    
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var question: String
     @State var listOfOptions: [String]
     @Binding var userChoice: String?
@@ -69,6 +70,7 @@ struct QuestionaireTemplate: View {
                     showingAlert = true
                     return
                 }
+                profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                 moreInfoView = moreInfoViewStatus
                 progressStatus = progressStatus + 100.0/6.0
                 

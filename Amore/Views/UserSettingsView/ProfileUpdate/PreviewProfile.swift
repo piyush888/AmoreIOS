@@ -56,7 +56,7 @@ struct PreviewProfile: View {
                         
                         
                         // Profile Height, Education, Job, Religion, Location
-                        CardBasicInfo(height: profileModel.editUserProfile.height.bound,
+                        CardBasicInfo(height: profileModel.editUserProfile.height.boundDouble,
                                       work: profileModel.editUserProfile.work.bound,
                                       education: profileModel.editUserProfile.education.bound,
                                       religion: profileModel.editUserProfile.religion.bound,

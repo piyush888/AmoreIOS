@@ -73,6 +73,13 @@ struct ContentView: View {
                                     profileModel.getUserProfile()
                                     profileModel.checkMinNumOfPhotosUploaded()
                                 }
+                            // To Test MoreInfo, comment out HomeView and uncomment block below
+//                            MoreInfoForBetterMatch()
+//                                .environmentObject(profileModel)
+//                                .onAppear {
+//                                    profileModel.getUserProfile()
+//                                    profileModel.checkMinNumOfPhotosUploaded()
+//                                }
                         }
                         else {
                             AddPhotosView()

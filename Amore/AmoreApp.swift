@@ -20,10 +20,9 @@ struct AmoreApp: App {
         
         WindowGroup {
             
-            MoreInfoForBetterMatch()
             /* Starts the application with Onboarding View*/
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

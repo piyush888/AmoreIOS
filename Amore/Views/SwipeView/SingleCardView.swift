@@ -152,7 +152,7 @@ struct SingleCardView: View {
 // 7
 struct SingleCardView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleCardView(currentSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), user:User(id: 0, firstName: "Mark", lastName: "Bennett", age: 27, profileDistanceFromUser: 15, imageName1: "onboarding_girl4",imageName2: "onboarding_girl2",imageName3: "onboarding_girl3", imageName4:"onboarding_girl9",imageName5: "onboarding_girl5",imageName6: "onboarding_girl6", occupation: "Insurance Agent", passions: ["Drink","Gaming","Partying"], height: "6 1''", education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Delhi, IN",
+        SingleCardView(currentSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), user:User(id: 0, firstName: "Mark", lastName: "Bennett", age: 27, profileDistanceFromUser: 15, imageName1: "onboarding_girl4",imageName2: "onboarding_girl2",imageName3: "onboarding_girl3", imageName4:"onboarding_girl9",imageName5: "onboarding_girl5",imageName6: "onboarding_girl6", occupation: "Insurance Agent", passions: ["Drink","Gaming","Partying"], height: 6.1, education:"Bachelor",religion:"Hindu",politics:"Liberal",location:"Delhi, IN",
                                                                                                                description:"You are strong because you are imperfect"),
                  onRemove: { _ in
                     // do nothing

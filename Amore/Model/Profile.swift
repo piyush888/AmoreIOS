@@ -26,7 +26,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var profileDistanceFromUser: Int? = 0
     var jobTitle: String?
     var workType: String?
-    var height: String?
+    var height: Double? = 5.3
     var education: String?
     var religion: String?
     var community: String?
@@ -42,6 +42,10 @@ struct Profile: Identifiable, Codable, Equatable {
     var image4: ProfileImage?
     var image5: ProfileImage?
     var image6: ProfileImage?
+    var doYouWorkOut: String?
+    var doYouDrink: String?
+    var doYouSmoke: String?
+    var doYouWantBabies: String?
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
@@ -75,7 +79,11 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.image3 == rhs.image3 &&
                lhs.image4 == rhs.image4 &&
                lhs.image5 == rhs.image5 &&
-               lhs.image6 == rhs.image6)
+               lhs.image6 == rhs.image6 &&
+               lhs.doYouWorkOut == rhs.doYouWorkOut &&
+               lhs.doYouDrink == rhs.doYouDrink &&
+               lhs.doYouSmoke == rhs.doYouSmoke &&
+               lhs.doYouWantBabies == rhs.doYouWantBabies)
     }
 }
 
@@ -96,7 +104,7 @@ struct User: Hashable, CustomStringConvertible {
     let imageName6: String
     let occupation: String
     let passions: [String]
-    let height: String
+    let height: Double
     let education: String
     let religion: String
     let politics: String

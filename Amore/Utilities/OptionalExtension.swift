@@ -44,3 +44,22 @@ extension Optional where Wrapped == Bool {
         }
     }
 }
+
+extension Optional where Wrapped == Double {
+    var _boundDouble: Double? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var boundDouble: Double {
+        get {
+            return _boundDouble ?? 0
+        }
+        set {
+            _boundDouble = newValue.isFinite ? newValue : nil
+        }
+    }
+}

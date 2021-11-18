@@ -19,7 +19,7 @@ struct ChildCardView: View {
     @State var lastName: String
     @State var profileDistanceFromUser: Int
     @State var description: String
-    @State var height: String
+    @State var height: Double
     @State var occupation: String
     @State var education: String
     @State var religion: String
