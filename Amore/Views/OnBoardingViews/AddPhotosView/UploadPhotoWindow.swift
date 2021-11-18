@@ -83,6 +83,7 @@ struct UploadPhotoWindow: View {
         photoModel.deleteTriggered = true
         photoModel.deleteSinglePhoto(profileImage: profileImage ?? ProfileImage()) {
             photoStruct.inProgress = false
+            photoModel.photoAction = false
         } onSuccess: {
             profileImage?.imageURL = nil
             profileImage?.firebaseImagePath = nil
