@@ -30,3 +30,15 @@ enum PopUpCards {
     case amoreGold
 
 }
+
+enum MoreInformation {
+    
+    case introInfoHomeView
+    case userHeightView
+    case doYouWorkOutView
+    case highestEducationView
+    case doYourDrinkView
+    case doYouSmokeView
+    case doYouWantBabies
+    case completed
+}

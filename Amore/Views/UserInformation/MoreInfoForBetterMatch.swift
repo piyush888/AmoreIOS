@@ -8,6 +8,17 @@
 import SwiftUI
 
 struct MoreInfoForBetterMatch: View {
+    
+    @State var moreInfoView: MoreInformation = .introInfoHomeView
+    @State private var progressStatus = 0.0
+    @State var userHeight = 5.3
+    @State var workoutSelection: String? = nil
+    @State var educationSelection: String? = nil
+    @State var drinkingSelection: String? = nil
+    @State var smokingSelection: String? = nil
+    @State var babiesSelection: String? = nil
+    
+    
     var body: some View {
         
         LinearGradient(gradient: Gradient(colors: [Color.red, Color.purple]),
@@ -15,104 +26,87 @@ struct MoreInfoForBetterMatch: View {
                        endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
-                VStack(alignment: .leading) {
-                    
-                    MoreInfoForBetterMatchChild(iconName:"heart.fill",
-                                                title: "Complete your profile",
-                                                description: "Users with 100% profile completion have better matches",
-                                                color:Color.red)
-                    
-                    MoreInfoForBetterMatchChild(iconName:"message.fill",
-                                                title: "Be in their DM",
-                                                description: "Match faster with your future partner",
-                                                color:Color.blue)
-                    
-                    MoreInfoForBetterMatchChild(iconName:"bonjour",
-                                                title: "Be on top of deck",
-                                                description: "Our matching algorithm priortizes verified & completed profiles",
-                                                color:Color.green)
                 
-                   
-                    // Let's get started with filling in user details
-                    Button{
-                        // TODO
-                    } label : {
-                        ZStack{
-                            Rectangle()
-                                .frame(height:45)
-                                .cornerRadius(5.0)
-                                .foregroundColor(.pink)
-                                .padding(.horizontal,70)
+                VStack {
+                    
+                    ProgressView(value: progressStatus, total: 100)
+                        .progressViewStyle(WithBackgroundProgressViewStyle())
+                        .padding(.horizontal,20)
+                    
+                    Spacer()
+                        
+                    Group {
+                        switch moreInfoView {
                             
-                            Text("Get me more matches")
-                                .foregroundColor(.white)
-                                .bold()
-                                .font(.BoardingButton)
-                        }
-                    }
-                    .padding(.top, 30)
-                    .padding(.bottom, 10)
-                    
-                    
-                    // Do it later
-                    Button{
-                        // TODO
-                    } label : {
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(5.0)
-                                .frame(height:45)
-                                .foregroundColor(.white)
-                                .overlay(RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.pink, lineWidth: 1))
-                                .padding(.horizontal,70)
+                            case .introInfoHomeView:
+                                IntroductionOption(moreInfoView:$moreInfoView,
+                                                   progressStatus:$progressStatus)
+                            
+                            case .userHeightView:
+                                UserHeight(userHeight:$userHeight,
+                                           moreInfoView:$moreInfoView,
+                                           progressStatus:$progressStatus)
+                            
+                            case .doYouWorkOutView:
+                                QuestionaireTemplate(question: "Do you workout?",
+                                                     listOfOptions: ["Everyday", "Sometimes", "Never"],
+                                                     userChoice: $workoutSelection,
+                                                     moreInfoView:$moreInfoView,
+                                                     moreInfoViewStatus:.doYourDrinkView,
+                                                     progressStatus:$progressStatus)
                                 
-                            Text("Not feeling the vibe")
-                                .foregroundColor(.pink)
-                                .bold()
-                                .font(.BoardingButton)
+                            case .highestEducationView:
+                                QuestionaireTemplate(question: "What's your highest education?",
+                                                 listOfOptions: ["Doctor PhD", "Masters", "Professional Degree","Bachelors","High School"],
+                                                 userChoice: $educationSelection,
+                                                 moreInfoView:$moreInfoView,
+                                                 moreInfoViewStatus:.doYourDrinkView,
+                                                 progressStatus:$progressStatus)
+                            
+                            case .doYourDrinkView:
+                                QuestionaireTemplate(question: "Do you drink?",
+                                             listOfOptions: ["Sometimes", "Occasionally", "Never"],
+                                             userChoice: $drinkingSelection,
+                                             moreInfoView:$moreInfoView,
+                                             moreInfoViewStatus:.doYouSmokeView,
+                                             progressStatus:$progressStatus)
+                        
+                            case .doYouSmokeView:
+                                QuestionaireTemplate(question: "Do you smoke?",
+                                         listOfOptions: ["Sometimes", "Never"],
+                                         userChoice: $smokingSelection,
+                                         moreInfoView:$moreInfoView,
+                                         moreInfoViewStatus:.doYouWantBabies,
+                                         progressStatus:$progressStatus)
+                            
+                            case .doYouWantBabies:
+                                QuestionaireTemplate(question: "Do you ever want babies?",
+                                     listOfOptions: ["Yes", "Maybe Someday","Never"],
+                                     userChoice: $babiesSelection,
+                                     moreInfoView:$moreInfoView,
+                                     moreInfoViewStatus:.completed,
+                                     progressStatus:$progressStatus)
+                            
+                            case .completed:
+                                Completed()
+                            }
                         }
-                    }
+                    
+                    Spacer()
+                    
                 }
-                
             )
         
     }
 }
 
-
-
-struct MoreInfoForBetterMatchChild : View {
-    
-    @State var iconName : String
-    @State var title: String
-    @State var description: String
-    @State var color: Color
-    
-    var body: some View {
-        
-        HStack(alignment: .center)  {
-            HStack {
-                Image(systemName: iconName)
-                    .font(.system(size: 30))
-                    .frame(width: 30)
-                    .foregroundColor(color)
-                    .padding()
-
-                VStack(alignment: .leading) {
-                    Text(title)
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.white)
-                    
-                    Text(description)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(Color.white)
-                }
-            }
-            .padding()
-        }
-        
+struct WithBackgroundProgressViewStyle: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        ProgressView(configuration)
+            .padding(8)
+            .background(Color.gray.opacity(0.25))
+            .accentColor(.white)
+            .cornerRadius(8)
     }
 }
 
