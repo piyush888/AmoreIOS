@@ -37,7 +37,6 @@ struct CardPassions: View {
                 }
             }
         }
-        
     }
 }
 

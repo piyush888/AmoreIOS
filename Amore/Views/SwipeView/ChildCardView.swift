@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ChildCardView: View {
     
-    @State var imageName1: String
-    @State var imageName2: String
-    @State var imageName3: String
-    @State var imageName4: String
-    @State var imageName5: String
-    @State var imageName6: String
+    @State var imageURL1: URL?
+    @State var imageURL2: URL?
+    @State var imageURL3: URL?
+    @State var imageURL4: URL?
+    @State var imageURL5: URL?
+    @State var imageURL6: URL?
     @State var firstName: String
     @State var lastName: String
     @State var profileDistanceFromUser: Int
@@ -39,19 +39,24 @@ struct ChildCardView: View {
                 VStack {
                     
                     ZStack {
-                        CardImages(imageName:imageName1,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
-                               
-                        
-                        VStack {
-                            Spacer()
+                        if let urlString = imageURL1 {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
                             
-                            NameAgeDistance(firstName: firstName,
-                                            lastName: lastName,
-                                            age: age,
-                                            profileDistanceFromUser: profileDistanceFromUser,
-                                            heightOfRectangle: geometry.size.height/9)
+                            VStack {
+                                Spacer()
+                                
+                                NameAgeDistance(firstName: firstName,
+                                                lastName: lastName,
+                                                age: age,
+                                                profileDistanceFromUser: profileDistanceFromUser,
+                                                heightOfRectangle: geometry.size.height/9)
+                            }
+                            
+                        } else {
+                            NoPhotoProvided(imageWidth:geometry.size.width,
+                                            imageHeight:geometry.size.height/1.5)
                         }
                     }
                     
@@ -71,37 +76,52 @@ struct ChildCardView: View {
                         .padding(.bottom,15)
                         
                     
-                    CardImages(imageName:imageName2,
+                    if let urlString = imageURL2 {
+                        CardImages(imageURL:urlString,
                                imageWidth:geometry.size.width,
                                imageHeight:geometry.size.height)
+                    }
                     
                     
                     // Profile Passions
                     CardPassions(passions: passions)
                         .padding(15)
                 
-                    
-                    CardImages(imageName:imageName3,
+                    if let urlString = imageURL3 {
+                        CardImages(imageURL:urlString,
                                imageWidth:geometry.size.width,
                                imageHeight:geometry.size.height)
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
-                    
-                    CardImages(imageName:imageName4,
+                    if let urlString = imageURL4 {
+                        CardImages(imageURL:urlString,
                                imageWidth:geometry.size.width,
                                imageHeight:geometry.size.height)
-                        .padding(.top,15)
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
-                    
-                    CardImages(imageName:imageName5,
+                    if let urlString = imageURL5 {
+                        CardImages(imageURL:urlString,
                                imageWidth:geometry.size.width,
                                imageHeight:geometry.size.height)
-                        .padding(.top,15)
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
-                    
-                    CardImages(imageName:imageName6,
+                    if let urlString = imageURL6 {
+                        CardImages(imageURL:urlString,
                                imageWidth:geometry.size.width,
                                imageHeight:geometry.size.height)
-                        .padding(.top,15)
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
                     // Report the profile
                     HStack {

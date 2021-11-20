@@ -66,7 +66,7 @@ struct PreviewProfile: View {
                         
                         
                         // Profile Passions
-                        CardPassions(passions: profileModel.editUserProfile.interests ?? ["tempPassion"])
+                        CardPassions(passions: profileModel.editUserProfile.interests ?? ["Cricket","Gaming"])
                             .padding(.top,10)
                         
                     }

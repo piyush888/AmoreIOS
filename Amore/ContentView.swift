@@ -72,6 +72,7 @@ struct ContentView: View {
                                 .onAppear {
                                     profileModel.getUserProfile()
                                     profileModel.checkMinNumOfPhotosUploaded()
+                                    adminAuthenticationModel.fetchProfile(numberOfProfiles: 10)
                                 }
                             // To Test MoreInfo, comment out HomeView and uncomment block below
 //                            MoreInfoForBetterMatch()

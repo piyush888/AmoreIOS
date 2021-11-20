@@ -15,7 +15,7 @@ struct HomeView: View {
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
-    
+        
     var body: some View {
         
             VStack {
@@ -30,10 +30,8 @@ struct HomeView: View {
                         LikesTopPicksHome()
                         
                     case .swipeView:
-                        AllCardsView()
-//                        .onAppear {
-//                            adminAuthenticationModel.serverLogin()
-//                        }
+                    AllCardsView(allCards:adminAuthenticationModel.allCards)
+                            .environmentObject(adminAuthenticationModel)
                         
                     case .filterSettingsView:
                         FilterSettings()
@@ -51,6 +49,7 @@ struct HomeView: View {
                     
                 
         }
+        
     }
 }
 

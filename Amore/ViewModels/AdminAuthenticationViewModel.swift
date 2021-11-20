@@ -21,6 +21,9 @@ class AdminAuthenticationViewModel: ObservableObject {
     
     @Published var cookieSet = false
     
+    // Cards Data
+    @Published var allCards = [CardProfile]()
+    
     var apiURL = "http://127.0.0.1:5000"
     
     // Authenticate the user in the backend
@@ -103,6 +106,42 @@ class AdminAuthenticationViewModel: ObservableObject {
            }.resume()
 
         }
+    }
+    
+    
+    // Call this function to fetch profiles from the backend server
+    func fetchProfile(numberOfProfiles:Int) {
+        
+        // fetchprofiles is the api where you can profiles
+        guard let url = URL(string: self.apiURL + "/fetchprofiles") else { return }
+        // add the pay load to the request
+        let body: [String: Int] = ["numberOfProfiles": numberOfProfiles]
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let data = data {
+                // Check if you receive a valid httpresponse
+                if let httpResponse = response as? HTTPURLResponse {
+                    
+                    do {
+                        self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
+                    }
+                    catch let jsonError as NSError {
+                      print("JSON decode failed: \(jsonError.localizedDescription)")
+                    }
+                    return
+                }
+            }
+            return
+        }.resume()
+        
     }
     
     
