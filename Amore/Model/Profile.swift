@@ -89,7 +89,7 @@ struct Profile: Identifiable, Codable, Equatable {
 
 
 // Temp User Model being used to display cards
-struct User: Hashable, CustomStringConvertible {
+struct User: Hashable, CustomStringConvertible {    
     var id: Int
     
     let firstName: String

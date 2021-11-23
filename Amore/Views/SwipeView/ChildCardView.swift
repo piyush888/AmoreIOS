@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ChildCardView: View {
     
-    @State var imageName1: String
-    @State var imageName2: String
-    @State var imageName3: String
-    @State var imageName4: String
-    @State var imageName5: String
-    @State var imageName6: String
+    @State var imageURL1: URL?
+    @State var imageURL2: URL?
+    @State var imageURL3: URL?
+    @State var imageURL4: URL?
+    @State var imageURL5: URL?
+    @State var imageURL6: URL?
     @State var firstName: String
     @State var lastName: String
     @State var profileDistanceFromUser: Int
@@ -35,23 +35,30 @@ struct ChildCardView: View {
         ScrollView(showsIndicators: false) {
             
             LazyVStack {
-             
+                
                 VStack {
-                    
+                
                     ZStack {
-                        CardImages(imageName:imageName1,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
-                               
-                        
-                        VStack {
-                            Spacer()
+                        if let urlString = imageURL1 {
+                            VStack {
+                                CardImages(imageURL:urlString,
+                                       imageWidth:geometry.size.width,
+                                       imageHeight:geometry.size.height)
+                            }
                             
-                            NameAgeDistance(firstName: firstName,
-                                            lastName: lastName,
-                                            age: age,
-                                            profileDistanceFromUser: profileDistanceFromUser,
-                                            heightOfRectangle: geometry.size.height/9)
+                            VStack {
+                                Spacer()
+                                
+                                NameAgeDistance(firstName: firstName,
+                                                lastName: lastName,
+                                                age: age,
+                                                profileDistanceFromUser: profileDistanceFromUser,
+                                                heightOfRectangle: geometry.size.height/9)
+                            }
+                            
+                        } else {
+                            NoPhotoProvided(imageWidth:geometry.size.width,
+                                            imageHeight:geometry.size.height/1.5)
                         }
                     }
                     
@@ -71,37 +78,62 @@ struct ChildCardView: View {
                         .padding(.bottom,15)
                         
                     
-                    CardImages(imageName:imageName2,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                    if let urlString = imageURL2 {
+                        VStack {
+                           CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
+                    }
                     
                     
                     // Profile Passions
                     CardPassions(passions: passions)
                         .padding(15)
                 
+                    if let urlString = imageURL3 {
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
-                    CardImages(imageName:imageName3,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                    if let urlString = imageURL4 {
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
+                    if let urlString = imageURL5 {
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
-                    CardImages(imageName:imageName4,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
-                        .padding(.top,15)
-                    
-                    
-                    CardImages(imageName:imageName5,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
-                        .padding(.top,15)
-                    
-                    
-                    CardImages(imageName:imageName6,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
-                        .padding(.top,15)
+                    if let urlString = imageURL6 {
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
+                    } else {
+                        NoPhotoProvided(imageWidth:geometry.size.width,
+                                        imageHeight:geometry.size.height/1.5)
+                    }
                     
                     // Report the profile
                     HStack {
@@ -116,8 +148,8 @@ struct ChildCardView: View {
                     }
                     .padding([.top,.bottom],30)
                 }
-                .padding(.horizontal,10)
             }
+            .padding(.horizontal,10)
             .background(Color.white)
             
         }

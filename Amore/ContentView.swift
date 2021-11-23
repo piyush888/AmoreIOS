@@ -81,6 +81,7 @@ struct ContentView: View {
                                         .onAppear {
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
+                                            adminAuthenticationModel.fetchProfile(numberOfProfiles: 10)
                                             filterAndLocationModel.getFilterAndLocation()
                                             locationModel.getLocationOnce()
                                             filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)

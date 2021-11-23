@@ -92,7 +92,7 @@ extension UIImage {
                     scale: CGFloat = UIScreen.main.scale) -> UIImage? {
         var imageData: Data
         do {
-            imageData = try self.heicData(compressionQuality: 1)
+            imageData = try self.heicData(compressionQuality: 0.10)
         }
         catch {
             imageData = Data()
@@ -110,13 +110,14 @@ extension UIImage {
         // Perform downsampling
         let downsampleOptions = [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceShouldCacheImmediately: false,
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
         ] as CFDictionary
         guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
             return nil
         }
+        
         
         // Return the downsampled image as UIImage
         return UIImage(cgImage: downsampledImage)

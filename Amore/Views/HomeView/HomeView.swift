@@ -32,10 +32,9 @@ struct HomeView: View {
                         LikesTopPicksHome()
                         
                     case .swipeView:
-                        AllCardsView()
-//                        .onAppear {
-//                            adminAuthenticationModel.serverLogin()
-//                        }
+                    AllCardsView()
+                            .environmentObject(adminAuthenticationModel)
+                            .environmentObject(photoModel)
                         
                     case .filterSettingsView:
                         FilterSettings()
@@ -59,6 +58,7 @@ struct HomeView: View {
                     
                 
         }
+        
     }
 }
 

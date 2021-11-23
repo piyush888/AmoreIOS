@@ -86,6 +86,7 @@
 		E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4652745E6520045F264 /* QuestionaireTemplate.swift */; };
 		E268A468274601830045F264 /* UserHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A467274601830045F264 /* UserHeight.swift */; };
 		E268A46A274603CD0045F264 /* Completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A469274603CD0045F264 /* Completed.swift */; };
+		E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A46B2747DB9A0045F264 /* CardProfiles.swift */; };
 		E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */; };
 		E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */; };
 		E273C31C27415FEA00AA3359 /* CardImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273C31B27415FE900AA3359 /* CardImages.swift */; };
@@ -112,6 +113,7 @@
 		E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */; };
 		E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */; };
 		E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */; };
+		E295F37B274877840003A1E1 /* NoPhotoProvided.swift in Sources */ = {isa = PBXBuildFile; fileRef = E295F37A274877840003A1E1 /* NoPhotoProvided.swift */; };
 		E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0D2713350900C82174 /* CardBasicInfo.swift */; };
 		E298BA142713A85500C82174 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA132713A85500C82174 /* ControlCenter.swift */; };
 		E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B29382722B09400C38035 /* UserEditProfile.swift */; };
@@ -237,6 +239,7 @@
 		E268A4652745E6520045F264 /* QuestionaireTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireTemplate.swift; sourceTree = "<group>"; };
 		E268A467274601830045F264 /* UserHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHeight.swift; sourceTree = "<group>"; };
 		E268A469274603CD0045F264 /* Completed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completed.swift; sourceTree = "<group>"; };
+		E268A46B2747DB9A0045F264 /* CardProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfiles.swift; sourceTree = "<group>"; };
 		E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAuthenticationViewModel.swift; sourceTree = "<group>"; };
 		E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeButtons.swift; sourceTree = "<group>"; };
 		E273C31B27415FE900AA3359 /* CardImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImages.swift; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 		E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeChild.swift; sourceTree = "<group>"; };
 		E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUserInfoForm.swift; sourceTree = "<group>"; };
+		E295F37A274877840003A1E1 /* NoPhotoProvided.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPhotoProvided.swift; sourceTree = "<group>"; };
 		E298BA0D2713350900C82174 /* CardBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBasicInfo.swift; sourceTree = "<group>"; };
 		E298BA132713A85500C82174 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E29B29382722B09400C38035 /* UserEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditProfile.swift; sourceTree = "<group>"; };
@@ -448,6 +452,7 @@
 				E273C31B27415FE900AA3359 /* CardImages.swift */,
 				E273C31D274170D200AA3359 /* ProfileBio.swift */,
 				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
+				E295F37A274877840003A1E1 /* NoPhotoProvided.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 				E283677E26FAB79800EEA049 /* Onboarding.swift */,
 				1BC8BE0D2705CD7C00F0137E /* Profile.swift */,
 				1B6273CD274B7B9A00590DD1 /* FiltersAndLocation.swift */,
+				E268A46B2747DB9A0045F264 /* CardProfiles.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -853,6 +859,7 @@
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */,
+				E295F37B274877840003A1E1 /* NoPhotoProvided.swift in Sources */,
 				E2347138271DC5320006F336 /* CustomShape.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
@@ -886,6 +893,7 @@
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
 				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
 				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
+				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
 				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,

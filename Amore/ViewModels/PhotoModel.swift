@@ -158,7 +158,7 @@ class PhotoModel: ObservableObject {
     /// Clear all images from SD Web Image Cache -- Generally on Delete/Update
     func clearAllImageCache() {
         SDImageCache.shared.clearMemory()
-        SDImageCache.shared.clearDisk(onCompletion: nil)
+//        SDImageCache.shared.clearDisk(onCompletion: nil)
     }
     
     /// **___________________________________________________________________________________________________________________________**
