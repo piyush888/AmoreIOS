@@ -25,8 +25,9 @@ struct AllCardsView: View {
     
     @State var numberOfProfilesSwiped = 0
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @EnvironmentObject var photoModel: PhotoModel
     @State var curSwipeStatus: LikeDislike = .none
-    @State var allCards: [CardProfile]
+    //@State var allCards: [CardProfile]
     
     
     enum LikeDislike: Int {
@@ -38,22 +39,23 @@ struct AllCardsView: View {
         GeometryReader { geometry in
             VStack {
                 ZStack {
-                    ForEach(allCards) { profile in
+                    ForEach(adminAuthenticationModel.allCards) { profile in
                         /// Using the pattern-match operator ~=, we can determine if our
                         /// user.id falls within the range of 6...9
                         
                         // Normal Card View being rendered here.
-                        SingleCardView(currentSwipeStatus: self.allCards.last == profile ?
+                        SingleCardView(currentSwipeStatus: adminAuthenticationModel.allCards.last == profile ?
                                        $curSwipeStatus : Binding.constant(LikeDislike.none),
                                        singleProfile: profile,
                                        onRemove: { removedUser in
                                             // Remove that user from our array
-                                            self.allCards.removeAll { $0.id == removedUser.id }
+                                            adminAuthenticationModel.allCards.removeAll { $0.id == removedUser.id }
                                             self.curSwipeStatus = .none
                                         }
                         )
                         .animation(.spring())
                         .frame(width: geometry.size.width)
+                        .environmentObject(photoModel)
                         
                     }
                     

@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SingleCardView: View {
+    
+    @EnvironmentObject var photoModel: PhotoModel
+    
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
-    
     public var singleProfile: CardProfile
     private var onRemove: (_ user: CardProfile) -> Void
     
@@ -110,6 +112,7 @@ struct SingleCardView: View {
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
                                 self.onRemove(self.singleProfile)
+                                photoModel.clearAllImageCache()
 //                                self.saveLikeDislike(givenSwipeStatus: self.dragSwipeStatus)
                             } else {
                                 self.translation = .zero

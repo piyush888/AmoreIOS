@@ -36,13 +36,13 @@ struct ChildCardView: View {
             
             LazyVStack {
              
-                VStack {
-                    
                     ZStack {
                         if let urlString = imageURL1 {
-                            CardImages(imageURL:urlString,
-                                   imageWidth:geometry.size.width,
-                                   imageHeight:geometry.size.height)
+                            VStack {
+                                CardImages(imageURL:urlString,
+                                       imageWidth:geometry.size.width,
+                                       imageHeight:geometry.size.height)
+                            }
                             
                             VStack {
                                 Spacer()
@@ -77,9 +77,11 @@ struct ChildCardView: View {
                         
                     
                     if let urlString = imageURL2 {
-                        CardImages(imageURL:urlString,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                        VStack {
+                           CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
                     }
                     
                     
@@ -88,36 +90,44 @@ struct ChildCardView: View {
                         .padding(15)
                 
                     if let urlString = imageURL3 {
-                        CardImages(imageURL:urlString,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
                     } else {
                         NoPhotoProvided(imageWidth:geometry.size.width,
                                         imageHeight:geometry.size.height/1.5)
                     }
                     
                     if let urlString = imageURL4 {
-                        CardImages(imageURL:urlString,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
                     } else {
                         NoPhotoProvided(imageWidth:geometry.size.width,
                                         imageHeight:geometry.size.height/1.5)
                     }
                     
                     if let urlString = imageURL5 {
-                        CardImages(imageURL:urlString,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
                     } else {
                         NoPhotoProvided(imageWidth:geometry.size.width,
                                         imageHeight:geometry.size.height/1.5)
                     }
                     
                     if let urlString = imageURL6 {
-                        CardImages(imageURL:urlString,
-                               imageWidth:geometry.size.width,
-                               imageHeight:geometry.size.height)
+                        VStack {
+                            CardImages(imageURL:urlString,
+                                   imageWidth:geometry.size.width,
+                                   imageHeight:geometry.size.height)
+                        }
                     } else {
                         NoPhotoProvided(imageWidth:geometry.size.width,
                                         imageHeight:geometry.size.height/1.5)
@@ -135,9 +145,9 @@ struct ChildCardView: View {
                         Spacer()
                     }
                     .padding([.top,.bottom],30)
-                }
-                .padding(.horizontal,10)
+                    
             }
+            .padding(.horizontal,10)
             .background(Color.white)
             
         }
