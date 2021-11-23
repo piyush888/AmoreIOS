@@ -63,3 +63,22 @@ extension Optional where Wrapped == Double {
         }
     }
 }
+
+extension Optional where Wrapped == [String] {
+    var _boundStringArray: [String]? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var boundStringArray: [String] {
+        get {
+            return _boundStringArray ?? []
+        }
+        set {
+            _boundStringArray = newValue.isEmpty ? nil : newValue
+        }
+    }
+}

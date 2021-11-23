@@ -15,6 +15,8 @@ struct HomeView: View {
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var locationModel: LocationModel
     
     var body: some View {
         
@@ -37,6 +39,12 @@ struct HomeView: View {
                         
                     case .filterSettingsView:
                         FilterSettings()
+                            .environmentObject(filterAndLocationModel)
+                            .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
+                                locationModel.getLocationOnce()
+                                filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)
+                                filterAndLocationModel.updateFilterAndLocation()
+                            }
                         
                     case .userSettingsView:
                         UserProfile()

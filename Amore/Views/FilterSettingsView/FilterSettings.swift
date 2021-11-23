@@ -10,9 +10,7 @@ import SwiftUI
 struct FilterSettings: View {
     
     // User Filter Settings
-    
-    // Show me preference
-    @State var genderPreference = "Man"
+    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     
     // Age perference - Scales are according to screen
     // 66.66(Scale on screen) / 368.0 (Max size of screen self.MaxPossibleAg) = 18
@@ -21,13 +19,6 @@ struct FilterSettings: View {
     @State var scaleMaxAge : CGFloat = 215.66
     @State var realMinAge : String = String(format : "%.0f",(66.66 / (UIScreen.main.bounds.width - 60) * 100))
     @State var realMaxAge : String = String(format : "%.0f",(215.66 / (UIScreen.main.bounds.width - 60) * 100))
-    
-    // Religious prefernce
-    @State var religionPreference = ["Any"]
-    @State var communityPreference = ["Any"]
-    @State var careerPreference = ["Any"]
-    @State var educationPreference = "Masters"
-    @State var countryPreference = "India"
     
     
     var body: some View {
@@ -40,7 +31,7 @@ struct FilterSettings: View {
                     .foregroundColor(.orange)
                     
                 //
-                GenderSettings(genderPreference: $genderPreference)
+                GenderSettings(genderPreference: $filterAndLocationModel.filterAndLocationData.genderPreference.bound)
                 
                 AgeSettings(scaleMinAge:$scaleMinAge,
                             scaleMaxAge: $scaleMaxAge,
@@ -48,11 +39,11 @@ struct FilterSettings: View {
                             realMaxAge: $realMaxAge)
                 
                 
-                ReligionFilter(religionPreference: $religionPreference)
-                CommunityFilter(communityPreference: $communityPreference)
-                CareerFilter(careerPreference: $careerPreference)
-                EducationFilter(educationPreference: $educationPreference)
-                RaisedInFilter(countryPreference: $countryPreference)
+                ReligionFilter(religionPreference: $filterAndLocationModel.filterAndLocationData.religionPreference.boundStringArray)
+                CommunityFilter(communityPreference: $filterAndLocationModel.filterAndLocationData.communityPreference.boundStringArray)
+                CareerFilter(careerPreference: $filterAndLocationModel.filterAndLocationData.careerPreference.boundStringArray)
+                EducationFilter(educationPreference: $filterAndLocationModel.filterAndLocationData.educationPreference.bound)
+                RaisedInFilter(countryPreference: $filterAndLocationModel.filterAndLocationData.countryPreference.bound)
                 
                 
                 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import CoreLocation
 
 struct ContentView: View {
     
@@ -16,6 +17,8 @@ struct ContentView: View {
     @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
+    @StateObject var locationModel = LocationModel()
+    @StateObject var filterAndLocationModel = FilterAndLocationModel()
     
     var body: some View {
         
@@ -64,22 +67,47 @@ struct ContentView: View {
                     if profileModel.userProfile.email != nil {
                         // If 2 or more photos already added
                         if profileModel.minPhotosAdded {
-                            HomeView()
-                                .environmentObject(profileModel)
-                                .environmentObject(streamModel)
-                                .environmentObject(photoModel)
-                                .environmentObject(adminAuthenticationModel)
-                                .onAppear {
-                                    profileModel.getUserProfile()
-                                    profileModel.checkMinNumOfPhotosUploaded()
+                            // If filter and location data is fetched and ready
+                            if filterAndLocationModel.filterAndLocationDataFetched {
+                                // If location authorisation granted
+                                if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(locationModel.authorizationStatus) {
+                                    HomeView()
+                                        .environmentObject(profileModel)
+                                        .environmentObject(streamModel)
+                                        .environmentObject(photoModel)
+                                        .environmentObject(adminAuthenticationModel)
+                                        .environmentObject(locationModel)
+                                        .environmentObject(filterAndLocationModel)
+                                        .onAppear {
+                                            profileModel.getUserProfile()
+                                            profileModel.checkMinNumOfPhotosUploaded()
+                                            filterAndLocationModel.getFilterAndLocation()
+                                            locationModel.getLocationOnce()
+                                            filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)
+                                            filterAndLocationModel.updateFilterAndLocation()
+                                        }
+                                    // To Test MoreInfo, comment out HomeView and uncomment block below
+        //                            MoreInfoForBetterMatch()
+        //                                .environmentObject(profileModel)
+        //                                .onAppear {
+        //                                    profileModel.getUserProfile()
+        //                                    profileModel.checkMinNumOfPhotosUploaded()
+        //                                }
                                 }
-                            // To Test MoreInfo, comment out HomeView and uncomment block below
-//                            MoreInfoForBetterMatch()
-//                                .environmentObject(profileModel)
-//                                .onAppear {
-//                                    profileModel.getUserProfile()
-//                                    profileModel.checkMinNumOfPhotosUploaded()
-//                                }
+                                // Else get location permission
+                                else {
+                                    LocationView()
+                                        .environmentObject(locationModel)
+                                        .environmentObject(filterAndLocationModel)
+                                }
+                            }
+                            else {
+                                ProgressView()
+                                    .onAppear {
+                                        filterAndLocationModel.getFilterAndLocation()
+                                    }
+                            }
+                            
                         }
                         else {
                             AddPhotosView()
@@ -89,7 +117,7 @@ struct ContentView: View {
                                     profileModel.checkMinNumOfPhotosUploaded()
                                 }
                         }
-                        
+
                     }
                     // Else user profile not created
                     // Show users forms to complete the profile
@@ -100,12 +128,16 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            
+            
             // Pull profile data first
             else {
                 ProgressView()
                     .onAppear {
                         profileModel.getUserProfile()
                         profileModel.checkMinNumOfPhotosUploaded()
+                        filterAndLocationModel.getFilterAndLocation()
                     }
             }
             

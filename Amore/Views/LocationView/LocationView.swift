@@ -11,7 +11,8 @@ import SwiftUI
 struct LocationView: View {
     
     // LocationModel is an observable object
-    @EnvironmentObject var location: LocationModel
+    @EnvironmentObject var locationModel: LocationModel
+    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     
     var body: some View {
         
@@ -39,16 +40,19 @@ struct LocationView: View {
                 
                 
                 NavigationLink(
-                    destination: LocationHomeView(),
+                    destination: LocationHomeView()
+                        .environmentObject(locationModel)
+                        .environmentObject(filterAndLocationModel),
                     // Will only go to next view when the user either "accepts" or "denies" location
                     // If the user gives location "ones" that will be useful for 1 time only
                     // The next time location when you open app again it will be ".notDetermined"
-                    isActive: .constant(location.authorizationState != .notDetermined),
+                    isActive: .constant(locationModel.authorizationStatus != .notDetermined),
                     label: {
                         // Continue to next view
                         Button{
                             // Call this to give a user pop-up
-                            location.getLocation()
+                            locationModel.requestPermission()
+                            locationModel.getLocationOnce()
                         } label : {
                             ZStack{
                                 Rectangle()

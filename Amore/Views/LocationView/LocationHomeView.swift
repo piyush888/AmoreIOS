@@ -9,18 +9,22 @@ import SwiftUI
 
 struct LocationHomeView: View {
     
-    @EnvironmentObject var location: LocationModel
+    @EnvironmentObject var locationModel: LocationModel
+    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     
     var body: some View {
         
         VStack {
             
             // When location is Not determined - Ideally this case shouldn't happen
-            if location.authorizationState == .notDetermined {
+            if locationModel.authorizationStatus == .notDetermined {
                 Text("Location Not Determined")
+                    .onAppear {
+                        locationModel.requestPermission()
+                    }
             }
             // When the location access is given by the user
-            else if location.authorizationState == .authorizedAlways || location.authorizationState == .authorizedWhenInUse{
+            else if locationModel.authorizationStatus == .authorizedAlways || locationModel.authorizationStatus == .authorizedWhenInUse{
                 // Show home view
                 Text("Location Granted")
                 
@@ -29,7 +33,8 @@ struct LocationHomeView: View {
                 Button{
                     // Use this function whenever you want to update the location data
                     // It can also be called as a state variable when a view loads
-                    location.requestLocationAgain()
+                    locationModel.getLocationOnce()
+                    print(String(locationModel.lastSeenLocation?.coordinate.latitude ?? 0)+", "+String(locationModel.lastSeenLocation?.coordinate.longitude ?? 0))
                 } label : {
                     ZStack{
                         Rectangle()
@@ -48,6 +53,7 @@ struct LocationHomeView: View {
             // When location access is denied by the user
             else {
                 LocationDenied()
+                    .environmentObject(filterAndLocationModel)
             }
         }
         .navigationBarBackButtonHidden(true)

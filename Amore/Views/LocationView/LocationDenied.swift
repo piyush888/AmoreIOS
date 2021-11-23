@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LocationDenied: View {
+    
+    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    
     var body: some View {
         
         VStack {

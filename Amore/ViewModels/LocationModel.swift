@@ -15,28 +15,25 @@ class LocationModel: NSObject, CLLocationManagerDelegate , ObservableObject {
         // https://developer.apple.com/documentation/corelocation/cllocationmanager/1620562-requestwheninuseauthorization
         // https://developer.apple.com/documentation/corelocation/cllocationmanager/1620551-requestalwaysauthorization
     */
- 
-    var locationManager = CLLocationManager()
     // This property will be used in other view to check the location authorization status
-    @Published var authorizationState = CLAuthorizationStatus.notDetermined
-    
+    @Published var authorizationStatus: CLAuthorizationStatus
+    @Published var lastSeenLocation: CLLocation?
+    private let locationManager: CLLocationManager
+ 
     // Over-rides init of the NSObject
     override init() {
-        // Init of the NSObject
+        locationManager = CLLocationManager()
+        authorizationStatus = locationManager.authorizationStatus
+        
         super.init()
-        authorizationState = locationManager.authorizationStatus
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     
     // Call this to give a location pop-up
-    func getLocation() {
-        // Set Location Model as the delegate of the location manager
-        locationManager.delegate = self
-        
-        // Request permission from the user
-        locationManager.requestWhenInUseAuthorization()
-        
-        // TODO: Start geolocating the user after permission has been granted
-        // locationManager.startUpdatingLocation()
+    func getLocationOnce() {
+        locationManager.requestLocation()
     }
     
     // Mark - Location Manager Delegate Methods
@@ -46,41 +43,32 @@ class LocationModel: NSObject, CLLocationManagerDelegate , ObservableObject {
     // This will be called everytime a user chooses "Give Access Ones" & application is
     // Opened next time
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        requestLocationAgain()
-        authorizationState = locationManager.authorizationStatus
+        authorizationStatus = locationManager.authorizationStatus
+        // Handle each case of location permissions
+        if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(authorizationStatus) {
+            locationManager.startUpdatingLocation()
+        }
+        else {
+            locationManager.stopUpdatingLocation()
+        }
     }
     
     // Get updated user location - Depend on authorization
-    func requestLocationAgain() {
-        if locationManager.authorizationStatus == CLAuthorizationStatus.notDetermined ||
-            locationManager.authorizationStatus == .authorizedWhenInUse {
-                
-            // We have permission
-            // Start geolocation the user, after we get permission
-            locationManager.startUpdatingLocation()
+    func requestPermission() {
+        if authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
         }
-        else if locationManager.authorizationStatus == .denied {
-            // We don't have permission
-        }
-        authorizationState = locationManager.authorizationStatus
-       }
+    }
     
     // Tells the delegate when new location data is available
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let userLocation = locations.first
-        
-        if userLocation != nil {
-            // Give us the location of the user
-            print(locations.first ?? "no location")
-            // Stop requesting the location after we get it once
-            locationManager.stopUpdatingLocation()
-        }
-        
-        // TODO - Piyush
-        // Store the latest location and time of location in the firestore
-        // Also get the profiles based on location
-        getProfiles( location: userLocation!)
+        guard let userLocation = locations.last else {return}
+        lastSeenLocation = userLocation
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Handle failure to get a user’s location
+        print("Failed to acquire user location.")
     }
     
     // This will only be called when new user location data is available
