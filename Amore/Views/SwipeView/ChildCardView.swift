@@ -35,7 +35,9 @@ struct ChildCardView: View {
         ScrollView(showsIndicators: false) {
             
             LazyVStack {
-             
+                
+                VStack {
+                
                     ZStack {
                         if let urlString = imageURL1 {
                             VStack {
@@ -145,7 +147,7 @@ struct ChildCardView: View {
                         Spacer()
                     }
                     .padding([.top,.bottom],30)
-                    
+                }
             }
             .padding(.horizontal,10)
             .background(Color.white)
