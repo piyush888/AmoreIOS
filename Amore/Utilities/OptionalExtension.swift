@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Optional where Wrapped == String {
     var _bound: String? {
@@ -79,6 +80,44 @@ extension Optional where Wrapped == [String] {
         }
         set {
             _boundStringArray = newValue.isEmpty ? nil : newValue
+        }
+    }
+}
+
+extension Optional where Wrapped == Int {
+    var _boundInt: Int? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var boundInt: Int {
+        get {
+            return _boundInt ?? 0
+        }
+        set {
+            _boundInt = Int(newValue) != nil ? Int(newValue) : nil
+        }
+    }
+}
+
+extension Optional where Wrapped == Photo {
+    var _boundPhoto: Photo? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    internal var boundPhoto: Photo {
+        get {
+            return _boundPhoto ?? Photo()
+        }
+        set {
+            _boundPhoto = newValue != nil ? newValue : nil
         }
     }
 }

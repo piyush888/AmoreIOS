@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D3227274E36E50096B40B /* CardProfileModel.swift */; };
 		1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED871270F345E00290FFF /* CardPassions.swift */; };
@@ -160,6 +161,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1B1D3227274E36E50096B40B /* CardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfileModel.swift; sourceTree = "<group>"; };
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		1B4ED871270F345E00290FFF /* CardPassions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPassions.swift; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
 				1B6273CF274B82FD00590DD1 /* FilterAndLocationModel.swift */,
+				1B1D3227274E36E50096B40B /* CardProfileModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */,
 				E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */,
+				1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,

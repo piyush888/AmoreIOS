@@ -19,6 +19,7 @@ struct ContentView: View {
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
     @StateObject var locationModel = LocationModel()
     @StateObject var filterAndLocationModel = FilterAndLocationModel()
+    @StateObject var cardProfileModel = CardProfileModel()
     
     var body: some View {
         
@@ -78,10 +79,11 @@ struct ContentView: View {
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(locationModel)
                                         .environmentObject(filterAndLocationModel)
+                                        .environmentObject(cardProfileModel)
                                         .onAppear {
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
-                                            adminAuthenticationModel.fetchProfile(numberOfProfiles: 10)
+                                            cardProfileModel.fetchProfile(numberOfProfiles: 10)
                                             filterAndLocationModel.getFilterAndLocation()
                                             locationModel.getLocationOnce()
                                             filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)

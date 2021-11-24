@@ -26,6 +26,7 @@ struct AllCardsView: View {
     @State var numberOfProfilesSwiped = 0
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     @State var curSwipeStatus: LikeDislike = .none
     //@State var allCards: [CardProfile]
     
@@ -39,25 +40,26 @@ struct AllCardsView: View {
         GeometryReader { geometry in
             VStack {
                 ZStack {
-                    ForEach(adminAuthenticationModel.allCards) { profile in
+                    ForEach(cardProfileModel.allCardsWithPhotos) { profile in
                         /// Using the pattern-match operator ~=, we can determine if our
                         /// user.id falls within the range of 6...9
-                        
+
                         // Normal Card View being rendered here.
-                        SingleCardView(currentSwipeStatus: adminAuthenticationModel.allCards.last == profile ?
+                        SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotos.last == profile ?
                                        $curSwipeStatus : Binding.constant(LikeDislike.none),
-                                       singleProfile: profile,
+                                       singleProfile: Binding.constant(profile),
                                        onRemove: { removedUser in
                                             // Remove that user from our array
-                                            adminAuthenticationModel.allCards.removeAll { $0.id == removedUser.id }
+                            cardProfileModel.allCardsWithPhotos.removeAll { $0.id == removedUser.id }
                                             self.curSwipeStatus = .none
                                         }
                         )
                         .animation(.spring())
                         .frame(width: geometry.size.width)
                         .environmentObject(photoModel)
-                        
+
                     }
+                    
                     
                     VStack {
                         Spacer()

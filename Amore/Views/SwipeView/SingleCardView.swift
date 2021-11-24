@@ -14,8 +14,8 @@ struct SingleCardView: View {
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
-    public var singleProfile: CardProfile
-    private var onRemove: (_ user: CardProfile) -> Void
+    @Binding var singleProfile: CardProfileWithPhotos
+    private var onRemove: (_ user: CardProfileWithPhotos) -> Void
     
     private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
@@ -51,8 +51,8 @@ struct SingleCardView: View {
 //        }
 //    }
     
-    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: CardProfile, onRemove: @escaping (_ user: CardProfile) -> Void) {
-        self.singleProfile = singleProfile
+    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: Binding<CardProfileWithPhotos>, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
+        _singleProfile = singleProfile
         self.onRemove = onRemove
         _swipeStatus = currentSwipeStatus
     }
@@ -71,27 +71,27 @@ struct SingleCardView: View {
             
             ZStack {
             
-                ChildCardView(imageURL1: self.singleProfile.image1?.imageURL,
-                         imageURL2: self.singleProfile.image2?.imageURL,
-                         imageURL3: self.singleProfile.image3?.imageURL,
-                         imageURL4: self.singleProfile.image4?.imageURL,
-                         imageURL5: self.singleProfile.image5?.imageURL,
-                         imageURL6: self.singleProfile.image6?.imageURL,
-                         firstName: self.singleProfile.firstName!,
-                         lastName: self.singleProfile.lastName!,
-                         profileDistanceFromUser:self.singleProfile.profileDistanceFromUser ?? 0,
-                         description: self.singleProfile.description ?? "No Description",
-                         height: self.singleProfile.height ?? 0.0,
-                         occupation: self.singleProfile.jobTitle ?? "No Job",
-                         education: self.singleProfile.education ?? "No Education",
-                         religion: self.singleProfile.religion ?? "No Religion",
-                         politics: self.singleProfile.politics ?? "No Politics",
-                         location: self.singleProfile.location ?? "No Location",
-                         passions: self.singleProfile.interests ?? ["No Interests"],
-                         geometry:geometry,
-                         age: self.singleProfile.age ?? 10
-                )
-                
+//                ChildCardView(imageURL1: self.singleProfile.image1?.imageURL,
+//                         imageURL2: self.singleProfile.image2?.imageURL,
+//                         imageURL3: self.singleProfile.image3?.imageURL,
+//                         imageURL4: self.singleProfile.image4?.imageURL,
+//                         imageURL5: self.singleProfile.image5?.imageURL,
+//                         imageURL6: self.singleProfile.image6?.imageURL,
+//                         firstName: self.singleProfile.firstName!,
+//                         lastName: self.singleProfile.lastName!,
+//                         profileDistanceFromUser:self.singleProfile.profileDistanceFromUser ?? 0,
+//                         description: self.singleProfile.description ?? "No Description",
+//                         height: self.singleProfile.height ?? 0.0,
+//                         occupation: self.singleProfile.jobTitle ?? "No Job",
+//                         education: self.singleProfile.education ?? "No Education",
+//                         religion: self.singleProfile.religion ?? "No Religion",
+//                         politics: self.singleProfile.politics ?? "No Politics",
+//                         location: self.singleProfile.location ?? "No Location",
+//                         passions: self.singleProfile.interests ?? ["No Interests"],
+//                         geometry:geometry,
+//                         age: self.singleProfile.age ?? 10
+//                )
+                ChildCardView(singleProfile: $singleProfile, geometry: geometry)
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)

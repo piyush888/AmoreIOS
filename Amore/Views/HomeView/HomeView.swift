@@ -17,6 +17,7 @@ struct HomeView: View {
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     @EnvironmentObject var locationModel: LocationModel
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     
     var body: some View {
         
@@ -35,6 +36,7 @@ struct HomeView: View {
                     AllCardsView()
                             .environmentObject(adminAuthenticationModel)
                             .environmentObject(photoModel)
+                            .environmentObject(cardProfileModel)
                         
                     case .filterSettingsView:
                         FilterSettings()

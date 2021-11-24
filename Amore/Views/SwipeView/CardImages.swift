@@ -10,13 +10,13 @@ import SDWebImageSwiftUI
 
 struct CardImages: View {
     
-    @State var imageURL: URL?
+    @Binding var profileImage: ProfileImage?
+    @Binding var photoStruct: Photo
     @State var imageWidth: CGFloat
     @State var imageHeight: CGFloat
-    @State var downsampledImage: UIImage?
     
     func getImage(onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
-        SDWebImageManager.shared.loadImage(with: imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
+        SDWebImageManager.shared.loadImage(with: profileImage?.imageURL, options: [.continueInBackground], progress: nil) { image, data, error, cacheType, finished, durl in
             if let err = error {
                 print(err)
                 return
@@ -26,24 +26,26 @@ struct CardImages: View {
                 onFailure()
                 return
             }
+            photoStruct = Photo(image: nil, downsampledImage: image.downsample(to: CGSize(width: imageWidth, height:imageHeight/1.5)), inProgress: false)
+            photoStruct.downsampledImage = image.downsample(to: CGSize(width: imageWidth, height:imageHeight/1.5))
             onSuccess(image)
         }
     }
     
     var body: some View {
         VStack {
-            Image(uiImage: downsampledImage ?? UIImage())
+            Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                 .resizable()
                 .scaledToFill()
                 .frame(width: imageWidth, height:imageHeight/1.5)
                 .onAppear(perform: {
-                    if downsampledImage == nil {
-                        if imageURL != nil {
-                            getImage {
-                                downsampledImage = nil
-                            } onSuccess: { image in
-                                downsampledImage = image.downsample(to: CGSize(width: imageWidth, height:imageHeight/1.5))
-                            }
+                    if profileImage?.imageURL != nil {
+                        getImage {
+//                            photoStruct = Photo()
+                        } onSuccess: { image in
+//                            photoStruct.downsampledImage = image.downsample(to: CGSize(width: imageWidth, height:imageHeight/1.5))
+//                            photoStruct = Photo(image: nil, downsampledImage: image.downsample(to: CGSize(width: imageWidth, height:imageHeight/1.5)), inProgress: false)
+//                            SDImageCache.shared.clearMemory()
                         }
                     }
                 })
