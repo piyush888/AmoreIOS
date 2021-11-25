@@ -17,7 +17,7 @@ struct ContentView: View {
     @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
-    @StateObject var locationModel = LocationModel()
+//    @StateObject var locationModel = LocationModel()
     @StateObject var filterAndLocationModel = FilterAndLocationModel()
     @StateObject var cardProfileModel = CardProfileModel()
     
@@ -71,22 +71,22 @@ struct ContentView: View {
                             // If filter and location data is fetched and ready
                             if filterAndLocationModel.filterAndLocationDataFetched {
                                 // If location authorisation granted
-                                if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(locationModel.authorizationStatus) {
+                                if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(filterAndLocationModel.authorizationStatus) {
                                     HomeView()
                                         .environmentObject(profileModel)
                                         .environmentObject(streamModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(adminAuthenticationModel)
-                                        .environmentObject(locationModel)
+//                                        .environmentObject(locationModel)
                                         .environmentObject(filterAndLocationModel)
                                         .environmentObject(cardProfileModel)
                                         .onAppear {
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
+                                            print("ON APPEAR TRIGGERED")
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
                                             filterAndLocationModel.getFilterAndLocation()
-                                            locationModel.getLocationOnce()
-                                            filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)
+//                                            filterAndLocationModel.getLocationOnce()
                                             filterAndLocationModel.updateFilterAndLocation()
                                         }
                                     // To Test MoreInfo, comment out HomeView and uncomment block below
@@ -100,7 +100,7 @@ struct ContentView: View {
                                 // Else get location permission
                                 else {
                                     LocationView()
-                                        .environmentObject(locationModel)
+//                                        .environmentObject(locationModel)
                                         .environmentObject(filterAndLocationModel)
                                 }
                             }

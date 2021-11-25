@@ -7,12 +7,86 @@
 
 import Foundation
 import Firebase
+import CoreLocation
 
-class FilterAndLocationModel: ObservableObject {
+class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var filterAndLocationData = FiltersAndLocation()
     var oldFilterAndLocationData = FiltersAndLocation()
     let db = Firestore.firestore()
     @Published var filterAndLocationDataFetched = false
+    
+    @Published var authorizationStatus: CLAuthorizationStatus
+    var lastSeenLocation: CLLocation?
+    private let locationManager: CLLocationManager
+    
+    override init() {
+        locationManager = CLLocationManager()
+        authorizationStatus = locationManager.authorizationStatus
+        
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.startUpdatingLocation()
+    }
+    
+    // Call this to give a location pop-up
+    func getLocationOnce() {
+        locationManager.requestLocation()
+        print("Location: Location Requested")
+    }
+    
+    // Mark - Location Manager Delegate Methods
+    // This method will be started when the auhtorization of location manager changes
+    // If user "Denies" it will never be called again, until
+    // - User deletes the application or go in settings to change location
+    // This will be called everytime a user chooses "Give Access Ones" & application is
+    // Opened next time
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = locationManager.authorizationStatus
+        // Handle each case of location permissions
+        if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(authorizationStatus) {
+//            locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
+        }
+        else {
+            locationManager.stopUpdatingLocation()
+        }
+        print("Location: authorizationStatus Updated")
+    }
+    
+    // Get updated user location - Depend on authorization
+    func requestPermission() {
+        if authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    // Tells the delegate when new location data is available
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else {return}
+        lastSeenLocation = userLocation
+//        filterAndLocationData.location = Location(longitude: userLocation.coordinate.longitude, latitude: userLocation.coordinate.latitude)
+        print("Location: Location Updated")
+//        filterAndLocationData.location?.longitude = userLocation.coordinate.longitude
+//        filterAndLocationData.location?.latitude = userLocation.coordinate.latitude
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Handle failure to get a user’s location
+        print("Location: Failed to acquire user location.")
+    }
+    
+    // This will only be called when new user location data is available
+    func getProfiles(location:CLLocation) {
+        
+        print(String(location.coordinate.latitude))
+        print(String(location.coordinate.longitude))
+        // TODO - Piyush
+        // Store the location and time of location in the firestore
+        
+        // We need to create an api to fetch the latest profile
+        
+    }
     
     func createFilterAndLocation() -> Bool {
         // Firestore Write
@@ -51,36 +125,39 @@ class FilterAndLocationModel: ObservableObject {
                             // Get User Profile from Firestore.
                             self.oldFilterAndLocationData = try document.data(as: FiltersAndLocation.self) ?? FiltersAndLocation()
                             self.filterAndLocationData = self.oldFilterAndLocationData
-                            print("Filter and Location data Refresh done...")
+                            print("Location: Filter and Location data Refresh done...")
                             self.filterAndLocationDataFetched = true
                         }
                         catch {
                             print(error)
+                            self.filterAndLocationDataFetched = true
                         }
                     }
                 }
-                self.filterAndLocationDataFetched = true
+//                self.filterAndLocationDataFetched = true
             }
         }
         
     }
     
     func updateFilterAndLocation() {
+//        filterAndLocationData.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
+        print("Location: Current Location \(filterAndLocationData.location)")
         if let profileId = Auth.auth().currentUser?.uid {
             if filterAndLocationData != oldFilterAndLocationData {
                 do {
-                    print("Updating FilterAndLocationData on Firestore...")
+                    print("Location: Updating FilterAndLocationData on Firestore...")
                     try db.collection("FilterAndLocation").document(profileId).setData(from: filterAndLocationData)
                     print(filterAndLocationData)
                     oldFilterAndLocationData = filterAndLocationData
                 }
                 catch {
-                    print("Error while updating FilterAndLocationData in Firestore: ")
+                    print("Location: Error while updating FilterAndLocationData in Firestore: ")
                     print(error.localizedDescription)
                 }
             }
             else {
-                print("No change in FilterAndLocation Data...")
+                print("Location: No change in FilterAndLocation Data...")
             }
         }
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationHomeView: View {
     
-    @EnvironmentObject var locationModel: LocationModel
+//    @EnvironmentObject var locationModel: LocationModel
     @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     
     var body: some View {
@@ -17,14 +17,14 @@ struct LocationHomeView: View {
         VStack {
             
             // When location is Not determined - Ideally this case shouldn't happen
-            if locationModel.authorizationStatus == .notDetermined {
+            if filterAndLocationModel.authorizationStatus == .notDetermined {
                 Text("Location Not Determined")
                     .onAppear {
-                        locationModel.requestPermission()
+                        filterAndLocationModel.requestPermission()
                     }
             }
             // When the location access is given by the user
-            else if locationModel.authorizationStatus == .authorizedAlways || locationModel.authorizationStatus == .authorizedWhenInUse{
+            else if filterAndLocationModel.authorizationStatus == .authorizedAlways || filterAndLocationModel.authorizationStatus == .authorizedWhenInUse{
                 // Show home view
                 Text("Location Granted")
                 
@@ -33,8 +33,8 @@ struct LocationHomeView: View {
                 Button{
                     // Use this function whenever you want to update the location data
                     // It can also be called as a state variable when a view loads
-                    locationModel.getLocationOnce()
-                    print(String(locationModel.lastSeenLocation?.coordinate.latitude ?? 0)+", "+String(locationModel.lastSeenLocation?.coordinate.longitude ?? 0))
+                    filterAndLocationModel.getLocationOnce()
+//                    print(String(filterAndLocationModel.lastSeenLocation?.coordinate.latitude ?? 0)+", "+String(filterAndLocationModel.lastSeenLocation?.coordinate.longitude ?? 0))
                 } label : {
                     ZStack{
                         Rectangle()

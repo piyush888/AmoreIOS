@@ -16,7 +16,7 @@ struct HomeView: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
-    @EnvironmentObject var locationModel: LocationModel
+//    @EnvironmentObject var locationModel: LocationModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     
     var body: some View {
@@ -42,8 +42,9 @@ struct HomeView: View {
                         FilterSettings()
                             .environmentObject(filterAndLocationModel)
                             .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
-                                locationModel.getLocationOnce()
-                                filterAndLocationModel.filterAndLocationData.location = Location(longitude: locationModel.lastSeenLocation?.coordinate.longitude, latitude: locationModel.lastSeenLocation?.coordinate.latitude)
+                                print("On change for filter triggered")
+                                filterAndLocationModel.getLocationOnce()
+//                                filterAndLocationModel.filterAndLocationData.location = Location(longitude: filterAndLocationModel.lastSeenLocation?.coordinate.longitude, latitude: filterAndLocationModel.lastSeenLocation?.coordinate.latitude)
                                 filterAndLocationModel.updateFilterAndLocation()
                             }
                         

@@ -71,26 +71,6 @@ struct SingleCardView: View {
             
             ZStack {
             
-//                ChildCardView(imageURL1: self.singleProfile.image1?.imageURL,
-//                         imageURL2: self.singleProfile.image2?.imageURL,
-//                         imageURL3: self.singleProfile.image3?.imageURL,
-//                         imageURL4: self.singleProfile.image4?.imageURL,
-//                         imageURL5: self.singleProfile.image5?.imageURL,
-//                         imageURL6: self.singleProfile.image6?.imageURL,
-//                         firstName: self.singleProfile.firstName!,
-//                         lastName: self.singleProfile.lastName!,
-//                         profileDistanceFromUser:self.singleProfile.profileDistanceFromUser ?? 0,
-//                         description: self.singleProfile.description ?? "No Description",
-//                         height: self.singleProfile.height ?? 0.0,
-//                         occupation: self.singleProfile.jobTitle ?? "No Job",
-//                         education: self.singleProfile.education ?? "No Education",
-//                         religion: self.singleProfile.religion ?? "No Religion",
-//                         politics: self.singleProfile.politics ?? "No Politics",
-//                         location: self.singleProfile.location ?? "No Location",
-//                         passions: self.singleProfile.interests ?? ["No Interests"],
-//                         geometry:geometry,
-//                         age: self.singleProfile.age ?? 10
-//                )
                 ChildCardView(singleProfile: $singleProfile, geometry: geometry)
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width, y: 0)

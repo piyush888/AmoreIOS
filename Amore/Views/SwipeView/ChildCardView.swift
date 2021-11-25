@@ -64,6 +64,7 @@ struct ChildCardView: View {
 
                     if let urlString = self.singleProfile.image2?.imageURL {
                         VStack {
+                            CardImages(profileImage: $singleProfile.image2, photoStruct: $singleProfile.photo2.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
 //                           CardImages(imageURL: Binding.constant(urlString),
 //                                   imageWidth: geometry.size.width,
 //                                   imageHeight: geometry.size.height)
@@ -77,6 +78,7 @@ struct ChildCardView: View {
 
                     if let urlString = self.singleProfile.image3?.imageURL {
                         VStack {
+                            CardImages(profileImage: $singleProfile.image3, photoStruct: $singleProfile.photo3.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
 //                            CardImages(imageURL: Binding.constant(urlString),
 //                                   imageWidth: geometry.size.width,
 //                                   imageHeight: geometry.size.height)
@@ -88,6 +90,7 @@ struct ChildCardView: View {
 
                     if let urlString = self.singleProfile.image4?.imageURL {
                         VStack {
+                            CardImages(profileImage: $singleProfile.image4, photoStruct: $singleProfile.photo4.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
 //                            CardImages(imageURL: Binding.constant(urlString),
 //                                   imageWidth: geometry.size.width,
 //                                   imageHeight: geometry.size.height)
@@ -99,6 +102,7 @@ struct ChildCardView: View {
 
                     if let urlString = self.singleProfile.image5?.imageURL {
                         VStack {
+                            CardImages(profileImage: $singleProfile.image5, photoStruct: $singleProfile.photo5.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
 //                            CardImages(imageURL:Binding.constant(urlString),
 //                                   imageWidth: geometry.size.width,
 //                                   imageHeight: geometry.size.height)
@@ -110,6 +114,7 @@ struct ChildCardView: View {
 
                     if let urlString = self.singleProfile.image6?.imageURL {
                         VStack {
+                            CardImages(profileImage: $singleProfile.image6, photoStruct: $singleProfile.photo6.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
 //                            CardImages(imageURL: Binding.constant(urlString),
 //                                   imageWidth: geometry.size.width,
 //                                   imageHeight: geometry.size.height)
