@@ -19,7 +19,6 @@ class CardProfileModel: ObservableObject {
     @Published var deck1Zndex: Double = 1.0
     @Published var deck2Zndex: Double = 0.0
     
-    
     @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
     
     // Number of Profiles to be fetched per pull
@@ -118,12 +117,10 @@ class CardProfileModel: ObservableObject {
         
         if allCardsWithPhotosDeck1.count == 0 {
             allCardsWithPhotosDeck1 = tempCardsWithPhotos
-            self.deck1Zndex = 0
-            self.deck2Zndex = 1
+            self.deck1Zndex = deck2Zndex - 1
         } else if allCardsWithPhotosDeck2.count == 0 {
             allCardsWithPhotosDeck2 = tempCardsWithPhotos
-            self.deck1Zndex = 1
-            self.deck2Zndex = 0
+            self.deck2Zndex = deck1Zndex - 1
         }
         
     }

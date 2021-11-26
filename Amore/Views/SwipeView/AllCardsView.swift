@@ -26,6 +26,7 @@ struct AllCardsView: View {
         GeometryReader { geometry in
             VStack {
                 ZStack {
+                    
                     DeckCards(cardDecks: $cardProfileModel.allCardsWithPhotosDeck1,
                               cardWidth:geometry.size.width,
                               curSwipeStatus : $curSwipeStatus)
@@ -33,9 +34,8 @@ struct AllCardsView: View {
                             .environmentObject(cardProfileModel)
                             .environmentObject(photoModel)
                             .onChange(of: cardProfileModel.allCardsWithPhotosDeck1) { _ in
-                                print("CardPhoto: On Change on ForEach Triggered")
+                                print("CardPhoto: On Change on ForEach Triggered First Deck")
                             }
-                    
                     DeckCards(cardDecks: $cardProfileModel.allCardsWithPhotosDeck2,
                               cardWidth:geometry.size.width,
                               curSwipeStatus : $curSwipeStatus)
@@ -43,10 +43,8 @@ struct AllCardsView: View {
                         .environmentObject(cardProfileModel)
                         .environmentObject(photoModel)
                         .onChange(of: cardProfileModel.allCardsWithPhotosDeck2) { _ in
-                            print("CardPhoto: On Change on ForEach Triggered")
+                            print("CardPhoto: On Change on ForEach Triggered Second Deck")
                         }
-                    
-                    
                     
                     VStack {
                         Spacer()
