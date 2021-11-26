@@ -33,16 +33,10 @@ struct HomeView: View {
                         LikesTopPicksHome()
                         
                     case .swipeView:
-//                    if cardProfileModel.photosLoaded {
                         AllCardsView()
                                 .environmentObject(adminAuthenticationModel)
                                 .environmentObject(photoModel)
                                 .environmentObject(cardProfileModel)
-//                    }
-//                    else {
-//                        ProgressView()
-//                    }
-                    
                         
                     case .filterSettingsView:
                         FilterSettings()

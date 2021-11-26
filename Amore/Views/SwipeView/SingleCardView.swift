@@ -72,7 +72,6 @@ struct SingleCardView: View {
         } set: { newCard in
             cardProfileModel.cardsDictionary[singleProfile.id!] = newCard
         }
-
     }
     
     var body: some View {
@@ -104,6 +103,7 @@ struct SingleCardView: View {
                                 self.onRemove(self.singleProfile)
                                 photoModel.clearAllImageCache()
 //                                self.saveLikeDislike(givenSwipeStatus: self.dragSwipeStatus)
+                                cardProfileModel.areMoreCardsNeeded()
                             } else {
                                 self.translation = .zero
                             }
@@ -117,6 +117,7 @@ struct SingleCardView: View {
                                                 })
                         photoModel.clearAllImageCache()
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
+                        cardProfileModel.areMoreCardsNeeded()
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)

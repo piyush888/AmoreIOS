@@ -13,11 +13,17 @@ class CardProfileModel: ObservableObject {
     
     // Cards Data
     @Published var allCards = [CardProfile]()
-    @Published var allCardsWithPhotos = [CardProfileWithPhotos]()
-//    @Published var photosLoaded: Bool = false
+    @Published var allCardsWithPhotosDeck1 = [CardProfileWithPhotos]()
+    @Published var allCardsWithPhotosDeck2 = [CardProfileWithPhotos]()
+    
+    @Published var deck1Zndex: Double = 1.0
+    @Published var deck2Zndex: Double = 0.0
+    
+    
     @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
     
-//    var lastPhoto: Bool = false
+    // Number of Profiles to be fetched per pull
+    @Published var userAdjustedFetchProfiles: Int = 10
     
     public var imageWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -63,7 +69,6 @@ class CardProfileModel: ObservableObject {
                         self.updateCardProfilesWithPhotos()
                         return
                     }
-                    
                 }
             }
             return
@@ -72,8 +77,7 @@ class CardProfileModel: ObservableObject {
     }
     
     func updateCardProfilesWithPhotos() {
-        var cardsWithPhotos = [CardProfileWithPhotos]()
-        var tempDictionary: [String: CardProfileWithPhotos] = [:]
+        var tempCardsWithPhotos = [CardProfileWithPhotos]()
         for card in allCards {
             let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
                                                          firstName: card.firstName,
@@ -99,26 +103,40 @@ class CardProfileModel: ObservableObject {
                                                          description: card.description,
                                                          country: card.country,
                                                          image1: card.image1,
-//                                                         photo1: photos[0],
                                                          image2: card.image2,
-//                                                         photo2: photos[1],
                                                          image3: card.image3,
-//                                                         photo3: photos[2],
                                                          image4: card.image4,
-//                                                         photo4: photos[3],
                                                          image5: card.image5,
-//                                                         photo5: photos[4],
                                                          image6: card.image6,
-//                                                         photo6: photos[5],
                                                          doYouWorkOut: card.doYouWorkOut,
                                                          doYouDrink: card.doYouDrink,
                                                          doYouSmoke: card.doYouSmoke,
                                                          doYouWantBabies: card.doYouWantBabies)
-            cardsWithPhotos.append(cardProfileWithPhoto)
-            tempDictionary[card.id!] = cardProfileWithPhoto
+            tempCardsWithPhotos.append(cardProfileWithPhoto)
+            cardsDictionary[card.id!] = cardProfileWithPhoto
         }
-        allCardsWithPhotos = cardsWithPhotos
-        cardsDictionary = tempDictionary
+        
+        if allCardsWithPhotosDeck1.count == 0 {
+            allCardsWithPhotosDeck1 = tempCardsWithPhotos
+            self.deck1Zndex = 0
+            self.deck2Zndex = 1
+        } else if allCardsWithPhotosDeck2.count == 0 {
+            allCardsWithPhotosDeck2 = tempCardsWithPhotos
+            self.deck1Zndex = 1
+            self.deck2Zndex = 0
+        }
+        
+    }
+    
+    
+    
+    func areMoreCardsNeeded() {
+        if (allCardsWithPhotosDeck1.count == 0) || (allCardsWithPhotosDeck2.count == 0) {
+            // Yes more cards are needed
+            self.fetchProfile(numberOfProfiles: self.userAdjustedFetchProfiles)
+        } else {
+            print("Both deck have data")
+        }
     }
     
 }

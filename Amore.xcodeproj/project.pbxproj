@@ -144,6 +144,7 @@
 		E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA6526F948BD00CC7A72 /* Fonts.swift */; };
 		E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */; };
 		E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */; };
+		E2FE49BE275177C500744930 /* DeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE49BD275177C500744930 /* DeckCards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -297,6 +298,7 @@
 		E2F8AA6526F948BD00CC7A72 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAllCards.swift; sourceTree = "<group>"; };
 		E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButtonSheet.swift; sourceTree = "<group>"; };
+		E2FE49BD275177C500744930 /* DeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +455,7 @@
 				E273C31D274170D200AA3359 /* ProfileBio.swift */,
 				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
 				E295F37A274877840003A1E1 /* NoPhotoProvided.swift */,
+				E2FE49BD275177C500744930 /* DeckCards.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
+				E2FE49BE275177C500744930 /* DeckCards.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
 				E2347132271DC3A00006F336 /* TabButton.swift in Sources */,
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,

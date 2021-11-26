@@ -21,12 +21,9 @@ struct ChildCardView: View {
                 VStack {
 
                     ZStack {
-                        if let urlString = self.singleProfile.image1?.imageURL {
+                        if self.singleProfile.image1?.imageURL != nil  {
                             VStack {
                                 CardImages(profileImage: $singleProfile.image1, photoStruct: $singleProfile.photo1.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                                CardImages(imageURL: Binding.constant(urlString),
-//                                       imageWidth: geometry.size.width,
-//                                       imageHeight: geometry.size.height)
                             }
 
                             VStack {
@@ -38,7 +35,6 @@ struct ChildCardView: View {
                                                 profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundInt,
                                                 heightOfRectangle: geometry.size.height/9)
                             }
-
                         }
                         else {
                             NoPhotoProvided(imageWidth: geometry.size.width,
@@ -62,68 +58,40 @@ struct ChildCardView: View {
                         .padding(.bottom,15)
 
 
-                    if let urlString = self.singleProfile.image2?.imageURL {
+                    if self.singleProfile.image2?.imageURL != nil  {
                         VStack {
                             CardImages(profileImage: $singleProfile.image2, photoStruct: $singleProfile.photo2.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                           CardImages(imageURL: Binding.constant(urlString),
-//                                   imageWidth: geometry.size.width,
-//                                   imageHeight: geometry.size.height)
                         }
                     }
-
 
                     // Profile Passions
                     CardPassions(passions: self.singleProfile.interests.boundStringArray)
                         .padding(15)
 
-                    if let urlString = self.singleProfile.image3?.imageURL {
+                    if self.singleProfile.image3?.imageURL != nil {
                         VStack {
                             CardImages(profileImage: $singleProfile.image3, photoStruct: $singleProfile.photo3.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                            CardImages(imageURL: Binding.constant(urlString),
-//                                   imageWidth: geometry.size.width,
-//                                   imageHeight: geometry.size.height)
                         }
-                    } else {
-                        NoPhotoProvided(imageWidth: geometry.size.width,
-                                        imageHeight: geometry.size.height/1.5)
                     }
 
-                    if let urlString = self.singleProfile.image4?.imageURL {
+                    if self.singleProfile.image4?.imageURL != nil {
                         VStack {
                             CardImages(profileImage: $singleProfile.image4, photoStruct: $singleProfile.photo4.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                            CardImages(imageURL: Binding.constant(urlString),
-//                                   imageWidth: geometry.size.width,
-//                                   imageHeight: geometry.size.height)
                         }
-                    } else {
-                        NoPhotoProvided(imageWidth: geometry.size.width,
-                                        imageHeight: geometry.size.height/1.5)
                     }
-
-                    if let urlString = self.singleProfile.image5?.imageURL {
+                    
+                    if self.singleProfile.image5?.imageURL != nil  {
                         VStack {
                             CardImages(profileImage: $singleProfile.image5, photoStruct: $singleProfile.photo5.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                            CardImages(imageURL:Binding.constant(urlString),
-//                                   imageWidth: geometry.size.width,
-//                                   imageHeight: geometry.size.height)
                         }
-                    } else {
-                        NoPhotoProvided(imageWidth: geometry.size.width,
-                                        imageHeight: geometry.size.height/1.5)
                     }
-
-                    if let urlString = self.singleProfile.image6?.imageURL {
+                    
+                    if self.singleProfile.image6?.imageURL != nil  {
                         VStack {
                             CardImages(profileImage: $singleProfile.image6, photoStruct: $singleProfile.photo6.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-//                            CardImages(imageURL: Binding.constant(urlString),
-//                                   imageWidth: geometry.size.width,
-//                                   imageHeight: geometry.size.height)
                         }
-                    } else {
-                        NoPhotoProvided(imageWidth: geometry.size.width,
-                                        imageHeight: geometry.size.height/1.5)
                     }
-
+                    
                     // Report the profile
                     HStack {
                         Spacer()
