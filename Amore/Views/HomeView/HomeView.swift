@@ -33,10 +33,16 @@ struct HomeView: View {
                         LikesTopPicksHome()
                         
                     case .swipeView:
-                    AllCardsView()
-                            .environmentObject(adminAuthenticationModel)
-                            .environmentObject(photoModel)
-                            .environmentObject(cardProfileModel)
+//                    if cardProfileModel.photosLoaded {
+                        AllCardsView()
+                                .environmentObject(adminAuthenticationModel)
+                                .environmentObject(photoModel)
+                                .environmentObject(cardProfileModel)
+//                    }
+//                    else {
+//                        ProgressView()
+//                    }
+                    
                         
                     case .filterSettingsView:
                         FilterSettings()
@@ -44,7 +50,6 @@ struct HomeView: View {
                             .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
                                 print("On change for filter triggered")
                                 filterAndLocationModel.getLocationOnce()
-//                                filterAndLocationModel.filterAndLocationData.location = Location(longitude: filterAndLocationModel.lastSeenLocation?.coordinate.longitude, latitude: filterAndLocationModel.lastSeenLocation?.coordinate.latitude)
                                 filterAndLocationModel.updateFilterAndLocation()
                             }
                         

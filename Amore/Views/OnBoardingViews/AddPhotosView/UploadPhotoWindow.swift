@@ -114,6 +114,9 @@ struct UploadPhotoWindow: View {
             if finished {
                 print("FINISHED LOADING IMAGE...")
                 photoModel.photoAction = false
+                SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
+                    print("Successfully deleted")
+                }
             }
         }
     }

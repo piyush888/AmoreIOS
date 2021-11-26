@@ -33,7 +33,7 @@ struct AllCardsView: View {
                         // Normal Card View being rendered here.
                         SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotos.last == profile ?
                                        $curSwipeStatus : Binding.constant(LikeDislike.none),
-                                       singleProfile: Binding.constant(profile),
+                                       singleProfile: profile,
                                        onRemove: { removedUser in
                                             // Remove that user from our array
                             cardProfileModel.allCardsWithPhotos.removeAll { $0.id == removedUser.id }
@@ -43,7 +43,11 @@ struct AllCardsView: View {
                         .animation(.spring())
                         .frame(width: geometry.size.width)
                         .environmentObject(photoModel)
+                        .environmentObject(cardProfileModel)
 
+                    }
+                    .onChange(of: cardProfileModel.allCardsWithPhotos) { _ in
+                        print("CardPhoto: On Change on ForEach Triggered")
                     }
                     
                     

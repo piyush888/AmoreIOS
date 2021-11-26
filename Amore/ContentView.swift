@@ -85,8 +85,7 @@ struct ContentView: View {
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             print("ON APPEAR TRIGGERED")
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
-                                            filterAndLocationModel.getFilterAndLocation()
-//                                            filterAndLocationModel.getLocationOnce()
+                                            filterAndLocationModel.getLocationOnce()
                                             filterAndLocationModel.updateFilterAndLocation()
                                         }
                                     // To Test MoreInfo, comment out HomeView and uncomment block below

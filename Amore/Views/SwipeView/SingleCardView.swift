@@ -10,11 +10,12 @@ import SwiftUI
 struct SingleCardView: View {
     
     @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
-    @Binding var singleProfile: CardProfileWithPhotos
+    var singleProfile: CardProfileWithPhotos
     private var onRemove: (_ user: CardProfileWithPhotos) -> Void
     
     private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
@@ -51,8 +52,8 @@ struct SingleCardView: View {
 //        }
 //    }
     
-    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: Binding<CardProfileWithPhotos>, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
-        _singleProfile = singleProfile
+    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: CardProfileWithPhotos, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
+        self.singleProfile = singleProfile
         self.onRemove = onRemove
         _swipeStatus = currentSwipeStatus
     }
@@ -65,13 +66,22 @@ struct SingleCardView: View {
         gesture.translation.width / geometry.size.width
     }
     
+    func getProfile() -> Binding<CardProfileWithPhotos> {
+        return Binding {
+            cardProfileModel.cardsDictionary[singleProfile.id!]!
+        } set: { newCard in
+            cardProfileModel.cardsDictionary[singleProfile.id!] = newCard
+        }
+
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
             
             ZStack {
             
-                ChildCardView(singleProfile: $singleProfile, geometry: geometry)
+                ChildCardView(singleProfile: getProfile(), geometry: geometry)
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
@@ -105,6 +115,7 @@ struct SingleCardView: View {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
                                                     self.onRemove(self.singleProfile)
                                                 })
+                        photoModel.clearAllImageCache()
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
@@ -112,6 +123,7 @@ struct SingleCardView: View {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
                                                     self.onRemove(self.singleProfile)
                                                 })
+                        photoModel.clearAllImageCache()
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                 }

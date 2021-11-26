@@ -14,15 +14,20 @@ class CardProfileModel: ObservableObject {
     // Cards Data
     @Published var allCards = [CardProfile]()
     @Published var allCardsWithPhotos = [CardProfileWithPhotos]()
+//    @Published var photosLoaded: Bool = false
+    @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
+    
+//    var lastPhoto: Bool = false
+    
     public var imageWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
-
-    // Screen height.
     public var imageHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
+    
     var apiURL = "http://127.0.0.1:5000"
+    
     
     // Call this function to fetch profiles from the backend server
     func fetchProfile(numberOfProfiles:Int) {
@@ -67,28 +72,10 @@ class CardProfileModel: ObservableObject {
     }
     
     func updateCardProfilesWithPhotos() {
-        let start = DispatchTime.now()
         var cardsWithPhotos = [CardProfileWithPhotos]()
+        var tempDictionary: [String: CardProfileWithPhotos] = [:]
         for card in allCards {
-            var photos = [Photo](repeating: Photo(), count: 6)
-            let cardImages = [card.image1, card.image2, card.image3, card.image4, card.image5, card.image6]
-            for (index,image) in cardImages.enumerated() {
-                if let imageURL = image?.imageURL {
-                    getImage(imageURL: imageURL) {
-                        return
-                    } onSuccess: { image in
-                        photos[index] = Photo(image: nil, downsampledImage: image.downsample(to: CGSize(width: self.imageWidth, height: self.imageHeight/1.5)), inProgress: false)
-//                        if card.id == self.allCards.last?.id && index+1 < 6 {
-//                            guard let _ = cardImages[index+1]?.imageURL else {
-//                                print("Clearing Cache of SDWebImage")
-//                                SDImageCache.shared.clearMemory()
-//                                return
-//                            }
-//                        }
-                    }
-                }
-            }
-            cardsWithPhotos.append(CardProfileWithPhotos(id: card.id,
+            let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
                                                          firstName: card.firstName,
                                                          lastName: card.lastName,
                                                          dateOfBirth: card.dateOfBirth,
@@ -112,39 +99,26 @@ class CardProfileModel: ObservableObject {
                                                          description: card.description,
                                                          country: card.country,
                                                          image1: card.image1,
-                                                         photo1: photos[0].downsampledImage != nil ? photos[0] : nil,
+//                                                         photo1: photos[0],
                                                          image2: card.image2,
-                                                         photo2: photos[1].downsampledImage != nil ? photos[1] : nil,
+//                                                         photo2: photos[1],
                                                          image3: card.image3,
-                                                         photo3: photos[2].downsampledImage != nil ? photos[2] : nil,
+//                                                         photo3: photos[2],
                                                          image4: card.image4,
-                                                         photo4: photos[3].downsampledImage != nil ? photos[3] : nil,
+//                                                         photo4: photos[3],
                                                          image5: card.image5,
-                                                         photo5: photos[4].downsampledImage != nil ? photos[4] : nil,
+//                                                         photo5: photos[4],
                                                          image6: card.image6,
-                                                         photo6: photos[5].downsampledImage != nil ? photos[5] : nil,
+//                                                         photo6: photos[5],
                                                          doYouWorkOut: card.doYouWorkOut,
                                                          doYouDrink: card.doYouDrink,
                                                          doYouSmoke: card.doYouSmoke,
-                                                         doYouWantBabies: card.doYouWantBabies))
+                                                         doYouWantBabies: card.doYouWantBabies)
+            cardsWithPhotos.append(cardProfileWithPhoto)
+            tempDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotos = cardsWithPhotos
-        print("TIME REQUIRED = \((DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds)/1000000000)")
-    }
-    
-    func getImage(imageURL: URL, onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
-        SDWebImageManager.shared.loadImage(with: imageURL, options: [.continueInBackground], progress: nil) { image, data, error, cacheType, finished, durl in
-            if let err = error {
-                print(err)
-                return
-            }
-            guard let image = image else {
-                // No image handle this error
-                onFailure()
-                return
-            }
-            onSuccess(image)
-        }
+        cardsDictionary = tempDictionary
     }
     
 }

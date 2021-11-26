@@ -47,7 +47,6 @@
 		E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */; };
 		E221EAB32715066000769234 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB22715066000769234 /* FilterSettings.swift */; };
 		E221EAB52715068800769234 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB42715068800769234 /* ChannelView.swift */; };
-		E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3D2707B19800FC5129 /* LocationModel.swift */; };
 		E226CF402707B19800FC5129 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3E2707B19800FC5129 /* LocationView.swift */; };
 		E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF412707D78C00FC5129 /* LocationHomeView.swift */; };
 		E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF432708ADAE00FC5129 /* LocationDenied.swift */; };
@@ -202,7 +201,6 @@
 		E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksHome.swift; sourceTree = "<group>"; };
 		E221EAB22715066000769234 /* FilterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
 		E221EAB42715068800769234 /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
-		E226CF3D2707B19800FC5129 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		E226CF3E2707B19800FC5129 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E226CF412707D78C00FC5129 /* LocationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHomeView.swift; sourceTree = "<group>"; };
 		E226CF432708ADAE00FC5129 /* LocationDenied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDenied.swift; sourceTree = "<group>"; };
@@ -653,7 +651,6 @@
 			isa = PBXGroup;
 			children = (
 				E27AC5482720CB5400EB50F7 /* PhotoModel.swift */,
-				E226CF3D2707B19800FC5129 /* LocationModel.swift */,
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
@@ -878,7 +875,6 @@
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
 				1B6273D0274B82FD00590DD1 /* FilterAndLocationModel.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
-				E226CF3F2707B19800FC5129 /* LocationModel.swift in Sources */,
 				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,
 				E2DBC033272DF21C000630F5 /*  BoostCard.swift in Sources */,

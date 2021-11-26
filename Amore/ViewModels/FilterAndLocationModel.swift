@@ -26,7 +26,7 @@ class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDeleg
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
     // Call this to give a location pop-up
@@ -45,8 +45,8 @@ class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDeleg
         authorizationStatus = locationManager.authorizationStatus
         // Handle each case of location permissions
         if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(authorizationStatus) {
-//            locationManager.startUpdatingLocation()
-            locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
+//            locationManager.requestLocation()
         }
         else {
             locationManager.stopUpdatingLocation()
@@ -74,18 +74,6 @@ class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // Handle failure to get a user’s location
         print("Location: Failed to acquire user location.")
-    }
-    
-    // This will only be called when new user location data is available
-    func getProfiles(location:CLLocation) {
-        
-        print(String(location.coordinate.latitude))
-        print(String(location.coordinate.longitude))
-        // TODO - Piyush
-        // Store the location and time of location in the firestore
-        
-        // We need to create an api to fetch the latest profile
-        
     }
     
     func createFilterAndLocation() -> Bool {
@@ -141,7 +129,7 @@ class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDeleg
     }
     
     func updateFilterAndLocation() {
-//        filterAndLocationData.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
+        filterAndLocationData.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
         print("Location: Current Location \(filterAndLocationData.location)")
         if let profileId = Auth.auth().currentUser?.uid {
             if filterAndLocationData != oldFilterAndLocationData {

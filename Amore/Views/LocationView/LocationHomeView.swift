@@ -34,7 +34,6 @@ struct LocationHomeView: View {
                     // Use this function whenever you want to update the location data
                     // It can also be called as a state variable when a view loads
                     filterAndLocationModel.getLocationOnce()
-//                    print(String(filterAndLocationModel.lastSeenLocation?.coordinate.latitude ?? 0)+", "+String(filterAndLocationModel.lastSeenLocation?.coordinate.longitude ?? 0))
                 } label : {
                     ZStack{
                         Rectangle()
