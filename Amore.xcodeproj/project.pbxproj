@@ -58,6 +58,7 @@
 		E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */; };
 		E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */; };
 		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
+		E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D555D27540D5700852D70 /* ServerErrorView.swift */; };
 		E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234711F271BE0030006F336 /* StreamViewModel.swift */; };
 		E2347122271BE10E0006F336 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* Credentials.swift */; };
 		E2347124271BFDDA0006F336 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347123271BFDDA0006F336 /* ChatView.swift */; };
@@ -213,6 +214,7 @@
 		E226CF7D270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AmoreCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E22D555D27540D5700852D70 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E234711F271BE0030006F336 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		E2347121271BE10E0006F336 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E2347123271BFDDA0006F336 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -434,6 +436,14 @@
 			path = AddPhotosView;
 			sourceTree = "<group>";
 		};
+		E22D555C27540D4200852D70 /* ServerErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				E22D555D27540D5700852D70 /* ServerErrorView.swift */,
+			);
+			path = ServerErrorView;
+			sourceTree = "<group>";
+		};
 		E23E416E270CFEB00065E6E4 /* ExtraViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +645,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E22D555C27540D4200852D70 /* ServerErrorView */,
 				E268A452274335B00045F264 /* UserInformation */,
 				E221EAA72714F3A400769234 /* LikesTopPicksView */,
 				E221EAA62714F39600769234 /* UserSettingsView */,
@@ -833,6 +844,7 @@
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBio.swift in Sources */,
 				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
+				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,

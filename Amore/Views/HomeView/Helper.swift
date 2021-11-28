@@ -15,6 +15,11 @@ enum ViewTypes {
     case userSettingsView
 }
 
+enum ErrorView {
+    case allServicesAreGoodView
+    case serverErrorView
+}
+
 enum EditOrPreviewProfile {
     case editProfile
     case previewProfile

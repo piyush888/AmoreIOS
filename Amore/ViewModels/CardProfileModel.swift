@@ -14,11 +14,13 @@ class CardProfileModel: ObservableObject {
     // Cards Data
     @Published var allCards = [CardProfile]()
     @Published var allCardsWithPhotosDeck = [CardProfileWithPhotos]()
-    
     @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
-    
     // Number of Profiles to be fetched per pull
     @Published var userAdjustedFetchProfiles: Int = 10
+    // time out after continious error from backend
+    @Published var timeOutRetriesCount: Int = 0
+    
+    @Published var adminAuthModel = AdminAuthenticationViewModel()
     
     public var imageWidth: CGFloat {
         return UIScreen.main.bounds.width
@@ -54,21 +56,36 @@ class CardProfileModel: ObservableObject {
             if let data = data {
                 // Check if you receive a valid httpresponse
                 if let httpResponse = response as? HTTPURLResponse {
-                    DispatchQueue.main.async {
-                        do {
-                            self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
+                    
+                    if httpResponse.statusCode == 200 {
+                        DispatchQueue.main.async {
+                            do {
+                                self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
+                            }
+                            catch let jsonError as NSError {
+                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                            }
+                            self.updateCardProfilesWithPhotos()
+                            
+                            if self.timeOutRetriesCount > 0 {
+                                self.timeOutRetriesCount = 0
+                            }
+                            return
                         }
-                        catch let jsonError as NSError {
-                          print("JSON decode failed: \(jsonError.localizedDescription)")
+                    }
+                    else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                        DispatchQueue.main.async {
+                            if self.timeOutRetriesCount < 10 {
+                                self.timeOutRetriesCount += 1
+                                self.adminAuthModel.serverLogin()
+                                self.fetchProfile(numberOfProfiles:10)
+                            }
                         }
-                        self.updateCardProfilesWithPhotos()
-                        return
                     }
                 }
             }
             return
         }.resume()
-        
     }
     
     func updateCardProfilesWithPhotos() {

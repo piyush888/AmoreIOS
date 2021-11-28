@@ -47,9 +47,9 @@ struct CardImages: View {
                                 return
                             } onSuccess: { downloadedImage in
                                 photoStruct = Photo(image: nil, downsampledImage: downloadedImage.downsample(to: CGSize(width: self.imageWidth, height: self.imageHeight/1.5)), inProgress: false)
-//                                SDImageCache.shared.removeImage(forKey: imageURL.absoluteString) {
-//                                    print("Successfully deleted")
-//                                }
+                                SDImageCache.shared.removeImage(forKey: imageURL.absoluteString) {
+                                    print("Successfully deleted")
+                                }
                             }
                         }
                     }

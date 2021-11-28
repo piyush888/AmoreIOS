@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @State var serviceErrorView: ErrorView = .allServicesAreGoodView
     @State var currentPage: ViewTypes = .swipeView
     
     @EnvironmentObject var profileModel: ProfileViewModel
@@ -19,50 +20,63 @@ struct HomeView: View {
 //    @EnvironmentObject var locationModel: LocationModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     
+    func checkIfDataIsComing() {
+        if (cardProfileModel.timeOutRetriesCount > 9) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
+            serviceErrorView = .serverErrorView
+        }
+    }
+    
     var body: some View {
         
-            VStack {
-                
-                switch currentPage {
+            switch serviceErrorView {
                     
-                    case .messagingView:
-                        ChannelView()
-                            .environmentObject(streamModel)
-                        
-                    case .likesTopPicksView:
-                        LikesTopPicksHome()
-                        
-                    case .swipeView:
-                        AllCardsView()
-                                .environmentObject(adminAuthenticationModel)
-                                .environmentObject(photoModel)
-                                .environmentObject(cardProfileModel)
-                        
-                    case .filterSettingsView:
-                        FilterSettings()
-                            .environmentObject(filterAndLocationModel)
-                            .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
-                                print("On change for filter triggered")
-                                filterAndLocationModel.getLocationOnce()
-                                filterAndLocationModel.updateFilterAndLocation()
+                    case .allServicesAreGoodView:
+                        VStack {
+                            switch currentPage {
+                                
+                                case .messagingView:
+                                    ChannelView()
+                                        .environmentObject(streamModel)
+                                    
+                                case .likesTopPicksView:
+                                    LikesTopPicksHome()
+                                    
+                                case .swipeView:
+                                    AllCardsView()
+                                        .environmentObject(adminAuthenticationModel)
+                                        .environmentObject(photoModel)
+                                        .environmentObject(cardProfileModel)
+                                        
+                                case .filterSettingsView:
+                                    FilterSettings()
+                                        .environmentObject(filterAndLocationModel)
+                                        .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
+                                            print("On change for filter triggered")
+                                            filterAndLocationModel.getLocationOnce()
+                                            filterAndLocationModel.updateFilterAndLocation()
+                                        }
+                                    
+                                case .userSettingsView:
+                                    UserProfile()
+                                        .environmentObject(profileModel)
+                                        .environmentObject(photoModel)
                             }
+                            
+                            // Control Center
+                            ControlCenter(currentPage:$currentPage)
+                                .padding(.horizontal,30)
+                                .padding(.top,10)
+                            
+                            }.onChange(of: cardProfileModel.timeOutRetriesCount, perform: { errorCount in
+                                self.checkIfDataIsComing()
+                            })
                         
-                    case .userSettingsView:
-                        UserProfile()
-                            .environmentObject(profileModel)
-                            .environmentObject(photoModel)
+                    case .serverErrorView:
+                        ServerErrorView()
                 }
-                
-                // Control Center
-                ControlCenter(currentPage:$currentPage)
-                    .padding(.horizontal,30)
-                    .padding(.top,10)
-                    
-                
         }
-        
     }
-}
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
