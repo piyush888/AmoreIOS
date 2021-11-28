@@ -28,6 +28,7 @@ struct NameAgeDistance: View {
                 )
                 .frame(width:.infinity, height: heightOfRectangle)
                 .opacity(0.8)
+                .cornerRadius(20)
             
             HStack {
                 

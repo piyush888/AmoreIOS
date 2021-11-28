@@ -10,108 +10,122 @@ import SwiftUI
 struct ChildCardView: View {
     
     @Binding var singleProfile: CardProfileWithPhotos
-    @State var geometry: GeometryProxy
+    @State var testing: Bool
     
     var body: some View {
-        
-        ScrollView(showsIndicators: false) {
+        GeometryReader { geometry in
+            ScrollView(showsIndicators: false) {
 
-            LazyVStack {
+                LazyVStack {
 
-                VStack {
+                    VStack {
 
-                    ZStack {
-                        if self.singleProfile.image1?.imageURL != nil  {
-                            VStack {
-                                CardImages(profileImage: $singleProfile.image1, photoStruct: $singleProfile.photo1.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
+                        ZStack {
+                            if self.singleProfile.image1?.imageURL != nil  {
+                                VStack {
+                                    CardImages(profileImage: $singleProfile.image1,
+                                               photoStruct: $singleProfile.photo1.boundPhoto,
+                                               geometry: geometry,
+                                               testing:testing)
+                                }
+
+                                VStack {
+                                    Spacer()
+
+                                    NameAgeDistance(firstName: self.singleProfile.firstName.bound,
+                                                    lastName: self.singleProfile.lastName.bound,
+                                                    age: self.singleProfile.age.boundInt,
+                                                    profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundInt,
+                                                    heightOfRectangle: geometry.size.height/9)
+                                }
                             }
+                        }
 
+                        // Profile Names and age
+                        // Profile Bio
+                        ProfileBio(description: self.singleProfile.description.bound)
+
+                        // Profile Height, Education, Job, Religion, Location
+                        CardBasicInfo(height: self.singleProfile.height.boundDouble,
+                                      work: self.singleProfile.jobTitle.bound,
+                                      education: self.singleProfile.education.bound,
+                                      religion: self.singleProfile.religion.bound,
+                                      politics: self.singleProfile.politics.bound,
+                                      location: self.singleProfile.location.bound)
+                            .padding(.horizontal,15)
+
+
+                        if self.singleProfile.image2?.imageURL != nil  {
                             VStack {
-                                Spacer()
-
-                                NameAgeDistance(firstName: self.singleProfile.firstName.bound,
-                                                lastName: self.singleProfile.lastName.bound,
-                                                age: self.singleProfile.age.boundInt,
-                                                profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundInt,
-                                                heightOfRectangle: geometry.size.height/9)
+                                CardImages(profileImage: $singleProfile.image2,
+                                           photoStruct: $singleProfile.photo2.boundPhoto,
+                                           geometry: geometry,
+                                           testing:testing)
                             }
                         }
-                        else {
-                            NoPhotoProvided(imageWidth: geometry.size.width,
-                                            imageHeight: geometry.size.height/1.5)
-                        }
-                    }
 
-                    // Profile Names and age
-                    // Profile Bio
-                    ProfileBio(description: self.singleProfile.description.bound,
-                               boxHeight:geometry.size.height/8)
+                        // Profile Passions
+                        CardPassions(passions: self.singleProfile.interests.boundStringArray)
+                            .padding(15)
 
-                    // Profile Height, Education, Job, Religion, Location
-                    CardBasicInfo(height: self.singleProfile.height.boundDouble,
-                                  work: self.singleProfile.jobTitle.bound,
-                                  education: self.singleProfile.education.bound,
-                                  religion: self.singleProfile.religion.bound,
-                                  politics: self.singleProfile.politics.bound,
-                                  location: self.singleProfile.location.bound)
-                        .padding(.horizontal,15)
+                        if self.singleProfile.image3?.imageURL != nil {
+                            VStack {
+                                CardImages(profileImage: $singleProfile.image3,
+                                           photoStruct: $singleProfile.photo3.boundPhoto,
+                                           geometry: geometry,
+                                           testing:testing)
+                            }
+                        }
 
-
-                    if self.singleProfile.image2?.imageURL != nil  {
-                        VStack {
-                            CardImages(profileImage: $singleProfile.image2, photoStruct: $singleProfile.photo2.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
+                        if self.singleProfile.image4?.imageURL != nil {
+                            VStack {
+                                CardImages(profileImage: $singleProfile.image4,
+                                           photoStruct: $singleProfile.photo4.boundPhoto,
+                                           geometry: geometry,
+                                           testing:testing)
+                            }
                         }
-                    }
-
-                    // Profile Passions
-                    CardPassions(passions: self.singleProfile.interests.boundStringArray)
-                        .padding(15)
-
-                    if self.singleProfile.image3?.imageURL != nil {
-                        VStack {
-                            CardImages(profileImage: $singleProfile.image3, photoStruct: $singleProfile.photo3.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
+                        
+                        if self.singleProfile.image5?.imageURL != nil  {
+                            VStack {
+                                CardImages(profileImage: $singleProfile.image5,
+                                           photoStruct: $singleProfile.photo5.boundPhoto,
+                                           geometry: geometry,
+                                           testing:testing)
+                            }
                         }
-                    }
-
-                    if self.singleProfile.image4?.imageURL != nil {
-                        VStack {
-                            CardImages(profileImage: $singleProfile.image4, photoStruct: $singleProfile.photo4.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
+                        
+                        if self.singleProfile.image6?.imageURL != nil  {
+                            VStack {
+                                CardImages(profileImage: $singleProfile.image6,
+                                           photoStruct: $singleProfile.photo6.boundPhoto,
+                                           geometry: geometry,
+                                           testing:testing)
+                            }
                         }
-                    }
-                    
-                    if self.singleProfile.image5?.imageURL != nil  {
-                        VStack {
-                            CardImages(profileImage: $singleProfile.image5, photoStruct: $singleProfile.photo5.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
+                        
+                        // Report the profile
+                        HStack {
+                            Spacer()
+                            Button {
+                                // TODO - Report a Person
+                            } label : {
+                                Text("Report \(self.singleProfile.firstName.bound)")
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
                         }
+                        .padding([.top,.bottom],30)
                     }
-                    
-                    if self.singleProfile.image6?.imageURL != nil  {
-                        VStack {
-                            CardImages(profileImage: $singleProfile.image6, photoStruct: $singleProfile.photo6.boundPhoto, imageWidth: geometry.size.width, imageHeight: geometry.size.height)
-                        }
-                    }
-                    
-                    // Report the profile
-                    HStack {
-                        Spacer()
-                        Button {
-                            // TODO - Report a Person
-                        } label : {
-                            Text("Report \(self.singleProfile.firstName.bound)")
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                    }
-                    .padding([.top,.bottom],30)
                 }
-            }
-            .padding(.horizontal,10)
-            .background(Color.white)
+                .padding(.horizontal,10)
+                .background(Color.white)
 
+            }
+            .cornerRadius(10)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white, lineWidth: 0.1))
         }
-        .cornerRadius(10)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.white, lineWidth: 0.1))
         
     }
 }
@@ -140,7 +154,7 @@ struct ChildCardView_Previews: PreviewProvider {
                               community: "Brahmin",
                               politics: "Liberal",
                               location: "Coordinates",
-                              description: "this field is description",
+                              description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                               country: "India",
                               image1: ProfileImage(imageURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/amore-f8cd6.appspot.com/o/images%2FQvV4OoZmZ3QWHhMNaZrr7lkqmLF3%2Fimage1637162606.404443.heic?alt=media&token=b91a59f4-1b39-4b28-b972-9d4d5252fd76"),
                                                    firebaseImagePath: "images/QvV4OoZmZ3QWHhMNaZrr7lkqmLF3/image1637162606.404443.heic"),
@@ -152,8 +166,8 @@ struct ChildCardView_Previews: PreviewProvider {
                               doYouSmoke: "Yes",
                               doYouWantBabies: "No")
         
-        GeometryReader { geometry in
-            ChildCardView(singleProfile: Binding.constant(tempProfile), geometry: geometry)
-        }
+            ChildCardView(singleProfile: Binding.constant(tempProfile), testing: true)
+            .padding(.horizontal)
+        
     }
 }
