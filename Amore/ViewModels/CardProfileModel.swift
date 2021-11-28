@@ -13,11 +13,7 @@ class CardProfileModel: ObservableObject {
     
     // Cards Data
     @Published var allCards = [CardProfile]()
-    @Published var allCardsWithPhotosDeck1 = [CardProfileWithPhotos]()
-    @Published var allCardsWithPhotosDeck2 = [CardProfileWithPhotos]()
-    
-    @Published var deck1Zndex: Double = 1.0
-    @Published var deck2Zndex: Double = 0.0
+    @Published var allCardsWithPhotosDeck = [CardProfileWithPhotos]()
     
     @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
     
@@ -115,25 +111,21 @@ class CardProfileModel: ObservableObject {
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         
-        if allCardsWithPhotosDeck1.count == 0 {
-            allCardsWithPhotosDeck1 = tempCardsWithPhotos
-            self.deck1Zndex = deck2Zndex - 1
-        } else if allCardsWithPhotosDeck2.count == 0 {
-            allCardsWithPhotosDeck2 = tempCardsWithPhotos
-            self.deck2Zndex = deck1Zndex - 1
-        }
+        allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
         
     }
     
-    
-    
     func areMoreCardsNeeded() {
-        if (allCardsWithPhotosDeck1.count == 0) || (allCardsWithPhotosDeck2.count == 0) {
+        if allCardsWithPhotosDeck.count == 0 {
             // Yes more cards are needed
             self.fetchProfile(numberOfProfiles: self.userAdjustedFetchProfiles)
         } else {
             print("Both deck have data")
         }
+    }
+    
+    func removeCard() {
+      allCardsWithPhotosDeck.removeLast()
     }
     
 }

@@ -27,24 +27,26 @@ struct AllCardsView: View {
             VStack {
                 ZStack {
                     
-                    DeckCards(cardDecks: $cardProfileModel.allCardsWithPhotosDeck1,
-                              cardWidth:geometry.size.width,
-                              curSwipeStatus : $curSwipeStatus)
-                            .zIndex(cardProfileModel.deck1Zndex)
-                            .environmentObject(cardProfileModel)
-                            .environmentObject(photoModel)
-                            .onChange(of: cardProfileModel.allCardsWithPhotosDeck1) { _ in
-                                print("CardPhoto: On Change on ForEach Triggered First Deck")
-                            }
-                    DeckCards(cardDecks: $cardProfileModel.allCardsWithPhotosDeck2,
-                              cardWidth:geometry.size.width,
-                              curSwipeStatus : $curSwipeStatus)
-                        .zIndex(cardProfileModel.deck2Zndex)
-                        .environmentObject(cardProfileModel)
+                    ForEach(cardProfileModel.allCardsWithPhotosDeck) { profile in
+                        // Normal Card View being rendered here.
+                        SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
+                                       $curSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
+                                       singleProfile: profile,
+                                       onRemove: { removedUser in
+                                            // Remove that user from our array
+                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                                            self.curSwipeStatus = .none
+                                        }
+                        )
+                        .animation(.spring())
+                        .frame(width: geometry.size.width)
                         .environmentObject(photoModel)
-                        .onChange(of: cardProfileModel.allCardsWithPhotosDeck2) { _ in
-                            print("CardPhoto: On Change on ForEach Triggered Second Deck")
-                        }
+                        .environmentObject(cardProfileModel)
+
+                    }
+                    .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
+                        print("CardPhoto: On Change on ForEach Triggered First Deck")
+                    }
                     
                     VStack {
                         Spacer()

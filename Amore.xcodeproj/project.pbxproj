@@ -145,7 +145,6 @@
 		E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */; };
 		E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */; };
 		E2FE49BE275177C500744930 /* DeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE49BD275177C500744930 /* DeckCards.swift */; };
-		E2FE49C02751998100744930 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE49BF2751998100744930 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -300,7 +299,6 @@
 		E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAllCards.swift; sourceTree = "<group>"; };
 		E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButtonSheet.swift; sourceTree = "<group>"; };
 		E2FE49BD275177C500744930 /* DeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCards.swift; sourceTree = "<group>"; };
-		E2FE49BF2751998100744930 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,7 +456,6 @@
 				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
 				E295F37A274877840003A1E1 /* NoPhotoProvided.swift */,
 				E2FE49BD275177C500744930 /* DeckCards.swift */,
-				E2FE49BF2751998100744930 /* TestView.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -860,7 +857,6 @@
 				E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
-				E2FE49C02751998100744930 /* TestView.swift in Sources */,
 				1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */,
 				1B6273CE274B7B9A00590DD1 /* FiltersAndLocation.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
