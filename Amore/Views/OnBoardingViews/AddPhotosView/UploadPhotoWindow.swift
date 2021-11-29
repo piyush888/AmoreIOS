@@ -131,28 +131,19 @@ struct UploadPhotoWindow: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 115, height: 170, alignment: .center)
+                    .cornerRadius(10.0)
                     .clipped()
-                    .cornerRadius(5.0)
-                    .background(Color.pink.opacity(0.2))
-                    .shadow(color: Color("onboarding-pink"),
-                            radius: 2, x: 3, y: 3)
-                    .clipShape(Rectangle())
             } else {
                 Image(uiImage: UIImage())
-                    .resizable()
-                    .scaledToFill()
                     .frame(width: 115, height: 170, alignment: .center)
-                    .clipped()
-                    .cornerRadius(5.0)
                     .background(Color.pink.opacity(0.2))
-                    .shadow(color: Color("onboarding-pink"),
-                            radius: 2, x: 3, y: 3)
-                    .clipShape(Rectangle())
+                    .cornerRadius(10.0)
+                    .clipped()
             }
             
             
             HStack {
-                Image(systemName:"plus.circle.fill")
+                Image(systemName:"plus.circle")
                     .resizable()
                     .frame(width:20, height:20)
                     .foregroundColor(.green)
@@ -163,7 +154,7 @@ struct UploadPhotoWindow: View {
                 
                 // Don't show if the image is nil
                 if photoStruct.image != nil {
-                    Image(systemName:"pencil.circle.fill")
+                    Image(systemName:"pencil.circle")
                         .resizable()
                         .frame(width:20, height:20)
                         .foregroundColor(.blue)
@@ -172,7 +163,7 @@ struct UploadPhotoWindow: View {
                             activeSheet = .cropImage
                         }
                     if profileModel.numOfUserPhotosAdded() > 2 {
-                        Image(systemName:"trash.circle.fill")
+                        Image(systemName:"trash.circle")
                             .resizable()
                             .frame(width:20, height:20)
                             .foregroundColor(.red)

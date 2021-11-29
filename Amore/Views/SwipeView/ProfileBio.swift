@@ -13,32 +13,28 @@ struct ProfileBio: View {
     
     var body: some View {
         
-        ZStack {
-            Text(description)
+        VStack(alignment: .leading) {
+              Text(description)
                 .font(.subheadline)
-        }
-        .padding(10)
-        .foregroundColor(Color.black)
-        .overlay(
-            GeometryReader { geometry in
-                RoundedRectangle(cornerRadius: 20.0)
-                    .foregroundColor(Color.yellow)
-                    .frame(height: geometry.size.height)
-                    .opacity(0.1)
+                .padding()
+              Spacer()
             }
-        )
-            
-          
-        
-        
+            .frame(
+              minWidth: 0,
+              maxWidth: .infinity,
+              minHeight: 0,
+              maxHeight: .infinity,
+              alignment: .topLeading
+            )
+            .background(Color(hex: 0xFFFFE0))
     }
 }
 
 struct ProfileBio_Previews: PreviewProvider {
     static var previews: some View {
         
-        GeometryReader  {geometry in
-            ProfileBio(description: "My name is Kshitiz Sharma, I am the founder of Drone AI. I started building drone software as a hobby & added AI features to it & opened it to the general public.")
-        }
+        ProfileBio(description: "My name is Kshitiz Sharma, I am the founder of Drone AI. I started building drone software as a hobby & added AI features to it & opened it to the general public.")
+            .padding()
+            
     }
 }
