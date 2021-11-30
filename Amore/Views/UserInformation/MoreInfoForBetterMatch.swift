@@ -39,7 +39,7 @@ struct MoreInfoForBetterMatch: View {
                                                    progressStatus:$progressStatus)
                             
                             case .userHeightView:
-                            UserHeight(userHeight:$profileModel.editUserProfile.height.boundDouble,
+                                UserHeight(userHeight:$profileModel.editUserProfile.height.boundDouble,
                                            moreInfoView:$moreInfoView,
                                            progressStatus:$progressStatus)
                             

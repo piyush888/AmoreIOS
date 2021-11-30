@@ -45,6 +45,7 @@ struct CardImages: View {
                   .scaledToFill()
                   .frame(width: geometry.size.width, height:geometry.size.height/2)
                   .cornerRadius(20)
+                  .padding(.vertical,5)
                   .clipped()
                 
             } else {
@@ -55,7 +56,7 @@ struct CardImages: View {
                     .scaledToFill()
                     .frame(width: geometry.size.width, height:geometry.size.height/2)
                     .cornerRadius(20)
-                    .clipped()
+                    .padding(.vertical,5)
                     .onAppear {
                         if photoStruct.downsampledImage == nil {
                             if let imageURL = profileImage?.imageURL {

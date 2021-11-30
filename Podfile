@@ -14,4 +14,5 @@ target 'Amore' do
   pod 'Firebase/Storage'
   pod 'StreamChat', '~> 3.1.11'
   pod 'SDWebImageSwiftUI'
+  pod 'SwiftUIFontIcon'
 end

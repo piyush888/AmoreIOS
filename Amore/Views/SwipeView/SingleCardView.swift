@@ -102,7 +102,6 @@ struct SingleCardView: View {
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
                                 self.onRemove(self.singleProfile)
-//                                photoModel.clearAllImageCache()
 //                                self.saveLikeDislike(givenSwipeStatus: self.dragSwipeStatus)
                                 cardProfileModel.areMoreCardsNeeded()
                             } else {
@@ -114,18 +113,17 @@ struct SingleCardView: View {
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-                                                    self.onRemove(self.singleProfile)
-                                                })
-//                        photoModel.clearAllImageCache()
+                                self.onRemove(self.singleProfile)
+                                cardProfileModel.areMoreCardsNeeded()
+                        })
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
-                        cardProfileModel.areMoreCardsNeeded()
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-                                                    self.onRemove(self.singleProfile)
-                                                })
-//                        photoModel.clearAllImageCache()
+                            self.onRemove(self.singleProfile)
+                            cardProfileModel.areMoreCardsNeeded()
+                        })
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                 }
