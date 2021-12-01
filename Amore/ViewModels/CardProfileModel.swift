@@ -133,7 +133,7 @@ class CardProfileModel: ObservableObject {
     }
     
     func areMoreCardsNeeded() {
-        if allCardsWithPhotosDeck.count == 0 {
+        if allCardsWithPhotosDeck.count < 10 {
             // Yes more cards are needed
             self.fetchProfile(numberOfProfiles: self.userAdjustedFetchProfiles)
         } else {

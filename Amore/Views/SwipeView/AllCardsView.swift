@@ -16,6 +16,15 @@ struct AllCardsView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @State var curSwipeStatus: LikeDislike = .none
     
+    func getCards() -> [CardProfileWithPhotos] {
+        if cardProfileModel.allCardsWithPhotosDeck.count>4 {
+            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(4))
+        }
+        else {
+            return [CardProfileWithPhotos]()
+        }
+        
+    }
     
     enum LikeDislike: Int {
         case like, dislike, none
@@ -27,14 +36,15 @@ struct AllCardsView: View {
             VStack {
                 ZStack {
                     
-                    ForEach(cardProfileModel.allCardsWithPhotosDeck) { profile in
+                    ForEach(getCards()) { profile in
                         // Normal Card View being rendered here.
                         SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
                                        $curSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
                                        singleProfile: profile,
                                        onRemove: { removedUser in
                                             // Remove that user from our array
-                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+//                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                            cardProfileModel.allCardsWithPhotosDeck.removeLast()
                                             self.curSwipeStatus = .none
                                         }
                         )
