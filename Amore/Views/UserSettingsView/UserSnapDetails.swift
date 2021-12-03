@@ -13,21 +13,6 @@ struct UserSnapDetails: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     
-    func getImage(onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
-        SDWebImageManager.shared.loadImage(with: profileModel.editUserProfile.image1?.imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
-            if let err = error {
-                print(err)
-                return
-            }
-            guard let image = image else {
-                // No image handle this error
-                onFailure()
-                return
-            }
-            onSuccess(image)
-        }
-    }
-    
     var body: some View {
         
         VStack {

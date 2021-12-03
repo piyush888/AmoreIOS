@@ -63,9 +63,10 @@ struct CardImages: View {
                                 getImage(imageURL: imageURL) {
                                     return
                                 } onSuccess: { downloadedImage in
-                                    photoStruct = Photo(image: nil, downsampledImage: downloadedImage.downsample(to: CGSize(width: geometry.size.width, height: geometry.size.height/1.5)), inProgress: false)
+//                                    photoStruct = Photo(image: nil, downsampledImage: downloadedImage.downsample(to: CGSize(width: geometry.size.width, height: geometry.size.height/1.5)), inProgress: false)
+                                    photoStruct = Photo(image: nil, downsampledImage: downloadedImage, inProgress: false)
                                     SDImageCache.shared.removeImage(forKey: imageURL.absoluteString) {
-                                        print("Successfully deleted")
+                                        print("Successfully deleted card image cache for : ", profileImage?.firebaseImagePath?.split(separator: "/")[1])
                                     }
                                 }
                             }

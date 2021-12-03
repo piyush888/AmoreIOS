@@ -26,12 +26,17 @@ struct ProfileImageView<V>: View where V: ViewModifier {
                 return
             }
             onSuccess(image)
+            if finished {
+                SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
+                    print("Successfully deleted some image cache")
+                }
+            }
         }
     }
     
     var body: some View {
         
-        Image(uiImage: photo.image ?? UIImage())
+        Image(uiImage: photo.downsampledImage ?? UIImage())
             .resizable()
             .modifier(customModifier)
             .onAppear(perform: {
@@ -41,7 +46,7 @@ struct ProfileImageView<V>: View where V: ViewModifier {
                             photo.image = nil
                             photo.downsampledImage = nil
                         } onSuccess: { image in
-                            photo.image = image
+//                            photo.image = image
                             photo.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
                         }
                     }
@@ -52,7 +57,7 @@ struct ProfileImageView<V>: View where V: ViewModifier {
                     photo.image = nil
                     photo.downsampledImage = nil
                 } onSuccess: { image in
-                    photo.image = image
+//                    photo.image = image
                     photo.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
                 }
             }

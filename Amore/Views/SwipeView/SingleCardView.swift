@@ -68,7 +68,7 @@ struct SingleCardView: View {
     
     func getProfile() -> Binding<CardProfileWithPhotos> {
         return Binding {
-            cardProfileModel.cardsDictionary[singleProfile.id!]!
+            cardProfileModel.cardsDictionary[singleProfile.id!] ?? CardProfileWithPhotos()
         } set: { newCard in
             cardProfileModel.cardsDictionary[singleProfile.id!] = newCard
         }

@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct DownloadedPhotoURL: Identifiable, Codable, Hashable {
-    public var id: String?
-    var imageURL: URL?
-    var firebaseImagePath: String?
-}
+//struct DownloadedPhotoURL: Identifiable, Codable, Hashable {
+//    public var id: String?
+//    var imageURL: URL?
+//    var firebaseImagePath: String?
+//}
 
 struct Photo: Hashable {
     var image: UIImage?

@@ -18,6 +18,7 @@ struct AllCardsView: View {
     
     func getCards() -> [CardProfileWithPhotos] {
         if cardProfileModel.allCardsWithPhotosDeck.count>4 {
+            print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
             return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(4))
         }
         else {
@@ -45,6 +46,7 @@ struct AllCardsView: View {
                                             // Remove that user from our array
 //                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
                             cardProfileModel.allCardsWithPhotosDeck.removeLast()
+                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
                                             self.curSwipeStatus = .none
                                         }
                         )

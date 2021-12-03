@@ -42,6 +42,7 @@ struct UploadPhotoWindow: View {
             profileModel.defragmentProfileImagesArray()
             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
         } onFinish: {
+//            photoStruct = Photo()
             photoStruct.image = nil
             photoStruct.downsampledImage = nil
             photoStruct.inProgress = false
@@ -65,6 +66,7 @@ struct UploadPhotoWindow: View {
                 profileModel.defragmentProfileImagesArray()
                 profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
             } onFinish: {
+//                photoStruct = Photo()
                 photoStruct.image = nil
                 photoStruct.downsampledImage = nil
                 photoStruct.inProgress = false
@@ -87,6 +89,7 @@ struct UploadPhotoWindow: View {
         } onSuccess: {
             profileImage?.imageURL = nil
             profileImage?.firebaseImagePath = nil
+//            photoStruct = Photo(image: nil, downsampledImage: nil, inProgress: true)
             photoStruct.image = nil
             photoStruct.downsampledImage = nil
             profileModel.defragmentProfileImagesArray()
@@ -108,14 +111,16 @@ struct UploadPhotoWindow: View {
                 photoModel.photoAction = false
                 return
             }
-            photoStruct.image = image
+//            photoStruct.image = image
             photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+            
+//            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
             
             if finished {
                 print("FINISHED LOADING IMAGE...")
                 photoModel.photoAction = false
                 SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
-                    print("Successfully deleted")
+                    print("Successfully deleted self profile image cache")
                 }
             }
         }
@@ -126,7 +131,7 @@ struct UploadPhotoWindow: View {
         
         VStack {
             
-            if photoStruct.image != nil {
+            if photoStruct.downsampledImage != nil {
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
@@ -153,7 +158,7 @@ struct UploadPhotoWindow: View {
                     }
                 
                 // Don't show if the image is nil
-                if photoStruct.image != nil {
+                if photoStruct.downsampledImage != nil {
                     Image(systemName:"pencil.circle")
                         .resizable()
                         .frame(width:20, height:20)
@@ -177,9 +182,10 @@ struct UploadPhotoWindow: View {
             
         }
         .onAppear(perform: {
-            if photoStruct.image == nil {
+            if photoStruct.downsampledImage == nil {
                 if profileImage?.imageURL != nil {
                     getImage()
+                    print("On Appear: Upload Photo Window")
                 }
             }
         })
@@ -191,6 +197,7 @@ struct UploadPhotoWindow: View {
             }
             if profileImage?.imageURL != nil {
                 getImage()
+                print("On Change: Upload Photo Window")
             }
             
         })
