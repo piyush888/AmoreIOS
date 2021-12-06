@@ -29,12 +29,12 @@ struct AllCardsView: View {
             // Progress Block
         } completed: { completed, skipped in
             // On Complete Block
-            print("Prefetched image for ", card.id)
+            print("Prefetched image for ", card.id as Any)
         }
     }
     
     func showNames(card: CardProfileWithPhotos) {
-        print("Name: ", card.firstName)
+        print("Name: ", card.firstName as Any)
     }
     
     func getCards() -> [CardProfileWithPhotos] {
@@ -68,9 +68,9 @@ struct AllCardsView: View {
                                        singleProfile: profile,
                                        onRemove: { removedUser in
                                             // Remove that user from our array
-//                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
-                            cardProfileModel.allCardsWithPhotosDeck.removeLast()
-                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+//                                          cardProfileModel.allCardsWithPhotosDeck.removeLast()
+                                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
                                             self.curSwipeStatus = .none
                                         }
                         )
@@ -81,15 +81,14 @@ struct AllCardsView: View {
 
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
-                        print("CardPhoto: On Change on ForEach Triggered First Deck")
                         print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
-                        Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10)).map{
-                            card in
-                            showNames(card: card)
-                        }
+//                        Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10)).map{
+//                            card in
+//                            showNames(card: card)
+//                        }
                         self.cardSwipeDone = true
-                        print("Count: card swipe done: ", cardSwipeDone)
-                        print("Name: _______________________________")
+//                        print("Count: card swipe done: ", cardSwipeDone)
+//                        print("Name: _______________________________")
                     }
                     
                     VStack {

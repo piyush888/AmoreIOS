@@ -26,21 +26,17 @@ struct ChildCardView: View {
                         Group {
                             ZStack {
                                 if self.singleProfile.image1?.imageURL != nil  {
-                                    VStack {
-                                        CardImages(profileImage: $singleProfile.image1,
-                                                   photoStruct: $singleProfile.photo1.boundPhoto,
-                                                   geometry: geometry,
-                                                   testing:testing)
-                                    }
-
+                                    CardImages(profileImage: $singleProfile.image1,
+                                               photoStruct: $singleProfile.photo1.boundPhoto,
+                                               geometry: geometry,
+                                               testing:testing)
                                     VStack {
                                         Spacer()
-
                                         NameAgeDistance(firstName: self.singleProfile.firstName.bound,
                                                         lastName: self.singleProfile.lastName.bound,
                                                         age: self.singleProfile.age.boundInt,
                                                         profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundInt,
-                                                        heightOfRectangle: geometry.size.height/9)
+                                                        geometry: geometry)
                                     }
                                 }
                             }
@@ -146,10 +142,6 @@ struct ChildCardView: View {
                             }
                             
                         }
-                        
-                        
-                        
-                        
                         
                         if self.singleProfile.image6?.imageURL != nil  {
                             VStack {

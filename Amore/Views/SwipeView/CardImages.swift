@@ -43,20 +43,18 @@ struct CardImages: View {
                 Image("onboarding_girl4")
                   .resizable()
                   .scaledToFill()
-                  .frame(width: geometry.size.width, height:geometry.size.height/2)
+                  .frame(width: geometry.size.width-10, height:geometry.size.height/2)
                   .cornerRadius(20)
-                  .padding(.vertical,5)
-                  .clipped()
-                
+                  .padding(5)
             } else {
                 
                 // If we are not testing
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
-                    .frame(width: geometry.size.width, height:geometry.size.height/2)
+                    .frame(width: geometry.size.width-10, height:geometry.size.height/2)
                     .cornerRadius(20)
-                    .padding(.vertical,5)
+                    .padding(5)
                     .onAppear {
                         if photoStruct.downsampledImage == nil {
                             if let imageURL = profileImage?.imageURL {

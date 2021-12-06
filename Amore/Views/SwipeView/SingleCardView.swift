@@ -113,7 +113,7 @@ struct SingleCardView: View {
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-                                self.onRemove(self.singleProfile)
+                            self.onRemove(self.singleProfile)
                                 cardProfileModel.areMoreCardsNeeded()
                         })
 //                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)

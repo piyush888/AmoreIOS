@@ -13,7 +13,7 @@ struct NameAgeDistance: View {
     @State var lastName: String
     @State var age: Int
     @State var profileDistanceFromUser: Int
-    @State var heightOfRectangle: CGFloat
+    @State var geometry: GeometryProxy
     
     var body: some View {
         
@@ -26,7 +26,7 @@ struct NameAgeDistance: View {
                     startPoint: .top,
                     endPoint: .bottom)
                 )
-                .frame(width:.infinity, height: heightOfRectangle)
+                .frame(width:geometry.size.width-10, height:  geometry.size.height/10)
                 .opacity(0.8)
                 .cornerRadius(20)
             
@@ -56,12 +56,13 @@ struct NameAgeDistance: View {
                 }
                 .padding(.horizontal,10)
                 .foregroundColor(.white)
-                
                 Spacer()
             }
             
             
         }
+        .padding(.vertical,5)
+        
     }
 }
     
@@ -74,7 +75,7 @@ struct NameAgeDistance_Previews: PreviewProvider {
                             lastName: "World",
                             age: 24,
                             profileDistanceFromUser: 17,
-                            heightOfRectangle:geometry.size.height/11)
+                            geometry: geometry)
         }
     }
 }
