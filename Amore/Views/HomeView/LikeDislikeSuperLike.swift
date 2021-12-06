@@ -10,6 +10,7 @@ import SwiftUI
 struct LikeDislikeSuperLike: View {
     
     @Binding var curSwipeStatus: AllCardsView.LikeDislike
+    @Binding var cardSwipeDone: Bool
     
     var body: some View {
         
@@ -27,7 +28,12 @@ struct LikeDislikeSuperLike: View {
             Spacer()
             
             Button {
-                curSwipeStatus = AllCardsView.LikeDislike.dislike
+                if cardSwipeDone {
+                    curSwipeStatus = AllCardsView.LikeDislike.dislike
+                    print("Count: Button Dislike Pressed")
+                    cardSwipeDone = false
+                    print("Count: card swipe done: ", cardSwipeDone)
+                }
             } label: {
                 Image(systemName: "xmark.circle.fill")
                     .resizable()
@@ -37,6 +43,7 @@ struct LikeDislikeSuperLike: View {
                     .shadow(color: .white,
                             radius: 5, x: 1, y: 1)
             }
+            .disabled(!cardSwipeDone)
             
             Spacer()
             
@@ -54,7 +61,12 @@ struct LikeDislikeSuperLike: View {
             Spacer()
             
             Button {
-                curSwipeStatus = AllCardsView.LikeDislike.like
+                if cardSwipeDone {
+                    curSwipeStatus = AllCardsView.LikeDislike.like
+                    print("Count: Button Like Pressed")
+                    cardSwipeDone = false
+                    print("Count: card swipe done: ", cardSwipeDone)
+                }
             } label: {
                 Image(systemName: "heart.circle.fill")
                     .resizable()
@@ -64,6 +76,7 @@ struct LikeDislikeSuperLike: View {
                     .shadow(color: .white,
                             radius: 5, x: 1, y: 1)
             }
+            .disabled(!cardSwipeDone)
             
             Spacer()
             
@@ -84,6 +97,6 @@ struct LikeDislikeSuperLike: View {
 
 struct LikeDislikeSuperLike_Previews: PreviewProvider {
     static var previews: some View {
-        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none))
+        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), cardSwipeDone: Binding.constant(true))
     }
 }

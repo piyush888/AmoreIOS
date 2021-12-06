@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct AllCardsView: View {
     
@@ -15,11 +16,34 @@ struct AllCardsView: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @State var curSwipeStatus: LikeDislike = .none
+    @State var cardSwipeDone: Bool = true
+    
+    func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
+        var urls: [URL] = []
+        for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
+            if url != nil {
+                urls.append(url!)
+            }
+        }
+        SDWebImagePrefetcher.shared.prefetchURLs(urls) { completed, total in
+            // Progress Block
+        } completed: { completed, skipped in
+            // On Complete Block
+            print("Prefetched image for ", card.id)
+        }
+    }
+    
+    func showNames(card: CardProfileWithPhotos) {
+        print("Name: ", card.firstName)
+    }
     
     func getCards() -> [CardProfileWithPhotos] {
-        if cardProfileModel.allCardsWithPhotosDeck.count>4 {
-            print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
-            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(4))
+        if cardProfileModel.allCardsWithPhotosDeck.count>20 {
+            Array(cardProfileModel.allCardsWithPhotosDeck.suffix(20)).map{
+                card in
+                prefetchNextCardPhotos(card: card)
+            }
+            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10))
         }
         else {
             return [CardProfileWithPhotos]()
@@ -58,11 +82,19 @@ struct AllCardsView: View {
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
                         print("CardPhoto: On Change on ForEach Triggered First Deck")
+                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
+                        Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10)).map{
+                            card in
+                            showNames(card: card)
+                        }
+                        self.cardSwipeDone = true
+                        print("Count: card swipe done: ", cardSwipeDone)
+                        print("Name: _______________________________")
                     }
                     
                     VStack {
                         Spacer()
-                        LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus)
+                        LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone)
                             .padding(.bottom, 20)
                             .padding(.horizontal, 40)
                             .opacity(1.5)

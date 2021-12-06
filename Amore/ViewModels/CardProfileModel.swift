@@ -133,9 +133,9 @@ class CardProfileModel: ObservableObject {
     }
     
     func areMoreCardsNeeded() {
-        if allCardsWithPhotosDeck.count < 10 {
+        if allCardsWithPhotosDeck.count < 35 && allCardsWithPhotosDeck.count > 33{
             // Yes more cards are needed
-            self.fetchProfile(numberOfProfiles: 10)
+            self.fetchProfile(numberOfProfiles: 50)
             print("Count: Cards Being fetched ", allCardsWithPhotosDeck.count)
         } else {
             print("Both deck have data")

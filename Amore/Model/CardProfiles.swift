@@ -43,7 +43,7 @@ struct CardProfile: Identifiable, Codable, Equatable {
     var doYouWantBabies: String?
 }
 
-struct CardProfileWithPhotos: Identifiable, Hashable {
+struct CardProfileWithPhotos: Identifiable, Hashable, Equatable {
     var id: String?
     var firstName: String?
     var lastName: String?
@@ -83,4 +83,40 @@ struct CardProfileWithPhotos: Identifiable, Hashable {
     var doYouDrink: String?
     var doYouSmoke: String?
     var doYouWantBabies: String?
+    
+    static func ==(lhs: CardProfileWithPhotos, rhs: CardProfileWithPhotos) -> Bool {
+        return(lhs.id == rhs.id &&
+               lhs.firstName == rhs.firstName &&
+               lhs.lastName == rhs.lastName &&
+               lhs.dateOfBirth == rhs.dateOfBirth &&
+               lhs.interests == rhs.interests &&
+               lhs.sexualOrientation == rhs.sexualOrientation &&
+               lhs.sexualOrientationVisible == rhs.sexualOrientationVisible &&
+               lhs.showMePreference == rhs.showMePreference &&
+               lhs.work == rhs.work &&
+               lhs.school == rhs.school &&
+               lhs.age == rhs.age &&
+               lhs.headline == rhs.headline &&
+               lhs.profileDistanceFromUser == rhs.profileDistanceFromUser &&
+               lhs.jobTitle == rhs.jobTitle &&
+               lhs.workType == rhs.workType &&
+               lhs.height == rhs.height &&
+               lhs.education == rhs.education &&
+               lhs.religion == rhs.religion &&
+               lhs.community == rhs.community &&
+               lhs.politics == rhs.politics &&
+               lhs.location == rhs.location &&
+               lhs.description == rhs.description &&
+               lhs.country == rhs.country &&
+               lhs.image1 == rhs.image1 &&
+               lhs.image2 == rhs.image2 &&
+               lhs.image3 == rhs.image3 &&
+               lhs.image4 == rhs.image4 &&
+               lhs.image5 == rhs.image5 &&
+               lhs.image6 == rhs.image6 &&
+               lhs.doYouWorkOut == rhs.doYouWorkOut &&
+               lhs.doYouDrink == rhs.doYouDrink &&
+               lhs.doYouSmoke == rhs.doYouSmoke &&
+               lhs.doYouWantBabies == rhs.doYouWantBabies)
+    }
 }
