@@ -23,7 +23,7 @@ struct CardProfile: Identifiable, Codable, Equatable {
     var profileDistanceFromUser: Int? = 0
     var jobTitle: String?
     var workType: String?
-    var height: Double? = 5.3
+    var height: Double?
     var education: String?
     var religion: String?
     var community: String?
