@@ -89,4 +89,4 @@ struct LikesTopPicksHome: View {
 
 // Tabs...
 
-var tabs = ["Matches","Elite Picks"]
+var tabs = ["Likes Received","Elite Picks"]

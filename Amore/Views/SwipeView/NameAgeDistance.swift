@@ -54,7 +54,7 @@ struct NameAgeDistance: View {
                     }
                     
                 }
-                .padding(.horizontal,10)
+                .padding(.horizontal,20)
                 .foregroundColor(.white)
                 Spacer()
             }

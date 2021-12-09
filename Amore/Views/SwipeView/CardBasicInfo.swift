@@ -29,12 +29,19 @@ struct CardBasicInfo: View {
             
             
             LazyVGrid(columns: adaptivecolumns, alignment: .leading, spacing: 8, content: {
+                
                 // Height of the profile
                 HStack {
                     Image(systemName:"arrow.up.square.fill")
                         .foregroundColor(Color.blue)
-                    Text(String(height))
-                        .font(.caption)
+                    
+                    if height > 0.0 {
+                        Text(String(height))
+                            .font(.caption)
+                    } else {
+                        RequestData(property:"height")
+                    }
+                    
                     Spacer()
                 }
                 
@@ -42,8 +49,13 @@ struct CardBasicInfo: View {
                 HStack {
                     Image(systemName:"bag.fill")
                         .foregroundColor(Color.blue)
-                    Text(work)
-                        .font(.caption)
+                    if work != "" {
+                        Text(work)
+                            .font(.caption)
+                    } else {
+                        RequestData(property:"work")
+                    }
+                    
                     Spacer()
                 }
                 
@@ -51,8 +63,13 @@ struct CardBasicInfo: View {
                 HStack {
                     Image(systemName:"graduationcap.fill")
                         .foregroundColor(Color.blue)
-                    Text(education)
-                        .font(.caption)
+                    
+                    if education != "" {
+                        Text(education)
+                            .font(.caption)
+                    } else {
+                        RequestData(property:"Education")
+                    }
                     Spacer()
                 }
                 
@@ -60,8 +77,14 @@ struct CardBasicInfo: View {
                 HStack {
                     Image(systemName:"book.fill")
                         .foregroundColor(Color.blue)
-                    Text(religion)
-                        .font(.caption)
+                    
+                    if religion != "" {
+                        Text(religion)
+                            .font(.caption)
+                    } else {
+                        RequestData(property:"Religion")
+                    }
+                    
                     Spacer()
                 }
                 
@@ -69,8 +92,13 @@ struct CardBasicInfo: View {
                 HStack {
                     Image(systemName: "person.2.fill")
                         .foregroundColor(Color.blue)
-                    Text(politics)
-                        .font(.caption)
+                    
+                    if politics != "" {
+                        Text(politics)
+                            .font(.caption)
+                    } else {
+                        RequestData(property:"Politics")
+                    }
                     Spacer()
                 }
                 
@@ -89,3 +117,14 @@ struct CardBasicInfo: View {
 }
 
 
+struct CardBasicInfo_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        CardBasicInfo(height: 0.0,
+                      work: "",
+                      education: "",
+                      religion: "",
+                      politics: "",
+                      location: "")
+    }
+}

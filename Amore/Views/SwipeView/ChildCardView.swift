@@ -40,11 +40,11 @@ struct ChildCardView: View {
                                     }
                                 }
                             }
-
-                            // User Bio & Headline
+                            
                             ProfileBioHeadline(description: self.singleProfile.headline.bound,
                                        bgColor:Color(hex: 0xe8f4f8),
-                                       headlineText:"")
+                                       headlineText:"Headline")
+                    
                         }
 
                         
@@ -197,10 +197,10 @@ struct ChildCardView_Previews: PreviewProvider {
                               jobTitle: "VP",
                               workType: "Remove this field", // *
                               height: 5.6,
-                              education: "Masters in Science",
-                              religion: "Hindu",
+//                              education: "Masters in Science",
+//                              religion: "Hindu",
                               community: "Brahmin",
-                              politics: "Liberal",
+//                              politics: "Liberal",
                               location: "Coordinates",
                               description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                               country: "India",

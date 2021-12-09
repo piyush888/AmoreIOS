@@ -19,13 +19,21 @@ struct ProfileBioHeadline: View {
             
              Text(headlineText)
                 .font(.BoardingTitle2)
-                .padding(.horizontal)
-                .padding(.top)
-            
-              Text(description)
+                .padding()
+                
+            if description != "" {
+                Text(description)
                 .font(.subheadline)
                 .padding(.horizontal)
                 .padding(.bottom)
+                
+            } else {
+                // If user hasn't provided any data
+                RequestData(property:headlineText)
+                    .font(.subheadline)
+                    .padding(.horizontal)
+                    .padding(.bottom)
+            }
               
             }
             .frame(
