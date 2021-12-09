@@ -20,38 +20,6 @@ struct SingleCardView: View {
     
     private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
-    
-//    func saveLikeDislike(givenSwipeStatus: AllCardsView.LikeDislike) {
-//        var ref: DocumentReference? = nil
-//        var otherUser: String? {
-//            switch givenSwipeStatus{
-//            case .like: return "likedUser"
-//            case .dislike: return "dislikedUser"
-//            case .none: return nil
-//            }
-//        }
-//        var collectionName: String? {
-//            switch givenSwipeStatus{
-//            case .like: return "Likes"
-//            case .dislike: return "Dislikes"
-//            case .none: return nil
-//            }
-//        }
-//        if let collectionName = collectionName {
-//            let collectionRef = db.collection(collectionName)
-//            ref = collectionRef.addDocument(data: [
-//                "currentUser": String(Auth.auth().currentUser?.uid ?? "testUser"),
-//                otherUser!: singleProfile.id
-//            ]) { err in
-//                if let err = err {
-//                    print("Error adding document: \(err)")
-//                } else {
-//                    print("Document added with ID: \(ref!.documentID)")
-//                }
-//            }
-//        }
-//    }
-    
     init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: CardProfileWithPhotos, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
         self.singleProfile = singleProfile
         self.onRemove = onRemove
@@ -101,9 +69,8 @@ struct SingleCardView: View {
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
+                                FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.dragSwipeStatus)
                                 self.onRemove(self.singleProfile)
-//                                self.saveLikeDislike(givenSwipeStatus: self.dragSwipeStatus)
-                                cardProfileModel.areMoreCardsNeeded()
                             } else {
                                 self.translation = .zero
                             }
@@ -113,18 +80,16 @@ struct SingleCardView: View {
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+                            FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
                             self.onRemove(self.singleProfile)
-                                cardProfileModel.areMoreCardsNeeded()
                         })
-//                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+                            FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
                             self.onRemove(self.singleProfile)
-                            cardProfileModel.areMoreCardsNeeded()
                         })
-//                        self.saveLikeDislike(givenSwipeStatus: self.swipeStatus)
                     }
                 }
                 

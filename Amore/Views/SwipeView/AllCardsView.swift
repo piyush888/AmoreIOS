@@ -33,10 +33,6 @@ struct AllCardsView: View {
         }
     }
     
-    func showNames(card: CardProfileWithPhotos) {
-        print("Name: ", card.firstName as Any)
-    }
-    
     func getCards() -> [CardProfileWithPhotos] {
         if cardProfileModel.allCardsWithPhotosDeck.count>20 {
             Array(cardProfileModel.allCardsWithPhotosDeck.suffix(20)).map{
@@ -46,9 +42,8 @@ struct AllCardsView: View {
             return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10))
         }
         else {
-            return [CardProfileWithPhotos]()
+            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(cardProfileModel.allCardsWithPhotosDeck.count))
         }
-        
     }
     
     enum LikeDislike: Int {
@@ -69,7 +64,6 @@ struct AllCardsView: View {
                                        onRemove: { removedUser in
                                             // Remove that user from our array
                                             cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
-//                                          cardProfileModel.allCardsWithPhotosDeck.removeLast()
                                             cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
                                             self.curSwipeStatus = .none
                                         }
@@ -82,13 +76,8 @@ struct AllCardsView: View {
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
                         print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
-//                        Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10)).map{
-//                            card in
-//                            showNames(card: card)
-//                        }
                         self.cardSwipeDone = true
-//                        print("Count: card swipe done: ", cardSwipeDone)
-//                        print("Name: _______________________________")
+                        cardProfileModel.areMoreCardsNeeded()
                     }
                     
                     VStack {
