@@ -17,6 +17,14 @@ struct LikesTopPicksHome: View {
     
     @State var show = false
     
+    func getProfile(userId:String) -> Binding<CardProfileWithPhotos> {
+        return Binding {
+            cardProfileModel.cardsDictionary[userId] ?? CardProfileWithPhotos()
+        } set: { newCard in
+            cardProfileModel.cardsDictionary[userId] = newCard
+        }
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -75,7 +83,7 @@ struct LikesTopPicksHome: View {
                 
                 if show{
                     if let selectedItemVar = selectedItem {
-                        Detail(selectedItem: selectedItemVar, show: $show, animation: animation)
+                        Detail(selectedItem: getProfile(userId:selectedItemVar.id!), show: $show, animation: animation)
 //                        Text("\(selectedItemVar.firstName.bound)")
                     }
                 }

@@ -12,7 +12,7 @@ import SwiftUI
 
 struct Detail: View {
     
-    @State var selectedItem: CardProfileWithPhotos
+    @Binding var selectedItem: CardProfileWithPhotos
     @Binding var show: Bool
     
     var animation: Namespace.ID
@@ -40,12 +40,9 @@ struct Detail: View {
                 
                 Spacer()
                 
-            }
-            .padding()
+            }.padding()
             
-        
             ChildCardView(singleProfile: $selectedItem, testing: false)
-            .padding()
             
             // delay loading the content for smooth animation...
             VStack{
