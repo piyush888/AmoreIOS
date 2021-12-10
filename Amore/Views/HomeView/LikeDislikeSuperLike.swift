@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LikeDislikeSuperLike: View {
     
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     @Binding var curSwipeStatus: AllCardsView.LikeDislike
     @Binding var cardSwipeDone: Bool
     
@@ -17,7 +18,13 @@ struct LikeDislikeSuperLike: View {
         HStack {
             
             Button {
-                
+                if cardProfileModel.lastSwipedCard != nil && cardProfileModel.lastSwipeInfo != nil {
+                    cardProfileModel.allCardsWithPhotosDeck.append(cardProfileModel.lastSwipedCard!)
+                    cardProfileModel.cardsDictionary[cardProfileModel.lastSwipedCard!.id!] = cardProfileModel.lastSwipedCard!
+                    FirestoreServices.undoLikeDislikeFirestore(swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
+                    cardProfileModel.lastSwipedCard = nil
+                    cardProfileModel.lastSwipeInfo = nil
+                }
             } label: {
                 Image(systemName: "arrowshape.turn.up.backward.circle.fill")
                     .resizable()
@@ -48,7 +55,12 @@ struct LikeDislikeSuperLike: View {
             Spacer()
             
             Button {
-                
+                if cardSwipeDone {
+                    curSwipeStatus = AllCardsView.LikeDislike.superlike
+                    print("Count: Button SuperLike Pressed")
+                    cardSwipeDone = false
+                    print("Count: card swipe done: ", cardSwipeDone)
+                }
             } label: {
                 Image(systemName: "star.circle.fill")
                     .resizable()

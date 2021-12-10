@@ -47,7 +47,7 @@ struct AllCardsView: View {
     }
     
     enum LikeDislike: Int {
-        case like, dislike, none
+        case like, dislike, none, superlike
     }
     
     var body: some View {
@@ -62,27 +62,30 @@ struct AllCardsView: View {
                                        $curSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
                                        singleProfile: profile,
                                        onRemove: { removedUser in
-                                            // Remove that user from our array
-                                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
-                                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                                            self.curSwipeStatus = .none
-                                        }
+                            // Remove that user from our array
+                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                            self.curSwipeStatus = .none
+                            cardProfileModel.lastSwipedCard = removedUser
+                        }
                         )
-                        .animation(.spring())
-                        .frame(width: geometry.size.width)
-                        .environmentObject(photoModel)
-                        .environmentObject(cardProfileModel)
-
+                            .animation(.spring())
+                            .frame(width: geometry.size.width)
+                            .environmentObject(photoModel)
+                            .environmentObject(cardProfileModel)
+                        
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
                         print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
                         self.cardSwipeDone = true
                         cardProfileModel.areMoreCardsNeeded()
+                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
                     }
                     
                     VStack {
                         Spacer()
                         LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone)
+                            .environmentObject(cardProfileModel)
                             .padding(.bottom, 20)
                             .padding(.horizontal, 40)
                             .opacity(1.5)

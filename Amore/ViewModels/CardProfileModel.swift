@@ -21,6 +21,8 @@ class CardProfileModel: ObservableObject {
     @Published var timeOutRetriesCount: Int = 0
     
     @Published var adminAuthModel = AdminAuthenticationViewModel()
+    @Published var lastSwipedCard: CardProfileWithPhotos? = nil
+    @Published var lastSwipeInfo: AllCardsView.LikeDislike? = nil
     
     public var imageWidth: CGFloat {
         return UIScreen.main.bounds.width
