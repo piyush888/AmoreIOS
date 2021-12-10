@@ -28,8 +28,12 @@ struct ChildCardView: View {
                                 if self.singleProfile.image1?.imageURL != nil  {
                                     CardImages(profileImage: $singleProfile.image1,
                                                photoStruct: $singleProfile.photo1.boundPhoto,
-                                               geometry: geometry,
+                                               width:geometry.size.width-10,
+                                               height:geometry.size.height/2,
                                                testing:testing)
+                                        .cornerRadius(20)
+                                        .padding(5)
+                                    
                                     VStack {
                                         Spacer()
                                         NameAgeDistance(firstName: self.singleProfile.firstName.bound,
@@ -64,8 +68,11 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image2,
                                                photoStruct: $singleProfile.photo2.boundPhoto,
-                                               geometry: geometry,
+                                               width:geometry.size.width-10,
+                                               height:geometry.size.height/2,
                                                testing:testing)
+                                        .cornerRadius(20)
+                                        .padding(5)
                                 }
                             }
                         }
@@ -82,8 +89,11 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image3,
                                                photoStruct: $singleProfile.photo3.boundPhoto,
-                                               geometry: geometry,
+                                               width:geometry.size.width-10,
+                                               height:geometry.size.height/2,
                                                testing:testing)
+                                        .cornerRadius(20)
+                                        .padding(5)
                                 }
                             }
                         }
@@ -109,8 +119,11 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image4,
                                                photoStruct: $singleProfile.photo4.boundPhoto,
-                                               geometry: geometry,
+                                               width:geometry.size.width-10,
+                                               height:geometry.size.height/2,
                                                testing:testing)
+                                        .cornerRadius(20)
+                                        .padding(5)
                                 }
                             }
                         }
@@ -136,8 +149,11 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image5,
                                                photoStruct: $singleProfile.photo5.boundPhoto,
-                                               geometry: geometry,
+                                               width:geometry.size.width-10,
+                                               height:geometry.size.height/2,
                                                testing:testing)
+                                        .cornerRadius(20)
+                                        .padding(5)
                                 }
                             }
                             
@@ -147,8 +163,11 @@ struct ChildCardView: View {
                             VStack {
                                 CardImages(profileImage: $singleProfile.image6,
                                            photoStruct: $singleProfile.photo6.boundPhoto,
-                                           geometry: geometry,
+                                           width:geometry.size.width-10,
+                                           height:geometry.size.height/2,
                                            testing:testing)
+                                    .cornerRadius(20)
+                                    .padding(5)
                             }
                         }
                         

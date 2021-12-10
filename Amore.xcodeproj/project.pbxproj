@@ -73,7 +73,7 @@
 		E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712F271C972F0006F336 /* LoadingScreen.swift */; };
 		E2347132271DC3A00006F336 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347131271DC3A00006F336 /* TabButton.swift */; };
 		E2347134271DC4C30006F336 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347133271DC4C30006F336 /* Detail.swift */; };
-		E2347136271DC4E50006F336 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347135271DC4E50006F336 /* CardView.swift */; };
+		E2347136271DC4E50006F336 /* MiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347135271DC4E50006F336 /* MiniCardView.swift */; };
 		E2347138271DC5320006F336 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347137271DC5320006F336 /* CustomShape.swift */; };
 		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
 		E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713F271F4B5D0006F336 /* CommonContainer.swift */; };
@@ -85,6 +85,7 @@
 		E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
+		E2586C14276271A9001F7326 /* LikesReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2586C13276271A9001F7326 /* LikesReceived.swift */; };
 		E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */; };
 		E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */; };
 		E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4652745E6520045F264 /* QuestionaireTemplate.swift */; };
@@ -233,7 +234,7 @@
 		E234712F271C972F0006F336 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		E2347131271DC3A00006F336 /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		E2347133271DC4C30006F336 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
-		E2347135271DC4E50006F336 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		E2347135271DC4E50006F336 /* MiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniCardView.swift; sourceTree = "<group>"; };
 		E2347137271DC5320006F336 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
 		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
 		E234713F271F4B5D0006F336 /* CommonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContainer.swift; sourceTree = "<group>"; };
@@ -244,6 +245,7 @@
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
+		E2586C13276271A9001F7326 /* LikesReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesReceived.swift; sourceTree = "<group>"; };
 		E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoForBetterMatch.swift; sourceTree = "<group>"; };
 		E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionForMoreInfo.swift; sourceTree = "<group>"; };
 		E268A4652745E6520045F264 /* QuestionaireTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireTemplate.swift; sourceTree = "<group>"; };
@@ -408,8 +410,9 @@
 				E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */,
 				E2347131271DC3A00006F336 /* TabButton.swift */,
 				E2347133271DC4C30006F336 /* Detail.swift */,
-				E2347135271DC4E50006F336 /* CardView.swift */,
+				E2347135271DC4E50006F336 /* MiniCardView.swift */,
 				E2347137271DC5320006F336 /* CustomShape.swift */,
+				E2586C13276271A9001F7326 /* LikesReceived.swift */,
 			);
 			path = LikesTopPicksView;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
+				E2586C14276271A9001F7326 /* LikesReceived.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
 				E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */,
@@ -973,7 +977,7 @@
 				E226CF402707B19800FC5129 /* LocationView.swift in Sources */,
 				E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */,
 				E2DBC025272B3621000630F5 /* ContactCommunityLegal.swift in Sources */,
-				E2347136271DC4E50006F336 /* CardView.swift in Sources */,
+				E2347136271DC4E50006F336 /* MiniCardView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 				E27AC54D2721237500EB50F7 /* ReligionSettings.swift in Sources */,
 			);

@@ -8,32 +8,34 @@
 import SwiftUI
 
 struct TabButton: View {
-    var title: String
-    @Binding var selected: String
     
+    @State var titleSelected: TopPicksLikesView
+    @Binding var selectedTab: TopPicksLikesView
     var animation: Namespace.ID
     
     var body: some View {
         
         Button(action: {
-            withAnimation(.spring()){selected = title}
+            withAnimation(.spring()){
+                selectedTab = titleSelected
+            }
         }) {
             
-            Text(title)
+            Text("\(titleSelected.rawValue)")
                 .font(.system(size: 15))
-                .fontWeight(.bold)
-                .foregroundColor(selected == title ? .white : .black)
+                .bold()
+                .foregroundColor(selectedTab == titleSelected ? .white : .gray)
                 .padding(.vertical,10)
-                .padding(.horizontal,selected == title ? 20 : 0)
+                .padding(.horizontal,selectedTab == titleSelected ? 20 : 0)
                 .background(
                 
                     // For Slide Effect Animation...
                     
                     ZStack{
                         
-                        if selected == title{
+                        if selectedTab == titleSelected {
                             
-                            Color.black
+                            Color.blue
                                 .clipShape(Capsule())
                                 .matchedGeometryEffect(id: "Tab", in: animation)
                         }

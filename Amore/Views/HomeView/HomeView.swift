@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
-    @State var currentPage: ViewTypes = .swipeView
+    @State var currentPage: ViewTypes = .likesTopPicksView
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
@@ -39,7 +39,8 @@ struct HomeView: View {
                                         .environmentObject(streamModel)
                                     
                                 case .likesTopPicksView:
-                                    LikesTopPicksHome()
+                                LikesTopPicksHome()
+                                        .environmentObject(cardProfileModel)
                                     
                                 case .swipeView:
                                     AllCardsView()

@@ -9,84 +9,79 @@ import SwiftUI
 
 struct LikesTopPicksHome: View {
     
-    @State var selectedTab = tabs[0]
     @Namespace var animation
+    @EnvironmentObject var cardProfileModel: CardProfileModel
+    @State var selectedTab: TopPicksLikesView = .likesReceived
+    @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesGive, .elitePicks]
+    @State var selectedItem : CardProfileWithPhotos? = nil
     
     @State var show = false
-    @State var selectedItem : TopPicksProfiles = TopPicksProfilesList[0]
     
     var body: some View {
         
-        ZStack{
-            
-            VStack{
+        GeometryReader { geometry in
+            ZStack{
                 
-                ScrollView{
+                VStack{
                     
-                    VStack{
+                    HStack(spacing: 0){
+                        Spacer()
                         
-                        HStack(spacing: 0){
-                            Spacer()
+                        ForEach(tabs,id: \.self){tab in
                             
-                            ForEach(tabs,id: \.self){tab in
-                                
-                                // Tab Button....
-                                
-                                TabButton(title: tab, selected: $selectedTab, animation: animation)
-                                
-                                // even spacing....
-                                
-                                if tabs.last != tab{Spacer(minLength: 0)}
-                            }
-                            Spacer()
+                            // Tab Button....
+                            TabButton(titleSelected: tab,
+                                      selectedTab: $selectedTab,
+                                      animation: animation)
+                            
+                            // even spacing....
+                            if tabs.last != tab{Spacer(minLength: 0)}
                         }
-                        .padding()
-                        .padding(.top,5)
+                        Spacer()
+                    }
+                    .padding()
+                    .padding(.top,5)
+                    
+                    ScrollView{
                         
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 25){
+                        VStack{
                             
-                            ForEach(TopPicksProfilesList){item in
+                            switch selectedTab {
                                 
-                                // Card the matches
-                                if selectedTab == "Matches" {
-                                    Button{
-                                        withAnimation(.spring()){
-                                            selectedItem = item
-                                            show.toggle()
-                                        }
-                                    } label : {
-                                        CardView(item: item, animation: animation)
-                                    }
-                                } else {
-                                // Card the elite picks
-                                    Button{
-                                        withAnimation(.spring()){
-                                            selectedItem = item
-                                            show.toggle()
-                                        }
-                                    } label : {
-                                        CardView(item: item, animation: animation)
-                                    }
-                                }
+                                case .likesReceived:
+                                    LikesReceived(selectedItem:$selectedItem,
+                                                  show:$show,
+                                                  geometry:geometry)
+                                    .environmentObject(cardProfileModel)
+                                
+                                case .superLikesGive:
+                                    LikesReceived(selectedItem:$selectedItem,
+                                                  show:$show,
+                                                  geometry:geometry)
+                                    .environmentObject(cardProfileModel)
+                                
+                                case .elitePicks:
+                                    LikesReceived(selectedItem:$selectedItem,
+                                                  show:$show,
+                                                  geometry:geometry)
+                                    .environmentObject(cardProfileModel)
+                            }
                                     
-                            }
                         }
-                        .padding()
+                    }
+                    Spacer(minLength: 0)
+                }
+                .opacity(show ? 0 : 1)
+                
+                if show{
+                    if let selectedItemVar = selectedItem {
+                        Detail(selectedItem: selectedItemVar, show: $show, animation: animation)
+//                        Text("\(selectedItemVar.firstName.bound)")
                     }
                 }
-                
-                Spacer(minLength: 0)
             }
-            .opacity(show ? 0 : 1)
-            
-            if show{
-                Detail(selectedItem: $selectedItem, show: $show, animation: animation)
-            }
+            .background(Color.white.ignoresSafeArea())
         }
-        .background(Color.white.ignoresSafeArea())
     }
 }
 
-// Tabs...
-
-var tabs = ["Likes Received","Elite Picks"]

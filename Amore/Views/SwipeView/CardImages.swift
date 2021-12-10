@@ -12,7 +12,8 @@ struct CardImages: View {
     
     @Binding var profileImage: ProfileImage?
     @Binding var photoStruct: Photo
-    @State var geometry: GeometryProxy
+    @State var width: CGFloat
+    @State var height: CGFloat
     @State var testing: Bool
     
     
@@ -43,18 +44,15 @@ struct CardImages: View {
                 Image("onboarding_girl4")
                   .resizable()
                   .scaledToFill()
-                  .frame(width: geometry.size.width-10, height:geometry.size.height/2)
+                  .frame(width: width, height:height)
                   .cornerRadius(20)
-                  .padding(5)
             } else {
                 
                 // If we are not testing
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
-                    .frame(width: geometry.size.width-10, height:geometry.size.height/2)
-                    .cornerRadius(20)
-                    .padding(5)
+                    .frame(width: width, height:height)
                     .onAppear {
                         if photoStruct.downsampledImage == nil {
                             if let imageURL = profileImage?.imageURL {
@@ -118,7 +116,8 @@ struct CardImages_Previews: PreviewProvider {
         GeometryReader { geometry in
             CardImages(profileImage: Binding.constant(tempProfile.image6),
                        photoStruct: Binding.constant(tempProfile.photo6.boundPhoto),
-                       geometry:geometry,
+                       width:geometry.size.width-10,
+                       height:geometry.size.height/2,
                        testing:true)
                 .padding()
         }
