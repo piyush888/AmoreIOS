@@ -17,9 +17,9 @@ struct ContentView: View {
     @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
-//    @StateObject var locationModel = LocationModel()
     @StateObject var filterAndLocationModel = FilterAndLocationModel()
     @StateObject var cardProfileModel = CardProfileModel()
+    @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     
     var body: some View {
         
@@ -77,14 +77,15 @@ struct ContentView: View {
                                         .environmentObject(streamModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(adminAuthenticationModel)
-//                                        .environmentObject(locationModel)
                                         .environmentObject(filterAndLocationModel)
                                         .environmentObject(cardProfileModel)
+                                        .environmentObject(receivedGivenEliteModel)
                                         .onAppear {
+                                            print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
-                                            print("ON APPEAR TRIGGERED")
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
+                                            receivedGivenEliteModel.getLikesGivenData()
                                             filterAndLocationModel.getLocationOnce()
                                             filterAndLocationModel.updateFilterAndLocation()
                                         }

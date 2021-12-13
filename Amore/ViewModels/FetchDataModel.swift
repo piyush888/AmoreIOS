@@ -1,47 +1,30 @@
 //
-//  CardProfileModel.swift
+//  FetchDataModel.swift
 //  Amore
 //
-//  Created by Piyush Garg on 24/11/21.
+//  Created by Kshitiz Sharma on 12/12/21.
 //
 
 import Foundation
 
-class CardProfileModel: ObservableObject {
+class FetchDataModel {
     
-    // Cards Data
-    @Published var allCards = [CardProfile]()
-    @Published var allCardsWithPhotosDeck = [CardProfileWithPhotos]()
-    @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
-    // Number of Profiles to be fetched per pull
-    @Published var userAdjustedFetchProfiles: Int = 10
-    // time out after continious error from backend
+    @Published var requestInProcessing: Bool = false
     @Published var timeOutRetriesCount: Int = 0
-    @Published var profilesBeingFetched: Bool = false
-    
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    @Published var lastSwipedCard: CardProfileWithPhotos? = nil
-    @Published var lastSwipeInfo: AllCardsView.LikeDislike? = nil
-    
     var apiURL = "http://127.0.0.1:5000"
-    
-    
-    // Call this function to fetch profiles from the backend server
-    func fetchProfile(numberOfProfiles:Int) {
-        print("FETCH PROFILE TRIGGERED........")
-        profilesBeingFetched = true
-        // fetchprofiles is the api where you can profiles
-        guard let url = URL(string: self.apiURL + "/fetchprofiles") else { return }
-        // add the pay load to the request
-        let body: [String: Int] = ["numberOfProfiles": numberOfProfiles]
-        
+
+    func fetchData(apiToBeUsed:String) -> [CardProfile]{
+        var tempData = [CardProfile]()
+        requestInProcessing = true
+        guard let url = URL(string: self.apiURL + apiToBeUsed) else { return tempData}
+        let body: [String: String] = ["DataStatus": "No Data"]
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
@@ -55,17 +38,15 @@ class CardProfileModel: ObservableObject {
                     if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async {
                             do {
-                                self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
+                                tempData =  try JSONDecoder().decode([CardProfile].self, from: data)
                             }
                             catch let jsonError as NSError {
                               print("JSON decode failed: \(jsonError.localizedDescription)")
                             }
-                            self.updateCardProfilesWithPhotos()
-                            self.profilesBeingFetched = false
+                            self.requestInProcessing = false
                             if self.timeOutRetriesCount > 0 {
                                 self.timeOutRetriesCount = 0
                             }
-                            return
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
@@ -73,21 +54,22 @@ class CardProfileModel: ObservableObject {
                             if self.timeOutRetriesCount < 10 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
-                                self.fetchProfile(numberOfProfiles:10)
+                                tempData = self.fetchData(apiToBeUsed:apiToBeUsed)
                             }
-                            self.profilesBeingFetched = false
+                            self.requestInProcessing = false
                         }
                     }
                 }
             }
-            return
         }.resume()
-        
+        return tempData
     }
     
-    func updateCardProfilesWithPhotos() {
+    func updateCardProfilesWithPhotos(tempData:[CardProfile]) -> (cardsWithPhotos: [CardProfileWithPhotos],
+                                                                  cardsDict: [String: CardProfileWithPhotos])  {
         var tempCardsWithPhotos = [CardProfileWithPhotos]()
-        for card in allCards {
+        var temp_Dict: [String: CardProfileWithPhotos] = [:]
+        for card in tempData {
             let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
                                                          firstName: card.firstName,
                                                          lastName: card.lastName,
@@ -122,25 +104,10 @@ class CardProfileModel: ObservableObject {
                                                          doYouSmoke: card.doYouSmoke,
                                                          doYouWantBabies: card.doYouWantBabies)
             tempCardsWithPhotos.append(cardProfileWithPhoto)
-            cardsDictionary[card.id!] = cardProfileWithPhoto
+            temp_Dict[card.id!] = cardProfileWithPhoto
         }
-        allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
-        self.areMoreCardsNeeded()
-    }
-    
-    func areMoreCardsNeeded() {
-        
-        if allCardsWithPhotosDeck.count < 34 && self.profilesBeingFetched == false {
-            // Yes more cards are needed
-            self.fetchProfile(numberOfProfiles: 50)
-            print("Count: Cards Being fetched ", allCardsWithPhotosDeck.count)
-        } else {
-            print("Both deck have data")
-        }
-    }
-    
-    func removeCard() {
-      allCardsWithPhotosDeck.removeLast()
+        return (tempCardsWithPhotos,temp_Dict)
     }
     
 }
+    

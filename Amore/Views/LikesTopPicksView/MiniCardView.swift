@@ -12,8 +12,6 @@ struct MiniCardView: View {
     @Binding var singleProfile: CardProfileWithPhotos
     var animation: Namespace.ID
     @State var geometry: GeometryProxy
-    @EnvironmentObject var cardProfileModel: CardProfileModel
-    
     
     var body: some View {
         

@@ -11,6 +11,8 @@ struct LikesTopPicksHome: View {
     
     @Namespace var animation
     @EnvironmentObject var cardProfileModel: CardProfileModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    
     @State var selectedTab: TopPicksLikesView = .likesReceived
     @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesGive, .elitePicks]
     @State var selectedItem : CardProfileWithPhotos? = nil
@@ -63,10 +65,10 @@ struct LikesTopPicksHome: View {
                                     .environmentObject(cardProfileModel)
                                 
                                 case .superLikesGive:
-                                    LikesReceived(selectedItem:$selectedItem,
+                                    LikesGiven(selectedItem:$selectedItem,
                                                   show:$show,
                                                   geometry:geometry)
-                                    .environmentObject(cardProfileModel)
+                                    .environmentObject(receivedGivenEliteModel)
                                 
                                 case .elitePicks:
                                     LikesReceived(selectedItem:$selectedItem,

@@ -17,23 +17,23 @@ struct ProfileBioHeadline: View {
         
         VStack(alignment: .leading) {
             
-             Text(headlineText)
-                .font(.BoardingTitle2)
-                .padding()
-                
-            if description != "" {
-                Text(description)
-                .font(.subheadline)
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-            } else {
-                // If user hasn't provided any data
-                RequestData(property:headlineText)
+                 Text(headlineText)
+                    .font(.BoardingTitle2)
+                    .padding()
+                    
+                if description != "" {
+                    Text(description)
                     .font(.subheadline)
                     .padding(.horizontal)
                     .padding(.bottom)
-            }
+                    
+                } else {
+                    // If user hasn't provided any data
+                    RequestData(property:headlineText)
+                        .font(.subheadline)
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                }
               
             }
             .frame(

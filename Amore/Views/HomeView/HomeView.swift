@@ -12,13 +12,15 @@ struct HomeView: View {
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
     @State var currentPage: ViewTypes = .likesTopPicksView
     
+    
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
-//    @EnvironmentObject var locationModel: LocationModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    
     
     func checkIfDataIsComing() {
         if (cardProfileModel.timeOutRetriesCount > 9) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
@@ -41,6 +43,7 @@ struct HomeView: View {
                                 case .likesTopPicksView:
                                 LikesTopPicksHome()
                                         .environmentObject(cardProfileModel)
+                                        .environmentObject(receivedGivenEliteModel)
                                     
                                 case .swipeView:
                                     AllCardsView()
