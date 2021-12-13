@@ -161,8 +161,13 @@ class PhotoModel: ObservableObject {
 //        SDImageCache.shared.clearDisk(onCompletion: nil)
     }
     
-    /// **___________________________________________________________________________________________________________________________**
-
-
+    func resetPhotosOnLogout() {
+        photo1 = Photo()
+        photo2 = Photo()
+        photo3 = Photo()
+        photo4 = Photo()
+        photo5 = Photo()
+        photo6 = Photo()
+    }
     
 }

@@ -11,6 +11,7 @@ import FirebaseAuth
 struct UserSettingView: View {
     
     @AppStorage("log_Status") var logStatus = false
+    @EnvironmentObject var photoModel: PhotoModel
     @Binding var settingsDone: Bool
     @State var popUpCardSelection: PopUpCards = .amoreGold
     @State var showModal = false
@@ -67,6 +68,9 @@ struct UserSettingView: View {
                 
                 // Log Out
                 Button{
+                    DispatchQueue.main.async {
+                        photoModel.resetPhotosOnLogout()
+                    }
                     try! Auth.auth().signOut()
                     logStatus = false
                 } label : {

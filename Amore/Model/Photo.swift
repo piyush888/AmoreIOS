@@ -23,4 +23,8 @@ struct Photo: Hashable {
 struct ProfileImage: Codable, Hashable, Equatable {
     var imageURL: URL?
     var firebaseImagePath: String?
+    
+    static func ==(lhs: ProfileImage, rhs: ProfileImage) -> Bool {
+        return(lhs.imageURL == rhs.imageURL && lhs.firebaseImagePath == rhs.firebaseImagePath)
+    }
 }
