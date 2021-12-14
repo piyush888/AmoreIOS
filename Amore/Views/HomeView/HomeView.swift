@@ -77,6 +77,7 @@ struct HomeView: View {
                         
                     case .serverErrorView:
                         ServerErrorView()
+                    .environmentObject(photoModel)
                 }
         }
     }

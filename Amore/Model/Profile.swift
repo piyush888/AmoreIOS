@@ -46,6 +46,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var doYouDrink: String?
     var doYouSmoke: String?
     var doYouWantBabies: String?
+    var profileCompletion: Double?
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
