@@ -28,13 +28,12 @@ class CardProfileModel: ObservableObject {
     
     // Call this function to fetch profiles from the backend server
     func fetchProfile(numberOfProfiles:Int) {
-        print("FETCH PROFILE TRIGGERED........")
         profilesBeingFetched = true
         // fetchprofiles is the api where you can profiles
         guard let url = URL(string: self.apiURL + "/fetchprofiles") else { return }
         // add the pay load to the request
-        let body: [String: Int] = ["numberOfProfiles": numberOfProfiles]
-        
+        let body: [String: Any] = ["numberOfProfiles": numberOfProfiles,
+                                   "idsAlreadyInDeck":allCardsWithPhotosDeck.map({ (card:CardProfileWithPhotos)-> String in card.id! })]
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -70,7 +69,7 @@ class CardProfileModel: ObservableObject {
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 10 {
+                            if self.timeOutRetriesCount < 2 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchProfile(numberOfProfiles:10)

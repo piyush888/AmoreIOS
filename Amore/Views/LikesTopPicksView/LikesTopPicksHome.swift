@@ -20,10 +20,28 @@ struct LikesTopPicksHome: View {
     @State var show = false
     
     func getProfile(userId:String) -> Binding<CardProfileWithPhotos> {
-        return Binding {
-            cardProfileModel.cardsDictionary[userId] ?? CardProfileWithPhotos()
-        } set: { newCard in
-            cardProfileModel.cardsDictionary[userId] = newCard
+        switch selectedTab {
+            
+            case .likesReceived:
+                return Binding {
+                    cardProfileModel.cardsDictionary[userId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    cardProfileModel.cardsDictionary[userId] = newCard
+                }
+            
+            case .superLikesGive:
+                return Binding {
+                    receivedGivenEliteModel.superLikesGivenPhotos_Dict[userId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    receivedGivenEliteModel.superLikesGivenPhotos_Dict[userId] = newCard
+                }
+
+            case .elitePicks:
+                return Binding {
+                    cardProfileModel.cardsDictionary[userId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    cardProfileModel.cardsDictionary[userId] = newCard
+                }
         }
     }
     
@@ -86,7 +104,6 @@ struct LikesTopPicksHome: View {
                 if show{
                     if let selectedItemVar = selectedItem {
                         Detail(selectedItem: getProfile(userId:selectedItemVar.id!), show: $show, animation: animation)
-//                        Text("\(selectedItemVar.firstName.bound)")
                     }
                 }
             }
