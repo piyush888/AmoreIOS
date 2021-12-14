@@ -188,6 +188,11 @@ struct UploadPhotoWindow: View {
                     print("On Appear: Upload Photo Window")
                 }
             }
+            else {
+                if profileImage?.imageURL == nil {
+                    photoStruct = Photo()
+                }
+            }
         })
         .onChange(of: profileImage?.imageURL, perform: { newURL in
             if photoModel.deleteTriggered {

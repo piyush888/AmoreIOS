@@ -21,6 +21,7 @@ struct SettingEditProfileSafety: View {
             
             NavigationLink(isActive: $settingsDone) {
                 return UserSettingView(settingsDone: $settingsDone)
+                    .environmentObject(photoModel)
             } label: {
                 Button {
                     settingsDone = true

@@ -36,16 +36,17 @@ struct Profile: Identifiable, Codable, Equatable {
     var country: String?
     var discoveryStatus: Bool? = false
     var notificationsStatus: Bool? = false
-    var image1: ProfileImage?
-    var image2: ProfileImage?
-    var image3: ProfileImage?
-    var image4: ProfileImage?
-    var image5: ProfileImage?
-    var image6: ProfileImage?
+    var image1: ProfileImage? = ProfileImage()
+    var image2: ProfileImage? = ProfileImage()
+    var image3: ProfileImage? = ProfileImage()
+    var image4: ProfileImage? = ProfileImage()
+    var image5: ProfileImage? = ProfileImage()
+    var image6: ProfileImage? = ProfileImage()
     var doYouWorkOut: String?
     var doYouDrink: String?
     var doYouSmoke: String?
     var doYouWantBabies: String?
+    var profileCompletion: Double?
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&

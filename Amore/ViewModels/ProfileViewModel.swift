@@ -205,6 +205,7 @@ class ProfileViewModel: ObservableObject {
             if editUserProfile != userProfile {
                 do {
                     print("Update Profile Information on Firestore...")
+                    self.calculateProfileCompletion()
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
                     userProfile = editUserProfile
                 }
@@ -255,6 +256,37 @@ class ProfileViewModel: ObservableObject {
         editUserProfile.image4 = profileImages[3]
         editUserProfile.image5 = profileImages[4]
         editUserProfile.image6 = profileImages[5]
+    }
+    
+    func calculateProfileCompletion() {
+        let mirror = Mirror(reflecting: userProfile)
+        var noOfProperties = 0.0
+        var score = 0.0
+        for child in mirror.children {
+            if child.label != "profileCompletion" {
+                if case Optional<Any>.none = child.value {
+                } else {
+                    if child.label!.contains("image") {
+                        if (child.value as! ProfileImage).imageURL != nil {
+                            score += 1
+                        }
+                    }
+                    else {
+                        score += 1
+                    }
+                }
+                noOfProperties += 1
+            }
+        }
+        let completionPercentage = (score/noOfProperties)*100
+        print("Profile Completion Percentage: ", completionPercentage)
+        if editUserProfile.id == nil {
+            //// If the profile is being created for the first time.
+            userProfile.profileCompletion = Double(round(100 * completionPercentage) / 100)
+        }
+        else {
+            editUserProfile.profileCompletion = Double(round(100 * completionPercentage) / 100)
+        }
     }
 }
 

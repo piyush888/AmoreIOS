@@ -11,7 +11,7 @@ import FirebaseAuth
 struct ServerErrorView: View {
     
     @AppStorage("log_Status") var logStatus = false
-    
+    @EnvironmentObject var photoModel: PhotoModel
     let email = "support@aidronesoftware.com"
     
     var body: some View {
@@ -55,6 +55,9 @@ struct ServerErrorView: View {
                         }
                     
                         Button{
+                            DispatchQueue.main.async {
+                                photoModel.resetPhotosOnLogout()
+                            }
                             try! Auth.auth().signOut()
                             logStatus = false
                         } label : {
@@ -83,5 +86,6 @@ struct ServerErrorView: View {
 struct ServerErrorView_Previews: PreviewProvider {
     static var previews: some View {
         ServerErrorView()
+            .environmentObject(PhotoModel())
     }
 }
