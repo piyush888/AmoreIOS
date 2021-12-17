@@ -40,7 +40,7 @@ struct ProfileImageView<V>: View where V: ViewModifier {
             .resizable()
             .modifier(customModifier)
             .onAppear(perform: {
-                if photo.image == nil {
+                if photo.downsampledImage == nil {
                     if profileImage?.imageURL != nil {
                         getImage {
                             photo.image = nil

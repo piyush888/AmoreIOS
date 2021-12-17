@@ -9,11 +9,14 @@ import Foundation
 import SwiftUI
 
 struct PreviewProfileModifier: ViewModifier {
+    
+    var width: CGFloat
+    var height: CGFloat
+    
     func body(content: Content) -> some View {
         content
-            .aspectRatio(contentMode: ContentMode.fill)
-        //.frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-            .clipped()
+            .scaledToFill()
+            .frame(width: width, height: height)
     }
 }
 
