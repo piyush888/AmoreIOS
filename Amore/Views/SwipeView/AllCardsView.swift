@@ -18,6 +18,8 @@ struct AllCardsView: View {
     @State var curSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
     
+    @State private var safetyButton = false
+    
     func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
         var urls: [URL] = []
         for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
@@ -83,6 +85,14 @@ struct AllCardsView: View {
                     }
                     
                     VStack {
+                        HStack {
+                            Spacer()
+                            ShieldButton(safetyButton:$safetyButton)
+                        }
+                        .padding(.top,15)
+                        .padding(.horizontal,15)
+                        
+                        
                         Spacer()
                         LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone)
                             .environmentObject(cardProfileModel)
@@ -92,6 +102,9 @@ struct AllCardsView: View {
                     }
                     
                 }
+            }
+            .sheet(isPresented: $safetyButton) {
+                ReportingIssuesCard(safetyButton: self.$safetyButton)
             }
         }
         .padding(.horizontal)
