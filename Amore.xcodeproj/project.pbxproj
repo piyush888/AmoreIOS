@@ -131,7 +131,10 @@
 		E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B2940272637B400C38035 /* EditCardInfo.swift */; };
 		E2A94C68276B93090069F814 /* ShieldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C67276B93090069F814 /* ShieldButton.swift */; };
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
+		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
+		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
+		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
 		E2DBC01D272B2FF4000630F5 /* SuperLikeBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */; };
 		E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01E272B30FB000630F5 /* AmoreGold.swift */; };
 		E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC020272B311B000630F5 /* AmorePlatinum.swift */; };
@@ -294,7 +297,10 @@
 		E29B2940272637B400C38035 /* EditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardInfo.swift; sourceTree = "<group>"; };
 		E2A94C67276B93090069F814 /* ShieldButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldButton.swift; sourceTree = "<group>"; };
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
+		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
+		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
+		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
 		E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLikeBoost.swift; sourceTree = "<group>"; };
 		E2DBC01E272B30FB000630F5 /* AmoreGold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
 		E2DBC020272B311B000630F5 /* AmorePlatinum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
@@ -556,13 +562,15 @@
 			path = OnBoardingViews;
 			sourceTree = "<group>";
 		};
-		E2A94C66276B92BF0069F814 /* CommonViews */ = {
+		E2A94C66276B92BF0069F814 /* ReportUser */ = {
 			isa = PBXGroup;
 			children = (
 				E2A94C67276B93090069F814 /* ShieldButton.swift */,
 				E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */,
+				E2A94C6B276CF7BC0069F814 /* RadioButton.swift */,
+				E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */,
 			);
-			path = CommonViews;
+			path = ReportUser;
 			sourceTree = "<group>";
 		};
 		E2DBC01B272B2F95000630F5 /* Settings */ = {
@@ -679,7 +687,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E2A94C66276B92BF0069F814 /* CommonViews */,
+				E2A94C66276B92BF0069F814 /* ReportUser */,
 				E22D555C27540D4200852D70 /* ServerErrorView */,
 				E268A452274335B00045F264 /* UserInformation */,
 				E221EAA72714F3A400769234 /* LikesTopPicksView */,
@@ -710,6 +718,7 @@
 				1B1D3227274E36E50096B40B /* CardProfileModel.swift */,
 				E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */,
 				E205F67C2766A3D600196A06 /* FetchDataModel.swift */,
+				E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -920,6 +929,7 @@
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
+				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E2586C14276271A9001F7326 /* LikesReceived.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
@@ -941,6 +951,7 @@
 				1BC8BE072705CC5E00F0137E /* AddSchool.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
+				E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */,
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */,
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
@@ -989,6 +1000,7 @@
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
+				E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */,
 				E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */,
 				E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */,
 				E2DBC031272DAF73000630F5 /* SuperLikeCard.swift in Sources */,

@@ -15,7 +15,8 @@ class ReceivedGivenEliteModel: ObservableObject {
     @Published var fetchDataObj = FetchDataModel()
     
     func getLikesGivenData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/fetchlikesgiven") {
+        
+        self.fetchDataObj.fetchData(apiToBeUsed: "/fetchlikesgiven",requestBody:["DataStatus": "No Data"]) {
             print("Error with fetching, Likes Given Data")
         } onSuccess: { tempData in
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
@@ -23,7 +24,6 @@ class ReceivedGivenEliteModel: ObservableObject {
             self.superLikesGivenPhotos_Dict = tempResponse.cardsDict
         }
 
-        
     }
         
 }

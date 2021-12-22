@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
-    @State var currentPage: ViewTypes = .likesTopPicksView
+    @State var currentPage: ViewTypes = .swipeView
     
     
     @EnvironmentObject var profileModel: ProfileViewModel
@@ -20,7 +20,7 @@ struct HomeView: View {
     @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
-    
+    @EnvironmentObject var reportActivityModel: ReportActivityModel
     
     func checkIfDataIsComing() {
         if (cardProfileModel.timeOutRetriesCount > 9) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
@@ -50,6 +50,8 @@ struct HomeView: View {
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(cardProfileModel)
+                                        .environmentObject(reportActivityModel)
+                                
                                         
                                 case .filterSettingsView:
                                     FilterSettings()

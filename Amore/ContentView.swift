@@ -20,6 +20,7 @@ struct ContentView: View {
     @StateObject var filterAndLocationModel = FilterAndLocationModel()
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
+    @StateObject var reportActivityModel = ReportActivityModel()
     
     var body: some View {
         
@@ -80,6 +81,7 @@ struct ContentView: View {
                                         .environmentObject(filterAndLocationModel)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
+                                        .environmentObject(reportActivityModel)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()

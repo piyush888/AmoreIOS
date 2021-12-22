@@ -14,14 +14,13 @@ class FetchDataModel {
     @Published var adminAuthModel = AdminAuthenticationViewModel()
     var apiURL = "http://127.0.0.1:5000"
 
-    func fetchData(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
+    func fetchData(apiToBeUsed:String, requestBody:[String: String], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
         var tempData = [CardProfile]()
         requestInProcessing = true
         guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
                 return
-            }
-        let body: [String: String] = ["DataStatus": "No Data"]
-        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        }
+        let finalBody = try! JSONSerialization.data(withJSONObject: requestBody)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
@@ -61,7 +60,7 @@ class FetchDataModel {
                             if self.timeOutRetriesCount < 10 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
-                                self.fetchData(apiToBeUsed: apiToBeUsed,onFailure: onFailure,onSuccess:onSuccess)
+                                self.fetchData(apiToBeUsed: apiToBeUsed,requestBody:["DataStatus": "No Data"],onFailure: onFailure,onSuccess:onSuccess)
                             }
                             self.requestInProcessing = false
                         }

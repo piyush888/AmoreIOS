@@ -69,7 +69,6 @@ struct SingleCardView: View {
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-//                                FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.dragSwipeStatus)
                                 FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                                     return
                                 }, onSuccess: {
@@ -86,7 +85,6 @@ struct SingleCardView: View {
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-//                            FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
                             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                                 return
                             }, onSuccess: {
@@ -99,7 +97,6 @@ struct SingleCardView: View {
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-//                            FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
                             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                                 return
                             }, onSuccess: {

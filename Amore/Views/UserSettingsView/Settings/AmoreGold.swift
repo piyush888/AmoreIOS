@@ -15,7 +15,6 @@ struct AmoreGold: View {
     
     var body: some View {
             
-        
         Button {
             popUpCardSelection = .amoreGold
             showModal.toggle()

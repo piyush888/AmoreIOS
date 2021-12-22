@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ShieldButton: View {
+    
     @Binding var safetyButton: Bool
+    @State var buttonWidth: CGFloat
+    @State var buttonHeight: CGFloat
+    @State var fontSize: CGFloat
+    @State var shieldColorList: [Color]
+    
     var body: some View {
         
         VStack {
@@ -18,12 +24,12 @@ struct ShieldButton: View {
             } label: {
                 
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.gray, Color.purple]),
+                    gradient: Gradient(colors: shieldColorList),
                     startPoint: .leading,
                     endPoint: .trailing)
-                    .frame(width:30, height:35)
+                    .frame(width:buttonWidth, height:buttonHeight)
                     .mask(Image(systemName: "shield.fill")
-                            .font(.system(size:25)))
+                            .font(.system(size:fontSize)))
                     .padding(.bottom,20)
 
             }
@@ -34,6 +40,10 @@ struct ShieldButton: View {
 
 struct ShieldButton_Previews: PreviewProvider {
     static var previews: some View {
-        ShieldButton(safetyButton:Binding.constant(false))
+        ShieldButton(safetyButton:Binding.constant(false),
+                     buttonWidth:30,
+                     buttonHeight: 35,
+                     fontSize:25,
+                     shieldColorList:[Color.purple,Color.red])
     }
 }
