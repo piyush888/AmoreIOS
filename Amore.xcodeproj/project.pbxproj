@@ -81,7 +81,6 @@
 		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
 		E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713F271F4B5D0006F336 /* CommonContainer.swift */; };
 		E2347142271F4B970006F336 /* GenderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347141271F4B970006F336 /* GenderSettings.swift */; };
-		E2347144271F4C090006F336 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347143271F4C090006F336 /* AgeSettings.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */; };
 		E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = E23BAA982741D8A700F619D6 /* WrappingStack */; };
@@ -135,6 +134,7 @@
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
 		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
+		E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00F27738C51003EDA83 /* AgeSettings.swift */; };
 		E2DBC01D272B2FF4000630F5 /* SuperLikeBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */; };
 		E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC01E272B30FB000630F5 /* AmoreGold.swift */; };
 		E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC020272B311B000630F5 /* AmorePlatinum.swift */; };
@@ -250,7 +250,6 @@
 		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
 		E234713F271F4B5D0006F336 /* CommonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContainer.swift; sourceTree = "<group>"; };
 		E2347141271F4B970006F336 /* GenderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSettings.swift; sourceTree = "<group>"; };
-		E2347143271F4C090006F336 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAgeDistance.swift; sourceTree = "<group>"; };
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
@@ -301,6 +300,7 @@
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
 		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
+		E2D0F00F27738C51003EDA83 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
 		E2DBC01C272B2FF4000630F5 /* SuperLikeBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLikeBoost.swift; sourceTree = "<group>"; };
 		E2DBC01E272B30FB000630F5 /* AmoreGold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
 		E2DBC020272B311B000630F5 /* AmorePlatinum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				E221EAB22715066000769234 /* FilterSettings.swift */,
 				E234713F271F4B5D0006F336 /* CommonContainer.swift */,
 				E2347141271F4B970006F336 /* GenderSettings.swift */,
-				E2347143271F4C090006F336 /* AgeSettings.swift */,
+				E2D0F00F27738C51003EDA83 /* AgeSettings.swift */,
 				E27AC54C2721237500EB50F7 /* ReligionSettings.swift */,
 				1BFCBADB2721AA820002BA67 /* CommunityFilter.swift */,
 				1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */,
@@ -976,6 +976,7 @@
 				1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
+				E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
 				1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */,
 				E205F6792764351700196A06 /* ReceivedGivenEliteModel.swift in Sources */,
@@ -985,7 +986,6 @@
 				E2DBC03A272DFCA5000630F5 /* PlatinumCard.swift in Sources */,
 				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
-				E2347144271F4C090006F336 /* AgeSettings.swift in Sources */,
 				E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
