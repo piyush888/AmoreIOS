@@ -20,9 +20,14 @@ struct FiltersAndLocation: Identifiable, Codable, Hashable, Equatable {
     var educationPreference: String? = "Masters"
     var countryPreference: String? = "India"
     var location: Location?
+    var geohash: Geohash?
 }
 
 struct Location: Codable, Hashable, Equatable {
     var longitude: Double?
     var latitude: Double?
+}
+
+struct Geohash: Codable, Hashable, Equatable {
+    var geohash: String?
 }
