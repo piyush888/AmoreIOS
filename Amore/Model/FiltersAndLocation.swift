@@ -12,8 +12,8 @@ import FirebaseFirestoreSwift
 struct FiltersAndLocation: Identifiable, Codable, Hashable, Equatable {
     @DocumentID public var id: String?
     var genderPreference: String? = "Male"
-    var minAgePreference: Int?
-    var maxAgePreference: Int?
+    var minAgePreference: Int? = 21
+    var maxAgePreference: Int? = 30
     var religionPreference: [String]? = ["Any"]
     var communityPreference: [String]? = ["Any"]
     var careerPreference: [String]? = ["Any"]

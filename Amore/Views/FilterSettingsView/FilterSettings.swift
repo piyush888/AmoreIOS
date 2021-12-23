@@ -28,8 +28,8 @@ struct FilterSettings: View {
                 GenderSettings(genderPreference: $filterAndLocationModel.filterAndLocationData.genderPreference.bound)
                 
                 
-                AgeSettings(minAgeFilter:$minAgeFilter,
-                            maxAgeFilter:$maxAgeFilter)
+                AgeSettings(minAgeFilter:$filterAndLocationModel.filterAndLocationData.minAgePreference.boundInt,
+                            maxAgeFilter:$filterAndLocationModel.filterAndLocationData.maxAgePreference.boundInt)
                 
                 ReligionFilter(religionPreference: $filterAndLocationModel.filterAndLocationData.religionPreference.boundStringArray)
                 CommunityFilter(communityPreference: $filterAndLocationModel.filterAndLocationData.communityPreference.boundStringArray)

@@ -80,6 +80,7 @@ class FilterAndLocationModel: NSObject, ObservableObject, CLLocationManagerDeleg
         print("Location: Location Updated")
 //        filterAndLocationData.location?.longitude = userLocation.coordinate.longitude
 //        filterAndLocationData.location?.latitude = userLocation.coordinate.latitude
+        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
