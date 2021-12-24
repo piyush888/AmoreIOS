@@ -12,6 +12,8 @@ struct AddWork: View {
     @EnvironmentObject var streamModel: StreamViewModel
     
     @State var workName : String = ""
+    @State var jobTitle : String = ""
+    
     @State var continueToNext: Bool = false
     var buttonText: String {
         if (workName.count > 0) {
@@ -23,26 +25,16 @@ struct AddWork: View {
     }
     
     func addInputToProfile () {
-        if (workName.count > 0) {
-            profileModel.userProfile.work = workName
-        }
-        else {
-            profileModel.userProfile.work = "NA"
-        }
+        profileModel.userProfile.work = workName.count > 0 ? workName : ""
+        profileModel.userProfile.jobTitle = jobTitle.count > 0 ? jobTitle : ""
         continueToNext = true
     }
     
     var body: some View {
         
         VStack(alignment:.leading) {
-//            HStack {
-//                Text("I work at")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
-//            .padding(.bottom,80)
-            // School Name
+
+            // Work Office Name
             ZStack{
                 Rectangle()
                     .cornerRadius(5.0)
@@ -51,7 +43,20 @@ struct AddWork: View {
                     .overlay(RoundedRectangle(cornerRadius: 5)
                             .stroke(Color.pink, lineWidth: 1))
                     
-                TextField("Add Work", text: $workName)
+                TextField("Job role title", text: $jobTitle)
+                    .padding()
+            }
+            
+            // Work Office Name
+            ZStack{
+                Rectangle()
+                    .cornerRadius(5.0)
+                    .frame(height:45)
+                    .foregroundColor(.white)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.pink, lineWidth: 1))
+                    
+                TextField("Company Name", text: $workName)
                     .padding()
             }
             

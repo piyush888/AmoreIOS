@@ -101,7 +101,7 @@ class CardProfileModel: ObservableObject {
                                                          headline: card.headline,
                                                          profileDistanceFromUser: card.profileDistanceFromUser,
                                                          jobTitle: card.jobTitle,
-                                                         workType: card.workType,
+                                                         careerField: card.careerField,
                                                          height: card.height,
                                                          education: card.education,
                                                          religion: card.religion,

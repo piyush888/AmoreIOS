@@ -94,7 +94,7 @@ struct CardImages_Previews: PreviewProvider {
                               headline: "Hey Pumpkin",
                               profileDistanceFromUser: 0,
                               jobTitle: "VP",
-                              workType: "Remove this field",
+                              careerField: "Remove this field",
                               height: 5.6,
                               education: "Masters in Science",
                               religion: "Hindu",

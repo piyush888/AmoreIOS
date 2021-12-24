@@ -79,9 +79,9 @@ struct ReportingIssuesCard: View {
                                                                     // If Success also remove the card from deck
                                                                     FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                                                                         print("Failed to remove card from deck")
+                                                                        self.showingAlert = true
                                                                         return
                                                                     }, onSuccess: {
-                                                                        self.showingAlert = true
                                                                         print("Successfully removed card from deck")
                                                                     }, swipedUserId: self.profileId, swipeInfo: .dislike)
                                                                         self.onRemove(self.profileId)

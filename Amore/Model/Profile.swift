@@ -25,7 +25,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var headline: String?
     var profileDistanceFromUser: Int? = 0
     var jobTitle: String?
-    var workType: String?
+    var careerField: String?
     var height: Double? = 5.3
     var education: String?
     var religion: String?
@@ -47,6 +47,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var doYouSmoke: String?
     var doYouWantBabies: String?
     var profileCompletion: Double?
+    var countryRaisedIn: String?
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
@@ -64,7 +65,7 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.headline == rhs.headline &&
                lhs.profileDistanceFromUser == rhs.profileDistanceFromUser &&
                lhs.jobTitle == rhs.jobTitle &&
-               lhs.workType == rhs.workType &&
+               lhs.careerField == rhs.careerField &&
                lhs.height == rhs.height &&
                lhs.education == rhs.education &&
                lhs.religion == rhs.religion &&
@@ -84,7 +85,8 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.doYouWorkOut == rhs.doYouWorkOut &&
                lhs.doYouDrink == rhs.doYouDrink &&
                lhs.doYouSmoke == rhs.doYouSmoke &&
-               lhs.doYouWantBabies == rhs.doYouWantBabies)
+               lhs.doYouWantBabies == rhs.doYouWantBabies  &&
+               lhs.countryRaisedIn == rhs.countryRaisedIn)
     }
 }
 

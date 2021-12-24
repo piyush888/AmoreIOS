@@ -57,7 +57,7 @@ struct PreviewProfile: View {
                                           education: profileModel.editUserProfile.education.bound,
                                           religion: profileModel.editUserProfile.religion.bound,
                                           politics: profileModel.editUserProfile.politics.bound,
-                                          location: profileModel.editUserProfile.location.bound)
+                                          countryRaisedIn: profileModel.editUserProfile.countryRaisedIn.bound)
                                 .padding(.horizontal,15)
 
 

@@ -11,7 +11,7 @@ struct IAmA: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var streamModel: StreamViewModel
     
-    let genders = ["male", "female", "other"]
+    let genders = ["Male", "Female", "Other"]
     @State var selectedGender: String? = nil
     @State var customGender: String = ""
     

@@ -14,6 +14,8 @@ struct AddSchool: View {
     @EnvironmentObject var streamModel: StreamViewModel
     
     @State var schoolName : String = ""
+    @State var education : String = ""
+    
     @State var continueToNext: Bool = false
     var buttonText: String {
         if (schoolName.count > 0) {
@@ -25,17 +27,28 @@ struct AddSchool: View {
     }
     
     func addInputToProfile () {
-        if (schoolName.count > 0) {
-            profileModel.userProfile.school = schoolName
-        }
-        else {
-            profileModel.userProfile.school = "NA"
-        }
+        profileModel.userProfile.education = education.count > 0 ? education : ""
+        profileModel.userProfile.school = schoolName.count > 0 ? schoolName : ""
+        continueToNext = true
     }
     
     var body: some View {
         
         VStack(alignment:.leading) {
+            
+            // Degree
+            ZStack{
+                Rectangle()
+                    .cornerRadius(5.0)
+                    .frame(height:45)
+                    .foregroundColor(.white)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.pink, lineWidth: 1))
+                    
+                TextField("EducatioM", text: $education)
+                    .padding()
+            }
+            
             // School Name
             ZStack{
                 Rectangle()

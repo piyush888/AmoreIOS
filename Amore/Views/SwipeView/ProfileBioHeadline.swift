@@ -15,26 +15,16 @@ struct ProfileBioHeadline: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            
-                 Text(headlineText)
-                    .font(.BoardingTitle2)
-                    .padding()
+            VStack(alignment: .leading) {
+                Text(headlineText)
+                  .bold()
+                  .padding()
                     
-                if description != "" {
-                    Text(description)
+                Text(description)
                     .font(.subheadline)
                     .padding(.horizontal)
                     .padding(.bottom)
                     
-                } else {
-                    // If user hasn't provided any data
-                    RequestData(property:headlineText)
-                        .font(.subheadline)
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                }
-              
             }
             .frame(
               minWidth: 0,
@@ -45,6 +35,13 @@ struct ProfileBioHeadline: View {
             )
             .background(bgColor)
             .cornerRadius(15)
+            .onAppear {
+                if self.description == "" {
+                    self.description = "No bio provided"
+                }
+            }
+        
+        
     }
 }
 

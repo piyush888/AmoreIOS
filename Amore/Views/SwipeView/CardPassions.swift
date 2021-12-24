@@ -17,7 +17,7 @@ struct CardPassions: View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Passions")
-                    .font(.BoardingTitle2)
+                 .bold()
                 Spacer()
             }
             
@@ -25,7 +25,7 @@ struct CardPassions: View {
                 ForEach(passions, id: \.self) { passion in
                     
                     Text("#\(passion)")
-                        .font(.subheadline)
+                       .font(.subheadline)
                        .padding(10)
                        .background(
                            Rectangle()

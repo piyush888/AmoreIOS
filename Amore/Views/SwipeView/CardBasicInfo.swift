@@ -14,7 +14,7 @@ struct CardBasicInfo: View {
     let education: String
     let religion: String
     let politics: String
-    let location: String
+    let countryRaisedIn: String
     
     let adaptivecolumns = Array(repeating:
                                     GridItem(.adaptive(minimum: 150),
@@ -25,97 +25,65 @@ struct CardBasicInfo: View {
         VStack(alignment:.leading) {
             
             Text("About me")
-                .font(.BoardingTitle2)
-            
-            
+                .bold()
+                
             LazyVGrid(columns: adaptivecolumns, alignment: .leading, spacing: 8, content: {
                 
                 // Height of the profile
-                HStack {
-                    Image(systemName:"arrow.up.square.fill")
-                        .foregroundColor(Color.blue)
-                    
-                    if height > 0.0 {
-                        Text(String(height))
-                            .font(.caption)
-                    } else {
-                        RequestData(property:"height")
-                    }
-                    
-                    Spacer()
-                }
-                
+                ChildCardBasicInfo(iconStringName: "arrow.up.square.fill",
+                                   data: String(height),
+                                   fieldName:"Height")
                 // Work
-                HStack {
-                    Image(systemName:"bag.fill")
-                        .foregroundColor(Color.blue)
-                    if work != "" {
-                        Text(work)
-                            .font(.caption)
-                    } else {
-                        RequestData(property:"work")
-                    }
-                    
-                    Spacer()
-                }
-                
+                ChildCardBasicInfo(iconStringName: "bag.fill",
+                                   data: work,
+                                   fieldName:"Work")
                 // Bachelors
-                HStack {
-                    Image(systemName:"graduationcap.fill")
-                        .foregroundColor(Color.blue)
-                    
-                    if education != "" {
-                        Text(education)
-                            .font(.caption)
-                    } else {
-                        RequestData(property:"Education")
-                    }
-                    Spacer()
-                }
-                
+                ChildCardBasicInfo(iconStringName: "graduationcap.fill",
+                                   data: education,
+                                   fieldName:"Education")
                 // Religion
-                HStack {
-                    Image(systemName:"book.fill")
-                        .foregroundColor(Color.blue)
-                    
-                    if religion != "" {
-                        Text(religion)
-                            .font(.caption)
-                    } else {
-                        RequestData(property:"Religion")
-                    }
-                    
-                    Spacer()
-                }
-                
+                ChildCardBasicInfo(iconStringName: "book.fill",
+                                   data: religion,
+                                   fieldName:"Religion")
                 // Politics
-                HStack {
-                    Image(systemName: "person.2.fill")
-                        .foregroundColor(Color.blue)
-                    
-                    if politics != "" {
-                        Text(politics)
-                            .font(.caption)
-                    } else {
-                        RequestData(property:"Politics")
-                    }
-                    Spacer()
-                }
-                
+                ChildCardBasicInfo(iconStringName: "person.2.fill",
+                                   data: politics,
+                                   fieldName:"Politics")
                 // Location
-                HStack {
-                    Image(systemName: "house.fill")
-                        .foregroundColor(Color.blue)
-                    Text(location)
-                        .font(.caption)
-                    Spacer()
-                }
+                ChildCardBasicInfo(iconStringName: "house.fill",
+                                   data: countryRaisedIn,
+                                   fieldName:"Home")
+                
             })
             
         }
     }
 }
 
+
+struct ChildCardBasicInfo : View {
+    
+    @State var iconStringName: String
+    @State var data: String
+    @State var fieldName: String
+    
+    var body: some View {
+        
+            HStack {
+                Image(systemName: self.iconStringName)
+                    .foregroundColor(Color.blue)
+                Text(self.data)
+                    .font(.caption)
+                Spacer()
+            }.onAppear {
+                if self.data == "" {
+                    self.data = "No \(self.fieldName)"
+                }
+            }
+        
+    }
+    
+}
 
 struct CardBasicInfo_Previews: PreviewProvider {
     static var previews: some View {
@@ -125,6 +93,6 @@ struct CardBasicInfo_Previews: PreviewProvider {
                       education: "",
                       religion: "",
                       politics: "",
-                      location: "")
+                      countryRaisedIn: "")
     }
 }

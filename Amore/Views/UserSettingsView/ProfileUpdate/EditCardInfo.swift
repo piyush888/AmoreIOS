@@ -62,6 +62,10 @@ struct EditCardInfo: View {
                                  formHeadLine: "Add Company",
                                  formInput: $profileModel.editUserProfile.work)
                     
+                    // Add Education
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "Add Education",
+                                 formInput: $profileModel.editUserProfile.education)
                     // Add School
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add School",
@@ -77,7 +81,11 @@ struct EditCardInfo: View {
                         Spacer()
                     }
                     
-                    UserProfileBasicInfo(genderPreference: $profileModel.editUserProfile.genderIdentity, religionPreference: $profileModel.editUserProfile.religion, communityPreference: $profileModel.editUserProfile.community, careerPreference: $profileModel.editUserProfile.workType, educationPreference: $profileModel.editUserProfile.education, countryPreference: $profileModel.editUserProfile.country)
+                    UserProfileBasicInfo(genderPreference: $profileModel.editUserProfile.genderIdentity,
+                                         religionPreference: $profileModel.editUserProfile.religion,
+                                         communityPreference: $profileModel.editUserProfile.community,
+                                         careerPreference: $profileModel.editUserProfile.careerField,
+                                         countryRaisedIn: $profileModel.editUserProfile.countryRaisedIn)
                 }
                 .padding(.top,10)
                 

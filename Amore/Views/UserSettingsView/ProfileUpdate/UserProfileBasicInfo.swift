@@ -13,16 +13,16 @@ struct UserProfileBasicInfo: View {
     @Binding var religionPreference: String?
     @Binding var communityPreference: String?
     @Binding var careerPreference: String?
-    @Binding var educationPreference: String?
-    @Binding var countryPreference: String?
+//    @Binding var educationPreference: String?
+    @Binding var countryRaisedIn: String?
     
     var body: some View {
-        GenderInfo(genderPreference: $genderPreference)
+//        GenderInfo(genderPreference: $genderPreference)
         ReligionInfo(religionPreference: $religionPreference)
         CommunityInfo(communityPreference: $communityPreference)
         CareerInfo(careerPreference: $careerPreference)
-        EducationInfo(educationPreference: $educationPreference)
-        RaisedInInfo(countryPreference: $countryPreference)
+//        EducationInfo(educationPreference: $educationPreference)
+        RaisedInInfo(countryRaisedIn: $countryRaisedIn)
     }
 }
 
@@ -78,7 +78,7 @@ struct ShowGendersInfo : View {
                 }
             }
             
-            ForEach(["Male", "Female", "All"], id: \.self) { gender in
+            ForEach(["Male", "Female", "Other"], id: \.self) { gender in
                 Button{
                     genderPreference = gender
                 } label : {
@@ -150,7 +150,7 @@ struct ReligionInfo: View {
 
 struct ReligionInfoOptions : View {
     
-    var religionsList = ["Any","Sikh","Hindu","Islam","Jain","Christian","Buddhist","Spiritual","Other","No Religion"]
+    var religionsList = ["Sikh","Hindu","Islam","Jain","Christian","Buddhist","Spiritual","Other","No Religion"]
     @Binding var religionPreference: String?
     @Binding var showSheetView: Bool
     
@@ -242,7 +242,7 @@ struct CommunityInfo: View {
 
 struct CommunityInfoOptions : View {
     
-    var communityList = ["Any","Gujarati","Jatt","Punjabi","Sunni","Shia","Hindi Speaking","Sindhi","Bengali","Tamil", "Telugu", "Malayali", "Maharashtrian", "Kannada"]
+    var communityList = ["Gujarati","Jatt","Punjabi","Sunni","Shia","Hindi Speaking","Sindhi","Bengali","Tamil", "Telugu", "Malayali", "Maharashtrian", "Kannada"]
     @Binding var communityPreference: String?
     @Binding var showSheetView: Bool
     
@@ -335,7 +335,7 @@ struct CareerInfo: View {
 
 struct CareerInfoOptions : View {
     
-    var careerList = ["Any","Account Executive","Accountant","Actor","Aerospace Engineer","Agriculturist","Analyst","Anesthesiologist","Archeologist","Architect", "Artist", "Attorney", "Aviation Professional", "Banker"]
+    var careerList = ["Account Executive","Accountant","Actor","Aerospace Engineer","Agriculturist","Analyst","Anesthesiologist","Archeologist","Architect", "Artist", "Attorney", "Aviation Professional", "Banker"]
     @Binding var careerPreference: String?
     @Binding var showSheetView: Bool
     
@@ -487,7 +487,7 @@ struct ShowEducationClassesInfo : View {
 
 struct RaisedInInfo: View {
     
-    @Binding var countryPreference: String?
+    @Binding var countryRaisedIn: String?
     @State private var showingSheet = false
     
     var body: some View {
@@ -505,12 +505,12 @@ struct RaisedInInfo: View {
                     
                     Spacer()
                     
-                    Text("\(self.countryPreference ?? "Modify Country")")
+                    Text("\(self.countryRaisedIn ?? "Modify Country")")
                 }
                 .padding(.horizontal,10)
             }
         }.sheet(isPresented: $showingSheet) {
-            ShowCountriesInfo(countryPreference:$countryPreference,
+            ShowCountriesInfo(countryPreference:$countryRaisedIn,
                             showSheetView:$showingSheet)
         }
     }
@@ -537,7 +537,7 @@ struct ShowCountriesInfo : View {
                 }
             }
                     
-            ForEach(["Any", "United States", "Canada", "United Kingdom", "Australia", "India", "United Arab Emirates", "Other"], id: \.self) { gender in
+            ForEach(["United States", "Canada", "United Kingdom", "Australia", "India", "United Arab Emirates", "Other"], id: \.self) { gender in
                 Button{
                     countryPreference = gender
                 } label : {
@@ -578,6 +578,10 @@ struct ShowCountriesInfo : View {
 
 struct UserProfileBasicInfo_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileBasicInfo(genderPreference: Binding.constant("Any"), religionPreference: Binding.constant("Any"), communityPreference: Binding.constant("Any"), careerPreference: Binding.constant("Any"), educationPreference: Binding.constant("Any"), countryPreference: Binding.constant("Any"))
+        UserProfileBasicInfo(genderPreference: Binding.constant("Any"),
+                             religionPreference: Binding.constant("Any"),
+                             communityPreference: Binding.constant("Any"),
+                             careerPreference: Binding.constant("Any"),
+                             countryRaisedIn: Binding.constant("Any"))
     }
 }

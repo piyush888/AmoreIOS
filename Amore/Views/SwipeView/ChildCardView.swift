@@ -60,7 +60,7 @@ struct ChildCardView: View {
                                           education: self.singleProfile.education.bound,
                                           religion: self.singleProfile.religion.bound,
                                           politics: self.singleProfile.politics.bound,
-                                          location: self.singleProfile.location.bound)
+                                          countryRaisedIn: self.singleProfile.countryRaisedIn.bound)
                                 .padding(.horizontal,15)
 
 
@@ -214,12 +214,12 @@ struct ChildCardView_Previews: PreviewProvider {
                               headline: "Hey Pumpkin",
                               profileDistanceFromUser: 0,
                               jobTitle: "VP",
-                              workType: "Remove this field", // *
+                              careerField: "Career Field", // *
                               height: 5.6,
-//                              education: "Masters in Science",
-//                              religion: "Hindu",
+                              education: "Masters in Science",
+                              religion: "Hindu",
                               community: "Brahmin",
-//                              politics: "Liberal",
+                              politics: "Liberal",
                               location: "Coordinates",
                               description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                               country: "India",
