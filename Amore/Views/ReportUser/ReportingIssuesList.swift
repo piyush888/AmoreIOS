@@ -11,13 +11,13 @@ struct ReportingIssuesCard: View {
     
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     
-    @Binding var safetyButton: Bool
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var profileId: String
     @Binding var showingAlert: Bool
     private var onRemove: (_ user: String) -> Void
     
-    init(safetyButton: Binding<Bool>, profileId: String, showingAlert:Binding<Bool>, onRemove: @escaping (_ user: String) -> Void) {
-        _safetyButton = safetyButton
+    init(allcardsActiveSheet: Binding<AllCardsActiveSheet?>, profileId: String, showingAlert:Binding<Bool>, onRemove: @escaping (_ user: String) -> Void) {
+        _allcardsActiveSheet = allcardsActiveSheet
         self.profileId = profileId
         _showingAlert = showingAlert
         self.onRemove = onRemove
@@ -47,7 +47,7 @@ struct ReportingIssuesCard: View {
                     HStack {
                         Spacer()
                         Button {
-                            self.safetyButton.toggle()
+                            self.allcardsActiveSheet = .none
                         } label: {
                             Text("Cancel")
                         }
@@ -87,7 +87,7 @@ struct ReportingIssuesCard: View {
                                                                         self.onRemove(self.profileId)
                                                                 }
                         )
-                        self.safetyButton.toggle()
+                        self.allcardsActiveSheet = .none
                         
                     } label: {
                         ZStack {
@@ -110,7 +110,7 @@ struct ReportingIssuesCard: View {
                     
                 }
                 .navigationBarItems(trailing: Button(action: {
-                    self.safetyButton.toggle()
+                    self.allcardsActiveSheet = .none
                 }) {
                     Text("Done").bold()
                 })

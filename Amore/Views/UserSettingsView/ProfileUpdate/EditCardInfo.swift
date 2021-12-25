@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 struct EditCardInfo: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
-
+    
     let adaptivecolumns = Array(repeating:
                                     GridItem(.adaptive(minimum: 150),spacing: 5,
                                              alignment: .center),count: 3)
@@ -37,9 +37,6 @@ struct EditCardInfo: View {
                 }
                 
                 
-                
-                
-                
                 Group {
                     // Edit Headline
                     EditCardForm(formHeight: 40.0,
@@ -56,7 +53,6 @@ struct EditCardInfo: View {
                                  formHeadLine: "Job Title",
                                  formInput: $profileModel.editUserProfile.jobTitle)
                     
-                    
                     // Add Company
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add Company",
@@ -66,6 +62,7 @@ struct EditCardInfo: View {
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add Education",
                                  formInput: $profileModel.editUserProfile.education)
+                    
                     // Add School
                     EditCardForm(formHeight: 40.0,
                                  formHeadLine: "Add School",
@@ -86,9 +83,11 @@ struct EditCardInfo: View {
                                          communityPreference: $profileModel.editUserProfile.community,
                                          careerPreference: $profileModel.editUserProfile.careerField,
                                          countryRaisedIn: $profileModel.editUserProfile.countryRaisedIn)
+                    
                 }
                 .padding(.top,10)
                 
+                // Discoverty and Notifications
                 Group {
                     // Discovery
                     VStack(alignment: .leading) {
@@ -114,6 +113,7 @@ struct EditCardInfo: View {
                     }.padding([.top,.bottom],10)
                 }
                 
+                // Contact Support or Delete Acccount
                 Group {
                     // Contact Support
                     ContactSupport()
@@ -122,7 +122,6 @@ struct EditCardInfo: View {
                     DeleteProfileButton()
                 }
                 .padding(.top,40)
-                
                 
             }.padding(.horizontal,20)
         })

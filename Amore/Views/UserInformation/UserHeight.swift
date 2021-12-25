@@ -29,8 +29,13 @@ struct UserHeight: View {
             
             Slider(
                    value: $userHeight,
-                   in: 4...7,
-                   step: 0.1
+                   // In cm convert to feet for display
+                   // 4 ft = 121.92
+                   // 7 ft = 213.36
+                   in: 121.92...213.36,
+                   // 1 inch = 2.54 cm
+                   // 1 feet = 30.48 cm
+                   step: 2.54
                ) {
                    Text("Speed")
                        .font(.title)
@@ -43,7 +48,7 @@ struct UserHeight: View {
                }
                .padding(.horizontal,50)
                 
-            Text(String(format: "%.1f",userHeight) + " feet")
+            Text(String(format: "%.1f",userHeight/30.48) + " feet")
             
             Spacer()
             

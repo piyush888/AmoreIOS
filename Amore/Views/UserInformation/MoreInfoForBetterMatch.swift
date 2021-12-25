@@ -28,6 +28,7 @@ struct MoreInfoForBetterMatch: View {
                     ProgressView(value: progressStatus, total: 100)
                         .progressViewStyle(WithBackgroundProgressViewStyle())
                         .padding(.horizontal,20)
+                        .padding(.top,4)
                     
                     Spacer()
                         

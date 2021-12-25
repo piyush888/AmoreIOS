@@ -45,7 +45,7 @@ struct AddSchool: View {
                     .overlay(RoundedRectangle(cornerRadius: 5)
                             .stroke(Color.pink, lineWidth: 1))
                     
-                TextField("EducatioM", text: $education)
+                TextField("Education", text: $education)
                     .padding()
             }
             

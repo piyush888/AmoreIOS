@@ -19,9 +19,9 @@ struct AllCardsView: View {
     
     @State var curSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
-    
     @State private var safetyButton = false
     @State private var showingAlert = false
+    @State var allcardsActiveSheet: AllCardsActiveSheet?
     
     func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
         var urls: [URL] = []
@@ -89,12 +89,21 @@ struct AllCardsView: View {
                     
                     VStack {
                         HStack {
-                            Spacer()
-                            ShieldButton(safetyButton:$safetyButton,
+                            ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
                                          buttonWidth:30,
                                          buttonHeight: 35,
                                          fontSize:25,
-                                         shieldColorList:[Color.gray, Color.purple])
+                                         shieldColorList:[Color.yellow, Color.green],
+                                         viewToBeAssigned:.moreMatchesSheet,
+                                         iconName:"speedometer")
+                            Spacer()
+                            ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
+                                         buttonWidth:30,
+                                         buttonHeight: 35,
+                                         fontSize:25,
+                                         shieldColorList:[Color.gray, Color.purple],
+                                         viewToBeAssigned:.reportProfileSheet,
+                                         iconName:"shield.fill")
                         }
                         .padding(.top,15)
                         .padding(.horizontal,15)
@@ -110,26 +119,46 @@ struct AllCardsView: View {
                     
                 }
             }
-            .sheet(isPresented: $safetyButton) {
-                if let profile = cardProfileModel.allCardsWithPhotosDeck.last {
-                    ReportingIssuesCard(safetyButton: self.$safetyButton, profileId: profile.id.bound,
-                                        showingAlert:self.$showingAlert,
-                                        onRemove: { profileId in
-                                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == profileId }
-                                            cardProfileModel.cardsDictionary.removeValue(forKey: profileId)
-                        })
+            .sheet(item: $allcardsActiveSheet) { item in
+                
+                switch item {
+                    case .reportProfileSheet:
+                        if let profile = cardProfileModel.allCardsWithPhotosDeck.last {
+                            ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
+                                                profileId: profile.id.bound,
+                                                showingAlert:self.$showingAlert,
+                                                onRemove: { profileId in
+                                                    cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == profileId }
+                                                    cardProfileModel.cardsDictionary.removeValue(forKey: profileId)
+                                                }
+                                            )
+                        }
+                   
+                    case .moreMatchesSheet:
+                       MoreInfoForBetterMatch()
+                    
+                    case .none:
+                        Text("Helo")
+                    
                 }
+                
             }
             .alert(isPresented: $showingAlert) {
                    Alert(
                        title: Text(""),
                        message: Text("Failed to report user")
                    )
-               }
+            }
+        
         }
         .padding(.horizontal)
     }
 }
 
 
-
+enum AllCardsActiveSheet: Identifiable {
+    case reportProfileSheet, moreMatchesSheet, none
+    var id: Int {
+        hashValue
+    }
+}
