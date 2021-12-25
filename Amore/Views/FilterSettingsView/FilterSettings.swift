@@ -10,7 +10,7 @@ import SwiftUI
 struct FilterSettings: View {
     
     // User Filter Settings
-    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var filterModel: FilterModel
     
     @State var minAgeFilter : Int = 21
     @State var maxAgeFilter : Int = 28
@@ -25,17 +25,17 @@ struct FilterSettings: View {
                     .foregroundColor(.orange)
                     
                 //
-                GenderSettings(genderPreference: $filterAndLocationModel.filterAndLocationData.genderPreference.bound)
+                GenderSettings(genderPreference: $filterModel.filterData.genderPreference.bound)
                 
                 
-                AgeSettings(minAgeFilter:$filterAndLocationModel.filterAndLocationData.minAgePreference.boundInt,
-                            maxAgeFilter:$filterAndLocationModel.filterAndLocationData.maxAgePreference.boundInt)
+                AgeSettings(minAgeFilter:$filterModel.filterData.minAgePreference.boundInt,
+                            maxAgeFilter:$filterModel.filterData.maxAgePreference.boundInt)
                 
-                ReligionFilter(religionPreference: $filterAndLocationModel.filterAndLocationData.religionPreference.boundStringArray)
-                CommunityFilter(communityPreference: $filterAndLocationModel.filterAndLocationData.communityPreference.boundStringArray)
-                CareerFilter(careerPreference: $filterAndLocationModel.filterAndLocationData.careerPreference.boundStringArray)
-                EducationFilter(educationPreference: $filterAndLocationModel.filterAndLocationData.educationPreference.bound)
-                RaisedInFilter(countryPreference: $filterAndLocationModel.filterAndLocationData.countryPreference.bound)
+                ReligionFilter(religionPreference: $filterModel.filterData.religionPreference.boundStringArray)
+                CommunityFilter(communityPreference: $filterModel.filterData.communityPreference.boundStringArray)
+                CareerFilter(careerPreference: $filterModel.filterData.careerPreference.boundStringArray)
+                EducationFilter(educationPreference: $filterModel.filterData.educationPreference.bound)
+                RaisedInFilter(countryPreference: $filterModel.filterData.countryPreference.bound)
                 
                 Spacer()
              

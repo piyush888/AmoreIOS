@@ -10,21 +10,21 @@ import SwiftUI
 struct LocationHomeView: View {
     
 //    @EnvironmentObject var locationModel: LocationModel
-    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
         
         VStack {
             
             // When location is Not determined - Ideally this case shouldn't happen
-            if filterAndLocationModel.authorizationStatus == .notDetermined {
+            if profileModel.authorizationStatus == .notDetermined {
                 Text("Location Not Determined")
                     .onAppear {
-                        filterAndLocationModel.requestPermission()
+                        profileModel.requestPermission()
                     }
             }
             // When the location access is given by the user
-            else if filterAndLocationModel.authorizationStatus == .authorizedAlways || filterAndLocationModel.authorizationStatus == .authorizedWhenInUse{
+            else if profileModel.authorizationStatus == .authorizedAlways || profileModel.authorizationStatus == .authorizedWhenInUse{
                 // Show home view
                 Text("Location Granted")
                 
@@ -33,7 +33,7 @@ struct LocationHomeView: View {
                 Button{
                     // Use this function whenever you want to update the location data
                     // It can also be called as a state variable when a view loads
-                    filterAndLocationModel.getLocationOnce()
+                    profileModel.getLocationOnce()
                 } label : {
                     ZStack{
                         Rectangle()
@@ -52,7 +52,7 @@ struct LocationHomeView: View {
             // When location access is denied by the user
             else {
                 LocationDenied()
-                    .environmentObject(filterAndLocationModel)
+                    .environmentObject(profileModel)
             }
         }
         .navigationBarBackButtonHidden(true)

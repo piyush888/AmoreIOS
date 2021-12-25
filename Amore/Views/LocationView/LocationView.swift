@@ -12,7 +12,7 @@ struct LocationView: View {
     
     // LocationModel is an observable object
 //    @EnvironmentObject var locationModel: LocationModel
-    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
         
@@ -42,17 +42,17 @@ struct LocationView: View {
                 NavigationLink(
                     destination: LocationHomeView()
 //                        .environmentObject(locationModel)
-                        .environmentObject(filterAndLocationModel),
+                        .environmentObject(profileModel),
                     // Will only go to next view when the user either "accepts" or "denies" location
                     // If the user gives location "ones" that will be useful for 1 time only
                     // The next time location when you open app again it will be ".notDetermined"
-                    isActive: .constant(filterAndLocationModel.authorizationStatus != .notDetermined),
+                    isActive: .constant(profileModel.authorizationStatus != .notDetermined),
                     label: {
                         // Continue to next view
                         Button{
                             // Call this to give a user pop-up
-                            filterAndLocationModel.requestPermission()
-                            filterAndLocationModel.getLocationOnce()
+                            profileModel.requestPermission()
+                            profileModel.getLocationOnce()
                         } label : {
                             ZStack{
                                 Rectangle()

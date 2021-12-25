@@ -31,7 +31,12 @@ struct Profile: Identifiable, Codable, Equatable {
     var religion: String?
     var community: String?
     var politics: String?
-    var location: String?
+    var location: Location?
+    var geohash: String?
+    var geohash2: String?
+    var geohash3: String?
+    var geohash4: String?
+    var geohash5: String?
     var description: String?
     var country: String?
     var discoveryStatus: Bool? = false
@@ -86,7 +91,14 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.doYouDrink == rhs.doYouDrink &&
                lhs.doYouSmoke == rhs.doYouSmoke &&
                lhs.doYouWantBabies == rhs.doYouWantBabies  &&
-               lhs.countryRaisedIn == rhs.countryRaisedIn)
+               lhs.countryRaisedIn == rhs.countryRaisedIn &&
+               lhs.location == rhs.location &&
+               lhs.geohash == rhs.geohash &&
+               lhs.geohash2 == rhs.geohash2 &&
+               lhs.geohash3 == rhs.geohash3 &&
+               lhs.geohash4 == rhs.geohash4 &&
+               lhs.geohash5 == rhs.geohash5
+        )
     }
 }
 
@@ -113,4 +125,13 @@ struct User: Hashable, CustomStringConvertible {
     let politics: String
     let location: String
     let description: String
+}
+
+struct Location: Codable, Hashable, Equatable {
+    var longitude: Double?
+    var latitude: Double?
+}
+
+struct Geohash: Codable, Hashable, Equatable {
+    var geohash: String?
 }

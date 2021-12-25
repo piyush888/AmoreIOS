@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationDenied: View {
     
-    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
         

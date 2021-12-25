@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct HomeView: View {
     
@@ -17,7 +18,7 @@ struct HomeView: View {
     @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
-    @EnvironmentObject var filterAndLocationModel: FilterAndLocationModel
+    @EnvironmentObject var filterModel: FilterModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
@@ -55,11 +56,9 @@ struct HomeView: View {
                                         
                                 case .filterSettingsView:
                                     FilterSettings()
-                                        .environmentObject(filterAndLocationModel)
-                                        .onChange(of: filterAndLocationModel.filterAndLocationData) { _ in
+                                        .environmentObject(filterModel)
+                                        .onChange(of: filterModel.filterData) { _ in
                                             print("On change for filter triggered")
-                                            filterAndLocationModel.getLocationOnce()
-                                            filterAndLocationModel.updateFilterAndLocation()
                                         }
                                     
                                 case .userSettingsView:

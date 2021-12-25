@@ -201,41 +201,41 @@ struct ChildCardView: View {
 struct ChildCardView_Previews: PreviewProvider {
     static var previews: some View {
         let tempProfile = CardProfileWithPhotos(id: "Test123456",  //can't be nil
-                              firstName: "Neha", //can't be nil
-                              lastName: "Sharma",  //can't be nil
-                              dateOfBirth: "October 14, 2021",  //can't be nil
-                              interests: ["Running","Gaming","Helping"],  //can't be nil
-                              sexualOrientation: ["Straight"], // * show sexual orientation if visible is true
-                              sexualOrientationVisible: true,
-                              showMePreference: "Women", // Don't show
-                              work: "Bank of America", // Give in info. Below Passions
-                              school: "Harvard University", // Show the university name
-                              age: 25, // Age is shown already
-                              headline: "Hey Pumpkin",
-                              profileDistanceFromUser: 0,
-                              jobTitle: "VP",
-                              careerField: "Career Field", // *
-                              height: 5.6,
-                              education: "Masters in Science",
-                              religion: "Hindu",
-                              community: "Brahmin",
-                              politics: "Liberal",
-                              location: "Coordinates",
-                              description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                              country: "India",
-                              image1: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              image2: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              image3: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              image4: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              image5: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              image6: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                              doYouWorkOut: "Yes", // * show this later
-                              doYouDrink: "No", // * show this later
-                              doYouSmoke: "Yes", // * show this later
-                              doYouWantBabies: "No" // * show this later
-                        )
+                                                firstName: "Neha", //can't be nil
+                                                lastName: "Sharma",  //can't be nil
+                                                dateOfBirth: "October 14, 2021",  //can't be nil
+                                                interests: ["Running","Gaming","Helping"],  //can't be nil
+                                                sexualOrientation: ["Straight"], // * show sexual orientation if visible is true
+                                                sexualOrientationVisible: true,
+                                                showMePreference: "Women", // Don't show
+                                                work: "Bank of America", // Give in info. Below Passions
+                                                school: "Harvard University", // Show the university name
+                                                age: 25, // Age is shown already
+                                                headline: "Hey Pumpkin",
+                                                profileDistanceFromUser: 0,
+                                                jobTitle: "VP",
+                                                careerField: "Career Field", // *
+                                                height: 5.6,
+                                                education: "Masters in Science",
+                                                religion: "Hindu",
+                                                community: "Brahmin",
+                                                politics: "Liberal",
+                                                location: Location(longitude: 0.0, latitude: 0.0),
+                                                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                                                country: "India",
+                                                image1: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image2: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image3: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image4: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image5: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image6: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                doYouWorkOut: "Yes", // * show this later
+                                                doYouDrink: "No", // * show this later
+                                                doYouSmoke: "Yes", // * show this later
+                                                doYouWantBabies: "No" // * show this later
+        )
         
-            ChildCardView(singleProfile: Binding.constant(tempProfile), testing: true)
+        ChildCardView(singleProfile: Binding.constant(tempProfile), testing: true)
             .padding(.horizontal)
         
     }
