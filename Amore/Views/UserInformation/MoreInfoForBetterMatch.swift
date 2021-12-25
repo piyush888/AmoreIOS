@@ -11,6 +11,7 @@ struct MoreInfoForBetterMatch: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var moreInfoView: MoreInformation = .introInfoHomeView
     @State private var progressStatus = 0.0
     
@@ -37,7 +38,8 @@ struct MoreInfoForBetterMatch: View {
                             
                             case .introInfoHomeView:
                                 IntroductionOption(moreInfoView:$moreInfoView,
-                                                   progressStatus:$progressStatus)
+                                                   progressStatus:$progressStatus,
+                                                   allcardsActiveSheet: $allcardsActiveSheet)
                             
                             case .userHeightView:
                                 UserHeight(userHeight:$profileModel.editUserProfile.height.boundDouble,
@@ -85,13 +87,19 @@ struct MoreInfoForBetterMatch: View {
                                      progressStatus:$progressStatus)
                             
                             case .completed:
-                                Completed()
+                            Completed(allcardsActiveSheet: $allcardsActiveSheet)
                             }
                         }
                     
                     Spacer()
                     
                 }
+                .onAppear{
+                    if profileModel.editUserProfile.height == nil {
+                        profileModel.editUserProfile.height = 167.64
+                    }
+                }
+                
             )
         
     }
@@ -110,6 +118,6 @@ struct WithBackgroundProgressViewStyle: ProgressViewStyle {
 
 struct MoreInfoForBetterMatch_Previews: PreviewProvider {
     static var previews: some View {
-        MoreInfoForBetterMatch()
+        MoreInfoForBetterMatch(allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
     }
 }

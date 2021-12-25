@@ -36,7 +36,7 @@ struct PreviewProfile: View {
                                         NameAgeDistance(firstName: profileModel.editUserProfile.firstName.bound,
                                                         lastName: profileModel.editUserProfile.lastName.bound,
                                                         age: profileModel.editUserProfile.age.boundInt,
-                                                        profileDistanceFromUser: profileModel.editUserProfile.profileDistanceFromUser.boundInt,
+                                                        profileDistanceFromUser: $profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
                                                         geometry: geometry)
                                     }
                                 }
@@ -56,7 +56,7 @@ struct PreviewProfile: View {
                                           work: profileModel.editUserProfile.jobTitle.bound,
                                           education: profileModel.editUserProfile.education.bound,
                                           religion: profileModel.editUserProfile.religion.bound,
-                                          politics: profileModel.editUserProfile.politics.bound,
+                                          profileCompletion: profileModel.editUserProfile.profileCompletion.boundDouble,
                                           countryRaisedIn: profileModel.editUserProfile.countryRaisedIn.bound)
                                 .padding(.horizontal,15)
 
@@ -149,17 +149,17 @@ struct PreviewProfile: View {
                         }
                         
                         // Report the profile
-                        HStack {
-                            Spacer()
-                            Button {
-                                // TODO - Report a Person
-                            } label : {
-                                Text("Report \(profileModel.editUserProfile.firstName.bound)")
-                                    .foregroundColor(.gray)
-                            }
-                            Spacer()
-                        }
-                        .padding([.top,.bottom],30)
+//                        HStack {
+//                            Spacer()
+//                            Button {
+//                                // TODO - Report a Person
+//                            } label : {
+//                                Text("Report \(profileModel.editUserProfile.firstName.bound)")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//                        }
+//                        .padding([.top,.bottom],30)
                     }
                 }
                 .padding(.horizontal,10)

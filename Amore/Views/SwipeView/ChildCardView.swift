@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftUIFontIcon
+import CoreLocation
+
 
 struct ChildCardView: View {
     
     @Binding var singleProfile: CardProfileWithPhotos
+    @EnvironmentObject var profileModel: ProfileViewModel
     @State var testing: Bool
     
     var body: some View {
@@ -39,8 +42,18 @@ struct ChildCardView: View {
                                         NameAgeDistance(firstName: self.singleProfile.firstName.bound,
                                                         lastName: self.singleProfile.lastName.bound,
                                                         age: self.singleProfile.age.boundInt,
-                                                        profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundInt,
+                                                        profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
                                                         geometry: geometry)
+                                            .onAppear {
+                                                if singleProfile.location != nil {
+                                                    let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
+                                                                                     longitude: singleProfile.location!.longitude.boundDouble)
+                                                    if profileModel.lastSeenLocation != nil {
+                                                        self.singleProfile.profileDistanceFromUser = profileModel.lastSeenLocation!.distance(from: profileLocation) / 1000
+                                                    }
+                                                }
+                                                
+                                            }
                                     }
                                 }
                             }
@@ -59,7 +72,7 @@ struct ChildCardView: View {
                                           work: self.singleProfile.jobTitle.bound,
                                           education: self.singleProfile.education.bound,
                                           religion: self.singleProfile.religion.bound,
-                                          politics: self.singleProfile.politics.bound,
+                                          profileCompletion:self.singleProfile.profileCompletion.boundDouble,
                                           countryRaisedIn: self.singleProfile.countryRaisedIn.bound)
                                 .padding(.horizontal,15)
 
@@ -172,17 +185,17 @@ struct ChildCardView: View {
                         }
                         
                         // Report the profile
-                        HStack {
-                            Spacer()
-                            Button {
-                                // TODO - Report a Person
-                            } label : {
-                                Text("Report \(self.singleProfile.firstName.bound)")
-                                    .foregroundColor(.gray)
-                            }
-                            Spacer()
-                        }
-                        .padding([.top,.bottom],30)
+//                        HStack {
+//                            Spacer()
+//                            Button {
+//                                // TODO - Report a Person
+//                            } label : {
+//                                Text("Report \(self.singleProfile.firstName.bound)")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//                        }
+//                        .padding([.top,.bottom],30)
                     }
                 }
                 .padding(.horizontal,10)

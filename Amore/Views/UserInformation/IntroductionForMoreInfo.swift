@@ -11,15 +11,17 @@ struct IntroductionOption: View {
     
     @Binding var moreInfoView: MoreInformation
     @Binding var progressStatus: Double
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    
     
     var body: some View {
         
         VStack(alignment: .leading) {
             
-            MoreInfoForBetterMatchChild(iconName:"heart.fill",
+            MoreInfoForBetterMatchChild(iconName:"speedometer",
                                         title: "Complete your profile",
                                         description: "Users with 100% profile completion have better matches",
-                                        color:Color.red)
+                                        color:Color.yellow)
             
             MoreInfoForBetterMatchChild(iconName:"message.fill",
                                         title: "Be in their DM",
@@ -57,6 +59,7 @@ struct IntroductionOption: View {
             // Do it later
             Button{
                 // TODO
+                self.allcardsActiveSheet =  .none
             } label : {
                 ZStack{
                     Rectangle()

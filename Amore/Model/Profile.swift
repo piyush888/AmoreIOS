@@ -21,12 +21,12 @@ struct Profile: Identifiable, Codable, Equatable {
     var showMePreference: String?
     var work: String?
     var school: String?
-    var age: Int? = 25
+    var age: Int?
     var headline: String?
-    var profileDistanceFromUser: Int? = 0
+    var profileDistanceFromUser: Double?
     var jobTitle: String?
     var careerField: String?
-    var height: Double? = 5.3
+    var height: Double?
     var education: String?
     var religion: String?
     var community: String?

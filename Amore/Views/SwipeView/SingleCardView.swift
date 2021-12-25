@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SingleCardView: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
@@ -120,8 +122,8 @@ struct SingleCardView: View {
                         })
                     }
                 }
+                .environmentObject(profileModel)
                 
-            
                 if self.swipeStatus == .like || self.dragSwipeStatus == .like {
                     LikeDislikeButtons(buttonName: "Like", buttonColor: Color.green, rotationAngle: -45,imageName:"bolt.heart.fill")
                 } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {

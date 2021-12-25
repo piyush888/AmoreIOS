@@ -52,6 +52,7 @@ struct HomeView: View {
                                         .environmentObject(photoModel)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(reportActivityModel)
+                                        .environmentObject(profileModel)
                                 
                                         
                                 case .filterSettingsView:

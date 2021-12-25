@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreLocation
+
 
 class CardProfileModel: ObservableObject {
     
@@ -149,7 +151,15 @@ class CardProfileModel: ObservableObject {
     
     func updateCardProfilesWithPhotos() {
         var tempCardsWithPhotos = [CardProfileWithPhotos]()
+        
         for card in allCards {
+            
+            if let location = card.location {
+                let profileLocation = CLLocation(latitude: location.latitude.boundDouble,
+                                            longitude: location.longitude.boundDouble)
+                
+            }
+            
             let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
                                                          firstName: card.firstName,
                                                          lastName: card.lastName,
@@ -182,7 +192,8 @@ class CardProfileModel: ObservableObject {
                                                          doYouWorkOut: card.doYouWorkOut,
                                                          doYouDrink: card.doYouDrink,
                                                          doYouSmoke: card.doYouSmoke,
-                                                         doYouWantBabies: card.doYouWantBabies)
+                                                         doYouWantBabies: card.doYouWantBabies,
+                                                         profileCompletion:card.profileCompletion)
             tempCardsWithPhotos.append(cardProfileWithPhoto)
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }

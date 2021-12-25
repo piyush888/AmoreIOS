@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Completed: View {
     
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    
     @State var time = 0.0
     @State var scale = 0.1
     let duration = 5.0
@@ -37,7 +39,7 @@ struct Completed: View {
                 // Continue to move to next view
                 Button{
                     // Close the view
-                    
+                    self.allcardsActiveSheet =  .none
                 } label : {
                     ZStack{
                         Rectangle()
@@ -61,7 +63,7 @@ struct Completed: View {
 
 struct Completed_Previews: PreviewProvider {
     static var previews: some View {
-        Completed()
+        Completed(allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
     }
 }
 

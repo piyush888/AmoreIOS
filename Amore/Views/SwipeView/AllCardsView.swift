@@ -16,6 +16,7 @@ struct AllCardsView: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     
     @State var curSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
@@ -78,6 +79,8 @@ struct AllCardsView: View {
                             .frame(width: geometry.size.width)
                             .environmentObject(photoModel)
                             .environmentObject(cardProfileModel)
+                            .environmentObject(profileModel)
+                        
                         
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
@@ -93,7 +96,7 @@ struct AllCardsView: View {
                                          buttonWidth:30,
                                          buttonHeight: 35,
                                          fontSize:25,
-                                         shieldColorList:[Color.yellow, Color.green],
+                                         shieldColorList:[Color.yellow],
                                          viewToBeAssigned:.moreMatchesSheet,
                                          iconName:"speedometer")
                             Spacer()
@@ -135,7 +138,7 @@ struct AllCardsView: View {
                         }
                    
                     case .moreMatchesSheet:
-                       MoreInfoForBetterMatch()
+                       MoreInfoForBetterMatch(allcardsActiveSheet: $allcardsActiveSheet)
                     
                     case .none:
                         Text("Helo")

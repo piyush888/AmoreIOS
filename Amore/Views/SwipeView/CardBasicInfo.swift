@@ -13,7 +13,7 @@ struct CardBasicInfo: View {
     let work: String
     let education: String
     let religion: String
-    let politics: String
+    let profileCompletion: Double
     let countryRaisedIn: String
     
     let adaptivecolumns = Array(repeating:
@@ -31,7 +31,8 @@ struct CardBasicInfo: View {
                 
                 // Height of the profile
                 ChildCardBasicInfo(iconStringName: "arrow.up.square.fill",
-                                   data: String(height),
+                                   // cm to feet
+                                   data: String(format:"%.1f", height/30.48),
                                    fieldName:"Height")
                 // Work
                 ChildCardBasicInfo(iconStringName: "bag.fill",
@@ -45,10 +46,11 @@ struct CardBasicInfo: View {
                 ChildCardBasicInfo(iconStringName: "book.fill",
                                    data: religion,
                                    fieldName:"Religion")
+                
                 // Politics
-                ChildCardBasicInfo(iconStringName: "person.2.fill",
-                                   data: politics,
-                                   fieldName:"Politics")
+                ChildCardBasicInfo(iconStringName: "speedometer",
+                                   data: String(format:"%.2f",profileCompletion) + "%",
+                                   fieldName:"Profile Completed")
                 // Location
                 ChildCardBasicInfo(iconStringName: "house.fill",
                                    data: countryRaisedIn,
@@ -92,7 +94,7 @@ struct CardBasicInfo_Previews: PreviewProvider {
                       work: "",
                       education: "",
                       religion: "",
-                      politics: "",
+                      profileCompletion: 0.0,
                       countryRaisedIn: "")
     }
 }
