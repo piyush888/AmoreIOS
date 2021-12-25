@@ -11,8 +11,9 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import CoreData
+import CoreLocation
 
-class ProfileViewModel: ObservableObject {
+class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @AppStorage("log_Status") var logStatus = false
     var userProfile = Profile()
@@ -35,7 +36,147 @@ class ProfileViewModel: ObservableObject {
     @Published var loginFormVisible = false
     @Published var minPhotosAdded: Bool = false
     
+    // Variables for Location
+    @Published var authorizationStatus: CLAuthorizationStatus
+    var lastSeenLocation: CLLocation?
+    var lastSeenLocationGeohash: Geohash?
+    private let locationManager: CLLocationManager
+    
+    @Published var requestInProcessing: Bool = false
+    // time out after continious error from backend
+    @Published var timeOutRetriesCount: Int = 0
+    @Published var adminAuthModel = AdminAuthenticationViewModel()
+    var apiURL = "http://127.0.0.1:5000"
+    
     let viewContext = PersistenceController.shared.container.viewContext
+    
+    override init() {
+        locationManager = CLLocationManager()
+        authorizationStatus = locationManager.authorizationStatus
+        
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
+    
+    // Call this to give a location pop-up
+    func getLocationOnce() {
+        locationManager.requestLocation()
+        print("Location: Location Requested")
+    }
+    
+    // Mark - Location Manager Delegate Methods
+    // This method will be started when the auhtorization of location manager changes
+    // If user "Denies" it will never be called again, until
+    // - User deletes the application or go in settings to change location
+    // This will be called everytime a user chooses "Give Access Ones" & application is
+    // Opened next time
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = locationManager.authorizationStatus
+        // Handle each case of location permissions
+        if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(authorizationStatus) {
+            locationManager.startUpdatingLocation()
+//            locationManager.requestLocation()
+        }
+        else {
+            locationManager.stopUpdatingLocation()
+        }
+        print("Location: authorizationStatus Updated")
+    }
+    
+    // Get updated user location - Depend on authorization
+    func requestPermission() {
+        if authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    // Tells the delegate when new location data is available
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else {return}
+        lastSeenLocation = userLocation
+        self.getGeohash(apiToBeUsed: "/getgeohash", precision: 12) {} onSuccess: {
+            if let geohash = self.lastSeenLocationGeohash?.geohash {
+                self.editUserProfile.geohash = geohash
+                self.editUserProfile.geohash2 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 2)])
+                self.editUserProfile.geohash3 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 3)])
+                self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
+                self.editUserProfile.geohash5 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 5)])
+            }
+            print("Location: Geohash Updated: ", self.editUserProfile.geohash as Any)
+        }
+//        editUserProfile.location = Location(longitude: userLocation.coordinate.longitude, latitude: userLocation.coordinate.latitude)
+        print("Location: Location Updated")
+//        editUserProfile.location?.longitude = userLocation.coordinate.longitude
+//        editUserProfile.location?.latitude = userLocation.coordinate.latitude
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Handle failure to get a user’s location
+        print("Location: Failed to acquire user location.")
+    }
+    
+    //// API Call to get Geohash for the User Location
+    func getGeohash(apiToBeUsed:String, precision: Int, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void)  -> Void {
+        var geohash = Geohash()
+        requestInProcessing = true
+        guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                return
+        }
+        let body: [String: Any] = ["latitude": lastSeenLocation?.coordinate.latitude as Any, "longitude": lastSeenLocation?.coordinate.longitude as Any, "precision": precision]
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                print("Error in API: \(error)")
+                onFailure()
+                return
+            }
+            
+            if let data = data {
+                // Check if you receive a valid httpresponse
+                if let httpResponse = response as? HTTPURLResponse {
+                    
+                    if httpResponse.statusCode == 200 {
+                        DispatchQueue.main.async {
+                            do {
+                                geohash = try JSONDecoder().decode(Geohash.self, from: data)
+                                self.lastSeenLocationGeohash = geohash
+                            }
+                            catch let jsonError as NSError {
+                                print("ProfileViewModel")
+                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                            }
+                            self.requestInProcessing = false
+                            if self.timeOutRetriesCount > 0 {
+                                self.timeOutRetriesCount = 0
+                            }
+                            // send back the temp data
+                            onSuccess()
+                        }
+                    }
+                    else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                        DispatchQueue.main.async {
+                            if self.timeOutRetriesCount < 10 {
+                                self.timeOutRetriesCount += 1
+                                self.adminAuthModel.serverLogin()
+                                self.getGeohash(apiToBeUsed: apiToBeUsed,precision: precision, onFailure: onFailure, onSuccess:onSuccess)
+                            }
+                            self.requestInProcessing = false
+                        }
+                    }
+                }
+            }
+        }.resume()
+    }
     
     func calculateUserAge() {
         let now = Date()
@@ -202,6 +343,17 @@ class ProfileViewModel: ObservableObject {
     
     func updateUserProfile(profileId: String?) {
         if let profileId = profileId {
+            editUserProfile.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
+            editUserProfile.geohash = lastSeenLocationGeohash?.geohash
+            if let geohash = self.lastSeenLocationGeohash?.geohash {
+                self.editUserProfile.geohash = geohash
+                self.editUserProfile.geohash2 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 2)])
+                self.editUserProfile.geohash3 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 3)])
+                self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
+                self.editUserProfile.geohash5 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 5)])
+            }
+            print("Location: Current Location \(String(describing: editUserProfile.location))")
+            print("Location: Current Location Geohash \(String(describing: editUserProfile.geohash))")
             if editUserProfile != userProfile {
                 do {
                     print("Update Profile Information on Firestore...")

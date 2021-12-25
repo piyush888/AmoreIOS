@@ -100,7 +100,7 @@ struct CardImages_Previews: PreviewProvider {
                               religion: "Hindu",
                               community: "Brahmin",
                               politics: "Liberal",
-                              location: "Coordinates",
+                              location: Location(longitude: 0.0, latitude: 0.0),
                               description: "this field is description",
                               country: "India",
                               image1: ProfileImage(imageURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/amore-f8cd6.appspot.com/o/images%2FQvV4OoZmZ3QWHhMNaZrr7lkqmLF3%2Fimage1637162606.404443.heic?alt=media&token=b91a59f4-1b39-4b28-b972-9d4d5252fd76"),

@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct FiltersAndLocation: Identifiable, Codable, Hashable, Equatable {
+struct Filters: Identifiable, Codable, Hashable, Equatable {
     @DocumentID public var id: String?
     var genderPreference: String? = "Male"
     var minAgePreference: Int? = 21
@@ -20,14 +20,9 @@ struct FiltersAndLocation: Identifiable, Codable, Hashable, Equatable {
     var educationPreference: String? = "Masters"
     var countryPreference: String? = "India"
     var location: Location?
-    var geohash: Geohash?
-}
-
-struct Location: Codable, Hashable, Equatable {
-    var longitude: Double?
-    var latitude: Double?
-}
-
-struct Geohash: Codable, Hashable, Equatable {
     var geohash: String?
+    var geohash2: String?
+    var geohash3: String?
+    var geohash4: String?
+    var geohash5: String?
 }

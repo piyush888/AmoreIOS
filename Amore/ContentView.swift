@@ -17,7 +17,7 @@ struct ContentView: View {
     @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
-    @StateObject var filterAndLocationModel = FilterAndLocationModel()
+    @StateObject var filterModel = FilterModel()
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
@@ -70,15 +70,15 @@ struct ContentView: View {
                         // If 2 or more photos already added
                         if profileModel.minPhotosAdded {
                             // If filter and location data is fetched and ready
-                            if filterAndLocationModel.filterAndLocationDataFetched {
+                            if filterModel.filterDataFetched {
                                 // If location authorisation granted
-                                if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(filterAndLocationModel.authorizationStatus) {
+                                if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(profileModel.authorizationStatus) {
                                     HomeView()
                                         .environmentObject(profileModel)
                                         .environmentObject(streamModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(adminAuthenticationModel)
-                                        .environmentObject(filterAndLocationModel)
+                                        .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(reportActivityModel)
@@ -88,8 +88,8 @@ struct ContentView: View {
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
                                             receivedGivenEliteModel.getLikesGivenData()
-                                            filterAndLocationModel.getLocationOnce()
-                                            filterAndLocationModel.updateFilterAndLocation()
+                                            profileModel.getLocationOnce()
+                                            profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                                         }
                                     // To Test MoreInfo, comment out HomeView and uncomment block below
         //                            MoreInfoForBetterMatch()
@@ -102,14 +102,13 @@ struct ContentView: View {
                                 // Else get location permission
                                 else {
                                     LocationView()
-//                                        .environmentObject(locationModel)
-                                        .environmentObject(filterAndLocationModel)
+                                        .environmentObject(profileModel)
                                 }
                             }
                             else {
                                 ProgressView()
                                     .onAppear {
-                                        filterAndLocationModel.getFilterAndLocation()
+                                        filterModel.getFilter()
                                     }
                             }
                             
@@ -142,7 +141,7 @@ struct ContentView: View {
                     .onAppear {
                         profileModel.getUserProfile()
                         profileModel.checkMinNumOfPhotosUploaded()
-                        filterAndLocationModel.getFilterAndLocation()
+                        filterModel.getFilter()
                     }
             }
             

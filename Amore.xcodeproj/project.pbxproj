@@ -16,8 +16,8 @@
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
 		1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273C9274509D400590DD1 /* ProfileImageView.swift */; };
 		1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */; };
-		1B6273CE274B7B9A00590DD1 /* FiltersAndLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CD274B7B9A00590DD1 /* FiltersAndLocation.swift */; };
-		1B6273D0274B82FD00590DD1 /* FilterAndLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CF274B82FD00590DD1 /* FilterAndLocationModel.swift */; };
+		1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CD274B7B9A00590DD1 /* Filters.swift */; };
+		1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CF274B82FD00590DD1 /* FilterModel.swift */; };
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
@@ -184,8 +184,8 @@
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		1B6273C9274509D400590DD1 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifiers.swift; sourceTree = "<group>"; };
-		1B6273CD274B7B9A00590DD1 /* FiltersAndLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersAndLocation.swift; sourceTree = "<group>"; };
-		1B6273CF274B82FD00590DD1 /* FilterAndLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAndLocationModel.swift; sourceTree = "<group>"; };
+		1B6273CD274B7B9A00590DD1 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		1B6273CF274B82FD00590DD1 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBasicInfo.swift; sourceTree = "<group>"; };
@@ -678,7 +678,7 @@
 				E27AC54A2720CB6200EB50F7 /* Photo.swift */,
 				E283677E26FAB79800EEA049 /* Onboarding.swift */,
 				1BC8BE0D2705CD7C00F0137E /* Profile.swift */,
-				1B6273CD274B7B9A00590DD1 /* FiltersAndLocation.swift */,
+				1B6273CD274B7B9A00590DD1 /* Filters.swift */,
 				E268A46B2747DB9A0045F264 /* CardProfiles.swift */,
 			);
 			path = Model;
@@ -714,7 +714,7 @@
 				E234711F271BE0030006F336 /* StreamViewModel.swift */,
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
-				1B6273CF274B82FD00590DD1 /* FilterAndLocationModel.swift */,
+				1B6273CF274B82FD00590DD1 /* FilterModel.swift */,
 				1B1D3227274E36E50096B40B /* CardProfileModel.swift */,
 				E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */,
 				E205F67C2766A3D600196A06 /* FetchDataModel.swift */,
@@ -920,7 +920,7 @@
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */,
-				1B6273CE274B7B9A00590DD1 /* FiltersAndLocation.swift in Sources */,
+				1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */,
@@ -943,7 +943,7 @@
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
 				E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */,
-				1B6273D0274B82FD00590DD1 /* FilterAndLocationModel.swift in Sources */,
+				1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
 				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,
