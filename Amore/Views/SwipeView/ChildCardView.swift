@@ -43,7 +43,8 @@ struct ChildCardView: View {
                                                         lastName: self.singleProfile.lastName.bound,
                                                         age: self.singleProfile.age.boundInt,
                                                         profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
-                                                        geometry: geometry)
+                                                        geometry: geometry,
+                                                        isPreviewProfile:true)
                                             .onAppear {
                                                 if singleProfile.location != nil {
                                                     let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
@@ -171,6 +172,7 @@ struct ChildCardView: View {
                             }
                             
                         }
+                        .padding([.bottom],50)
                         
                         if self.singleProfile.image6?.imageURL != nil  {
                             VStack {
@@ -182,6 +184,7 @@ struct ChildCardView: View {
                                     .cornerRadius(20)
                                     .padding(5)
                             }
+                            
                         }
                         
                         // Report the profile

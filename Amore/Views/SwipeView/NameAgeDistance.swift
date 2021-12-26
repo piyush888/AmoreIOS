@@ -14,6 +14,7 @@ struct NameAgeDistance: View {
     @State var age: Int
     @Binding var profileDistanceFromUser: Double
     @State var geometry: GeometryProxy
+    @State var isPreviewProfile: Bool
     
     var body: some View {
         
@@ -43,15 +44,15 @@ struct NameAgeDistance: View {
                             .font(.title3)
                     }
                     
-                    
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                            .resizable()
-                            .frame(width:20, height:20)
-                            
-                        Text(String(format: "%.1f",profileDistanceFromUser) + " km")
-                            .font(.headline)
-                        
+                    if isPreviewProfile {
+                        HStack {
+                            Image(systemName: "mappin.and.ellipse")
+                                .resizable()
+                                .frame(width:20, height:20)
+                                
+                            Text(String(format: "%.1f",profileDistanceFromUser) + " km")
+                                .font(.headline)
+                        }
                     }
                     
                 }
@@ -76,7 +77,8 @@ struct NameAgeDistance_Previews: PreviewProvider {
                             lastName: "World",
                             age: 24,
                             profileDistanceFromUser: Binding.constant(17),
-                            geometry: geometry)
+                            geometry: geometry,
+                            isPreviewProfile:true)
         }
     }
 }

@@ -37,7 +37,8 @@ struct PreviewProfile: View {
                                                         lastName: profileModel.editUserProfile.lastName.bound,
                                                         age: profileModel.editUserProfile.age.boundInt,
                                                         profileDistanceFromUser: $profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
-                                                        geometry: geometry)
+                                                        geometry: geometry,
+                                                        isPreviewProfile:false)
                                     }
                                 }
                             }
@@ -137,17 +138,19 @@ struct PreviewProfile: View {
                                         .padding(5)
                                 }
                             }
-                            
-                        }
                         
-                        if profileModel.editUserProfile.image6?.imageURL != nil  {
-                            VStack {
-                                ProfileImageView(profileImage: $profileModel.editUserProfile.image6, photo: $photoModel.photo6, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
-                                    .cornerRadius(20)
-                                    .padding(5)
+                            if profileModel.editUserProfile.image6?.imageURL != nil  {
+                                VStack {
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image6, photo: $photoModel.photo6, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                        .cornerRadius(20)
+                                        .padding(5)
+                                }
                             }
-                        }
                         
+                        }
+                        .padding([.bottom],40)
+                        
+                            
                         // Report the profile
 //                        HStack {
 //                            Spacer()
