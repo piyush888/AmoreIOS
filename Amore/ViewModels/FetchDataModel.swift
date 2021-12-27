@@ -57,7 +57,8 @@ class FetchDataModel {
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 10 {
+                            // number of retries 3
+                            if self.timeOutRetriesCount < 1 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchData(apiToBeUsed: apiToBeUsed,requestBody:["DataStatus": "No Data"],onFailure: onFailure,onSuccess:onSuccess)

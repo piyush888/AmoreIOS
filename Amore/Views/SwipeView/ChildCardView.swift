@@ -172,7 +172,6 @@ struct ChildCardView: View {
                             }
                             
                         }
-                        .padding([.bottom],50)
                         
                         if self.singleProfile.image6?.imageURL != nil  {
                             VStack {
@@ -186,19 +185,6 @@ struct ChildCardView: View {
                             }
                             
                         }
-                        
-                        // Report the profile
-//                        HStack {
-//                            Spacer()
-//                            Button {
-//                                // TODO - Report a Person
-//                            } label : {
-//                                Text("Report \(self.singleProfile.firstName.bound)")
-//                                    .foregroundColor(.gray)
-//                            }
-//                            Spacer()
-//                        }
-//                        .padding([.top,.bottom],30)
                     }
                 }
                 .padding(.horizontal,10)

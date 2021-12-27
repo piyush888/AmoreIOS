@@ -24,7 +24,7 @@ struct HomeView: View {
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     
     func checkIfDataIsComing() {
-        if (cardProfileModel.timeOutRetriesCount > 9) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
+        if (cardProfileModel.timeOutRetriesCount > 4) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
             serviceErrorView = .serverErrorView
         }
     }
@@ -45,6 +45,7 @@ struct HomeView: View {
                                 LikesTopPicksHome()
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
+                                        
                                     
                                 case .swipeView:
                                     AllCardsView()

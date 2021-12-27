@@ -141,7 +141,7 @@ struct AllCardsView: View {
                        MoreInfoForBetterMatch(allcardsActiveSheet: $allcardsActiveSheet)
                     
                     case .none:
-                        Text("Helo")
+                        Text("None")
                     
                 }
                 
@@ -154,7 +154,6 @@ struct AllCardsView: View {
             }
         
         }
-        .padding(.horizontal)
     }
 }
 

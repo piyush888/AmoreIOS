@@ -46,7 +46,10 @@ class CardProfileModel: ObservableObject {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
+                // nil responses - Service is down, since the response is nil
+                self.timeOutRetriesCount = self.timeOutRetriesCount + 5
                 print("Error in API: \(error)")
+                return
             }
             
             if let data = data {
@@ -72,7 +75,7 @@ class CardProfileModel: ObservableObject {
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 2 {
+                            if self.timeOutRetriesCount < 3 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchProfile(numberOfProfiles:10)
@@ -134,7 +137,8 @@ class CardProfileModel: ObservableObject {
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 2 {
+                            // number of retries 3
+                            if self.timeOutRetriesCount < 3 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchProfilesWithinRadius(numberOfProfiles: 10, radius: radius, latitude: latitude, longitude: longitude)

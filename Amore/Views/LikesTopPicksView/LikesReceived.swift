@@ -12,39 +12,65 @@ struct LikesReceived: View {
     @Namespace var animation
     @Binding var selectedItem : CardProfileWithPhotos?
     @Binding var show: Bool
-    @EnvironmentObject var cardProfileModel: CardProfileModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @State var geometry: GeometryProxy
     
     func getProfile(userId:String) -> Binding<CardProfileWithPhotos> {
         return Binding {
-            cardProfileModel.cardsDictionary[userId] ?? CardProfileWithPhotos()
+            receivedGivenEliteModel.superLikesReceivedPhotos_Dict[userId] ?? CardProfileWithPhotos()
         } set: { newCard in
-            cardProfileModel.cardsDictionary[userId] = newCard
+            receivedGivenEliteModel.superLikesReceivedPhotos_Dict[userId] = newCard
         }
     }
     
     var body: some View {
         
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 25){
-        
-            ForEach(cardProfileModel.allCardsWithPhotosDeck) { profile in
+        if receivedGivenEliteModel.superLikesReceivedPhotos.count == 0 {
+            VStack {
                 
-                    Button{
-                        withAnimation(.spring()){
-                            selectedItem = profile
-                            show.toggle()
-                        }
-                    } label : {
-                        MiniCardView(singleProfile: getProfile(userId:profile.id!),
-                                     animation: animation,
-                                     geometry:geometry)
-                            .environmentObject(cardProfileModel)
-                    }
-            
+                    Text("You have no Super Likes yet, Keep Swiping!!")
+                        .foregroundColor(Color.gray)
+                        .padding([.top,.bottom],20)
+                        .font(.headline)
+                    
+                    Image(systemName: "suit.heart.fill")
+                        .foregroundColor(Color.red)
+                        .font(.title)
             }
         }
-        .padding()
-        
+        else {
+            VStack {
+                
+                HStack {
+                    Text("Super likes received by you")
+                        .foregroundColor(Color.gray)
+                        .font(.caption)
+                    
+                    Image(systemName: "star.fill")
+                        .foregroundColor(Color("gold-star"))
+                        .font(.title3)
+                }
+                
+                ScrollView{
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 10){
+                       ForEach(receivedGivenEliteModel.superLikesReceivedPhotos) { profile in
+                                    Button{
+                                        withAnimation(.spring()){
+                                            selectedItem = profile
+                                            show.toggle()
+                                        }
+                                    } label : {
+                                        MiniCardView(singleProfile: getProfile(userId:profile.id!),
+                                                     animation: animation,
+                                                     geometry:geometry)
+                                    }
+                            
+                            }
+                        }
+                    .padding()
+                }
+            }
+        }
     }
 }
 

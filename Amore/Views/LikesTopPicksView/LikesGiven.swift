@@ -24,8 +24,8 @@ struct LikesGiven: View {
     }
     
     var body: some View {
-        
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 25){
+        ScrollView{
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 10){
         
             ForEach(receivedGivenEliteModel.superLikesGivenPhotos) { profile in
                 
@@ -42,8 +42,8 @@ struct LikesGiven: View {
             
             }
         }
-        .padding()
-        
+            .padding()
+        }
     }
 }
 

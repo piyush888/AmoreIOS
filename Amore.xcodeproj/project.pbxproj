@@ -151,6 +151,10 @@
 		E2DBC03A272DFCA5000630F5 /* PlatinumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC039272DFCA5000630F5 /* PlatinumCard.swift */; };
 		E2DBC03C272DFCB0000630F5 /* GoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC03B272DFCB0000630F5 /* GoldCard.swift */; };
 		E2DBFE27275EC05200250686 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBFE26275EC05200250686 /* RequestData.swift */; };
+		E2E0175F2779146700527E24 /* Elites.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0175E2779146700527E24 /* Elites.swift */; };
+		E2E01767277A705400527E24 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E01766277A705400527E24 /* LikeButton.swift */; };
+		E2E01769277A70AE00527E24 /* DislikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E01768277A70AE00527E24 /* DislikeButton.swift */; };
+		E2E0176B277A70D600527E24 /* SuperLikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176A277A70D600527E24 /* SuperLikeButton.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -317,6 +321,10 @@
 		E2DBC039272DFCA5000630F5 /* PlatinumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatinumCard.swift; sourceTree = "<group>"; };
 		E2DBC03B272DFCB0000630F5 /* GoldCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldCard.swift; sourceTree = "<group>"; };
 		E2DBFE26275EC05200250686 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
+		E2E0175E2779146700527E24 /* Elites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elites.swift; sourceTree = "<group>"; };
+		E2E01766277A705400527E24 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
+		E2E01768277A70AE00527E24 /* DislikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeButton.swift; sourceTree = "<group>"; };
+		E2E0176A277A70D600527E24 /* SuperLikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLikeButton.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -430,6 +438,10 @@
 				E2347137271DC5320006F336 /* CustomShape.swift */,
 				E2586C13276271A9001F7326 /* LikesReceived.swift */,
 				E205F67E2766DEA200196A06 /* LikesGiven.swift */,
+				E2E0175E2779146700527E24 /* Elites.swift */,
+				E2E01766277A705400527E24 /* LikeButton.swift */,
+				E2E01768277A70AE00527E24 /* DislikeButton.swift */,
+				E2E0176A277A70D600527E24 /* SuperLikeButton.swift */,
 			);
 			path = LikesTopPicksView;
 			sourceTree = "<group>";
@@ -883,6 +895,7 @@
 				E2DBC036272DF635000630F5 /* MessageCard.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E234712A271BFEDF0006F336 /* ChannelRowView.swift in Sources */,
+				E2E0176B277A70D600527E24 /* SuperLikeButton.swift in Sources */,
 				E268A468274601830045F264 /* UserHeight.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
 				E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */,
@@ -914,6 +927,7 @@
 				1B6AB336271DBE9600A45A82 /* (null) in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
+				E2E01769277A70AE00527E24 /* DislikeButton.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
 				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
 				E2DBC01F272B30FB000630F5 /* AmoreGold.swift in Sources */,
@@ -992,11 +1006,13 @@
 				E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
+				E2E0175F2779146700527E24 /* Elites.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
+				E2E01767277A705400527E24 /* LikeButton.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,
 				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,

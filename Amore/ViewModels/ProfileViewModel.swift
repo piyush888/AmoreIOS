@@ -165,7 +165,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 10 {
+                            if self.timeOutRetriesCount < 3 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.getGeohash(apiToBeUsed: apiToBeUsed,precision: precision, onFailure: onFailure, onSuccess:onSuccess)

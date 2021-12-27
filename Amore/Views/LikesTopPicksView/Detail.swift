@@ -33,9 +33,9 @@ struct Detail: View {
                     withAnimation(.spring()){show.toggle()}
                 }) {
                     
-                    Image(systemName: "chevron.left")
+                    Image(systemName: "chevron.left.circle.fill")
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.blue)
                 }
                 
                 Spacer()

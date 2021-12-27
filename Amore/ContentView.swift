@@ -87,9 +87,11 @@ struct ContentView: View {
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
-                                            receivedGivenEliteModel.getLikesGivenData()
                                             profileModel.getLocationOnce()
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                                            receivedGivenEliteModel.getLikesGivenData()
+                                            receivedGivenEliteModel.getLikesReceivedData()
+                                            receivedGivenEliteModel.elitesReceivedData()
                                         }
                                     // To Test MoreInfo, comment out HomeView and uncomment block below
         //                            MoreInfoForBetterMatch()
