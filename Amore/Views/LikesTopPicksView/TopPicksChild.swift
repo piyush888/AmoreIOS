@@ -1,34 +1,32 @@
 //
-//  LikesReceived.swift
+//  TopPicksChild.swift
 //  Amore
 //
-//  Created by Kshitiz Sharma on 12/9/21.
+//  Created by Kshitiz Sharma on 12/27/21.
 //
 
 import SwiftUI
 
-struct LikesReceived: View {
+struct TopPicksChild: View {
     
     @Namespace var animation
     @Binding var selectedItem : CardProfileWithPhotos?
     @Binding var show: Bool
+    @State var dataArray: [CardProfileWithPhotos]
+    @State var selectedTab: TopPicksLikesView
+    @State var stringNoDataPresent: String
+    @State var viewHeadText: String
+    @State var viewHeadIcon: String
+    @State var iconColor: Color
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @State var geometry: GeometryProxy
     
-    func getProfile(userId:String) -> Binding<CardProfileWithPhotos> {
-        return Binding {
-            receivedGivenEliteModel.superLikesReceivedPhotos_Dict[userId] ?? CardProfileWithPhotos()
-        } set: { newCard in
-            receivedGivenEliteModel.superLikesReceivedPhotos_Dict[userId] = newCard
-        }
-    }
-    
     var body: some View {
         
-        if receivedGivenEliteModel.superLikesReceivedPhotos.count == 0 {
+        if dataArray.count == 0 {
             VStack {
                 
-                    Text("You have no Super Likes yet, Keep Swiping!!")
+                    Text(stringNoDataPresent)
                         .foregroundColor(Color.gray)
                         .padding([.top,.bottom],20)
                         .font(.headline)
@@ -42,25 +40,25 @@ struct LikesReceived: View {
             VStack {
                 
                 HStack {
-                    Text("Super likes received by you")
+                    Text(viewHeadText)
                         .foregroundColor(Color.gray)
                         .font(.caption)
                     
-                    Image(systemName: "star.fill")
-                        .foregroundColor(Color("gold-star"))
+                    Image(systemName: viewHeadIcon)
+                        .foregroundColor(iconColor)
                         .font(.title3)
                 }
                 
                 ScrollView{
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 10){
-                       ForEach(receivedGivenEliteModel.superLikesReceivedPhotos) { profile in
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 15){
+                       ForEach(dataArray) { profile in
                                     Button{
                                         withAnimation(.spring()){
                                             selectedItem = profile
                                             show.toggle()
                                         }
                                     } label : {
-                                        MiniCardView(singleProfile: getProfile(userId:profile.id!),
+                                        MiniCardView(singleProfile: receivedGivenEliteModel.getProfile(profileId:profile.id!,selectedTab:selectedTab),
                                                      animation: animation,
                                                      geometry:geometry)
                                     }
@@ -71,6 +69,7 @@ struct LikesReceived: View {
                 }
             }
         }
+        
     }
 }
 

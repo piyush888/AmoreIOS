@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class ReceivedGivenEliteModel: ObservableObject {
@@ -51,6 +52,32 @@ class ReceivedGivenEliteModel: ObservableObject {
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.elitesReceivedPhotos = tempResponse.cardsWithPhotos
             self.elitesReceivedPhotos_Dict = tempResponse.cardsDict
+        }
+    }
+    
+    func getProfile(profileId:String, selectedTab:TopPicksLikesView) -> Binding<CardProfileWithPhotos> {
+        switch selectedTab {
+            case .likesReceived:
+                return Binding {
+                    self.superLikesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    self.superLikesReceivedPhotos_Dict[profileId] = newCard
+                }
+            
+            case .superLikesGive:
+                return Binding {
+                    self.superLikesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    self.superLikesGivenPhotos_Dict[profileId] = newCard
+                }
+
+            case .elitePicks:
+                return Binding {
+                    self.elitesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
+                } set: { newCard in
+                    self.elitesReceivedPhotos_Dict[profileId] = newCard
+                }
+            
         }
     }
     

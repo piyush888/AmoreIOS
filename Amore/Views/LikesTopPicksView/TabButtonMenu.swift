@@ -1,5 +1,5 @@
 //
-//  TabButton.swift
+//  TabButtonMenu.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 10/18/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabButton: View {
+struct TabButtonMenu: View {
     
     @State var titleSelected: TopPicksLikesView
     @Binding var selectedTab: TopPicksLikesView

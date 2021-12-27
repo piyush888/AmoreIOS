@@ -1,5 +1,5 @@
 //
-//  Detail.swift
+//  CardDetail.swift
 //  Amore
 //
 //  Created by Kshitiz Sharma on 10/18/21.
@@ -10,7 +10,7 @@ import SwiftUI
 
 import SwiftUI
 
-struct Detail: View {
+struct CardDetail: View {
     
     @Binding var selectedItem: CardProfileWithPhotos
     @Binding var show: Bool

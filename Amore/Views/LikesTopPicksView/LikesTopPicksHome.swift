@@ -20,33 +20,6 @@ struct LikesTopPicksHome: View {
     @State var show = false
     @State var showingAlert: Bool = false
     
-    func getProfile(profileId:String) -> Binding<CardProfileWithPhotos> {
-        switch selectedTab {
-            
-            case .likesReceived:
-                return Binding {
-                    receivedGivenEliteModel.superLikesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                } set: { newCard in
-                    receivedGivenEliteModel.superLikesReceivedPhotos_Dict[profileId] = newCard
-                }
-            
-            case .superLikesGive:
-                return Binding {
-                    receivedGivenEliteModel.superLikesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                } set: { newCard in
-                    receivedGivenEliteModel.superLikesGivenPhotos_Dict[profileId] = newCard
-                }
-
-            case .elitePicks:
-                return Binding {
-                    receivedGivenEliteModel.elitesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                } set: { newCard in
-                    receivedGivenEliteModel.elitesReceivedPhotos_Dict[profileId] = newCard
-                }
-            
-        }
-    }
-    
     var body: some View {
         
         GeometryReader { geometry in
@@ -60,7 +33,8 @@ struct LikesTopPicksHome: View {
                         ForEach(tabs,id: \.self){tab in
                             
                             // Tab Button....
-                            TabButton(titleSelected: tab,
+                            // Likes received, Likes given, Elite Picks
+                            TabButtonMenu(titleSelected: tab,
                                       selectedTab: $selectedTab,
                                       animation: animation)
                             
@@ -76,21 +50,39 @@ struct LikesTopPicksHome: View {
                     switch selectedTab {
                         
                         case .likesReceived:
-                            LikesReceived(selectedItem:$selectedItem,
-                                          show:$show,
-                                          geometry:geometry)
+                            TopPicksChild(selectedItem: $selectedItem,
+                                      show: $show,
+                                      dataArray: receivedGivenEliteModel.superLikesReceivedPhotos,
+                                      selectedTab: selectedTab,
+                                      stringNoDataPresent: "You have no Super Likes yet, Keep Swiping!!",
+                                      viewHeadText: "Super likes received by you",
+                                      viewHeadIcon: "star.fill",
+                                      iconColor:Color("gold-star"),
+                                      geometry:geometry)
                             .environmentObject(receivedGivenEliteModel)
                         
                         case .superLikesGive:
-                            LikesGiven(selectedItem:$selectedItem,
-                                          show:$show,
-                                          geometry:geometry)
-                            .environmentObject(receivedGivenEliteModel)
+                            TopPicksChild(selectedItem: $selectedItem,
+                                  show: $show,
+                                  dataArray: receivedGivenEliteModel.superLikesGivenPhotos,
+                                  selectedTab: selectedTab,
+                                  stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
+                                  viewHeadText: "Super likes given by you",
+                                  viewHeadIcon: "heart.fill",
+                                  iconColor:Color.red,
+                                  geometry:geometry)
+                                .environmentObject(receivedGivenEliteModel)
                         
                         case .elitePicks:
-                            Elites(selectedItem:$selectedItem,
-                                          show:$show,
-                                          geometry:geometry)
+                            TopPicksChild(selectedItem: $selectedItem,
+                              show: $show,
+                              dataArray: receivedGivenEliteModel.elitesReceivedPhotos,
+                              selectedTab: selectedTab,
+                              stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
+                              viewHeadText: "Elite picks you",
+                              viewHeadIcon: "bolt.fill",
+                              iconColor:Color.yellow,
+                              geometry:geometry)
                             .environmentObject(receivedGivenEliteModel)
                     }
                     
@@ -103,7 +95,10 @@ struct LikesTopPicksHome: View {
                 if show{
                     if let selectedItemVar = selectedItem {
                         ZStack {
-                            Detail(selectedItem: getProfile(profileId:selectedItemVar.id!), show: $show, animation: animation)
+                            // Open the pop up window which expand every Mini Card
+                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,selectedTab: selectedTab),
+                                   show: $show,
+                                   animation: animation)
                             
                             VStack {
                                 Spacer()
