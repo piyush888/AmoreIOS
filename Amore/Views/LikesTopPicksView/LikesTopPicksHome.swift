@@ -52,6 +52,7 @@ struct LikesTopPicksHome: View {
                     switch selectedTab {
                         
                         case .likesReceived:
+                            // Likes Received Vertical Scroll
                             TopPicksChild(selectedItem: $selectedItem,
                                       show: $show,
                                       dataArray: $receivedGivenEliteModel.superLikesReceivedPhotos,
@@ -67,6 +68,7 @@ struct LikesTopPicksHome: View {
                         
                         case .superLikesAndLikesGiven:
                         VStack {
+                            // Super Likes Given Carousel
                             TopPicksChild(selectedItem: $selectedItem,
                                   show: $show,
                                   dataArray: $receivedGivenEliteModel.superLikesGivenPhotos,
@@ -81,7 +83,7 @@ struct LikesTopPicksHome: View {
                                 .padding(.horizontal,10)
                                 .environmentObject(receivedGivenEliteModel)
                                 
-                            
+                            // Likes Given Vertical Scroll
                             TopPicksChild(selectedItem: $selectedItem,
                                   show: $show,
                                   dataArray: $receivedGivenEliteModel.likesGivenPhotos,
@@ -98,6 +100,7 @@ struct LikesTopPicksHome: View {
                         }
                         
                         case .elitePicks:
+                            // Elite Photos Vertical Scroll
                             TopPicksChild(selectedItem: $selectedItem,
                               show: $show,
                               dataArray: $receivedGivenEliteModel.elitesPhotos,
@@ -128,7 +131,9 @@ struct LikesTopPicksHome: View {
                             
                             VStack {
                                 Spacer()
+                                // Buttons to show which button to show with what view.
                                 switch selectedTab {
+                                    // Show all dislike, superlike and like button
                                     case .likesReceived:
                                         HStack(alignment:.center) {
                                             
@@ -156,6 +161,7 @@ struct LikesTopPicksHome: View {
                                         }
                                         .padding(.bottom, 30)
                                     
+                                    // when superLikesAndLikesGiven cards are being displayed. Star will be shown
                                     case .superLikesAndLikesGiven:
                                     
                                         switch selectedTabSubView {
@@ -177,7 +183,7 @@ struct LikesTopPicksHome: View {
                                                 Text("")
                                         }
                                     
-                                        
+                                    // Show all dislike, superlike and like button
                                     case .elitePicks:
                                         HStack(alignment:.center) {
                                             DislikeButton(profileId:selectedItemVar.id!,

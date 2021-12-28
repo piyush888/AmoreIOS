@@ -51,6 +51,7 @@ struct TopPicksChild: View {
                         .font(.title3)
                 }
                 
+                // Shows card vertically arranged . - KTZ
                 if self.verticalView {
                     ScrollView{
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 10), count: 2),spacing: 10){
@@ -77,6 +78,7 @@ struct TopPicksChild: View {
                         
                     }
                 } else {
+                    // Shows Card horizontally scaled... Like a carousel... - KTZ
                     ScrollView(.horizontal) {
                     LazyHGrid(rows:  Array(repeating: GridItem(.flexible(),spacing: 10), count: 1), spacing: 10) {
                         ForEach(dataArray) { profile in
