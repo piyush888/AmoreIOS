@@ -14,10 +14,12 @@ struct TopPicksChild: View {
     @Binding var show: Bool
     @Binding var dataArray: [CardProfileWithPhotos]
     @State var selectedTab: TopPicksLikesView
+    @Binding var selectedTabSubView: TopPicksLikesSubView
     @State var stringNoDataPresent: String
     @State var viewHeadText: String
     @State var viewHeadIcon: String
     @State var iconColor: Color
+    @State var verticalView: Bool
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @State var geometry: GeometryProxy
     
@@ -49,24 +51,56 @@ struct TopPicksChild: View {
                         .font(.title3)
                 }
                 
-                ScrollView{
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 20), count: 2),spacing: 15){
-                       ForEach(dataArray) { profile in
-                                    Button{
-                                        withAnimation(.spring()){
-                                            selectedItem = profile
-                                            show.toggle()
+                if self.verticalView {
+                    ScrollView{
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 10), count: 2),spacing: 10){
+                           ForEach(dataArray) { profile in
+                                        Button{
+                                            withAnimation(.spring()){
+                                                self.selectedTabSubView = TopPicksLikesSubView.likesGivenTab
+                                                selectedItem = profile
+                                                show.toggle()
+                                            }
+                                        } label : {
+                                            MiniCardView(singleProfile: receivedGivenEliteModel.getProfile(profileId:profile.id!,
+                                                                                                           selectedTab:selectedTab,
+                                                                                                           selectedTabSubView:selectedTabSubView),
+                                                         animation: animation,
+                                                         geometry:geometry,
+                                                         miniCardWidth:geometry.size.width/2.2,
+                                                         miniCardHeight:geometry.size.height/3)
                                         }
-                                    } label : {
-                                        MiniCardView(singleProfile: receivedGivenEliteModel.getProfile(profileId:profile.id!,selectedTab:selectedTab),
-                                                     animation: animation,
-                                                     geometry:geometry)
-                                    }
-                            
+                                
+                                }
                             }
-                        }
-                    .padding()
+                        .padding()
+                        
+                    }
+                } else {
+                    ScrollView(.horizontal) {
+                    LazyHGrid(rows:  Array(repeating: GridItem(.flexible(),spacing: 10), count: 1), spacing: 10) {
+                        ForEach(dataArray) { profile in
+                                     Button{
+                                         withAnimation(.spring()){
+                                             self.selectedTabSubView = TopPicksLikesSubView.superLikesGivenTab
+                                             selectedItem = profile
+                                             show.toggle()
+                                         }
+                                     } label : {
+                                         MiniCardView(singleProfile: receivedGivenEliteModel.getProfile(profileId:profile.id!,
+                                                                                                        selectedTab:selectedTab,
+                                                                                                        selectedTabSubView:selectedTabSubView),
+                                                      animation: animation,
+                                                      geometry:geometry,
+                                                      miniCardWidth:geometry.size.width/3.5,
+                                                      miniCardHeight:geometry.size.height/4.5)
+                                     }
+                             
+                             }
+                    }
                 }
+                }
+                
             }
         }
         

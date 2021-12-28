@@ -14,7 +14,8 @@ struct LikesTopPicksHome: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
-    @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesGive, .elitePicks]
+    @State var selectedTabSubView: TopPicksLikesSubView = .likesGivenTab
+    @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesAndLikesGiven, .elitePicks]
     @State var selectedItem : CardProfileWithPhotos? = nil
     
     @State var show = false
@@ -55,34 +56,58 @@ struct LikesTopPicksHome: View {
                                       show: $show,
                                       dataArray: $receivedGivenEliteModel.superLikesReceivedPhotos,
                                       selectedTab: selectedTab,
+                                      selectedTabSubView:Binding.constant(TopPicksLikesSubView.none),
                                       stringNoDataPresent: "You have no Super Likes yet, Keep Swiping!!",
                                       viewHeadText: "Super likes received by you",
                                       viewHeadIcon: "star.fill",
                                       iconColor:Color("gold-star"),
+                                      verticalView:true,
                                       geometry:geometry)
                             .environmentObject(receivedGivenEliteModel)
                         
-                        case .superLikesGive:
+                        case .superLikesAndLikesGiven:
+                        VStack {
                             TopPicksChild(selectedItem: $selectedItem,
                                   show: $show,
                                   dataArray: $receivedGivenEliteModel.superLikesGivenPhotos,
                                   selectedTab: selectedTab,
-                                  stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
+                                  selectedTabSubView:$selectedTabSubView,
+                                  stringNoDataPresent: "You haven't given any Super Likes yet, Keep Swiping!!",
                                   viewHeadText: "Super likes given by you",
+                                  viewHeadIcon: "star.fill",
+                                  iconColor:Color("gold-star"),
+                                  verticalView:false,
+                                  geometry:geometry)
+                                .padding(.horizontal,10)
+                                .environmentObject(receivedGivenEliteModel)
+                                
+                            
+                            TopPicksChild(selectedItem: $selectedItem,
+                                  show: $show,
+                                  dataArray: $receivedGivenEliteModel.likesGivenPhotos,
+                                  selectedTab: selectedTab,
+                                  selectedTabSubView:$selectedTabSubView,
+                                  stringNoDataPresent: "You haven't given any Likes yet, Keep Swiping!!",
+                                  viewHeadText: "Likes given by you",
                                   viewHeadIcon: "heart.fill",
                                   iconColor:Color.red,
+                                  verticalView:true,
                                   geometry:geometry)
                                 .environmentObject(receivedGivenEliteModel)
+                                
+                        }
                         
                         case .elitePicks:
                             TopPicksChild(selectedItem: $selectedItem,
                               show: $show,
-                              dataArray: $receivedGivenEliteModel.elitesReceivedPhotos,
+                              dataArray: $receivedGivenEliteModel.elitesPhotos,
                               selectedTab: selectedTab,
+                              selectedTabSubView:Binding.constant(TopPicksLikesSubView.none),
                               stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
-                              viewHeadText: "Elite picks you",
+                              viewHeadText: "Elite picks for you",
                               viewHeadIcon: "bolt.fill",
                               iconColor:Color.yellow,
+                              verticalView:true,
                               geometry:geometry)
                             .environmentObject(receivedGivenEliteModel)
                     }
@@ -97,7 +122,7 @@ struct LikesTopPicksHome: View {
                     if let selectedItemVar = selectedItem {
                         ZStack {
                             // Open the pop up window which expand every Mini Card
-                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,selectedTab: selectedTab),
+                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,selectedTab: selectedTab, selectedTabSubView:selectedTabSubView),
                                    show: $show,
                                    animation: animation)
                             
@@ -131,17 +156,28 @@ struct LikesTopPicksHome: View {
                                         }
                                         .padding(.bottom, 30)
                                     
-                                    case .superLikesGive:
-                                        HStack(alignment:.center) {
-                                            SuperLikeButton(profileId:selectedItemVar.id!,
-                                                            show: $show,
-                                                            showingAlert:$showingAlert,
-                                                            alertMessage:$alertMessage,
-                                                            selectedTab:selectedTab)
-                                                .environmentObject(receivedGivenEliteModel)
-                                        }
-                                        .padding(.bottom,30)
+                                    case .superLikesAndLikesGiven:
                                     
+                                        switch selectedTabSubView {
+                                            case .likesGivenTab:
+                                                HStack(alignment:.center) {
+                                                    SuperLikeButton(profileId:selectedItemVar.id!,
+                                                                    show: $show,
+                                                                    showingAlert:$showingAlert,
+                                                                    alertMessage:$alertMessage,
+                                                                    selectedTab:selectedTab)
+                                                        .environmentObject(receivedGivenEliteModel)
+                                                }
+                                                .padding(.bottom,30)
+                                            
+                                            case .superLikesGivenTab:
+                                                Text("")
+                                            
+                                            case .none:
+                                                Text("")
+                                        }
+                                    
+                                        
                                     case .elitePicks:
                                         HStack(alignment:.center) {
                                             DislikeButton(profileId:selectedItemVar.id!,

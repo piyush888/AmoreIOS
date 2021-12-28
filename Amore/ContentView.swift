@@ -91,15 +91,9 @@ struct ContentView: View {
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                                             receivedGivenEliteModel.getLikesReceivedData()
                                             receivedGivenEliteModel.getLikesGivenData()
-                                            receivedGivenEliteModel.elitesReceivedData()
+                                            receivedGivenEliteModel.getSuperLikesGivenData()
+                                            receivedGivenEliteModel.elitesData()
                                         }
-                                    // To Test MoreInfo, comment out HomeView and uncomment block below
-        //                            MoreInfoForBetterMatch()
-        //                                .environmentObject(profileModel)
-        //                                .onAppear {
-        //                                    profileModel.getUserProfile()
-        //                                    profileModel.checkMinNumOfPhotosUploaded()
-        //                                }
                                 }
                                 // Else get location permission
                                 else {

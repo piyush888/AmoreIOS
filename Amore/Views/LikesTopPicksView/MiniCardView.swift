@@ -12,6 +12,8 @@ struct MiniCardView: View {
     @Binding var singleProfile: CardProfileWithPhotos
     var animation: Namespace.ID
     @State var geometry: GeometryProxy
+    @State var miniCardWidth: CGFloat
+    @State var miniCardHeight: CGFloat
     
     var body: some View {
         
@@ -23,8 +25,8 @@ struct MiniCardView: View {
                         if self.singleProfile.image1?.imageURL != nil  {
                             CardImages(profileImage: $singleProfile.image1,
                                        photoStruct: $singleProfile.photo1.boundPhoto,
-                                       width:geometry.size.width/2.2,
-                                       height:geometry.size.height/3,
+                                       width:miniCardWidth,
+                                       height:miniCardHeight,
                                        testing:false)
                                     .matchedGeometryEffect(id: "image\(singleProfile.id.bound)", in: animation)
                                     .cornerRadius(10)
@@ -35,10 +37,11 @@ struct MiniCardView: View {
                                     VStack(alignment:.leading, spacing:0)  {
                                         HStack {
                                             Text("\(singleProfile.firstName.bound)")
-                                                .font(.headline)
+                                                .font(.caption)
                                                 .bold()
                                             
                                             Text("\(singleProfile.age.boundInt)")
+                                                .font(.caption2)
                                                 .fontWeight(.light)
                                         }
                                     }
