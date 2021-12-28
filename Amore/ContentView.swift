@@ -89,8 +89,8 @@ struct ContentView: View {
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
                                             profileModel.getLocationOnce()
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
-                                            receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getLikesReceivedData()
+                                            receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.elitesReceivedData()
                                         }
                                     // To Test MoreInfo, comment out HomeView and uncomment block below

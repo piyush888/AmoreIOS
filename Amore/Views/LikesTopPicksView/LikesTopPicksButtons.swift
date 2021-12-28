@@ -12,13 +12,20 @@ struct LikeButton: View {
     
     @State var profileId: String
     @Binding var show: Bool
+    @Binding var showingAlert: Bool
+    @Binding var alertMessage: String
+    @State var selectedTab: TopPicksLikesView
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     var body: some View {
         Button {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
+                self.alertMessage = "Failed to send a like to user, try again"
+                self.showingAlert = true
                 return
             }, onSuccess: {
-                self.show = true
+                self.show = false
+                receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
             }, swipedUserId: self.profileId,
             swipeInfo: AllCardsView.LikeDislike.like)
         } label: {
@@ -38,13 +45,20 @@ struct SuperLikeButton: View {
     
     @State var profileId: String
     @Binding var show: Bool
+    @Binding var showingAlert: Bool
+    @Binding var alertMessage: String
+    @State var selectedTab: TopPicksLikesView
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     var body: some View {
         Button {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
+                self.alertMessage = "Failed to send a dislike to user, try again"
+                self.showingAlert = true
                 return
             }, onSuccess: {
-                self.show = true
+                self.show = false
+                receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
             }, swipedUserId: self.profileId,
             swipeInfo: AllCardsView.LikeDislike.superlike)
         } label: {
@@ -64,14 +78,21 @@ struct DislikeButton: View {
     
     @State var profileId: String
     @Binding var show: Bool
+    @Binding var showingAlert: Bool
+    @Binding var alertMessage: String
+    @State var selectedTab: TopPicksLikesView
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     var body: some View {
         
         Button {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
+                self.alertMessage = "Failed to send a superlike to user, try again"
+                self.showingAlert = true
                 return
             }, onSuccess: {
-                self.show = true
+                self.show = false
+                receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
             }, swipedUserId: self.profileId,
             swipeInfo: AllCardsView.LikeDislike.dislike)
         } label: {

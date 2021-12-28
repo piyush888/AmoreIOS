@@ -12,7 +12,7 @@ struct TopPicksChild: View {
     @Namespace var animation
     @Binding var selectedItem : CardProfileWithPhotos?
     @Binding var show: Bool
-    @State var dataArray: [CardProfileWithPhotos]
+    @Binding var dataArray: [CardProfileWithPhotos]
     @State var selectedTab: TopPicksLikesView
     @State var stringNoDataPresent: String
     @State var viewHeadText: String

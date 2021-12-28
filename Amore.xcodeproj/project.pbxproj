@@ -149,7 +149,7 @@
 		E2DBC03C272DFCB0000630F5 /* GoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC03B272DFCB0000630F5 /* GoldCard.swift */; };
 		E2DBFE27275EC05200250686 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBFE26275EC05200250686 /* RequestData.swift */; };
 		E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176C277A804300527E24 /* TopPicksChild.swift */; };
-		E2E0176F277A859C00527E24 /* LikesTopPicksButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176E277A859C00527E24 /* LikesTopPicksButton.swift */; };
+		E2E0176F277A859C00527E24 /* LikesTopPicksButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -314,7 +314,7 @@
 		E2DBC03B272DFCB0000630F5 /* GoldCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldCard.swift; sourceTree = "<group>"; };
 		E2DBFE26275EC05200250686 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		E2E0176C277A804300527E24 /* TopPicksChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksChild.swift; sourceTree = "<group>"; };
-		E2E0176E277A859C00527E24 /* LikesTopPicksButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksButton.swift; sourceTree = "<group>"; };
+		E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksButtons.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 				E2347133271DC4C30006F336 /* CardDetail.swift */,
 				E2347135271DC4E50006F336 /* MiniCardView.swift */,
 				E2E0176C277A804300527E24 /* TopPicksChild.swift */,
-				E2E0176E277A859C00527E24 /* LikesTopPicksButton.swift */,
+				E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */,
 			);
 			path = LikesTopPicksView;
 			sourceTree = "<group>";
@@ -902,7 +902,7 @@
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
 				E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */,
-				E2E0176F277A859C00527E24 /* LikesTopPicksButton.swift in Sources */,
+				E2E0176F277A859C00527E24 /* LikesTopPicksButtons.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,
 				E273C31C27415FEA00AA3359 /* CardImages.swift in Sources */,
 				E268A46A274603CD0045F264 /* Completed.swift in Sources */,

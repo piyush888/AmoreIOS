@@ -63,21 +63,32 @@ class ReceivedGivenEliteModel: ObservableObject {
                 } set: { newCard in
                     self.superLikesReceivedPhotos_Dict[profileId] = newCard
                 }
-            
             case .superLikesGive:
                 return Binding {
                     self.superLikesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
                 } set: { newCard in
                     self.superLikesGivenPhotos_Dict[profileId] = newCard
                 }
-
             case .elitePicks:
                 return Binding {
                     self.elitesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
                 } set: { newCard in
                     self.elitesReceivedPhotos_Dict[profileId] = newCard
                 }
-            
+        }
+    }
+    
+    func removeProfileFromArray(profileId:String, selectedTab:TopPicksLikesView) {
+        switch selectedTab {
+        case .likesReceived:
+            self.superLikesReceivedPhotos.removeAll { $0.id == profileId }
+            self.superLikesReceivedPhotos_Dict.removeValue(forKey: profileId)
+        case .superLikesGive:
+            // No need to delete data
+            break
+        case .elitePicks:
+            self.elitesReceivedPhotos.removeAll { $0.id == profileId }
+            self.elitesReceivedPhotos_Dict.removeValue(forKey: profileId)
         }
     }
     

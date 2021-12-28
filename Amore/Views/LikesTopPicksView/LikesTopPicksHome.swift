@@ -19,7 +19,8 @@ struct LikesTopPicksHome: View {
     
     @State var show = false
     @State var showingAlert: Bool = false
-    
+    @State var alertMessage: String = ""
+        
     var body: some View {
         
         GeometryReader { geometry in
@@ -52,7 +53,7 @@ struct LikesTopPicksHome: View {
                         case .likesReceived:
                             TopPicksChild(selectedItem: $selectedItem,
                                       show: $show,
-                                      dataArray: receivedGivenEliteModel.superLikesReceivedPhotos,
+                                      dataArray: $receivedGivenEliteModel.superLikesReceivedPhotos,
                                       selectedTab: selectedTab,
                                       stringNoDataPresent: "You have no Super Likes yet, Keep Swiping!!",
                                       viewHeadText: "Super likes received by you",
@@ -64,7 +65,7 @@ struct LikesTopPicksHome: View {
                         case .superLikesGive:
                             TopPicksChild(selectedItem: $selectedItem,
                                   show: $show,
-                                  dataArray: receivedGivenEliteModel.superLikesGivenPhotos,
+                                  dataArray: $receivedGivenEliteModel.superLikesGivenPhotos,
                                   selectedTab: selectedTab,
                                   stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
                                   viewHeadText: "Super likes given by you",
@@ -76,7 +77,7 @@ struct LikesTopPicksHome: View {
                         case .elitePicks:
                             TopPicksChild(selectedItem: $selectedItem,
                               show: $show,
-                              dataArray: receivedGivenEliteModel.elitesReceivedPhotos,
+                              dataArray: $receivedGivenEliteModel.elitesReceivedPhotos,
                               selectedTab: selectedTab,
                               stringNoDataPresent: "You have not given any Likes yet, Keep Swiping!!",
                               viewHeadText: "Elite picks you",
@@ -105,25 +106,66 @@ struct LikesTopPicksHome: View {
                                 switch selectedTab {
                                     case .likesReceived:
                                         HStack(alignment:.center) {
-                                            DislikeButton(profileId:selectedItemVar.id!, show: $show)
-                                            SuperLikeButton(profileId:selectedItemVar.id!, show: $show)
-                                            LikeButton(profileId: selectedItemVar.id!, show: $show)
+                                            
+                                            DislikeButton(profileId:selectedItemVar.id!,
+                                                          show: $show,
+                                                          showingAlert:$showingAlert,
+                                                          alertMessage:$alertMessage,
+                                                          selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
+                                            
+                                            SuperLikeButton(profileId:selectedItemVar.id!,
+                                                            show: $show,
+                                                            showingAlert:$showingAlert,
+                                                            alertMessage:$alertMessage,
+                                                            selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
+                                            
+                                            LikeButton(profileId: selectedItemVar.id!,
+                                                       show: $show,
+                                                       showingAlert:$showingAlert,
+                                                       alertMessage:$alertMessage,
+                                                       selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
+                                            
                                         }
                                         .padding(.bottom, 30)
                                     
                                     case .superLikesGive:
                                         HStack(alignment:.center) {
-                                            SuperLikeButton(profileId:selectedItemVar.id!, show: $show)
+                                            SuperLikeButton(profileId:selectedItemVar.id!,
+                                                            show: $show,
+                                                            showingAlert:$showingAlert,
+                                                            alertMessage:$alertMessage,
+                                                            selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
                                         }
                                         .padding(.bottom,30)
                                     
                                     case .elitePicks:
                                         HStack(alignment:.center) {
-                                            DislikeButton(profileId:selectedItemVar.id!, show: $show)
-                                            SuperLikeButton(profileId:selectedItemVar.id!, show: $show)
-                                            LikeButton(profileId: selectedItemVar.id!, show: $show)
+                                            DislikeButton(profileId:selectedItemVar.id!,
+                                                          show: $show,
+                                                          showingAlert:$showingAlert,
+                                                          alertMessage:$alertMessage,
+                                                          selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
+                                            
+                                            SuperLikeButton(profileId:selectedItemVar.id!,
+                                                            show: $show,
+                                                            showingAlert:$showingAlert,
+                                                            alertMessage:$alertMessage,
+                                                            selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
+                                            
+                                            LikeButton(profileId: selectedItemVar.id!,
+                                                       show: $show,
+                                                       showingAlert:$showingAlert,
+                                                       alertMessage:$alertMessage,
+                                                       selectedTab:selectedTab)
+                                                .environmentObject(receivedGivenEliteModel)
                                         }
-                                    .padding(.bottom, 30)
+                                        .padding(.bottom, 30)
                                 }
                             }
                             
@@ -135,7 +177,7 @@ struct LikesTopPicksHome: View {
             .alert(isPresented: $showingAlert) {
                    Alert(
                        title: Text(""),
-                       message: Text("Action failed, please try again")
+                       message: Text(self.alertMessage)
                    )
             }
             
