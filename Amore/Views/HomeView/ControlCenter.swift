@@ -18,7 +18,7 @@ struct ControlCenter: View {
             
             Image(systemName: "text.bubble.fill")
                 .imageScale(.large)
-                .foregroundColor(controlCenterColor)
+                .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
                 .padding(.horizontal)
                 .onTapGesture {
                     currentPage = .messagingView
@@ -27,7 +27,7 @@ struct ControlCenter: View {
             Spacer()
             Image(systemName: "sparkles")
                 .imageScale(.large)
-                .foregroundColor(controlCenterColor)
+                .foregroundColor(currentPage == .likesTopPicksView ? Color.blue : controlCenterColor)
                 .padding(.horizontal)
                 .onTapGesture {
                     currentPage = .likesTopPicksView
@@ -36,7 +36,7 @@ struct ControlCenter: View {
             Spacer()
             Image(systemName: "bonjour")
                 .imageScale(.large)
-                .foregroundColor(controlCenterColor)
+                .foregroundColor(currentPage == .swipeView ? Color.blue : controlCenterColor)
                 .padding(.horizontal)
                 .onTapGesture {
                     currentPage = .swipeView
@@ -45,7 +45,7 @@ struct ControlCenter: View {
             Spacer()
             Image(systemName: "slider.vertical.3")
                 .imageScale(.large)
-                .foregroundColor(controlCenterColor)
+                .foregroundColor(currentPage == .filterSettingsView ? Color.blue : controlCenterColor)
                 .padding(.horizontal)
                 .onTapGesture {
                     currentPage = .filterSettingsView
@@ -54,7 +54,7 @@ struct ControlCenter: View {
             Spacer()
             Image(systemName: "person.fill")
                 .imageScale(.large)
-                .foregroundColor(controlCenterColor)
+                .foregroundColor(currentPage == .userSettingsView ? Color.blue : controlCenterColor)
                 .padding(.horizontal)
                 .onTapGesture {
                     currentPage = .userSettingsView
