@@ -66,7 +66,7 @@ struct ReportingIssuesCard: View {
                         .foregroundColor(Color.black)
                     
                     Button {
-                        
+                        // call this function to report user, if successfully remove the card from deck
                         reportActivityModel.reportUserWithReason(profileBeingReportedId:profileId,
                                                                  reason:selectedReasoning,
                                                                  description:reportUserDescription.bound,

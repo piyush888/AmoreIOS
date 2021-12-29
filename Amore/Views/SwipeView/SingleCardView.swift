@@ -44,6 +44,18 @@ struct SingleCardView: View {
         }
     }
     
+    func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+            FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
+                return
+            }, onSuccess: {
+                
+            }, swipedUserId: self.singleProfile.id, swipeInfo: swipeInfo)
+            self.onRemove(self.singleProfile)
+        })
+    }
+    
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -71,13 +83,8 @@ struct SingleCardView: View {
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-                                FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                                    return
-                                }, onSuccess: {
-                                    
-                                }, swipedUserId: self.singleProfile.id, swipeInfo: self.dragSwipeStatus)
+                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus)
                                 cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
-                                self.onRemove(self.singleProfile)
                             } else {
                                 self.translation = .zero
                             }
@@ -86,40 +93,18 @@ struct SingleCardView: View {
                 .onChange(of: self.swipeStatus) { newValue in
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-                            FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                                return
-                            }, onSuccess: {
-                                
-                            }, swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
-                            self.onRemove(self.singleProfile)
-                        })
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
+                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-                            FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                                return
-                            }, onSuccess: {
-                                
-                            }, swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
-                            self.onRemove(self.singleProfile)
-                        })
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
+                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
                     }
                     else if newValue == AllCardsView.LikeDislike.superlike {
                         self.translation = .init(width: 0, height: 50)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
-//                            FirestoreServices.storeLikesDislikes(swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
-                            FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                                return
-                            }, onSuccess: {
-                                
-                            }, swipedUserId: self.singleProfile.id, swipeInfo: self.swipeStatus)
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
-                            self.onRemove(self.singleProfile)
-                        })
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
+                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
                     }
                 }
                 .environmentObject(profileModel)
