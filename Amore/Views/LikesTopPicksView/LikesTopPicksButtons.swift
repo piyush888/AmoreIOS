@@ -52,15 +52,27 @@ struct SuperLikeButton: View {
     
     var body: some View {
         Button {
-            FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                self.alertMessage = "Failed to send a dislike to user, try again"
-                self.showingAlert = true
-                return
-            }, onSuccess: {
-                self.show = false
-                receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
-            }, swipedUserId: self.profileId,
-            swipeInfo: AllCardsView.LikeDislike.superlike)
+            if selectedTab == TopPicksLikesView.superLikesAndLikesGiven {
+                FirestoreServices.upgradeLikeToSuperlike(apiToBeUsed: "/upgradeliketosuperlike", onFailure: {
+                    self.alertMessage = "Failed to convert like to superlike, try again"
+                    self.showingAlert = true
+                    return
+                }, onSuccess: {
+                    self.show = false
+                    receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
+                }, swipedUserId: self.profileId, swipeInfo: AllCardsView.LikeDislike.superlike)
+            }
+            else {
+                FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
+                    self.alertMessage = "Failed to send a dislike to user, try again"
+                    self.showingAlert = true
+                    return
+                }, onSuccess: {
+                    self.show = false
+                    receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
+                }, swipedUserId: self.profileId,
+                swipeInfo: AllCardsView.LikeDislike.superlike)
+            }
         } label: {
             Image(systemName: "star.circle.fill")
                 .resizable()

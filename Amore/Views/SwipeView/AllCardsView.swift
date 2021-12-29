@@ -17,6 +17,7 @@ struct AllCardsView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     @State var curSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
@@ -88,6 +89,10 @@ struct AllCardsView: View {
                         self.cardSwipeDone = true
                         cardProfileModel.areMoreCardsNeeded()
                         print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
+                        receivedGivenEliteModel.getLikesReceivedData()
+                        receivedGivenEliteModel.getLikesGivenData()
+                        receivedGivenEliteModel.getSuperLikesGivenData()
+                        receivedGivenEliteModel.elitesData()
                     }
                     
                     VStack {

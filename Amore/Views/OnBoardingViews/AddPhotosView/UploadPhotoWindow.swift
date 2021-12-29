@@ -215,7 +215,7 @@ struct UploadPhotoWindow: View {
             }
             else if self.activeSheet == .cropImage {
                 // Option to Crop the image
-                ImageCropper(image: self.$photoStruct.image, visible: self.$showSheet, done: self.imageCropped)
+                ImageCropper(image: self.$photoStruct.downsampledImage, visible: self.$showSheet, done: self.imageCropped)
                     .edgesIgnoringSafeArea(.all)
             }
         }

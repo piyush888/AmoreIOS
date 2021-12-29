@@ -21,7 +21,7 @@ struct LikeDislikeSuperLike: View {
                 if cardProfileModel.lastSwipedCard != nil && cardProfileModel.lastSwipeInfo != nil {
                     cardProfileModel.allCardsWithPhotosDeck.append(cardProfileModel.lastSwipedCard!)
                     cardProfileModel.cardsDictionary[cardProfileModel.lastSwipedCard!.id!] = cardProfileModel.lastSwipedCard!
-                    FirestoreServices.undoLikeDislikeFirestore(swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
+                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {}, swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
                     cardProfileModel.lastSwipedCard = nil
                     cardProfileModel.lastSwipeInfo = nil
                 }
