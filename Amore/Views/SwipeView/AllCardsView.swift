@@ -89,10 +89,6 @@ struct AllCardsView: View {
                         self.cardSwipeDone = true
                         cardProfileModel.areMoreCardsNeeded()
                         print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
-                        receivedGivenEliteModel.getLikesReceivedData()
-                        receivedGivenEliteModel.getLikesGivenData()
-                        receivedGivenEliteModel.getSuperLikesGivenData()
-                        receivedGivenEliteModel.elitesData()
                     }
                     
                     VStack {

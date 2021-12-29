@@ -23,6 +23,8 @@ struct HomeView: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     
+    @State var selectedTab: TopPicksLikesView = .likesReceived
+    
     func checkIfDataIsComing() {
         if (cardProfileModel.timeOutRetriesCount > 4) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
             serviceErrorView = .serverErrorView
@@ -42,7 +44,7 @@ struct HomeView: View {
                                         .environmentObject(streamModel)
                                     
                                 case .likesTopPicksView:
-                                LikesTopPicksHome()
+                                LikesTopPicksHome(selectedTab:$selectedTab)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         
@@ -61,6 +63,7 @@ struct HomeView: View {
                                         .environmentObject(filterModel)
                                         .onChange(of: filterModel.filterData) { _ in
                                             print("On change for filter triggered")
+                                            filterModel.updateFilter()
                                         }
                                     
                                 case .userSettingsView:

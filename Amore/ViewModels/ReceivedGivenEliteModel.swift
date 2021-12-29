@@ -110,7 +110,7 @@ class ReceivedGivenEliteModel: ObservableObject {
             case .superLikesAndLikesGiven:
                 // transfer from likes to superlikes..
                 // to do make similar replacement on backend
-            self.superLikesGivenPhotos.insert(self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos(),at:0)
+                self.superLikesGivenPhotos.insert(self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos(),at:0)
                 self.superLikesGivenPhotos_Dict[profileId] = self.likesGivenPhotos_Dict[profileId]
                 // You only need to remove from Likes Given and move it to SuperLikes Given
                 self.likesGivenPhotos.removeAll { $0.id == profileId }

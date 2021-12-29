@@ -36,6 +36,7 @@ struct FilterSettings: View {
                 CareerFilter(careerPreference: $filterModel.filterData.careerPreference.boundStringArray)
                 EducationFilter(educationPreference: $filterModel.filterData.educationPreference.bound)
                 RaisedInFilter(countryPreference: $filterModel.filterData.countryPreference.bound)
+                RadiusFilter(radiusDistance: $filterModel.filterData.radiusDistance.boundCGFloat)
                 
                 Spacer()
              

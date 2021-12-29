@@ -27,6 +27,25 @@ extension Optional where Wrapped == String {
     }
 }
 
+extension Optional where Wrapped == CGFloat {
+    var _boundCGFloat: CGFloat? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var boundCGFloat: CGFloat {
+        get {
+            return _boundCGFloat ?? 0.0
+        }
+        set {
+            _boundCGFloat = newValue.isFinite ? newValue : nil
+        }
+    }
+}
+
 extension Optional where Wrapped == Bool {
     var _boundBool: Bool? {
         get {

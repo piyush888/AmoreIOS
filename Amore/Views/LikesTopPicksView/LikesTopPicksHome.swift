@@ -13,7 +13,7 @@ struct LikesTopPicksHome: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
-    @State var selectedTab: TopPicksLikesView = .likesReceived
+    @Binding var selectedTab: TopPicksLikesView
     @State var selectedTabSubView: TopPicksLikesSubView = .likesGivenTab
     @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesAndLikesGiven, .elitePicks]
     @State var selectedItem : CardProfileWithPhotos? = nil

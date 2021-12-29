@@ -85,6 +85,7 @@
 		E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
+		E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2530F59277CB0760040CAB2 /* RadiusFilter.swift */; };
 		E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */; };
 		E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */; };
 		E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4652745E6520045F264 /* QuestionaireTemplate.swift */; };
@@ -252,6 +253,7 @@
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
+		E2530F59277CB0760040CAB2 /* RadiusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusFilter.swift; sourceTree = "<group>"; };
 		E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoForBetterMatch.swift; sourceTree = "<group>"; };
 		E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionForMoreInfo.swift; sourceTree = "<group>"; };
 		E268A4652745E6520045F264 /* QuestionaireTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireTemplate.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */,
 				1BFCBAE02721BBCA0002BA67 /* EducationFilter.swift */,
 				1BFCBAE22721BD260002BA67 /* RaisedInFilter.swift */,
+				E2530F59277CB0760040CAB2 /* RadiusFilter.swift */,
 			);
 			path = FilterSettingsView;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2DBC021272B311B000630F5 /* AmorePlatinum.swift in Sources */,
+				E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */,
 				E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */,
 				1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
