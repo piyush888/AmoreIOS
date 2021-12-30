@@ -10,6 +10,7 @@ import SwiftUI
 struct LikeDislikeSuperLike: View {
     
     @EnvironmentObject var cardProfileModel: CardProfileModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @Binding var curSwipeStatus: AllCardsView.LikeDislike
     @Binding var cardSwipeDone: Bool
     
@@ -22,6 +23,7 @@ struct LikeDislikeSuperLike: View {
                     cardProfileModel.allCardsWithPhotosDeck.append(cardProfileModel.lastSwipedCard!)
                     cardProfileModel.cardsDictionary[cardProfileModel.lastSwipedCard!.id!] = cardProfileModel.lastSwipedCard!
                     FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {}, swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
+                    receivedGivenEliteModel.rewindAction(swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
                     cardProfileModel.lastSwipedCard = nil
                     cardProfileModel.lastSwipeInfo = nil
                 }

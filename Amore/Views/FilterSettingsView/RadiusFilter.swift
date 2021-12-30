@@ -10,12 +10,13 @@ import SwiftUI
 
 struct RadiusFilter: View {
     
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     @Binding var radiusDistance: CGFloat
     
     var body: some View {
         
             NavigationLink(
-              destination: DistanceSlider(radiusDistance:$radiusDistance),
+                destination: DistanceSlider(radiusDistance:$radiusDistance).environmentObject(cardProfileModel),
               label: {
                   ZStack{
                   CommonContainer()
@@ -38,6 +39,7 @@ struct RadiusFilter: View {
 
 struct DistanceSlider: View {
     
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     @State private var appearance: Float = 4
     @Binding var radiusDistance: CGFloat
     @State private var isEditing = false
@@ -51,6 +53,7 @@ struct DistanceSlider: View {
                step: 1,
                onEditingChanged: { editing in
                    radiusDistance = distanceOptions[Int(appearance)-1]
+                   cardProfileModel.filterRadius = radiusDistance
                }
            )
             Text("\(String(format: "Amore Radius: %.0f", radiusDistance)) km")

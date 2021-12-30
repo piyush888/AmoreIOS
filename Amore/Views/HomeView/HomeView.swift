@@ -61,6 +61,7 @@ struct HomeView: View {
                                 case .filterSettingsView:
                                     FilterSettings()
                                         .environmentObject(filterModel)
+                                        .environmentObject(cardProfileModel)
                                         .onChange(of: filterModel.filterData) { _ in
                                             print("On change for filter triggered")
                                             filterModel.updateFilter()

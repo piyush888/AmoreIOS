@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreLocation
-
+import CoreGraphics
 
 class CardProfileModel: ObservableObject {
     
@@ -24,6 +24,7 @@ class CardProfileModel: ObservableObject {
     @Published var adminAuthModel = AdminAuthenticationViewModel()
     @Published var lastSwipedCard: CardProfileWithPhotos? = nil
     @Published var lastSwipeInfo: AllCardsView.LikeDislike? = nil
+    @Published var filterRadius: CGFloat? = 2
     
     var apiURL = "http://127.0.0.1:5000"
     
@@ -91,7 +92,7 @@ class CardProfileModel: ObservableObject {
     }
     
     // Call this function to fetch profiles from the backend server
-    func fetchProfilesWithinRadius(numberOfProfiles:Int, radius: Int, latitude: Double, longitude: Double) {
+    func fetchProfilesWithinRadius(numberOfProfiles:Int, latitude: Double, longitude: Double) {
         profilesBeingFetched = true
         // fetchprofiles is the api where you can profiles
         guard let url = URL(string: self.apiURL + "/fetchprofileswithinradius") else { return }
@@ -100,7 +101,7 @@ class CardProfileModel: ObservableObject {
                                    "idsAlreadyInDeck":allCardsWithPhotosDeck.map({ (card:CardProfileWithPhotos)-> String in card.id! }),
                                    "latitude": latitude,
                                    "longitude": longitude,
-                                   "radius": radius]
+                                   "radius": filterRadius as Any]
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -141,7 +142,7 @@ class CardProfileModel: ObservableObject {
                             if self.timeOutRetriesCount < 3 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
-                                self.fetchProfilesWithinRadius(numberOfProfiles: 10, radius: radius, latitude: latitude, longitude: longitude)
+                                self.fetchProfilesWithinRadius(numberOfProfiles: 10, latitude: latitude, longitude: longitude)
                             }
                             self.profilesBeingFetched = false
                         }

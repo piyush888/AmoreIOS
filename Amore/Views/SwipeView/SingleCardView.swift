@@ -13,6 +13,7 @@ struct SingleCardView: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
@@ -44,12 +45,13 @@ struct SingleCardView: View {
         }
     }
     
-    func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike) {
+    func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike, onSuccess: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                 return
             }, onSuccess: {
-                
+                onSuccess()
+                receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile, swipeInfo: cardProfileModel.lastSwipeInfo ?? AllCardsView.LikeDislike.none)
             }, swipedUserId: self.singleProfile.id, swipeInfo: swipeInfo)
             self.onRemove(self.singleProfile)
         })
@@ -83,8 +85,9 @@ struct SingleCardView: View {
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus)
-                                cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
+                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {
+                                    cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
+                                }
                             } else {
                                 self.translation = .zero
                             }
@@ -93,18 +96,21 @@ struct SingleCardView: View {
                 .onChange(of: self.swipeStatus) { newValue in
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
-                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
+                        self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {
+                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
+                        }
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = .init(width: -100, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
-                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
+                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
+                        }
                     }
                     else if newValue == AllCardsView.LikeDislike.superlike {
                         self.translation = .init(width: 0, height: 50)
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus)
-                        cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
+                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
+                        }
                     }
                 }
                 .environmentObject(profileModel)

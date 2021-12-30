@@ -25,6 +25,7 @@ struct LikeButton: View {
                 return
             }, onSuccess: {
                 self.show = false
+                receivedGivenEliteModel.addProfileToArray(profileId: profileId, selectedTab: selectedTab, swipeInfo: AllCardsView.LikeDislike.like)
                 receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
             }, swipedUserId: self.profileId,
             swipeInfo: AllCardsView.LikeDislike.like)
@@ -59,16 +60,18 @@ struct SuperLikeButton: View {
                     return
                 }, onSuccess: {
                     self.show = false
+                    receivedGivenEliteModel.addProfileToArray(profileId: profileId, selectedTab: selectedTab, swipeInfo: AllCardsView.LikeDislike.superlike)
                     receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
                 }, swipedUserId: self.profileId, swipeInfo: AllCardsView.LikeDislike.superlike)
             }
             else {
                 FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                    self.alertMessage = "Failed to send a dislike to user, try again"
+                    self.alertMessage = "Failed to send a superlike to user, try again"
                     self.showingAlert = true
                     return
                 }, onSuccess: {
                     self.show = false
+                    receivedGivenEliteModel.addProfileToArray(profileId: profileId, selectedTab: selectedTab, swipeInfo: AllCardsView.LikeDislike.superlike)
                     receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
                 }, swipedUserId: self.profileId,
                 swipeInfo: AllCardsView.LikeDislike.superlike)
@@ -99,11 +102,12 @@ struct DislikeButton: View {
         
         Button {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                self.alertMessage = "Failed to send a superlike to user, try again"
+                self.alertMessage = "Failed to send a dislike to user, try again"
                 self.showingAlert = true
                 return
             }, onSuccess: {
                 self.show = false
+                receivedGivenEliteModel.addProfileToArray(profileId: profileId, selectedTab: selectedTab, swipeInfo: AllCardsView.LikeDislike.dislike)
                 receivedGivenEliteModel.removeProfileFromArray(profileId: profileId, selectedTab: selectedTab)
             }, swipedUserId: self.profileId,
             swipeInfo: AllCardsView.LikeDislike.dislike)

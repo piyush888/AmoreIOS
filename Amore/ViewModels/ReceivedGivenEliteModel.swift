@@ -108,10 +108,10 @@ class ReceivedGivenEliteModel: ObservableObject {
                 self.superLikesReceivedPhotos.removeAll { $0.id == profileId }
                 self.superLikesReceivedPhotos_Dict.removeValue(forKey: profileId)
             case .superLikesAndLikesGiven:
-                // transfer from likes to superlikes..
-                // to do make similar replacement on backend
-                self.superLikesGivenPhotos.insert(self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos(),at:0)
-                self.superLikesGivenPhotos_Dict[profileId] = self.likesGivenPhotos_Dict[profileId]
+//                // transfer from likes to superlikes..
+//                // to do make similar replacement on backend
+//                self.superLikesGivenPhotos.insert(self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos(),at:0)
+//                self.superLikesGivenPhotos_Dict[profileId] = self.likesGivenPhotos_Dict[profileId]
                 // You only need to remove from Likes Given and move it to SuperLikes Given
                 self.likesGivenPhotos.removeAll { $0.id == profileId }
                 self.likesGivenPhotos_Dict.removeValue(forKey: profileId)
@@ -121,8 +121,62 @@ class ReceivedGivenEliteModel: ObservableObject {
             }
     }
     
+    func addProfileToArray(profileId: String, selectedTab:TopPicksLikesView, swipeInfo: AllCardsView.LikeDislike) {
+        switch selectedTab {
+            case .superLikesAndLikesGiven:
+                // transfer from likes to superlikes..
+                // to do make similar replacement on backend
+                self.superLikesGivenPhotos.insert(self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos(),at:0)
+                self.superLikesGivenPhotos_Dict[profileId] = self.likesGivenPhotos_Dict[profileId]
+            case .likesReceived:
+                guard let profileCard = superLikesReceivedPhotos_Dict[profileId] else {return}
+                if swipeInfo == .like {
+                    likesGivenPhotos.insert(profileCard, at: 0)
+                    likesGivenPhotos_Dict[profileId] = profileCard
+                }
+                else if swipeInfo == .superlike {
+                    superLikesGivenPhotos.insert(profileCard, at: 0)
+                    superLikesGivenPhotos_Dict[profileId] = profileCard
+                }
+            case .elitePicks:
+                guard let profileCard = elitesPhotos_Dict[profileId] else {return}
+                if swipeInfo == .like {
+                    likesGivenPhotos.insert(profileCard, at: 0)
+                    likesGivenPhotos_Dict[profileId] = profileCard
+                }
+                else if swipeInfo == .superlike {
+                    superLikesGivenPhotos.insert(profileCard, at: 0)
+                    superLikesGivenPhotos_Dict[profileId] = profileCard
+                }
+            }
+    }
     
+    func addProfileToArrayFromSwipeView(profileCard: CardProfileWithPhotos, swipeInfo: AllCardsView.LikeDislike) {
+        guard let id = profileCard.id else {
+            return
+        }
+        if swipeInfo == .like {
+            likesGivenPhotos.insert(profileCard, at: 0)
+            likesGivenPhotos_Dict[id] = profileCard
+        }
+        else if swipeInfo == .superlike {
+            superLikesGivenPhotos.insert(profileCard, at: 0)
+            superLikesGivenPhotos_Dict[id] = profileCard
+        }
+    }
     
+    func rewindAction(swipedUserId: String?, swipeInfo: AllCardsView.LikeDislike) {
+        if let swipedUserId = swipedUserId {
+            if swipeInfo == .like {
+                likesGivenPhotos.removeAll { $0.id == swipedUserId }
+                likesGivenPhotos_Dict.removeValue(forKey: swipedUserId)
+            }
+            else if swipeInfo == .superlike {
+                superLikesGivenPhotos.removeAll { $0.id == swipedUserId }
+                superLikesGivenPhotos_Dict.removeValue(forKey: swipedUserId)
+            }
+        }
+    }
         
 }
     

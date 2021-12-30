@@ -11,6 +11,7 @@ struct FilterSettings: View {
     
     // User Filter Settings
     @EnvironmentObject var filterModel: FilterModel
+    @EnvironmentObject var cardProfileModel: CardProfileModel
     
     @State var minAgeFilter : Int = 21
     @State var maxAgeFilter : Int = 28
@@ -37,6 +38,7 @@ struct FilterSettings: View {
                 EducationFilter(educationPreference: $filterModel.filterData.educationPreference.bound)
                 RaisedInFilter(countryPreference: $filterModel.filterData.countryPreference.bound)
                 RadiusFilter(radiusDistance: $filterModel.filterData.radiusDistance.boundCGFloat)
+                    .environmentObject(cardProfileModel)
                 
                 Spacer()
              

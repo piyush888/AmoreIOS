@@ -86,6 +86,7 @@ struct ContentView: View {
                                             print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
+                                            cardProfileModel.filterRadius = filterModel.filterData.radiusDistance
                                             cardProfileModel.fetchProfile(numberOfProfiles: 10)
                                             profileModel.getLocationOnce()
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)

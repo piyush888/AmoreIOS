@@ -81,7 +81,7 @@ struct AllCardsView: View {
                             .environmentObject(photoModel)
                             .environmentObject(cardProfileModel)
                             .environmentObject(profileModel)
-                        
+                            .environmentObject(receivedGivenEliteModel)
                         
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
@@ -116,6 +116,7 @@ struct AllCardsView: View {
                         Spacer()
                         LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone)
                             .environmentObject(cardProfileModel)
+                            .environmentObject(receivedGivenEliteModel)
                             .padding(.bottom, 20)
                             .padding(.horizontal, 40)
                             .opacity(1.5)
