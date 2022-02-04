@@ -13,7 +13,7 @@ struct LogInSheetView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var streamModel: StreamViewModel
+//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     var body: some View {
@@ -40,7 +40,7 @@ struct LogInSheetView: View {
             }) {
                 LoginPhoneNumber()
                     .environmentObject(profileModel)
-                    .environmentObject(streamModel)
+//                    .environmentObject(streamModel)
                     .environmentObject(adminAuthenticationModel)
             }
         }

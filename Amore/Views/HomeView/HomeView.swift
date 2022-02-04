@@ -15,7 +15,7 @@ struct HomeView: View {
     
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var streamModel: StreamViewModel
+//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var filterModel: FilterModel
@@ -41,7 +41,7 @@ struct HomeView: View {
                                 
                                 case .messagingView:
                                     ChannelView()
-                                        .environmentObject(streamModel)
+//                                        .environmentObject(streamModel)
                                     
                                 case .likesTopPicksView:
                                 LikesTopPicksHome(selectedTab:$selectedTab)

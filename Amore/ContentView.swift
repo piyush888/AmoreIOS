@@ -14,7 +14,7 @@ struct ContentView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @StateObject var profileModel = ProfileViewModel()
-    @StateObject var streamModel = StreamViewModel()
+//    @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
     @StateObject var filterModel = FilterModel()
@@ -50,7 +50,7 @@ struct ContentView: View {
                 // Signin/Sign Up Button - Mobile Number - OTP Login
                 LogInSheetView()
                     .environmentObject(profileModel)
-                    .environmentObject(streamModel)
+//                    .environmentObject(streamModel)
                     .environmentObject(adminAuthenticationModel)
                 
                 Spacer()
@@ -75,7 +75,7 @@ struct ContentView: View {
                                 if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(profileModel.authorizationStatus) {
                                     HomeView()
                                         .environmentObject(profileModel)
-                                        .environmentObject(streamModel)
+//                                        .environmentObject(streamModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(filterModel)
@@ -125,7 +125,7 @@ struct ContentView: View {
                     else {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
-                            .environmentObject(streamModel)
+//                            .environmentObject(streamModel)
                     }
                 }
             }
