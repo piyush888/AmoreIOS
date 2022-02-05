@@ -14,7 +14,7 @@ import FirebaseAuth
 struct LoginPhoneNumber: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var streamModel: StreamViewModel
+//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     let phoneNumberKit = PhoneNumberKit()
@@ -105,12 +105,12 @@ struct LoginPhoneNumber: View {
 struct LoginPhoneNumber_Previews: PreviewProvider {
     
     static let profileModel = ProfileViewModel()
-    static let streamModel = StreamViewModel()
+//    static let streamModel = StreamViewModel()
     
     static var previews: some View {
 
         LoginPhoneNumber()
             .environmentObject(profileModel)
-            .environmentObject(streamModel)
+//            .environmentObject(streamModel)
     }
 }

@@ -15,4 +15,5 @@ target 'Amore' do
   pod 'StreamChat', '~> 3.1.11'
   pod 'SDWebImageSwiftUI'
   pod 'SwiftUIFontIcon'
+  pod 'FirebaseMessaging'
 end

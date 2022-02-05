@@ -6,73 +6,36 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct ChannelView: View {
     
-    @EnvironmentObject var streamModel: StreamViewModel
-    
     var body: some View {
-        NavigationView {
         
-            VStack {
-            // Message View...
-            ScrollView(.vertical, showsIndicators: false, content: {
+        VStack {
+            Spacer()
+            Text("This is message view")
+            Spacer()
+            
+            Button {
+                let token = Messaging.messaging().fcmToken
+                print("FCM token: \(token ?? "")")
+                // [END log_fcm_reg_token]
                 
-                VStack(spacing: 20){
-                    
-                    if let channels = streamModel.channels{
-                        
-                        ForEach(channels,id: \.channel){listner in
-                            
-                            NavigationLink(
-                                destination: ChatView(listner: listner),
-                                label: {
-                                    ChannelRowView(listner: listner)
-                                })
-                        }
-                    }
-                    else{
-                        // Progress View....
-                        ProgressView()
-                            .padding(.top,20)
-                    }
+                // [START log_iid_reg_token]
+                Messaging.messaging().token { token, error in
+                  if let error = error {
+                    print("Error fetching remote FCM registration token: \(error)")
+                  } else if let token = token {
+                    print("Remote instance ID token: \(token)")
+                  }
                 }
-                .padding()
-            })
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        streamModel.channels = nil
-                        streamModel.fetchAllChannels()
-                    }, label: {
-                        Image(systemName: "arrow.clockwise.circle.fill")
-                    })
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    
-                    Button(action: {
-                        withAnimation{streamModel.createNewChannel.toggle()}
-                    }, label: {
-                        Image(systemName: "square.and.pencil")
-                    })
-                }
-            })
-            .onAppear(perform: {streamModel.fetchAllChannels()})
-            .overlay(
-                ZStack{
-                    
-                    
-                    // New Channel View....
-                    if streamModel.createNewChannel{CreateNewChannel()}
-                    
-                    // Lodaing Screen...
-                    if streamModel.isLoading{LoadingScreen()}
-                }
-            )
+            } label: {
+                Text("Print FCM token")
             }
-            .navigationBarHidden(true)
+            
         }
+        
     }
 }
 

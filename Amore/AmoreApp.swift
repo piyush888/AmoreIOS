@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Firebase
-import StreamChat
+import FirebaseMessaging
 import JWTKit
 
 @main
 struct AmoreApp: App {
     
+    // Makes SwiftUI aware of the newly created app delegate(AppDelegate)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let persistenceController = PersistenceController.shared
     
@@ -34,50 +35,31 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // 1 - Configures app to work with Firebase.
         FirebaseApp.configure()
+        // 2 - Sets how much Firebase will log. Setting this to min reduces the amount of data you’ll see in your debugger.
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
         
-        // Stream Chat SDK
-        // if user already logged in...
-        if logStatus {
-            // Reloading user if logged in...
-            // Verifying if user is already in stream SDk or Not...
-            // for that we need to intialize the stream sdk with JWT Tokens...
-            // AKA known as Authenticatiog with stream SDK....
-            // generating JWT Token...
-            let signers = JWTSigners()
-            signers.use(.hs256(key: streamSecretKey.data(using: .utf8)!))
-            
-            // Creating Payload and inserting Userd ID to generate Token..
-            // Here User ID will be Firebase UID....
-            // Since its Unique...
-            guard let uid = Auth.auth().currentUser?.uid else{
-                return true
-            }
-            let payload = PayLoad(user_id: uid)
-            // generating Token...
-            do{
-                let jwt = try signers.sign(payload)
-                let config = ChatClientConfig(apiKeyString: streamAPIKey)
-                let tokenProvider = TokenProvider.closure { client, completion in
-                    guard let token = try? Token(rawValue: jwt) else{
-                        return
-                    }
-                    completion(.success(token))
-                }
-                ChatClient.shared = ChatClient(config: config, tokenProvider: tokenProvider)
-                ChatClient.shared.currentUserController().reloadUserIfNeeded()
-            }
-            catch{
-                print(error.localizedDescription)
-            }
-        }
+        // APNs(Apple Push Notification) will generate and register a token when a user grants permission for push notifications. This token identifies the individual device so you can send notifications to it. You’ll use Firebase to distribute your notifications, and this code makes that token available in Firebase.
+        // 3 - Sets AppDelegate as the delegate for UNUserNotificationCenter. The necessary delegate methods is implemented on step 3.2
+        UNUserNotificationCenter.current().delegate = self
+        // 4 - Creates options related to what kind of push notification permissions your app will request. In this case, you’re asking for alerts, badges and sound.
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+          options: authOptions) { _, _ in }
+        // 5 - Registers your app for remote notifications.
+        application.registerForRemoteNotifications()
+        
+        // 7 - sets AppDelegate as the delegate for Messaging
+        Messaging.messaging().delegate = self
         return true
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("\(#function)")
-        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
-    }
+    // NOTE - duplicate function is commented & added to 'extension AppDelegate'
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        print("\(#function)")
+//        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+//    }
       
     func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("\(#function)")
@@ -96,7 +78,58 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-// stream API...
-extension ChatClient{
-    static var shared: ChatClient!
+// Since you’re not letting Firebase automatically handle notification code through swizzling(FirebaseAppDelegateProxyEnabled is set to 0 in Info config), you’ll need to conform to UNUserNotificationCenterDelegate.
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // User notification setting are in the Amore > Signing & Capabilities
+    // The user notification center will call these methods when notifications arrive or when the user interacts with them. You’ll be working with them a little later.
+      func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void
+      ) {
+        completionHandler([[.banner, .sound]])
+      }
+
+    // function overloading for userNotificationCenter
+      func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+      ) {
+        completionHandler()
+      }
+     
+      // Once firebase is configured, we can start registering to receive notifications
+      // step 3.2
+      func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+        ) {
+            print("\(#function)")
+            Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+            Messaging.messaging().apnsToken = deviceToken
+        }
+    
+        func application(_ application: UIApplication,
+                         didFailToRegisterForRemoteNotificationsWithError error: Error) {
+          print("Unable to register for remote notifications: \(error.localizedDescription)")
+        }
+
+}
+
+
+// 6 - Messaging is Firebase’s class that manages everything related to push notifications. Like a lot of iOS APIs, it features a delegate called MessagingDelegate, which you implement in the code above. Whenever your app starts up or Firebase updates your token, Firebase will call the method you just added to keep the app in sync with it.
+extension AppDelegate: MessagingDelegate {
+  func messaging(
+    _ messaging: Messaging,
+    didReceiveRegistrationToken fcmToken: String?
+  ) {
+    let tokenDict = ["token": fcmToken ?? ""]
+    NotificationCenter.default.post(
+      name: Notification.Name("FCMToken"),
+      object: nil,
+      userInfo: tokenDict)
+  }
 }

@@ -72,14 +72,7 @@
 		E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D555D27540D5700852D70 /* ServerErrorView.swift */; };
 		E22D5562275532B800852D70 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D5561275532B800852D70 /* ColorExtension.swift */; };
 		E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D55632755828400852D70 /* WorkAndSchool.swift */; };
-		E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234711F271BE0030006F336 /* StreamViewModel.swift */; };
 		E2347122271BE10E0006F336 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* Credentials.swift */; };
-		E2347124271BFDDA0006F336 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347123271BFDDA0006F336 /* ChatView.swift */; };
-		E2347126271BFE390006F336 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347125271BFE390006F336 /* MessageRowView.swift */; };
-		E2347128271BFE6F0006F336 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347127271BFE6F0006F336 /* ChatBubble.swift */; };
-		E234712A271BFEDF0006F336 /* ChannelRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347129271BFEDF0006F336 /* ChannelRowView.swift */; };
-		E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712B271BFF360006F336 /* ChatModifiersView.swift */; };
-		E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712D271C967F0006F336 /* CreateNewChannel.swift */; };
 		E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712F271C972F0006F336 /* LoadingScreen.swift */; };
 		E2347132271DC3A00006F336 /* TabButtonMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347131271DC3A00006F336 /* TabButtonMenu.swift */; };
 		E2347134271DC4C30006F336 /* CardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347133271DC4C30006F336 /* CardDetail.swift */; };
@@ -249,14 +242,7 @@
 		E22D555D27540D5700852D70 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E22D5561275532B800852D70 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E22D55632755828400852D70 /* WorkAndSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAndSchool.swift; sourceTree = "<group>"; };
-		E234711F271BE0030006F336 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		E2347121271BE10E0006F336 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		E2347123271BFDDA0006F336 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		E2347125271BFE390006F336 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
-		E2347127271BFE6F0006F336 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
-		E2347129271BFEDF0006F336 /* ChannelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRowView.swift; sourceTree = "<group>"; };
-		E234712B271BFF360006F336 /* ChatModifiersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModifiersView.swift; sourceTree = "<group>"; };
-		E234712D271C967F0006F336 /* CreateNewChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannel.swift; sourceTree = "<group>"; };
 		E234712F271C972F0006F336 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		E2347131271DC3A00006F336 /* TabButtonMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonMenu.swift; sourceTree = "<group>"; };
 		E2347133271DC4C30006F336 /* CardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetail.swift; sourceTree = "<group>"; };
@@ -404,12 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				E221EAB42715068800769234 /* ChannelView.swift */,
-				E2347123271BFDDA0006F336 /* ChatView.swift */,
-				E2347129271BFEDF0006F336 /* ChannelRowView.swift */,
-				E2347125271BFE390006F336 /* MessageRowView.swift */,
-				E2347127271BFE6F0006F336 /* ChatBubble.swift */,
-				E234712B271BFF360006F336 /* ChatModifiersView.swift */,
-				E234712D271C967F0006F336 /* CreateNewChannel.swift */,
 			);
 			path = MessagesView;
 			sourceTree = "<group>";
@@ -741,7 +721,6 @@
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
-				E234711F271BE0030006F336 /* StreamViewModel.swift */,
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
 				1B6273CF274B82FD00590DD1 /* FilterModel.swift */,
@@ -914,12 +893,10 @@
 				E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */,
 				E2DBC036272DF635000630F5 /* MessageCard.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
-				E234712A271BFEDF0006F336 /* ChannelRowView.swift in Sources */,
 				E268A468274601830045F264 /* UserHeight.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
 				E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */,
 				E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */,
-				E2347124271BFDDA0006F336 /* ChatView.swift in Sources */,
 				E22D5562275532B800852D70 /* ColorExtension.swift in Sources */,
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
 				1BB36D3C27AE302200F4029C /* ChatModel.swift in Sources */,
@@ -933,7 +910,6 @@
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
 				E298BA142713A85500C82174 /* ControlCenter.swift in Sources */,
 				E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */,
-				E2347128271BFE6F0006F336 /* ChatBubble.swift in Sources */,
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
@@ -965,7 +941,6 @@
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
-				E234712C271BFF360006F336 /* ChatModifiersView.swift in Sources */,
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,
 				E2DBC02F272D8E06000630F5 /* SettingEditProfileSafety.swift in Sources */,
 				E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */,
@@ -992,8 +967,6 @@
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
-				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
-				E234712E271C967F0006F336 /* CreateNewChannel.swift in Sources */,
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
@@ -1037,7 +1010,6 @@
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,
-				E2347126271BFE390006F336 /* MessageRowView.swift in Sources */,
 				E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */,
 				E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */,
 				E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */,
@@ -1191,6 +1163,7 @@
 				CODE_SIGN_ENTITLEMENTS = Amore/AmoreDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
+				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1214,6 +1187,7 @@
 				CODE_SIGN_ENTITLEMENTS = Amore/Amore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
+				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

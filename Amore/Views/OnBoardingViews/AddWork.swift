@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddWork: View {
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var streamModel: StreamViewModel
+//    @EnvironmentObject var streamModel: StreamViewModel
     
     @State var workName : String = ""
     @State var jobTitle : String = ""
@@ -64,8 +64,8 @@ struct AddWork: View {
             
             // Continue to next view
             NavigationLink(destination: AddSchool()
-                            .environmentObject(profileModel)
-                            .environmentObject(streamModel),
+                            .environmentObject(profileModel),
+//                            .environmentObject(streamModel),
                            isActive: $continueToNext,
                            label: {
                 Button{

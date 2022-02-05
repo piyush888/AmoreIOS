@@ -222,7 +222,8 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         profileCore.school = userProfile.school
     }
     
-    func signIn(streamObj: StreamViewModel, adminAuthenticationObj:AdminAuthenticationViewModel) {
+//    func signIn(streamObj: StreamViewModel, adminAuthenticationObj:AdminAuthenticationViewModel) {
+    func signIn(adminAuthenticationObj:AdminAuthenticationViewModel) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
             print(verificationID+" in sign in!")
@@ -242,7 +243,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 self.profileFetchedAndReady = false
                             }
                             self.getUserProfile()
-                            streamObj.streamLogin(uid: authRes.user.uid)
+//                            streamObj.streamLogin(uid: authRes.user.uid)
                             adminAuthenticationObj.serverLogin()
                         }
                         self.loginFormVisible = false

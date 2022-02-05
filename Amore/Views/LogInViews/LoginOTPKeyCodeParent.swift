@@ -12,7 +12,7 @@ import FirebaseAuth
 struct LoginOTPKeyCodeParent: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var streamModel: StreamViewModel
+//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     @Binding var otpGeneratedOnce: Bool
@@ -55,7 +55,8 @@ struct LoginOTPKeyCodeParent: View {
             
             // OTP Submit button
             Button(action: {
-                profileModel.signIn(streamObj: streamModel, adminAuthenticationObj: adminAuthenticationModel)
+//                profileModel.signIn(streamObj: streamModel, adminAuthenticationObj: adminAuthenticationModel)
+                profileModel.signIn(adminAuthenticationObj: adminAuthenticationModel)
             }) {
                 ZStack{
                     Rectangle()
