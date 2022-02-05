@@ -64,7 +64,6 @@
 		E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D555D27540D5700852D70 /* ServerErrorView.swift */; };
 		E22D5562275532B800852D70 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D5561275532B800852D70 /* ColorExtension.swift */; };
 		E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D55632755828400852D70 /* WorkAndSchool.swift */; };
-		E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234711F271BE0030006F336 /* StreamViewModel.swift */; };
 		E2347122271BE10E0006F336 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* Credentials.swift */; };
 		E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712F271C972F0006F336 /* LoadingScreen.swift */; };
 		E2347132271DC3A00006F336 /* TabButtonMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347131271DC3A00006F336 /* TabButtonMenu.swift */; };
@@ -227,7 +226,6 @@
 		E22D555D27540D5700852D70 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E22D5561275532B800852D70 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E22D55632755828400852D70 /* WorkAndSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAndSchool.swift; sourceTree = "<group>"; };
-		E234711F271BE0030006F336 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		E2347121271BE10E0006F336 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E234712F271C972F0006F336 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		E2347131271DC3A00006F336 /* TabButtonMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonMenu.swift; sourceTree = "<group>"; };
@@ -693,7 +691,6 @@
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
-				E234711F271BE0030006F336 /* StreamViewModel.swift */,
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
 				1B6273CF274B82FD00590DD1 /* FilterModel.swift */,
@@ -937,7 +934,6 @@
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
-				E2347120271BE0030006F336 /* StreamViewModel.swift in Sources */,
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,
