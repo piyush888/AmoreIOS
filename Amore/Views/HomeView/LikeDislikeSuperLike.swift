@@ -39,9 +39,9 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.dislike
-                    print("Count: Button Dislike Pressed")
+//                    print("Count: Button Dislike Pressed")
                     cardSwipeDone = false
-                    print("Count: card swipe done: ", cardSwipeDone)
+//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "xmark.circle.fill")
@@ -59,9 +59,9 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.superlike
-                    print("Count: Button SuperLike Pressed")
+//                    print("Count: Button SuperLike Pressed")
                     cardSwipeDone = false
-                    print("Count: card swipe done: ", cardSwipeDone)
+//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "star.circle.fill")
@@ -77,9 +77,9 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.like
-                    print("Count: Button Like Pressed")
+//                    print("Count: Button Like Pressed")
                     cardSwipeDone = false
-                    print("Count: card swipe done: ", cardSwipeDone)
+//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "heart.circle.fill")

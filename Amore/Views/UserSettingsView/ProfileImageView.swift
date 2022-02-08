@@ -28,7 +28,7 @@ struct ProfileImageView<V>: View where V: ViewModifier {
             onSuccess(image)
             if finished {
                 SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
-                    print("Successfully deleted some image cache")
+//                    print("Successfully deleted some image cache")
                 }
             }
         }

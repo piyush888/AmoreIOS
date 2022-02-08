@@ -22,6 +22,8 @@ struct HomeView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -40,7 +42,10 @@ struct HomeView: View {
                             switch currentPage {
                                 
                                 case .messagingView:
-                                    ChannelView()
+                                    MainMessagesView()
+                                        .environmentObject(ChatModel())
+                                        .environmentObject(MainMessagesViewModel())
+//                                    ChannelView()
 //                                        .environmentObject(streamModel)
                                     
                                 case .likesTopPicksView:

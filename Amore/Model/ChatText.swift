@@ -35,4 +35,5 @@ struct ChatText: Identifiable, Codable, Hashable {
     var fromId: String?
     var toId: String?
     var text: String?
+    var timestamp: Date?
 }

@@ -28,9 +28,9 @@
 		1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */; };
 		1BB36D3027ACE88200F4029C /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2F27ACE88200F4029C /* ChatUser.swift */; };
 		1BB36D3227ACE91A00F4029C /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */; };
-		1BB36D3427ADB9DC00F4029C /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3327ADB9DB00F4029C /* ChatLogView.swift */; };
+		1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3327ADB9DB00F4029C /* ConversationView.swift */; };
 		1BB36D3827ADBC1C00F4029C /* customNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3727ADBC1C00F4029C /* customNavBar.swift */; };
-		1BB36D3A27ADBD3000F4029C /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3927ADBD3000F4029C /* MessagesView.swift */; };
+		1BB36D3A27ADBD3000F4029C /* AllConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */; };
 		1BB36D3C27AE302200F4029C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3B27AE302200F4029C /* ChatModel.swift */; };
 		1BB36D3E27AE744800F4029C /* ChatText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3D27AE744800F4029C /* ChatText.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
@@ -41,6 +41,7 @@
 		1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE052705CC5E00F0137E /* AddWork.swift */; };
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
+		1BDABE8D27AF7D6000772D6A /* ChatConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */; };
 		1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */; };
 		1BF55ECB272025860027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1BF55ECD272025CC0027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -196,9 +197,9 @@
 		1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
 		1BB36D2F27ACE88200F4029C /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
-		1BB36D3327ADB9DB00F4029C /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		1BB36D3327ADB9DB00F4029C /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		1BB36D3727ADBC1C00F4029C /* customNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customNavBar.swift; sourceTree = "<group>"; };
-		1BB36D3927ADBD3000F4029C /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllConversationsView.swift; sourceTree = "<group>"; };
 		1BB36D3B27AE302200F4029C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		1BB36D3D27AE744800F4029C /* ChatText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatText.swift; sourceTree = "<group>"; };
 		1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmoreDebug.entitlements; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 		1BC8BE052705CC5E00F0137E /* AddWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWork.swift; sourceTree = "<group>"; };
 		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
 		1BC8BE0D2705CD7C00F0137E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversation.swift; sourceTree = "<group>"; };
 		1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadWindowsGroup.swift; sourceTree = "<group>"; };
 		1BFCBADB2721AA820002BA67 /* CommunityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFilter.swift; sourceTree = "<group>"; };
 		1BFCBADD2721B9B60002BA67 /* CareerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerFilter.swift; sourceTree = "<group>"; };
@@ -350,9 +352,9 @@
 			isa = PBXGroup;
 			children = (
 				1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */,
-				1BB36D3327ADB9DB00F4029C /* ChatLogView.swift */,
+				1BB36D3327ADB9DB00F4029C /* ConversationView.swift */,
 				1BB36D3727ADBC1C00F4029C /* customNavBar.swift */,
-				1BB36D3927ADBD3000F4029C /* MessagesView.swift */,
+				1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */,
 			);
 			path = ChatPageView;
 			sourceTree = "<group>";
@@ -689,6 +691,7 @@
 				E268A46B2747DB9A0045F264 /* CardProfiles.swift */,
 				1BB36D2F27ACE88200F4029C /* ChatUser.swift */,
 				1BB36D3D27AE744800F4029C /* ChatText.swift */,
+				1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -980,7 +983,7 @@
 				E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */,
 				1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
-				1BB36D3A27ADBD3000F4029C /* MessagesView.swift in Sources */,
+				1BB36D3A27ADBD3000F4029C /* AllConversationsView.swift in Sources */,
 				1BB36D3227ACE91A00F4029C /* MainMessagesViewModel.swift in Sources */,
 				1BB36D3827ADBC1C00F4029C /* customNavBar.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
@@ -998,8 +1001,9 @@
 				E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */,
-				1BB36D3427ADB9DC00F4029C /* ChatLogView.swift in Sources */,
+				1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
+				1BDABE8D27AF7D6000772D6A /* ChatConversation.swift in Sources */,
 				E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
@@ -1163,7 +1167,7 @@
 				CODE_SIGN_ENTITLEMENTS = Amore/AmoreDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
-				DEVELOPMENT_TEAM = 292QG86ZUY;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1187,7 +1191,7 @@
 				CODE_SIGN_ENTITLEMENTS = Amore/Amore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
-				DEVELOPMENT_TEAM = 292QG86ZUY;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

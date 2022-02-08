@@ -36,7 +36,7 @@ struct AllCardsView: View {
             // Progress Block
         } completed: { completed, skipped in
             // On Complete Block
-            print("Prefetched image for ", card.id as Any)
+//            print("Prefetched image for ", card.id as Any)
         }
     }
     
@@ -85,10 +85,10 @@ struct AllCardsView: View {
                         
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
-                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
+//                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
                         self.cardSwipeDone = true
                         cardProfileModel.areMoreCardsNeeded()
-                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
+//                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
                     }
                     
                     VStack {

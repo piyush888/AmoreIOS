@@ -52,7 +52,7 @@ class FilterModel: ObservableObject {
                             // Get User Profile from Firestore.
                             self.oldFilterData = try document.data(as: Filters.self) ?? Filters()
                             self.filterData = self.oldFilterData
-                            print("Location: Filter and Location data Refresh done...")
+//                            print("Location: Filter and Location data Refresh done...")
                             self.filterDataFetched = true
                         }
                         catch {
@@ -71,18 +71,18 @@ class FilterModel: ObservableObject {
         if let profileId = Auth.auth().currentUser?.uid {
             if filterData != oldFilterData {
                 do {
-                    print("Location: Updating FilterData on Firestore...")
+//                    print("Location: Updating FilterData on Firestore...")
                     try db.collection("FilterAndLocation").document(profileId).setData(from: filterData)
                     print(filterData)
                     oldFilterData = filterData
                 }
                 catch {
-                    print("Location: Error while updating FilterData in Firestore: ")
+//                    print("Location: Error while updating FilterData in Firestore: ")
                     print(error.localizedDescription)
                 }
             }
             else {
-                print("Location: No change in Filter Data...")
+//                print("Location: No change in Filter Data...")
             }
         }
     }

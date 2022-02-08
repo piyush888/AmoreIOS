@@ -211,7 +211,7 @@ class CardProfileModel: ObservableObject {
         if allCardsWithPhotosDeck.count < 34 && self.profilesBeingFetched == false {
             // Yes more cards are needed
             self.fetchProfile(numberOfProfiles: 50)
-            print("Count: Cards Being fetched ", allCardsWithPhotosDeck.count)
+//            print("Count: Cards Being fetched ", allCardsWithPhotosDeck.count)
         } else {
             print("Both deck have data")
         }

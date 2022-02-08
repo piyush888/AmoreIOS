@@ -11,8 +11,10 @@ struct MainMessagesView: View {
 
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
-    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+//    @StateObject var mainMessagesModel = MainMessagesViewModel()
+//    @StateObject var chatModel = ChatModel()
     @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
 
     var body: some View {
         NavigationView {
@@ -20,8 +22,9 @@ struct MainMessagesView: View {
             VStack {
                 customNavBar(shouldShowLogOutOptions: $shouldShowLogOutOptions)
                     .environmentObject(mainMessagesModel)
-                MessagesView(navigateToChatView: $navigateToChatView)
+                AllConversationsView(navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
+                    .environmentObject(mainMessagesModel)
             }
             .navigationBarHidden(true)
         }
@@ -29,9 +32,10 @@ struct MainMessagesView: View {
 
 }
 
-struct MainMessageView_Previews: PreviewProvider {
+struct MainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MainMessagesView()
+            .environmentObject(ChatModel())
             .environmentObject(MainMessagesViewModel())
     }
 }

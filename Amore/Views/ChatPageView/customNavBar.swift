@@ -19,7 +19,7 @@ struct customNavBar: View {
                 .font(.system(size: 34, weight: .heavy))
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(mainMessagesModel.fromUser?.firstName ?? "User")
+                Text(mainMessagesModel.fromUser.firstName ?? "User")
                     .font(.system(size: 24, weight: .bold))
 
                 HStack {

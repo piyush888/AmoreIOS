@@ -63,7 +63,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // Call this to give a location pop-up
     func getLocationOnce() {
         locationManager.requestLocation()
-        print("Location: Location Requested")
+//        print("Location: Location Requested")
     }
     
     // Mark - Location Manager Delegate Methods
@@ -82,7 +82,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         else {
             locationManager.stopUpdatingLocation()
         }
-        print("Location: authorizationStatus Updated")
+//        print("Location: authorizationStatus Updated")
     }
     
     // Get updated user location - Depend on authorization
@@ -104,10 +104,10 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
                 self.editUserProfile.geohash5 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 5)])
             }
-            print("Location: Geohash Updated: ", self.editUserProfile.geohash as Any)
+//            print("Location: Geohash Updated: ", self.editUserProfile.geohash as Any)
         }
 //        editUserProfile.location = Location(longitude: userLocation.coordinate.longitude, latitude: userLocation.coordinate.latitude)
-        print("Location: Location Updated")
+//        print("Location: Location Updated")
 //        editUserProfile.location?.longitude = userLocation.coordinate.longitude
 //        editUserProfile.location?.latitude = userLocation.coordinate.latitude
         locationManager.stopUpdatingLocation()
@@ -115,7 +115,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // Handle failure to get a user’s location
-        print("Location: Failed to acquire user location.")
+//        print("Location: Failed to acquire user location.")
     }
     
     //// API Call to get Geohash for the User Location
@@ -353,8 +353,8 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
                 self.editUserProfile.geohash5 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 5)])
             }
-            print("Location: Current Location \(String(describing: editUserProfile.location))")
-            print("Location: Current Location Geohash \(String(describing: editUserProfile.geohash))")
+//            print("Location: Current Location \(String(describing: editUserProfile.location))")
+//            print("Location: Current Location Geohash \(String(describing: editUserProfile.geohash))")
             if editUserProfile != userProfile {
                 do {
                     print("Update Profile Information on Firestore...")

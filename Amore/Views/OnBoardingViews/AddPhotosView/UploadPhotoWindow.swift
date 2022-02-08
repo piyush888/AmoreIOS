@@ -117,10 +117,10 @@ struct UploadPhotoWindow: View {
 //            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
             
             if finished {
-                print("FINISHED LOADING IMAGE...")
+//                print("FINISHED LOADING IMAGE...")
                 photoModel.photoAction = false
                 SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
-                    print("Successfully deleted self profile image cache")
+//                    print("Successfully deleted self profile image cache")
                 }
             }
         }
