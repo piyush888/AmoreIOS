@@ -23,13 +23,8 @@ struct AllConversationsView: View {
                 ForEach(mainMessagesModel.recentChats) { recentMessage in
                     VStack {
                         Button {
-//                            let uid = Auth.auth().currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId
-
                             self.toUser = recentMessage.user ?? ChatUser()
-                            DispatchQueue.main.async {
-                                self.chatModel.fetchMessages(toUser: toUser)
-                            }
-//                            self.chatModel.fetchMessages(toUser: toUser)
+                            self.chatModel.fetchMessages(toUser: toUser)
                             self.navigateToChatView = true
                         } label: {
                             HStack(spacing: 16) {
@@ -63,8 +58,6 @@ struct AllConversationsView: View {
                             }
                         }
 
-
-                        
                         Divider()
                             .padding(.vertical, 8)
                     }.padding(.horizontal)

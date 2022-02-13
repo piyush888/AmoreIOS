@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatUser: Identifiable, Codable, Equatable {
+struct ChatUser: Identifiable, Codable, Equatable, Hashable {
     var id: String?
     var firstName: String?
     var lastName: String?

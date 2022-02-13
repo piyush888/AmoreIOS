@@ -25,49 +25,18 @@ struct ConversationView: View {
                 }
             }
             .navigationTitle(toUser.firstName ?? "")
-                .navigationBarTitleDisplayMode(.inline)
-//                .onAppear {
-//                    chatModel.fetchMessages(toUser: toUser)
-//                }
-//                .navigationBarHidden(false)
+//            .navigationBarTitleDisplayMode(.inline)
         }
     
     private var AllMessagesForUser: some View {
+        VStack {
             ScrollView {
-                
                 ScrollViewReader { scrollViewProxy in
-                    
                     VStack {
                         ForEach(chatModel.chatMessages, id: \.self) { message in
-                            VStack {
-                                if message.fromId == Auth.auth().currentUser?.uid {
-                                    HStack {
-                                        Spacer()
-                                        HStack {
-                                            Text(message.text.bound)
-                                                .foregroundColor(.white)
-                                        }
-                                        .padding()
-                                        .background(Color.blue)
-                                        .cornerRadius(8)
-                                    }
-                                }
-                                else {
-                                    HStack {
-                                        HStack {
-                                            Text(message.text.bound)
-                                                .foregroundColor(.black)
-                                        }
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(8)
-                                    }
-                                }
-                            }
-                            .padding(.horizontal)
-                            .padding(.top, 8)
+                            MessageView(message: message)
                         }
-                        
+
                         HStack{ Spacer() }
                         .frame(height: 50)
                         .id(self.emptyScrollToString)
@@ -82,17 +51,11 @@ struct ConversationView: View {
                         }
                         print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
                     }
-//                    .onReceive(chatModel.$count) { _ in
-//                        withAnimation(.easeOut(duration: 0.5)) {
-//                            scrollViewProxy.scrollTo(self.emptyScrollToString, anchor: .bottom)
-//                        }
-//                    }
-                    
                 }
-                
             }
             .background(Color(.init(white: 0.95, alpha: 1)))
         }
+    }
 
     private var MessageSendField: some View {
         HStack(spacing: 16) {
@@ -127,6 +90,35 @@ struct ConversationView: View {
         .padding(.vertical, 8)
     }
     
+}
+
+struct MessageView: View {
+    
+    let message: ChatText
+    
+    var body: some View {
+        VStack {
+            if message.fromId == Auth.auth().currentUser?.uid {
+                ChatBubble(direction: .right) {
+                    Text(message.text.bound)
+                        .foregroundColor(.white)
+                        .padding(.all, 20)
+                        .background(Color.blue)
+//                        .cornerRadius(8)
+                }
+            } else {
+                ChatBubble(direction: .left) {
+                    Text(message.text.bound)
+                        .foregroundColor(.black)
+                        .padding(.all, 20)
+                        .background(Color.white)
+//                        .cornerRadius(8)
+                }
+            }
+        }
+        .padding(.horizontal)
+//        .padding(.top, 8)
+    }
 }
 
 struct ConversationView_Previews: PreviewProvider {

@@ -19,7 +19,7 @@ class MainMessagesViewModel: ObservableObject {
 
     init() {
         fetchCurrentUser()
-        fetchRecentChats()
+//        fetchRecentChats()
     }
 
     private func fetchCurrentUser() {

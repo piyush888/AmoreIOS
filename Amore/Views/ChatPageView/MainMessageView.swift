@@ -11,8 +11,6 @@ struct MainMessagesView: View {
 
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
-//    @StateObject var mainMessagesModel = MainMessagesViewModel()
-//    @StateObject var chatModel = ChatModel()
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
 
@@ -20,14 +18,17 @@ struct MainMessagesView: View {
         NavigationView {
 
             VStack {
-                customNavBar(shouldShowLogOutOptions: $shouldShowLogOutOptions)
-                    .environmentObject(mainMessagesModel)
                 AllConversationsView(navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
+                    .onAppear {
+                        mainMessagesModel.fetchRecentChats()
+                    }
             }
-            .navigationBarHidden(true)
+            .navigationTitle("Messages")
+//            .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(.stack)
     }
 
 }
