@@ -14,6 +14,7 @@ struct ConversationView: View {
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @Binding var toUser: ChatUser
     var emptyScrollToString = ""
+    @State var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
             ZStack {
@@ -25,6 +26,27 @@ struct ConversationView: View {
                 }
             }
             .navigationTitle(toUser.firstName ?? "")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Button  {
+                            
+                        } label: {
+                            Label("Report User", systemImage: "shield.fill")
+                                .font(.system(size: 60))
+                        }
+                        Button  {
+                            
+                        } label: {
+                            Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
+                                .font(.system(size: 60))
+                        }
+                    }
+                    label: {
+                        Label("Options", systemImage: "ellipsis.circle")
+                    }
+                }
+            }
 //            .navigationBarTitleDisplayMode(.inline)
         }
     
@@ -59,9 +81,6 @@ struct ConversationView: View {
 
     private var MessageSendField: some View {
         HStack(spacing: 16) {
-            Image(systemName: "photo.on.rectangle")
-                .font(.system(size: 24))
-                .foregroundColor(Color(.darkGray))
             ZStack {
                 if (chatModel.chatText.isEmpty) {
                     HStack{

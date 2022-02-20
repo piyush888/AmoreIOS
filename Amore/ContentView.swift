@@ -14,15 +14,12 @@ struct ContentView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @StateObject var profileModel = ProfileViewModel()
-//    @StateObject var streamModel = StreamViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
     @StateObject var filterModel = FilterModel()
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
-    @StateObject var mainMessagesModel = MainMessagesViewModel()
-    @StateObject var chatModel = ChatModel()
     
     var body: some View {
         
@@ -77,15 +74,12 @@ struct ContentView: View {
                                 if [CLAuthorizationStatus.authorizedWhenInUse, CLAuthorizationStatus.authorizedAlways].contains(profileModel.authorizationStatus) {
                                     HomeView()
                                         .environmentObject(profileModel)
-//                                        .environmentObject(streamModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(reportActivityModel)
-                                        .environmentObject(mainMessagesModel)
-                                        .environmentObject(chatModel)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()
