@@ -20,6 +20,7 @@ struct ContentView: View {
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
+    @StateObject var stripeModel = StripeModel()
     
     var body: some View {
         
@@ -80,6 +81,7 @@ struct ContentView: View {
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(reportActivityModel)
+                                        .environmentObject(stripeModel)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()
@@ -92,6 +94,7 @@ struct ContentView: View {
                                             receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getSuperLikesGivenData()
                                             receivedGivenEliteModel.elitesData()
+                                            stripeModel.getPricingData()
                                         }
                                 }
                                 // Else get location permission

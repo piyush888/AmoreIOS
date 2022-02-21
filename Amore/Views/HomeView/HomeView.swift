@@ -21,6 +21,7 @@ struct HomeView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
+    @EnvironmentObject var stripeModel: StripeModel
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -69,6 +70,10 @@ struct HomeView: View {
                                     UserProfile()
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
+                                        .environmentObject(stripeModel)
+//                                        .onAppear {
+//                                                    stripeModel.getPricingData()
+//                                        }
                             }
                             
                             // Control Center
