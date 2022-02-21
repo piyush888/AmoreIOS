@@ -20,7 +20,6 @@ struct SubscriptionDetails: View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(bgColor)
 
-            
             VStack {
                 
                 Spacer()

@@ -13,7 +13,6 @@ struct UserSettingView: View {
     @AppStorage("log_Status") var logStatus = false
     @EnvironmentObject var photoModel: PhotoModel
     @Binding var settingsDone: Bool
-    @State var popUpCardSelection: PopUpCards = .amoreGold
     @State var showModal = false
     
     var body: some View {
@@ -39,19 +38,6 @@ struct UserSettingView: View {
                     }
                     
                 }
-                
-                // Amore Platinum
-                AmorePlatinum(width:geometry.size.width,
-                              popUpCardSelection:$popUpCardSelection,
-                              showModal:$showModal)
-                
-                // Amore Gold
-                AmoreGold(width:geometry.size.width,
-                          popUpCardSelection:$popUpCardSelection,
-                          showModal:$showModal)
-                
-                // Super Like and Boost Count and Buy
-                SuperLikeBoost(width:geometry.size.width/2)
                 
                 // Section
                 /// Phone Number
