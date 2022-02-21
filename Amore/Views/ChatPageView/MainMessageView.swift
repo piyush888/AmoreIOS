@@ -11,8 +11,8 @@ struct MainMessagesView: View {
 
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
-    @EnvironmentObject var chatModel: ChatModel
-    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+    @StateObject var mainMessagesModel = MainMessagesViewModel()
+    @StateObject var chatModel = ChatModel()
 
     var body: some View {
         NavigationView {
@@ -21,9 +21,6 @@ struct MainMessagesView: View {
                 AllConversationsView(navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
-                    .onAppear {
-                        mainMessagesModel.fetchRecentChats()
-                    }
             }
             .navigationTitle("Messages")
 //            .navigationBarTitleDisplayMode(.inline)
@@ -36,8 +33,6 @@ struct MainMessagesView: View {
 struct MainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MainMessagesView()
-            .environmentObject(ChatModel())
-            .environmentObject(MainMessagesViewModel())
     }
 }
 

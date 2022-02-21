@@ -15,15 +15,12 @@ struct HomeView: View {
     
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var filterModel: FilterModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
-    @EnvironmentObject var chatModel: ChatModel
-    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -43,10 +40,6 @@ struct HomeView: View {
                                 
                                 case .messagingView:
                                     MainMessagesView()
-                                        .environmentObject(ChatModel())
-                                        .environmentObject(MainMessagesViewModel())
-//                                    ChannelView()
-//                                        .environmentObject(streamModel)
                                     
                                 case .likesTopPicksView:
                                 LikesTopPicksHome(selectedTab:$selectedTab)

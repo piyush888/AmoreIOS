@@ -63,7 +63,11 @@ struct AllConversationsView: View {
                     }.padding(.horizontal)
                     
                 }.padding(.bottom, 50)
-                
+                if (mainMessagesModel.recentChats.count == 0) {
+                        HStack{
+                            Spacer()
+                        }
+                    }
             }
             
             NavigationLink("", isActive: $navigateToChatView) {
