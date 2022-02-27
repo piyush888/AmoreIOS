@@ -22,6 +22,28 @@ class MainMessagesViewModel: ObservableObject {
         fetchCurrentUser()
         fetchRecentChats()
     }
+    
+    func updateRecentChatsFirestore(chat: ChatConversation) {
+        guard let fromId = chat.fromId else {return}
+        guard let toId = chat.toId else {return}
+        
+        db.collection("RecentChats")
+            .document(fromId)
+            .collection("Messages")
+            .document(toId).updateData(["msgRead": chat.msgRead])
+        
+        db.collection("RecentChats")
+            .document(toId)
+            .collection("Messages")
+            .document(fromId).updateData(["msgRead": chat.msgRead])
+    }
+    
+    func markMessageRead(chat: ChatConversation) {
+        if let index = recentChats.firstIndex(where: {$0.id == chat.id}) {
+            recentChats[index].msgRead = true
+            updateRecentChatsFirestore(chat: recentChats[index])
+        }
+    }
 
     private func fetchCurrentUser() {
 
@@ -30,23 +52,22 @@ class MainMessagesViewModel: ObservableObject {
             return
         }
 
-        db.collection("Profiles").document(uid).getDocument { snapshot, error in
+        db.collection("Profiles").document(uid).getDocument { [self] snapshot, error in
             if let error = error {
                 self.errorMessage = "Failed to fetch current user: \(error)"
                 print("Chat: Failed to fetch current user:", error)
                 return
             }
-
-            guard let data = snapshot?.data() else {
-                self.errorMessage = "No data found"
-                return
-
+            
+            if let snapshot = snapshot {
+                do {
+                    self.fromUser = try snapshot.data(as: ChatUser.self) ?? ChatUser()
+                    self.fromUser.id = Auth.auth().currentUser?.uid
+                }
+                catch {
+                    print("Chat: Error in decoding: \(error)")
+                }
             }
-            let id = Auth.auth().currentUser?.uid
-            let fname = data["firstName"] as? String ?? ""
-            let lname = data["lastName"] as? String ?? ""
-            let profileImage = data["image1"] as? ProfileImage ?? ProfileImage()
-            self.fromUser = ChatUser(id: id, firstName: fname, lastName: lname, image1: profileImage)
         }
     }
     
