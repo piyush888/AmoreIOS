@@ -24,4 +24,5 @@ struct ChatConversation: Identifiable, Codable, Hashable {
         formatter.unitsStyle = .abbreviated
         return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
+    var msgRead: Bool? = false
 }

@@ -12,5 +12,4 @@ struct ChatUser: Identifiable, Codable, Equatable, Hashable {
     var firstName: String?
     var lastName: String?
     var image1: ProfileImage?
-    var latestMessage: String?
 }

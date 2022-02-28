@@ -18,10 +18,10 @@ class ChatModel: ObservableObject {
     var firestoreListener: ListenerRegistration?
 
     func handleSend(fromUser: ChatUser, toUser: ChatUser) {
+        chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
         if chatText.isEmpty {
             return
         }
-        chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
         print("Chat: Checkpoint 3")
         print("Chat: "+chatText)
         guard let fromId = Auth.auth().currentUser?.uid else { return }
