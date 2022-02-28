@@ -133,10 +133,10 @@
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
 		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
 		E2A960F627C110E7009108F0 /* StripeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960F527C110E7009108F0 /* StripeModel.swift */; };
-		E2A960F927C1E18D009108F0 /* StripeCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960F827C1E18D009108F0 /* StripeCheckout.swift */; };
 		E2A960FB27C1F268009108F0 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */; };
 		E2A960FD27C1F280009108F0 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FC27C1F280009108F0 /* AmoreGold.swift */; };
 		E2A960FF27C345D6009108F0 /* SubsriptionItemPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */; };
+		E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A9610027CB4660009108F0 /* StoreKit.framework */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
 		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
@@ -299,10 +299,10 @@
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
 		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		E2A960F527C110E7009108F0 /* StripeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeModel.swift; sourceTree = "<group>"; };
-		E2A960F827C1E18D009108F0 /* StripeCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeCheckout.swift; sourceTree = "<group>"; };
 		E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
 		E2A960FC27C1F280009108F0 /* AmoreGold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
 		E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsriptionItemPricing.swift; sourceTree = "<group>"; };
+		E2A9610027CB4660009108F0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
 		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
@@ -336,6 +336,7 @@
 			files = (
 				E27AC5472720CA0A00EB50F7 /* JWTKit in Frameworks */,
 				684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */,
+				E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */,
 				E27AC5442720C9BA00EB50F7 /* iPhoneNumberField in Frameworks */,
 				E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */,
 			);
@@ -371,6 +372,7 @@
 		8146232F1123BB8CE8350BEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2A9610027CB4660009108F0 /* StoreKit.framework */,
 				5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */,
 			);
 			name = Frameworks;
@@ -582,7 +584,6 @@
 		E2A960F727C1E16F009108F0 /* StripePaymentView */ = {
 			isa = PBXGroup;
 			children = (
-				E2A960F827C1E18D009108F0 /* StripeCheckout.swift */,
 			);
 			path = StripePaymentView;
 			sourceTree = "<group>";
@@ -1010,7 +1011,6 @@
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,
-				E2A960F927C1E18D009108F0 /* StripeCheckout.swift in Sources */,
 				1BFCBADC2721AA830002BA67 /* CommunityFilter.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,

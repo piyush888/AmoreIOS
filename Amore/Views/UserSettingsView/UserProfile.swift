@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Stripe
 
 struct UserProfile: View {
     
@@ -106,6 +107,7 @@ struct UserProfile: View {
                                                       currency: pricingData.superLikesPricing[1].currency,
                                                       totalCost:Float(pricingData.superLikesPricing[1].itemQuantity) * pricingData.superLikesPricing[1].pricePerQty
                                                     )
+                                                    .environmentObject(stripeModel)
                                 
                                 case .boostCards :
                                     BuySubscriptionOrItemsCard(cardColorFormat:[Color.yellow, Color.orange, Color.white],
@@ -121,6 +123,7 @@ struct UserProfile: View {
                                                   currency: pricingData.boostPricing[1].currency,
                                                   totalCost:Float(pricingData.boostPricing[1].itemQuantity) * pricingData.boostPricing[1].pricePerQty
                                                 )
+                                                .environmentObject(stripeModel)
                                 
                                 case .messagesCards:
                                     BuySubscriptionOrItemsCard(cardColorFormat:[Color.red, Color.pink, Color.white],
@@ -159,6 +162,7 @@ struct UserProfile: View {
                                           currency: pricingData.amorePlatinumPricing[1].currency,
                                           totalCost:Float(pricingData.amorePlatinumPricing[1].itemQuantity) * pricingData.amorePlatinumPricing[1].pricePerQty
                                         )
+                                        .environmentObject(stripeModel)
                                 
                                 case .amoreGold:
                                     BuySubscriptionOrItemsCard(cardColorFormat:[Color.red,Color.yellow],
@@ -178,6 +182,7 @@ struct UserProfile: View {
                                       currency: pricingData.amoreGoldPricing[1].currency,
                                       totalCost:Float(pricingData.amoreGoldPricing[1].itemQuantity) * pricingData.amoreGoldPricing[1].pricePerQty
                                     )
+                                    .environmentObject(stripeModel)
                                                       
                                 } // switch statement
                             } // check for nil
@@ -193,6 +198,8 @@ struct UserProfile: View {
 
 // Template to display cards - this view is used by all the subscription & individualized item buying cards
 struct BuySubscriptionOrItemsCard : View {
+    
+    @EnvironmentObject var stripeModel: StripeModel
     
     @Namespace var animation
     @State var cardColorFormat: [Color]
@@ -289,23 +296,41 @@ struct BuySubscriptionOrItemsCard : View {
                     /// Option to see amore gold
                     /// No Thanks to close the tab
                     Group {
+                        
                         // Buy the subscripion or item
-                        ZStack{
-                            Capsule()
-                                .fill(LinearGradient(
-                                    gradient: Gradient(colors: [cardColorFormat[0],cardColorFormat[1]]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing)
-                                )
-                                .frame(width:UIScreen.main.bounds.width - 150, height:50)
+                        VStack {
+                           if let paymentSheet = stripeModel.paymentSheet {
+                             PaymentSheet.PaymentButton(
+                               paymentSheet: paymentSheet,
+                               onCompletion: stripeModel.onPaymentCompletion
+                             ) {
+                                 // Load the prices
+                                 PayButton(buttonText: "Buy \(currency)",
+                                           totalCost: $totalCost,
+                                           buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                 
+                             }
+                           } else {
+                               // Can't load the prices... Show Loadin... option
+                               PayButton(buttonText: "Loading…",
+                                         totalCost: Binding.constant(Float(0.0)),
+                                         buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                           }
+                           
+                            Group {
+                                if let result = stripeModel.paymentResult {
+                                 switch result {
+                                     case .completed:
+                                       Text("Payment complete")
+                                     case .failed(let error):
+                                       Text("Payment failed: \(error.localizedDescription)")
+                                     case .canceled:
+                                       Text("Payment canceled.")
+                                 }
+                               }
+                            }.foregroundColor(Color.gray)
                             
-                            VStack {
-                                Text("Buy \(currency) \(totalCost, specifier: "%.1f")")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
-                            }
-                        }
-                        .padding(.top,15)
+                         }
                         
                         Spacer()
                         
@@ -380,3 +405,40 @@ struct PriceTab: View {
     
     }
 }
+
+
+struct PayButton: View {
+
+    @State var buttonText: String
+    @Binding var totalCost: Float
+    @State var buttonColor: [Color]
+    
+    var body: some View {
+    
+        ZStack{
+            // Box rectangle
+            Capsule()
+                .fill(LinearGradient(
+                    gradient: Gradient(colors:buttonColor),
+                    startPoint: .leading,
+                    endPoint: .trailing)
+                )
+                .frame(width:UIScreen.main.bounds.width - 150, height:50)
+            
+            VStack {
+                if totalCost == 0.0 {
+                    Text("\(buttonText)")
+                } else {
+                    Text("\(buttonText) \(totalCost, specifier: "%.1f")")
+                }
+            }
+            .foregroundColor(Color.white)
+            .font(.headline)
+        }
+        .padding(.top,15)
+        
+    }
+    
+}
+
+

@@ -62,7 +62,6 @@ struct HomeView: View {
                                         .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
                                         .onChange(of: filterModel.filterData) { _ in
-                                            print("On change for filter triggered")
                                             filterModel.updateFilter()
                                         }
                                     
@@ -71,9 +70,7 @@ struct HomeView: View {
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(stripeModel)
-//                                        .onAppear {
-//                                                    stripeModel.getPricingData()
-//                                        }
+
                             }
                             
                             // Control Center

@@ -95,6 +95,7 @@ struct ContentView: View {
                                             receivedGivenEliteModel.getSuperLikesGivenData()
                                             receivedGivenEliteModel.elitesData()
                                             stripeModel.getPricingData()
+                                            stripeModel.preparePaymentSheet()
                                         }
                                 }
                                 // Else get location permission
