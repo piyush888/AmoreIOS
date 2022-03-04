@@ -15,8 +15,25 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         //Use your product IDs instead
         "Amore.ProductId.5.SuperLikes.v1",
         "Amore.ProductId.15.SuperLikes.v1",
-        "Amore.ProductId.30.SuperLikes.v1"
-    ]
+        "Amore.ProductId.30.SuperLikes.v1",
+        "Amore.ProductId.2.Boosts.v1",
+        "Amore.ProductId.5.Boosts.v1",
+        "Amore.ProductId.10.Boosts.v1",
+        "Amore.ProductId.5.Messages.v1",
+        "Amore.ProductId.10.Messages.v1",
+        "Amore.ProductId.15.Messages.v1",
+        "Amore.ProductId.1M.Gold.v1",
+        "Amore.ProductId.3M.Gold.v1",
+        "Amore.ProductId.6M.Gold.v1",
+        "Amore.ProductId.1M.Platinum.v1",
+        "Amore.ProductId.3M.Platinum.v1",
+        "Amore.ProductId.6M.Platinum.v1"]
+    
+    @Published var superLikesPricing: [String: SKProduct] = [:]
+    @Published var boostsPricing: [String: SKProduct] = [:]
+    @Published var messagesPricing: [String: SKProduct] = [:]
+    @Published var amoreGoldPricing: [String: SKProduct] = [:]
+    @Published var amorePlatinumPricing: [String: SKProduct] = [:]
     
     // SKProductsRequest property in our StoreManager, which we will use to start the fetching process
     var request: SKProductsRequest!
@@ -42,8 +59,19 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         if !response.products.isEmpty {
             // If we are sure that we have received products, we can add any of these products to our myProducts array using a for-in loop.
             for fetchedProduct in response.products {
+                print("Product List " + fetchedProduct.localizedTitle)
                 DispatchQueue.main.async {
-                    self.myProducts.append(fetchedProduct)
+                    if fetchedProduct.localizedTitle.contains("Super Likes") {
+                        self.superLikesPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    } else if fetchedProduct.localizedTitle.contains("Boosts") {
+                        self.boostsPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    } else if fetchedProduct.localizedTitle.contains("Messages") {
+                        self.messagesPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    } else if fetchedProduct.localizedTitle.contains("Amore Gold") {
+                        self.amoreGoldPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    } else if fetchedProduct.localizedTitle.contains("Amore Platinum") {
+                        self.amorePlatinumPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    }
                 }
             }
         }
@@ -107,3 +135,28 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     }
 }
 
+
+extension SKProduct {
+
+    private static let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter
+    }()
+
+    var isFree: Bool {
+        price == 0.00
+    }
+
+    var localizedPrice: String? {
+        guard !isFree else {
+            return nil
+        }
+        
+        let formatter = SKProduct.formatter
+        formatter.locale = priceLocale
+
+        return formatter.string(from: price)
+    }
+
+}

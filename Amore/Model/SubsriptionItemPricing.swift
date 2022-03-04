@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import StoreKit
 
 struct StripePricings : Codable{
     
@@ -18,7 +19,6 @@ struct StripePricings : Codable{
     var amorePlatinumPricing: [SubscriptionItemPricing]
 }
 
-
 struct SubscriptionItemPricing: Identifiable, Codable, Hashable {
     
     var id: String
@@ -26,10 +26,7 @@ struct SubscriptionItemPricing: Identifiable, Codable, Hashable {
     var description: String
     var pricePerQty: Float
     var currency: String
-
 }
-
-
 
 
 
