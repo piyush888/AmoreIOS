@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct UserProfile: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
-    @EnvironmentObject var stripeModel: StripeModel
+    @EnvironmentObject var storeManager: StoreManager
     
     @State var profileEditingToBeDone: Bool = false
     @State var settingsDone: Bool = false
@@ -25,164 +26,218 @@ struct UserProfile: View {
             GeometryReader { geometry in
                 
                 ZStack {
-                    VStack(alignment:.center) {
-                        
-                        // User Data
-                        /// Image
-                        /// Where user works
-                        /// School Attended
-                        UserSnapDetails()
-                            .environmentObject(photoModel)
-                            .environmentObject(profileModel)
-                        
-                        
-                        // User Setttings View
-                        /// Settings
-                        /// Edit Profile
-                        /// Safety
-                        SettingEditProfileSafety(settingsDone:$settingsDone,
-                                                 profileEditingToBeDone:$profileEditingToBeDone)
-                            .environmentObject(photoModel)
-                            .environmentObject(profileModel)
-                            .padding(.bottom,20)
-                        
-                        // Subscription details
-                        /// SuperLike
-                        /// Number Of Boosst Left
-                        /// Upgrade
-                        SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                            showModal:$showModal,
-                                            bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
-                        
-                        Spacer()
-                        
-                        // Subscription Options
-                        /// User subscription amore
-                        /// Amore Platinum Information
-                        ///  Amore Gold Information
-                        ZStack {
+                    ScrollView{
+                        VStack(alignment:.center) {
+                            
+                            // User Data
+                            /// Image
+                            /// Where user works
+                            /// School Attended
+                            UserSnapDetails()
+                                .environmentObject(photoModel)
+                                .environmentObject(profileModel)
+                            
+                            
+                            // User Setttings View
+                            /// Settings
+                            /// Edit Profile
+                            /// Safety
+                            SettingEditProfileSafety(settingsDone:$settingsDone,
+                                                     profileEditingToBeDone:$profileEditingToBeDone)
+                                .environmentObject(photoModel)
+                                .environmentObject(profileModel)
+                                .padding(.bottom,20)
+                            
+                            // Subscription details
+                            /// SuperLike
+                            /// Number Of Boosst Left
+                            /// Upgrade
+                            SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                                showModal:$showModal,
+                                                bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
+                            
+                            
+                            
+                            SubscriptionTypes()
+                                .environmentObject(storeManager)
+                            
+                            
                             Spacer()
                             
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
-                            VStack {
-                                MyAmore(width: 300,
-                                        popUpCardSelection:$popUpCardSelection,
-                                        showModal: $showModal)
-                                AmorePlatinum(width:300,
+                            // Subscription Options
+                            /// User subscription amore
+                            /// Amore Platinum Information
+                            ///  Amore Gold Information
+                            ZStack {
+                                Spacer()
+                                
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
+                                VStack {
+                                    MyAmore(width: 300,
+                                            popUpCardSelection:$popUpCardSelection,
+                                            showModal: $showModal)
+                                    AmorePlatinum(width:300,
+                                                  popUpCardSelection:$popUpCardSelection,
+                                                  showModal:$showModal)
+                                    AmoreGold(width:300,
                                               popUpCardSelection:$popUpCardSelection,
                                               showModal:$showModal)
-                                AmoreGold(width:300,
-                                          popUpCardSelection:$popUpCardSelection,
-                                          showModal:$showModal)
-                                    .padding(.bottom,10)
+                                        .padding(.bottom,10)
+                                }
+                                
+                                Spacer()
                             }
                             
-                            Spacer()
                         }
+                        .padding(.horizontal,20)
+                        .navigationBarHidden(true)
+                    } // ScrollView
                         
-                    }
-                    .padding(.horizontal,20)
-                    .navigationBarHidden(true)
-                    
-                    
-                    if showModal {
-                        
-                        if let pricingData = stripeModel.pricingData {
+                        if showModal {
                             
-                            switch popUpCardSelection {
-                                
-                                case .superLikeCards :
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color.blue, Color.white],
-                                                      cardName: "Super Likes",
-                                                      cardHeaderSymbol:"star.circle",
-                                                      cardHeaderSymbolColor:Color("gold-star"),
-                                                      headerText:"Stand out with Super Like",
-                                                      subHeaderText:"You're 3x likely to get a match!!",
-                                                      showModal: $showModal,
-                                                      geometry:geometry,
-                                                      priceTabs: pricingData.superLikesPricing,
-                                                      selectedPriceTabId: pricingData.superLikesPricing[1].id,
-                                                      currency: pricingData.superLikesPricing[1].currency,
-                                                      totalCost:Float(pricingData.superLikesPricing[1].itemQuantity) * pricingData.superLikesPricing[1].pricePerQty
-                                                    )
-                                
-                                case .boostCards :
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.yellow, Color.orange, Color.white],
-                                                  cardName: "Boost",
-                                                  cardHeaderSymbol:"bolt.circle.fill",
-                                                               cardHeaderSymbolColor:Color.blue,
-                                                  headerText:"Skip the queue",
-                                                  subHeaderText:"Be on top of the deck for 30 minutes",
-                                                  showModal: $showModal,
-                                                  geometry:geometry,
-                                                  priceTabs: pricingData.boostPricing,
-                                                  selectedPriceTabId: pricingData.boostPricing[1].id,
-                                                  currency: pricingData.boostPricing[1].currency,
-                                                  totalCost:Float(pricingData.boostPricing[1].itemQuantity) * pricingData.boostPricing[1].pricePerQty
-                                                )
-                                
-                                case .messagesCards:
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.red, Color.pink, Color.white],
-                                              cardName: "Messages",
-                                              cardHeaderSymbol:"message.circle.fill",
-                                                           cardHeaderSymbolColor:Color.white,
-                                              headerText:"Be in their DM",
-                                              subHeaderText:"Get noticed, say something nice",
-                                              showModal: $showModal,
-                                              geometry:geometry,
-                                              priceTabs: pricingData.messagesPricing,
-                                              selectedPriceTabId: pricingData.messagesPricing[1].id,
-                                              currency: pricingData.messagesPricing[1].currency,
-                                              totalCost:Float(pricingData.messagesPricing[1].itemQuantity) * pricingData.messagesPricing[1].pricePerQty
-                                            )
+                                switch popUpCardSelection {
                                     
-                                case .myAmorecards:
-                                    MyAmoreCard(showModal: $showModal,
-                                                popUpCardSelection:$popUpCardSelection)
+                                    case .superLikeCards :
+                                        if let pricingData = storeManager.superLikesPricing {
+                                            BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color.blue, Color.white],
+                                                              cardName: "Super Likes",
+                                                              cardHeaderSymbol: "star.circle",
+                                                              cardHeaderSymbolColor: Color("gold-star"),
+                                                              headerText: "Stand out with Super Like",
+                                                              subHeaderText: "You're 3x likely to get a match!!",
+                                                              showModal: $showModal,
+                                                              geometry: geometry,
+                                                              priceTabs: pricingData,
+                                                              selectedPriceTabId: pricingData["5 Super Likes"]?.productIdentifier ?? "NoId",
+                                                              selectedDictIndex: "5 Super Likes",
+                                                              currency: pricingData["5 Super Likes"]?.localizedPrice ?? "USD",
+                                                              totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
+                                                              firstTabKey: "5 Super Likes",
+                                                              firstTabCount: 5,
+                                                              secondTabKey: "15 Super Likes",
+                                                              secondTabCount: 15,
+                                                              thirdTabKey: "30 Super Likes",
+                                                              thirdTabCount: 30
+                                                            )
+                                                            .environmentObject(storeManager)
+                                        }
                                     
-                                case .amorePlatinum:
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.black,Color.white],
-                                          cardName: "Amore Platinum",
-                                          cardHeaderSymbol:"bolt.heart.fill",
-                                          cardHeaderSymbolColor:Color.white,
-                                          headerText:"Amore Platinum",
-                                          subScriptText1:"Top Picks",
-                                          subScriptText2:"Unlimited Likes",
-                                          subScriptText3:"10 Super likes everyday",
-                                          subScriptText4:"5 Boost a month",
-                                          subScriptText5:"2 messages everyday",
-                                          showModal: $showModal,
-                                          geometry:geometry,
-                                          priceTabs: pricingData.amorePlatinumPricing,
-                                          selectedPriceTabId: pricingData.amorePlatinumPricing[1].id,
-                                          currency: pricingData.amorePlatinumPricing[1].currency,
-                                          totalCost:Float(pricingData.amorePlatinumPricing[1].itemQuantity) * pricingData.amorePlatinumPricing[1].pricePerQty
-                                        )
-                                
-                                case .amoreGold:
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.red,Color.yellow],
-                                      cardName: "Amore Gold",
-                                      cardHeaderSymbol:"bolt.heart.fill",
-                                      cardHeaderSymbolColor:Color("gold-star"),
-                                      headerText:"Amore Gold",
-                                      subScriptText1:"Top Picks",
-                                      subScriptText2:"500 Likes everyday",
-                                      subScriptText3:"5 Super likes everyday",
-                                      subScriptText4:"2 Boost a month",
-                                      subScriptText5:"1 messages everyday",
-                                      showModal: $showModal,
-                                      geometry:geometry,
-                                      priceTabs: pricingData.amoreGoldPricing,
-                                      selectedPriceTabId: pricingData.amoreGoldPricing[1].id,
-                                      currency: pricingData.amoreGoldPricing[1].currency,
-                                      totalCost:Float(pricingData.amoreGoldPricing[1].itemQuantity) * pricingData.amoreGoldPricing[1].pricePerQty
-                                    )
-                                                      
-                                } // switch statement
-                            } // check for nil
-                        } // show modal
-                        
+                                    case .boostCards :
+                                        if let pricingData = storeManager.boostsPricing {
+                                            BuySubscriptionOrItemsCard(cardColorFormat:[Color.yellow, Color.orange, Color.white],
+                                                              cardName: "Boosts",
+                                                              cardHeaderSymbol: "bolt.circle.fill",
+                                                              cardHeaderSymbolColor: Color.blue,
+                                                              headerText: "Skip the queue",
+                                                              subHeaderText: "Be on top of the deck for 30 minutes",
+                                                              showModal: $showModal,
+                                                              geometry: geometry,
+                                                              priceTabs: pricingData,
+                                                              selectedPriceTabId: pricingData["2 Boosts"]?.productIdentifier ?? "NoId",
+                                                              selectedDictIndex: "2 Boosts",
+                                                              currency: pricingData["2 Boosts"]?.localizedPrice ?? "USD",
+                                                              totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
+                                                              firstTabKey: "2 Boosts",
+                                                              firstTabCount: 2,
+                                                              secondTabKey: "5 Boosts",
+                                                              secondTabCount: 5,
+                                                              thirdTabKey: "10 Boosts",
+                                                              thirdTabCount: 10
+                                                            )
+                                                            .environmentObject(storeManager)
+                                        }
+                                    
+                                    case .messagesCards:
+                                        if let pricingData = storeManager.messagesPricing {
+                                            BuySubscriptionOrItemsCard(cardColorFormat:[Color.red, Color.pink, Color.white],
+                                                              cardName: "Messages",
+                                                              cardHeaderSymbol: "message.circle.fill",
+                                                              cardHeaderSymbolColor: Color.white,
+                                                              headerText: "Be in their DM",
+                                                              subHeaderText: "Get noticed, say something nice",
+                                                              showModal: $showModal,
+                                                              geometry: geometry,
+                                                              priceTabs: pricingData,
+                                                              selectedPriceTabId: pricingData["5 Messages"]?.productIdentifier ?? "NoId",
+                                                              selectedDictIndex: "5 Messages",
+                                                              currency: pricingData["5 Messages"]?.localizedPrice ?? "USD",
+                                                              totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
+                                                              firstTabKey: "5 Messages",
+                                                              firstTabCount: 5,
+                                                              secondTabKey: "10 Messages",
+                                                              secondTabCount: 10,
+                                                              thirdTabKey: "15 Messages",
+                                                              thirdTabCount: 15
+                                                            )
+                                                            .environmentObject(storeManager)
+                                        }
+                                        
+                                    case .myAmorecards:
+                                        MyAmoreCard(showModal: $showModal,
+                                                    popUpCardSelection:$popUpCardSelection)
+                                        
+                                    case .amorePlatinum:
+                                        if let pricingData = storeManager.amorePlatinumPricing {
+                                            BuySubscriptionOrItemsCard(cardColorFormat:[Color.black,Color.white],
+                                                              cardName: "Month",
+                                                              cardHeaderSymbol: "bolt.heart.fill",
+                                                              cardHeaderSymbolColor: Color.white,
+                                                              headerText:"Platinum Subscription",
+                                                              subScriptText1:"Top Picks",
+                                                              subScriptText2:"Unlimited Likes",
+                                                              subScriptText3:"10 Super likes everyday",
+                                                              subScriptText4:"5 Boost a month",
+                                                              subScriptText5:"2 messages everyday",
+                                                              showModal: $showModal,
+                                                              geometry: geometry,
+                                                              priceTabs: pricingData,
+                                                              selectedPriceTabId: pricingData["Amore Platinum 1 Month"]?.productIdentifier ?? "NoId",
+                                                              selectedDictIndex: "Amore Platinum 1 Month",
+                                                              currency: pricingData["Amore Platinum 1 Month"]?.localizedPrice ?? "USD",
+                                                              totalCost: Float(truncating: pricingData["Amore Platinum 1 Month"]?.price ?? 0.0),
+                                                              firstTabKey: "Amore Platinum 1 Month",
+                                                              firstTabCount: 1,
+                                                              secondTabKey: "Amore Platinum 3 Month",
+                                                              secondTabCount: 3,
+                                                              thirdTabKey: "Amore Platinum 6 Month",
+                                                              thirdTabCount: 6
+                                                            )
+                                                            .environmentObject(storeManager)
+                                        }
+                                    
+                                    case .amoreGold:
+                                    if let pricingData = storeManager.amoreGoldPricing {
+                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.red,Color.yellow],
+                                                          cardName: "Month",
+                                                          cardHeaderSymbol: "bolt.heart.fill",
+                                                          cardHeaderSymbolColor: Color("gold-star"),
+                                                          headerText:"Gold Subscription",
+                                                          subScriptText1:"Top Picks",
+                                                          subScriptText2:"500 Likes everyday",
+                                                          subScriptText3:"5 Super likes everyday",
+                                                          subScriptText4:"2 Boost a month",
+                                                          subScriptText5:"1 messages everyday",
+                                                          showModal: $showModal,
+                                                          geometry: geometry,
+                                                          priceTabs: pricingData,
+                                                          selectedPriceTabId: pricingData["Amore Gold 1 Month"]?.productIdentifier ?? "NoId",
+                                                          selectedDictIndex: "Amore Gold 1 Month",
+                                                          currency: pricingData["Amore Gold 1 Month"]?.localizedPrice ?? "USD",
+                                                          totalCost: Float(truncating: pricingData["Amore Gold 1 Month"]?.price ?? 0.0),
+                                                          firstTabKey: "Amore Gold 1 Month",
+                                                          firstTabCount: 1,
+                                                          secondTabKey: "Amore Gold 3 Month",
+                                                          secondTabCount: 3,
+                                                          thirdTabKey: "Amore Gold 6 Month",
+                                                          thirdTabCount: 6
+                                                        )
+                                                       .environmentObject(storeManager)
+                                    }
+                                                          
+                                    } // switch statement
+                            } // show modal
+                            
                 } // Zstack
             } // geometry reader
         } // navigation view
@@ -193,6 +248,8 @@ struct UserProfile: View {
 
 // Template to display cards - this view is used by all the subscription & individualized item buying cards
 struct BuySubscriptionOrItemsCard : View {
+    
+    @EnvironmentObject var storeManager: StoreManager
     
     @Namespace var animation
     @State var cardColorFormat: [Color]
@@ -208,14 +265,21 @@ struct BuySubscriptionOrItemsCard : View {
     @State var subScriptText5: String?
     @Binding var showModal: Bool
     @State var geometry: GeometryProxy
-    @State var priceTabs: [SubscriptionItemPricing]
+    @State var priceTabs: [String: SKProduct]
     @State var selectedPriceTabId: String
+    @State var selectedDictIndex: String
     @State var currency: String
     @State var totalCost: Float
+    @State var firstTabKey: String
+    @State var firstTabCount: Int
+    @State var secondTabKey: String
+    @State var secondTabCount: Int
+    @State var thirdTabKey: String
+    @State var thirdTabCount: Int
     
     var body: some View {
         
-            ZStack{
+            ZStack {
                 
                 // Card rectangle background cover
                 // Just the color which is gradient
@@ -267,17 +331,44 @@ struct BuySubscriptionOrItemsCard : View {
                     // Pricing data is received from the backend
                     // We ite over each subscription or itemized pricing details
                     HStack {
-                        ForEach(priceTabs, id:\.self) { priceTab in
-                            PriceTab(itemId:priceTab.id,
-                                     itemQuantity: priceTab.itemQuantity,
-                                     description: priceTab.description,
-                                     pricePerQty: priceTab.pricePerQty,
-                                     currency: priceTab.currency,
-                                     selectedPriceTabId: $selectedPriceTabId,
-                                     animation: animation,
-                                     totalCost: $totalCost)
-                        }
+                        PriceTab(itemId: priceTabs[firstTabKey]?.productIdentifier ?? "NoId",
+                                 itemQuantity: firstTabCount,
+                                 description: cardName,
+                                 pricePerQty: Float(truncating: priceTabs[firstTabKey]?.price ?? 0.0)/Float(firstTabCount),
+                                 currency: priceTabs[firstTabKey]?.localizedPrice ?? "USD",
+                                 selectedPriceTabId: $selectedPriceTabId,
+                                 animation: animation,
+                                 priceTabCost: Binding.constant(Float(truncating: priceTabs[firstTabKey]?.price ?? 0.0)),
+                                 totalCost:$totalCost,
+                                 dictIndex:firstTabKey,
+                                 selectedDictIndex:$selectedDictIndex
+                        )
                         
+                        PriceTab(itemId: priceTabs[secondTabKey]?.productIdentifier ?? "NoId",
+                                 itemQuantity: secondTabCount,
+                                 description: cardName,
+                                 pricePerQty: Float(truncating: priceTabs[secondTabKey]?.price ?? 0.0)/Float(secondTabCount),
+                                 currency: priceTabs[secondTabKey]?.localizedPrice ?? "USD",
+                                 selectedPriceTabId: $selectedPriceTabId,
+                                 animation: animation,
+                                 priceTabCost: Binding.constant(Float(truncating: priceTabs[secondTabKey]?.price ?? 0.0)),
+                                 totalCost:$totalCost,
+                                 dictIndex:secondTabKey,
+                                 selectedDictIndex:$selectedDictIndex
+                                )
+                        
+                        PriceTab(itemId: priceTabs[thirdTabKey]?.productIdentifier ?? "NoId",
+                                 itemQuantity: thirdTabCount,
+                                 description: cardName,
+                                 pricePerQty: Float(truncating: priceTabs[thirdTabKey]?.price ?? 0.0)/Float(thirdTabCount),
+                                 currency: priceTabs[thirdTabKey]?.localizedPrice ?? "USD",
+                                 selectedPriceTabId: $selectedPriceTabId,
+                                 animation: animation,
+                                 priceTabCost: Binding.constant(Float(truncating: priceTabs[thirdTabKey]?.price ?? 0.0)),
+                                 totalCost:$totalCost,
+                                 dictIndex:thirdTabKey,
+                                 selectedDictIndex:$selectedDictIndex
+                                 )
                     }
                     .padding(.top,10)
                     .foregroundColor(Color.white)
@@ -289,23 +380,30 @@ struct BuySubscriptionOrItemsCard : View {
                     /// Option to see amore gold
                     /// No Thanks to close the tab
                     Group {
+                        
                         // Buy the subscripion or item
-                        ZStack{
-                            Capsule()
-                                .fill(LinearGradient(
-                                    gradient: Gradient(colors: [cardColorFormat[0],cardColorFormat[1]]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing)
-                                )
-                                .frame(width:UIScreen.main.bounds.width - 150, height:50)
+                        VStack {
                             
-                            VStack {
-                                Text("Buy \(currency) \(totalCost, specifier: "%.1f")")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
+                            // Buy the subscripion or item
+                            if UserDefaults.standard.bool(forKey: selectedPriceTabId) {
+                               PayButton(buttonText: "Purchased",
+                                         cardName: "",
+                                         totalCost: Binding.constant(Float(0.0)),
+                                         buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+
+                            } else {
+                                Button(action: {
+                                    storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
+                                }) {
+                                    PayButton(buttonText: "\(currency)",
+                                       cardName: "Buy",
+                                       totalCost: $totalCost,
+                                       buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                }
+                                .foregroundColor(.blue)
                             }
-                        }
-                        .padding(.top,15)
+                            
+                         }
                         
                         Spacer()
                         
@@ -341,7 +439,10 @@ struct PriceTab: View {
     @State var currency: String
     @Binding var selectedPriceTabId: String
     var animation: Namespace.ID
+    @Binding var priceTabCost: Float
     @Binding var totalCost: Float
+    @State var dictIndex: String
+    @Binding var selectedDictIndex: String
     
     var body: some View {
         
@@ -349,19 +450,20 @@ struct PriceTab: View {
         Button(action: {
             withAnimation(.spring()){
                 selectedPriceTabId = itemId
+                totalCost = priceTabCost
+                selectedDictIndex = dictIndex
             }
-            totalCost = Float(itemQuantity) * pricePerQty
         }) {
             VStack {
                 Text(String(self.itemQuantity))
                     .font(.title)
                 
                 Text(description)
-                    .font(.subheadline)
+                    .font(.headline)
                 
                 Divider()
                 
-                Text("\(currency) \(pricePerQty, specifier: "%.1f")/ea")
+                Text("\(currency)")
                     .bold()
             }
             .padding(5)
@@ -380,3 +482,41 @@ struct PriceTab: View {
     
     }
 }
+
+
+struct PayButton: View {
+
+    @State var buttonText: String
+    @State var cardName: String
+    @Binding var totalCost: Float
+    @State var buttonColor: [Color]
+    
+    var body: some View {
+    
+        ZStack{
+            // Box rectangle
+            Capsule()
+                .fill(LinearGradient(
+                    gradient: Gradient(colors:buttonColor),
+                    startPoint: .leading,
+                    endPoint: .trailing)
+                )
+                .frame(width:UIScreen.main.bounds.width - 150, height:50)
+            
+            VStack {
+                if totalCost == 0.0 {
+                    Text("\(buttonText)")
+                } else {
+                    Text("\(cardName) for \(String(buttonText.first!)) \(totalCost, specifier: "%.2f")")
+                }
+            }
+            .foregroundColor(Color.white)
+            .font(.headline)
+        }
+        .padding(.top,15)
+        
+    }
+    
+}
+
+

@@ -21,7 +21,7 @@ struct HomeView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
-    @EnvironmentObject var stripeModel: StripeModel
+    @EnvironmentObject var storeManager: StoreManager
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -62,7 +62,6 @@ struct HomeView: View {
                                         .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
                                         .onChange(of: filterModel.filterData) { _ in
-                                            print("On change for filter triggered")
                                             filterModel.updateFilter()
                                         }
                                     
@@ -70,10 +69,8 @@ struct HomeView: View {
                                     UserProfile()
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
-                                        .environmentObject(stripeModel)
-//                                        .onAppear {
-//                                                    stripeModel.getPricingData()
-//                                        }
+                                        .environmentObject(storeManager)
+
                             }
                             
                             // Control Center

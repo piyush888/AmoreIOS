@@ -10,7 +10,7 @@ import SwiftUI
 
 class StripeModel: ObservableObject {
     
-  let backendCheckoutUrl = URL(string: "http://127.0.0.1:5000/payment-sheet")!
+  let backendCheckoutUrl = URL(string: "http://127.0.0.1:5000/paymentsheet")!
   var apiURL = "http://127.0.0.1:5000"
   @Published var paymentSheet: PaymentSheet?
   @Published var paymentResult: PaymentSheetResult?

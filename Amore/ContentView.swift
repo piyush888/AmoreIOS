@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import CoreLocation
+import StoreKit
 
 struct ContentView: View {
     
@@ -20,7 +21,7 @@ struct ContentView: View {
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
-    @StateObject var stripeModel = StripeModel()
+    @StateObject var storeManager = StoreManager()
     
     var body: some View {
         
@@ -81,7 +82,7 @@ struct ContentView: View {
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(reportActivityModel)
-                                        .environmentObject(stripeModel)
+                                        .environmentObject(storeManager)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
                                             profileModel.getUserProfile()
@@ -94,7 +95,9 @@ struct ContentView: View {
                                             receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getSuperLikesGivenData()
                                             receivedGivenEliteModel.elitesData()
-                                            stripeModel.getPricingData()
+                                            // Observing the storemanager payment queue and responds to the changes. 
+                                            SKPaymentQueue.default().add(storeManager)
+                                            storeManager.getProducts()
                                         }
                                 }
                                 // Else get location permission
