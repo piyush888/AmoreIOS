@@ -10,20 +10,35 @@ import SwiftUI
 struct ControlCenter: View {
     
     @Binding var currentPage: ViewTypes
+//    @Binding var newMessageBadge: Bool
     
     var controlCenterColor = Color(UIColor.lightGray)
     
     var body: some View {
         HStack {
             
-            Image(systemName: "text.bubble.fill")
-                .imageScale(.large)
-                .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
-                .padding(.horizontal)
-                .onTapGesture {
-                    currentPage = .messagingView
-                }
-                
+//            if newMessageBadge {
+//                Image(systemName: "text.bubble.fill")
+//                    .imageScale(.large)
+//                    .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
+//                    .padding(.horizontal)
+//                    .onTapGesture {
+//                        currentPage = .messagingView
+//                    }
+//                    .overlay(Text("\(Image(systemName: "suit.heart.fill"))")
+//                                .foregroundColor(.green)
+//                                .font(.body), alignment: .topTrailing)
+//            }
+//            else {
+                Image(systemName: "text.bubble.fill")
+                    .imageScale(.large)
+                    .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        currentPage = .messagingView
+                    }
+//            }
+            
             Spacer()
             Image(systemName: "sparkles")
                 .imageScale(.large)

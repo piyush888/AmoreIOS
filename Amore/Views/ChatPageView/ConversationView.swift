@@ -17,10 +17,13 @@ struct ConversationView: View {
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
-            ZStack {
+            VStack {
                 AllMessagesForUser
+                    .onTapGesture {
+                        self.hideKeyboard()
+                    }
                 VStack(spacing: 0) {
-                    Spacer()
+//                    Spacer()
                     MessageSendField
                         .background(Color.white.ignoresSafeArea())
                 }
@@ -60,7 +63,7 @@ struct ConversationView: View {
                         }
 
                         HStack{ Spacer() }
-                        .frame(height: 50)
+                        .frame(height: 20)
                         .id(self.emptyScrollToString)
                     }
                     .onChange(of: chatModel.chatMessages.count) { _ in
