@@ -11,6 +11,8 @@
 		1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
+		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
+		1B39493627D3263100793431 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493527D3263100793431 /* CustomScrollView.swift */; };
 		1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED871270F345E00290FFF /* CardPassions.swift */; };
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
@@ -181,6 +183,8 @@
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		1B38DFC127B8C1A0009B905F /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardExtension.swift; sourceTree = "<group>"; };
+		1B39493527D3263100793431 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		1B4ED871270F345E00290FFF /* CardPassions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPassions.swift; sourceTree = "<group>"; };
 		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -758,6 +762,8 @@
 				E2DBC026272B3BC0000630F5 /* SFSafariViewWrapper.swift */,
 				1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */,
 				E22D5561275532B800852D70 /* ColorExtension.swift */,
+				1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */,
+				1B39493527D3263100793431 /* CustomScrollView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -946,6 +952,7 @@
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1BFCBAE32721BD260002BA67 /* RaisedInFilter.swift in Sources */,
 				E295F37B274877840003A1E1 /* NoPhotoProvided.swift in Sources */,
+				1B39493627D3263100793431 /* CustomScrollView.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
@@ -971,6 +978,7 @@
 				E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */,
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */,
+				1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */,
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
 				E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */,
 				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,

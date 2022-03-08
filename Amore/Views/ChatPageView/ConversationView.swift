@@ -13,14 +13,22 @@ struct ConversationView: View {
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @Binding var toUser: ChatUser
+    @Binding var selectedChat: ChatConversation
+    var selectedChatIndex: Int {
+        mainMessagesModel.returnSelectedChatIndex(chat: selectedChat)
+    }
     var emptyScrollToString = ""
+    @State var scrollToBottomOnSend: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
-            ZStack {
+            VStack {
                 AllMessagesForUser
+                    .onTapGesture {
+                        self.hideKeyboard()
+                    }
                 VStack(spacing: 0) {
-                    Spacer()
+//                    Spacer()
                     MessageSendField
                         .background(Color.white.ignoresSafeArea())
                 }
@@ -47,6 +55,11 @@ struct ConversationView: View {
                     }
                 }
             }
+            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
+                if newValue.fromId != Auth.auth().currentUser?.uid {
+                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
+                }
+            }
 //            .navigationBarTitleDisplayMode(.inline)
         }
     
@@ -60,7 +73,7 @@ struct ConversationView: View {
                         }
 
                         HStack{ Spacer() }
-                        .frame(height: 50)
+                        .frame(height: 20)
                         .id(self.emptyScrollToString)
                     }
                     .onChange(of: chatModel.chatMessages.count) { _ in
@@ -72,6 +85,18 @@ struct ConversationView: View {
                             print("Chat: Checkpoint 8")
                         }
                         print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
+                    }
+                    .onChange(of: scrollToBottomOnSend) { newValue in
+                        if newValue == true {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    scrollViewProxy.scrollTo(self.emptyScrollToString)
+                                }
+                                print("Chat: Checkpoint 8")
+                            }
+                            print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
+                            scrollToBottomOnSend = false
+                        }
                     }
                 }
             }
@@ -95,6 +120,7 @@ struct ConversationView: View {
             .frame(height: 40)
 
             Button {
+                scrollToBottomOnSend = true
                 chatModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser)
             } label: {
                 Text("Send")
@@ -142,7 +168,7 @@ struct MessageView: View {
 
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())))
+        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation()))
             .environmentObject(ChatModel())
             .environmentObject(MainMessagesViewModel())
     }

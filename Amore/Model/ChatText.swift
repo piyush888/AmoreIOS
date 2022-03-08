@@ -36,4 +36,5 @@ struct ChatText: Identifiable, Codable, Hashable {
     var toId: String?
     var text: String?
     var timestamp: Date?
+    var otherUserUpdated: Bool? = false
 }

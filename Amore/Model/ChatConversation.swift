@@ -25,4 +25,5 @@ struct ChatConversation: Identifiable, Codable, Hashable {
         return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
     var msgRead: Bool? = false
+    var otherUserUpdated: Bool? = false
 }
