@@ -12,6 +12,7 @@ struct SubscriptionDetails: View {
     @Binding var popUpCardSelection: PopUpCards
     @Binding var showModal: Bool
     @State var bgColor: Color
+    @EnvironmentObject var storeManager: StoreManager
     
     var body: some View {
         
@@ -28,7 +29,7 @@ struct SubscriptionDetails: View {
                 
                     Spacer()
                     
-                        
+                    // Buy Super Likes & show the count of the super likes
                     Button {
                         popUpCardSelection = .superLikeCards
                         showModal = true
@@ -46,6 +47,7 @@ struct SubscriptionDetails: View {
                     
                     Spacer()
                     
+                    // Buy Boosts and show the count of boosts
                     Button {
                         popUpCardSelection = .boostCards
                         showModal = true
@@ -64,6 +66,8 @@ struct SubscriptionDetails: View {
                     
                     Spacer()
                     
+                    
+                    // Buy Message Options
                     Button {
                         popUpCardSelection = .messagesCards
                         showModal = true
@@ -74,6 +78,22 @@ struct SubscriptionDetails: View {
                                 .frame(width:50, height:50)
                                 .foregroundColor(.pink)
                             Text("3 messages ")
+                                .font(.caption2)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    //Restore products already purchased
+                    Button {
+                        storeManager.restoreProducts()
+                    } label: {
+                        VStack {
+                            Image(systemName: "arrow.counterclockwise.circle.fill")
+                                .resizable()
+                                .frame(width:50, height:50)
+                                .foregroundColor(.green)
+                            Text("Restore")
                                 .font(.caption2)
                         }
                     }

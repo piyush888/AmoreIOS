@@ -26,7 +26,7 @@ struct HomeView: View {
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
     func checkIfDataIsComing() {
-        if (cardProfileModel.timeOutRetriesCount > 4) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
+        if (cardProfileModel.timeOutRetriesCount > 5) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
             serviceErrorView = .serverErrorView
         }
     }

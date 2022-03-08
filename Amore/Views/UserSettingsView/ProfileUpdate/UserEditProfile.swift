@@ -25,27 +25,21 @@ struct EditProfile: View {
                     
                     Spacer()
                     
-                    Button {
+                    Button(action: {
                         // Take Back to Profile View
                         profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                         profileEditingToBeDone = false
-                    } label: {
-                        
-                        VStack(alignment: .leading) {
-                              Text("Done")
-                                .font(.subheadline)
-                                .padding()
-                                .foregroundColor(.white)
-                            }
-                            .frame(
-                              minWidth: 0,
-                              maxWidth: geometry.size.width/5
-                            )
-                            .background(Color.blue)
-                            .cornerRadius(20.0)
+                    }) {
+                    HStack {
+                        Text("Done")
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
                     }
-                    
-                    
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color("dark-green"), Color("light-green")]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(20)
+                    }
                     
                 }.padding(.horizontal,20)
                 

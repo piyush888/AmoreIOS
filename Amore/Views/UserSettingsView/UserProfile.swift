@@ -46,15 +46,17 @@ struct UserProfile: View {
                                                      profileEditingToBeDone:$profileEditingToBeDone)
                                 .environmentObject(photoModel)
                                 .environmentObject(profileModel)
-                                .padding(.bottom,20)
+                                .padding(.bottom,5)
                             
                             // Subscription details
-                            /// SuperLike
-                            /// Number Of Boosst Left
-                            /// Upgrade
+                            /// SuperLike : Show count or option to buy
+                            /// Boosts: Show count or option to buy
+                            /// Messages: Show count and option to buy
+                            /// Restore: Restore Purcahse
                             SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
                                                 showModal:$showModal,
                                                 bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
+                                .environmentObject(storeManager)
                             
                             
                             

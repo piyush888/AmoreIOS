@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 import StoreKit
 
 struct StripePricings : Codable{
-    
     var superLikesPricing : [SubscriptionItemPricing]
     var boostPricing : [SubscriptionItemPricing]
     var messagesPricing: [SubscriptionItemPricing]
@@ -20,7 +19,6 @@ struct StripePricings : Codable{
 }
 
 struct SubscriptionItemPricing: Identifiable, Codable, Hashable {
-    
     var id: String
     var itemQuantity: Int
     var description: String
