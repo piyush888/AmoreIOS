@@ -30,18 +30,37 @@ class MainMessagesViewModel: ObservableObject {
         db.collection("RecentChats")
             .document(fromId)
             .collection("Messages")
-            .document(toId).updateData(["msgRead": chat.msgRead])
+            .document(toId).updateData(["msgRead": chat.msgRead, "otherUserUpdated": false])
         
         db.collection("RecentChats")
-            .document(toId)
-            .collection("Messages")
-            .document(fromId).updateData(["msgRead": chat.msgRead])
+            .document(fromId)
+            .setData(["wasUpdated": true]) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save recent message: \(error)"
+                print("Chat: Failed to save recent message: \(error)")
+                return
+            }
+        }
     }
     
     func markMessageRead(chat: ChatConversation) {
         if let index = recentChats.firstIndex(where: {$0.id == chat.id}) {
             recentChats[index].msgRead = true
             updateRecentChatsFirestore(chat: recentChats[index])
+        }
+    }
+    
+    func markMessageRead(index: Int) {
+        recentChats[index].msgRead = true
+        updateRecentChatsFirestore(chat: recentChats[index])
+    }
+    
+    func returnSelectedChatIndex(chat: ChatConversation) -> Int {
+        if let index = recentChats.firstIndex(where: {$0.id == chat.id}) {
+            return index
+        }
+        else {
+            return -1
         }
     }
 

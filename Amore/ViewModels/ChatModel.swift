@@ -54,26 +54,6 @@ class ChatModel: ObservableObject {
             print("Chat: \(error)")
         }
         
-        // Save the same text message with Receiver's ID also
-        
-        do {
-            _ = try db.collection("Messages")
-                .document(toId)
-                .collection(fromId)
-                .document().setData(from: messageData) { error in
-                    if let error = error {
-                        print("Chat: \(error)")
-                        self.errorMessage = "Failed to save message into Firestore: \(error)"
-                        return
-                    }
-
-                    print("Chat: Recipient saved message as well")
-                }
-        }
-        catch {
-            print("Chat: \(error)")
-        }
-        
     }
     
     func fetchMessages(toUser: ChatUser) {
@@ -101,8 +81,6 @@ class ChatModel: ObservableObject {
                                     print("Chat: Appending chatMessage in ChatLogView: \(Date())")
                                     print("Chat: Checkpoint 4")
                                 }
-//                                self.chatMessages.append(data)
-//                                print("Appending chatMessage in ChatLogView: \(Date())")
                             }
                         }
                         catch {
@@ -125,6 +103,16 @@ class ChatModel: ObservableObject {
 
         let senderData = ChatConversation(fromId: uid, toId: toId, user: toUser, lastText: self.chatText, timestamp: Date())
         
+        db.collection("RecentChats")
+            .document(uid)
+            .setData(["wasUpdated": true]) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save recent message: \(error)"
+                print("Chat: Failed to save recent message: \(error)")
+                return
+            }
+        }
+        
         do {
             _ = try db.collection("RecentChats")
                 .document(uid)
@@ -140,25 +128,6 @@ class ChatModel: ObservableObject {
         catch {
             print("Chat: \(error)")
         }
-        
-        let recipientData = ChatConversation(fromId: uid, toId: toId, user: fromUser, lastText: self.chatText, timestamp: Date())
-        
-        do {
-            _ = try db.collection("RecentChats")
-                .document(toId)
-                .collection("Messages")
-                .document(uid)
-                .setData(from: recipientData) { error in
-                    if let error = error {
-                        print("Chat: Failed to save recipient recent message: \(error)")
-                        return
-                    }
-                }
-        }
-        catch {
-            print("Chat: \(error)")
-        }
-        
     }
     
 }

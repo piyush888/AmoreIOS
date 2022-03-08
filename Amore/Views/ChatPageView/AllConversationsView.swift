@@ -14,6 +14,7 @@ struct AllConversationsView: View {
     
     @Binding var navigateToChatView: Bool
     @State var toUser: ChatUser = ChatUser()
+    @State var selectedChat = ChatConversation()
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
@@ -26,6 +27,7 @@ struct AllConversationsView: View {
                             self.toUser = recentMessage.user ?? ChatUser()
                             self.chatModel.fetchMessages(toUser: toUser)
                             self.navigateToChatView = true
+                            self.selectedChat = recentMessage
                             mainMessagesModel.markMessageRead(chat: recentMessage)
                         } label: {
                             if (recentMessage.fromId == Auth.auth().currentUser?.uid) {
@@ -57,7 +59,7 @@ struct AllConversationsView: View {
             }
             
             NavigationLink("", isActive: $navigateToChatView) {
-                ConversationView(toUser: $toUser)
+                ConversationView(toUser: $toUser, selectedChat: $selectedChat)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
             }
