@@ -425,6 +425,7 @@ struct BuySubscriptionOrItemsCard : View {
                 .clipped()
                 .frame(width: UIScreen.main.bounds.width-50, height: geometry.size.height/1.7)
             }
+            .animation(.spring())
         
         
     }
