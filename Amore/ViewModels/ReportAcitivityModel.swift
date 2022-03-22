@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import Firebase
 
 class ReportActivityModel: ObservableObject  {
 
     @Published var fetchDataObj = FetchDataModel()
     
-    func reportUserWithReason(profileBeingReportedId:String, reason:String, description:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void) {
+    static func reportUserWithReason(otherUserId:String, reason:String, description:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void) {
         
-        var requestBody = ["swipedProfileID": profileBeingReportedId,
+        var requestBody = ["current_user_id": Auth.auth().currentUser?.uid, "other_user_id": otherUserId,
                            "reasonGiven": reason,
                            "descriptionGiven": description]
         
