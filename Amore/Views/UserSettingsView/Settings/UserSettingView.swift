@@ -12,6 +12,7 @@ struct UserSettingView: View {
     
     @AppStorage("log_Status") var logStatus = false
     @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var settingsDone: Bool
     @State var showModal = false
     
@@ -40,13 +41,9 @@ struct UserSettingView: View {
                 }
                 
                 // Section
-                /// Phone Number
-                /// Email Address
-                PhoneNumberEmail(width:geometry.size.width)
-                
-                // Section
                 /// Help & Support, Legal and Privacy Policy
                 ContactCommunityLegal()
+                    .environmentObject(profileModel)
                 
                 
                 Spacer()

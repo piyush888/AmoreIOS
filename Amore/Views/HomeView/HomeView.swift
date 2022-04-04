@@ -13,7 +13,6 @@ struct HomeView: View {
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
     @State var currentPage: ViewTypes = .swipeView
     
-    
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
@@ -70,7 +69,6 @@ struct HomeView: View {
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(storeManager)
-
                             }
                             
                             // Control Center

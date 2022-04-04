@@ -17,7 +17,6 @@ struct BasicUserInfoForm: View {
     }
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     
     @State var lastName: String = ""
     @State var firstName: String = ""
@@ -155,8 +154,6 @@ struct BasicUserInfoForm: View {
                 NavigationLink(
                     destination: Passions()
                         .environmentObject(profileModel),
-//                        .environmentObject(streamModel),
-                    
                     isActive: $allFieldsFilled,
                     label: {
                         Button{

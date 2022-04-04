@@ -57,11 +57,13 @@ struct UserProfile: View {
                                                 showModal:$showModal,
                                                 bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
                                 .environmentObject(storeManager)
-                            
-                            
-                            
-                            SubscriptionTypes()
-                                .environmentObject(storeManager)
+                                
+                            // Test Firebase storage of data
+                            Button(action: {
+                                storeManager.testFirebaseFunc()
+                            }) {
+                                Text("Firebase store")
+                            }
                             
                             
                             Spacer()

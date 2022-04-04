@@ -18,6 +18,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @AppStorage("log_Status") var logStatus = false
     var userProfile = Profile()
     @Published var editUserProfile = Profile()
+    @Published var storeManagerObj = StoreManager() // Object
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
     
@@ -271,6 +272,15 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.editUserProfile = self.userProfile
                 // Set profileFetchedAndReady = True, right after profile creation.
                 self.profileFetchedAndReady = true
+                
+                // New Profile Create Document for user in IAPPurchase
+                // Default Consumable & Free Subscription
+                // Current Free Consumables Limit 20th March 22
+                _ = self.storeManagerObj.storePurchaseWithParams(product:ConsumableCountAndSubscriptionModel(
+                                                totalBoostCount: 1,
+                                                totalSuperLikesCount: 2,
+                                                totalMessagesCount: 1,
+                                                subscriptionTypeId: "Amore.ProductId.12M.Free.v1"))
                 return true
             }
             catch let error {

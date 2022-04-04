@@ -7,6 +7,7 @@
 
 import Foundation
 import StoreKit
+import Firebase
 
 // To fetch the products, we adapt the NSObject and SKProductsRequestDelegate protocols.
 class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -38,17 +39,14 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     // SKProductsRequest property in our StoreManager, which we will use to start the fetching process
     var request: SKProductsRequest!
     
-    // Array that will contain the IAP products as SKProduct instances. Since we want to update the observing ContentView every time a new SKProduct is added, we use the @Published property wrapper.
-    @Published var myProducts = [SKProduct]()
-    
-    // Sends a request to the Apple servers based on given product IDs. At the same time we use the StoreManager class itself as the delegate of the request, so that the request knows that the didReceive response method should be called as soon as the Apple servers send a response.
+    // Sends a request to the Apple servers based on given product IDs. At the same time we use the StoreManager class itself as the delegate of the request  so that the request knows that the didReceive response method should be called as soon as the Apple servers send a response.
+    // Get Products from IAP
     func getProducts() {
         print("Store Manager: Start requesting products ...")
         let request = SKProductsRequest(productIdentifiers: Set(productIDs))
         request.delegate = self
         request.start()
     }
-    
     
     // didReceive response method
     // To conform to the SKProducutsRequestDelegate, we add the following function to our class
@@ -87,10 +85,8 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         print("Store Manager: Request did fail: \(error)")
     }
     
-    
     //HANDLE TRANSACTIONS - state of a transaction
     @Published var transactionState: SKPaymentTransactionState?
-    
     
     // Once we have started a transaction(paymentQueue), this function is called every time something changes in the status of the transaction(s) currently processed.
     func purchaseProduct(product: SKProduct) {
@@ -114,8 +110,10 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
+                self.storePurchaseNoParams()
             case .restored:
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
+                self.getPurcahse()
                 queue.finishTransaction(transaction)
                 transactionState = .restored
             case .failed, .deferred:
@@ -128,11 +126,92 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         }
     }
     
-    
+    // Restore the purcahse
     func restoreProducts() {
         print("Store Manager: Restoring products ...")
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
+    
+    // TOBE removed use this as a test function
+    func testFirebaseFunc() {
+//        self.storePurchaseNoParams()
+        self.getPurcahse()
+    }
+    
+    // ******************************************** //
+    // ******************************************** //
+    // ******************************************** //
+    // ************ Purcahse to Firebase ********** //
+    // ******************************************** //
+    // ******************************************** //
+    // ******************************************** //
+    
+    let db = Firestore.firestore()
+    @Published var purcahseDataDetails = ConsumableCountAndSubscriptionModel()
+    var oldPurcahseData = ConsumableCountAndSubscriptionModel()
+    var storeIAPPurchasingActivity = IAPPurcahseHistoryModel() // Model
+    var purchaseDataFetched = false
+    
+    // Call this function to store the user purchase data into firebase
+    func storePurchase(product: ConsumableCountAndSubscriptionModel) -> Bool {
+        let collectionRef = db.collection("InAppPurchase")
+        if let userId = Auth.auth().currentUser?.uid {
+            
+            do {
+                let newDocReference = try collectionRef.document(userId).setData(from: product)
+                return true
+            }
+            catch let error {
+                print("Error writing document to Firestore: \(error)")
+            }
+            
+        } else {
+                print("No User Id")
+        }
+        return false
+    }
+    
+    // Call this function when you want to store firestore object without an object
+    func storePurchaseNoParams() -> Bool {
+        return self.storePurchase(product:self.purcahseDataDetails)
+    }
+    
+    // Call this function when you don't want to pass an object to be stored
+    func storePurchaseWithParams(product:ConsumableCountAndSubscriptionModel) -> Bool {
+        return self.storePurchase(product:product)
+    }
+    
+    // Save the purchase data to firebase
+    func getPurcahse() {
+        
+        self.purchaseDataFetched = false
+        let collectionRef = db.collection("InAppPurchase")
+        if let documentId = Auth.auth().currentUser?.uid {
+            let docRef = collectionRef.document(documentId)
+            // Get Data from Firestore. Network Action -- Async Behaviour at this point
+             .getDocument { [self] document, error in
+                if let error = error as NSError? {
+                    print("Error getting document: \(error.localizedDescription)")
+                }
+                else {
+                    if let document = document {
+                        do {
+                            // Get User Purcahse Data from firestore
+                            self.oldPurcahseData = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
+                            self.purcahseDataDetails = self.oldPurcahseData
+                            self.purchaseDataFetched = true
+                        }
+                        catch {
+                            print(error)
+                            self.purchaseDataFetched = true
+                        }
+                    } // if document
+                } // else
+            } // docref
+        } // documentID
+    } // getPurcahse
+    
+    
 }
 
 

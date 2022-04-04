@@ -11,7 +11,6 @@ struct AddSchool: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     
     @State var schoolName : String = ""
     @State var education : String = ""
@@ -73,8 +72,6 @@ struct AddSchool: View {
                 // Execute "Create Profile Document in Firestore"
                 profileModel.calculateProfileCompletion()
                 let status = profileModel.createUserProfile()
-                // Create Stream Chat User Profile - Only called once during profile creation
-//                streamModel.createUserProfileInStream(userName: profileModel.userProfile.firstName ?? "No Name")
                 continueToNext = status
                 print("Profile Saved: \(status)")
             } label : {

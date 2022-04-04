@@ -10,7 +10,6 @@ import SwiftUI
 struct SexualOrientation: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
@@ -70,8 +69,6 @@ struct SexualOrientation: View {
                         // Add if passion doesn't exist in list
                         orientationsSelected.append(item)
                     }
-                    print(orientationsSelected)
-                    print(showMyOrientation)
                     // Load the passionSelected to firebase
                 }) {
                     ZStack {
@@ -98,7 +95,6 @@ struct SexualOrientation: View {
             // Continue to next view
             NavigationLink(destination: ShowMe()
                             .environmentObject(profileModel),
-//                            .environmentObject(streamModel),
                            isActive: $sexualOrientationDataTaken,
                            label: {
                 Button{

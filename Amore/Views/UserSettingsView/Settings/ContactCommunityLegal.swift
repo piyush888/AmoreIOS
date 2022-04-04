@@ -6,14 +6,33 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContactCommunityLegal: View {
     
     @State var width: CGFloat = 0.0
+    @EnvironmentObject var profileModel: ProfileViewModel
+    let currentUser = Auth.auth().currentUser
     
     var body: some View {
         
         Form {
+            
+            /// Phone Number
+            HStack {
+                Text("Phone Number")
+                Spacer()
+                Text("\(currentUser?.phoneNumber ?? "")")
+                
+            }
+            
+            /// Email
+            HStack {
+                Text("Email")
+                Spacer()
+                Text("\(profileModel.userProfile.email ?? "")")
+                
+            }
             
             SettingFormComponents(settingName:"Help & Support",
                                   urlToOpen:"http://aidronesoftware.com")

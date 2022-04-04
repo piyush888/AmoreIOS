@@ -95,9 +95,10 @@ struct ContentView: View {
                                             receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getSuperLikesGivenData()
                                             receivedGivenEliteModel.elitesData()
-                                            // Observing the storemanager payment queue and responds to the changes. 
+                                            // Observing the storemanager payment queue and responds to the changes.
                                             SKPaymentQueue.default().add(storeManager)
                                             storeManager.getProducts()
+                                            storeManager.getPurcahse()
                                         }
                                 }
                                 // Else get location permission
@@ -129,7 +130,6 @@ struct ContentView: View {
                     else {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
-//                            .environmentObject(streamModel)
                     }
                 }
             }

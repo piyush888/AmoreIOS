@@ -9,7 +9,6 @@ import SwiftUI
 
 struct IAmA: View {
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     
     let genders = ["Male", "Female", "Other"]
     @State var selectedGender: String? = nil
@@ -101,7 +100,6 @@ struct IAmA: View {
             
             NavigationLink(destination: SexualOrientation()
                             .environmentObject(profileModel),
-//                            .environmentObject(streamModel),
                            isActive: $isGenderSet,
                            label: {
                 Button{

@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 struct Passions: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     
     @State var isPassionsSelectionDone: Bool = false
     
@@ -78,8 +77,6 @@ struct Passions: View {
                                 passionSelected.append(item)
                             }
                             
-                            //print(passionSelected)
-                            
                             // Load the passionSelected to firebase
                         }) {
                             ZStack {
@@ -107,7 +104,6 @@ struct Passions: View {
             NavigationLink(
                 destination: IAmA()
                     .environmentObject(profileModel),
-//                    .environmentObject(streamModel),
                 isActive: $isPassionsSelectionDone,
                 label: {
                     Button{

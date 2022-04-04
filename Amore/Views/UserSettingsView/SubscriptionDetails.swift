@@ -40,7 +40,7 @@ struct SubscriptionDetails: View {
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(Color("gold-star"))
-                        Text("6 Super Likes")
+                            Text("\(storeManager.purcahseDataDetails.totalSuperLikesCount ?? 0) Super Likes")
                             .font(.caption2)
                         }
                     }
@@ -59,7 +59,7 @@ struct SubscriptionDetails: View {
                                 .foregroundColor(.blue)
                                 .shadow(color: .blue,
                                         radius: 0.1, x: 1, y: 1)
-                            Text("1 Boost")
+                            Text("\(storeManager.purcahseDataDetails.totalBoostCount  ?? 0) Boost")
                                 .font(.caption2)
                         }
                     }
@@ -77,7 +77,7 @@ struct SubscriptionDetails: View {
                                 .resizable()
                                 .frame(width:50, height:50)
                                 .foregroundColor(.pink)
-                            Text("3 messages ")
+                            Text("\(storeManager.purcahseDataDetails.totalMessagesCount  ?? 0) Messages")
                                 .font(.caption2)
                         }
                     }
