@@ -17,6 +17,7 @@
 		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
+		1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */; };
 		1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273C9274509D400590DD1 /* ProfileImageView.swift */; };
 		1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */; };
 		1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CD274B7B9A00590DD1 /* Filters.swift */; };
@@ -188,6 +189,7 @@
 		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
+		1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		1B6273C9274509D400590DD1 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifiers.swift; sourceTree = "<group>"; };
 		1B6273CD274B7B9A00590DD1 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 				E22D5561275532B800852D70 /* ColorExtension.swift */,
 				1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */,
 				1B39493527D3263100793431 /* CustomScrollView.swift */,
+				1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -982,6 +985,7 @@
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
+				1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */,
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				1BFCBADE2721B9B60002BA67 /* CareerFilter.swift in Sources */,

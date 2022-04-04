@@ -20,6 +20,7 @@ struct ConversationView: View {
     var emptyScrollToString = ""
     @State var scrollToBottomOnSend: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
+    @Binding var navigateToChatView: Bool
     
     var body: some View {
             VStack {
@@ -38,13 +39,25 @@ struct ConversationView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         Button  {
-                            
+                            navigateToChatView.toggle()
+                            if let toUserId = toUser.id {
+                                ReportActivityModel.reportUserWithReason(otherUserId: toUserId, reason: "", description: "") {
+                                    print("Report From Chat: API Call Failed")
+                                } onSuccess: {
+                                    print("Report From Chat: API Success")
+                                }
+                            }
                         } label: {
                             Label("Report User", systemImage: "shield.fill")
                                 .font(.system(size: 60))
                         }
                         Button  {
-                            
+                            navigateToChatView.toggle()
+                            FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
+                                print("Unmatch: API Call Failed")
+                            }, onSuccess: {
+                                print("Unmatch: API Success")
+                            }, otherUserId: toUser.id)
                         } label: {
                             Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
                                 .font(.system(size: 60))
@@ -55,11 +68,18 @@ struct ConversationView: View {
                     }
                 }
             }
-            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
-                if newValue.fromId != Auth.auth().currentUser?.uid {
-                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
+            .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
+                if oldValue.count <= newValue.count {
+                    if newValue[selectedChatIndex].fromId != Auth.auth().currentUser?.uid {
+                        mainMessagesModel.markMessageRead(index: selectedChatIndex)
+                    }
                 }
-            }
+            })
+//            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
+//                if newValue.fromId != Auth.auth().currentUser?.uid {
+//                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
+//                }
+//            }
 //            .navigationBarTitleDisplayMode(.inline)
         }
     
@@ -168,7 +188,7 @@ struct MessageView: View {
 
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation()))
+        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation()), navigateToChatView: Binding.constant(true))
             .environmentObject(ChatModel())
             .environmentObject(MainMessagesViewModel())
     }

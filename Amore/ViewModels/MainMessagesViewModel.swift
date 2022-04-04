@@ -107,25 +107,40 @@ class MainMessagesViewModel: ObservableObject {
                 }
                 
                 querySnapshot?.documentChanges.forEach({ change in
-                    let docId = change.document.documentID
                     
-                    DispatchQueue.main.async {
-                        if let index = self.recentChats.firstIndex(where: { rm in
-                            return rm.id == docId
-                        }) {
-                            print("Chat: Checkpoint 1")
-                            self.recentChats.remove(at: index)
-                        }
-                        
-                        do {
-                            if let rm = try change.document.data(as: ChatConversation.self) {
-                                print("Chat: Checkpoint 2")
-                                self.recentChats.insert(rm, at: 0)
+                    if (change.type == .removed) {
+                        let docId = change.document.documentID
+                        DispatchQueue.main.async {
+                            if let index = self.recentChats.firstIndex(where: { rm in
+                                return rm.id == docId
+                            }) {
+                                print("Chat: Checkpoint 1")
+                                self.recentChats.remove(at: index)
                             }
-                        } catch {
-                            print("Chat: \(error)")
                         }
                     }
+                    
+                    else {
+                        let docId = change.document.documentID
+                        DispatchQueue.main.async {
+                            if let index = self.recentChats.firstIndex(where: { rm in
+                                return rm.id == docId
+                            }) {
+                                print("Chat: Checkpoint 1")
+                                self.recentChats.remove(at: index)
+                            }
+                            
+                            do {
+                                if let rm = try change.document.data(as: ChatConversation.self) {
+                                    print("Chat: Checkpoint 2")
+                                    self.recentChats.insert(rm, at: 0)
+                                }
+                            } catch {
+                                print("Chat: \(error)")
+                            }
+                        }
+                    }
+                    
                 })
             }
     }

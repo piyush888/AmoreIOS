@@ -50,7 +50,7 @@ struct AllConversationsView: View {
                             .padding(.vertical, 8)
                     }.padding(.horizontal)
                     
-                }.padding(.bottom, 50)
+                }.padding(.bottom, 10)
                 if (mainMessagesModel.recentChats.count == 0) {
                         HStack{
                             Spacer()
@@ -59,7 +59,7 @@ struct AllConversationsView: View {
             }
             
             NavigationLink("", isActive: $navigateToChatView) {
-                ConversationView(toUser: $toUser, selectedChat: $selectedChat)
+                ConversationView(toUser: $toUser, selectedChat: $selectedChat, navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
             }

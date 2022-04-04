@@ -67,7 +67,7 @@ struct ReportingIssuesCard: View {
                     
                     Button {
                         // call this function to report user, if successfully remove the card from deck
-                        reportActivityModel.reportUserWithReason(profileBeingReportedId:profileId,
+                        ReportActivityModel.reportUserWithReason(otherUserId:profileId,
                                                                  reason:selectedReasoning,
                                                                  description:reportUserDescription.bound,
                                                                  onFailure:{

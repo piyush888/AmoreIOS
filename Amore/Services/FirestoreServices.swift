@@ -209,4 +209,59 @@ class FirestoreServices {
         }
     }
     
+    public static func unmatchUser(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, otherUserId: String?) {
+        if let otherUserId = otherUserId {
+            requestInProcessing = true
+            guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                    return
+                }
+            let body: [String: String] = ["current_user_id": Auth.auth().currentUser!.uid, "other_user_id": otherUserId]
+            let finalBody = try! JSONSerialization.data(withJSONObject: body)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = finalBody
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                if let error = error {
+                    print("Error in API: \(error)")
+                    onFailure()
+                    return
+                }
+                
+                if let _ = data {
+                    // Check if you receive a valid httpresponse
+                    if let httpResponse = response as? HTTPURLResponse {
+                        
+                        if httpResponse.statusCode == 200 {
+                            DispatchQueue.main.async {
+                                print("Unmatch Operation Successful")
+                                self.requestInProcessing = false
+                                if self.timeOutRetriesCount > 0 {
+                                    self.timeOutRetriesCount = 0
+                                }
+                                // send back the temp data
+                                onSuccess()
+                            }
+                        }
+                        else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                            DispatchQueue.main.async {
+                                if self.timeOutRetriesCount < 3 {
+                                    self.timeOutRetriesCount += 1
+                                    self.adminAuthModel.serverLogin()
+                                    self.unmatchUser(apiToBeUsed: apiToBeUsed, onFailure: onFailure, onSuccess: onSuccess, otherUserId: otherUserId)
+                                }
+                                self.requestInProcessing = false
+                            }
+                        }
+                    }
+                }
+            }.resume()
+        
+        }
+        
+    }
+    
 }
