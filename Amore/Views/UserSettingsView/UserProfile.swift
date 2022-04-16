@@ -82,11 +82,11 @@ struct UserProfile: View {
                                 .environmentObject(storeManager)
                                 
                             // Test Firebase storage of data
-                            Button(action: {
-                                storeManager.testFirebaseFunc()
-                            }) {
-                                Text("Firebase store")
-                            }
+//                            Button(action: {
+//                                storeManager.testFirebaseFunc()
+//                            }) {
+//                                Text("Firebase store")
+//                            }
                             
                             
                             Spacer()
@@ -423,7 +423,7 @@ struct BuySubscriptionOrItemsCard : View {
                             
                             if cardName == "Month" {
                                 // Subscription
-                                if UserDefaults.standard.bool(forKey: selectedPriceTabId) {
+                                if storeManager.purcahseDataDetails.subscriptionTypeId == selectedPriceTabId {
                                     // If Subscription is already purchased
                                     PayButton(buttonText: "Purchased",
                                          cardName: "",
@@ -431,8 +431,14 @@ struct BuySubscriptionOrItemsCard : View {
                                          buttonColor: [cardColorFormat[0],cardColorFormat[1]])
                                 } else {
                                     Button(action: {
-                                        storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                         self.storeManager.oldpurcahseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
+                                        storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
+                                        // Only store data in firebase when payment is successfull
+                                        // If Purcahse is Successfull, update the new purchase data
+                                        if storeManager.purcahseDataDetails == storeManager.oldpurcahseDataDetails {
+                                            storeManager.storePurchaseNoParams()
+                                        }
+                                        
                                     }) {
                                         PayButton(buttonText: "\(currency)",
                                            cardName: storeManager.purcahseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",

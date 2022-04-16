@@ -23,12 +23,12 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         "Amore.ProductId.5.Messages.v1",
         "Amore.ProductId.10.Messages.v1",
         "Amore.ProductId.15.Messages.v1",
-        "Amore.ProductId.1M.Gold.v1",
-        "Amore.ProductId.3M.Gold.v1",
-        "Amore.ProductId.6M.Gold.v1",
-        "Amore.ProductId.1M.Platinum.v1",
-        "Amore.ProductId.3M.Platinum.v1",
-        "Amore.ProductId.6M.Platinum.v1"]
+        "Amore.ProductId.1M.Gold.v2",
+        "Amore.ProductId.3M.Gold.v2",
+        "Amore.ProductId.6M.Gold.v2",
+        "Amore.ProductId.1M.Platinum.v2",
+        "Amore.ProductId.3M.Platinum.v2",
+        "Amore.ProductId.6M.Platinum.v2"]
     
     @Published var superLikesPricing: [String: SKProduct] = [:]
     @Published var boostsPricing: [String: SKProduct] = [:]
@@ -110,14 +110,17 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
             case .purchasing:
                 transactionState = .purchasing
             case .purchased:
-                UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
+                // UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
-                // If Purcahse is Successfull, update the new purchase data
                 self.purcahseDataDetails = self.oldpurcahseDataDetails
-                self.storePurchaseNoParams()
+                // Only store data in firebase when payment is successfull
+                // If Purcahse is Successfull, update the new purchase data
+                if self.oldpurcahseDataDetails != nil {
+                    self.storePurchaseNoParams()
+                }
             case .restored:
-                UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
+                // UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 self.getPurcahse()
                 queue.finishTransaction(transaction)
                 transactionState = .restored
@@ -140,7 +143,6 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     
     // TOBE removed use this as a test function
     func testFirebaseFunc() {
-//        self.storePurchaseNoParams()
         self.getPurcahse()
     }
     
