@@ -59,6 +59,9 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
             for fetchedProduct in response.products {
                 print("Product List " + fetchedProduct.localizedTitle)
                 DispatchQueue.main.async {
+                    // Localized Titles Are Stored in Apple InApp Purchase Developer account
+                    // Please make sure Localized Titles are always same even when you create new products
+                    // other wise the application will break
                     if fetchedProduct.localizedTitle.contains("Super Likes") {
                         self.superLikesPricing[fetchedProduct.localizedTitle] = fetchedProduct
                     } else if fetchedProduct.localizedTitle.contains("Boosts") {
@@ -110,6 +113,8 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
+                // If Purcahse is Successfull, update the new purchase data
+                self.purcahseDataDetails = self.oldpurcahseDataDetails
                 self.storePurchaseNoParams()
             case .restored:
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
@@ -118,6 +123,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 transactionState = .restored
             case .failed, .deferred:
                 print("Store Manager: Payment Queue Error: \(String(describing: transaction.error))")
+                self.oldpurcahseDataDetails = self.purcahseDataDetails
                 queue.finishTransaction(transaction)
                 transactionState = .failed
             default:
@@ -148,7 +154,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     
     let db = Firestore.firestore()
     @Published var purcahseDataDetails = ConsumableCountAndSubscriptionModel()
-    var oldPurcahseData = ConsumableCountAndSubscriptionModel()
+    @Published var oldpurcahseDataDetails = ConsumableCountAndSubscriptionModel()
     var storeIAPPurchasingActivity = IAPPurcahseHistoryModel() // Model
     var purchaseDataFetched = false
     
@@ -197,8 +203,8 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                     if let document = document {
                         do {
                             // Get User Purcahse Data from firestore
-                            self.oldPurcahseData = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
-                            self.purcahseDataDetails = self.oldPurcahseData
+                            self.oldpurcahseDataDetails = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
+                            self.purcahseDataDetails = self.oldpurcahseDataDetails
                             self.purchaseDataFetched = true
                         }
                         catch {

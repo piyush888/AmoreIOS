@@ -277,6 +277,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 // Default Consumable & Free Subscription
                 // Current Free Consumables Limit 20th March 22
                 _ = self.storeManagerObj.storePurchaseWithParams(product:ConsumableCountAndSubscriptionModel(
+                                                purchasedBoostCount:0,
+                                                purchasedSuperLikesCount:0,
+                                                purchasedMessagesCount:0,
                                                 totalBoostCount: 1,
                                                 totalSuperLikesCount: 2,
                                                 totalMessagesCount: 1,

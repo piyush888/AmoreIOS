@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct ConsumableCountAndSubscriptionModel: Identifiable, Codable, Hashable {
     @DocumentID public var id: String?
-    var purcahseBoostCount: Int?
+    var purchasedBoostCount: Int?
     var purchasedSuperLikesCount: Int?
     var purchasedMessagesCount: Int?
     var totalBoostCount: Int?

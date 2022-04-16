@@ -5,6 +5,29 @@
 //  Created by Kshitiz Sharma on 10/11/21.
 //
 
+
+// Localized Titles a.k.a TabKey are Stored in Apple InApp Purchase Developer account
+// Please make sure Localized Titles are always same even when you create new products
+// other wise the application will break
+
+// 5 Super Likes
+// 15 Super Likes
+// 30 Super Likes
+// 2 Boosts
+// 5 Boosts
+// 10 Boosts
+// 5 Messages
+// 10 Messages
+// 15 Messages
+// Amore Platinum 1 Month
+// Amore Platinum 3 Month
+// Amore Platinum 6 Month
+// Amore Gold 1 Month
+// Amore Gold 3 Month
+// Amore Gold 6 Month
+
+
+
 import SwiftUI
 import StoreKit
 
@@ -122,7 +145,8 @@ struct UserProfile: View {
                                                               secondTabKey: "15 Super Likes",
                                                               secondTabCount: 15,
                                                               thirdTabKey: "30 Super Likes",
-                                                              thirdTabCount: 30
+                                                              thirdTabCount: 30,
+                                                              selectedItemCount: 5
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -147,7 +171,8 @@ struct UserProfile: View {
                                                               secondTabKey: "5 Boosts",
                                                               secondTabCount: 5,
                                                               thirdTabKey: "10 Boosts",
-                                                              thirdTabCount: 10
+                                                              thirdTabCount: 10,
+                                                              selectedItemCount: 2
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -172,7 +197,8 @@ struct UserProfile: View {
                                                               secondTabKey: "10 Messages",
                                                               secondTabCount: 10,
                                                               thirdTabKey: "15 Messages",
-                                                              thirdTabCount: 15
+                                                              thirdTabCount: 15,
+                                                              selectedItemCount: 5
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -205,7 +231,8 @@ struct UserProfile: View {
                                                               secondTabKey: "Amore Platinum 3 Month",
                                                               secondTabCount: 3,
                                                               thirdTabKey: "Amore Platinum 6 Month",
-                                                              thirdTabCount: 6
+                                                              thirdTabCount: 6,
+                                                              selectedItemCount: 1
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -234,7 +261,8 @@ struct UserProfile: View {
                                                           secondTabKey: "Amore Gold 3 Month",
                                                           secondTabCount: 3,
                                                           thirdTabKey: "Amore Gold 6 Month",
-                                                          thirdTabCount: 6
+                                                          thirdTabCount: 6,
+                                                          selectedItemCount: 1
                                                         )
                                                        .environmentObject(storeManager)
                                     }
@@ -269,6 +297,7 @@ struct BuySubscriptionOrItemsCard : View {
     @State var subScriptText5: String?
     @Binding var showModal: Bool
     @State var geometry: GeometryProxy
+    // priceTabs received the pricingData
     @State var priceTabs: [String: SKProduct]
     @State var selectedPriceTabId: String
     @State var selectedDictIndex: String
@@ -280,6 +309,7 @@ struct BuySubscriptionOrItemsCard : View {
     @State var secondTabCount: Int
     @State var thirdTabKey: String
     @State var thirdTabCount: Int
+    @State var selectedItemCount: Int
     
     var body: some View {
         
@@ -341,6 +371,7 @@ struct BuySubscriptionOrItemsCard : View {
                                  pricePerQty: Float(truncating: priceTabs[firstTabKey]?.price ?? 0.0)/Float(firstTabCount),
                                  currency: priceTabs[firstTabKey]?.localizedPrice ?? "USD",
                                  selectedPriceTabId: $selectedPriceTabId,
+                                 selectedItemCount:$selectedItemCount,
                                  animation: animation,
                                  priceTabCost: Binding.constant(Float(truncating: priceTabs[firstTabKey]?.price ?? 0.0)),
                                  totalCost:$totalCost,
@@ -354,6 +385,7 @@ struct BuySubscriptionOrItemsCard : View {
                                  pricePerQty: Float(truncating: priceTabs[secondTabKey]?.price ?? 0.0)/Float(secondTabCount),
                                  currency: priceTabs[secondTabKey]?.localizedPrice ?? "USD",
                                  selectedPriceTabId: $selectedPriceTabId,
+                                 selectedItemCount:$selectedItemCount,
                                  animation: animation,
                                  priceTabCost: Binding.constant(Float(truncating: priceTabs[secondTabKey]?.price ?? 0.0)),
                                  totalCost:$totalCost,
@@ -367,6 +399,7 @@ struct BuySubscriptionOrItemsCard : View {
                                  pricePerQty: Float(truncating: priceTabs[thirdTabKey]?.price ?? 0.0)/Float(thirdTabCount),
                                  currency: priceTabs[thirdTabKey]?.localizedPrice ?? "USD",
                                  selectedPriceTabId: $selectedPriceTabId,
+                                 selectedItemCount:$selectedItemCount,
                                  animation: animation,
                                  priceTabCost: Binding.constant(Float(truncating: priceTabs[thirdTabKey]?.price ?? 0.0)),
                                  totalCost:$totalCost,
@@ -388,19 +421,56 @@ struct BuySubscriptionOrItemsCard : View {
                         // Buy the subscripion or item
                         VStack {
                             
-                            // Buy the subscripion or item
-                            if UserDefaults.standard.bool(forKey: selectedPriceTabId) {
-                               PayButton(buttonText: "Purchased",
+                            if cardName == "Month" {
+                                // Subscription
+                                if UserDefaults.standard.bool(forKey: selectedPriceTabId) {
+                                    // If Subscription is already purchased
+                                    PayButton(buttonText: "Purchased",
                                          cardName: "",
                                          totalCost: Binding.constant(Float(0.0)),
                                          buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                } else {
+                                    Button(action: {
+                                        storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
+                                        self.storeManager.oldpurcahseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
+                                    }) {
+                                        PayButton(buttonText: "\(currency)",
+                                           cardName: storeManager.purcahseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
+                                           totalCost: $totalCost,
+                                           buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                    }
+                                    .foregroundColor(.blue)
+                                    
+                                }
 
                             } else {
+                                // Consumables
                                 Button(action: {
+                                    
+                                    if cardName == "Boosts" {
+                                        if let purchasedBoostCount = storeManager.oldpurcahseDataDetails.purchasedBoostCount,
+                                           let totalBoostCount =  storeManager.oldpurcahseDataDetails.totalBoostCount{
+                                         self.storeManager.oldpurcahseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
+                                         self.storeManager.oldpurcahseDataDetails.totalBoostCount = totalBoostCount + selectedItemCount
+                                        }
+                                    } else if cardName == "Messages" {
+                                        if let purchasedMessagesCount = storeManager.oldpurcahseDataDetails.purchasedMessagesCount,
+                                           let totalMessagesCount =  storeManager.oldpurcahseDataDetails.totalMessagesCount{
+                                            self.storeManager.oldpurcahseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
+                                            self.storeManager.oldpurcahseDataDetails.totalMessagesCount = totalMessagesCount + selectedItemCount
+                                        }
+                                    } else if cardName == "Super Likes" {
+                                        if let purchasedSuperLikesCount = storeManager.oldpurcahseDataDetails.purchasedSuperLikesCount,
+                                           let totalSuperLikesCount =  storeManager.oldpurcahseDataDetails.totalSuperLikesCount{
+                                            self.storeManager.oldpurcahseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
+                                            self.storeManager.oldpurcahseDataDetails.totalSuperLikesCount = totalSuperLikesCount + selectedItemCount
+                                        }
+                                    }
+                                    
                                     storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                 }) {
                                     PayButton(buttonText: "\(currency)",
-                                       cardName: "Buy",
+                                       cardName: "Buy for",
                                        totalCost: $totalCost,
                                        buttonColor: [cardColorFormat[0],cardColorFormat[1]])
                                 }
@@ -443,6 +513,7 @@ struct PriceTab: View {
     @State var pricePerQty: Float
     @State var currency: String
     @Binding var selectedPriceTabId: String
+    @Binding var selectedItemCount: Int
     var animation: Namespace.ID
     @Binding var priceTabCost: Float
     @Binding var totalCost: Float
@@ -457,6 +528,7 @@ struct PriceTab: View {
                 selectedPriceTabId = itemId
                 totalCost = priceTabCost
                 selectedDictIndex = dictIndex
+                selectedItemCount = itemQuantity
             }
         }) {
             VStack {
@@ -512,7 +584,7 @@ struct PayButton: View {
                 if totalCost == 0.0 {
                     Text("\(buttonText)")
                 } else {
-                    Text("\(cardName) for \(String(buttonText.first!)) \(totalCost, specifier: "%.2f")")
+                    Text("\(cardName) \(String(buttonText.first!)) \(totalCost, specifier: "%.2f")")
                 }
             }
             .foregroundColor(Color.white)

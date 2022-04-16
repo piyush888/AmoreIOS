@@ -12,7 +12,7 @@ import JWTKit
 
 @main
 struct AmoreApp: App {
-    
+//    
     // Makes SwiftUI aware of the newly created app delegate(AppDelegate)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let persistenceController = PersistenceController.shared
