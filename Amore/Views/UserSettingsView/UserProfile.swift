@@ -75,7 +75,7 @@ struct UserProfile: View {
                             /// SuperLike : Show count or option to buy
                             /// Boosts: Show count or option to buy
                             /// Messages: Show count and option to buy
-                            /// Restore: Restore Purcahse
+                            /// Restore: Restore Purchase
                             SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
                                                 showModal:$showModal,
                                                 bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
@@ -423,7 +423,7 @@ struct BuySubscriptionOrItemsCard : View {
                             
                             if cardName == "Month" {
                                 // Subscription
-                                if storeManager.purcahseDataDetails.subscriptionTypeId == selectedPriceTabId {
+                                if storeManager.purchaseDataDetails.subscriptionTypeId == selectedPriceTabId {
                                     // If Subscription is already purchased
                                     PayButton(buttonText: "Purchased",
                                          cardName: "",
@@ -431,17 +431,11 @@ struct BuySubscriptionOrItemsCard : View {
                                          buttonColor: [cardColorFormat[0],cardColorFormat[1]])
                                 } else {
                                     Button(action: {
-                                        self.storeManager.oldpurcahseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
+                                        self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
                                         storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
-                                        // Only store data in firebase when payment is successfull
-                                        // If Purcahse is Successfull, update the new purchase data
-                                        if storeManager.purcahseDataDetails == storeManager.oldpurcahseDataDetails {
-                                            storeManager.storePurchaseNoParams()
-                                        }
-                                        
                                     }) {
                                         PayButton(buttonText: "\(currency)",
-                                           cardName: storeManager.purcahseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
+                                           cardName: storeManager.purchaseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
                                            totalCost: $totalCost,
                                            buttonColor: [cardColorFormat[0],cardColorFormat[1]])
                                     }
@@ -454,22 +448,22 @@ struct BuySubscriptionOrItemsCard : View {
                                 Button(action: {
                                     
                                     if cardName == "Boosts" {
-                                        if let purchasedBoostCount = storeManager.oldpurcahseDataDetails.purchasedBoostCount,
-                                           let totalBoostCount =  storeManager.oldpurcahseDataDetails.totalBoostCount{
-                                         self.storeManager.oldpurcahseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
-                                         self.storeManager.oldpurcahseDataDetails.totalBoostCount = totalBoostCount + selectedItemCount
+                                        if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount,
+                                           let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount{
+                                         self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
+                                         self.storeManager.oldpurchaseDataDetails.totalBoostCount = totalBoostCount + selectedItemCount
                                         }
                                     } else if cardName == "Messages" {
-                                        if let purchasedMessagesCount = storeManager.oldpurcahseDataDetails.purchasedMessagesCount,
-                                           let totalMessagesCount =  storeManager.oldpurcahseDataDetails.totalMessagesCount{
-                                            self.storeManager.oldpurcahseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
-                                            self.storeManager.oldpurcahseDataDetails.totalMessagesCount = totalMessagesCount + selectedItemCount
+                                        if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount,
+                                           let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount{
+                                            self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
+                                            self.storeManager.oldpurchaseDataDetails.totalMessagesCount = totalMessagesCount + selectedItemCount
                                         }
                                     } else if cardName == "Super Likes" {
-                                        if let purchasedSuperLikesCount = storeManager.oldpurcahseDataDetails.purchasedSuperLikesCount,
-                                           let totalSuperLikesCount =  storeManager.oldpurcahseDataDetails.totalSuperLikesCount{
-                                            self.storeManager.oldpurcahseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
-                                            self.storeManager.oldpurcahseDataDetails.totalSuperLikesCount = totalSuperLikesCount + selectedItemCount
+                                        if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount,
+                                           let totalSuperLikesCount =  storeManager.oldpurchaseDataDetails.totalSuperLikesCount{
+                                            self.storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
+                                            self.storeManager.oldpurchaseDataDetails.totalSuperLikesCount = totalSuperLikesCount + selectedItemCount
                                         }
                                     }
                                     

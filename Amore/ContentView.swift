@@ -98,7 +98,7 @@ struct ContentView: View {
                                             // Observing the storemanager payment queue and responds to the changes.
                                             SKPaymentQueue.default().add(storeManager)
                                             storeManager.getProducts()
-                                            storeManager.getPurcahse()
+                                            storeManager.getPurchase()
                                         }
                                 }
                                 // Else get location permission

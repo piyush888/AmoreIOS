@@ -20,12 +20,3 @@ struct ConsumableCountAndSubscriptionModel: Identifiable, Codable, Hashable {
     var subscriptionTypeId: String?
 }
 
-struct IAPPurcahseHistoryModel: Identifiable, Codable, Hashable {
-    @DocumentID public var id: String?
-    var purcahseType: String?
-    var purcahseAmount: Double?
-    var timeOfPurchase: Date?
-    var wasPurcahseSuccessful: Bool?
-    var isCosumable: Bool?
-    var isSubscription: Bool?
-}

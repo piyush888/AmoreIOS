@@ -113,20 +113,24 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 // UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
-                self.purcahseDataDetails = self.oldpurcahseDataDetails
                 // Only store data in firebase when payment is successfull
-                // If Purcahse is Successfull, update the new purchase data
-                if self.oldpurcahseDataDetails != nil {
-                    self.storePurchaseNoParams()
+                // If Purchase is Successfull, update the new purchase data
+                // Check if the object is not nil & the call is being actually done by the user
+                if self.purchaseDataDetails.subscriptionTypeId != nil && self.purchaseDataDetails != self.oldpurchaseDataDetails {
+                    self.purchaseDataDetails = self.oldpurchaseDataDetails
+                    // Store the details of consumables and subscription to firebase
+                    _ = self.storePurchaseNoParams()
+                    // Store the transaction in payment activity
+                    _ = self.storePurchaseActivityDetails(transaction:transaction)
                 }
             case .restored:
                 // UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
-                self.getPurcahse()
+                self.getPurchase()
                 queue.finishTransaction(transaction)
                 transactionState = .restored
             case .failed, .deferred:
                 print("Store Manager: Payment Queue Error: \(String(describing: transaction.error))")
-                self.oldpurcahseDataDetails = self.purcahseDataDetails
+                self.oldpurchaseDataDetails = self.purchaseDataDetails
                 queue.finishTransaction(transaction)
                 transactionState = .failed
             default:
@@ -135,53 +139,69 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         }
     }
     
-    // Restore the purcahse
+    // Restore the purchase
     func restoreProducts() {
         print("Store Manager: Restoring products ...")
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
-    // TOBE removed use this as a test function
-    func testFirebaseFunc() {
-        self.getPurcahse()
-    }
-    
     // ******************************************** //
     // ******************************************** //
     // ******************************************** //
-    // ************ Purcahse to Firebase ********** //
+    // ************ Purchase to Firebase ********** //
     // ******************************************** //
     // ******************************************** //
     // ******************************************** //
     
     let db = Firestore.firestore()
-    @Published var purcahseDataDetails = ConsumableCountAndSubscriptionModel()
-    @Published var oldpurcahseDataDetails = ConsumableCountAndSubscriptionModel()
-    var storeIAPPurchasingActivity = IAPPurcahseHistoryModel() // Model
+    @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
+    @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
     var purchaseDataFetched = false
     
     // Call this function to store the user purchase data into firebase
     func storePurchase(product: ConsumableCountAndSubscriptionModel) -> Bool {
-        let collectionRef = db.collection("InAppPurchase")
+        
         if let userId = Auth.auth().currentUser?.uid {
-            
             do {
-                let newDocReference = try collectionRef.document(userId).setData(from: product)
+                _ = try db.collection("InAppPurchase").document(userId).setData(from: product)
                 return true
             }
             catch let error {
-                print("Error writing document to Firestore: \(error)")
+                print("storePurchase: Can't store the purchase data in firestore: \(error)")
             }
             
         } else {
-                print("No User Id")
+            print("No User Id")
         }
         return false
     }
     
+    
+    func storePurchaseActivityDetails(transaction:SKPaymentTransaction) -> Bool  {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss 'UTC'"
+        if let userId = Auth.auth().currentUser?.uid {
+            do {
+                _ = try db.collection("InAppPurchase").document(userId).collection("PurchaseActivity")
+                    .addDocument(data: ["timeOfPurchase": Date(),
+                                        "productRefernceId": transaction.payment.productIdentifier])
+                return true
+            }
+            catch let error {
+                print("storePurchase: Can't store the purchase activity in firestore: \(error)")
+            }
+            
+        } else {
+            print("No User Id")
+        }
+        return false
+    }
+    
+    
     // Call this function when you want to store firestore object without an object
     func storePurchaseNoParams() -> Bool {
-        return self.storePurchase(product:self.purcahseDataDetails)
+        return self.storePurchase(product:self.purchaseDataDetails)
     }
     
     // Call this function when you don't want to pass an object to be stored
@@ -190,7 +210,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     }
     
     // Save the purchase data to firebase
-    func getPurcahse() {
+    func getPurchase() {
         
         self.purchaseDataFetched = false
         let collectionRef = db.collection("InAppPurchase")
@@ -204,9 +224,9 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 else {
                     if let document = document {
                         do {
-                            // Get User Purcahse Data from firestore
-                            self.oldpurcahseDataDetails = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
-                            self.purcahseDataDetails = self.oldpurcahseDataDetails
+                            // Get User Purchase Data from firestore
+                            self.oldpurchaseDataDetails = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
+                            self.purchaseDataDetails = self.oldpurchaseDataDetails
                             self.purchaseDataFetched = true
                         }
                         catch {
@@ -217,7 +237,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 } // else
             } // docref
         } // documentID
-    } // getPurcahse
+    } // getPurchase
     
     
 }
