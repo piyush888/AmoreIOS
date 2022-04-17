@@ -92,6 +92,7 @@
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
 		E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2530F59277CB0760040CAB2 /* RadiusFilter.swift */; };
+		E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B7493280CAAC700C87855 /* PaymentComplete.swift */; };
 		E268A462274340790045F264 /* MoreInfoForBetterMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */; };
 		E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */; };
 		E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A4652745E6520045F264 /* QuestionaireTemplate.swift */; };
@@ -264,6 +265,7 @@
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
 		E2530F59277CB0760040CAB2 /* RadiusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusFilter.swift; sourceTree = "<group>"; };
+		E25B7493280CAAC700C87855 /* PaymentComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComplete.swift; sourceTree = "<group>"; };
 		E268A461274340790045F264 /* MoreInfoForBetterMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoForBetterMatch.swift; sourceTree = "<group>"; };
 		E268A4632745D6140045F264 /* IntroductionForMoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionForMoreInfo.swift; sourceTree = "<group>"; };
 		E268A4652745E6520045F264 /* QuestionaireTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireTemplate.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
 				E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */,
 				1B6273C9274509D400590DD1 /* ProfileImageView.swift */,
+				E25B7493280CAAC700C87855 /* PaymentComplete.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
 				1BB36D3C27AE302200F4029C /* ChatModel.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBioHeadline.swift in Sources */,
+				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E2347142271F4B970006F336 /* GenderSettings.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,

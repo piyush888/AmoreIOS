@@ -146,7 +146,8 @@ struct UserProfile: View {
                                                               secondTabCount: 15,
                                                               thirdTabKey: "30 Super Likes",
                                                               thirdTabCount: 30,
-                                                              selectedItemCount: 5
+                                                              selectedItemCount: 5,
+                                                              popUpCardSelection:$popUpCardSelection
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -172,7 +173,8 @@ struct UserProfile: View {
                                                               secondTabCount: 5,
                                                               thirdTabKey: "10 Boosts",
                                                               thirdTabCount: 10,
-                                                              selectedItemCount: 2
+                                                              selectedItemCount: 2,
+                                                              popUpCardSelection:$popUpCardSelection
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -198,14 +200,17 @@ struct UserProfile: View {
                                                               secondTabCount: 10,
                                                               thirdTabKey: "15 Messages",
                                                               thirdTabCount: 15,
-                                                              selectedItemCount: 5
+                                                              selectedItemCount: 5,
+                                                              popUpCardSelection:$popUpCardSelection
                                                             )
                                                             .environmentObject(storeManager)
                                         }
                                         
                                     case .myAmorecards:
                                         MyAmoreCard(showModal: $showModal,
-                                                    popUpCardSelection:$popUpCardSelection)
+                                                    popUpCardSelection:$popUpCardSelection,
+                                                    subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")
+                                        .environmentObject(storeManager)
                                         
                                     case .amorePlatinum:
                                         if let pricingData = storeManager.amorePlatinumPricing {
@@ -232,7 +237,8 @@ struct UserProfile: View {
                                                               secondTabCount: 3,
                                                               thirdTabKey: "Amore Platinum 6 Month",
                                                               thirdTabCount: 6,
-                                                              selectedItemCount: 1
+                                                              selectedItemCount: 1,
+                                                              popUpCardSelection:$popUpCardSelection
                                                             )
                                                             .environmentObject(storeManager)
                                         }
@@ -262,7 +268,8 @@ struct UserProfile: View {
                                                           secondTabCount: 3,
                                                           thirdTabKey: "Amore Gold 6 Month",
                                                           thirdTabCount: 6,
-                                                          selectedItemCount: 1
+                                                          selectedItemCount: 1,
+                                                          popUpCardSelection:$popUpCardSelection
                                                         )
                                                        .environmentObject(storeManager)
                                     }
@@ -310,6 +317,8 @@ struct BuySubscriptionOrItemsCard : View {
     @State var thirdTabKey: String
     @State var thirdTabCount: Int
     @State var selectedItemCount: Int
+    @Binding var popUpCardSelection: PopUpCards
+    
     
     var body: some View {
         
@@ -418,7 +427,7 @@ struct BuySubscriptionOrItemsCard : View {
                     /// No Thanks to close the tab
                     Group {
                         
-                        // Buy the subscripion or item
+                        // Buy Button
                         VStack {
                             
                             if cardName == "Month" {
@@ -440,33 +449,30 @@ struct BuySubscriptionOrItemsCard : View {
                                            buttonColor: [cardColorFormat[0],cardColorFormat[1]])
                                     }
                                     .foregroundColor(.blue)
-                                    
                                 }
-
+                                    
                             } else {
                                 // Consumables
                                 Button(action: {
-                                    
                                     if cardName == "Boosts" {
                                         if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount,
-                                           let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount{
+                                           let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount {
                                          self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
                                          self.storeManager.oldpurchaseDataDetails.totalBoostCount = totalBoostCount + selectedItemCount
                                         }
                                     } else if cardName == "Messages" {
                                         if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount,
-                                           let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount{
+                                           let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount {
                                             self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
                                             self.storeManager.oldpurchaseDataDetails.totalMessagesCount = totalMessagesCount + selectedItemCount
                                         }
                                     } else if cardName == "Super Likes" {
                                         if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount,
-                                           let totalSuperLikesCount =  storeManager.oldpurchaseDataDetails.totalSuperLikesCount{
+                                           let totalSuperLikesCount =  storeManager.oldpurchaseDataDetails.totalSuperLikesCount {
                                             self.storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
                                             self.storeManager.oldpurchaseDataDetails.totalSuperLikesCount = totalSuperLikesCount + selectedItemCount
                                         }
                                     }
-                                    
                                     storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                 }) {
                                     PayButton(buttonText: "\(currency)",

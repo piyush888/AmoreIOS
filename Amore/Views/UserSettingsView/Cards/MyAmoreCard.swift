@@ -6,17 +6,26 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct MyAmoreCard: View {
     
+    @EnvironmentObject var storeManager: StoreManager
     @Binding var showModal: Bool
     @Binding var popUpCardSelection: PopUpCards
+    @State var subscriptionTypeId: String
     
-    // Types of subscription
-    /// Free
-    /// Gold
-    /// Platinum
-    @State var profileSubscription: String = "Free"
+    private func writeReview() {
+      let productURL = URL(string: "https://itunes.apple.com/app/id958625272")!
+      var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+      components?.queryItems = [
+        URLQueryItem(name: "action", value: "write-review")
+      ]
+     guard let writeReviewURL = components?.url else {
+        return
+      }
+     UIApplication.shared.open(writeReviewURL)
+    }
     
     var body: some View {
         
@@ -37,25 +46,25 @@ struct MyAmoreCard: View {
                 
                 Group{
                 
-                    if profileSubscription == "Free" {
-                        Text("Amore Free plan")
+                    if subscriptionTypeId.contains("Free") {
+                        Text("If you like Amore Free")
                             .font(.title2)
                             .foregroundColor(Color.white)
                         Text("Consider upgrading to Amore Gold or Platinum")
                             .font(.caption)
                             .foregroundColor(Color.white)
-                    } else if profileSubscription == "Gold" {
-                        Text("Amore Gold plan")
+                    } else if subscriptionTypeId.contains("Gold") {
+                        Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Gold plan")
                             .font(.title2)
                             .foregroundColor(Color.white)
-                        Text("Consider upgrading to Amore Platinum")
+                        Text("Consider upgrading to Amore 3 Month Platinum")
                             .font(.caption)
                             .foregroundColor(Color.white)
-                    } else if profileSubscription == "Platinum" {
-                        Text("Amore Platinum plan")
+                    } else if subscriptionTypeId.contains("Platinum") {
+                        Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Platinum plan")
                             .font(.title2)
                             .foregroundColor(Color.white)
-                        Text("You can buy more stars, boosts and request messages.")
+                        Text("We hope you are enjoying the app")
                             .font(.caption)
                             .foregroundColor(Color.white)
                     }
@@ -64,7 +73,20 @@ struct MyAmoreCard: View {
                 
                 Spacer()
                 
-                if profileSubscription == "Free" {
+                if subscriptionTypeId.contains("Platinum") || subscriptionTypeId.contains("Gold") {
+                    
+                    SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                        showModal:$showModal,
+                                        bgColor:Color.clear)
+                        .frame(width: UIScreen.main.bounds.width-50, height:90)
+                        .padding(.horizontal,30)
+                    
+                }
+                
+                
+                Spacer()
+                
+                if subscriptionTypeId.contains("Free") {
                 
                     Button {
                         //TODO redirect to payment page
@@ -82,11 +104,13 @@ struct MyAmoreCard: View {
                                 Text("Upgrade to Amore Gold")
                                     .foregroundColor(Color.white)
                                     .font(.headline)
-                                Text("3 month for 800")
-                                    .italic()
-                                    .foregroundColor(Color.white)
-                                    .font(.subheadline)
-                                Text("Find your Dil today, Don't make them wait")
+                                if let pricingData = storeManager.amoreGoldPricing {
+                                    Text("3 month for \(Float(truncating: pricingData["Amore Gold 1 Month"]?.price ?? 0.0))")
+                                        .italic()
+                                        .foregroundColor(Color.white)
+                                        .font(.subheadline)
+                                }
+                                Text("Don't make them wait")
                                     .font(.caption)
                                     .foregroundColor(Color.white)
                                     
@@ -97,7 +121,7 @@ struct MyAmoreCard: View {
                     }
                 }
                 
-                if profileSubscription == "Free" {
+                if subscriptionTypeId.contains("Free") {
                     Spacer()
                     Text("Or")
                         .font(.headline)
@@ -105,7 +129,7 @@ struct MyAmoreCard: View {
                     Spacer()
                 }
                 
-                if profileSubscription == "Free" || profileSubscription == "Gold" {
+                if subscriptionTypeId.contains("Free") || subscriptionTypeId.contains("Gold") {
                 
                     Button {
                         //TODO redirect to payment page
@@ -123,11 +147,13 @@ struct MyAmoreCard: View {
                                 Text("Upgrade to Platinum")
                                     .foregroundColor(Color.white)
                                     .font(.headline)
-                                Text("3 month for 1050")
-                                    .italic()
-                                    .foregroundColor(Color.white)
-                                    .font(.subheadline)
-                                Text("Top picks, super stars, boosts, messages")
+                                if let pricingData = storeManager.amorePlatinumPricing {
+                                    Text("3 month for \(Float(truncating: pricingData["Amore Platinum 1 Month"]?.price ?? 0.0), specifier: "%.2f")")
+                                        .italic()
+                                        .foregroundColor(Color.white)
+                                        .font(.subheadline)
+                                }
+                                                                Text("Top picks, super stars, boosts, messages")
                                     .foregroundColor(Color.white)
                                     .font(.caption)
                             }
@@ -135,26 +161,21 @@ struct MyAmoreCard: View {
                     }
                 }
                 
-                if profileSubscription == "Platinum" {
-                    
-                    SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                        showModal:$showModal,
-                                        bgColor:Color.clear)
-                        .frame(width: UIScreen.main.bounds.width-50, height:90)
-                        .padding(.horizontal,30)
-                    
-                }
-                
                 Spacer()
                 
-                Text("No thanks")
-                        .foregroundColor(Color.gray)
-                    .onTapGesture {
+                HStack {
+                    Spacer()
+                    Button("Rate us") {
+                        self.writeReview()
+                    }
+                    .buttonStyle(GrowingButton(buttonColor:Color.yellow, fontColor: Color.white))
+                    Spacer()
+                    Button("Close") {
                         showModal.toggle()
                     }
-                    .padding(.top,10)
-                
-                
+                    .buttonStyle(GrowingButton(buttonColor:Color.blue, fontColor: Color.white))
+                    Spacer()
+                }
                 
             }
             .padding(10)
@@ -168,3 +189,19 @@ struct MyAmoreCard: View {
     }
 }
 
+
+struct GrowingButton: ButtonStyle {
+    
+    @State var buttonColor: Color
+    @State var fontColor: Color
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(self.buttonColor)
+            .foregroundColor(self.fontColor)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}

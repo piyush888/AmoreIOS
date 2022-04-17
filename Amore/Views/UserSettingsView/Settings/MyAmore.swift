@@ -13,12 +13,9 @@ struct MyAmore: View {
     @Binding var popUpCardSelection: PopUpCards
     @Binding var showModal: Bool
     
-    
     var body: some View {
         
-        
         VStack {
-            
             Button {
                 showModal = true
                 popUpCardSelection = .myAmorecards

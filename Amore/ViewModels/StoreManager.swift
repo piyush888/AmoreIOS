@@ -145,6 +145,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
+    
     // ******************************************** //
     // ******************************************** //
     // ******************************************** //
@@ -156,6 +157,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     let db = Firestore.firestore()
     @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
     @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
+//    @Published var paymentCompleteDisplayMyAmore : Bool = false - NOT IN USE YET - Delete KTZ
     var purchaseDataFetched = false
     
     // Call this function to store the user purchase data into firebase
@@ -176,7 +178,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         return false
     }
     
-    
+    // Call this function to store the details of the payment which was just made
     func storePurchaseActivityDetails(transaction:SKPaymentTransaction) -> Bool  {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(identifier: "UTC")
