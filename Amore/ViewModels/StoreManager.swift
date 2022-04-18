@@ -157,7 +157,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     let db = Firestore.firestore()
     @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
     @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
-//    @Published var paymentCompleteDisplayMyAmore : Bool = false - NOT IN USE YET - Delete KTZ
+    @Published var paymentCompleteDisplayMyAmore : Bool = false
     var purchaseDataFetched = false
     
     // Call this function to store the user purchase data into firebase
@@ -188,12 +188,12 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 _ = try db.collection("InAppPurchase").document(userId).collection("PurchaseActivity")
                     .addDocument(data: ["timeOfPurchase": Date(),
                                         "productRefernceId": transaction.payment.productIdentifier])
+                self.paymentCompleteDisplayMyAmore = true
                 return true
             }
             catch let error {
                 print("storePurchase: Can't store the purchase activity in firestore: \(error)")
             }
-            
         } else {
             print("No User Id")
         }
@@ -241,6 +241,18 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         } // documentID
     } // getPurchase
     
+    
+    func writeReview() {
+      let productURL = URL(string: "https://itunes.apple.com/app/id958625272")!
+      var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+      components?.queryItems = [
+        URLQueryItem(name: "action", value: "write-review")
+      ]
+     guard let writeReviewURL = components?.url else {
+        return
+      }
+     UIApplication.shared.open(writeReviewURL)
+    }
     
 }
 

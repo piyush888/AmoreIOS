@@ -15,18 +15,6 @@ struct MyAmoreCard: View {
     @Binding var popUpCardSelection: PopUpCards
     @State var subscriptionTypeId: String
     
-    private func writeReview() {
-      let productURL = URL(string: "https://itunes.apple.com/app/id958625272")!
-      var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-      components?.queryItems = [
-        URLQueryItem(name: "action", value: "write-review")
-      ]
-     guard let writeReviewURL = components?.url else {
-        return
-      }
-     UIApplication.shared.open(writeReviewURL)
-    }
-    
     var body: some View {
         
         ZStack{
@@ -166,7 +154,7 @@ struct MyAmoreCard: View {
                 HStack {
                     Spacer()
                     Button("Rate us") {
-                        self.writeReview()
+                        storeManager.writeReview()
                     }
                     .buttonStyle(GrowingButton(buttonColor:Color.yellow, fontColor: Color.white))
                     Spacer()

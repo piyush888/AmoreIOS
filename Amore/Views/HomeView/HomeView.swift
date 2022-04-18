@@ -30,6 +30,10 @@ struct HomeView: View {
         }
     }
     
+    func didDimiss() {
+        storeManager.paymentCompleteDisplayMyAmore = false
+    }
+    
     var body: some View {
         
             switch serviceErrorView {
@@ -65,12 +69,18 @@ struct HomeView: View {
                                         }
                                     
                                 case .userSettingsView:
+                                    // Load the user profile
                                     UserProfile()
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(storeManager)
+                                        .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
+                                               onDismiss: didDimiss){
+                                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")
+                                                .environmentObject(storeManager)
+                                        }
+                             
                             }
-                            
                             // Control Center
                             ControlCenter(currentPage:$currentPage)
                                 .padding(.horizontal,30)
