@@ -27,20 +27,24 @@ class MainMessagesViewModel: ObservableObject {
         guard let fromId = chat.fromId else {return}
         guard let toId = chat.toId else {return}
         
-        db.collection("RecentChats")
-            .document(fromId)
-            .collection("Messages")
-            .document(toId).updateData(["msgRead": chat.msgRead, "otherUserUpdated": false])
-        
-        db.collection("RecentChats")
-            .document(fromId)
-            .setData(["wasUpdated": true]) { error in
-            if let error = error {
-                self.errorMessage = "Failed to save recent message: \(error)"
-                print("Chat: Failed to save recent message: \(error)")
-                return
-            }
+        if let currentUserId = Auth.auth().currentUser?.uid {
+            
+            let otherUserId = fromId == currentUserId ? toId : fromId
+            db.collection("RecentChats")
+                .document(currentUserId)
+                .collection("Messages")
+                .document(otherUserId).updateData(["msgRead": chat.msgRead])
         }
+//
+//        db.collection("RecentChats")
+//            .document(fromId)
+//            .setData(["wasUpdated": true]) { error in
+//            if let error = error {
+//                self.errorMessage = "Failed to save recent message: \(error)"
+//                print("Chat: Failed to save recent message: \(error)")
+//                return
+//            }
+//        }
     }
     
     func markMessageRead(chat: ChatConversation) {

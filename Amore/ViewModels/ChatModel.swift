@@ -103,17 +103,9 @@ class ChatModel: ObservableObject {
 
         let senderData = ChatConversation(fromId: uid, toId: toId, user: toUser, lastText: self.chatText, timestamp: Date())
         
-        db.collection("RecentChats")
-            .document(uid)
-            .setData(["wasUpdated": true]) { error in
-            if let error = error {
-                self.errorMessage = "Failed to save recent message: \(error)"
-                print("Chat: Failed to save recent message: \(error)")
-                return
-            }
-        }
         
         do {
+            // Write to recent chats the data of the messages
             _ = try db.collection("RecentChats")
                 .document(uid)
                 .collection("Messages")
@@ -124,10 +116,24 @@ class ChatModel: ObservableObject {
                     return
                 }
             }
+            
+            // Raise the flag for recent chat
+            db.collection("RecentChats")
+                .document(uid)
+                .setData(["wasUpdated": true]) { error in
+                if let error = error {
+                    self.errorMessage = "Failed to save recent message: \(error)"
+                    print("Chat: Failed to save recent message: \(error)")
+                    return
+                }
+            }
+            
         }
         catch {
             print("Chat: \(error)")
+            return
         }
+        
     }
     
 }

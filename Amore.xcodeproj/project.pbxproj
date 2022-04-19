@@ -61,7 +61,6 @@
 		E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserProfile.swift */; };
 		E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */; };
 		E221EAB32715066000769234 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB22715066000769234 /* FilterSettings.swift */; };
-		E221EAB52715068800769234 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB42715068800769234 /* ChannelView.swift */; };
 		E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22328D22755A726000ABBA6 /* UserOtherInformation.swift */; };
 		E226CF402707B19800FC5129 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3E2707B19800FC5129 /* LocationView.swift */; };
 		E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF412707D78C00FC5129 /* LocationHomeView.swift */; };
@@ -235,7 +234,6 @@
 		E221EAAE2714FBDA00769234 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksHome.swift; sourceTree = "<group>"; };
 		E221EAB22715066000769234 /* FilterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
-		E221EAB42715068800769234 /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		E22328D22755A726000ABBA6 /* UserOtherInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOtherInformation.swift; sourceTree = "<group>"; };
 		E226CF3E2707B19800FC5129 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E226CF412707D78C00FC5129 /* LocationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHomeView.swift; sourceTree = "<group>"; };
@@ -395,14 +393,6 @@
 				70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		E221EAA22714F36700769234 /* MessagesView */ = {
-			isa = PBXGroup;
-			children = (
-				E221EAB42715068800769234 /* ChannelView.swift */,
-			);
-			path = MessagesView;
 			sourceTree = "<group>";
 		};
 		E221EAA32714F37400769234 /* FilterSettingsView */ = {
@@ -592,13 +582,6 @@
 			path = ReportUser;
 			sourceTree = "<group>";
 		};
-		E2A960F727C1E16F009108F0 /* StripePaymentView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StripePaymentView;
-			sourceTree = "<group>";
-		};
 		E2DBC01B272B2F95000630F5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,7 +694,6 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E2A960F727C1E16F009108F0 /* StripePaymentView */,
 				1BB36D2C27ACE6C600F4029C /* ChatPageView */,
 				E2A94C66276B92BF0069F814 /* ReportUser */,
 				E22D555C27540D4200852D70 /* ServerErrorView */,
@@ -719,7 +701,6 @@
 				E221EAA72714F3A400769234 /* LikesTopPicksView */,
 				E221EAA62714F39600769234 /* UserSettingsView */,
 				E221EAA32714F37400769234 /* FilterSettingsView */,
-				E221EAA22714F36700769234 /* MessagesView */,
 				E24A0F14271256A7001640CA /* SwipeView */,
 				E226CF452708C8BB00FC5129 /* NotificationsView */,
 				E226CF3C2707B18A00FC5129 /* LocationView */,
@@ -1015,7 +996,6 @@
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
 				E2A94C68276B93090069F814 /* ButtonIcon.swift in Sources */,
 				E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */,
-				E221EAB52715068800769234 /* ChannelView.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */,
 				E268A4662745E6520045F264 /* QuestionaireTemplate.swift in Sources */,

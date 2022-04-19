@@ -206,7 +206,7 @@ class CardProfileModel: ObservableObject {
         self.areMoreCardsNeeded()
     }
     
-    func areMoreCardsNeeded() {
+    func areMoreCardsNeeded() {	
         
         if allCardsWithPhotosDeck.count < 34 && self.profilesBeingFetched == false {
             // Yes more cards are needed
