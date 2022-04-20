@@ -56,6 +56,12 @@ struct MiniCardView: View {
                     }
                     
                 }
+                else {
+                    Image(systemName: "camera.fill")
+                        .onTapGesture {
+                            print("ID for faulting profile: ", singleProfile.id)
+                        }
+                }
                 
             }
 //            .background(
