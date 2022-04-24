@@ -126,7 +126,7 @@ class CardProfileModel: ObservableObject {
                             }
                             catch let jsonError as NSError {
                                 print("CardProfileModel")
-                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                                print("JSON decode failed: \(jsonError.localizedDescription)")
                             }
                             self.updateCardProfilesWithPhotos()
                             self.profilesBeingFetched = false

@@ -62,6 +62,9 @@ struct AllConversationsView: View {
                 ConversationView(toUser: $toUser, selectedChat: $selectedChat, navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
+                    .onDisappear {
+                        chatModel.firestoreListener?.remove()
+                    }
             }
         }
         .onAppear {
