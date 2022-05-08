@@ -267,6 +267,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let collectionRef = db.collection("Profiles")
         if let id = userProfile.id {
             do {
+                self.userProfile.wasProfileUpdated = true
                 let newDocReference = try collectionRef.document(id).setData(from: userProfile)
                 print("Profile stored in firestore with new document reference: \(newDocReference)")
                 self.editUserProfile = self.userProfile
@@ -372,8 +373,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 do {
                     print("Update Profile Information on Firestore...")
                     self.calculateProfileCompletion()
+                    self.editUserProfile.wasProfileUpdated = true
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
-                    userProfile = editUserProfile
+                    self.userProfile = self.editUserProfile
                 }
                 catch {
                     print("Error while updating Profile in Firestore: ")

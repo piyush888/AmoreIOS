@@ -53,6 +53,8 @@ struct Profile: Identifiable, Codable, Equatable {
     var doYouWantBabies: String?
     var profileCompletion: Double?
     var countryRaisedIn: String?
+    var wasProfileUpdated: Bool?
+    var isProfileActive: Bool? = true
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
