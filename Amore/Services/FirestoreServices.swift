@@ -15,7 +15,7 @@ class FirestoreServices {
     // time out after continious error from backend
     public static var timeOutRetriesCount: Int = 0
     public static var adminAuthModel = AdminAuthenticationViewModel()
-    public static var apiURL = "http://127.0.0.1:5000"
+    public static var apiURL = "http://127.0.0.1:5040"
     
     public static func storeLikesDislikes(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, swipedUserId: String?, swipeInfo: AllCardsView.LikeDislike) {
         var subCollection: String? {

@@ -24,7 +24,7 @@ class AdminAuthenticationViewModel: ObservableObject {
     // Cards Data
     @Published var allCards = [CardProfile]()
     
-    var apiURL = "http://127.0.0.1:5000"
+    var apiURL = "http://127.0.0.1:5040"
     
     // Authenticate the user in the backend
     /// Makes use of Client ID Token, This token will be sent to backend to authenticate the client to backend

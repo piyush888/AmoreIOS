@@ -18,7 +18,7 @@ class ReportActivityModel: ObservableObject  {
                            "reasonGiven": reason,
                            "descriptionGiven": description]
         
-        guard let url = URL(string: "http://127.0.0.1:5000/reportProfile") else { onFailure()
+        guard let url = URL(string: "http://127.0.0.1:5040/reportProfile") else { onFailure()
                 return
         }
         let finalBody = try! JSONSerialization.data(withJSONObject: requestBody)

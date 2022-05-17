@@ -47,7 +47,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // time out after continious error from backend
     @Published var timeOutRetriesCount: Int = 0
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    var apiURL = "http://127.0.0.1:5000"
+    var apiURL = "http://127.0.0.1:5040"
     
     let viewContext = PersistenceController.shared.container.viewContext
     

@@ -12,7 +12,7 @@ class FetchDataModel {
     @Published var requestInProcessing: Bool = false
     @Published var timeOutRetriesCount: Int = 0
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    var apiURL = "http://127.0.0.1:5000"
+    var apiURL = "http://127.0.0.1:5040"
 
     func fetchData(apiToBeUsed:String, requestBody:[String: String], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
         var tempData = [CardProfile]()

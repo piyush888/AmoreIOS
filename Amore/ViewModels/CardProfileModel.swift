@@ -26,7 +26,7 @@ class CardProfileModel: ObservableObject {
     @Published var lastSwipeInfo: AllCardsView.LikeDislike? = nil
     @Published var filterRadius: CGFloat? = 2
     
-    var apiURL = "http://127.0.0.1:5000"
+    var apiURL = "http://127.0.0.1:5040"
     
     
     // Call this function to fetch profiles from the backend server
