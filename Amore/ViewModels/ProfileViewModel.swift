@@ -157,19 +157,18 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                               print("JSON decode failed: \(jsonError.localizedDescription)")
                             }
                             self.requestInProcessing = false
-                            if self.timeOutRetriesCount > 0 {
-                                self.timeOutRetriesCount = 0
-                            }
+                            self.timeOutRetriesCount = 0
                             // send back the temp data
                             onSuccess()
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                        print("Unable to fetch getohash")
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 3 {
+                            if self.timeOutRetriesCount < 1 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
-                                self.getGeohash(apiToBeUsed: apiToBeUsed,precision: precision, onFailure: onFailure, onSuccess:onSuccess)
+                                self.getGeohash(apiToBeUsed: apiToBeUsed, precision: precision, onFailure: onFailure, onSuccess:onSuccess)
                             }
                             self.requestInProcessing = false
                         }

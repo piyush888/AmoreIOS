@@ -25,7 +25,7 @@ struct HomeView: View {
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
     func checkIfDataIsComing() {
-        if (cardProfileModel.timeOutRetriesCount > 5) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
+        if (cardProfileModel.timeOutRetriesCount > 1) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
             serviceErrorView = .serverErrorView
         }
     }
@@ -86,10 +86,11 @@ struct HomeView: View {
                                 .padding(.horizontal,30)
                                 .padding(.top,10)
                             
-                            }.onChange(of: cardProfileModel.timeOutRetriesCount, perform: { errorCount in
-                                self.checkIfDataIsComing()
-                            })
-                        
+                            }
+//                        .onChange(of: cardProfileModel.timeOutRetriesCount, perform: { errorCount in
+//                                self.checkIfDataIsComing()
+//                            })
+//
                     case .serverErrorView:
                         ServerErrorView()
                     .environmentObject(photoModel)

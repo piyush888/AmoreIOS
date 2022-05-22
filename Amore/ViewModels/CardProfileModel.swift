@@ -48,7 +48,6 @@ class CardProfileModel: ObservableObject {
             
             if let error = error {
                 // nil responses - Service is down, since the response is nil
-                self.timeOutRetriesCount = self.timeOutRetriesCount + 5
                 print("Error in API: \(error)")
                 return
             }
@@ -68,15 +67,13 @@ class CardProfileModel: ObservableObject {
                             }
                             self.updateCardProfilesWithPhotos()
                             self.profilesBeingFetched = false
-                            if self.timeOutRetriesCount > 0 {
-                                self.timeOutRetriesCount = 0
-                            }
+                            self.timeOutRetriesCount = 0
                             return
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 3 {
+                            if self.timeOutRetriesCount < 1 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchProfile(numberOfProfiles:10)
@@ -130,16 +127,14 @@ class CardProfileModel: ObservableObject {
                             }
                             self.updateCardProfilesWithPhotos()
                             self.profilesBeingFetched = false
-                            if self.timeOutRetriesCount > 0 {
-                                self.timeOutRetriesCount = 0
-                            }
+                            self.timeOutRetriesCount = 0
                             return
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            // number of retries 3
-                            if self.timeOutRetriesCount < 3 {
+                            // number of retries 1
+                            if self.timeOutRetriesCount < 1 {
                                 self.timeOutRetriesCount += 1
                                 self.adminAuthModel.serverLogin()
                                 self.fetchProfilesWithinRadius(numberOfProfiles: 10, latitude: latitude, longitude: longitude)

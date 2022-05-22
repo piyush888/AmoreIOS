@@ -10,7 +10,6 @@ import Foundation
 class FetchDataModel {
     
     @Published var requestInProcessing: Bool = false
-    @Published var timeOutRetriesCount: Int = 0
     @Published var adminAuthModel = AdminAuthenticationViewModel()
     var apiURL = "http://127.0.0.1:5040"
 
@@ -48,22 +47,13 @@ class FetchDataModel {
                               print("JSON decode failed: \(jsonError.localizedDescription)")
                             }
                             self.requestInProcessing = false
-                            if self.timeOutRetriesCount > 0 {
-                                self.timeOutRetriesCount = 0
-                            }
-                            // send back the temp data
                             onSuccess(tempData)
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                         DispatchQueue.main.async {
-                            // number of retries 3
-                            if self.timeOutRetriesCount < 1 {
-                                self.timeOutRetriesCount += 1
-                                self.adminAuthModel.serverLogin()
-                                self.fetchData(apiToBeUsed: apiToBeUsed,requestBody:["DataStatus": "No Data"],onFailure: onFailure,onSuccess:onSuccess)
-                            }
                             self.requestInProcessing = false
+                            print("Unable to fetch common data for: \(apiToBeUsed), \(requestBody)")
                         }
                     }
                 }

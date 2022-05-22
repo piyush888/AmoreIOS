@@ -13,7 +13,6 @@ class FirestoreServices {
     
     public static var requestInProcessing: Bool = false
     // time out after continious error from backend
-    public static var timeOutRetriesCount: Int = 0
     public static var adminAuthModel = AdminAuthenticationViewModel()
     public static var apiURL = "http://127.0.0.1:5040"
     
@@ -57,20 +56,12 @@ class FirestoreServices {
                                 DispatchQueue.main.async {
                                     print("Stored Successfully")
                                     self.requestInProcessing = false
-                                    if self.timeOutRetriesCount > 0 {
-                                        self.timeOutRetriesCount = 0
-                                    }
-                                    // send back the temp data
-                                    onSuccess()
+                                    return
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                                 DispatchQueue.main.async {
-                                    if self.timeOutRetriesCount < 3 {
-                                        self.timeOutRetriesCount += 1
-                                        self.adminAuthModel.serverLogin()
-                                        self.storeLikesDislikes(apiToBeUsed: apiToBeUsed,onFailure: onFailure,onSuccess:onSuccess, swipedUserId: swipedUserId, swipeInfo: swipeInfo)
-                                    }
+                                    print("Unable to store LikeDislike Firestore: \(apiToBeUsed), swipedUserId:\(swipedUserId)")
                                     self.requestInProcessing = false
                                 }
                             }
@@ -121,21 +112,13 @@ class FirestoreServices {
                                 DispatchQueue.main.async {
                                     print("Stored Successfully")
                                     self.requestInProcessing = false
-                                    if self.timeOutRetriesCount > 0 {
-                                        self.timeOutRetriesCount = 0
-                                    }
-                                    // send back the temp data
                                     onSuccess()
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                                 DispatchQueue.main.async {
-                                    if self.timeOutRetriesCount < 3 {
-                                        self.timeOutRetriesCount += 1
-                                        self.adminAuthModel.serverLogin()
-                                        self.storeLikesDislikes(apiToBeUsed: apiToBeUsed,onFailure: onFailure,onSuccess:onSuccess, swipedUserId: swipedUserId, swipeInfo: swipeInfo)
-                                    }
                                     self.requestInProcessing = false
+                                    print("Unable to upgrade LikeDislike Firestore: \(apiToBeUsed), upgradeLikeToSuperlike:\(swipedUserId)")
                                 }
                             }
                         }
@@ -185,14 +168,11 @@ class FirestoreServices {
                                 DispatchQueue.main.async {
                                     print("Rewind Operation Successful")
                                     self.requestInProcessing = false
-                                    if self.timeOutRetriesCount > 0 {
-                                        self.timeOutRetriesCount = 0
-                                    }
-                                    // send back the temp data
-                                    onSuccess()
+                                    return
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                                print("Unable to undo LikeDislike Firestore: \(apiToBeUsed), swipedUserId:\(swipedUserId)")
                                 DispatchQueue.main.async {
                                     self.requestInProcessing = false
                                 }
@@ -229,21 +209,16 @@ class FirestoreServices {
                 if let _ = data {
                     // Check if you receive a valid httpresponse
                     if let httpResponse = response as? HTTPURLResponse {
-                        
                         if httpResponse.statusCode == 200 {
                             DispatchQueue.main.async {
                                 print("Unmatch Operation Successful")
                                 self.requestInProcessing = false
-                                if self.timeOutRetriesCount > 0 {
-                                    self.timeOutRetriesCount = 0
-                                }
-                                // send back the temp data
-                                onSuccess()
                             }
                         }
                         else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                             DispatchQueue.main.async {
                                 self.requestInProcessing = false
+                                print("Error: Unable to ")
                             }
                         }
                     }
