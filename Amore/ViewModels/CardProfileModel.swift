@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import CoreGraphics
+import FirebaseAuth
 
 class CardProfileModel: ObservableObject {
     
@@ -28,32 +29,24 @@ class CardProfileModel: ObservableObject {
     
     var apiURL = "http://127.0.0.1:5040"
     
-    
-    // Call this function to fetch profiles from the backend server
-    func fetchProfile(numberOfProfiles:Int) {
+    func fetchProfile() {
         profilesBeingFetched = true
-        // fetchprofiles is the api where you can profiles
-        guard let url = URL(string: self.apiURL + "/fetchprofiles") else { return }
-        // add the pay load to the request
-        let body: [String: Any] = ["numberOfProfiles": numberOfProfiles,
-                                   "idsAlreadyInDeck":allCardsWithPhotosDeck.map({ (card:CardProfileWithPhotos)-> String in card.id! })]
+        guard let url = URL(string: self.apiURL + "/fetchGeoRecommendations") else { return }
+        let body: [String: String] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count)]
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                // nil responses - Service is down, since the response is nil
                 print("Error in API: \(error)")
                 return
             }
             
             if let data = data {
-                // Check if you receive a valid httpresponse
                 if let httpResponse = response as? HTTPURLResponse {
                     
                     if httpResponse.statusCode == 200 {
@@ -62,7 +55,7 @@ class CardProfileModel: ObservableObject {
                                 self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
                             }
                             catch let jsonError as NSError {
-                                print("CardProfileModel")
+                              print("CardProfileModel")
                               print("JSON decode failed: \(jsonError.localizedDescription)")
                             }
                             self.updateCardProfilesWithPhotos()
@@ -72,75 +65,8 @@ class CardProfileModel: ObservableObject {
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
-                        DispatchQueue.main.async {
-                            if self.timeOutRetriesCount < 1 {
-                                self.timeOutRetriesCount += 1
-                                self.adminAuthModel.serverLogin()
-                                self.fetchProfile(numberOfProfiles:10)
-                            }
-                            self.profilesBeingFetched = false
-                        }
-                    }
-                }
-            }
-            return
-        }.resume()
-        
-    }
-    
-    // Call this function to fetch profiles from the backend server
-    func fetchProfilesWithinRadius(numberOfProfiles:Int, latitude: Double, longitude: Double) {
-        profilesBeingFetched = true
-        // fetchprofiles is the api where you can profiles
-        guard let url = URL(string: self.apiURL + "/fetchprofileswithinradius") else { return }
-        // add the pay load to the request
-        let body: [String: Any] = ["numberOfProfiles": numberOfProfiles,
-                                   "idsAlreadyInDeck":allCardsWithPhotosDeck.map({ (card:CardProfileWithPhotos)-> String in card.id! }),
-                                   "latitude": latitude,
-                                   "longitude": longitude,
-                                   "radius": filterRadius as Any]
-        let finalBody = try! JSONSerialization.data(withJSONObject: body)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = finalBody
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            if let error = error {
-                print("Error in API: \(error)")
-            }
-            
-            if let data = data {
-                // Check if you receive a valid httpresponse
-                if let httpResponse = response as? HTTPURLResponse {
-                    
-                    if httpResponse.statusCode == 200 {
-                        DispatchQueue.main.async {
-                            do {
-                                self.allCards =  try JSONDecoder().decode([CardProfile].self, from: data)
-                            }
-                            catch let jsonError as NSError {
-                                print("CardProfileModel")
-                                print("JSON decode failed: \(jsonError.localizedDescription)")
-                            }
-                            self.updateCardProfilesWithPhotos()
-                            self.profilesBeingFetched = false
-                            self.timeOutRetriesCount = 0
-                            return
-                        }
-                    }
-                    else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
-                        DispatchQueue.main.async {
-                            // number of retries 1
-                            if self.timeOutRetriesCount < 1 {
-                                self.timeOutRetriesCount += 1
-                                self.adminAuthModel.serverLogin()
-                                self.fetchProfilesWithinRadius(numberOfProfiles: 10, latitude: latitude, longitude: longitude)
-                            }
-                            self.profilesBeingFetched = false
-                        }
+                        print("Unable to fetch geo profiles.")
+                        print("Profiles left in deck \(self.allCardsWithPhotosDeck.count)")
                     }
                 }
             }
@@ -157,7 +83,6 @@ class CardProfileModel: ObservableObject {
             if let location = card.location {
                 let profileLocation = CLLocation(latitude: location.latitude.boundDouble,
                                             longitude: location.longitude.boundDouble)
-                
             }
             
             let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
@@ -198,17 +123,14 @@ class CardProfileModel: ObservableObject {
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
-        self.areMoreCardsNeeded()
     }
     
     func areMoreCardsNeeded() {	
         
-        if allCardsWithPhotosDeck.count < 34 && self.profilesBeingFetched == false {
-            // Yes more cards are needed
-            self.fetchProfile(numberOfProfiles: 50)
-//            print("Count: Cards Being fetched ", allCardsWithPhotosDeck.count)
+        if allCardsWithPhotosDeck.count < 10 && self.profilesBeingFetched == false {
+            self.fetchProfile()
         } else {
-            print("Both deck have data")
+            print("No data is required in deck")
         }
     }
     

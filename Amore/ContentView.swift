@@ -88,7 +88,7 @@ struct ContentView: View {
                                             profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             cardProfileModel.filterRadius = filterModel.filterData.radiusDistance
-                                            cardProfileModel.fetchProfile(numberOfProfiles: 10)
+                                            cardProfileModel.fetchProfile()
                                             profileModel.getLocationOnce()
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                                             receivedGivenEliteModel.getLikesReceivedData()
