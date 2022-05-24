@@ -289,6 +289,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 totalMessagesCount: 1,
                                                 subscriptionTypeId: "Amore.ProductId.12M.Free.v1"))
                 
+                // Updating profile in backend too
+                _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
+                
                 return true
             }
             catch let error {
@@ -321,11 +324,11 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 else {
                     if let document = document {
                         do {
-                            // Get User Profile from Firestore.
+                            // 1 - Get User Profile from Firestore.
                             self.userProfile = try document.data(as: Profile.self) ?? Profile()
                             self.editUserProfile = self.userProfile
 
-                            // Storing Profile Data to Core
+                            // 2 - Storing Profile Data to Core
                             self.fetchProfileCoreData()
                             do {
                                 var profileCore: ProfileCore?
@@ -349,6 +352,10 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             catch {
                                 print("Core Data Storing failed during profile fetch...:\(error)")
                             }
+                            
+                            // 3 - Updating profile in backend too
+                            _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
+                            
                         }
                         catch {
                             print(error)
