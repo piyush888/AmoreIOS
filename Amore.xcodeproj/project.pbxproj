@@ -136,7 +136,6 @@
 		E2A94C68276B93090069F814 /* ButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C67276B93090069F814 /* ButtonIcon.swift */; };
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
 		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
-		E2A960F627C110E7009108F0 /* StripeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960F527C110E7009108F0 /* StripeModel.swift */; };
 		E2A960FB27C1F268009108F0 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */; };
 		E2A960FD27C1F280009108F0 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FC27C1F280009108F0 /* AmoreGold.swift */; };
 		E2A960FF27C345D6009108F0 /* SubsriptionItemPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */; };
@@ -307,7 +306,6 @@
 		E2A94C67276B93090069F814 /* ButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonIcon.swift; sourceTree = "<group>"; };
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
 		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
-		E2A960F527C110E7009108F0 /* StripeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeModel.swift; sourceTree = "<group>"; };
 		E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
 		E2A960FC27C1F280009108F0 /* AmoreGold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
 		E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsriptionItemPricing.swift; sourceTree = "<group>"; };
@@ -730,7 +728,6 @@
 				E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */,
 				1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */,
 				1BB36D3B27AE302200F4029C /* ChatModel.swift */,
-				E2A960F527C110E7009108F0 /* StripeModel.swift */,
 				E2A9610227CC89FF009108F0 /* StoreManager.swift */,
 			);
 			path = ViewModels;
@@ -953,7 +950,6 @@
 				E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
-				E2A960F627C110E7009108F0 /* StripeModel.swift in Sources */,
 				E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */,
 				1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* IAmA.swift in Sources */,
