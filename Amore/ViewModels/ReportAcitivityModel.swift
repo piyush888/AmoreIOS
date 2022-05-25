@@ -47,7 +47,7 @@ class ReportActivityModel: ObservableObject  {
                                 print(data)
                             }
                             catch let jsonError as NSError {
-                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                              print("JSON decode failed ReportActivityModel: \(jsonError.localizedDescription)")
                             }
                             // send back the temp data
                             onSuccess()

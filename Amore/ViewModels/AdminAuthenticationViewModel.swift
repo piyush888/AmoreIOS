@@ -98,7 +98,7 @@ class AdminAuthenticationViewModel: ObservableObject {
                            print(httpResponse.statusCode)
                        }
                      } catch let jsonError as NSError {
-                       print("JSON decode failed: \(jsonError.localizedDescription)")
+                         print("JSON decode failed AdminAuthenticationViewModel: \(jsonError.localizedDescription)")
                      }
                      return
                    }

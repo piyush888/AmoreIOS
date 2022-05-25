@@ -29,7 +29,7 @@ class FetchDataModel {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                print("Error in API: \(error)")
+                print("Error in API \(apiToBeUsed): \(error)")
                 onFailure()
                 return
             }
@@ -44,7 +44,7 @@ class FetchDataModel {
                                 tempData =  try JSONDecoder().decode([CardProfile].self, from: data)
                             }
                             catch let jsonError as NSError {
-                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                              print("JSON decode failed \(apiToBeUsed): \(finalBody): \(jsonError.localizedDescription)")
                             }
                             self.requestInProcessing = false
                             onSuccess(tempData)

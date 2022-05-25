@@ -43,7 +43,7 @@ class FirestoreServices {
                 URLSession.shared.dataTask(with: request) { (data, response, error) in
                     
                     if let error = error {
-                        print("Error in API: \(error)")
+                        print("Error in API \(apiToBeUsed): \(error)")
                         onFailure()
                         return
                     }
@@ -99,7 +99,7 @@ class FirestoreServices {
                 URLSession.shared.dataTask(with: request) { (data, response, error) in
                     
                     if let error = error {
-                        print("Error in API: \(error)")
+                        print("Error in API \(apiToBeUsed): \(error)")
                         onFailure()
                         return
                     }
@@ -155,7 +155,7 @@ class FirestoreServices {
                 URLSession.shared.dataTask(with: request) { (data, response, error) in
                     
                     if let error = error {
-                        print("Error in API: \(error)")
+                        print("Error in API \(apiToBeUsed): \(error)")
                         onFailure()
                         return
                     }
@@ -201,7 +201,7 @@ class FirestoreServices {
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
                 if let error = error {
-                    print("Error in API: \(error)")
+                    print("Error in API \(apiToBeUsed): \(error)")
                     onFailure()
                     return
                 }

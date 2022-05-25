@@ -141,7 +141,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                print("Error in API: \(error)")
+                print("Error in API \(apiToBeUsed): \(error)")
                 onFailure()
                 return
             }
@@ -158,7 +158,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             }
                             catch let jsonError as NSError {
                                 print("ProfileViewModel")
-                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                              print("JSON decode failed ProfileViewModel: \(jsonError.localizedDescription)")
                             }
                             self.requestInProcessing = false
                             self.timeOutRetriesCount = 0

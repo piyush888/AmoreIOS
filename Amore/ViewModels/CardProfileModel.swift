@@ -42,7 +42,7 @@ class CardProfileModel: ObservableObject {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                print("Error in API: \(error)")
+                print("Error in API \(url): \(error)")
                 return
             }
             
@@ -56,7 +56,7 @@ class CardProfileModel: ObservableObject {
                             }
                             catch let jsonError as NSError {
                               print("CardProfileModel")
-                              print("JSON decode failed: \(jsonError.localizedDescription)")
+                              print("JSON decode failed CardProfileModel: \(jsonError.localizedDescription)")
                             }
                             self.updateCardProfilesWithPhotos()
                             self.profilesBeingFetched = false
