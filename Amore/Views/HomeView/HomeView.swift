@@ -58,8 +58,8 @@ struct HomeView: View {
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(reportActivityModel)
                                         .environmentObject(profileModel)
-                                
-                                        
+                                        .environmentObject(filterModel)
+                                    
                                 case .filterSettingsView:
                                     FilterSettings()
                                         .environmentObject(filterModel)

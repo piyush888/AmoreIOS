@@ -29,10 +29,35 @@ class CardProfileModel: ObservableObject {
     
     var apiURL = "http://127.0.0.1:5040"
     
-    func fetchProfile() {
+    func fetchProfile(filterData: Filters) {
         profilesBeingFetched = true
+        
         guard let url = URL(string: self.apiURL + "/fetchGeoRecommendations") else { return }
-        let body: [String: String] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count)]
+        
+        let genderPreference = filterData.genderPreference ?? ""
+        let minAgePreference = String(filterData.minAgePreference ?? 21)
+        let maxAgePreference = String(filterData.maxAgePreference ?? 30)
+        let religionPreference = filterData.religionPreference ?? ["Any"]
+        let communityPreference = filterData.communityPreference ?? [""]
+        let careerPreference = filterData.careerPreference ?? [""]
+        let educationPreference = filterData.educationPreference ?? ""
+        let countryPreference = filterData.countryPreference ?? ""
+        let radiusDistance = filterData.radiusDistance ?? 100.0
+        
+        let body: [String: Any] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count),
+                                      "filterData": [
+                                            "genderPreference":genderPreference,
+                                            "minAgePreference":minAgePreference,
+                                            "maxAgePreference":maxAgePreference,
+                                            "religionPreference":religionPreference,
+                                            "communityPreference":communityPreference,
+                                            "careerPreference":careerPreference,
+                                            "educationPreference":educationPreference,
+                                            "countryPreference":countryPreference,
+                                            "radiusDistance":radiusDistance,
+                                        ]
+                                    ]
+        
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -125,10 +150,10 @@ class CardProfileModel: ObservableObject {
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
     }
     
-    func areMoreCardsNeeded() {	
+    func areMoreCardsNeeded(filterData: Filters) {
         
         if allCardsWithPhotosDeck.count < 10 && self.profilesBeingFetched == false {
-            self.fetchProfile()
+            self.fetchProfile(filterData:filterData)
         } else {
             print("No data is required in deck")
         }

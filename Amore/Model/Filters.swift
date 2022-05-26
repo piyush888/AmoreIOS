@@ -20,10 +20,4 @@ struct Filters: Identifiable, Codable, Hashable, Equatable {
     var educationPreference: String? = "Masters"
     var countryPreference: String? = "India"
     var radiusDistance: CGFloat? = 100
-    var location: Location?
-    var geohash: String?
-    var geohash2: String?
-    var geohash3: String?
-    var geohash4: String?
-    var geohash5: String?
 }

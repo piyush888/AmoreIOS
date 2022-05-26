@@ -18,6 +18,8 @@ struct AllCardsView: View {
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    @EnvironmentObject var filterModel: FilterModel
+    
     
     @State var curSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
@@ -87,7 +89,7 @@ struct AllCardsView: View {
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
 //                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
                         self.cardSwipeDone = true
-                        cardProfileModel.areMoreCardsNeeded()
+                        cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
 //                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
                     }
                     
