@@ -46,6 +46,7 @@ class ProfileViewModelV2: ObservableObject {
         let latitude = String(userProfile.location?.latitude ?? 0)
         let longitude = String(userProfile.location?.longitude ?? 0)
         let geohash = userProfile.geohash ?? ""
+        let geohash1 = userProfile.geohash1 ?? ""
         let geohash2 = userProfile.geohash2 ?? ""
         let geohash3 = userProfile.geohash3 ?? ""
         let geohash4 = userProfile.geohash4 ?? ""
@@ -95,6 +96,7 @@ class ProfileViewModelV2: ObservableObject {
                                           "location": ["latitude": latitude,
                                                        "longitude": longitude],
                                           "geohash": geohash,
+                                          "geohash1": geohash1,
                                           "geohash2": geohash2,
                                           "geohash3": geohash3,
                                           "geohash4": geohash4,

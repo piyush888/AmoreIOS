@@ -33,6 +33,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var politics: String?
     var location: Location?
     var geohash: String?
+    var geohash1: String?
     var geohash2: String?
     var geohash3: String?
     var geohash4: String?
@@ -96,6 +97,7 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.countryRaisedIn == rhs.countryRaisedIn &&
                lhs.location == rhs.location &&
                lhs.geohash == rhs.geohash &&
+               lhs.geohash1 == rhs.geohash1 &&
                lhs.geohash2 == rhs.geohash2 &&
                lhs.geohash3 == rhs.geohash3 &&
                lhs.geohash4 == rhs.geohash4 &&

@@ -104,6 +104,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.getGeohash(apiToBeUsed: "/getgeohash", precision: 12) {} onSuccess: {
             if let geohash = self.lastSeenLocationGeohash?.geohash {
                 self.editUserProfile.geohash = geohash
+                self.editUserProfile.geohash1 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 1)])
                 self.editUserProfile.geohash2 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 2)])
                 self.editUserProfile.geohash3 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 3)])
                 self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
@@ -374,6 +375,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             editUserProfile.geohash = lastSeenLocationGeohash?.geohash
             if let geohash = self.lastSeenLocationGeohash?.geohash {
                 self.editUserProfile.geohash = geohash
+                self.editUserProfile.geohash1 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 1)])
                 self.editUserProfile.geohash2 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 2)])
                 self.editUserProfile.geohash3 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 3)])
                 self.editUserProfile.geohash4 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 4)])
