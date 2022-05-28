@@ -84,12 +84,13 @@ struct AllCardsView: View {
                             .environmentObject(cardProfileModel)
                             .environmentObject(profileModel)
                             .environmentObject(receivedGivenEliteModel)
+                            .environmentObject(filterModel)
                         
                     }
                     .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
 //                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
                         self.cardSwipeDone = true
-                        cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
+//                        cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
 //                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
                     }
                     

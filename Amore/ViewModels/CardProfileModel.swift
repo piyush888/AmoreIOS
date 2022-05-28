@@ -31,6 +31,7 @@ class CardProfileModel: ObservableObject {
     
     func fetchProfile(filterData: Filters) {
         profilesBeingFetched = true
+        print("Calling fetchProfile")
         
         guard let url = URL(string: self.apiURL + "/fetchGeoRecommendations") else { return }
         
@@ -42,7 +43,7 @@ class CardProfileModel: ObservableObject {
         let careerPreference = filterData.careerPreference ?? [""]
         let educationPreference = filterData.educationPreference ?? ""
         let countryPreference = filterData.countryPreference ?? ""
-        let radiusDistance = filterData.radiusDistance ?? 200.0
+        let radiusDistance = filterData.radiusDistance ?? 100.0
         
         let body: [String: Any] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count),
                                       "filterData": [

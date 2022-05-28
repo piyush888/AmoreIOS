@@ -14,6 +14,7 @@ struct SingleCardView: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    @EnvironmentObject var filterModel: FilterModel
     
     @State private var translation: CGSize = .zero
     @Binding var swipeStatus: AllCardsView.LikeDislike
@@ -69,6 +70,7 @@ struct SingleCardView: View {
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
+                // Dragging from UI
                 .gesture(
                     DragGesture()
                         .onChanged { value in
@@ -88,11 +90,13 @@ struct SingleCardView: View {
                                 self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {
                                     cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
                                 }
+                                cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                             } else {
                                 self.translation = .zero
                             }
                         }
                 )
+                // Buttons
                 .onChange(of: self.swipeStatus) { newValue in
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = .init(width: 100, height: 0)
@@ -112,6 +116,7 @@ struct SingleCardView: View {
                             cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
                         }
                     }
+                    cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                 }
                 .environmentObject(profileModel)
                 
