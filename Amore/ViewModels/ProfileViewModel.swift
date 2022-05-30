@@ -19,7 +19,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userProfile = Profile()
     @Published var editUserProfile = Profile()
     @Published var storeManagerObj = StoreManager() // Object
-    @Published var storeProfileV2 = ProfileViewModelV2()
+    @Published var storeProfileV2 = ProfileViewModelV2() // Object
     
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
@@ -247,8 +247,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             if self.profileFetchedAndReady {
                                 self.profileFetchedAndReady = false
                             }
-                            self.getUserProfile()
-//                            streamObj.streamLogin(uid: authRes.user.uid)
+//                            self.getUserProfile()
                             adminAuthenticationObj.serverLogin()
                         }
                         self.loginFormVisible = false
@@ -289,9 +288,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 totalSuperLikesCount: 2,
                                                 totalMessagesCount: 1,
                                                 subscriptionTypeId: "Amore.ProductId.12M.Free.v1"))
-                
-                // Updating profile in backend too
-                _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
                 
                 return true
             }
@@ -353,10 +349,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             catch {
                                 print("Core Data Storing failed during profile fetch...:\(error)")
                             }
-                            
-                            // 3 - Updating profile in backend too
-                            _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
-                            
                         }
                         catch {
                             print(error)
@@ -392,6 +384,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     self.userProfile = self.editUserProfile
                     // also updating cache and backend
                     _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
+                    
                 }
                 catch {
                     print("Error while updating Profile in Firestore: ")

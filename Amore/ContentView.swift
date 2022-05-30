@@ -22,6 +22,7 @@ struct ContentView: View {
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
     @StateObject var storeManager = StoreManager()
+    @StateObject var storeProfileV2 = ProfileViewModelV2()
     
     var body: some View {
         
@@ -85,7 +86,7 @@ struct ContentView: View {
                                         .environmentObject(storeManager)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
-                                            profileModel.getUserProfile()
+//                                            profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             cardProfileModel.filterRadius = filterModel.filterData.radiusDistance
                                             cardProfileModel.fetchProfile(filterData:filterModel.filterData)
@@ -99,6 +100,7 @@ struct ContentView: View {
                                             SKPaymentQueue.default().add(storeManager)
                                             storeManager.getProducts()
                                             storeManager.getPurchase()
+                                            storeProfileV2.writeUserProfileToBackend(userProfile:profileModel.editUserProfile)
                                         }
                                 }
                                 // Else get location permission

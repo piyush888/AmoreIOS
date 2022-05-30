@@ -148,7 +148,6 @@ class ProfileViewModelV2: ObservableObject {
                     }
                 }
             }.resume()
-            
             return true
         }
         else{
@@ -156,8 +155,6 @@ class ProfileViewModelV2: ObservableObject {
         }
         return false
     }
-    
-    
 }
 
 
