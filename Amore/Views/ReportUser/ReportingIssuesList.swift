@@ -56,7 +56,8 @@ struct ReportingIssuesCard: View {
                     TextSlider()
                         
                     RadioButtonGroup(items: reportUserReasoning, selectedId: selectedReasoning) { selected in
-                            print("Selected is: \(selected)")
+                        selectedReasoning = selected
+                            print("Selected is: \(selectedReasoning)")
                     }
                     
                     // Please provide information why you want to report user
@@ -67,7 +68,7 @@ struct ReportingIssuesCard: View {
                     
                     Button {
                         // call this function to report user, if successfully remove the card from deck
-                        ReportActivityModel.reportUserWithReason(otherUserId:profileId,
+                        ReportActivityModel.reportUserWithReason(otherUserId:self.profileId,
                                                                  reason:selectedReasoning,
                                                                  description:reportUserDescription.bound,
                                                                  onFailure:{
@@ -75,7 +76,7 @@ struct ReportingIssuesCard: View {
                                                                     print("Failed to report user, please try again")
                                                                 },
                                                                  onSuccess: {
-                                                                    print("Failed to report user, please try again")
+                                                                    print("Successfully reported user")
                                                                     // If Success also remove the card from deck
                                                                     FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                                                                         print("Failed to remove card from deck")

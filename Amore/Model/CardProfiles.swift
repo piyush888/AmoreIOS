@@ -49,6 +49,51 @@ struct CardProfile: Identifiable, Codable, Equatable {
     var doYouWantBabies: String?
     var countryRaisedIn: String?
     var profileCompletion: Double?
+    
+    /// Allows initialisation of object using CardProfileWithPhotos object
+    init(_ cardProfileWithPhotos: CardProfileWithPhotos) {
+        id = cardProfileWithPhotos.id
+        firstName = cardProfileWithPhotos.firstName
+        lastName = cardProfileWithPhotos.lastName
+        dateOfBirth = cardProfileWithPhotos.dateOfBirth
+        interests = cardProfileWithPhotos.interests
+        sexualOrientation = cardProfileWithPhotos.sexualOrientation
+        sexualOrientationVisible = cardProfileWithPhotos.sexualOrientationVisible
+        showMePreference = cardProfileWithPhotos.showMePreference
+        work = cardProfileWithPhotos.work
+        school = cardProfileWithPhotos.school
+        age = cardProfileWithPhotos.age
+        headline = cardProfileWithPhotos.headline
+        profileDistanceFromUser = cardProfileWithPhotos.profileDistanceFromUser
+        jobTitle = cardProfileWithPhotos.jobTitle
+        careerField = cardProfileWithPhotos.careerField
+        height = cardProfileWithPhotos.height
+        education = cardProfileWithPhotos.education
+        religion = cardProfileWithPhotos.religion
+        community = cardProfileWithPhotos.community
+        politics = cardProfileWithPhotos.politics
+        location = cardProfileWithPhotos.location
+        geohash = cardProfileWithPhotos.geohash
+        geohash1 = cardProfileWithPhotos.geohash1
+        geohash2 = cardProfileWithPhotos.geohash2
+        geohash3 = cardProfileWithPhotos.geohash3
+        geohash4 = cardProfileWithPhotos.geohash4
+        geohash5 = cardProfileWithPhotos.geohash5
+        description = cardProfileWithPhotos.description
+        country = cardProfileWithPhotos.country
+        image1 = cardProfileWithPhotos.image1
+        image2 = cardProfileWithPhotos.image2
+        image3 = cardProfileWithPhotos.image3
+        image4 = cardProfileWithPhotos.image4
+        image5 = cardProfileWithPhotos.image5
+        image6 = cardProfileWithPhotos.image6
+        doYouWorkOut = cardProfileWithPhotos.doYouWorkOut
+        doYouDrink = cardProfileWithPhotos.doYouDrink
+        doYouSmoke = cardProfileWithPhotos.doYouSmoke
+        doYouWantBabies = cardProfileWithPhotos.doYouWantBabies
+        countryRaisedIn = cardProfileWithPhotos.countryRaisedIn
+        profileCompletion = cardProfileWithPhotos.profileCompletion
+    }
 }
 
 struct CardProfileWithPhotos: Identifiable, Hashable, Equatable {

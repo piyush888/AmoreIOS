@@ -383,7 +383,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
                     self.userProfile = self.editUserProfile
                     // also updating cache and backend
-                    _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.userProfile)
+                    _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.editUserProfile)
                     
                 }
                 catch {

@@ -20,6 +20,8 @@ struct ConversationView: View {
     var emptyScrollToString = ""
     @State var scrollToBottomOnSend: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
+    @State private var showingAlert = false
+//    @State var presentReportingSheet: Bool = false
     @Binding var navigateToChatView: Bool
     
     var body: some View {
@@ -39,14 +41,7 @@ struct ConversationView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         Button  {
-                            navigateToChatView.toggle()
-                            if let toUserId = toUser.id {
-                                ReportActivityModel.reportUserWithReason(otherUserId: toUserId, reason: "", description: "") {
-                                    print("Report From Chat: API Call Failed")
-                                } onSuccess: {
-                                    print("Report From Chat: API Success")
-                                }
-                            }
+                            allcardsActiveSheet = .reportProfileSheet
                         } label: {
                             Label("Report User", systemImage: "shield.fill")
                                 .font(.system(size: 60))
@@ -75,6 +70,19 @@ struct ConversationView: View {
                     }
                 }
             })
+        /// Use Report User List view for Reporting
+            .sheet(item: $allcardsActiveSheet) { item in
+                if let toUserId = toUser.id {
+                    ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
+                                        profileId: toUserId,
+                                        showingAlert:self.$showingAlert,
+                                        onRemove: { user in
+                        print("Report From Chat: API Success")
+                        navigateToChatView.toggle()
+                    }
+                                    )
+                }
+            }
 //            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
 //                if newValue.fromId != Auth.auth().currentUser?.uid {
 //                    mainMessagesModel.markMessageRead(index: selectedChatIndex)

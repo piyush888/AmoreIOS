@@ -13,6 +13,18 @@ class FetchDataModel {
     @Published var adminAuthModel = AdminAuthenticationViewModel()
     var apiURL = "http://127.0.0.1:5040"
 
+    /**
+     Common API Call function to fetch likes, superlikes, elite picks.
+
+     - Parameter:
+        - apiToBeUsed: String: Endpoint to be used
+        - requestBody: [String: String]: consists `from_collection` var pointing to likesGiven, likesReceived, etc
+        - onFailure: @escaping () -> Void: Code block to be executed if an error occurs in API call
+        - onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void:_ Code block to be executed
+                    when API Call succeeds.
+
+     - Returns: N/A
+     */
     func fetchData(apiToBeUsed:String, requestBody:[String: String], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
         var tempData = [CardProfile]()
         requestInProcessing = true
@@ -44,7 +56,7 @@ class FetchDataModel {
                                 tempData =  try JSONDecoder().decode([CardProfile].self, from: data)
                             }
                             catch let jsonError as NSError {
-                              print("JSON decode failed \(apiToBeUsed): \(finalBody): \(jsonError.localizedDescription)")
+                              print("JSON decode failed \(apiToBeUsed): \(requestBody): \(jsonError.localizedDescription)")
                             }
                             self.requestInProcessing = false
                             onSuccess(tempData)

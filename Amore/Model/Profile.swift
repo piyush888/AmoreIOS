@@ -107,28 +107,107 @@ struct Profile: Identifiable, Codable, Equatable {
 }
 
 
-// Temp User Model being used to display cards
-struct User: Hashable, CustomStringConvertible {    
-    var id: Int
+/// Model simulating Profile Model above, where `id` attribute
+/// is String instead of Firestore Document id.
+struct User: Identifiable, Codable, Equatable, Hashable {
+    var id: String?
+    var firstName: String?
+    var lastName: String?
+    var email: String?
+    var dateOfBirth: Date?
+    var interests: [String]?
+    var genderIdentity: String?
+    var sexualOrientation: [String]?
+    var sexualOrientationVisible: Bool?
+    var showMePreference: String?
+    var work: String?
+    var school: String?
+    var age: Int?
+    var headline: String?
+    var profileDistanceFromUser: Double?
+    var jobTitle: String?
+    var careerField: String?
+    var height: Double?
+    var education: String?
+    var religion: String?
+    var community: String?
+    var politics: String?
+    var location: Location?
+    var geohash: String?
+    var geohash1: String?
+    var geohash2: String?
+    var geohash3: String?
+    var geohash4: String?
+    var geohash5: String?
+    var description: String?
+    var country: String?
+    var discoveryStatus: Bool? = false
+    var notificationsStatus: Bool? = false
+    var image1: ProfileImage? = ProfileImage()
+    var image2: ProfileImage? = ProfileImage()
+    var image3: ProfileImage? = ProfileImage()
+    var image4: ProfileImage? = ProfileImage()
+    var image5: ProfileImage? = ProfileImage()
+    var image6: ProfileImage? = ProfileImage()
+    var doYouWorkOut: String?
+    var doYouDrink: String?
+    var doYouSmoke: String?
+    var doYouWantBabies: String?
+    var profileCompletion: Double?
+    var countryRaisedIn: String?
+    var wasProfileUpdated: Bool?
+    var isProfileActive: Bool? = true
     
-    let firstName: String
-    let lastName: String
-    let age: Int
-    let profileDistanceFromUser: Int
-    let imageName1: String
-    let imageName2: String
-    let imageName3: String
-    let imageName4: String
-    let imageName5: String
-    let imageName6: String
-    let occupation: String
-    let passions: [String]
-    let height: Double
-    let education: String
-    let religion: String
-    let politics: String
-    let location: String
-    let description: String
+    /// Allows initialisation of struct object from Profile Model object
+    init(_ profile: Profile) {
+        id = profile.id
+        firstName = profile.firstName
+        lastName = profile.lastName
+        email = profile.email
+        dateOfBirth = profile.dateOfBirth
+        interests = profile.interests
+        genderIdentity = profile.genderIdentity
+        sexualOrientation = profile.sexualOrientation
+        sexualOrientationVisible = profile.sexualOrientationVisible
+        showMePreference = profile.showMePreference
+        work = profile.work
+        school = profile.school
+        age = profile.age
+        headline = profile.headline
+        profileDistanceFromUser = profile.profileDistanceFromUser
+        jobTitle = profile.jobTitle
+        careerField = profile.careerField
+        height = profile.height
+        education = profile.education
+        religion = profile.religion
+        community = profile.community
+        politics = profile.politics
+        location = profile.location
+        geohash = profile.geohash
+        geohash1 = profile.geohash1
+        geohash2 = profile.geohash2
+        geohash3 = profile.geohash3
+        geohash4 = profile.geohash4
+        geohash5 = profile.geohash5
+        description = profile.description
+        country = profile.country
+        discoveryStatus = profile.discoveryStatus
+        notificationsStatus = profile.notificationsStatus
+        image1 = profile.image1
+        image2 = profile.image2
+        image3 = profile.image3
+        image4 = profile.image4
+        image5 = profile.image5
+        image6 = profile.image6
+        doYouWorkOut = profile.doYouWorkOut
+        doYouDrink = profile.doYouDrink
+        doYouSmoke = profile.doYouSmoke
+        doYouWantBabies = profile.doYouWantBabies
+        profileCompletion = profile.profileCompletion
+        countryRaisedIn = profile.countryRaisedIn
+        wasProfileUpdated = profile.wasProfileUpdated
+        isProfileActive = profile.isProfileActive
+    }
 }
 
 struct Location: Codable, Hashable, Equatable {
