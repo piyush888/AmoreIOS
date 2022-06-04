@@ -156,6 +156,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             do {
                                 geohash = try JSONDecoder().decode(Geohash.self, from: data)
                                 self.lastSeenLocationGeohash = geohash
+                                onSuccess()
                             }
                             catch let jsonError as NSError {
                                 print("ProfileViewModel")
@@ -164,7 +165,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             self.requestInProcessing = false
                             self.timeOutRetriesCount = 0
                             // send back the temp data
-                            onSuccess()
                         }
                     }
                     else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
@@ -364,7 +364,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func updateUserProfile(profileId: String?) {
         if let profileId = profileId {
             editUserProfile.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
-            editUserProfile.geohash = lastSeenLocationGeohash?.geohash
             if let geohash = self.lastSeenLocationGeohash?.geohash {
                 self.editUserProfile.geohash = geohash
                 self.editUserProfile.geohash1 = String(geohash[..<geohash.index(geohash.startIndex, offsetBy: 1)])
