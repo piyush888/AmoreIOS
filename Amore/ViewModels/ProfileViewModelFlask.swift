@@ -76,15 +76,3 @@ class ProfileViewModelV2: ObservableObject {
         return false
     }
 }
-
-
-//self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesReceived"]) {
-//    print("Error while fetching /likesReceived")
-//} onSuccess: { tempData in
-//    _ = tempData.map{ card in
-//        self.prefetchNextCardPhotos(card: card)
-//    }
-//    let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
-//    self.superLikesReceivedPhotos = tempResponse.cardsWithPhotos
-//    self.superLikesReceivedPhotos_Dict = tempResponse.cardsDict
-//}

@@ -28,6 +28,11 @@ class ReceivedGivenEliteModel: ObservableObject {
     @Published var elitesPhotos = [CardProfileWithPhotos]()
     @Published var elitesPhotos_Dict: [String: CardProfileWithPhotos] = [:]
     
+    // matches
+    @Published var matchesPhotos = [CardProfileWithPhotos]()
+    @Published var matchesPhotos_Dict: [String: CardProfileWithPhotos] = [:]
+    
+    
     @Published var fetchDataObj = FetchDataModel()
     
     func prefetchNextCardPhotos(card: CardProfile) {
@@ -94,6 +99,19 @@ class ReceivedGivenEliteModel: ObservableObject {
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.elitesPhotos = tempResponse.cardsWithPhotos
             self.elitesPhotos_Dict = tempResponse.cardsDict
+        }
+    }
+    
+    func loadMatches() {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/loadmatchesunmatches",requestBody:["fromCollection": "Match"]) {
+            print("Error while loading matches profiles")
+        } onSuccess: { tempData in
+            _ = tempData.map{ card in
+                self.prefetchNextCardPhotos(card: card)
+            }
+            let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
+            self.matchesPhotos = tempResponse.cardsWithPhotos
+            self.matchesPhotos_Dict = tempResponse.cardsDict
         }
     }
     
