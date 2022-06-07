@@ -11,8 +11,12 @@ struct LikeDislikeSuperLike: View {
     
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @Binding var curSwipeStatus: AllCardsView.LikeDislike
     @Binding var cardSwipeDone: Bool
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
         
@@ -39,9 +43,7 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.dislike
-//                    print("Count: Button Dislike Pressed")
                     cardSwipeDone = false
-//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "xmark.circle.fill")
@@ -59,9 +61,7 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.superlike
-//                    print("Count: Button SuperLike Pressed")
                     cardSwipeDone = false
-//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "star.circle.fill")
@@ -77,9 +77,7 @@ struct LikeDislikeSuperLike: View {
             Button {
                 if cardSwipeDone {
                     curSwipeStatus = AllCardsView.LikeDislike.like
-//                    print("Count: Button Like Pressed")
                     cardSwipeDone = false
-//                    print("Count: card swipe done: ", cardSwipeDone)
                 }
             } label: {
                 Image(systemName: "heart.circle.fill")
@@ -95,9 +93,9 @@ struct LikeDislikeSuperLike: View {
             Spacer()
             
             Button {
-                
+                allcardsActiveSheet = .directMessageSheet
             } label: {
-                Image(systemName: "bolt.circle.fill")
+                Image(systemName: "bubble.left.circle.fill")
                     .resizable()
                     .frame(width:35, height:35)
                     .foregroundColor(.blue)
@@ -111,6 +109,6 @@ struct LikeDislikeSuperLike: View {
 
 struct LikeDislikeSuperLike_Previews: PreviewProvider {
     static var previews: some View {
-        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), cardSwipeDone: Binding.constant(true))
+        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), cardSwipeDone: Binding.constant(true), allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
     }
 }

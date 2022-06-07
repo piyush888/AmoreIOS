@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Firebase
 
 struct AllCardsView: View {
     
@@ -19,6 +20,9 @@ struct AllCardsView: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var filterModel: FilterModel
+    @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     
     @State var curSwipeStatus: LikeDislike = .none
@@ -117,9 +121,12 @@ struct AllCardsView: View {
                         
                         
                         Spacer()
-                        LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone)
+                        LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)
                             .environmentObject(cardProfileModel)
                             .environmentObject(receivedGivenEliteModel)
+                            .environmentObject(storeManager)
+                            .environmentObject(chatModel)
+                            .environmentObject(mainMessagesModel)
                             .padding(.bottom, 20)
                             .padding(.horizontal, 40)
                             .opacity(1.5)
@@ -145,6 +152,15 @@ struct AllCardsView: View {
                     case .moreMatchesSheet:
                        MoreInfoForBetterMatch(allcardsActiveSheet: $allcardsActiveSheet)
                     
+                case .directMessageSheet:
+                    if let profile = cardProfileModel.allCardsWithPhotosDeck.last {
+                        DirectMessageCardView(
+                            fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
+                            toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
+                            cardActive: $allcardsActiveSheet)
+                        .environmentObject(chatModel)
+                    }
+                    
                     case .none:
                         Text("None")
                     
@@ -164,7 +180,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, moreMatchesSheet, none
+    case reportProfileSheet, moreMatchesSheet, directMessageSheet, none
     var id: Int {
         hashValue
     }

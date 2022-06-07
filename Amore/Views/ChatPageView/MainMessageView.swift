@@ -11,8 +11,8 @@ struct MainMessagesView: View {
 
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
-    @StateObject var mainMessagesModel = MainMessagesViewModel()
-    @StateObject var chatModel = ChatModel()
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
 
     var body: some View {
         NavigationView {

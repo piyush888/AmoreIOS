@@ -17,7 +17,17 @@ class ChatModel: ObservableObject {
     @Published var count = 0
     var firestoreListener: ListenerRegistration?
 
-    func handleSend(fromUser: ChatUser, toUser: ChatUser) {
+    /**
+     Function to write each text message from chat to the Messages Collection in firestore for the current user.
+     
+     Parameters:
+        - fromUser: User info for the 'From' user
+        - toUser: User info for the 'To' user
+        - directMessage: Boolean signifying whether the message is being sent from the Direct Message popup
+     
+     Returns: None
+     */
+    func handleSend(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool) {
         chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
         if chatText.isEmpty {
             return
@@ -43,7 +53,7 @@ class ChatModel: ObservableObject {
                             return
                         }
                             
-                        self.persistRecentMessage(fromUser: fromUser, toUser: toUser)
+                        self.persistRecentMessage(fromUser: fromUser, toUser: toUser, directMessage: directMessage)
                         print("Chat: Successfully saved current user sending message")
                         self.chatText = ""
                         self.count += 1
@@ -96,12 +106,22 @@ class ChatModel: ObservableObject {
             }
     }
     
-    private func persistRecentMessage(fromUser: ChatUser, toUser: ChatUser) {
+    /**
+     Function to write last text message to Recent Chats collection of the current user.
+     
+     Parameters:
+        - fromUser: User info for the 'From' user
+        - toUser: User info for the 'To' user
+        - directMessage: Boolean signifying whether the message is being sent from the Direct Message popup
+     
+     Returns: None
+     */
+    private func persistRecentMessage(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool) {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let toId = toUser.id else { return }
 
-        let senderData = ChatConversation(fromId: uid, toId: toId, user: toUser, lastText: self.chatText, timestamp: Date())
+        let senderData = ChatConversation(fromId: uid, toId: toId, user: toUser, lastText: self.chatText, timestamp: Date(), directMessageApproved: !directMessage)
         
         
         do {

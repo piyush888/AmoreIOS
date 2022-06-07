@@ -21,6 +21,8 @@ struct HomeView: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -44,6 +46,8 @@ struct HomeView: View {
                                 
                                 case .messagingView:
                                     MainMessagesView()
+                                        .environmentObject(chatModel)
+                                        .environmentObject(mainMessagesModel)
                                     
                                 case .likesTopPicksView:
                                 LikesTopPicksHome(selectedTab:$selectedTab)
@@ -59,6 +63,9 @@ struct HomeView: View {
                                         .environmentObject(reportActivityModel)
                                         .environmentObject(profileModel)
                                         .environmentObject(filterModel)
+                                        .environmentObject(storeManager)
+                                        .environmentObject(chatModel)
+                                        .environmentObject(mainMessagesModel)
                                     
                                 case .filterSettingsView:
                                     FilterSettings()

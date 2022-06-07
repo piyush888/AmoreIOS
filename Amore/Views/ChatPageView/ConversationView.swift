@@ -132,12 +132,62 @@ struct ConversationView: View {
         }
     }
 
+    private var emptyTextBoxPlaceHolder: String {
+        if allowDirectMessageSendCondition {
+            return "Enter Message"
+        }
+        else {
+            return "You made your move, now it's a waiting game"
+        }
+    }
+    
+    private var sendButtonColor: Color {
+        if allowDirectMessageSendCondition {
+            return Color.blue
+        }
+        else {
+            return Color.gray
+        }
+    }
+    
+    /**
+     if
+        - Direct Message has been approved
+     OR
+        - the current user is the receiver of Direct Message
+     Let the Send button and Chat Text box be activated.
+     */
+    private var allowDirectMessageSendCondition: Bool {
+        if mainMessagesModel.recentChats[selectedChatIndex].directMessageApproved || (mainMessagesModel.recentChats[selectedChatIndex].toId == Auth.auth().currentUser?.uid) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    /**
+     If
+        - direct message is not approved yet
+     AND
+        - the current user is the receiver of direct message
+     Trigger Match of two profiles on Send, when these two conditions are met simultaneously.
+     */
+    private var triggerMatchOnDirectMessageCondition: Bool {
+        if !mainMessagesModel.recentChats[selectedChatIndex].directMessageApproved && (mainMessagesModel.recentChats[selectedChatIndex].toId == Auth.auth().currentUser?.uid) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     private var MessageSendField: some View {
         HStack(spacing: 16) {
             ZStack {
                 if (chatModel.chatText.isEmpty) {
                     HStack{
-                        Text("Enter Message")
+                        Text(emptyTextBoxPlaceHolder)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 4, trailing: 0))
                         Spacer()
                     }
@@ -146,18 +196,24 @@ struct ConversationView: View {
                     .opacity(chatModel.chatText.isEmpty ? 0.5 : 1)
             }
             .frame(height: 40)
+            .disabled(!allowDirectMessageSendCondition)
 
             Button {
                 scrollToBottomOnSend = true
-                chatModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser)
+                chatModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser, directMessage: false)
+                if triggerMatchOnDirectMessageCondition {
+                    print("Triggering Match on DM")
+                    FirestoreServices.directMessageMatchUsers(apiToBeUsed: "/matchondirectmessage", onFailure: {}, onSuccess: {}, otherUserId: mainMessagesModel.recentChats[selectedChatIndex].fromId)
+                }
             } label: {
                 Text("Send")
                     .foregroundColor(.white)
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .background(Color.blue)
+            .background(sendButtonColor)
             .cornerRadius(4)
+            .disabled(!allowDirectMessageSendCondition)
         }
         .padding(.horizontal)
         .padding(.vertical, 8)

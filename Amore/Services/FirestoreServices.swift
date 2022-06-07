@@ -229,4 +229,59 @@ class FirestoreServices {
         
     }
     
+    /**
+     API Call to match two users on approval of Direct Message request.
+
+     - Parameter:
+        - apiToBeUsed: API Endpoint
+        - onFailure: Code block to be executed on failure of API call
+        - onSuccess: Code block to be executed on success of API call
+        - otherUserId: User ID of the other user in Chat
+
+     - Returns: API Status as Boolean.
+     */
+    public static func directMessageMatchUsers(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, otherUserId: String?) {
+        if let otherUserId = otherUserId {
+            requestInProcessing = true
+            guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                    return
+                }
+            let body: [String: String] = ["currentUserId": Auth.auth().currentUser!.uid, "otherUserId": otherUserId]
+            let finalBody = try! JSONSerialization.data(withJSONObject: body)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = finalBody
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                if let error = error {
+                    print("Error in API \(apiToBeUsed): \(error)")
+                    onFailure()
+                    return
+                }
+                
+                if let _ = data {
+                    // Check if you receive a valid httpresponse
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if httpResponse.statusCode == 200 {
+                            DispatchQueue.main.async {
+                                print("Direct Message Matching Successful")
+                                self.requestInProcessing = false
+                            }
+                        }
+                        else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                            DispatchQueue.main.async {
+                                self.requestInProcessing = false
+                                print("Error: Unable to Match Profiles for Direct Message")
+                            }
+                        }
+                    }
+                }
+            }.resume()
+        
+        }
+    }
+    
 }

@@ -23,6 +23,8 @@ struct ContentView: View {
     @StateObject var reportActivityModel = ReportActivityModel()
     @StateObject var storeManager = StoreManager()
     @StateObject var storeProfileV2 = ProfileViewModelV2()
+    @StateObject var mainMessagesModel = MainMessagesViewModel()
+    @StateObject var chatModel = ChatModel()
     
     var body: some View {
         
@@ -84,6 +86,8 @@ struct ContentView: View {
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(reportActivityModel)
                                         .environmentObject(storeManager)
+                                        .environmentObject(chatModel)
+                                        .environmentObject(mainMessagesModel)
                                         .onAppear {
                                             print("Content View on appear triggered, all data is being intialized")
 //                                            profileModel.getUserProfile()

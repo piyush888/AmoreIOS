@@ -25,6 +25,7 @@
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
+		1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */; };
 		1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */; };
 		1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73E272A95840009683A /* OptionalExtension.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
@@ -196,6 +197,7 @@
 		1B6273CF274B82FD00590DD1 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageCardView.swift; sourceTree = "<group>"; };
 		1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBasicInfo.swift; sourceTree = "<group>"; };
 		1B96B73E272A95840009683A /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				E22D55632755828400852D70 /* WorkAndSchool.swift */,
 				E22328D22755A726000ABBA6 /* UserOtherInformation.swift */,
 				E2DBFE26275EC05200250686 /* RequestData.swift */,
+				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
 				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
+				1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,

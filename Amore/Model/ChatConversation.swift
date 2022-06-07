@@ -9,6 +9,9 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
+/**
+ Data model used for Recent Chats collection in firestore for last text message sent between two users.
+ */
 struct ChatConversation: Identifiable, Codable, Hashable {
     @DocumentID var id: String?
     var fromId: String?
@@ -26,4 +29,6 @@ struct ChatConversation: Identifiable, Codable, Hashable {
     }
     var msgRead: Bool? = false
     var otherUserUpdated: Bool? = false
+    var directMessageApproved: Bool = true
 }
+
