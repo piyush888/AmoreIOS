@@ -19,7 +19,9 @@ struct AllConversationsView: View {
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
+            Divider()
+                .opacity(0)
             ScrollView {
                 ForEach(mainMessagesModel.recentChats.sorted(by: { $0.timeAgo < $1.timeAgo })) { recentMessage in
                     VStack {
@@ -47,10 +49,11 @@ struct AllConversationsView: View {
                         }
 
                         Divider()
-                            .padding(.vertical, 8)
-                    }.padding(.horizontal)
-                    
-                }.padding(.bottom, 10)
+                            .padding(.bottom, 5)
+                    }
+                    .padding(.horizontal)
+                }
+                
                 if (mainMessagesModel.recentChats.count == 0) {
                         HStack{
                             Spacer()
@@ -67,6 +70,7 @@ struct AllConversationsView: View {
                     }
             }
         }
+//        .padding(.top, 10)
         .onAppear {
             print("Chat: USER ID FOR THIS USER: \(Auth.auth().currentUser?.uid)")
         }

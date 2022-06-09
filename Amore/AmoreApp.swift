@@ -52,6 +52,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // 7 - sets AppDelegate as the delegate for Messaging
         Messaging.messaging().delegate = self
+        
+        UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance()
         return true
     }
 

@@ -25,71 +25,72 @@ struct ConversationView: View {
     @Binding var navigateToChatView: Bool
     
     var body: some View {
-            VStack {
+        GeometryReader { geo in
+            VStack{
                 AllMessagesForUser
                     .onTapGesture {
                         self.hideKeyboard()
                     }
-                VStack(spacing: 0) {
-//                    Spacer()
-                    MessageSendField
-                        .background(Color.white.ignoresSafeArea())
-                }
+                MessageSendField
+                    .frame(minHeight: geo.size.height * 0.05, maxHeight: geo.size.height * 0.1, alignment: .center)
+                    .padding(.horizontal)
             }
-            .navigationTitle(toUser.firstName ?? "")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Menu {
-                        Button  {
-                            allcardsActiveSheet = .reportProfileSheet
-                        } label: {
-                            Label("Report User", systemImage: "shield.fill")
-                                .font(.system(size: 60))
-                        }
-                        Button  {
-                            navigateToChatView.toggle()
-                            FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
-                                print("Unmatch: API Call Failed")
-                            }, onSuccess: {
-                                print("Unmatch: API Success")
-                            }, otherUserId: toUser.id)
-                        } label: {
-                            Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
-                                .font(.system(size: 60))
-                        }
-                    }
-                    label: {
-                        Label("Options", systemImage: "ellipsis.circle")
-                    }
-                }
-            }
-            .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
-                if oldValue.count <= newValue.count {
-                    if newValue[selectedChatIndex].fromId != Auth.auth().currentUser?.uid {
-                        mainMessagesModel.markMessageRead(index: selectedChatIndex)
-                    }
-                }
-            })
-        /// Use Report User List view for Reporting
-            .sheet(item: $allcardsActiveSheet) { item in
-                if let toUserId = toUser.id {
-                    ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
-                                        profileId: toUserId,
-                                        showingAlert:self.$showingAlert,
-                                        onRemove: { user in
-                        print("Report From Chat: API Success")
-                        navigateToChatView.toggle()
-                    }
-                                    )
-                }
-            }
-//            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
-//                if newValue.fromId != Auth.auth().currentUser?.uid {
-//                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
-//                }
-//            }
-//            .navigationBarTitleDisplayMode(.inline)
+            
         }
+        .navigationTitle(Text(toUser.firstName ?? ""))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Button  {
+                        allcardsActiveSheet = .reportProfileSheet
+                    } label: {
+                        Label("Report User", systemImage: "shield.fill")
+                            .font(.system(size: 60))
+                    }
+                    Button  {
+                        navigateToChatView.toggle()
+                        FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
+                            print("Unmatch: API Call Failed")
+                        }, onSuccess: {
+                            print("Unmatch: API Success")
+                        }, otherUserId: toUser.id)
+                    } label: {
+                        Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
+                            .font(.system(size: 60))
+                    }
+                }
+            label: {
+                Label("Options", systemImage: "ellipsis.circle")
+            }
+            }
+        }
+        .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
+            if oldValue.count <= newValue.count {
+                if newValue[selectedChatIndex].fromId != Auth.auth().currentUser?.uid {
+                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
+                }
+            }
+        })
+        /// Use Report User List view for Reporting
+        .sheet(item: $allcardsActiveSheet) { item in
+            if let toUserId = toUser.id {
+                ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
+                                    profileId: toUserId,
+                                    showingAlert:self.$showingAlert,
+                                    onRemove: { user in
+                    print("Report From Chat: API Success")
+                    navigateToChatView.toggle()
+                }
+                )
+            }
+        }
+        //            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
+        //                if newValue.fromId != Auth.auth().currentUser?.uid {
+        //                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
+        //                }
+        //            }
+    }
     
     private var AllMessagesForUser: some View {
         VStack {
@@ -99,11 +100,12 @@ struct ConversationView: View {
                         ForEach(chatModel.chatMessages, id: \.self) { message in
                             MessageView(message: message)
                         }
-
+                        
                         HStack{ Spacer() }
-                        .frame(height: 20)
-                        .id(self.emptyScrollToString)
+                            .frame(height: 20)
+                            .id(self.emptyScrollToString)
                     }
+                    .padding(.top, 10)
                     .onChange(of: chatModel.chatMessages.count) { _ in
                         print("Chat: Checkpoint 7")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -131,7 +133,7 @@ struct ConversationView: View {
             .background(Color(.init(white: 0.95, alpha: 1)))
         }
     }
-
+    
     private var emptyTextBoxPlaceHolder: String {
         if allowDirectMessageSendCondition {
             return "Enter Message"
@@ -152,9 +154,9 @@ struct ConversationView: View {
     
     /**
      if
-        - Direct Message has been approved
+     - Direct Message has been approved
      OR
-        - the current user is the receiver of Direct Message
+     - the current user is the receiver of Direct Message
      Let the Send button and Chat Text box be activated.
      */
     private var allowDirectMessageSendCondition: Bool {
@@ -168,9 +170,9 @@ struct ConversationView: View {
     
     /**
      If
-        - direct message is not approved yet
+     - direct message is not approved yet
      AND
-        - the current user is the receiver of direct message
+     - the current user is the receiver of direct message
      Trigger Match of two profiles on Send, when these two conditions are met simultaneously.
      */
     private var triggerMatchOnDirectMessageCondition: Bool {
@@ -188,16 +190,20 @@ struct ConversationView: View {
                 if (chatModel.chatText.isEmpty) {
                     HStack{
                         Text(emptyTextBoxPlaceHolder)
-                            .padding(EdgeInsets(top: 0, leading: 4, bottom: 4, trailing: 0))
+                            .padding([.leading, .bottom], 5)
                         Spacer()
                     }
                 }
                 TextEditor(text: $chatModel.chatText)
                     .opacity(chatModel.chatText.isEmpty ? 0.5 : 1)
             }
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.gray, lineWidth: 2)
+            )
             .frame(height: 40)
             .disabled(!allowDirectMessageSendCondition)
-
+            
             Button {
                 scrollToBottomOnSend = true
                 chatModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser, directMessage: false)
@@ -206,17 +212,15 @@ struct ConversationView: View {
                     FirestoreServices.directMessageMatchUsers(apiToBeUsed: "/matchondirectmessage", onFailure: {}, onSuccess: {}, otherUserId: mainMessagesModel.recentChats[selectedChatIndex].fromId)
                 }
             } label: {
-                Text("Send")
-                    .foregroundColor(.white)
+                Image(systemName: "paperplane.circle.fill")
+                    .resizable()
+                    .frame(width:35, height:35)
+                    .foregroundColor(sendButtonColor)
+                    .shadow(color: .blue,
+                            radius: 0.1, x: 1, y: 1)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 8)
-            .background(sendButtonColor)
-            .cornerRadius(4)
             .disabled(!allowDirectMessageSendCondition)
         }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
     }
     
 }
@@ -233,7 +237,7 @@ struct MessageView: View {
                         .foregroundColor(.white)
                         .padding(.all, 20)
                         .background(Color.blue)
-//                        .cornerRadius(8)
+                    //                        .cornerRadius(8)
                 }
             } else {
                 ChatBubble(direction: .left) {
@@ -241,12 +245,11 @@ struct MessageView: View {
                         .foregroundColor(.black)
                         .padding(.all, 20)
                         .background(Color.white)
-//                        .cornerRadius(8)
+                    //                        .cornerRadius(8)
                 }
             }
         }
         .padding(.horizontal)
-//        .padding(.top, 8)
     }
 }
 
