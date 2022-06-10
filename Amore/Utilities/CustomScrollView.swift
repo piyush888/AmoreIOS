@@ -87,12 +87,12 @@ struct CustomScrollView<Content>: View where Content: View {
 
 
 
-struct ViewHeightKey: PreferenceKey {
-    static var defaultValue: CGFloat { 0 }
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value = value + nextValue()
-    }
-}
+//struct ViewHeightKey: PreferenceKey {
+//    static var defaultValue: CGFloat { 0 }
+//    static func reduce(value: inout Value, nextValue: () -> Value) {
+//        value = value + nextValue()
+//    }
+//}
 
 extension ViewHeightKey: ViewModifier {
     func body(content: Content) -> some View {

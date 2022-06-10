@@ -22,6 +22,7 @@
 		1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */; };
 		1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CD274B7B9A00590DD1 /* Filters.swift */; };
 		1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CF274B82FD00590DD1 /* FilterModel.swift */; };
+		1B64588B285300BD00D5AD6E /* TextEditorWithPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */; };
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
@@ -195,6 +196,7 @@
 		1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifiers.swift; sourceTree = "<group>"; };
 		1B6273CD274B7B9A00590DD1 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		1B6273CF274B82FD00590DD1 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
+		1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithPlaceholder.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageCardView.swift; sourceTree = "<group>"; };
@@ -751,6 +753,7 @@
 				1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */,
 				1B39493527D3263100793431 /* CustomScrollView.swift */,
 				1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */,
+				1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,
 				E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */,
 				E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */,
+				1B64588B285300BD00D5AD6E /* TextEditorWithPlaceholder.swift in Sources */,
 				E268A4642745D6140045F264 /* IntroductionForMoreInfo.swift in Sources */,
 				E2A960FF27C345D6009108F0 /* SubsriptionItemPricing.swift in Sources */,
 				E2851CB02727580C005B19E1 /* EditProfileUtil.swift in Sources */,

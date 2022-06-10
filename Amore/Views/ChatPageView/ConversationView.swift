@@ -32,7 +32,7 @@ struct ConversationView: View {
                         self.hideKeyboard()
                     }
                 MessageSendField
-                    .frame(minHeight: geo.size.height * 0.05, maxHeight: geo.size.height * 0.1, alignment: .center)
+//                    .frame(minHeight: geo.size.height * 0.05, maxHeight: geo.size.height * 0.1, alignment: .center)
                     .padding(.horizontal)
             }
             
@@ -71,6 +71,9 @@ struct ConversationView: View {
                     mainMessagesModel.markMessageRead(index: selectedChatIndex)
                 }
             }
+        })
+        .onChange(of: selectedChatIndex, perform: { newValue in
+            navigateToChatView = false
         })
         /// Use Report User List view for Reporting
         .sheet(item: $allcardsActiveSheet) { item in
@@ -160,6 +163,9 @@ struct ConversationView: View {
      Let the Send button and Chat Text box be activated.
      */
     private var allowDirectMessageSendCondition: Bool {
+        if selectedChatIndex < 0 {
+            return false
+        }
         if mainMessagesModel.recentChats[selectedChatIndex].directMessageApproved || (mainMessagesModel.recentChats[selectedChatIndex].toId == Auth.auth().currentUser?.uid) {
             return true
         }
@@ -176,6 +182,9 @@ struct ConversationView: View {
      Trigger Match of two profiles on Send, when these two conditions are met simultaneously.
      */
     private var triggerMatchOnDirectMessageCondition: Bool {
+        if selectedChatIndex < 0 {
+            return false
+        }
         if !mainMessagesModel.recentChats[selectedChatIndex].directMessageApproved && (mainMessagesModel.recentChats[selectedChatIndex].toId == Auth.auth().currentUser?.uid) {
             return true
         }
@@ -186,23 +195,32 @@ struct ConversationView: View {
     
     private var MessageSendField: some View {
         HStack(spacing: 16) {
-            ZStack {
-                if (chatModel.chatText.isEmpty) {
-                    HStack{
-                        Text(emptyTextBoxPlaceHolder)
-                            .padding([.leading, .bottom], 5)
-                        Spacer()
-                    }
-                }
-                TextEditor(text: $chatModel.chatText)
-                    .opacity(chatModel.chatText.isEmpty ? 0.5 : 1)
-            }
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.gray, lineWidth: 2)
-            )
-            .frame(height: 40)
-            .disabled(!allowDirectMessageSendCondition)
+            /**
+             Old Text Box Implementation
+             */
+//            ZStack {
+//                if (chatModel.chatText.isEmpty) {
+//                    HStack{
+//                        Text(emptyTextBoxPlaceHolder)
+//                            .padding([.leading, .bottom], 5)
+//                        Spacer()
+//                    }
+//                }
+//                TextEditor(text: $chatModel.chatText)
+//                    .opacity(chatModel.chatText.isEmpty ? 0.5 : 1)
+//            }
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 20)
+//                    .stroke(Color.gray, lineWidth: 2)
+//            )
+//            .frame(height: 40)
+//            .disabled(!allowDirectMessageSendCondition)
+            
+            /**
+             New Text box Implementation with Placeholder and auto expanding Text Box
+             */
+            TextEditorWithPlaceholder(text: $chatModel.chatText, placeholder: emptyTextBoxPlaceHolder)
+                .disabled(!allowDirectMessageSendCondition)
             
             Button {
                 scrollToBottomOnSend = true
@@ -255,7 +273,7 @@ struct MessageView: View {
 
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation()), navigateToChatView: Binding.constant(true))
+        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation(id: "1", fromId: "123", toId: "456", user: ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage()), lastText: "abc", timestamp: Date(), msgRead: true, otherUserUpdated: true, directMessageApproved: true)), navigateToChatView: Binding.constant(true))
             .environmentObject(ChatModel())
             .environmentObject(MainMessagesViewModel())
     }
