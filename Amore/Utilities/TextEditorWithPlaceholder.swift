@@ -19,12 +19,12 @@ struct TextEditorWithPlaceholder: View {
             Text(text.isEmpty ? placeholder : text)
                 .font(.system(.body))
                 .foregroundColor(text.isEmpty ? .gray : .clear)
-                .padding(14)
+                .padding(10)
                 .background(GeometryReader {
                     Color.clear.preference(key: ViewHeightKey.self,
                                            value: $0.frame(in: .local).size.height)
                 })
-                .frame(minHeight: textEditorHeight, idealHeight: textEditorHeight, maxHeight: maxTextEditorHeight)
+                .lineLimit(3)
             
             TextEditor(text: $text)
                 .font(.system(.body))
@@ -43,28 +43,6 @@ struct TextEditorWithPlaceholder: View {
     }
 }
 
-//struct TextEditorWithPlaceholder: View {
-//    @State var placeholder: String = "Placeholder"
-//    @Binding var text: String
-//
-//    init(text: Binding<String>, placeholder: String) {
-//        self.placeholder = placeholder
-//        self._text = text
-//    }
-//
-//    var body: some View {
-//        TextEditor(text: $text)
-//            .background(
-//                HStack(alignment: .top) {
-//                    text.isBlank ? Text(placeholder) : Text("")
-//                    Spacer()
-//                }
-//                .foregroundColor(Color.primary.opacity(0.25))
-//                .padding(EdgeInsets(top: 0, leading: 4, bottom: 7, trailing: 0))
-//            )
-//    }
-//}
-
 extension String {
     var isBlank: Bool {
         return allSatisfy({ $0.isWhitespace })
@@ -78,8 +56,6 @@ struct ViewHeightKey: PreferenceKey {
         value += nextValue()
     }
 }
-
-
 
 struct TextEditorWithPlaceholder_Previews: PreviewProvider {
     static var previews: some View {
