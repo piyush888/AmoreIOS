@@ -25,7 +25,7 @@ class FetchDataModel {
 
      - Returns: N/A
      */
-    func fetchData(apiToBeUsed:String, requestBody:[String: String], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
+    func fetchData(apiToBeUsed:String, requestBody:[String: Any], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
         var tempData = [CardProfile]()
         requestInProcessing = true
         guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()

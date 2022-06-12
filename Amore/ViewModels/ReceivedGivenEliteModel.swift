@@ -35,27 +35,12 @@ class ReceivedGivenEliteModel: ObservableObject {
     
     @Published var fetchDataObj = FetchDataModel()
     
-    func prefetchNextCardPhotos(card: CardProfile) {
-        var urls: [URL] = []
-        for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
-            if url != nil {
-                urls.append(url!)
-            }
-        }
-        SDWebImagePrefetcher.shared.prefetchURLs(urls) { completed, total in
-            // Progress Block
-        } completed: { completed, skipped in
-            // On Complete Block
-//            print("Prefetched Elites image for ", card.id as Any)
-        }
-    }
-    
     func getLikesGivenData() {
         self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesGiven"]) {
             print("Error while fetching /likesGiven")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
-                self.prefetchNextCardPhotos(card: card)
+                ImageService.prefetchNextCardPhotos(card: card)
             }
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.likesGivenPhotos = tempResponse.cardsWithPhotos
@@ -68,7 +53,7 @@ class ReceivedGivenEliteModel: ObservableObject {
             print("Error while fetching /superLikesGiven")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
-                self.prefetchNextCardPhotos(card: card)
+                ImageService.prefetchNextCardPhotos(card: card)
             }
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.superLikesGivenPhotos = tempResponse.cardsWithPhotos
@@ -81,7 +66,7 @@ class ReceivedGivenEliteModel: ObservableObject {
             print("Error while fetching /likesReceived")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
-                self.prefetchNextCardPhotos(card: card)
+                ImageService.prefetchNextCardPhotos(card: card)
             }
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.superLikesReceivedPhotos = tempResponse.cardsWithPhotos
@@ -94,7 +79,7 @@ class ReceivedGivenEliteModel: ObservableObject {
             print("Error while fetching elitePicks")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
-                self.prefetchNextCardPhotos(card: card)
+                ImageService.prefetchNextCardPhotos(card: card)
             }
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.elitesPhotos = tempResponse.cardsWithPhotos
@@ -107,7 +92,7 @@ class ReceivedGivenEliteModel: ObservableObject {
             print("Error while loading matches profiles")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
-                self.prefetchNextCardPhotos(card: card)
+                ImageService.prefetchNextCardPhotos(card: card)
             }
             let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
             self.matchesPhotos = tempResponse.cardsWithPhotos

@@ -23,7 +23,7 @@ struct MainMessagesView: View {
                     .environmentObject(mainMessagesModel)
             }
             .navigationTitle("Messages")
-//            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
     }

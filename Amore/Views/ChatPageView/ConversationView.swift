@@ -7,9 +7,11 @@
 
 import SwiftUI
 import Firebase
+import SDWebImageSwiftUI
 
 struct ConversationView: View {
 
+    @Namespace var animation
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @Binding var toUser: ChatUser
@@ -21,7 +23,7 @@ struct ConversationView: View {
     @State var scrollToBottomOnSend: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     @State private var showingAlert = false
-//    @State var presentReportingSheet: Bool = false
+    @State var presentProfileCard: Bool = false
     @Binding var navigateToChatView: Bool
     
     var body: some View {
@@ -32,14 +34,16 @@ struct ConversationView: View {
                         self.hideKeyboard()
                     }
                 MessageSendField
-//                    .frame(minHeight: geo.size.height * 0.05, maxHeight: geo.size.height * 0.1, alignment: .center)
                     .padding(.horizontal)
             }
             
         }
-        .navigationTitle(Text(toUser.firstName ?? ""))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                customNavBar(toUser: $toUser, presentProfileCard: $presentProfileCard)
+                    .environmentObject(mainMessagesModel)
+            }
             ToolbarItem(placement: .primaryAction) {
                 Menu {
                     Button  {
@@ -88,6 +92,11 @@ struct ConversationView: View {
                 )
             }
         }
+        .sheet(isPresented: $presentProfileCard) {
+            if let userId = toUser.id {
+                CardDetail(selectedItem: mainMessagesModel.getProfile(profileId: userId), show: $presentProfileCard, animation: animation)
+            }
+        }
         //            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
         //                if newValue.fromId != Auth.auth().currentUser?.uid {
         //                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
@@ -101,7 +110,7 @@ struct ConversationView: View {
                 ScrollViewReader { scrollViewProxy in
                     VStack {
                         ForEach(chatModel.chatMessages, id: \.self) { message in
-                            MessageView(message: message)
+                            MessageView(message: message, toUser: toUser)
                         }
                         
                         HStack{ Spacer() }
@@ -196,27 +205,6 @@ struct ConversationView: View {
     private var MessageSendField: some View {
         HStack(spacing: 16) {
             /**
-             Old Text Box Implementation
-             */
-//            ZStack {
-//                if (chatModel.chatText.isEmpty) {
-//                    HStack{
-//                        Text(emptyTextBoxPlaceHolder)
-//                            .padding([.leading, .bottom], 5)
-//                        Spacer()
-//                    }
-//                }
-//                TextEditor(text: $chatModel.chatText)
-//                    .opacity(chatModel.chatText.isEmpty ? 0.5 : 1)
-//            }
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 20)
-//                    .stroke(Color.gray, lineWidth: 2)
-//            )
-//            .frame(height: 40)
-//            .disabled(!allowDirectMessageSendCondition)
-            
-            /**
              New Text box Implementation with Placeholder and auto expanding Text Box
              */
             TextEditorWithPlaceholder(text: $chatModel.chatText, placeholder: emptyTextBoxPlaceHolder)
@@ -246,6 +234,7 @@ struct ConversationView: View {
 struct MessageView: View {
     
     let message: ChatText
+    var toUser: ChatUser
     
     var body: some View {
         VStack {
@@ -258,13 +247,27 @@ struct MessageView: View {
                     //                        .cornerRadius(8)
                 }
             } else {
-                ChatBubble(direction: .left) {
-                    Text(message.text.bound)
-                        .foregroundColor(.black)
-                        .padding(.all, 20)
-                        .background(Color.white)
-                    //                        .cornerRadius(8)
+                HStack(alignment: .bottom, spacing: 10) {
+                    WebImage(url: toUser.image1?.imageURL)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 40)
+                        .clipped()
+                        .cornerRadius(40)
+                        .overlay(RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color.black, lineWidth: 1))
+                        .shadow(radius: 1)
+                    
+                    ChatBubble(direction: .left) {
+                        Text(message.text.bound)
+                            .foregroundColor(.black)
+                            .padding(.all, 20)
+                            .background(Color.white)
+                        //                        .cornerRadius(8)
+                    }
+                    
                 }
+                
             }
         }
         .padding(.horizontal)

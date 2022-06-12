@@ -6,57 +6,50 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct customNavBar: View {
     
-    @Binding var shouldShowLogOutOptions: Bool
+    @Binding var toUser: ChatUser
+    @Binding var presentProfileCard: Bool
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     var body: some View {
-        HStack(spacing: 16) {
-
-            Image(systemName: "person.fill")
-                .font(.system(size: 34, weight: .heavy))
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(mainMessagesModel.fromUser.firstName ?? "User")
-                    .font(.system(size: 24, weight: .bold))
-
-                HStack {
-                    Circle()
-                        .foregroundColor(.green)
-                        .frame(width: 14, height: 14)
-                    Text("online")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(.lightGray))
+        
+        Button {
+            /**
+             Show Profile Card
+             */
+            if let uid = toUser.id {
+                if (mainMessagesModel.allChatPhotos_Dict[uid] != nil) {
+                    print("Chat: Present Profile Card for \(uid): \(presentProfileCard)")
+                    withAnimation(.spring()){
+                        presentProfileCard = true
+                    }
                 }
-
             }
-
-            Spacer()
-            Button {
-                shouldShowLogOutOptions.toggle()
-            } label: {
-                Image(systemName: "gear")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Color(.label))
+        } label: {
+            HStack(alignment: .center, spacing: 10) {
+                WebImage(url: toUser.image1?.imageURL)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 40, height: 40)
+                    .clipped()
+                    .cornerRadius(40)
+                    .overlay(RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.black, lineWidth: 1))
+                    .shadow(radius: 1)
+                Text(toUser.firstName ?? "User")
+                    .foregroundColor(.black)
+                    .font(.headline)
             }
-        }
-        .padding()
-        .actionSheet(isPresented: $shouldShowLogOutOptions) {
-            .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
-                .destructive(Text("Sign Out"), action: {
-                    print("handle sign out")
-                }),
-                    .cancel()
-            ])
         }
     }
 }
 
 struct customNavBar_Previews: PreviewProvider {
     static var previews: some View {
-        customNavBar(shouldShowLogOutOptions: Binding.constant(false))
+        customNavBar(toUser: Binding.constant(ChatUser(id: "QvV4OoZmZ3QWHhMNaZrr7lkqmLF3", firstName: "Jason", lastName: "Kalkanus", image1: ProfileImage(imageURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/amore-f8cd6.appspot.com/o/images%2FQvV4OoZmZ3QWHhMNaZrr7lkqmLF3%2Fimage1640439314.5542731.heic?alt=media&token=cb324857-1cf9-4ee1-b208-ddba11751275") , firebaseImagePath: "images/QvV4OoZmZ3QWHhMNaZrr7lkqmLF3/image1640439314.5542731.heic"))), presentProfileCard: Binding.constant(false))
             .environmentObject(MainMessagesViewModel())
     }
 }

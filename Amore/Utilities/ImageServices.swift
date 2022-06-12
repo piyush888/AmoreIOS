@@ -8,6 +8,7 @@
 import Foundation
 import CoreGraphics
 import UIKit
+import SDWebImageSwiftUI
 
 class ImageService {
     
@@ -37,5 +38,20 @@ class ImageService {
         
         // Return the downsampled image as UIImage
         return UIImage(cgImage: downsampledImage)
+    }
+    
+    public static func prefetchNextCardPhotos(card: CardProfile) {
+        var urls: [URL] = []
+        for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
+            if url != nil {
+                urls.append(url!)
+            }
+        }
+        SDWebImagePrefetcher.shared.prefetchURLs(urls) { completed, total in
+            // Progress Block
+        } completed: { completed, skipped in
+            // On Complete Block
+//            print("Prefetched Elites image for ", card.id as Any)
+        }
     }
 }

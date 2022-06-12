@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
 import SDWebImageSwiftUI
@@ -16,6 +17,11 @@ class MainMessagesViewModel: ObservableObject {
     @Published var fromUser: ChatUser = ChatUser()
     @Published var recentChats = [ChatConversation]()
     private var firestoreListener: ListenerRegistration?
+    var fetchDataObj = FetchDataModel()
+    
+    // All Chat Profiles
+    @Published var allChatPhotos = [CardProfileWithPhotos]()
+    @Published var allChatPhotos_Dict: [String: CardProfileWithPhotos] = [:]
 
     init() {
         print("Chat: Init called at \(Date())")
@@ -118,8 +124,16 @@ class MainMessagesViewModel: ObservableObject {
                             if let index = self.recentChats.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-                                print("Chat: Checkpoint 1")
+                                print("Chat: Checkpoint 0.1")
                                 self.recentChats.remove(at: index)
+                            }
+                            // Remove profile of the removed chat
+                            if let index = self.allChatPhotos.firstIndex(where: { rm in
+                                return rm.id == docId
+                            }) {
+                                print("Chat: Checkpoint 0.2")
+                                self.allChatPhotos.remove(at: index)
+                                self.allChatPhotos_Dict.removeValue(forKey: docId)
                             }
                         }
                     }
@@ -142,6 +156,8 @@ class MainMessagesViewModel: ObservableObject {
                             } catch {
                                 print("Chat: \(error)")
                             }
+                            // Load all chats profiles
+                            self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
                         }
                     }
                     
@@ -149,5 +165,35 @@ class MainMessagesViewModel: ObservableObject {
             }
     }
     
-
+    func getAllChatProfileIds() -> [String] {
+        var userIds: [String] = []
+        for chat in recentChats {
+            if let userId = chat.user?.id {
+                userIds.append(userId)
+            }
+        }
+        return userIds
+    }
+    
+    func getProfile(profileId: String) -> Binding<CardProfileWithPhotos> {
+        return Binding {
+            self.allChatPhotos_Dict[profileId] ?? CardProfileWithPhotos()
+        } set: { newCard in
+            self.allChatPhotos_Dict[profileId] = newCard
+        }
+    }
+    
+    func loadAllChatProfiles(allChatUserIds: [String]) {
+        print("Chat: Fetching Chat Profiles")
+        self.fetchDataObj.fetchData(apiToBeUsed: "/loadallchatprofiles",requestBody:["allChatUserIds": allChatUserIds]) {
+            print("Error while loading matches profiles")
+        } onSuccess: { tempData in
+            _ = tempData.map{ card in
+                ImageService.prefetchNextCardPhotos(card: card)
+            }
+            let tempResponse = self.fetchDataObj.updateCardProfilesWithPhotos(tempData:tempData)
+            self.allChatPhotos = tempResponse.cardsWithPhotos
+            self.allChatPhotos_Dict = tempResponse.cardsDict
+        }
+    }
 }
