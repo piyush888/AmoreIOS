@@ -15,7 +15,10 @@ class ChatModel: ObservableObject {
     @Published var chatText = ""
     @Published var chatMessages = [ChatText]()
     @Published var count = 0
+    @Published var chatDocuments: [DocumentSnapshot] = []
+    var lastSnapshot: DocumentSnapshot?
     var firestoreListener: ListenerRegistration?
+    var fetchMoreFirestoreListener: ListenerRegistration?
 
     /**
      Function to write each text message from chat to the Messages Collection in firestore for the current user.
@@ -66,15 +69,40 @@ class ChatModel: ObservableObject {
         
     }
     
-    func fetchMessages(toUser: ChatUser) {
+    /**
+     Check whether pagination is needed.
+     If second last message has appeared, fetch next page of messages
+     - Parameter:
+        - message: ChatText for the current message in view
+
+     - Returns: Boolean indicating pagination needed or not
+     */
+    func shouldFetchMoreMessages(message: ChatText) -> Bool {
+        guard chatDocuments.count > 0 && message.id == chatDocuments[chatDocuments.index(chatDocuments.endIndex, offsetBy: -2)].documentID else { return false }
+        return true
+    }
+    
+    /**
+     Fetch next page of chat messages.
+     Uses separate firestore listener than initial fetcher.
+     Fetches next 25 messages from last document.
+     - Parameter:
+        - toUser: ChatUser: other user in the conversation
+     */
+    func fetchMoreMessages(toUser: ChatUser) {
         guard let fromId = Auth.auth().currentUser?.uid else { return }
         guard let toId = toUser.id else { return }
-        firestoreListener?.remove()
-        chatMessages.removeAll()
-        firestoreListener = db.collection("Messages")
+        guard let lastSnapshot = lastSnapshot else {
+            return
+        }
+        let fetchMoreQuery = db.collection("Messages")
             .document(fromId)
             .collection(toId)
-            .order(by: "timestamp")
+            .order(by: "timestamp", descending: true)
+            .limit(to: 25)
+            .start(afterDocument: lastSnapshot)
+        fetchMoreFirestoreListener?.remove()
+        fetchMoreFirestoreListener = fetchMoreQuery
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     self.errorMessage = "Failed to listen for messages: \(error)"
@@ -83,6 +111,62 @@ class ChatModel: ObservableObject {
                 }
 
                 querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .added {
+                        do {
+                            if let data = try change.document.data(as: ChatText.self) {
+                                DispatchQueue.main.async {
+                                    self.chatMessages.append(data)
+                                    print("Chat: Paginating chatMessage in ChatLogView: \(Date())")
+                                }
+                            }
+                        }
+                        catch {
+                            print("Chat: Error parsing fetched messages.")
+                            print("Chat: \(error)")
+                        }
+                    }
+                })
+                DispatchQueue.main.async {
+                    self.count += 1
+                    print("Chat: Checkpoint 5")
+                    guard let documents = querySnapshot?.documents, error == nil else { return }
+                    self.chatDocuments += documents
+                    if let lastDoc = querySnapshot?.documents.last {
+                        self.lastSnapshot = lastDoc
+                    }
+                }
+            }
+    }
+    
+    /**
+     Fetch and listen on first batch of 25 messages.
+     Uses separate firestore listener than pagination fetcher.
+     - Parameter:
+        - toUser: ChatUser: other user in the conversation
+     */
+    func fetchMessages(toUser: ChatUser) {
+        guard let fromId = Auth.auth().currentUser?.uid else { return }
+        guard let toId = toUser.id else { return }
+        firestoreListener?.remove()
+        chatMessages.removeAll()
+        firestoreListener = db.collection("Messages")
+            .document(fromId)
+            .collection(toId)
+            .order(by: "timestamp", descending: true)
+            .limit(to: 25)
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to listen for messages: \(error)"
+                    print("Chat: \(error)")
+                    return
+                }
+                
+                guard let querySnapshot = querySnapshot else {
+                    print("Error retreving chats: \(error.debugDescription)")
+                    return
+                }
+                
+                querySnapshot.documentChanges.forEach({ change in
                     if change.type == .added {
                         do {
                             if let data = try change.document.data(as: ChatText.self) {
@@ -102,6 +186,10 @@ class ChatModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.count += 1
                     print("Chat: Checkpoint 5")
+                    self.chatDocuments += querySnapshot.documents
+                    if let lastDoc = querySnapshot.documents.last {
+                        self.lastSnapshot = lastDoc
+                    }
                 }
             }
     }
