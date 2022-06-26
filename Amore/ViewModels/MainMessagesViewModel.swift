@@ -154,7 +154,7 @@ class MainMessagesViewModel: ObservableObject {
                                     self.recentChats.insert(rm, at: 0)
                                 }
                             } catch {
-                                print("Chat: \(error)")
+                                print("Chat: Error Decoding Recent Message: \(error)")
                             }
                             // Load all chats profiles
                             self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())

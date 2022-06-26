@@ -105,44 +105,33 @@ struct ConversationView: View {
     }
     
     private var AllMessagesForUser: some View {
-        VStack {
-            ScrollView {
-                ScrollViewReader { scrollViewProxy in
-                    VStack {
-                        ForEach(chatModel.chatMessages, id: \.self) { message in
-                            MessageView(message: message, toUser: toUser)
-                        }
-                        
-                        HStack{ Spacer() }
-                            .frame(height: 20)
-                            .id(self.emptyScrollToString)
-                    }
-                    .padding(.top, 10)
-                    .onChange(of: chatModel.chatMessages.count) { _ in
-                        print("Chat: Checkpoint 7")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation {
-                                scrollViewProxy.scrollTo(self.emptyScrollToString)
+        ScrollViewReader { scrollViewProxy in
+            ReverseScrollView(.vertical) {
+                ForEach(chatModel.chatMessages.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}), id: \.self) { message in
+                    MessageView(message: message, toUser: toUser)
+                        .id(message.id)
+                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                        .onAppear {
+                            if chatModel.shouldFetchMoreMessages(message: message) {
+                                chatModel.fetchMoreMessages(toUser: toUser)
                             }
-                            print("Chat: Checkpoint 8")
                         }
-                        print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
-                    }
-                    .onChange(of: scrollToBottomOnSend) { newValue in
-                        if newValue == true {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation {
-                                    scrollViewProxy.scrollTo(self.emptyScrollToString)
-                                }
-                                print("Chat: Checkpoint 8")
-                            }
-                            print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
-                            scrollToBottomOnSend = false
-                        }
-                    }
                 }
+                .padding(.top, 10)
             }
             .background(Color(.init(white: 0.95, alpha: 1)))
+            .onChange(of: scrollToBottomOnSend) { newValue in
+                if newValue == true {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation {
+                            scrollViewProxy.scrollTo(chatModel.chatMessages.last?.id)
+                        }
+                        print("Chat: Checkpoint 8")
+                    }
+                    print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
+                    scrollToBottomOnSend = false
+                }
+            }
         }
     }
     
