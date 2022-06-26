@@ -15,6 +15,7 @@ struct EditProfile: View {
     @Binding var profileEditingToBeDone: Bool
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var headingName = "Edit Info"
+    @State private var showSheetView = false
     
     var body: some View {
         
@@ -22,6 +23,20 @@ struct EditProfile: View {
             VStack {
                 
                 HStack {
+                    
+                    Button {
+                        self.showSheetView.toggle()
+                    } label: {
+                        
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.purple, Color.blue]),
+                            startPoint: .leading,
+                            endPoint: .trailing)
+                            .frame(width:30, height:35)
+                            .mask(Image(systemName: "bonjour")
+                                    .imageScale(.large))
+                            .padding(.bottom,20)
+                    }
                     
                     Spacer()
                     
@@ -97,25 +112,24 @@ struct EditProfile: View {
                 
                 switch currentPage {
                     
-                case .editProfile:
-                    EditCardInfo()
-                        .environmentObject(photoModel)
-                        .environmentObject(profileModel)
-                    
-                case .previewProfile:
-                    PreviewProfile()
-                        .environmentObject(photoModel)
-                        .environmentObject(profileModel)
-                    
-                    
+                    case .editProfile:
+                        EditCardInfo()
+                            .environmentObject(photoModel)
+                            .environmentObject(profileModel)
+                        
+                    case .previewProfile:
+                        PreviewProfile()
+                            .environmentObject(photoModel)
+                            .environmentObject(profileModel)
                 }
                 
                 Spacer()
             }
-            
             .padding(.top)
             .navigationBarHidden(true)
-            
+            .sheet(isPresented: $showSheetView) {
+                MoreInfoForBetterMatch(showSheetView:$showSheetView)
+            }
         }
     }
 }

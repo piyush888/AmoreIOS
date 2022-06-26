@@ -104,10 +104,12 @@ struct AllCardsView: View {
                                          buttonWidth:30,
                                          buttonHeight: 35,
                                          fontSize:25,
-                                         shieldColorList:[Color.yellow],
-                                         viewToBeAssigned:.moreMatchesSheet,
-                                         iconName:"speedometer")
+                                         shieldColorList: [Color(hex: 0x780206), Color(hex: 0x061161)],
+                                         viewToBeAssigned:.boostProfileSheet,
+                                         iconName:"bolt.circle.fill")
+                            
                             Spacer()
+                            
                             ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
                                          buttonWidth:30,
                                          buttonHeight: 35,
@@ -149,18 +151,18 @@ struct AllCardsView: View {
                                             )
                         }
                    
-                    case .moreMatchesSheet:
-                       MoreInfoForBetterMatch(allcardsActiveSheet: $allcardsActiveSheet)
+                    case .boostProfileSheet:
+                        BoostUserProfile(cardActive:$allcardsActiveSheet)
                     
-                case .directMessageSheet:
-                    if let profile = cardProfileModel.allCardsWithPhotosDeck.last {
-                        DirectMessageCardView(
-                            fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
-                            toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
-                            cardActive: $allcardsActiveSheet)
-                        .environmentObject(chatModel)
-                    }
-                    
+                    case .directMessageSheet:
+                        if let profile = cardProfileModel.allCardsWithPhotosDeck.last {
+                            DirectMessageCardView(
+                                fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
+                                toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
+                                cardActive: $allcardsActiveSheet)
+                            .environmentObject(chatModel)
+                        }
+                        
                     case .none:
                         Text("None")
                     
@@ -180,7 +182,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, moreMatchesSheet, directMessageSheet, none
+    case reportProfileSheet, boostProfileSheet, directMessageSheet, none
     var id: Int {
         hashValue
     }

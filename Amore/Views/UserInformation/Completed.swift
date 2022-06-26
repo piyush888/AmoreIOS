@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Completed: View {
     
-    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    @Binding var showSheetView: Bool
     
     @State var time = 0.0
     @State var scale = 0.1
@@ -39,7 +39,7 @@ struct Completed: View {
                 // Continue to move to next view
                 Button{
                     // Close the view
-                    self.allcardsActiveSheet =  .none
+                    self.showSheetView.toggle()
                 } label : {
                     ZStack{
                         Rectangle()
@@ -63,7 +63,7 @@ struct Completed: View {
 
 struct Completed_Previews: PreviewProvider {
     static var previews: some View {
-        Completed(allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
+        Completed(showSheetView: Binding.constant(false))
     }
 }
 

@@ -11,8 +11,7 @@ struct IntroductionOption: View {
     
     @Binding var moreInfoView: MoreInformation
     @Binding var progressStatus: Double
-    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
-    
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
@@ -59,7 +58,7 @@ struct IntroductionOption: View {
             // Do it later
             Button{
                 // TODO
-                self.allcardsActiveSheet =  .none
+                self.showSheetView.toggle()
             } label : {
                 ZStack{
                     Rectangle()

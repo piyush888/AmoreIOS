@@ -8,7 +8,6 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
-import StreamChat
 
 struct AllConversationsView: View {
     

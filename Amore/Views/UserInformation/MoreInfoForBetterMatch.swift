@@ -10,11 +10,9 @@ import SwiftUI
 struct MoreInfoForBetterMatch: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    
-    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var moreInfoView: MoreInformation = .introInfoHomeView
     @State private var progressStatus = 0.0
-    
+    @Binding var showSheetView: Bool
     
     var body: some View {
         
@@ -39,7 +37,7 @@ struct MoreInfoForBetterMatch: View {
                             case .introInfoHomeView:
                                 IntroductionOption(moreInfoView:$moreInfoView,
                                                    progressStatus:$progressStatus,
-                                                   allcardsActiveSheet: $allcardsActiveSheet)
+                                                   showSheetView:$showSheetView)
                             
                             case .userHeightView:
                                 UserHeight(userHeight:$profileModel.editUserProfile.height.boundDouble,
@@ -87,7 +85,7 @@ struct MoreInfoForBetterMatch: View {
                                      progressStatus:$progressStatus)
                             
                             case .completed:
-                            Completed(allcardsActiveSheet: $allcardsActiveSheet)
+                                Completed(showSheetView:$showSheetView)
                             }
                         }
                     
@@ -118,6 +116,6 @@ struct WithBackgroundProgressViewStyle: ProgressViewStyle {
 
 struct MoreInfoForBetterMatch_Previews: PreviewProvider {
     static var previews: some View {
-        MoreInfoForBetterMatch(allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
+        MoreInfoForBetterMatch(showSheetView: Binding.constant(false))
     }
 }
