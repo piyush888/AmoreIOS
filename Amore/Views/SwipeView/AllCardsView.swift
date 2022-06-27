@@ -153,6 +153,8 @@ struct AllCardsView: View {
                    
                     case .boostProfileSheet:
                         BoostUserProfile(cardActive:$allcardsActiveSheet)
+                            .environmentObject(profileModel)
+                            .environmentObject(photoModel)
                     
                     case .directMessageSheet:
                         if let profile = cardProfileModel.allCardsWithPhotosDeck.last {

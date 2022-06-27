@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import StoreKit
 import RiveRuntime
 
 struct BoostUserProfile: View {
     
     @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var photoModel: PhotoModel
+    
     @Binding var cardActive: AllCardsActiveSheet?
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
@@ -31,31 +35,26 @@ struct BoostUserProfile: View {
     static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
     static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
     
+    // Boot Page
     var body: some View {
             
-        
+            
             GeometryReader { geometry in
 
                 VStack {
 
-                    // Part 1 - 'Done' button for closing the sheet
+                    // Done button to close the sheet modifier
                     HStack {
                         Spacer()
                         Button {
                             cardActive = .none
                         } label: {
-                            Text("Done")
-                            .fontWeight(.bold)
-                            .font(.subheadline)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(LinearGradient(gradient: Gradient(colors: [Color("dark-green"), Color("light-green")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
+                            DoneButton()
                         }
                     }.padding()
 
 
-                    // Part 2 - Boot Description Status
+                    // Displays how manu boosts are left with the user & other information about how boost works
                     VStack(spacing: 16) {
                         Image(systemName: "bolt.circle.fill")
                             .resizable()
@@ -73,22 +72,32 @@ struct BoostUserProfile: View {
                             .customFont(.footnote)
                             .opacity(0.7)
                             .padding(.horizontal,20)
-                        
-                        
                     }
                     
                     Spacer()
                     
-                    Text("Profile was seen by 324 users")
-                        .font(.title2)
                     
-                    // Radiant
-                    radiateAnimation
-                        .view()
-                        .frame(width:geometry.size.width/1.5)
-                        
+                    // Radiant Animation - Nothing happens in here, just a show piece
+                    ZStack {
+                        // Radiant Animation
+                        radiateAnimation
+                            .view()
+                            .frame(width:geometry.size.width/1.5)
+                        // User Profile act as a button
+                        Button {
+                            // Nothing happens here
+                        }label: {
+                            ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: UserSnapDetailsModifier(width:80, height:80))
+                        }
+                    }
                     
-                    // Part 3.2 Activate Boost if boost count is already more than x
+                    // Basic info
+                    Text("Get noticed by thousands of people around you")
+                        .customFont(.footnote)
+                        .opacity(0.7)
+                        .padding(.horizontal,20)
+                    
+                    // Activate boost button
                     button
                         .view()
                         .frame(width:330, height:80)
@@ -101,11 +110,11 @@ struct BoostUserProfile: View {
                         )
                         .overlay(
                             HStack {
-//                                Text("Boost me").fontWeight(.bold)
-//                                Image(systemName: "bolt.circle.fill")
-                                Text("00:34")
-                                    .font(.title)
-                                    .fontWeight(.bold)
+                                Text("Boost me").fontWeight(.bold)
+                                Image(systemName: "bolt.circle.fill")
+//                                Text("00:34")
+//                                    .font(.title)
+//                                    .fontWeight(.bold)
                                     
                             }
                             .offset(x: 4, y: 4)
@@ -123,6 +132,7 @@ struct BoostUserProfile: View {
                             storeManager.purchaseDataDetails.purchasedBoostCount = 2
                         }
                     
+                    
                     Spacer()
                     
                     // Divider
@@ -134,34 +144,30 @@ struct BoostUserProfile: View {
                     
                     Spacer()
                     
-                    // Give user to buy boost here
-                    if let pricingData = storeManager.boostsPricing {
-                        HStack {
-                            Button {
-                                storeManager.purchaseDataDetails.purchasedBoostCount = 2
-                            } label: {
-                                HStack {
-                                    Image(systemName: "creditcard.fill")
-                                    Text("Buy Boost here")
-                                }
-                                .purcahseButton()
-                            }
+                    // Give user option to buy boost here
+                    VStack {
+                        if let pricingData = storeManager.boostsPricing {
                             
-                            Button {
-                                storeManager.purchaseDataDetails.purchasedBoostCount = 2
-                            } label: {
-                                HStack {
-                                    Image(systemName: "creditcard.fill")
-                                    Text("Buy Boost here")
-                                }
-                                .purcahseButton()
-                            }
+                            BoostBuyButton(boostType:2.0,
+                                           totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
+                                           currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
+                                           skProductObj: pricingData["2 Boosts"] ?? SKProduct())
+                                .frame(width: geometry.size.width*0.80)
+                                .environmentObject(storeManager)
+                        
+
+                            BoostBuyButton(boostType:5.0,
+                                           totalCost: Float(truncating: pricingData["5 Boosts"]?.price ?? 0.0),
+                                           currency: pricingData["5 Boosts"]?.localizedPrice?.first ?? "$",
+                                           skProductObj: pricingData["5 Boosts"] ?? SKProduct())
+                                .frame(width: geometry.size.width*0.80)
+                                .environmentObject(storeManager)
                         }
+                        
                     }
                     
-                    
                 }
-
+                
             }
             .padding()
             .background(
@@ -184,5 +190,46 @@ struct BoostUserProfile_Previews: PreviewProvider {
         BoostUserProfile(cardActive:Binding.constant(AllCardsActiveSheet.boostProfileSheet))
             .preferredColorScheme(.dark)
             .environmentObject(StoreManager())
+            .environmentObject(PhotoModel())
+            .environmentObject(CardProfileModel())
+            
     }
 }
+
+
+struct BoostBuyButton: View {
+    @EnvironmentObject var storeManager: StoreManager
+    // Recieves [2, 5, 10] which is used to refer 2 Boost, 5 Boost and 10 Boost count
+    @State var boostType: Float = 0.0
+    @State var totalCost:Float = 0.0
+    @State var currency: Character // Receives Dollar Sign
+    @State var skProductObj: SKProduct = SKProduct()
+    var body: some View {
+        
+        
+            Button {
+                if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount,
+                   let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount {
+                        self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + Int(boostType)
+                        self.storeManager.oldpurchaseDataDetails.totalBoostCount = totalBoostCount + Int(boostType)
+                        _ = storeManager.purchaseProduct(product:skProductObj)
+                }
+            } label : {
+                
+                VStack {
+                        HStack {
+                            Text("Buy \(boostType, specifier: "%.2f")")
+                            Image(systemName: "bolt.circle.fill")
+                            Text("for \(String(currency))\(totalCost, specifier: "%.2f")")
+                            Text("/ \(String(currency))\(totalCost/boostType, specifier: "%.2f") each")
+                                .customFont(.footnote2)
+                                .opacity(0.8)
+                        }
+                    }
+                    .purcahseButton()
+            }
+
+        }
+}
+
+

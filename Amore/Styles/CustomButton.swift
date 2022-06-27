@@ -46,3 +46,18 @@ extension View {
         modifier(PurchaseButton())
     }
 }
+
+
+
+
+struct DoneButton: View {
+    var body: some View {
+        Text("Done")
+            .fontWeight(.bold)
+            .font(.subheadline)
+            .padding()
+            .foregroundColor(.white)
+            .background(LinearGradient(gradient: Gradient(colors: [Color("dark-green"), Color("light-green")]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(20)
+    }
+}
