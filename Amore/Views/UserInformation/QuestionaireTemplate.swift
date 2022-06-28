@@ -70,10 +70,8 @@ struct QuestionaireTemplate: View {
                     showingAlert = true
                     return
                 }
-                profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                 moreInfoView = moreInfoViewStatus
                 progressStatus = progressStatus + 100.0/6.0
-                
             } label : {
                 ZStack{
                     Rectangle()

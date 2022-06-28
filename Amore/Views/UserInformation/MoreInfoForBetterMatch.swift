@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MoreInfoForBetterMatch: View {
     
@@ -55,7 +56,7 @@ struct MoreInfoForBetterMatch: View {
                             case .highestEducationView:
                                 QuestionaireTemplate(question: "What's your highest education?",
                                                  listOfOptions: ["Doctor PhD", "Masters", "Professional Degree","Bachelors","High School"],
-                                                     userChoice: $profileModel.editUserProfile.education,
+                                                 userChoice: $profileModel.editUserProfile.education,
                                                  moreInfoView:$moreInfoView,
                                                  moreInfoViewStatus:.doYourDrinkView,
                                                  progressStatus:$progressStatus)
@@ -63,7 +64,7 @@ struct MoreInfoForBetterMatch: View {
                             case .doYourDrinkView:
                                 QuestionaireTemplate(question: "Do you drink?",
                                              listOfOptions: ["Sometimes", "Occasionally", "Never"],
-                                                     userChoice: $profileModel.editUserProfile.doYouDrink,
+                                             userChoice: $profileModel.editUserProfile.doYouDrink,
                                              moreInfoView:$moreInfoView,
                                              moreInfoViewStatus:.doYouSmokeView,
                                              progressStatus:$progressStatus)
@@ -71,7 +72,7 @@ struct MoreInfoForBetterMatch: View {
                             case .doYouSmokeView:
                                 QuestionaireTemplate(question: "Do you smoke?",
                                          listOfOptions: ["Sometimes", "Never"],
-                                                     userChoice: $profileModel.editUserProfile.doYouSmoke,
+                                         userChoice: $profileModel.editUserProfile.doYouSmoke,
                                          moreInfoView:$moreInfoView,
                                          moreInfoViewStatus:.doYouWantBabies,
                                          progressStatus:$progressStatus)
@@ -79,13 +80,17 @@ struct MoreInfoForBetterMatch: View {
                             case .doYouWantBabies:
                                 QuestionaireTemplate(question: "Do you ever want babies?",
                                      listOfOptions: ["Yes", "Maybe Someday","Never"],
-                                                     userChoice: $profileModel.editUserProfile.doYouWantBabies,
+                                     userChoice: $profileModel.editUserProfile.doYouWantBabies,
                                      moreInfoView:$moreInfoView,
                                      moreInfoViewStatus:.completed,
                                      progressStatus:$progressStatus)
                             
                             case .completed:
                                 Completed(showSheetView:$showSheetView)
+                                    .onAppear {
+                                        // Only update the user profile once user has complete the entire Questionnaire
+                                        profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                                    }
                             }
                         }
                     
@@ -93,8 +98,17 @@ struct MoreInfoForBetterMatch: View {
                     
                 }
                 .onAppear{
+                    
                     if profileModel.editUserProfile.height == nil {
                         profileModel.editUserProfile.height = 167.64
+                    }
+                }
+                .onDisappear {
+                    // Before disappear check if user Completed the entire questionnaire?
+                    /// If user completed the entire questionaire template this will not be called
+                    /// Only called if user closes the questionnaire before completing it, we need to revert back to userProfile
+                    if profileModel.editUserProfile != profileModel.userProfile {
+                        profileModel.editUserProfile = profileModel.userProfile
                     }
                 }
                 

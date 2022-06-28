@@ -122,14 +122,8 @@ struct BoostUserProfile: View {
                             .foregroundColor(Color.blue)
                         )
                         .onTapGesture {
-                            // Activate Boost Profile
                             try? button.play(animationName: "active")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                withAnimation(.spring()) {
-                                    cardActive = .none
-                                }
-                            }
-                            storeManager.purchaseDataDetails.purchasedBoostCount = 2
+                            
                         }
                     
                     
