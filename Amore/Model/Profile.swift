@@ -56,6 +56,8 @@ struct Profile: Identifiable, Codable, Equatable {
     var countryRaisedIn: String?
     var wasProfileUpdated: Bool?
     var isProfileActive: Bool? = true
+    var boostTime: TimeInterval? = 0
+    
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
         return(lhs.firstName == rhs.firstName &&
@@ -101,7 +103,8 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.geohash2 == rhs.geohash2 &&
                lhs.geohash3 == rhs.geohash3 &&
                lhs.geohash4 == rhs.geohash4 &&
-               lhs.geohash5 == rhs.geohash5
+               lhs.geohash5 == rhs.geohash5 &&
+               lhs.boostTime == rhs.boostTime
         )
     }
 }
@@ -157,6 +160,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var countryRaisedIn: String?
     var wasProfileUpdated: Bool?
     var isProfileActive: Bool? = true
+    var boostTime: TimeInterval? = 0
     
     /// Allows initialisation of struct object from Profile Model object
     init(_ profile: Profile) {
@@ -207,6 +211,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
         countryRaisedIn = profile.countryRaisedIn
         wasProfileUpdated = profile.wasProfileUpdated
         isProfileActive = profile.isProfileActive
+        boostTime = profile.boostTime
     }
 }
 

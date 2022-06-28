@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 import StoreKit
 import RiveRuntime
 
@@ -97,6 +98,8 @@ struct BoostUserProfile: View {
                         .opacity(0.7)
                         .padding(.horizontal,20)
                     
+                    
+                    // MAIN FUNCTIONALITY
                     // Activate boost button
                     button
                         .view()
@@ -123,7 +126,10 @@ struct BoostUserProfile: View {
                         )
                         .onTapGesture {
                             try? button.play(animationName: "active")
-                            
+                            DispatchQueue.main.async {
+                                profileModel.editUserProfile.boostTime = NSDate().timeIntervalSince1970
+                                profileModel.updateUserProfile(profileId:  Auth.auth().currentUser?.uid)
+                            }
                         }
                     
                     
