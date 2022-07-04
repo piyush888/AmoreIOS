@@ -16,18 +16,33 @@ struct BoostUserProfile: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     
+    
     @Binding var cardActive: AllCardsActiveSheet?
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
     private var BoostCountView: some View {
-        Text("\(storeManager.purchaseDataDetails.purchasedBoostCount.boundInt)")
+        Text("\(storeManager.purchaseDataDetails.totalBoostCount.boundInt)")
     }
     
     private var boostBalanceIsZero: Bool {
-//        return storeManager.purchaseDataDetails.purchasedBoostCount.boundInt == 0 ? true : false
-        // UNDO
-        return false
+        return storeManager.purchaseDataDetails.totalBoostCount.boundInt == 0 ? true : false
     }
+    
+    @State var boostSecondsRemaining: Int = 0
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var isBoostActive: Bool = false
+    
+    func activateBoost() {
+        let boostTimeRemainingInUnix = NSDate().timeIntervalSince1970 - (profileModel.editUserProfile.boostTime ?? 0)
+        // Boost count is less than number of seconds in an hour, that means boost is stil active
+        if boostTimeRemainingInUnix < 3600 {
+            boostSecondsRemaining = Int(3600 - boostTimeRemainingInUnix)
+            isBoostActive = true
+        } else {
+            isBoostActive = false
+        }
+    }
+    
     
     // The RiveViewModel has methods to play and pause specific animations. To do that, the Rive asset must be declared first. If you have an animation that automatically plays, you can set autoplay to false.autoPlay
     let button = RiveViewModel(fileName: "button", autoPlay: false)
@@ -35,6 +50,7 @@ struct BoostUserProfile: View {
     
     static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
     static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
+    
     
     // Boot Page
     var body: some View {
@@ -87,17 +103,23 @@ struct BoostUserProfile: View {
                         // User Profile act as a button
                         Button {
                             // Nothing happens here
-                        }label: {
+                        } label: {
                             ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: UserSnapDetailsModifier(width:80, height:80))
                         }
                     }
                     
-                    // Basic info
-                    Text("Get noticed by thousands of people around you")
-                        .customFont(.footnote)
-                        .opacity(0.7)
-                        .padding(.horizontal,20)
-                    
+                    VStack{
+                        if isBoostActive {
+                            // Tells user when boost is active
+                            Text("Boost is active, continue swiping")
+                        } else {
+                            // Normal info to encourage user to purcahse boost
+                            Text("Get noticed by thousands of people around you")
+                        }
+                    }
+                    .customFont(.footnote)
+                    .opacity(0.7)
+                    .padding(.horizontal,20)
                     
                     // MAIN FUNCTIONALITY
                     // Activate boost button
@@ -113,12 +135,23 @@ struct BoostUserProfile: View {
                         )
                         .overlay(
                             HStack {
-                                Text("Boost me").fontWeight(.bold)
-                                Image(systemName: "bolt.circle.fill")
-//                                Text("00:34")
-//                                    .font(.title)
-//                                    .fontWeight(.bold)
+                                if isBoostActive {
+                                    HStack {
+                                        Text("00:\(boostSecondsRemaining/60):\(boostSecondsRemaining%60)")
+                                            .fontWeight(.bold)
+                                            .onReceive(timer) { _ in
+                                                   if boostSecondsRemaining > 0 {
+                                                       boostSecondsRemaining -= 1
+                                                   }
+                                               }
+                                        Image(systemName: "clock")
+                                    }
+                                    .font(.title)
                                     
+                                } else {
+                                    Text("Boost me").fontWeight(.bold)
+                                    Image(systemName: "bolt.circle.fill")
+                                }
                             }
                             .offset(x: 4, y: 4)
                             .font(.title3)
@@ -126,10 +159,24 @@ struct BoostUserProfile: View {
                         )
                         .onTapGesture {
                             try? button.play(animationName: "active")
-                            DispatchQueue.main.async {
-                                profileModel.editUserProfile.boostTime = NSDate().timeIntervalSince1970
-                                profileModel.updateUserProfile(profileId:  Auth.auth().currentUser?.uid)
+                            // Activate boost only if not already active
+                            if isBoostActive == false {
+                                DispatchQueue.main.async {
+                                    // Check if the total boost count is not none
+                                    if storeManager.purchaseDataDetails.totalBoostCount.boundInt > 0 {
+                                        profileModel.editUserProfile.boostTime = NSDate().timeIntervalSince1970
+                                        profileModel.updateUserProfile(profileId:  Auth.auth().currentUser?.uid)
+                                        storeManager.purchaseDataDetails.totalBoostCount.boundInt -= 1
+                                        _ = storeManager.storePurchaseNoParams()
+                                        isBoostActive = true
+                                        self.activateBoost()
+                                        print("User Boost was activated")
+                                    } else {
+                                        print("User has no boosts left")
+                                    }
+                                }
                             }
+                            try? button.reset()
                         }
                     
                     
@@ -181,20 +228,22 @@ struct BoostUserProfile: View {
                             )
 
 
-            )
+            ).onAppear {
+                self.activateBoost()
+            }
     }
 }
 
-struct BoostUserProfile_Previews: PreviewProvider {
-    static var previews: some View {
-        BoostUserProfile(cardActive:Binding.constant(AllCardsActiveSheet.boostProfileSheet))
-            .preferredColorScheme(.dark)
-            .environmentObject(StoreManager())
-            .environmentObject(PhotoModel())
-            .environmentObject(CardProfileModel())
-            
-    }
-}
+//struct BoostUserProfile_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BoostUserProfile(cardActive:Binding.constant(AllCardsActiveSheet.boostProfileSheet))
+//            .preferredColorScheme(.dark)
+//            .environmentObject(StoreManager())
+//            .environmentObject(PhotoModel())
+//            .environmentObject(CardProfileModel())
+//
+//    }
+//}
 
 
 struct BoostBuyButton: View {

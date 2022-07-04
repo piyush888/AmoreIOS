@@ -104,7 +104,7 @@ struct AllCardsView: View {
                                          buttonWidth:30,
                                          buttonHeight: 35,
                                          fontSize:25,
-                                         shieldColorList: [Color(hex: 0x780206), Color(hex: 0x061161)],
+                                         colorList: [Color(hex: 0x8f94fb)],
                                          viewToBeAssigned:.boostProfileSheet,
                                          iconName:"bolt.circle.fill")
                             
@@ -114,7 +114,7 @@ struct AllCardsView: View {
                                          buttonWidth:30,
                                          buttonHeight: 35,
                                          fontSize:25,
-                                         shieldColorList:[Color.gray, Color.purple],
+                                         colorList:[Color.gray, Color.purple],
                                          viewToBeAssigned:.reportProfileSheet,
                                          iconName:"shield.fill")
                         }

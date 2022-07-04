@@ -60,29 +60,24 @@ struct RadioButton: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: self.size, height: self.size)
                     .modifier(ColorInvert())
-                    .foregroundColor(Color.blue)
                 Text(id)
-                    .font(Font.system(size: textSize))
-                    .foregroundColor(Color.black)
+                    .font(.body)
                 Spacer()
             }
+            
         }
 
     }
 }
 
 struct RadioButtonGroup: View {
-
     let items : [String]
-
     @State var selectedId: String = ""
-
     let callback: (String) -> ()
-
     var body: some View {
         VStack {
             ForEach(0..<items.count) { index in
-                RadioButton(self.items[index], callback: self.radioGroupCallback, selectedID: self.selectedId)
+                RadioButton(self.items[index], callback: self.radioGroupCallback, selectedID: self.selectedId, color:Color.black)
             }
         }
     }

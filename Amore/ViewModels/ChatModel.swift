@@ -71,14 +71,14 @@ class ChatModel: ObservableObject {
     
     /**
      Check whether pagination is needed.
-     If second last message has appeared, fetch next page of messages
+     If second last message has appeared, fetch next page of messagesr
      - Parameter:
         - message: ChatText for the current message in view
 
      - Returns: Boolean indicating pagination needed or not
      */
     func shouldFetchMoreMessages(message: ChatText) -> Bool {
-        guard chatDocuments.count > 0 && message.id == chatDocuments[chatDocuments.index(chatDocuments.endIndex, offsetBy: -2)].documentID else { return false }
+        guard chatDocuments.count > 2 && message.id == chatDocuments[chatDocuments.index(chatDocuments.endIndex, offsetBy: -2)].documentID else { return false }
         return true
     }
     
