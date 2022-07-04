@@ -62,6 +62,7 @@ struct RadioButton: View {
                     .modifier(ColorInvert())
                 Text(id)
                     .font(.body)
+                    .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
                 Spacer()
             }
             
