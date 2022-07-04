@@ -30,11 +30,14 @@ class ProfileViewModelV2: ObservableObject {
         do
         {
             let formatter3 = DateFormatter()
-            formatter3.dateFormat = "HH:mm E, d MMM y"
-            let dateofBirthString = (formatter3.string(from: user.dateOfBirth ?? Date()))
-            let jsonData = try JSONEncoder().encode(user)
+            formatter3.dateFormat = "yyyy-MM-dd' 'HH:mm:ss.SSSSSS"
+//            formatter3.dateFormat = "HH:mm E, d MMM y"
+//            let dateofBirthString = (formatter3.string(from: user.dateOfBirth ?? Date()))
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .formatted(formatter3)
+            let jsonData = try encoder.encode(user)
             var jsonString = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String:AnyObject]
-            jsonString?["dateOfBirth"] = dateofBirthString as AnyObject
+//            jsonString?["dateOfBirth"] = dateofBirthString as AnyObject
             let requestBody = ["profile": jsonString]
             let finalBody = try! JSONSerialization.data(withJSONObject: requestBody)
             var request = URLRequest(url: url)

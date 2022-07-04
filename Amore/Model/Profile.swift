@@ -17,7 +17,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var interests: [String]?
     var genderIdentity: String?
     var sexualOrientation: [String]?
-    var sexualOrientationVisible: Bool?
+    var sexualOrientationVisible: Bool? = true
     var showMePreference: String?
     var work: String?
     var school: String?
