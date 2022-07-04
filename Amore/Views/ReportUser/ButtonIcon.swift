@@ -13,7 +13,7 @@ struct ButtonIcon: View {
     @State var buttonWidth: CGFloat
     @State var buttonHeight: CGFloat
     @State var fontSize: CGFloat
-    @State var shieldColorList: [Color]
+    @State var colorList: [Color]
     @State var viewToBeAssigned: AllCardsActiveSheet = .none
     @State var iconName: String
     
@@ -24,7 +24,7 @@ struct ButtonIcon: View {
                 self.allcardsActiveSheet = viewToBeAssigned
             } label: {
                 LinearGradient(
-                    gradient: Gradient(colors: shieldColorList),
+                    gradient: Gradient(colors: colorList),
                     startPoint: .leading,
                     endPoint: .trailing)
                     .frame(width:buttonWidth, height:buttonHeight)
