@@ -15,7 +15,8 @@ struct ChildCardView: View {
     @Binding var singleProfile: CardProfileWithPhotos
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var testing: Bool
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
@@ -188,7 +189,9 @@ struct ChildCardView: View {
                     }
                 }
                 .padding(.horizontal,10)
-                .background(Color.white)
+                .background(colorScheme == .dark ? Color.black: Color.white)
+                .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
+                
 
             }
             .cornerRadius(10)

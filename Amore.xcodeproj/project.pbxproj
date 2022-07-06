@@ -59,6 +59,7 @@
 		684BD1B7C189E0EEDBA471A8 /* Pods_Amore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */; };
 		E205F6792764351700196A06 /* ReceivedGivenEliteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */; };
 		E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F67C2766A3D600196A06 /* FetchDataModel.swift */; };
+		E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20CFEED2875044C00EF7EB1 /* TabModel.swift */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
 		E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserProfile.swift */; };
@@ -242,6 +243,7 @@
 		D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.debug.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.debug.xcconfig"; sourceTree = "<group>"; };
 		E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedGivenEliteModel.swift; sourceTree = "<group>"; };
 		E205F67C2766A3D600196A06 /* FetchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataModel.swift; sourceTree = "<group>"; };
+		E20CFEED2875044C00EF7EB1 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E221EAAA2714F79A00769234 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		E221EAAC2714F84F00769234 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E221EAAE2714FBDA00769234 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 				1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */,
 				E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */,
 				E27CCEB527E44130006278EB /* IAPFirebaseModel.swift */,
+				E20CFEED2875044C00EF7EB1 /* TabModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -990,6 +993,7 @@
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
+				E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E27CCEB627E44130006278EB /* IAPFirebaseModel.swift in Sources */,

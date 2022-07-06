@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
     @State var currentPage: ViewTypes = .swipeView
+    @StateObject var tabModel = TabModel()
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
@@ -42,19 +43,20 @@ struct HomeView: View {
                     
                     case .allServicesAreGoodView:
                         VStack {
-                            switch currentPage {
+                            VStack {
+                                switch currentPage {
                                 
                                 case .messagingView:
                                     MainMessagesView()
                                         .environmentObject(chatModel)
                                         .environmentObject(mainMessagesModel)
-                                    
+                                        
                                 case .likesTopPicksView:
-                                LikesTopPicksHome(selectedTab:$selectedTab)
+                                    LikesTopPicksHome(selectedTab:$selectedTab)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         
-                                    
+                                        
                                 case .swipeView:
                                     AllCardsView()
                                         .environmentObject(adminAuthenticationModel)
@@ -66,6 +68,7 @@ struct HomeView: View {
                                         .environmentObject(storeManager)
                                         .environmentObject(chatModel)
                                         .environmentObject(mainMessagesModel)
+                                        
                                     
                                 case .filterSettingsView:
                                     FilterSettings()
@@ -74,6 +77,7 @@ struct HomeView: View {
                                         .onChange(of: filterModel.filterData) { _ in
                                             filterModel.updateFilter()
                                         }
+                                        
                                     
                                 case .userSettingsView:
                                     // Load the user profile
@@ -86,18 +90,15 @@ struct HomeView: View {
                                             PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")
                                                 .environmentObject(storeManager)
                                         }
-                             
+                                }
                             }
-                            // Control Center
-                            ControlCenter(currentPage:$currentPage)
-                                .padding(.horizontal,30)
-                                .padding(.top,10)
                             
-                            }
-//                        .onChange(of: cardProfileModel.timeOutRetriesCount, perform: { errorCount in
-//                                self.checkIfDataIsComing()
-//                            })
-//
+                            // Tab View
+                            ControlCenter(currentPage:$currentPage)
+                                .offset(y: tabModel.showDetail ? 200 : 0)
+                        }
+                        .ignoresSafeArea(.all, edges: .bottom)
+                
                     case .serverErrorView:
                         ServerErrorView()
                     .environmentObject(photoModel)
@@ -107,7 +108,18 @@ struct HomeView: View {
 
 
 struct HomeView_Previews: PreviewProvider {
+    
     static var previews: some View {
         HomeView()
+            .environmentObject(ProfileViewModel())
+            .environmentObject(PhotoModel())
+            .environmentObject(AdminAuthenticationViewModel())
+            .environmentObject(FilterModel())
+            .environmentObject(CardProfileModel())
+            .environmentObject(ReceivedGivenEliteModel())
+            .environmentObject(ReportActivityModel())
+            .environmentObject(StoreManager())
+            .environmentObject(ChatModel())
+            .environmentObject(MainMessagesViewModel())
     }
 }

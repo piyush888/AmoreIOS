@@ -7,74 +7,102 @@
 
 import SwiftUI
 
+
+struct TabItem: Identifiable {
+    var id = UUID()
+    var text: String
+    var icon: String
+    var tab: ViewTypes
+    var color: Color
+}
+
+var tabItems = [
+    TabItem(text: "Messages", icon: "text.bubble.fill", tab: .messagingView, color: Color(hex:0x008080)),
+    TabItem(text: "History", icon: "sparkles", tab: .likesTopPicksView, color: .blue),
+    TabItem(text: "Swipe", icon: "bonjour", tab: .swipeView, color: .red),
+    TabItem(text: "Filter", icon: "slider.vertical.3", tab: .filterSettingsView, color: .purple),
+    TabItem(text: "Profile", icon: "person.fill", tab: .userSettingsView, color: .pink)
+]
+
 struct ControlCenter: View {
     
     @Binding var currentPage: ViewTypes
-//    @Binding var newMessageBadge: Bool
-    
-    var controlCenterColor = Color(UIColor.lightGray)
     
     var body: some View {
-        HStack {
             
-//            if newMessageBadge {
-//                Image(systemName: "text.bubble.fill")
-//                    .imageScale(.large)
-//                    .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
-//                    .padding(.horizontal)
-//                    .onTapGesture {
-//                        currentPage = .messagingView
-//                    }
-//                    .overlay(Text("\(Image(systemName: "suit.heart.fill"))")
-//                                .foregroundColor(.green)
-//                                .font(.body), alignment: .topTrailing)
-//            }
-//            else {
-                Image(systemName: "text.bubble.fill")
+        // Fallback on earlier versions
+            HStack {
+                tabButtonList
+            }
+            .padding(.horizontal, 8)
+            .padding(.top, 14)
+            .padding(.bottom, 35)
+            .background(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(Color(hex:0xFF6EE0))
+                    .strokeStyle(cornerRadius:35)
+                    .opacity(0.2)
+            )
+            .strokeStyle(cornerRadius:34)
+            
+    }
+    
+    var tabButtonList: some View {
+        
+        ForEach(tabItems) { item in
+            TabButton(systemImage: item.icon,
+                      tabViewType: item.tab,
+                      buttonColor: item.color,
+                      currentPage: $currentPage)
+            
+        }
+    
+    }
+}
+
+struct TabButton: View {
+    @State var systemImage: String
+    @State var tabViewType: ViewTypes
+    @State var buttonColor: Color
+    @Binding var currentPage: ViewTypes
+    
+    var body: some View {
+        Button {
+            currentPage = tabViewType
+        } label: {
+            VStack(spacing:0) {
+                Image(systemName: systemImage)
                     .imageScale(.large)
-                    .foregroundColor(currentPage == .messagingView ? Color.blue : controlCenterColor)
+                    .font(.body.bold())
+                    .frame(width: 44, height: 29)
+                    .foregroundColor(currentPage == tabViewType ? buttonColor : Color(UIColor.lightGray))
                     .padding(.horizontal)
-                    .onTapGesture {
-                        currentPage = .messagingView
-                    }
-//            }
-            
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .overlay(
+            GeometryReader { proxy in
+//                            Text("\(proxy.size.width)")
+                Color.clear.preference(key: TabPreferenceKey.self, value: proxy.size.width)
+            }
+        )
+        
+    }
+}
+
+struct ControlCenter_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
             Spacer()
-            Image(systemName: "sparkles")
-                .imageScale(.large)
-                .foregroundColor(currentPage == .likesTopPicksView ? Color.blue : controlCenterColor)
-                .padding(.horizontal)
-                .onTapGesture {
-                    currentPage = .likesTopPicksView
-                }
-                
-            Spacer()
-            Image(systemName: "bonjour")
-                .imageScale(.large)
-                .foregroundColor(currentPage == .swipeView ? Color.blue : controlCenterColor)
-                .padding(.horizontal)
-                .onTapGesture {
-                    currentPage = .swipeView
-                }
-                
-            Spacer()
-            Image(systemName: "slider.vertical.3")
-                .imageScale(.large)
-                .foregroundColor(currentPage == .filterSettingsView ? Color.blue : controlCenterColor)
-                .padding(.horizontal)
-                .onTapGesture {
-                    currentPage = .filterSettingsView
-                }
-            
-            Spacer()
-            Image(systemName: "person.fill")
-                .imageScale(.large)
-                .foregroundColor(currentPage == .userSettingsView ? Color.blue : controlCenterColor)
-                .padding(.horizontal)
-                .onTapGesture {
-                    currentPage = .userSettingsView
-                }
+            ControlCenter(currentPage:Binding.constant(ViewTypes.swipeView))
         }
     }
 }
 
+
+struct TabPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}

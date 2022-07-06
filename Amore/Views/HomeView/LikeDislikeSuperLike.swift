@@ -95,10 +95,10 @@ struct LikeDislikeSuperLike: View {
             Button {
                 allcardsActiveSheet = .directMessageSheet
             } label: {
-                Image(systemName: "bubble.left.circle.fill")
+                Image(systemName: "message.circle.fill")
                     .resizable()
                     .frame(width:35, height:35)
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color(hex:0xFA86C4))
                     .shadow(color: .blue,
                             radius: 0.1, x: 1, y: 1)
             }
