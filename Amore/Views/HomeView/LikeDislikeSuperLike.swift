@@ -14,7 +14,7 @@ struct LikeDislikeSuperLike: View {
     @EnvironmentObject var storeManager: StoreManager
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
-    @Binding var curSwipeStatus: AllCardsView.LikeDislike
+    @Binding var buttonSwipeStatus: AllCardsView.LikeDislike
     @Binding var cardSwipeDone: Bool
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
@@ -42,7 +42,7 @@ struct LikeDislikeSuperLike: View {
             
             Button {
                 if cardSwipeDone {
-                    curSwipeStatus = AllCardsView.LikeDislike.dislike
+                    buttonSwipeStatus = AllCardsView.LikeDislike.dislike
                     cardSwipeDone = false
                 }
             } label: {
@@ -60,7 +60,7 @@ struct LikeDislikeSuperLike: View {
             
             Button {
                 if cardSwipeDone {
-                    curSwipeStatus = AllCardsView.LikeDislike.superlike
+                    buttonSwipeStatus = AllCardsView.LikeDislike.superlike
                     cardSwipeDone = false
                 }
             } label: {
@@ -76,7 +76,7 @@ struct LikeDislikeSuperLike: View {
             
             Button {
                 if cardSwipeDone {
-                    curSwipeStatus = AllCardsView.LikeDislike.like
+                    buttonSwipeStatus = AllCardsView.LikeDislike.like
                     cardSwipeDone = false
                 }
             } label: {
@@ -109,7 +109,7 @@ struct LikeDislikeSuperLike: View {
 
 struct LikeDislikeSuperLike_Previews: PreviewProvider {
     static var previews: some View {
-        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
+        LikeDislikeSuperLike(buttonSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
                              cardSwipeDone: Binding.constant(true),
                              allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.directMessageSheet))
     }

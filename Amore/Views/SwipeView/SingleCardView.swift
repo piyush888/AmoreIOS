@@ -52,7 +52,8 @@ struct SingleCardView: View {
                 return
             }, onSuccess: {
                 onSuccess()
-                receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile, swipeInfo: cardProfileModel.lastSwipeInfo ?? AllCardsView.LikeDislike.none)
+                receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile,
+                                                                       swipeInfo: cardProfileModel.lastSwipeInfo ?? AllCardsView.LikeDislike.none)
             }, swipedUserId: self.singleProfile.id, swipeInfo: swipeInfo)
             self.onRemove(self.singleProfile)
         })
@@ -125,6 +126,7 @@ struct SingleCardView: View {
                 } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {
                     LikeDislikeButtons(buttonName: "DisLike", buttonColor: Color.red, rotationAngle: 45,imageName:"heart.slash.fill")
                 }
+                
             }
             
         }

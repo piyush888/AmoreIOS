@@ -25,7 +25,7 @@ struct AllCardsView: View {
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     
-    @State var curSwipeStatus: LikeDislike = .none
+    @State var buttonSwipeStatus: LikeDislike = .none
     @State var cardSwipeDone: Bool = true
     @State private var safetyButton = false
     @State private var showingAlert = false
@@ -72,13 +72,13 @@ struct AllCardsView: View {
                     ForEach(getCards()) { profile in
                         // Normal Card View being rendered here.
                         SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
-                                       $curSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
+                                       $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
                                        singleProfile: profile,
                                        onRemove: { removedUser in
                                             // Remove that user from our array
                                             cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
                                             cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                                            self.curSwipeStatus = .none
+                                            self.buttonSwipeStatus = .none
                                             cardProfileModel.lastSwipedCard = removedUser
                                 }
                             )
@@ -123,7 +123,7 @@ struct AllCardsView: View {
                         
                         
                         Spacer()
-                        LikeDislikeSuperLike(curSwipeStatus: $curSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)
+                        LikeDislikeSuperLike(buttonSwipeStatus: $buttonSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)
                             .environmentObject(cardProfileModel)
                             .environmentObject(receivedGivenEliteModel)
                             .environmentObject(storeManager)
@@ -161,7 +161,8 @@ struct AllCardsView: View {
                             DirectMessageCardView(
                                 fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
                                 toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
-                                allcardsActiveSheet: $allcardsActiveSheet)
+                                allcardsActiveSheet: $allcardsActiveSheet,
+                                buttonSwipeStatus: $buttonSwipeStatus)
                             .environmentObject(chatModel)
                         }
                         
