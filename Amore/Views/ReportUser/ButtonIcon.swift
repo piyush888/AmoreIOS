@@ -14,7 +14,7 @@ struct ButtonIcon: View {
     @State var buttonHeight: CGFloat
     @State var fontSize: CGFloat
     @State var colorList: [Color]
-    @State var viewToBeAssigned: AllCardsActiveSheet = .none
+    @State var viewToBeAssigned: AllCardsActiveSheet?
     @State var iconName: String
     
     var body: some View {

@@ -70,3 +70,15 @@ struct EditCardForm: View {
         
     }
 }
+
+
+struct EditCardForm_Previews: PreviewProvider {
+    static var previews: some View {
+        EditCardForm(formHeight: 100.0,
+                     formHeadLine: "",
+                     formInput: Binding.constant(""))
+            .foregroundColor(Color.black)
+            .padding()
+            
+    }
+}

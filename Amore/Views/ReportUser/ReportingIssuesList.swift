@@ -52,7 +52,7 @@ struct ReportingIssuesCard: View {
                     HStack {
                         Spacer()
                         Button {
-                            self.allcardsActiveSheet = .none
+                            self.allcardsActiveSheet = nil
                         } label: {
                             DoneButton()
                         }
@@ -98,7 +98,7 @@ struct ReportingIssuesCard: View {
                                                                         self.onRemove(self.profileId)
                                                                 }
                         )
-                        self.allcardsActiveSheet = .none
+                        self.allcardsActiveSheet = nil
 
                     } label: {
                         VStack {

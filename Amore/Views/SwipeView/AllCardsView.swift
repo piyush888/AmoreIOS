@@ -152,7 +152,7 @@ struct AllCardsView: View {
                         }
                    
                     case .boostProfileSheet:
-                        BoostUserProfile(cardActive:$allcardsActiveSheet)
+                        BoostUserProfile(allcardsActiveSheet:$allcardsActiveSheet)
                             .environmentObject(profileModel)
                             .environmentObject(photoModel)
                     
@@ -161,13 +161,10 @@ struct AllCardsView: View {
                             DirectMessageCardView(
                                 fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
                                 toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
-                                cardActive: $allcardsActiveSheet)
+                                allcardsActiveSheet: $allcardsActiveSheet)
                             .environmentObject(chatModel)
                         }
                         
-                    case .none:
-                        Text("None")
-                    
                 }
                 
             }
@@ -184,7 +181,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, boostProfileSheet, directMessageSheet, none
+    case reportProfileSheet, boostProfileSheet, directMessageSheet
     var id: Int {
         hashValue
     }

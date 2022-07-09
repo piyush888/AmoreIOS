@@ -109,6 +109,8 @@ struct LikeDislikeSuperLike: View {
 
 struct LikeDislikeSuperLike_Previews: PreviewProvider {
     static var previews: some View {
-        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none), cardSwipeDone: Binding.constant(true), allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.none))
+        LikeDislikeSuperLike(curSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
+                             cardSwipeDone: Binding.constant(true),
+                             allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.directMessageSheet))
     }
 }

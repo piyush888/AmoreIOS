@@ -17,7 +17,7 @@ struct BoostUserProfile: View {
     @EnvironmentObject var photoModel: PhotoModel
     
     
-    @Binding var cardActive: AllCardsActiveSheet?
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
     private var BoostCountView: some View {
@@ -64,7 +64,7 @@ struct BoostUserProfile: View {
                     HStack {
                         Spacer()
                         Button {
-                            cardActive = .none
+                            allcardsActiveSheet = nil
                         } label: {
                             DoneButton()
                         }
@@ -226,8 +226,6 @@ struct BoostUserProfile: View {
                                     .blur(radius: 50)
                                     .offset(x: 200, y: 100)
                             )
-
-
             ).onAppear {
                 self.activateBoost()
             }
