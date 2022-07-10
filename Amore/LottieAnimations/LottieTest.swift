@@ -13,12 +13,13 @@ struct LottieTest: View {
     var body: some View {
         VStack {
             LottieView(name: "LikeLottie", loopMode: .playOnce)
-                .frame(width: 200,
-                       height: 200)
+                .frame(width: 200, height: 200)
             
             LottieView(name: "DislikeLottie", loopMode: .playOnce)
-                .frame(width: 100,
-                       height: 100)
+                .frame(width: 100, height: 100)
+            
+            LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
+                .frame(width: 400, height: 400)
         }
     }
 }

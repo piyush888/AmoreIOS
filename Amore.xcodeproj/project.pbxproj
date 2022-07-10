@@ -98,7 +98,6 @@
 		E2591199287A001200028152 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E2591198287A001200028152 /* Lottie */; };
 		E259119F287A04D600028152 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E259119E287A04D600028152 /* LottieView.swift */; };
 		E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A0287B126300028152 /* SuccessfulLottie.json */; };
-		E25911A6287B15C500028152 /* SuperLikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A4287B15C500028152 /* SuperLikeLottie.json */; };
 		E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A5287B15C500028152 /* AppLoadingLottie.json */; };
 		E25911AB287B24D600028152 /* LottieTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25911AA287B24D600028152 /* LottieTest.swift */; };
 		E25911AD287B25F300028152 /* LikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911AC287B25F300028152 /* LikeLottie.json */; };
@@ -138,6 +137,7 @@
 		E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */; };
 		E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB327277D7A005B19E1 /* ContactSupport.swift */; };
 		E2869322287B2D900079701F /* DislikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E2869321287B2D900079701F /* DislikeLottie.json */; };
+		E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E2869323287B86DA0079701F /* SuperLikeLottie.json */; };
 		E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */; };
 		E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */; };
 		E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */; };
@@ -288,7 +288,6 @@
 		E2530F59277CB0760040CAB2 /* RadiusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusFilter.swift; sourceTree = "<group>"; };
 		E259119E287A04D600028152 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		E25911A0287B126300028152 /* SuccessfulLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuccessfulLottie.json; sourceTree = "<group>"; };
-		E25911A4287B15C500028152 /* SuperLikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuperLikeLottie.json; sourceTree = "<group>"; };
 		E25911A5287B15C500028152 /* AppLoadingLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppLoadingLottie.json; sourceTree = "<group>"; };
 		E25911AA287B24D600028152 /* LottieTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieTest.swift; sourceTree = "<group>"; };
 		E25911AC287B25F300028152 /* LikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LikeLottie.json; sourceTree = "<group>"; };
@@ -326,6 +325,7 @@
 		E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileButton.swift; sourceTree = "<group>"; };
 		E2851CB327277D7A005B19E1 /* ContactSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupport.swift; sourceTree = "<group>"; };
 		E2869321287B2D900079701F /* DislikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DislikeLottie.json; sourceTree = "<group>"; };
+		E2869323287B86DA0079701F /* SuperLikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuperLikeLottie.json; sourceTree = "<group>"; };
 		E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPhoneNumber.swift; sourceTree = "<group>"; };
 		E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeParent.swift; sourceTree = "<group>"; };
 		E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
@@ -555,7 +555,7 @@
 			children = (
 				E25911A5287B15C500028152 /* AppLoadingLottie.json */,
 				E25911AC287B25F300028152 /* LikeLottie.json */,
-				E25911A4287B15C500028152 /* SuperLikeLottie.json */,
+				E2869323287B86DA0079701F /* SuperLikeLottie.json */,
 				E25911A0287B126300028152 /* SuccessfulLottie.json */,
 				E2869321287B2D900079701F /* DislikeLottie.json */,
 				E25911AA287B24D600028152 /* LottieTest.swift */,
@@ -916,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
+				E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
 				E283677C26FAA7B700EEA049 /* Onboarding.json in Resources */,
 				E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */,
@@ -925,7 +926,6 @@
 				E2F8AA5826F9428100CC7A72 /* Preview Assets.xcassets in Resources */,
 				E2D00E0C286647460037DC07 /* button.riv in Resources */,
 				E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */,
-				E25911A6287B15C500028152 /* SuperLikeLottie.json in Resources */,
 				E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */,
 				E275356328662AD800F04BD3 /* shapes.riv in Resources */,
 				E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */,

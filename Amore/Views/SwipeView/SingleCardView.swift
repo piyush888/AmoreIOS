@@ -47,7 +47,10 @@ struct SingleCardView: View {
     }
     
     func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike, onSuccess: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+        
+        let timeDelay = swipeInfo == .superlike ? 2 : 0.5
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + timeDelay, execute: {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
                 return
             }, onSuccess: {
@@ -124,16 +127,18 @@ struct SingleCardView: View {
                 if self.swipeStatus == .like || self.dragSwipeStatus == .like {
                     // Animation for like given
                     LottieView(name: "LikeLottie", loopMode: .playOnce)
-                        .frame(width: 200,
-                               height: 200)
-                    
+                        .frame(width: 220,height: 220)
                     
                 } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {
                     // Animation for dislike given
                     LottieView(name: "DislikeLottie", loopMode: .playOnce)
-                        .frame(width: 110,
-                               height: 110)
+                        .frame(width: 140, height: 140)
                 }
+                else if self.swipeStatus == .superlike || self.dragSwipeStatus == .superlike {
+                   // Animation for superlike given
+                   LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
+                        .frame(width: 400, height: 400)
+               }
                 
             }
             
