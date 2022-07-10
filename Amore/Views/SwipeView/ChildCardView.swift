@@ -61,8 +61,7 @@ struct ChildCardView: View {
                             }
                             
                             ProfileBioHeadline(description: self.singleProfile.headline.bound,
-                                       bgColor:Color(hex: 0xe8f4f8),
-                                       headlineText:"Headline")
+                                               headlineText:"Headline")
                     
                         }
 
@@ -97,8 +96,7 @@ struct ChildCardView: View {
                         // Image 3
                         Group {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
-                                       bgColor:Color(hex: 0xFFFFE0),
-                                       headlineText:"Bio")
+                                               headlineText:"Bio")
 
                             if self.singleProfile.image3?.imageURL != nil {
                                 VStack {
@@ -126,8 +124,8 @@ struct ChildCardView: View {
                             WorkAndSchool(work: self.singleProfile.work.bound,
                                           jobTitle:self.singleProfile.jobTitle.bound,
                                           education:self.singleProfile.education.bound,
-                                          school:self.singleProfile.school.bound
-                            )
+                                          school:self.singleProfile.school.bound)
+                                
                             
                             
                             if self.singleProfile.image4?.imageURL != nil {
@@ -195,8 +193,8 @@ struct ChildCardView: View {
 
             }
             .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 0.1))
+//            .overlay(RoundedRectangle(cornerRadius: 10)
+//                        .stroke(Color.white, lineWidth: 0.1))
         }
         
     }

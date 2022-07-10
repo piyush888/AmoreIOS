@@ -44,7 +44,6 @@ struct PreviewProfile: View {
                             }
                             
                             ProfileBioHeadline(description: profileModel.editUserProfile.headline.bound,
-                                       bgColor:Color(hex: 0xe8f4f8),
                                        headlineText:"Headline")
                     
                         }
@@ -76,7 +75,6 @@ struct PreviewProfile: View {
                         // Image 3
                         Group {
                             ProfileBioHeadline(description: profileModel.editUserProfile.description.bound,
-                                       bgColor:Color(hex: 0xFFFFE0),
                                        headlineText:"Bio")
 
                             if profileModel.editUserProfile.image3?.imageURL != nil {

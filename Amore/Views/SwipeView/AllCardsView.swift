@@ -69,6 +69,7 @@ struct AllCardsView: View {
             VStack {
                 ZStack {
                     
+                    // Show all cards that user can swipe
                     ForEach(getCards()) { profile in
                         // Normal Card View being rendered here.
                         SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
@@ -98,6 +99,8 @@ struct AllCardsView: View {
 //                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
                     }
                     
+                    
+                    // Buttons and other interaction on top of cards
                     VStack {
                         HStack {
                             ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
@@ -121,6 +124,8 @@ struct AllCardsView: View {
                         .padding(.top,15)
                         .padding(.horizontal,15)
                         
+                        
+                        Spacer()
                         
                         Spacer()
                         LikeDislikeSuperLike(buttonSwipeStatus: $buttonSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)

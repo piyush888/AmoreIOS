@@ -13,6 +13,8 @@ struct WorkAndSchool: View {
     let jobTitle: String
     let education: String
     let school: String
+    @Environment(\.colorScheme) var colorScheme
+
     
     var body: some View {
             
@@ -52,9 +54,8 @@ struct WorkAndSchool: View {
               maxHeight: .infinity,
               alignment: .topLeading
             )
-            .background(Color(hex: 0xe8f4f8))
+            .background(colorScheme == .dark ? Color(UIColor.systemBackground): Color(hex: 0xe8f4f8))
             .cornerRadius(20)
-    
     }
 }
 

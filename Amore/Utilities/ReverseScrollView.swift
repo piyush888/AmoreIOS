@@ -44,7 +44,8 @@ struct ReverseScrollView<Content: View>: View {
                 }
                 .frame(
                     minWidth: minWidth(in: proxy, for: axis),
-                    minHeight: minHeight(in: proxy, for: axis)
+                    minHeight: minHeight(in: proxy, for: axis),
+                    alignment:.bottom
                 )
                 
             }
@@ -84,7 +85,7 @@ struct Stack<Content: View>: View {
 struct ReverseScrollView_Previews: PreviewProvider {
     static var previews: some View {
         ReverseScrollView(.vertical) {
-            ForEach(0..<100) { item in
+            ForEach(0..<1) { item in
                 Text("\(item)")
                     .padding()
                     .background(Color.gray.opacity(0.5))

@@ -122,9 +122,17 @@ struct SingleCardView: View {
                 .environmentObject(profileModel)
                 
                 if self.swipeStatus == .like || self.dragSwipeStatus == .like {
-                    LikeDislikeButtons(buttonName: "Like", buttonColor: Color.green, rotationAngle: -45,imageName:"bolt.heart.fill")
+                    // Animation for like given
+                    LottieView(name: "LikeLottie", loopMode: .playOnce)
+                        .frame(width: 200,
+                               height: 200)
+                    
+                    
                 } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {
-                    LikeDislikeButtons(buttonName: "DisLike", buttonColor: Color.red, rotationAngle: 45,imageName:"heart.slash.fill")
+                    // Animation for dislike given
+                    LottieView(name: "DislikeLottie", loopMode: .playOnce)
+                        .frame(width: 110,
+                               height: 110)
                 }
                 
             }

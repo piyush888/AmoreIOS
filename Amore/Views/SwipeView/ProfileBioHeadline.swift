@@ -10,8 +10,8 @@ import SwiftUI
 struct ProfileBioHeadline: View {
     
     @State var description: String
-    @State var bgColor: Color
     @State var headlineText: String
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -33,7 +33,7 @@ struct ProfileBioHeadline: View {
               maxHeight: .infinity,
               alignment: .topLeading
             )
-            .background(bgColor)
+            .background(colorScheme == .dark ? Color(UIColor.systemBackground): Color(hex: 0xe8f4f8))
             .cornerRadius(15)
             .onAppear {
                 if self.description == "" {
@@ -48,8 +48,7 @@ struct ProfileBioHeadline: View {
 struct ProfileBioHeadline_Previews: PreviewProvider {
     static var previews: some View {
         
-        ProfileBioHeadline(description: "My name is Kshitiz Sharma, I am the founder of Drone AI. I started building drone software as a hobby & added AI features to it & opened it to the general public."
-                   ,bgColor: Color.yellow,
+        ProfileBioHeadline(description: "My name is Kshitiz Sharma, I am the founder of Drone AI. I started building drone software as a hobby & added AI features to it & opened it to the general public.",
                    headlineText:"Bio")
             .padding()
             

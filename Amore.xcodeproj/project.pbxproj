@@ -95,6 +95,13 @@
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
 		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
 		E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2530F59277CB0760040CAB2 /* RadiusFilter.swift */; };
+		E2591199287A001200028152 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E2591198287A001200028152 /* Lottie */; };
+		E259119F287A04D600028152 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E259119E287A04D600028152 /* LottieView.swift */; };
+		E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A0287B126300028152 /* SuccessfulLottie.json */; };
+		E25911A6287B15C500028152 /* SuperLikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A4287B15C500028152 /* SuperLikeLottie.json */; };
+		E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911A5287B15C500028152 /* AppLoadingLottie.json */; };
+		E25911AB287B24D600028152 /* LottieTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25911AA287B24D600028152 /* LottieTest.swift */; };
+		E25911AD287B25F300028152 /* LikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E25911AC287B25F300028152 /* LikeLottie.json */; };
 		E25B0F3C285FB14800411BDA /* BoostUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */; };
 		E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B7493280CAAC700C87855 /* PaymentComplete.swift */; };
 		E25D15A128675FE8001330DB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25D15A028675FE8001330DB /* CustomButton.swift */; };
@@ -130,6 +137,7 @@
 		E2851CB02727580C005B19E1 /* EditProfileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */; };
 		E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */; };
 		E2851CB427277D7A005B19E1 /* ContactSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2851CB327277D7A005B19E1 /* ContactSupport.swift */; };
+		E2869322287B2D900079701F /* DislikeLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = E2869321287B2D900079701F /* DislikeLottie.json */; };
 		E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */; };
 		E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */; };
 		E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */; };
@@ -278,6 +286,12 @@
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
 		E2530F59277CB0760040CAB2 /* RadiusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusFilter.swift; sourceTree = "<group>"; };
+		E259119E287A04D600028152 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		E25911A0287B126300028152 /* SuccessfulLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuccessfulLottie.json; sourceTree = "<group>"; };
+		E25911A4287B15C500028152 /* SuperLikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuperLikeLottie.json; sourceTree = "<group>"; };
+		E25911A5287B15C500028152 /* AppLoadingLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppLoadingLottie.json; sourceTree = "<group>"; };
+		E25911AA287B24D600028152 /* LottieTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieTest.swift; sourceTree = "<group>"; };
+		E25911AC287B25F300028152 /* LikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LikeLottie.json; sourceTree = "<group>"; };
 		E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostUserProfile.swift; sourceTree = "<group>"; };
 		E25B7493280CAAC700C87855 /* PaymentComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComplete.swift; sourceTree = "<group>"; };
 		E25D15A028675FE8001330DB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -311,6 +325,7 @@
 		E2851CAF2727580B005B19E1 /* EditProfileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUtil.swift; sourceTree = "<group>"; };
 		E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileButton.swift; sourceTree = "<group>"; };
 		E2851CB327277D7A005B19E1 /* ContactSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupport.swift; sourceTree = "<group>"; };
+		E2869321287B2D900079701F /* DislikeLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DislikeLottie.json; sourceTree = "<group>"; };
 		E291A1E426FE3711000D8A2C /* LoginPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPhoneNumber.swift; sourceTree = "<group>"; };
 		E291A1E626FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeParent.swift; sourceTree = "<group>"; };
 		E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
@@ -369,6 +384,7 @@
 				E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */,
 				E27AC5442720C9BA00EB50F7 /* iPhoneNumberField in Frameworks */,
 				E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */,
+				E2591199287A001200028152 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +550,19 @@
 			path = SwipeView;
 			sourceTree = "<group>";
 		};
+		E259119B287A005400028152 /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				E25911A5287B15C500028152 /* AppLoadingLottie.json */,
+				E25911AC287B25F300028152 /* LikeLottie.json */,
+				E25911A4287B15C500028152 /* SuperLikeLottie.json */,
+				E25911A0287B126300028152 /* SuccessfulLottie.json */,
+				E2869321287B2D900079701F /* DislikeLottie.json */,
+				E25911AA287B24D600028152 /* LottieTest.swift */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 		E25D159F28675DE1001330DB /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +716,7 @@
 		E2F8AA4F26F9427F00CC7A72 /* Amore */ = {
 			isa = PBXGroup;
 			children = (
+				E259119B287A005400028152 /* LottieAnimations */,
 				1BBB485127031F65004D42A3 /* Amore.entitlements */,
 				1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */,
 				E283678226FAB8B800EEA049 /* Services */,
@@ -797,6 +827,7 @@
 				1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */,
 				1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */,
 				1BA0A67328592C510032DE4E /* ReverseScrollView.swift */,
+				E259119E287A04D600028152 /* LottieView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -835,6 +866,7 @@
 				E27AC5432720C9BA00EB50F7 /* iPhoneNumberField */,
 				E27AC5462720CA0A00EB50F7 /* JWTKit */,
 				E23BAA982741D8A700F619D6 /* WrappingStack */,
+				E2591198287A001200028152 /* Lottie */,
 			);
 			productName = Amore;
 			productReference = E2F8AA4D26F9427F00CC7A72 /* Amore.app */;
@@ -867,6 +899,7 @@
 				E27AC5422720C9BA00EB50F7 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				E27AC5452720CA0A00EB50F7 /* XCRemoteSwiftPackageReference "jwt-kit" */,
 				E23BAA972741D8A700F619D6 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
+				E2591197287A001100028152 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = E2F8AA4E26F9427F00CC7A72 /* Products */;
 			projectDirPath = "";
@@ -882,12 +915,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
 				E283677C26FAA7B700EEA049 /* Onboarding.json in Resources */,
+				E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */,
+				E2869322287B2D900079701F /* DislikeLottie.json in Resources */,
 				E283677726F9534200EEA049 /* Sk-Modernist-Regular.otf in Resources */,
+				E25911AD287B25F300028152 /* LikeLottie.json in Resources */,
 				E2F8AA5826F9428100CC7A72 /* Preview Assets.xcassets in Resources */,
 				E2D00E0C286647460037DC07 /* button.riv in Resources */,
 				E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */,
+				E25911A6287B15C500028152 /* SuperLikeLottie.json in Resources */,
 				E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */,
 				E275356328662AD800F04BD3 /* shapes.riv in Resources */,
 				E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */,
@@ -976,6 +1014,7 @@
 				E268A46A274603CD0045F264 /* Completed.swift in Sources */,
 				E2DBC027272B3BC0000630F5 /* SFSafariViewWrapper.swift in Sources */,
 				1B6AB336271DBE9600A45A82 /* (null) in Sources */,
+				E25911AB287B24D600028152 /* LottieTest.swift in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
 				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
@@ -1081,6 +1120,7 @@
 				E25D15A32867613F001330DB /* Extensions.swift in Sources */,
 				1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */,
 				1BFCBAE12721BBCA0002BA67 /* EducationFilter.swift in Sources */,
+				E259119F287A04D600028152 /* LottieView.swift in Sources */,
 				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				1BC8BE0B2705CC5E00F0137E /* AddWork.swift in Sources */,
@@ -1298,6 +1338,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E2591197287A001100028152 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		E27AC5422720C9BA00EB50F7 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
@@ -1321,6 +1369,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E23BAA972741D8A700F619D6 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
 			productName = WrappingStack;
+		};
+		E2591198287A001200028152 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2591197287A001100028152 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		E27AC5432720C9BA00EB50F7 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;
