@@ -48,7 +48,7 @@ struct SingleCardView: View {
     
     func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike, onSuccess: @escaping () -> Void) {
         
-        let timeDelay = swipeInfo == .superlike ? 2 : 0.5
+        let timeDelay = swipeInfo == .superlike ? 1.5 : 0.5
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + timeDelay, execute: {
             FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
@@ -90,9 +90,14 @@ struct SingleCardView: View {
                             
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
-                            if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
+                            let cardGesturePct = self.getGesturePercentage(geometry, from: value)
+                            if abs(cardGesturePct) > self.thresholdPercentage {
                                 self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {
                                     cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
+                                }
+                                withAnimation {
+                                    // For smoother swipe of the card
+                                    self.translation = cardGesturePct < 0 ? CGSize(width: -500, height: 0) : CGSize(width: 500, height: 0)
                                 }
                                 cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                             } else {
@@ -103,22 +108,24 @@ struct SingleCardView: View {
                 // Buttons
                 .onChange(of: self.swipeStatus) { newValue in
                     if newValue == AllCardsView.LikeDislike.like {
-                        self.translation = .init(width: 100, height: 0)
+                        self.translation = CGSize(width: 500, height: 0)
                         self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {
                             cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
                         }
+                        
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
-                        self.translation = .init(width: -100, height: 0)
+                        self.translation = CGSize(width: -500, height: 0)
                         self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
                             cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
                         }
+                        
                     }
                     else if newValue == AllCardsView.LikeDislike.superlike {
-                        self.translation = .init(width: 0, height: 50)
                         self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
                             cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
                         }
+                        
                     }
                     cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                 }
@@ -145,4 +152,3 @@ struct SingleCardView: View {
         }
     }
 }
-
