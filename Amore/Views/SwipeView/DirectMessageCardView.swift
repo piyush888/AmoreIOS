@@ -194,14 +194,17 @@ struct DirectMessageCardView: View {
             }
             .padding(.horizontal)
             .background(
-                    RiveViewModel(fileName: "shapes").view()
-                            .ignoresSafeArea()
-                            .blur(radius: 30)
-                            .background(
-                                Image("Spline")
-                                    .blur(radius: 50)
-                                    .offset(x: 200, y: 100)
-                            )
+                Image("Spline")
+                    .blur(radius: 50)
+                    .offset(x: 200, y: 100)
+//                    RiveViewModel(fileName: "shapes").view()
+//                            .ignoresSafeArea()
+//                            .blur(radius: 30)
+//                            .background(
+//                                Image("Spline")
+//                                    .blur(radius: 50)
+//                                    .offset(x: 200, y: 100)
+//                            )
             )
             .alert(item: $info, content: { info in
                         Alert(title: Text(info.title),

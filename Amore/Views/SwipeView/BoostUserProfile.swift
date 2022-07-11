@@ -218,15 +218,19 @@ struct BoostUserProfile: View {
             }
             .padding()
             .background(
-                    RiveViewModel(fileName: "shapes").view()
-                            .ignoresSafeArea()
-                            .blur(radius: 30)
-                            .background(
-                                Image("Spline")
-                                    .blur(radius: 50)
-                                    .offset(x: 200, y: 100)
-                            )
-            ).onAppear {
+                Image("Spline")
+                    .blur(radius: 50)
+                    .offset(x: 200, y: 100)
+//                    RiveViewModel(fileName: "shapes").view()
+//                            .ignoresSafeArea()
+//                            .blur(radius: 30)
+//                            .background(
+//                                Image("Spline")
+//                                    .blur(radius: 50)
+//                                    .offset(x: 200, y: 100)
+//                            )
+            )
+            .onAppear {
                 self.activateBoost()
             }
     }
