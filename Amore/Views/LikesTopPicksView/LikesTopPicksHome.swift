@@ -215,7 +215,6 @@ struct LikesTopPicksHome: View {
                     }
                 }
             }
-            .background(Color.white.ignoresSafeArea())
             .alert(isPresented: $showingAlert) {
                    Alert(
                        title: Text(""),

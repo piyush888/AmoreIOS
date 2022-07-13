@@ -9,8 +9,11 @@ import SwiftUI
 import Firebase
 import SDWebImageSwiftUI
 
-struct ConversationView: View {
 
+struct ConversationView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     @Namespace var animation
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
@@ -119,7 +122,6 @@ struct ConversationView: View {
                 }
                 .padding(.top, 10)
             }
-            .background(Color(.init(white: 0.95, alpha: 1)))
             .onChange(of: scrollToBottomOnSend) { newValue in
                 if newValue == true {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -222,6 +224,8 @@ struct ConversationView: View {
 
 struct MessageView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     let message: ChatText
     var toUser: ChatUser
     
@@ -233,7 +237,6 @@ struct MessageView: View {
                         .foregroundColor(.white)
                         .padding(.all, 20)
                         .background(Color.blue)
-                    //                        .cornerRadius(8)
                 }
             } else {
                 HStack(alignment: .bottom, spacing: 10) {
@@ -244,15 +247,13 @@ struct MessageView: View {
                         .clipped()
                         .cornerRadius(40)
                         .overlay(RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color.black, lineWidth: 1))
+                        .stroke(Color.black, lineWidth: 1))
                         .shadow(radius: 1)
                     
                     ChatBubble(direction: .left) {
                         Text(message.text.bound)
-                            .foregroundColor(.black)
                             .padding(.all, 20)
-                            .background(Color.white)
-                        //                        .cornerRadius(8)
+                            .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                     }
                     
                 }
