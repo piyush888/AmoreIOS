@@ -33,7 +33,7 @@ struct TextEditorWithPlaceholder: View {
                 .cornerRadius(10.0)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
+                        .stroke(Color.purple, lineWidth: 0.5)
                 )
         }
         .onPreferenceChange(ViewHeightKey.self) {

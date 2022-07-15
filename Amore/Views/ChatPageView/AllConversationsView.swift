@@ -16,6 +16,7 @@ struct AllConversationsView: View {
     @State var selectedChat = ChatConversation()
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+    @EnvironmentObject var tabModel: TabModel
     
     var body: some View {
         VStack(spacing: 10) {
@@ -30,6 +31,7 @@ struct AllConversationsView: View {
                             self.navigateToChatView = true
                             self.selectedChat = recentMessage
                             mainMessagesModel.markMessageRead(chat: recentMessage)
+//                            tabModel.showDetail.toggle()
                         } label: {
                             if (recentMessage.fromId == Auth.auth().currentUser?.uid) {
                                 IndividualMessageRow(recentMessage: recentMessage)
@@ -66,6 +68,9 @@ struct AllConversationsView: View {
                     .environmentObject(mainMessagesModel)
                     .onDisappear {
                         chatModel.firestoreListener?.remove()
+//                        withAnimation(.easeInOut) {
+//                            tabModel.showDetail.toggle()
+//                        }
                     }
             }
         }
@@ -89,10 +94,7 @@ struct IndividualMessageRow: View {
                 .frame(width: 64, height: 64)
                 .clipped()
                 .cornerRadius(64)
-                .overlay(RoundedRectangle(cornerRadius: 64)
-                            .stroke(Color.black, lineWidth: 1))
-                .shadow(radius: 5)
-            
+                .shadow(radius: 3)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text((recentMessage.user?.firstName.bound ?? "") + " " + (recentMessage.user?.lastName.bound ?? ""))
@@ -102,14 +104,14 @@ struct IndividualMessageRow: View {
                 if recentMessage.lastText.bound.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                     Text("Be the first to break the ice!")
                         .font(.system(size: 14).italic())
-                        .foregroundColor(Color(.darkGray))
+                        .foregroundColor(Color(.label))
                         .multilineTextAlignment(.leading)
                         .lineLimit(1)
                 }
                 else {
                     Text(recentMessage.lastText.bound)
                         .font(.system(size: 14))
-                        .foregroundColor(Color(.darkGray))
+                        .foregroundColor(Color(.label))
                         .multilineTextAlignment(.leading)
                         .lineLimit(1)
                 }

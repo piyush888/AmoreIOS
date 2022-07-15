@@ -13,6 +13,7 @@ struct customNavBar: View {
     @Binding var toUser: ChatUser
     @Binding var presentProfileCard: Bool
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -36,11 +37,9 @@ struct customNavBar: View {
                     .frame(width: 40, height: 40)
                     .clipped()
                     .cornerRadius(40)
-                    .overlay(RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.black, lineWidth: 1))
                     .shadow(radius: 1)
                 Text(toUser.firstName ?? "User")
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
                     .font(.headline)
             }
         }

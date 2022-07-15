@@ -170,7 +170,7 @@ struct DirectMessageCardView: View {
                     // Give user option to buy messages here
                     VStack {
                         if let pricingData = storeManager.messagesPricing {
-                            
+                            // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
                             BoostBuyButton(boostType:5.0,
                                            totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
                                            currency: pricingData["5 Messages"]?.localizedPrice?.first ?? "$",

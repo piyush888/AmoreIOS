@@ -13,6 +13,7 @@ struct MainMessagesView: View {
     @State var navigateToChatView: Bool = false
     @EnvironmentObject var chatModel: ChatModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+    @EnvironmentObject var tabModel: TabModel
 
     var body: some View {
         NavigationView {
@@ -21,6 +22,7 @@ struct MainMessagesView: View {
                 AllConversationsView(navigateToChatView: $navigateToChatView)
                     .environmentObject(chatModel)
                     .environmentObject(mainMessagesModel)
+                    .environmentObject(tabModel)
             }
             .navigationTitle("Messages")
             .navigationBarTitleDisplayMode(.inline)

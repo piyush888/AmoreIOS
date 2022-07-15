@@ -53,6 +53,7 @@ struct UserOtherInformation: View {
             }
             
         }
+        .padding(15)
     }
 }
 

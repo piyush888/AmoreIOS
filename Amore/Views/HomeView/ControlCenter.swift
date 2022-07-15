@@ -30,7 +30,7 @@ struct ControlCenter: View {
     
     var body: some View {
             
-        // Fallback on earlier versions
+            // Fallback on earlier versions
             HStack {
                 tabButtonList
             }
@@ -48,16 +48,14 @@ struct ControlCenter: View {
     }
     
     var tabButtonList: some View {
-        
         ForEach(tabItems) { item in
             TabButton(systemImage: item.icon,
                       tabViewType: item.tab,
                       buttonColor: item.color,
                       currentPage: $currentPage)
-            
         }
-    
     }
+    
 }
 
 struct TabButton: View {
@@ -82,7 +80,6 @@ struct TabButton: View {
         }
         .overlay(
             GeometryReader { proxy in
-//                            Text("\(proxy.size.width)")
                 Color.clear.preference(key: TabPreferenceKey.self, value: proxy.size.width)
             }
         )

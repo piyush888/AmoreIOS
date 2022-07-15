@@ -33,6 +33,7 @@ struct ConversationView: View {
         GeometryReader { geo in
             VStack{
                 AllMessagesForUser
+                    .padding(.top,10)
                     .onTapGesture {
                         self.hideKeyboard()
                     }
@@ -67,9 +68,9 @@ struct ConversationView: View {
                             .font(.system(size: 60))
                     }
                 }
-            label: {
-                Label("Options", systemImage: "ellipsis.circle")
-            }
+                label: {
+                    Label("Options", systemImage: "ellipsis.circle")
+                }
             }
         }
         .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
@@ -246,8 +247,6 @@ struct MessageView: View {
                         .frame(width: 40, height: 40)
                         .clipped()
                         .cornerRadius(40)
-                        .overlay(RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.black, lineWidth: 1))
                         .shadow(radius: 1)
                     
                     ChatBubble(direction: .left) {

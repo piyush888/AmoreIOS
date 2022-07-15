@@ -9,17 +9,15 @@ import SwiftUI
 import WrappingStack
 
 struct CardPassions: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     var passions: [String] = [""]
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            HStack {
-                Text("Passions")
-                 .bold()
-                Spacer()
-            }
+            
+            Text("Passions")
+             .bold()
             
             WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 5, verticalSpacing: 5) {
                 ForEach(passions, id: \.self) { passion in
@@ -37,6 +35,7 @@ struct CardPassions: View {
                 }
             }
         }
+        
     }
 }
 

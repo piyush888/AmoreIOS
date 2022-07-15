@@ -16,6 +16,7 @@ struct ProfileBioHeadline: View {
     var body: some View {
         
             VStack(alignment: .leading) {
+                Spacer()
                 Text(headlineText)
                   .bold()
                   .padding()
@@ -24,7 +25,7 @@ struct ProfileBioHeadline: View {
                     .font(.subheadline)
                     .padding(.horizontal)
                     .padding(.bottom)
-                    
+                Spacer()
             }
             .frame(
               minWidth: 0,
@@ -33,7 +34,7 @@ struct ProfileBioHeadline: View {
               maxHeight: .infinity,
               alignment: .topLeading
             )
-            .background(colorScheme == .dark ? Color(UIColor.systemBackground): Color(hex: 0xe8f4f8))
+            .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
             .cornerRadius(15)
             .onAppear {
                 if self.description == "" {

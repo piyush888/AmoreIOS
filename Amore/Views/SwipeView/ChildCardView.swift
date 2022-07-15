@@ -22,7 +22,6 @@ struct ChildCardView: View {
             ScrollView(showsIndicators: false) {
 
                 LazyVStack {
-
                     VStack {
                         
                         // Image 1
@@ -76,6 +75,7 @@ struct ChildCardView: View {
                                           profileCompletion:self.singleProfile.profileCompletion.boundDouble,
                                           countryRaisedIn: self.singleProfile.countryRaisedIn.bound)
                                 .padding(.horizontal,15)
+                                .padding(.top,10)
 
 
                             if self.singleProfile.image2?.imageURL != nil  {
@@ -169,7 +169,6 @@ struct ChildCardView: View {
                                         .padding(5)
                                 }
                             }
-                            
                         }
                         
                         if self.singleProfile.image6?.imageURL != nil  {
@@ -184,13 +183,23 @@ struct ChildCardView: View {
                             }
                             
                         }
+                        
+                        // Blank VStack to allow space of Superlikes dislikes buttons
+                        // If you remove this VStack the buttons will overlap on profile content
+                        VStack {
+                            Text("")
+                        }
+                        .frame(height: 80)
+                        .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                        .cornerRadius(15)
+                        .blur(radius: 30)
+                        
                     }
                 }
                 .padding(.horizontal,10)
                 .background(colorScheme == .dark ? Color.black: Color.white)
                 .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
                 
-
             }
             .cornerRadius(10)
 //            .overlay(RoundedRectangle(cornerRadius: 10)

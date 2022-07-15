@@ -54,7 +54,6 @@ struct WorkAndSchool: View {
               maxHeight: .infinity,
               alignment: .topLeading
             )
-            .background(colorScheme == .dark ? Color(UIColor.systemBackground): Color(hex: 0xe8f4f8))
             .cornerRadius(20)
     }
 }

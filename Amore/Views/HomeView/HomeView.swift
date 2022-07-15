@@ -50,6 +50,7 @@ struct HomeView: View {
                                     MainMessagesView()
                                         .environmentObject(chatModel)
                                         .environmentObject(mainMessagesModel)
+                                        .environmentObject(tabModel)
                                         
                                 case .likesTopPicksView:
                                     LikesTopPicksHome(selectedTab:$selectedTab)
