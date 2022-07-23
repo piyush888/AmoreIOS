@@ -27,7 +27,6 @@ struct EditProfile: View {
                     Button {
                         self.showSheetView.toggle()
                     } label: {
-                        
                         LinearGradient(
                             gradient: Gradient(colors: [Color.purple, Color.blue]),
                             startPoint: .leading,
@@ -45,67 +44,30 @@ struct EditProfile: View {
                         profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                         profileEditingToBeDone = false
                     }) {
-                    HStack {
                         Text("Done")
-                        .fontWeight(.semibold)
-                        .font(.subheadline)
                     }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("dark-green"), Color("light-green")]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(20)
-                    }
-                    
                 }.padding(.horizontal,20)
+               
+                
                 
                 HStack {
                     Spacer()
                     
-                    
-                    VStack(alignment: .leading) {
-                          Text("Edit Info")
-                            .font(.subheadline)
-                            .padding()
-                        }
-                        .frame(
-                          minWidth: 0,
-                          maxWidth: geometry.size.width/3
-                        )
-                        .background(headingName == "Edit Info" ? Color(hex: 0xe8f4f8) : .white)
-                        .cornerRadius(20.0)
-                        .onTapGesture {
-                            currentPage = .editProfile
-                            headingName = "Edit Info"
-                        }
-                        .overlay(
-                               RoundedRectangle(cornerRadius: 16)
-                                .stroke(headingName == "Edit Info" ? Color.clear :Color(hex: 0xe8f4f8), lineWidth: 0.5)
-                        )
-                    
+                    EditProfileButtons(buttonName:"Edit Info")
+                    .onTapGesture {
+                        currentPage = .editProfile
+                        headingName = "Edit Info"
+                    }
+                    .padding(.horizontal,20)
                     
                     Spacer()
                     
-                    
-                    VStack(alignment: .leading) {
-                          Text("Preview Profile")
-                            .font(.subheadline)
-                            .padding()
-                        }
-                        .frame(
-                          minWidth: 0,
-                          maxWidth: geometry.size.width/3
-                        )
-                        .background(headingName == "Preview Profile" ? Color(hex: 0xe8f4f8) :.white)
-                        .cornerRadius(20.0)
-                        .onTapGesture {
-                            currentPage = .previewProfile
-                            headingName = "Preview Profile"
-                        }
-                        .overlay(
-                               RoundedRectangle(cornerRadius: 16)
-                                .stroke(headingName == "Preview Profile" ? Color.clear :Color(hex: 0xe8f4f8), lineWidth: 0.5)
-                        )
-                    
+                    EditProfileButtons(buttonName:"Preview Profile")
+                    .onTapGesture {
+                        currentPage = .previewProfile
+                        headingName = "Preview Profile"
+                    }
+                    .padding(.horizontal,20)
                     
                     Spacer()
                 }
@@ -134,6 +96,29 @@ struct EditProfile: View {
     }
 }
 
+struct EditProfileButtons: View {
+    @Environment(\.colorScheme) var colorScheme
+    @State var buttonName: String
+    
+    var body: some View {
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 15)
+                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                .frame(height:45)
+                
+            Text(buttonName)
+                .font(.subheadline)
+                .padding(.horizontal,20)
+        }
+        .foregroundColor(.accentColor)
+        
+    }
+        
+}
+
+
+
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         EditProfile(profileEditingToBeDone: Binding.constant(true))
@@ -141,3 +126,5 @@ struct EditProfile_Previews: PreviewProvider {
             .environmentObject(ProfileViewModel())
     }
 }
+
+

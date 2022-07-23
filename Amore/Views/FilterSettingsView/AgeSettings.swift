@@ -19,21 +19,8 @@ struct AgeSettings: View {
               destination: ShowAge(minAgeFilter:$minAgeFilter,
                                    maxAgeFilter:$maxAgeFilter),
               label: {
-                  ZStack{
-                      CommonContainer()
-                      HStack {
-                          
-                          Text("Select age filters")
-                              .font(.subheadline)
-                              .foregroundColor(Color.black)
-                          
-                          Spacer()
-                          
-                          Text("\(self.minAgeFilter) - \(self.maxAgeFilter)")
-                      }
-                      .padding(.horizontal,20)
-                  }
-                  .navigationBarHidden(true)
+                  FilterCommonContainer(filterName:"Age",
+                                        filteredValue:"Modify")
               })
         }
 }
@@ -49,6 +36,7 @@ struct ShowAge: View {
     @State private var tempMaxAgeFilter: Int = 60
     @State private var minAgeBoundary: Int = 18
     @State private var maxAgeBoundary: Int = 61
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -56,45 +44,59 @@ struct ShowAge: View {
             
             VStack {
                 
+                Spacer()
+                
                 HStack {
-                    
-                    Spacer()
-                    
-                    AgePicker(agePickerTitle:"Min Age",
-                              selectionFilter: $tempMinAgeFilter,
-                              startForLoop: $minAgeBoundary,
-                              endForLoop: $maxAgeBoundary,
-                              geometry: geometry)
-                              .onChange(of: self.tempMinAgeFilter) { _ in
-                                  if self.tempMinAgeFilter < self.tempMaxAgeFilter {
-                                      self.minAgeFilter =  self.tempMinAgeFilter
-                                  } else {
-                                      self.showingAlert = true
-                                      self.tempMinAgeFilter = self.minAgeFilter
-                                  }
-                              }
                         
-                    AgePicker(agePickerTitle:"Max Age",
-                              selectionFilter: $tempMaxAgeFilter,
-                              startForLoop: $minAgeBoundary,
-                              endForLoop: $maxAgeBoundary,
-                              geometry: geometry)
-                              .onChange(of: self.tempMaxAgeFilter) { _ in
-                                  if self.tempMinAgeFilter < self.tempMaxAgeFilter {
-                                      self.maxAgeFilter = self.tempMaxAgeFilter
-                                  } else {
-                                      self.showingAlert = true
-                                      self.tempMaxAgeFilter = self.maxAgeFilter
-                                  }
-                              }
-                    
                     Spacer()
                     
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                            .frame(height:400)
+                        AgePicker(agePickerTitle:"Min Age",
+                                  selectionFilter: $tempMinAgeFilter,
+                                  startForLoop: $minAgeBoundary,
+                                  endForLoop: $maxAgeBoundary,
+                                  geometry: geometry)
+                                  .onChange(of: self.tempMinAgeFilter) { _ in
+                                      if self.tempMinAgeFilter < self.tempMaxAgeFilter {
+                                          self.minAgeFilter =  self.tempMinAgeFilter
+                                      } else {
+                                          self.showingAlert = true
+                                          self.tempMinAgeFilter = self.minAgeFilter
+                                      }
+                                  }
                     }
+                        
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                            .frame(height:400)
+                        
+                        AgePicker(agePickerTitle:"Max Age",
+                                  selectionFilter: $tempMaxAgeFilter,
+                                  startForLoop: $minAgeBoundary,
+                                  endForLoop: $maxAgeBoundary,
+                                  geometry: geometry)
+                                  .onChange(of: self.tempMaxAgeFilter) { _ in
+                                      if self.tempMinAgeFilter < self.tempMaxAgeFilter {
+                                          self.maxAgeFilter = self.tempMaxAgeFilter
+                                      } else {
+                                          self.showingAlert = true
+                                          self.tempMaxAgeFilter = self.maxAgeFilter
+                                      }
+                                  }
+                    }
+                    
+                    
+                    Spacer()
+                }
                 .padding(.top,5)
                 
                 Spacer()
             }
+            .foregroundColor(.accentColor)
             .onAppear {
                 self.tempMinAgeFilter = minAgeFilter
                 self.tempMaxAgeFilter = maxAgeFilter
@@ -106,6 +108,7 @@ struct ShowAge: View {
                   dismissButton: .default(Text("OK"))
             )
         }
+        .navigationTitle("Age")
             
     }
 }
@@ -124,10 +127,9 @@ struct AgePicker : View {
         VStack {
             
             Text(self.agePickerTitle)
-                .foregroundColor(Color.gray)
+                .font(.headline)
             
             Text("\(self.selectionFilter)")
-                .foregroundColor(Color.gray)
             
             Picker(self.agePickerTitle, selection: $selectionFilter) {
                 ForEach(self.startForLoop ..< self.endForLoop) { age in

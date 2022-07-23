@@ -42,6 +42,9 @@ struct UserProfile: View {
     @State var showModal = false
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     var body: some View {
         
         NavigationView {
@@ -49,79 +52,9 @@ struct UserProfile: View {
             GeometryReader { geometry in
                 
                 ZStack {
-                    ScrollView{
-                        VStack(alignment:.center) {
-                            
-                            // User Data
-                            /// Image
-                            /// Where user works
-                            /// School Attended
-                            UserSnapDetails()
-                                .environmentObject(photoModel)
-                                .environmentObject(profileModel)
-                            
-                            
-                            // User Setttings View
-                            /// Settings
-                            /// Edit Profile
-                            /// Safety
-                            SettingEditProfileSafety(settingsDone:$settingsDone,
-                                                     profileEditingToBeDone:$profileEditingToBeDone)
-                                .environmentObject(photoModel)
-                                .environmentObject(profileModel)
-                                .padding(.bottom,5)
-                            
-                            // Subscription details
-                            /// SuperLike : Show count or option to buy
-                            /// Boosts: Show count or option to buy
-                            /// Messages: Show count and option to buy
-                            /// Restore: Restore Purchase
-                            SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                                showModal:$showModal,
-                                                bgColor:Color(red: 0.80, green: 1.0, blue: 1.0))
-                                .environmentObject(storeManager)
-                                
-                            // Test Firebase storage of data
-//                            Button(action: {
-//                                storeManager.testFirebaseFunc()
-//                            }) {
-//                                Text("Firebase store")
-//                            }
-                            
-                            
-                            Spacer()
-                            
-                            // Subscription Options
-                            /// User subscription amore
-                            /// Amore Platinum Information
-                            ///  Amore Gold Information
-                            ZStack {
-                                Spacer()
-                                
-                                RoundedRectangle(cornerRadius: 20)
-                                    .foregroundColor(Color(red: 0.80, green: 1.0, blue: 1.0))
-                                VStack {
-                                    MyAmore(width: 300,
-                                            popUpCardSelection:$popUpCardSelection,
-                                            showModal: $showModal)
-                                    AmorePlatinum(width:300,
-                                                  popUpCardSelection:$popUpCardSelection,
-                                                  showModal:$showModal)
-                                    AmoreGold(width:300,
-                                              popUpCardSelection:$popUpCardSelection,
-                                              showModal:$showModal)
-                                        .padding(.bottom,10)
-                                }
-                                
-                                Spacer()
-                            }
-                            
-                        }
-                        .padding(.horizontal,20)
-                        .navigationBarHidden(true)
-                    }
-                    // ScrollView
                         
+                    content
+                    
                     if showModal {
                         
                             switch popUpCardSelection {
@@ -281,9 +214,87 @@ struct UserProfile: View {
                         
                         
                 } // Zstack
+                .navigationBarTitle("Settings")
+                .navigationBarTitleDisplayMode(.inline)
                 
             } // geometry reader
         } // navigation view
+    }
+    
+    
+    var content: some View {
+        
+        ScrollView{
+            VStack(alignment:.center) {
+                
+                // User Data
+                /// Image
+                /// Where user works
+                /// School Attended
+                UserSnapDetails()
+                    .environmentObject(photoModel)
+                    .environmentObject(profileModel)
+                
+                
+                // User Setttings View
+                /// Settings
+                /// Edit Profile
+                /// Safety
+                SettingEditProfileSafety(settingsDone:$settingsDone,
+                                         profileEditingToBeDone:$profileEditingToBeDone)
+                    .environmentObject(photoModel)
+                    .environmentObject(profileModel)
+                    .padding(.bottom,5)
+                
+                // Subscription details
+                /// SuperLike : Show count or option to buy
+                /// Boosts: Show count or option to buy
+                /// Messages: Show count and option to buy
+                /// Restore: Restore Purchase
+                SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                    showModal:$showModal,
+                                    bgColor:colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                    .environmentObject(storeManager)
+                    
+                // Test Firebase storage of data
+//                            Button(action: {
+//                                storeManager.testFirebaseFunc()
+//                            }) {
+//                                Text("Firebase store")
+//                            }
+                
+                
+                Spacer()
+                
+                // Subscription Options
+                /// User subscription amore
+                /// Amore Platinum Information
+                ///  Amore Gold Information
+                ZStack {
+                    Spacer()
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                    VStack {
+                        MyAmore(width: 300,
+                                popUpCardSelection:$popUpCardSelection,
+                                showModal: $showModal)
+                        AmorePlatinum(width:300,
+                                      popUpCardSelection:$popUpCardSelection,
+                                      showModal:$showModal)
+                        AmoreGold(width:300,
+                                  popUpCardSelection:$popUpCardSelection,
+                                  showModal:$showModal)
+                            .padding(.bottom,10)
+                    }
+                    
+                    Spacer()
+                }
+                
+            }
+            .padding(.horizontal,20)
+            .navigationBarHidden(true)
+        }
     }
     
 }

@@ -11,30 +11,19 @@ import SwiftUI
 struct RadiusFilter: View {
     
     @EnvironmentObject var cardProfileModel: CardProfileModel
-    @Binding var radiusDistance: CGFloat
+    @EnvironmentObject var filterModel: FilterModel
+    
     
     var body: some View {
         
             NavigationLink(
-                destination: DistanceSlider(radiusDistance:$radiusDistance).environmentObject(cardProfileModel),
+                destination: DistanceSlider(radiusDistance:$filterModel.filterData.radiusDistance.boundCGFloat)
+                                    .environmentObject(cardProfileModel),
               label: {
-                  ZStack{
-                  CommonContainer()
-                  HStack {
-                      
-                      Text("Amore Radius")
-                          .font(.subheadline)
-                          .foregroundColor(Color.black)
-                      
-                      Spacer()
-                      
-                      Text("\(String(format: "%.0f", radiusDistance)) km")
-                  }
-                  .padding(.horizontal,20)
-              }
-          })
-        
-    }
+                      FilterCommonContainer(filterName:"Radius",
+                                            filteredValue:"Modify")
+              })
+        }
 }
 
 struct DistanceSlider: View {
@@ -44,20 +33,26 @@ struct DistanceSlider: View {
     @Binding var radiusDistance: CGFloat
     @State private var isEditing = false
     let distanceOptions:[CGFloat] = [5,20,50,100,300,500,750,1000,5000]
+    let countryCode = NSLocale.current.regionCode
     
     var body: some View {
         VStack {
            Slider(
                value: $appearance,
-               in: 1...9,
+               in: 0...8,
                step: 1,
                onEditingChanged: { editing in
-                   radiusDistance = distanceOptions[Int(appearance)-1]
+                   radiusDistance = distanceOptions[Int(appearance)]
                    cardProfileModel.filterRadius = radiusDistance
                }
-           )
-            Text("\(String(format: "Amore Radius: %.0f", radiusDistance)) km")
+           ).onAppear {
+               appearance = Float(distanceOptions.firstIndex(of: radiusDistance) ?? 4)
+           }
+            
+            Text("\(String(format: "Show profile in radius: %.0f", radiusDistance)) \(countryCode == "US" ? "Miles" : "Km")")
                 .foregroundColor(Color.gray)
+        
+        
        }
         .padding(.horizontal,40)
     }

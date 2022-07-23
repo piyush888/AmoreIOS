@@ -106,7 +106,7 @@ struct ContentView: View {
                                             storeManager.getProducts()
                                             storeManager.getPurchase()
                                             // Since it's not a write throuh cache, when user imports profile for the first time, we write that profile to backend too
-                                            storeProfileV2.writeUserProfileToBackend(userProfile:profileModel.editUserProfile)
+//                                            storeProfileV2.writeUserProfileToBackend(userProfile:profileModel.editUserProfile)
                                         }
                                 }
                                 // Else get location permission

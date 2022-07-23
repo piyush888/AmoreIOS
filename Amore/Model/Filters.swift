@@ -14,10 +14,14 @@ struct Filters: Identifiable, Codable, Hashable, Equatable {
     var genderPreference: String? = "Male"
     var minAgePreference: Int? = 21
     var maxAgePreference: Int? = 30
-    var religionPreference: [String]? = ["Any"]
-    var communityPreference: [String]? = ["Any"]
-    var careerPreference: [String]? = ["Any"]
-    var educationPreference: String? = "Masters"
-    var countryPreference: String? = "India"
+    var religionPreference: [String]? = ["All (Default)"]
+    var communityPreference: [String]? = ["All (Default)"]
+    var careerPreference: [String]? = ["All (Default)"]
+    var educationPreference: [String]? = ["All (Default)"]
+    var countryPreference: [String]? = ["All (Default)"]
+    var politicalPreference: [String]? = ["All (Default)"]
+    var smoker: [String]? = ["All (Default)"]
+    var drink: [String]? = ["All (Default)"]
+    var howAreYouFeelingToday: [String]? = ["All (Default)"]
     var radiusDistance: CGFloat? = 100
 }

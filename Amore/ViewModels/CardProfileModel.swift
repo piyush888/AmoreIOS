@@ -41,8 +41,8 @@ class CardProfileModel: ObservableObject {
         let religionPreference = filterData.religionPreference ?? ["Any"]
         let communityPreference = filterData.communityPreference ?? [""]
         let careerPreference = filterData.careerPreference ?? [""]
-        let educationPreference = filterData.educationPreference ?? ""
-        let countryPreference = filterData.countryPreference ?? ""
+        let educationPreference = filterData.educationPreference ?? [""]
+        let countryPreference = filterData.countryPreference ?? [""]
         let radiusDistance = filterData.radiusDistance ?? 100.0
         
         let body: [String: Any] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count),

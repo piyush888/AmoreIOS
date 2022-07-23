@@ -9,6 +9,13 @@ import SwiftUI
 
 struct MainMessagesView: View {
 
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
+    
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
     @EnvironmentObject var chatModel: ChatModel
@@ -27,7 +34,6 @@ struct MainMessagesView: View {
             .navigationTitle("Messages")
             .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationViewStyle(.stack)
     }
 
 }
