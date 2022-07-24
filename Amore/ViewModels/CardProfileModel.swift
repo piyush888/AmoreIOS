@@ -45,7 +45,7 @@ class CardProfileModel: ObservableObject {
         let countryPreference = filterData.countryPreference ?? [""]
         let radiusDistance = filterData.radiusDistance ?? 100.0
         
-        let body: [String: Any] = ["profilesCountLeftInDeck": String(allCardsWithPhotosDeck.count),
+        let body: [String: Any] = ["profilesAlreadyInDeck": allCardsWithPhotosDeck.map({ profile in return profile.id}),
                                       "filterData": [
                                             "genderPreference":genderPreference,
                                             "minAgePreference":minAgePreference,

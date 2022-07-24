@@ -256,13 +256,6 @@ struct UserProfile: View {
                                     bgColor:colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
                     .environmentObject(storeManager)
                     
-                // Test Firebase storage of data
-//                            Button(action: {
-//                                storeManager.testFirebaseFunc()
-//                            }) {
-//                                Text("Firebase store")
-//                            }
-                
                 
                 Spacer()
                 

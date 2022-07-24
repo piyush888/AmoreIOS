@@ -381,8 +381,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     self.editUserProfile.wasProfileUpdated = true
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
                     self.userProfile = self.editUserProfile
+                    // July 23: Below func is replicated through listeners
                     // also updating cache and backend
-                    _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.editUserProfile)
+//                    _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.editUserProfile)
                     
                 }
                 catch {
