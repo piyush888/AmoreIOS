@@ -1,0 +1,43 @@
+[
+    {
+        "selectionFormName":"Career",
+        "selectionLists": ["Media & Entertainment", "Fashion", "Arts, Entertainment and Recreation", "Education", "Healthcare",
+            "Accommodation and Food Services", "Technology", "Construction", "Real Estate", "Retail Trade", "Energy",
+             "Finance", "Information", "Mining", "Manufacturing", "Government", "Automobile", "Consumer Services", "Transportation",
+            "Law Professional"]
+    },
+    {
+        "selectionFormName":"Religion",
+        "selectionLists": ["Atheism", "Bahá'í", "Buddhism", "Christianity", "Confucianism", "Druze", "Gnosticism", "Hinduism",
+            "Islam", "Jainism", "Judaism", "Rastafarianism", "Shinto", "Sikhism", "Zoroastrianism",
+            "Traditional African Religions", "African Diaspora Religions", "Indigenous American Religion"]
+    },
+    {
+        "selectionFormName":"Political",
+        "selectionLists": ["Far Left","Left Wing","Moderate Left","Independent","Moderate Right","Right Wing","Far Right","All (Default)"]
+    },
+    {
+        "selectionFormName":"Education",
+        "selectionLists": ["Doctorate", "Masters", "Bachelors", "Associates", "Trade School", "High School", "No Education"]
+    },
+    {
+        "selectionFormName":"Raised In",
+        "selectionLists": ["India", "United States", "Canada", "China", "Japan", "Germany", "United Kingdom", "France",
+            "Brazil", "Itlay", "Russia", "South Korea", "Australia","Spain","Mexico","Indonesia","Turkey","Netherlands",
+            "Saudi Arabia","Switzerland","Argentina","Sweden","Poland","Belgium","Thailand","Iran","Austria","Norway",
+            "United Arab Emirates","Nigeria", "Israel","Asia","Europe","North America","South America"]
+    },
+    {
+        "selectionFormName":"Smoking",
+        "selectionLists": ["Socially","Sometimes","Never"]
+    },
+    {
+        "selectionFormName":"Drinks",
+        "selectionLists": ["Socially","Sometimes","Never"]
+    },
+    {
+        "selectionFormName":"Workout",
+        "selectionLists": ["Everyday","Sometimes","Never"]
+    }
+    
+]

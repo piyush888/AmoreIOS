@@ -46,7 +46,7 @@ struct FilterSettings: View {
                                  "Israel","Asia","Europe","North America","South America","All (Default)"]
 
     var politicalPreferenceList = ["Far Left","Left Wing","Moderate Left","Independent","Moderate Right","Right Wing","Far Right","All (Default)"]
-    var smokerPreferenceList = ["Smoker","Non Smoker","All (Default)"]
+    var smokerPreferenceList = ["Socially","Sometimes","Never","All (Default)"]
     var drinkPreferenceList = ["Socially","Sometimes","Never","All (Default)"]
     
     var countries: [String] = []

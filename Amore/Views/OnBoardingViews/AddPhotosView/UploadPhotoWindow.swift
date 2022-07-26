@@ -26,6 +26,9 @@ struct UploadPhotoWindow: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     func imageCropped(image: UIImage){
         self.photoStruct.image = image
         self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
@@ -141,7 +144,7 @@ struct UploadPhotoWindow: View {
             } else {
                 Image(uiImage: UIImage())
                     .frame(width: 115, height: 170, alignment: .center)
-                    .background(Color.pink.opacity(0.2))
+                    .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
                     .cornerRadius(10.0)
                     .clipped()
             }

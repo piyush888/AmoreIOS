@@ -252,8 +252,7 @@ struct UserProfile: View {
                 /// Messages: Show count and option to buy
                 /// Restore: Restore Purchase
                 SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                    showModal:$showModal,
-                                    bgColor:colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                                    showModal:$showModal)
                     .environmentObject(storeManager)
                     
                 

@@ -36,7 +36,6 @@ struct FilterCommonContainer: View {
                                        endPoint: .top))
         )
         .foregroundColor(Color.white)
-        
     }
     
 }

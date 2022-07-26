@@ -64,8 +64,7 @@ struct MyAmoreCard: View {
                 if subscriptionTypeId.contains("Platinum") || subscriptionTypeId.contains("Gold") {
                     
                     SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                        showModal:$showModal,
-                                        bgColor:Color.clear)
+                                        showModal:$showModal)
                         .frame(width: UIScreen.main.bounds.width-50, height:90)
                         .padding(.horizontal,30)
                     

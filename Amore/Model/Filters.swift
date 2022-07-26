@@ -25,3 +25,37 @@ struct Filters: Identifiable, Codable, Hashable, Equatable {
     var howAreYouFeelingToday: [String]? = ["All (Default)"]
     var radiusDistance: CGFloat? = 100
 }
+
+
+struct FilterType: Codable, Identifiable {
+    
+    enum CodingKeys: CodingKey {
+        case selectionFormName
+        case selectionLists
+    }
+    
+    var id = UUID()
+    var selectionFormName: String
+    var selectionLists: [String]
+}
+
+class LoadEditProfileFormData: ObservableObject  {
+    @Published var editCardFormData = [FilterType]()
+    
+    init(){
+        loadData()
+    }
+    
+    func loadData()  {
+        guard let url = Bundle.main.url(forResource: "EditCardFormData", withExtension: "json")
+            else {
+                print("Json file not found")
+                return
+            }
+        
+        let data = try? Data(contentsOf: url)
+        let editCardFormData = try? JSONDecoder().decode([FilterType].self, from: data!)
+        self.editCardFormData = editCardFormData!
+    }
+     
+}

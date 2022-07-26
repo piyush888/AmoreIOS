@@ -75,8 +75,7 @@ struct PaymentComplete: View {
                 }
                 
                 SubscriptionDetails(popUpCardSelection:Binding.constant(PopUpCards.myAmorecards),
-                                    showModal:Binding.constant(false),
-                                    bgColor:Color.clear)
+                                    showModal:Binding.constant(false))
                     .frame(width: UIScreen.main.bounds.width-50, height:90)
                     .padding(.horizontal,30)
                 

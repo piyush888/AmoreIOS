@@ -14,7 +14,7 @@ struct EditProfile: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @Binding var profileEditingToBeDone: Bool
     @State var currentPage: EditOrPreviewProfile = .editProfile
-    @State var headingName = "Edit Info"
+    @State var selectedTab = "Edit Info"
     @State private var showSheetView = false
     
     var body: some View {
@@ -22,6 +22,7 @@ struct EditProfile: View {
         GeometryReader { geometry in
             VStack {
                 
+                // Done Button
                 HStack {
                     
                     Button {
@@ -49,42 +50,45 @@ struct EditProfile: View {
                 }.padding(.horizontal,20)
                
                 
-                
+                // Tab Buttons
                 HStack {
                     Spacer()
-                    
-                    EditProfileButtons(buttonName:"Edit Info")
+
+                    EditProfileButtons(buttonName:"Edit Info",
+                                       selectedTab:$selectedTab)
                     .onTapGesture {
                         currentPage = .editProfile
-                        headingName = "Edit Info"
+                        selectedTab = "Edit Info"
                     }
                     .padding(.horizontal,20)
-                    
+
                     Spacer()
-                    
-                    EditProfileButtons(buttonName:"Preview Profile")
+
+                    EditProfileButtons(buttonName:"Preview Profile",
+                                       selectedTab:$selectedTab)
                     .onTapGesture {
                         currentPage = .previewProfile
-                        headingName = "Preview Profile"
+                        selectedTab = "Preview Profile"
                     }
                     .padding(.horizontal,20)
-                    
+
                     Spacer()
                 }
-                
+
+                // Tab Views
                 switch currentPage {
-                    
+
                     case .editProfile:
                         EditCardInfo()
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
-                        
+
                     case .previewProfile:
                         PreviewProfile()
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
                 }
-                
+
                 Spacer()
             }
             .padding(.top)
@@ -98,20 +102,23 @@ struct EditProfile: View {
 
 struct EditProfileButtons: View {
     @Environment(\.colorScheme) var colorScheme
+    @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var buttonName: String
+    @Binding var selectedTab: String
     
     var body: some View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 15)
-                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                .frame(height:45)
+                .foregroundColor(selectedTab == buttonName ? Color.blue : (colorScheme == .dark ? Color(hex: 0x24244A) : Color(hex: 0xe8f4f8)))
+                .frame(height:40)
                 
             Text(buttonName)
                 .font(.subheadline)
                 .padding(.horizontal,20)
+                .foregroundColor(selectedTab == buttonName ? Color.white : .accentColor)
         }
-        .foregroundColor(.accentColor)
+        
         
     }
         
