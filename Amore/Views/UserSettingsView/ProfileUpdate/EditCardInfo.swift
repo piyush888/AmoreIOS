@@ -16,26 +16,47 @@ struct EditCardInfo: View {
                                     GridItem(.adaptive(minimum: 150),spacing: 5,
                                              alignment: .center),count: 3)
     
-    @StateObject var formDataObj = LoadEditProfileFormData()
+    var formDataObj = LoadEditProfileFormData()
     
-    func returnFilterBinding(formName:String) -> Binding<String?> {
+    // About You Variables
+    @Binding var careerField: String?
+    @Binding var religion: String?
+    @Binding var politics: String?
+    @Binding var education: String?
+    @Binding var countryRaisedIn: String?
+    @Binding var doYouSmoke: String?
+    @Binding var doYouDrink: String?
+    @Binding var doYouWorkOut: String?
+    @Binding var formUpdated: Bool
+    
+    
+    func aboutYouVariablesBinding(formName:String) -> Binding<String> {
         switch formName {
             
             case "Career":
-                return $profileModel.editUserProfile.careerField
+                return $careerField.bound
             
             case "Religion":
-                return $profileModel.editUserProfile.religion
+                return $religion.bound
             
             case "Political":
-                return $profileModel.editUserProfile.politics
+                return $politics.bound
             
             case "Education":
-                return $profileModel.editUserProfile.education
+                return $education.bound
             
             case "Raised In":
-                return $profileModel.editUserProfile.countryRaisedIn
-        
+                return $countryRaisedIn.bound
+            
+            case "Smoking":
+                return $doYouSmoke.bound
+            
+            case "Drinks":
+                return $doYouDrink.bound
+            
+            case "Workout":
+                return $doYouWorkOut.bound
+
             default:
                 return Binding.constant("")
         }
@@ -43,7 +64,6 @@ struct EditCardInfo: View {
     
     var body: some View {
         
-//        ScrollView(.vertical, showsIndicators: false, content: {
             Form {
                 
                 // Photos only
@@ -96,21 +116,19 @@ struct EditCardInfo: View {
                                 formHeadLine: "Add School",
                                 formInput: $profileModel.editUserProfile.school)
             
-                
-                ForEach(0..<formDataObj.editCardFormData.count) { index in
+                // Please update this About You List every time a field is added or removed
+                /// Career, Religion, Political, Education,Raised In, Smoking, Drinks, Workout
+                Section(header: Text("About you")) {
+                    ForEach(0..<formDataObj.editCardFormData.count) { index in
+                        SelectionForm(selection:self.aboutYouVariablesBinding(formName: formDataObj.editCardFormData[index].selectionFormName),
+                                      formName: formDataObj.editCardFormData[index].selectionFormName,
+                                      selectionsList: formDataObj.editCardFormData[index].selectionLists,
+                                      formUpdated:$formUpdated)
+                                    .environmentObject(profileModel)
+                    }
+                }
                     
-                    SelectionForm(selection: returnFilterBinding(formName: formDataObj.editCardFormData[index].selectionFormName),
-                                  formName: formDataObj.editCardFormData[index].selectionFormName,
-                                  selectionsList: formDataObj.editCardFormData[index].selectionLists)
-                }
-                
-                Section(header: Text("Basic Info")) {
-                    UserProfileBasicInfo(genderPreference: $profileModel.editUserProfile.genderIdentity,
-                                         religionPreference: $profileModel.editUserProfile.religion,
-                                         communityPreference: $profileModel.editUserProfile.community,
-                                         careerPreference: $profileModel.editUserProfile.careerField,
-                                         countryRaisedIn: $profileModel.editUserProfile.countryRaisedIn)
-                }
+
                 
                 
                 // Discoverty and Notifications
@@ -151,14 +169,23 @@ struct EditCardInfo: View {
                 }
                 
             }
-//        })
+
     }
 }
 
 struct EditCardInfo_Previews: PreviewProvider {
     static var previews: some View {
-        EditCardInfo()
+        EditCardInfo(careerField:Binding.constant("Fashion"),
+                     religion:Binding.constant("Atheism"),
+                     politics:Binding.constant("Far Left"),
+                     education:Binding.constant("High School"),
+                     countryRaisedIn:Binding.constant("India"),
+                     doYouSmoke:Binding.constant("Socially"),
+                     doYouDrink:Binding.constant("Socially"),
+                     doYouWorkOut:Binding.constant("Socially"),
+                     formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
+    
     }
 }

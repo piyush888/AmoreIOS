@@ -11,8 +11,9 @@ struct SettingEditProfileSafety: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
-    
+    // Close the settings tab
     @Binding var settingsDone: Bool
+    // Close the Editing Tab
     @Binding var profileEditingToBeDone: Bool
     
     var body: some View {
@@ -20,7 +21,7 @@ struct SettingEditProfileSafety: View {
         HStack(spacing:50) {
             
             NavigationLink(isActive: $settingsDone) {
-                return UserSettingView(settingsDone: $settingsDone)
+                UserSettingView(settingsDone: $settingsDone)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
             } label: {
@@ -41,7 +42,15 @@ struct SettingEditProfileSafety: View {
             }
             
             NavigationLink(isActive: $profileEditingToBeDone) {
-                return EditProfile(profileEditingToBeDone: $profileEditingToBeDone)
+                EditProfile(profileEditingToBeDone: $profileEditingToBeDone,
+                                   careerField:profileModel.editUserProfile.careerField,
+                                   religion:profileModel.editUserProfile.religion,
+                                   politics:profileModel.editUserProfile.politics,
+                                   education:profileModel.editUserProfile.education,
+                                   countryRaisedIn:profileModel.editUserProfile.countryRaisedIn,
+                                   doYouSmoke:profileModel.editUserProfile.doYouSmoke,
+                                   doYouDrink:profileModel.editUserProfile.doYouDrink,
+                                   doYouWorkOut:profileModel.editUserProfile.doYouWorkOut)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
             } label: {

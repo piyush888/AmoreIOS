@@ -9,18 +9,21 @@ import SwiftUI
 
 struct SelectionForm: View {
     
-    @Binding var selection: String?
+    @Binding var selection: String
     @State var formName: String
     @State var selectionsList: [String]
+    @Binding var formUpdated: Bool
     
     var body: some View {
         
-        Section(header: Text(formName)) {
-            Picker("Choose \(formName)", selection: $selection) {
-                    ForEach(selectionsList, id: \.self) {
-                        Text($0)
-                    }
+        Picker("\(formName)", selection: $selection) {
+                ForEach(selectionsList, id: \.self) {
+                    Text($0).tag($0)
                 }
+            }
+            .onChange(of: selection) { _ in
+                print("Tag Value selected: \(selection) for \(formName)")
+                self.formUpdated = true
             }
     }
 }
@@ -30,7 +33,8 @@ struct SelectionForm_Previews: PreviewProvider {
         Form {
             SelectionForm(selection:Binding.constant("Red"),
                           formName:"Test",
-                          selectionsList:["Red","Yellow","Blue"])
+                          selectionsList:["Red","Yellow","Blue"],
+                          formUpdated:Binding.constant(false))
         }
     }
 }

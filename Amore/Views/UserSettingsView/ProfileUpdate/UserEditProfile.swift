@@ -17,69 +17,80 @@ struct EditProfile: View {
     @State var selectedTab = "Edit Info"
     @State private var showSheetView = false
     
+    @State var careerField: String?
+    @State var religion: String?
+    @State var politics: String?
+    @State var education: String?
+    @State var countryRaisedIn: String?
+    @State var doYouSmoke: String?
+    @State var doYouDrink: String?
+    @State var doYouWorkOut: String?
+    @State var formUpdated: Bool = false
+    
+    
+    func isAboutYouUpdated() {
+        // If form was updated we need to copy the State values to the Profile Model fields
+        /// Problem: Not sure which attribute was changed
+        if(formUpdated) {
+            print("Form was updated")
+            // TODO - How to find out which profileModel field was updated?
+            /// To Save time I'm currently initalizing all the profile model variables again
+            profileModel.editUserProfile.careerField = careerField
+            profileModel.editUserProfile.religion = religion
+            profileModel.editUserProfile.politics = politics
+            profileModel.editUserProfile.education = education
+            profileModel.editUserProfile.countryRaisedIn = countryRaisedIn
+            profileModel.editUserProfile.doYouSmoke = doYouSmoke
+            profileModel.editUserProfile.doYouDrink = doYouDrink
+            profileModel.editUserProfile.doYouWorkOut = doYouWorkOut
+        } else {
+            print("Edit Profile was closed without updating profile")
+        }
+        
+        // profileModel was updated
+        self.formUpdated = false
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
             VStack {
                 
-                // Done Button
+                // Done Button to close the editing view
                 HStack {
-                    
-                    Button {
-                        self.showSheetView.toggle()
-                    } label: {
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.purple, Color.blue]),
-                            startPoint: .leading,
-                            endPoint: .trailing)
-                            .frame(width:30, height:35)
-                            .mask(Image(systemName: "bonjour")
-                                    .imageScale(.large))
-                            .padding(.bottom,20)
-                    }
-                    
                     Spacer()
                     
                     Button(action: {
-                        // Take Back to Profile View
+                        // Check if the user change the About You Prefernces
+                        /// If true update the profileModel with new data
+                        self.isAboutYouUpdated()
+                        // Update the firestore with  new user data
                         profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                        // Close the Editing Tab
                         profileEditingToBeDone = false
                     }) {
                         Text("Done")
                     }
                 }.padding(.horizontal,20)
                
+                // get the tab buttons here
+                // Edit Info
+                // Preview Profile
+                tabButtons
                 
-                // Tab Buttons
-                HStack {
-                    Spacer()
-
-                    EditProfileButtons(buttonName:"Edit Info",
-                                       selectedTab:$selectedTab)
-                    .onTapGesture {
-                        currentPage = .editProfile
-                        selectedTab = "Edit Info"
-                    }
-                    .padding(.horizontal,20)
-
-                    Spacer()
-
-                    EditProfileButtons(buttonName:"Preview Profile",
-                                       selectedTab:$selectedTab)
-                    .onTapGesture {
-                        currentPage = .previewProfile
-                        selectedTab = "Preview Profile"
-                    }
-                    .padding(.horizontal,20)
-
-                    Spacer()
-                }
-
                 // Tab Views
                 switch currentPage {
 
                     case .editProfile:
-                        EditCardInfo()
+                        EditCardInfo(careerField:$careerField,
+                                     religion:$religion,
+                                     politics:$politics,
+                                     education:$education,
+                                     countryRaisedIn:$countryRaisedIn,
+                                     doYouSmoke:$doYouSmoke,
+                                     doYouDrink:$doYouDrink,
+                                     doYouWorkOut:$doYouWorkOut,
+                                     formUpdated:$formUpdated)
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
 
@@ -97,6 +108,34 @@ struct EditProfile: View {
                 MoreInfoForBetterMatch(showSheetView:$showSheetView)
             }
         }
+    }
+    
+    var tabButtons: some View {
+        // Tab Buttons
+        HStack {
+            Spacer()
+
+            EditProfileButtons(buttonName:"Edit Info",
+                               selectedTab:$selectedTab)
+            .onTapGesture {
+                currentPage = .editProfile
+                selectedTab = "Edit Info"
+            }
+            .padding(.horizontal,20)
+
+            Spacer()
+
+            EditProfileButtons(buttonName:"Preview Profile",
+                               selectedTab:$selectedTab)
+            .onTapGesture {
+                currentPage = .previewProfile
+                selectedTab = "Preview Profile"
+            }
+            .padding(.horizontal,20)
+
+            Spacer()
+        }
+
     }
 }
 

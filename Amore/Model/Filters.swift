@@ -39,8 +39,8 @@ struct FilterType: Codable, Identifiable {
     var selectionLists: [String]
 }
 
-class LoadEditProfileFormData: ObservableObject  {
-    @Published var editCardFormData = [FilterType]()
+class LoadEditProfileFormData  {
+    var editCardFormData = [FilterType]()
     
     init(){
         loadData()

@@ -27,7 +27,6 @@
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
 		1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */; };
-		1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */; };
 		1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73E272A95840009683A /* OptionalExtension.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
 		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
@@ -82,7 +81,6 @@
 		E2347134271DC4C30006F336 /* CardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347133271DC4C30006F336 /* CardDetail.swift */; };
 		E2347136271DC4E50006F336 /* MiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347135271DC4E50006F336 /* MiniCardView.swift */; };
 		E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347139271DC5640006F336 /* TopPicksProfiles.swift */; };
-		E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234713F271F4B5D0006F336 /* CommonContainer.swift */; };
 		E237CED926FD391D004F20AB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237CED826FD391D004F20AB /* SignUp.swift */; };
 		E23BAA962741BB7B00F619D6 /* NameAgeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */; };
 		E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = E23BAA982741D8A700F619D6 /* WrappingStack */; };
@@ -217,7 +215,6 @@
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageCardView.swift; sourceTree = "<group>"; };
-		1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBasicInfo.swift; sourceTree = "<group>"; };
 		1B96B73E272A95840009683A /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -274,7 +271,6 @@
 		E2347133271DC4C30006F336 /* CardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetail.swift; sourceTree = "<group>"; };
 		E2347135271DC4E50006F336 /* MiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniCardView.swift; sourceTree = "<group>"; };
 		E2347139271DC5640006F336 /* TopPicksProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksProfiles.swift; sourceTree = "<group>"; };
-		E234713F271F4B5D0006F336 /* CommonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContainer.swift; sourceTree = "<group>"; };
 		E237CED826FD391D004F20AB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAgeDistance.swift; sourceTree = "<group>"; };
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
@@ -437,7 +433,6 @@
 			isa = PBXGroup;
 			children = (
 				E221EAB22715066000769234 /* FilterSettings.swift */,
-				E234713F271F4B5D0006F336 /* CommonContainer.swift */,
 				E2D0F00F27738C51003EDA83 /* AgeSettings.swift */,
 				E2530F59277CB0760040CAB2 /* RadiusFilter.swift */,
 				E2723F7F2882285100C0E3B1 /* FilterCommonContainer.swift */,
@@ -680,7 +675,6 @@
 				E29B2940272637B400C38035 /* EditCardInfo.swift */,
 				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
 				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
-				1B96B73C272A850D0009683A /* UserProfileBasicInfo.swift */,
 			);
 			path = ProfileUpdate;
 			sourceTree = "<group>";
@@ -1062,12 +1056,10 @@
 				E2925E822883460A006FDAF6 /* SelectSingleItem.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
-				1B96B73D272A850D0009683A /* UserProfileBasicInfo.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
 				1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */,
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E25B0F3C285FB14800411BDA /* BoostUserProfile.swift in Sources */,
-				E2347140271F4B5E0006F336 /* CommonContainer.swift in Sources */,
 				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,
 				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E2BE415C283AA7AC00AD42CE /* ProfileViewModelFlask.swift in Sources */,
