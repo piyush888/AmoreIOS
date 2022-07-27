@@ -1,3 +1,4 @@
+
 [
     {
         "selectionFormName":"Career",
@@ -14,11 +15,7 @@
     },
     {
         "selectionFormName":"Political",
-        "selectionLists": ["Far Left","Left Wing","Moderate Left","Independent","Moderate Right","Right Wing","Far Right","All (Default)"]
-    },
-    {
-        "selectionFormName":"Education",
-        "selectionLists": ["Doctorate", "Masters", "Bachelors", "Associates", "Trade School", "High School", "No Education"]
+        "selectionLists": ["Far Left","Left Wing","Moderate Left","Independent","Moderate Right","Right Wing","Far Right"]
     },
     {
         "selectionFormName":"Raised In",

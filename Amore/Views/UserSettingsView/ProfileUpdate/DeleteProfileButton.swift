@@ -14,18 +14,13 @@ struct DeleteProfileButton: View {
         Button{
             // TODO
         } label : {
-            ZStack{
-                Rectangle()
-                    .frame(height:45)
-                    .cornerRadius(5.0)
-                    .foregroundColor(.pink)
-                
+            HStack {
+                Image(systemName: "trash.fill")
                 Text("Delete Account")
-                    .foregroundColor(.white)
-                    .bold()
-                    .font(.BoardingButton)
             }
-        }.padding(.bottom, 10)
+            .foregroundColor(.pink)
+        }
+        .padding(.bottom, 10)
         
     }
 }

@@ -12,20 +12,13 @@ struct ContactSupport: View {
     var body: some View {
         
         Button{
-            // TODO
+            // TODO - Get the official email address and pop a email to the support team
         } label : {
-            ZStack{
-                RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(Color.pink, lineWidth: 1)
-                    .frame(height:45)
-                    
+            HStack {
+                Image(systemName: "envelope.fill")
                 Text("Conact Support")
-                    .foregroundColor(.pink)
-                    .bold()
-                    .font(.BoardingButton)
             }
-        }.padding(.bottom, 10)
-        
+        }
     }
 }
 

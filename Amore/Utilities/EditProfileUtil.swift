@@ -31,10 +31,22 @@ struct EditCardForm: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        Section(header: Text(formHeadLine)) {
+            
+        ZStack {
+            if self.formInput.bound.isEmpty {
+                TextEditor(text:$formHeadLine)
+                        .frame(height: formHeight)
+                        .foregroundColor(.gray)
+                        .disabled(true)
+            }
             TextEditor(text: $formInput.bound)
                 .frame(height: formHeight)
+                .opacity(self.formInput.bound.isEmpty ? 0.25 : 1)
+                
         }
+        
+//            TextEditor(text: $formInput.bound)
+//                .frame(height: formHeight)
     }
 }
 

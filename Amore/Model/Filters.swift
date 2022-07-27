@@ -47,6 +47,7 @@ class LoadEditProfileFormData  {
     }
     
     func loadData()  {
+        // DO NOT CHANGE THE SEQUENCE/FORMATTING OF THE JSON FILE. ADD NEW FEATURES IN SEQUENECE
         guard let url = Bundle.main.url(forResource: "EditCardFormData", withExtension: "json")
             else {
                 print("Json file not found")

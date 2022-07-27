@@ -85,37 +85,51 @@ struct EditCardInfo: View {
                     .padding(.vertical,10)
                 }
                 
-                
                 // Edit Headline
-                EditCardForm(formHeight: 40.0,
-                                formHeadLine: "Headline",
-                                formInput: $profileModel.editUserProfile.headline)
+                Section(header: Text("Headline")) {
+                    EditCardForm(formHeight: 40.0,
+                                    formHeadLine: "Headline",
+                                    formInput: $profileModel.editUserProfile.headline)
+                }
                 
                 // Edit About Me
-                EditCardForm(formHeight: 100.0,
-                                formHeadLine: "About Me",
-                                formInput: $profileModel.editUserProfile.description)
+                Section(header: Text("About Me")) {
+                    EditCardForm(formHeight: 100.0,
+                                    formHeadLine: "About Me",
+                                    formInput: $profileModel.editUserProfile.description)
+                }
                 
                 // Job title
-                EditCardForm(formHeight: 40.0,
-                                formHeadLine: "Job Title",
-                                formInput: $profileModel.editUserProfile.jobTitle)
+                Section(header: Text("Work")) {
+                    EditCardForm(formHeight: 40.0,
+                                    formHeadLine: "Job Title",
+                                    formInput: $profileModel.editUserProfile.jobTitle)
+                    
+                    // Add Company
+                    EditCardForm(formHeight: 40.0,
+                                    formHeadLine: "Company Name",
+                                    formInput: $profileModel.editUserProfile.work)
+                }
                 
-                // Add Company
-                EditCardForm(formHeight: 40.0,
-                                formHeadLine: "Add Company",
-                                formInput: $profileModel.editUserProfile.work)
+                Section(header: Text("Education")) {
+//                    // Add Education
+//                    EditCardForm(formHeight: 40.0,
+//                                    formHeadLine: "Highest Education",
+//                                    formInput: $profileModel.editUserProfile.education)
+//
+                    // 3 corresponds to Education field
+                    SelectionForm(selection:$education.bound,
+                                  formName: "Education",
+                                  selectionsList: ["Doctorate", "Masters", "Bachelors", "Associates", "Trade School", "High School", "No Education"],
+                                  formUpdated:$formUpdated)
+                                .environmentObject(profileModel)
+                    
+                    // Add School
+                    EditCardForm(formHeight: 40.0,
+                                    formHeadLine: "School Name",
+                                    formInput: $profileModel.editUserProfile.school)
+                }
                 
-                // Add Education
-                EditCardForm(formHeight: 40.0,
-                                formHeadLine: "Add Education",
-                                formInput: $profileModel.editUserProfile.education)
-                
-                // Add School
-                EditCardForm(formHeight: 40.0,
-                                formHeadLine: "Add School",
-                                formInput: $profileModel.editUserProfile.school)
-            
                 // Please update this About You List every time a field is added or removed
                 /// Career, Religion, Political, Education,Raised In, Smoking, Drinks, Workout
                 Section(header: Text("About you")) {
@@ -129,16 +143,16 @@ struct EditCardInfo: View {
                 }
                     
 
-                
+                // Height
+                // Passion or Interests
                 
                 // Discoverty and Notifications
-                Group {
+                Section(header: Text("Card Settings")) {
                     // Discovery
                     VStack(alignment: .leading) {
                         Toggle(isOn: $profileModel.editUserProfile.discoveryStatus.boundBool) {
-                            Text("Discovery")
-                                .font(.subheadline)
                             Image(systemName: "magnifyingglass")
+                            Text("Discovery")
                         }
                         Text("Found someone? Take a break, hide your card. You can still chat with your matches")
                             .font(.caption2)
@@ -148,24 +162,22 @@ struct EditCardInfo: View {
                     // Notifications
                     VStack(alignment: .leading) {
                         Toggle(isOn: $profileModel.editUserProfile.notificationsStatus.boundBool) {
-                            Text("Notifications")
-                                .font(.subheadline)
                             Image(systemName: "bell.fill")
+                            Text("Notifications")
                         }
                         Text("Want to be notified when you find a match, turn on that notification?")
                             .font(.caption2)
                     }.padding([.top,.bottom],10)
                 
+                }
+                
+                
+                Section(header: Text("Others")) {
+                    // Contact Support
+                    ContactSupport()
                     
-                    // Contact Support or Delete Acccount
-                    Group {
-                        // Contact Support
-                        ContactSupport()
-                        
-                        // Delete Profile
-                        DeleteProfileButton()
-                    }
-                    .padding(.top,40)
+                    // Delete Profile
+                    DeleteProfileButton()
                 }
                 
             }

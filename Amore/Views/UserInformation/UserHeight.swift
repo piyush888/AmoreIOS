@@ -30,25 +30,25 @@ struct UserHeight: View {
             Slider(
                    value: $userHeight,
                    // In cm convert to feet for display
-                   // 4 ft = 121.92
-                   // 7 ft = 213.36
-                   in: 121.92...213.36,
+                   // 4 ft = 120
+                   // 7 ft = 220
+                   in: 120...220,
                    // 1 inch = 2.54 cm
                    // 1 feet = 30.48 cm
-                   step: 2.54
+                   step: 1
                ) {
                    Text("Speed")
                        .font(.title)
                } minimumValueLabel: {
-                   Text("4 ft")
+                   Text("120 cm")
                } maximumValueLabel: {
-                   Text("7 ft")
+                   Text("220 cm")
                } onEditingChanged: { editing in
                    isEditing = editing
                }
                .padding(.horizontal,50)
                 
-            Text(String(format: "%.1f",userHeight/30.48) + " feet")
+            Text(String(format: "%.1f",userHeight) + " cm")
             
             Spacer()
             
