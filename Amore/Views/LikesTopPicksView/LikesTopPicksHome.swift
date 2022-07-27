@@ -28,7 +28,7 @@ struct LikesTopPicksHome: View {
             ZStack{
                 
                 VStack{
-                    
+                    // Tabs: Likes Received, Likes Given, Elites
                     HStack(spacing: 0){
                         Spacer()
                         
@@ -48,7 +48,7 @@ struct LikesTopPicksHome: View {
                     .padding()
                     .padding(.top,5)
                     
-                    
+                    // Views to be displayed for each of the above tab selected
                     switch selectedTab {
                         
                         case .likesReceived:
@@ -80,7 +80,6 @@ struct LikesTopPicksHome: View {
                                   iconColor:Color("gold-star"),
                                   verticalView:false,
                                   geometry:geometry)
-                                .padding(.horizontal,10)
                                 .environmentObject(receivedGivenEliteModel)
                                 
                             // Likes Given Vertical Scroll
@@ -121,6 +120,7 @@ struct LikesTopPicksHome: View {
                 }
                 .opacity(show ? 0 : 1)
                 
+                // Button functionalities for each of the above views
                 if show{
                     if let selectedItemVar = selectedItem {
                         ZStack {

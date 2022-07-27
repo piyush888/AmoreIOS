@@ -56,6 +56,7 @@ class FirestoreServices {
                                 DispatchQueue.main.async {
                                     print("Stored Successfully")
                                     self.requestInProcessing = false
+                                    onSuccess()
                                     return
                                 }
                             }
@@ -168,6 +169,7 @@ class FirestoreServices {
                                 DispatchQueue.main.async {
                                     print("Rewind Operation Successful")
                                     self.requestInProcessing = false
+                                    onSuccess()
                                     return
                                 }
                             }

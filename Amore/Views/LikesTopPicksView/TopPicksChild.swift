@@ -40,7 +40,7 @@ struct TopPicksChild: View {
         }
         else {
             VStack {
-                
+                // Header for the section
                 HStack {
                     Text(viewHeadText)
                         .foregroundColor(Color.gray)
@@ -100,7 +100,9 @@ struct TopPicksChild: View {
                              
                              }
                     }
+                    .padding(.horizontal)
                 }
+                    .frame(height: geometry.size.height/4.5)
                 }
                 
             }

@@ -21,7 +21,7 @@ struct LikeDislikeSuperLike: View {
     var body: some View {
         
         HStack {
-            
+            // Rewind Button
             Button {
                 if cardProfileModel.lastSwipedCard != nil && cardProfileModel.lastSwipeInfo != nil {
                     cardProfileModel.allCardsWithPhotosDeck.append(cardProfileModel.lastSwipedCard!)
@@ -40,6 +40,7 @@ struct LikeDislikeSuperLike: View {
 
             Spacer()
             
+            // Dislike Button
             Button {
                 if cardSwipeDone {
                     buttonSwipeStatus = AllCardsView.LikeDislike.dislike
@@ -58,6 +59,7 @@ struct LikeDislikeSuperLike: View {
             
             Spacer()
             
+            // Superlike Button
             Button {
                 if cardSwipeDone {
                     buttonSwipeStatus = AllCardsView.LikeDislike.superlike
@@ -74,6 +76,7 @@ struct LikeDislikeSuperLike: View {
 
             Spacer()
             
+            // Like Button
             Button {
                 if cardSwipeDone {
                     buttonSwipeStatus = AllCardsView.LikeDislike.like
@@ -92,6 +95,7 @@ struct LikeDislikeSuperLike: View {
             
             Spacer()
             
+            // DM Button
             Button {
                 allcardsActiveSheet = .directMessageSheet
             } label: {
