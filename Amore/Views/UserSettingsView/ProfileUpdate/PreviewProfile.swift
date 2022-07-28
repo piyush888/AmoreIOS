@@ -13,6 +13,7 @@ struct PreviewProfile: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         GeometryReader { geometry in
@@ -147,29 +148,13 @@ struct PreviewProfile: View {
                         
                         }
                         .padding([.bottom],40)
-                        
-                            
-                        // Report the profile
-//                        HStack {
-//                            Spacer()
-//                            Button {
-//                                // TODO - Report a Person
-//                            } label : {
-//                                Text("Report \(profileModel.editUserProfile.firstName.bound)")
-//                                    .foregroundColor(.gray)
-//                            }
-//                            Spacer()
-//                        }
-//                        .padding([.top,.bottom],30)
                     }
                 }
                 .padding(.horizontal,10)
-                .background(Color.white)
-
+                .background(colorScheme == .dark ? Color.black: Color.white)
+                .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
             }
             .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 0.1))
         }
     }
 }

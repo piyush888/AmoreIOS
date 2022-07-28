@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIFontIcon
 import CoreLocation
 
-
+// Changes made in Child Card View have to be also reflected in the Preview Profile
 struct ChildCardView: View {
     
     @Binding var singleProfile: CardProfileWithPhotos
@@ -49,6 +49,7 @@ struct ChildCardView: View {
                                                 if singleProfile.location != nil {
                                                     let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
                                                                                      longitude: singleProfile.location!.longitude.boundDouble)
+                                                    // Calculates distance between user and profile
                                                     if profileModel.lastSeenLocation != nil {
                                                         self.singleProfile.profileDistanceFromUser = profileModel.lastSeenLocation!.distance(from: profileLocation) / 1000
                                                     }
@@ -199,11 +200,8 @@ struct ChildCardView: View {
                 .padding(.horizontal,10)
                 .background(colorScheme == .dark ? Color.black: Color.white)
                 .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
-                
             }
             .cornerRadius(10)
-//            .overlay(RoundedRectangle(cornerRadius: 10)
-//                        .stroke(Color.white, lineWidth: 0.1))
         }
         
     }

@@ -15,7 +15,6 @@ struct EditProfile: View {
     @Binding var profileEditingToBeDone: Bool
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var selectedTab = "Edit Info"
-    @State private var showSheetView = false
     
     @State var careerField: String?
     @State var religion: String?
@@ -104,9 +103,6 @@ struct EditProfile: View {
             }
             .padding(.top)
             .navigationBarHidden(true)
-            .sheet(isPresented: $showSheetView) {
-                MoreInfoForBetterMatch(showSheetView:$showSheetView)
-            }
         }
     }
     

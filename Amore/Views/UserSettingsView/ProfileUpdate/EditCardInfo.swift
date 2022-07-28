@@ -28,6 +28,8 @@ struct EditCardInfo: View {
     @Binding var doYouDrink: String?
     @Binding var doYouWorkOut: String?
     @Binding var formUpdated: Bool
+    // User Height
+    @State var height: Double = 0.0
     
     
     func aboutYouVariablesBinding(formName:String) -> Binding<String> {
@@ -128,6 +130,11 @@ struct EditCardInfo: View {
                     EditCardForm(formHeight: 40.0,
                                     formHeadLine: "School Name",
                                     formInput: $profileModel.editUserProfile.school)
+                }
+                
+                // User Height
+                Section(header: Text("Your Height")) {
+                    UserHeight(height: $profileModel.editUserProfile.height.boundDouble)
                 }
                 
                 // Please update this About You List every time a field is added or removed
