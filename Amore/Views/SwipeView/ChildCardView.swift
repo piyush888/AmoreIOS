@@ -62,6 +62,7 @@ struct ChildCardView: View {
                             
                             ProfileBioHeadline(description: self.singleProfile.headline.bound,
                                                headlineText:"Headline")
+                                .padding(5)
                     
                         }
 
@@ -98,6 +99,7 @@ struct ChildCardView: View {
                         Group {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
                                                headlineText:"Bio")
+                                                .padding(5)
 
                             if self.singleProfile.image3?.imageURL != nil {
                                 VStack {
@@ -197,7 +199,7 @@ struct ChildCardView: View {
                         
                     }
                 }
-                .padding(.horizontal,10)
+//                .padding(.horizontal,10)
                 .background(colorScheme == .dark ? Color.black: Color.white)
                 .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
             }
@@ -209,6 +211,7 @@ struct ChildCardView: View {
 
 
 struct ChildCardView_Previews: PreviewProvider {
+    
     static var previews: some View {
         let tempProfile = CardProfileWithPhotos(id: "Test123456",  //can't be nil
                                                 firstName: "Neha", //can't be nil
@@ -241,12 +244,12 @@ struct ChildCardView_Previews: PreviewProvider {
                                                 image6: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
                                                 doYouWorkOut: "Yes", // * show this later
                                                 doYouDrink: "No", // * show this later
-                                                doYouSmoke: "Yes", // * show this later
+                                                doYouSmoke: "", // * show this later
                                                 doYouWantBabies: "No" // * show this later
         )
         
         ChildCardView(singleProfile: Binding.constant(tempProfile), testing: true)
-            .padding(.horizontal)
+            .environmentObject(ProfileViewModel())
         
     }
 }

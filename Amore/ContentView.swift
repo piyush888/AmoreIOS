@@ -54,7 +54,6 @@ struct ContentView: View {
                 // Signin/Sign Up Button - Mobile Number - OTP Login
                 LogInSheetView()
                     .environmentObject(profileModel)
-//                    .environmentObject(streamModel)
                     .environmentObject(adminAuthenticationModel)
                 
                 Spacer()

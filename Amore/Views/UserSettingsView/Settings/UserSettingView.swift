@@ -13,6 +13,7 @@ struct UserSettingView: View {
     @AppStorage("log_Status") var logStatus = false
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @Binding var settingsDone: Bool
     @State var showModal = false
     
@@ -54,6 +55,8 @@ struct UserSettingView: View {
                     DispatchQueue.main.async {
                         photoModel.resetPhotosOnLogout()
                     }
+                    adminAuthenticationModel.removeCookies()
+                    // Firestore logout
                     try! Auth.auth().signOut()
                     logStatus = false
                 } label : {

@@ -9,6 +9,25 @@ import SwiftUI
 import SwiftUIFontIcon
 import WrappingStack
 
+struct UserOtherInformation: View {
+    
+    @State var iconNameUserDataList: [Text]
+    @State var userInfoFieldData: [String]
+    
+    var body: some View {
+        
+        VStack {
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 5, verticalSpacing: 5) {
+                ForEach(0..<iconNameUserDataList.count) { i in
+                    UserInfoData(icon: self.iconNameUserDataList[i],
+                                 userInfoField:self.userInfoFieldData[i])
+                }
+            }
+        }
+        .padding(15)
+    }
+}
+
 
 struct UserInfoData: View {
     @State var icon: Text
@@ -34,29 +53,6 @@ struct UserInfoData: View {
 
 }
 
-struct UserOtherInformation: View {
-    
-    @State var iconNameUserDataList: [Text]
-    @State var userInfoFieldData: [String]
-    
-    var body: some View {
-        
-        VStack {
-            
-            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 5, verticalSpacing: 5) {
-                    
-                ForEach(0..<iconNameUserDataList.count) { i in
-                    
-                    UserInfoData(icon: self.iconNameUserDataList[i],
-                                 userInfoField:self.userInfoFieldData[i])
-                }
-            }
-            
-        }
-        .padding(15)
-    }
-}
-
 struct UserOtherInformation_Previews: PreviewProvider {
     static var previews: some View {
         UserOtherInformation(iconNameUserDataList:[FontIcon.text(.materialIcon(code: .child_care)),
@@ -66,7 +62,7 @@ struct UserOtherInformation_Previews: PreviewProvider {
                                                    FontIcon.text(.materialIcon(code: .local_bar)),
                                                    ],
                              userInfoFieldData:["Maybe",
-                                                "Never",
+                                                "",
                                                 "Everyday",
                                                 "Masters",
                                                 "Occasionally",

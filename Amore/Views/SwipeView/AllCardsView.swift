@@ -13,7 +13,6 @@ import Firebase
 struct AllCardsView: View {
     
     @State var numberOfProfilesSwiped = 0
-    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel

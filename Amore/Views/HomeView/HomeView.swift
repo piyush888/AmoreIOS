@@ -60,7 +60,7 @@ struct HomeView: View {
                                         
                                 case .swipeView:
                                     AllCardsView()
-                                        .environmentObject(adminAuthenticationModel)
+                                        
                                         .environmentObject(photoModel)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(reportActivityModel)
@@ -81,11 +81,13 @@ struct HomeView: View {
                                         
                                     
                                 case .userSettingsView:
+                                    
                                     // Load the user profile
                                     UserProfile()
                                         .environmentObject(profileModel)
                                         .environmentObject(photoModel)
                                         .environmentObject(storeManager)
+                                        .environmentObject(adminAuthenticationModel)
                                         .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
                                                onDismiss: didDimiss){
                                             PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")

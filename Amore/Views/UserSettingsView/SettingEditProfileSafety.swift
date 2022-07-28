@@ -11,6 +11,7 @@ struct SettingEditProfileSafety: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     // Close the settings tab
     @Binding var settingsDone: Bool
     // Close the Editing Tab
@@ -24,6 +25,7 @@ struct SettingEditProfileSafety: View {
                 UserSettingView(settingsDone: $settingsDone)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
+                    .environmentObject(adminAuthenticationModel)
             } label: {
                 Button {
                     settingsDone = true

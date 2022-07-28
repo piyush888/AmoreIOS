@@ -108,8 +108,14 @@ class AdminAuthenticationViewModel: ObservableObject {
         }
     }
     
-    
+    // Call this function after log out
+    func removeCookies(){
+        let cookieJar = HTTPCookieStorage.shared
 
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
+    }
     
     
 }
