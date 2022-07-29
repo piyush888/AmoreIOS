@@ -66,7 +66,7 @@ struct EditCardInfo: View {
     
     var body: some View {
         
-            Form {
+        Form {
                 
                 // Photos only
                 Section(header: Text("Photos")) {
@@ -86,6 +86,8 @@ struct EditCardInfo: View {
                     }
                     .padding(.vertical,10)
                 }
+                .navigationBarTitle("Upload Photos")
+                .navigationBarTitleDisplayMode(.inline)
                 
                 // Edit Headline
                 Section(header: Text("Headline")) {
@@ -93,6 +95,9 @@ struct EditCardInfo: View {
                                     formHeadLine: "Headline",
                                     formInput: $profileModel.editUserProfile.headline)
                 }
+                .navigationBarTitle("Headline")
+                .navigationBarTitleDisplayMode(.inline)
+                
                 
                 // Edit About Me
                 Section(header: Text("About Me")) {
@@ -100,6 +105,9 @@ struct EditCardInfo: View {
                                     formHeadLine: "About Me",
                                     formInput: $profileModel.editUserProfile.description)
                 }
+                .navigationBarTitle("About Me")
+                .navigationBarTitleDisplayMode(.inline)
+                
                 
                 // Job title
                 Section(header: Text("Work")) {
@@ -112,6 +120,9 @@ struct EditCardInfo: View {
                                     formHeadLine: "Company Name",
                                     formInput: $profileModel.editUserProfile.work)
                 }
+                .navigationBarTitle("Work")
+                .navigationBarTitleDisplayMode(.inline)
+                
                 
                 Section(header: Text("Education")) {
 //                    // Add Education
@@ -131,12 +142,18 @@ struct EditCardInfo: View {
                                     formHeadLine: "School Name",
                                     formInput: $profileModel.editUserProfile.school)
                 }
+                .navigationBarTitle("Education")
+                .navigationBarTitleDisplayMode(.inline)
                 
+            
                 // User Height
-                Section(header: Text("Your Height")) {
+                Section(header: Text("Height")) {
                     UserHeight(height: $profileModel.editUserProfile.height.boundDouble)
                 }
+                .navigationBarTitle("Height")
+                .navigationBarTitleDisplayMode(.inline)
                 
+            
                 // Please update this About You List every time a field is added or removed
                 /// Career, Religion, Political, Education,Raised In, Smoking, Drinks, Workout
                 Section(header: Text("About you")) {
@@ -148,6 +165,9 @@ struct EditCardInfo: View {
                                     .environmentObject(profileModel)
                     }
                 }
+                .navigationBarTitle("About you")
+                .navigationBarTitleDisplayMode(.inline)
+                
                     
 
                 // Height
@@ -175,8 +195,10 @@ struct EditCardInfo: View {
                         Text("Want to be notified when you find a match, turn on that notification?")
                             .font(.caption2)
                     }.padding([.top,.bottom],10)
-                
                 }
+                .navigationBarTitle("Card Settings")
+                .navigationBarTitleDisplayMode(.inline)
+                
                 
                 
                 Section(header: Text("Others")) {
@@ -186,9 +208,10 @@ struct EditCardInfo: View {
                     // Delete Profile
                     DeleteProfileButton()
                 }
-                
+                .navigationBarTitle("Others")
+                .navigationBarTitleDisplayMode(.inline)
             }
-
+        
     }
 }
 

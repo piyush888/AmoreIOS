@@ -21,12 +21,12 @@ struct SelectionForm: View {
                     Text($0).tag($0)
                 }
                 .navigationBarTitle("\(formName)") // for picker navigation title
+                .navigationBarTitleDisplayMode(.inline)
             }
             .onChange(of: selection) { _ in
                 print("Tag Value selected: \(selection) for \(formName)")
                 self.formUpdated = true
             }
-            .navigationBarTitle("Edit Info")
     }
 }
 

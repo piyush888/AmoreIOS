@@ -34,21 +34,25 @@ struct UserInfoData: View {
     @State var userInfoField: String
 
     var body : some View {
-
-        HStack {
-            Text("\(icon)")
-            Text("\(userInfoField)")
-                .font(.subheadline)
+        
+        VStack {
+            if userInfoField.count != 0 {
+                HStack {
+                    Text("\(icon)")
+                    Text("\(userInfoField)")
+                        .font(.subheadline)
+                }
+                .padding(10)
+                   .background(
+                       Rectangle()
+                           .stroke(Color.yellow)
+                           .background(Color.yellow)
+                           .cornerRadius(10.0)
+                           .opacity(0.1)
+                   )
+            }
         }
-        .padding(10)
-           .background(
-               Rectangle()
-                   .stroke(Color.yellow)
-                   .background(Color.yellow)
-                   .cornerRadius(10.0)
-                   .opacity(0.1)
-           )
-
+        
     }
 
 }
