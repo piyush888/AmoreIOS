@@ -38,7 +38,8 @@ struct ConversationView: View {
                         self.hideKeyboard()
                     }
                 MessageSendField
-                    .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
+                    .ignoresSafeArea()
             }
             
         }

@@ -97,8 +97,10 @@ struct HomeView: View {
                             }
                             
                             // Tab View
+                            if !tabModel.showDetail {
                             ControlCenter(currentPage:$currentPage)
-                                .offset(y: tabModel.showDetail ? 200 : 0)
+//                                .offset(y: tabModel.showDetail ? 200 : 0)
+                            }
                         }
                         .ignoresSafeArea(.all, edges: .bottom)
                 
