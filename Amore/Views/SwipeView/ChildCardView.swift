@@ -124,8 +124,8 @@ struct ChildCardView: View {
 
 
                             // Show User Work and School At
-                            WorkAndSchool(work: self.singleProfile.work.bound,
-                                          jobTitle:self.singleProfile.jobTitle.bound,
+                            WorkAndSchool(jobTitle:self.singleProfile.jobTitle.bound,
+                                         work: self.singleProfile.work.bound,
                                           education:self.singleProfile.education.bound,
                                           school:self.singleProfile.school.bound)
                                 

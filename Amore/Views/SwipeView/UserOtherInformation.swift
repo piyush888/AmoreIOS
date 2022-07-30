@@ -72,5 +72,19 @@ struct UserOtherInformation_Previews: PreviewProvider {
                                                 "Occasionally",
                                                 ]
                             )
+        
+        UserOtherInformation(iconNameUserDataList:[FontIcon.text(.materialIcon(code: .child_care)),
+                                                   FontIcon.text(.materialIcon(code: .smoking_rooms)),
+                                                   FontIcon.text(.materialIcon(code: .fitness_center)),
+                                                   FontIcon.text(.materialIcon(code: .school)),
+                                                   FontIcon.text(.materialIcon(code: .local_bar)),
+                                                   ],
+                             userInfoFieldData:["",
+                                                "",
+                                                "",
+                                                "",
+                                                "",
+                                                ]
+                            )
     }
 }

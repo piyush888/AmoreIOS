@@ -97,8 +97,8 @@ struct PreviewProfile: View {
 
 
                             // Show User Work and School At
-                            WorkAndSchool(work: profileModel.editUserProfile.work.bound,
-                                          jobTitle:profileModel.editUserProfile.jobTitle.bound,
+                            WorkAndSchool(jobTitle:profileModel.editUserProfile.jobTitle.bound,
+                                         work: profileModel.editUserProfile.work.bound,
                                           education:profileModel.editUserProfile.education.bound,
                                           school:profileModel.editUserProfile.school.bound
                             )
