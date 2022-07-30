@@ -65,81 +65,77 @@ struct AllCardsView: View {
     var body: some View {
         
         GeometryReader { geometry in
-            VStack {
-                ZStack {
-                    
-                    // Show all cards that user can swipe
-                    ForEach(getCards()) { profile in
-                        // Normal Card View being rendered here.
-                        SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
-                                       $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
-                                       singleProfile: profile,
-                                       onRemove: { removedUser in
-                                            // Remove that user from our array
-                                            cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
-                                            cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                                            self.buttonSwipeStatus = .none
-                                            cardProfileModel.lastSwipedCard = removedUser
-                                }
-                            )
-                            .animation(.spring())
-                            .frame(width: geometry.size.width)
-                            .environmentObject(photoModel)
-                            .environmentObject(cardProfileModel)
-                            .environmentObject(profileModel)
-                            .environmentObject(receivedGivenEliteModel)
-                            .environmentObject(filterModel)
-                        
-                    }
-                    .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
-//                        print("Count: Cards Being Shown ", cardProfileModel.allCardsWithPhotosDeck.count)
-                        self.cardSwipeDone = true
-//                        cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
-//                        print("Last Swiped Card: ", cardProfileModel.lastSwipedCard?.id, cardProfileModel.lastSwipeInfo)
-                    }
-                    
-                    
-                    // Buttons and other interaction on top of cards
-                    VStack {
-                        HStack {
-                            ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
-                                         buttonWidth:30,
-                                         buttonHeight: 35,
-                                         fontSize:25,
-                                         colorList: [Color(hex: 0x8f94fb)],
-                                         viewToBeAssigned:.boostProfileSheet,
-                                         iconName:"bolt.circle.fill")
-                            
-                            Spacer()
-                            
-                            ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
-                                         buttonWidth:30,
-                                         buttonHeight: 35,
-                                         fontSize:25,
-                                         colorList:[Color.gray, Color.purple],
-                                         viewToBeAssigned:.reportProfileSheet,
-                                         iconName:"shield.fill")
-                        }
-                        .padding(.top,15)
-                        .padding(.horizontal,15)
-                        
-                        
-                        Spacer()
-                        
-                        Spacer()
-                        LikeDislikeSuperLike(buttonSwipeStatus: $buttonSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)
-                            .environmentObject(cardProfileModel)
-                            .environmentObject(receivedGivenEliteModel)
-                            .environmentObject(storeManager)
-                            .environmentObject(chatModel)
-                            .environmentObject(mainMessagesModel)
-                            .padding(.bottom, 20)
-                            .padding(.horizontal, 40)
-                            .opacity(1.5)
-                    }
+            ZStack {
+                
+                // Show all cards that user can swipe
+                ForEach(getCards()) { profile in
+                    // Normal Card View being rendered here.
+                    SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
+                                   $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
+                                   singleProfile: profile,
+                                   onRemove: { removedUser in
+                                        // Remove that user from our array
+                                        cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                                        self.buttonSwipeStatus = .none
+                                        cardProfileModel.lastSwipedCard = removedUser
+                            }
+                        )
+                        .animation(.spring())
+                        .frame(width: geometry.size.width)
+                        .environmentObject(photoModel)
+                        .environmentObject(cardProfileModel)
+                        .environmentObject(profileModel)
+                        .environmentObject(receivedGivenEliteModel)
+                        .environmentObject(filterModel)
                     
                 }
+                .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
+                    self.cardSwipeDone = true
+                }
+                
+                // Buttons and other interaction on top of cards
+                VStack {
+                    // Boost and Report Buttons
+                    HStack {
+                        ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
+                                     buttonWidth:30,
+                                     buttonHeight: 35,
+                                     fontSize:25,
+                                     colorList: [Color(hex: 0x8f94fb)],
+                                     viewToBeAssigned:.boostProfileSheet,
+                                     iconName:"bolt.circle.fill")
+                        
+                        Spacer()
+                        
+                        ButtonIcon(allcardsActiveSheet:$allcardsActiveSheet,
+                                     buttonWidth:30,
+                                     buttonHeight: 35,
+                                     fontSize:25,
+                                     colorList:[Color.gray, Color.purple],
+                                     viewToBeAssigned:.reportProfileSheet,
+                                     iconName:"shield.fill")
+                    }
+                    .padding(.top,15)
+                    .padding(.horizontal,15)
+                    
+                    
+                    Spacer()
+                    
+                    // Swipe Buttons
+                    LikeDislikeSuperLike(buttonSwipeStatus: $buttonSwipeStatus, cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet)
+                        .environmentObject(cardProfileModel)
+                        .environmentObject(receivedGivenEliteModel)
+                        .environmentObject(storeManager)
+                        .environmentObject(chatModel)
+                        .environmentObject(mainMessagesModel)
+                        .padding(.bottom, 20)
+                        .padding(.horizontal, 40)
+                        .opacity(1.5)
+                }
+                .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height, alignment: .center)
             }
+            .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height, alignment: .center)
             .sheet(item: $allcardsActiveSheet) { item in
                 
                 switch item {

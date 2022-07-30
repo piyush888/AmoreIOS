@@ -161,8 +161,27 @@ struct PreviewProfile: View {
 
 struct PreviewProfile_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewProfile()
-            .environmentObject(PhotoModel())
-            .environmentObject(ProfileViewModel())
+        Group {
+            PreviewProfile()
+                .previewDisplayName("iPhone 13 Pro Max")
+                .previewDevice("iPhone 13 Pro Max")
+                .environmentObject(PhotoModel())
+                .environmentObject(ProfileViewModel())
+            PreviewProfile()
+                .previewDisplayName("iPhone 13 Mini")
+                .previewDevice("iPhone 13 Mini")
+                .environmentObject(PhotoModel())
+                .environmentObject(ProfileViewModel())
+            PreviewProfile()
+                .previewDisplayName("iPhone 12 Pro")
+                .previewDevice("iPhone 12 Pro")
+                .environmentObject(PhotoModel())
+                .environmentObject(ProfileViewModel())
+            PreviewProfile()
+                .previewDisplayName("iPhone 11")
+                .previewDevice("iPhone 11")
+                .environmentObject(PhotoModel())
+                .environmentObject(ProfileViewModel())
+        }
     }
 }

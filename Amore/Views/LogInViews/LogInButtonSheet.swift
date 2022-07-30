@@ -13,7 +13,6 @@ struct LogInSheetView: View {
     @AppStorage("log_Status") var logStatus = false
     
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     var body: some View {
@@ -40,12 +39,10 @@ struct LogInSheetView: View {
             }) {
                 LoginPhoneNumber()
                     .environmentObject(profileModel)
-//                    .environmentObject(streamModel)
                     .environmentObject(adminAuthenticationModel)
             }
         }
         .padding(.horizontal,44)
-        .padding(.bottom,44)
         
     }
     
@@ -54,5 +51,7 @@ struct LogInSheetView: View {
 struct LogInSheetView_Previews: PreviewProvider {
     static var previews: some View {
         LogInSheetView()
+            .environmentObject(ProfileViewModel())
+            .environmentObject(AdminAuthenticationViewModel())
     }
 }

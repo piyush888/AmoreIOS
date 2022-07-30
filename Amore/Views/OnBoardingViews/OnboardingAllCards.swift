@@ -13,7 +13,7 @@ struct OnboardingAllCards: View {
     @State var tabSelectionIndex = 0
     
     var body: some View {
-        
+        VStack(spacing:0) {
             TabView(selection: $tabSelectionIndex){
                 ForEach(0..<onboardingModel.onboardingsData.count) { index in
                     // Pictures, Onboarding Heading & Onboarding SubText
@@ -25,8 +25,19 @@ struct OnboardingAllCards: View {
                     .tag(index)
                 }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            
+            HStack(spacing: 4) {
+                ForEach(0..<onboardingModel.onboardingsData.count) { index in
+                    Capsule()
+                        .fill(Color.gray.opacity(tabSelectionIndex == index ? 1 : 0.55))
+                        .frame(width: tabSelectionIndex == index ? 18 : 4, height: 4)
+                        .animation(.easeInOut, value: tabSelectionIndex)
+                }
+            }
+        }
+        .frame(height: UIScreen.main.bounds.size.height * 0.75, alignment: .center)
     }
 }
 

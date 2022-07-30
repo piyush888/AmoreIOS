@@ -72,7 +72,6 @@ struct TabButton: View {
                 Image(systemName: systemImage)
                     .imageScale(.large)
                     .font(.body.bold())
-                    .frame(width: 44, height: 29)
                     .foregroundColor(currentPage == tabViewType ? buttonColor : Color(UIColor.lightGray))
                     .padding(.horizontal)
             }

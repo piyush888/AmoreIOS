@@ -38,13 +38,3 @@ struct NoPhotoProvided: View {
         
     }
 }
-
-struct SingleCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        GeometryReader { geometry in
-            NoPhotoProvided(imageWidth:geometry.size.width,
-                            imageHeight:geometry.size.height/1.5)
-        }
-    }
-}

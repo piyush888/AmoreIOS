@@ -21,7 +21,7 @@ struct OnboardingCards: View {
                     .scaledToFill()
                     .frame(height: 450, alignment: .center)
                     .cornerRadius(15)
-                    .padding(.horizontal,40)
+                    .padding(.horizontal,45)
                     .shadow(color: Color("onboarding-pink"),
                             radius: 8, x: 3, y: 3)
                 
@@ -35,17 +35,41 @@ struct OnboardingCards: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.black)
                     .font(.BoardingSubHeading)
+                    .padding(.horizontal)
                     .padding(.bottom,10)
         }
-        .padding(.horizontal,25)
-        .padding(.bottom,20)
+        .padding(.bottom, 20)
     }
 }
 
 struct OnboardingCards_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingCards(boardingtitle: "Algorithm",
-                        boardingtext: "Users going through a vetting process to ensure you never match with bots.",
-                        image: "onboarding_girl1")
+        Group {
+            OnboardingCards(boardingtitle: "Algorithm",
+                            boardingtext: "Users going through a vetting process to ensure you never match with bots.",
+                            image: "onboarding_girl1")
+            .previewDisplayName("iPhone 13 Pro Max")
+            .previewDevice("iPhone 13 Pro Max")
+            OnboardingCards(boardingtitle: "Algorithm",
+                            boardingtext: "Users going through a vetting process to ensure you never match with bots.",
+                            image: "onboarding_girl1")
+            .previewDisplayName("iPhone 13 Mini")
+            .previewDevice("iPhone 13 Mini")
+            OnboardingCards(boardingtitle: "Algorithm",
+                            boardingtext: "Users going through a vetting process to ensure you never match with bots.",
+                            image: "onboarding_girl1")
+            .previewDisplayName("iPhone 12 Mini")
+            .previewDevice("iPhone 12 Mini")
+            OnboardingCards(boardingtitle: "Algorithm",
+                            boardingtext: "Users going through a vetting process to ensure you never match with bots.",
+                            image: "onboarding_girl1")
+            .previewDisplayName("iPhone 12 Pro")
+            .previewDevice("iPhone 12 Pro")
+            OnboardingCards(boardingtitle: "Algorithm",
+                            boardingtext: "Users going through a vetting process to ensure you never match with bots.",
+                            image: "onboarding_girl1")
+            .previewDisplayName("iPhone 11")
+            .previewDevice("iPhone 11")
+        }
     }
 }
