@@ -55,14 +55,15 @@ class FirestoreServices {
                             if httpResponse.statusCode == 200 {
                                 DispatchQueue.main.async {
                                     print("Stored Successfully")
-                                    self.requestInProcessing = false
                                     onSuccess()
+                                    self.requestInProcessing = false
                                     return
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                                 DispatchQueue.main.async {
                                     print("Unable to store LikeDislike Firestore: \(apiToBeUsed), swipedUserId:\(swipedUserId)")
+                                    onFailure()
                                     self.requestInProcessing = false
                                 }
                             }
@@ -111,13 +112,14 @@ class FirestoreServices {
                             
                             if httpResponse.statusCode == 200 {
                                 DispatchQueue.main.async {
-                                    print("Stored Successfully")
-                                    self.requestInProcessing = false
+                                    print("Upgraded Like to Superlike Successfully")
                                     onSuccess()
+                                    self.requestInProcessing = false
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                                 DispatchQueue.main.async {
+                                    onFailure()
                                     self.requestInProcessing = false
                                     print("Unable to upgrade LikeDislike Firestore: \(apiToBeUsed), upgradeLikeToSuperlike:\(swipedUserId)")
                                 }
@@ -167,15 +169,16 @@ class FirestoreServices {
                             
                             if httpResponse.statusCode == 200 {
                                 DispatchQueue.main.async {
+                                    onSuccess()
                                     print("Rewind Operation Successful")
                                     self.requestInProcessing = false
-                                    onSuccess()
                                     return
                                 }
                             }
                             else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                                 print("Unable to undo LikeDislike Firestore: \(apiToBeUsed), swipedUserId:\(swipedUserId)")
                                 DispatchQueue.main.async {
+                                    onFailure()
                                     self.requestInProcessing = false
                                 }
                             }
@@ -213,12 +216,14 @@ class FirestoreServices {
                     if let httpResponse = response as? HTTPURLResponse {
                         if httpResponse.statusCode == 200 {
                             DispatchQueue.main.async {
-                                print("Unmatch Operation Successful")
+                                onSuccess()
                                 self.requestInProcessing = false
+                                print("Unmatch Operation Successful")
                             }
                         }
                         else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                             DispatchQueue.main.async {
+                                onFailure()
                                 self.requestInProcessing = false
                                 print("Error: Unable to ")
                             }
@@ -269,12 +274,14 @@ class FirestoreServices {
                     if let httpResponse = response as? HTTPURLResponse {
                         if httpResponse.statusCode == 200 {
                             DispatchQueue.main.async {
-                                print("Direct Message Matching Successful")
+                                onSuccess()
                                 self.requestInProcessing = false
+                                print("Direct Message Matching Successful")
                             }
                         }
                         else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
                             DispatchQueue.main.async {
+                                onFailure()
                                 self.requestInProcessing = false
                                 print("Error: Unable to Match Profiles for Direct Message")
                             }
