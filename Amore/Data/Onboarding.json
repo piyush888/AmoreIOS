@@ -1,20 +1,21 @@
 [
  {
-     "id":"OnboardingView1",
-     "onboardingtitle" : "Algorithm",
-     "onboardingtext" : "Users going through a vetting process to ensure you never match with bots",
-     "image":"onboarding_girl6",
+     "id":"onboarding_view_1",
+     "onboardingtitle" : "Recommendations",
+     "_comment" : "Users going through a vetting process to ensure you never match with bots",
+     "onboardingtext": "A community built deep learning recommendation engine",
+     "image":"In love-cuate",
  },
  {
-     "id":"OnboardingView2",
+     "id":"onboarding_view_2",
      "onboardingtitle" : "Matches",
-     "onboardingtext" : "We match you with people that have a large array of similar interests",
-     "image":"onboarding_girl9",
+     "onboardingtext" : "The engine proposes matches among users with large arrays of similar feature sets",
+     "image":"In love-pana",
  },
  {
-     "id":"OnboardingView3",
+     "id":"onboarding_view_3",
      "onboardingtitle" : "Premium",
      "onboardingtext" : "Sign up today and enjoy the first month of premium benefits on us",
-     "image":"onboarding_girl7",
+     "image":"True friends-pana",
  }
 ]

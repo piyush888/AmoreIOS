@@ -8,29 +8,36 @@
 import Foundation
 import FirebaseAuth
 
-class FirebaseServices {
+class FirebaseServices: ObservableObject {
     
-    static func requestOtp(phoneNumber: String) -> String {
-        var currentVerificationId = ""
+    @Published var isLoading: Bool = false
+    @Published var verificationCode: String = ""
+    @Published var navigationTag: String?
+    
+    func requestOtp(phoneNumber: String) {
+        if isLoading{return}
+        
         // Step 3 (Optional) - Default language is English
         Auth.auth().languageCode = "en"
-        
         // Step 4: Request SMS
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-            if let error = error {
-                print("$$$$$"+error.localizedDescription)
-                return
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error in requestOTP"+error.localizedDescription)
+                    self.isLoading = false
+                }
+                if let verId = verificationID {
+                    self.verificationCode = verId
+                    self.navigationTag = "VERIFICATION"
+                    self.isLoading = false
+                    print("requestOTP Verification success"+verId)
+                }
+                // Either received APNs or user has passed the reCAPTCHA
+                // Step 5: Verification ID is saved for later use for verifying OTP with phone number
+                UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
             }
-            if let ver = verificationID {
-                print("$$$"+ver)
-            }
-            
-            // Either received APNs or user has passed the reCAPTCHA
-            // Step 5: Verification ID is saved for later use for verifying OTP with phone number
-            currentVerificationId = verificationID!
-            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
         }
-        return currentVerificationId
+        
     }
     
 }

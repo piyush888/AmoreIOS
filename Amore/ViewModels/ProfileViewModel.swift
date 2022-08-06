@@ -15,7 +15,7 @@ import CoreLocation
 
 class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    @AppStorage("log_Status") var logStatus = false
+    @AppStorage("log_Status") var log_Status = false
     var userProfile = Profile()
     @Published var editUserProfile = Profile()
     @Published var storeManagerObj = StoreManager() // Object
@@ -25,8 +25,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var profileCores = [ProfileCore]()
     
     @Published var phoneNumber = String()
-    @Published var verificationCode = String()
-    @Published var currentVerificationId = String()
     @Published var countryCode = String()
     
     // Alert...
@@ -227,12 +225,12 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         profileCore.school = userProfile.school
     }
     
-//    func signIn(streamObj: StreamViewModel, adminAuthenticationObj:AdminAuthenticationViewModel) {
-    func signIn(adminAuthenticationObj:AdminAuthenticationViewModel) {
+
+    func signIn(adminAuthenticationObj:AdminAuthenticationViewModel, otpVerificationCode:String) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
             print(verificationID+" in sign in!")
-            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: otpVerificationCode)
 
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 DispatchQueue.main.async { [self] in
@@ -249,6 +247,8 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             }
 //                            self.getUserProfile()
                             adminAuthenticationObj.serverLogin()
+                            // log in to the application, this view close the onboarding view and will load the application
+                            log_Status = true
                         }
                         self.loginFormVisible = false
                     }
@@ -303,8 +303,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     func checkLogin() {
-        logStatus = Auth.auth().currentUser == nil ? false : true
-        print("Logged In: "+String(logStatus))
+        log_Status = Auth.auth().currentUser == nil ? false : true
     }
     
     

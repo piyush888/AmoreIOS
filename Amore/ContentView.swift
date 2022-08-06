@@ -12,7 +12,7 @@ import StoreKit
 
 struct ContentView: View {
     
-    @AppStorage("log_Status") var logStatus = false
+    @AppStorage("log_Status") var log_Status = false
     
     @StateObject var profileModel = ProfileViewModel()
     @StateObject var photoModel = PhotoModel()
@@ -25,42 +25,19 @@ struct ContentView: View {
     @StateObject var storeProfileV2 = ProfileViewModelV2()
     @StateObject var mainMessagesModel = MainMessagesViewModel()
     @StateObject var chatModel = ChatModel()
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
         // If User is Not Logged In Yet
-        if !logStatus {
-            // Onboarding View - Logged Out
-            GeometryReader { geometry in
-                VStack(spacing: 20) {
-                    // Amore heading
-                    VStack {
-                        
-                        Text("Amore")
-                            .font(.title)
-                            .foregroundColor(Color.pink)
-                            .shadow(color: .pink, radius: 2, x: 0, y: 0)
-                            
-                        Text("The Indian Way of Dating")
-                            .font(.caption2)
-                            .italic()
-                    }
-                    
-                    // Onboarding Swipeable Cards
-                    OnboardingAllCards()
-                        .frame(maxWidth: geometry.size.width * 0.95, minHeight: geometry.size.height * 0.7, idealHeight: geometry.size.height * 0.7, maxHeight: geometry.size.height * 0.85, alignment: .center)
-                    
-                    // Signin/Sign Up Button - Mobile Number - OTP Login
-                    LogInSheetView()
-                        .environmentObject(profileModel)
-                        .environmentObject(adminAuthenticationModel)
-                }
-                .padding(.vertical, 5)
-                .onAppear{
-                    // As soon as the page loads check if user is already logged In
-                    profileModel.checkLogin()
-                }
-            }
+        if !log_Status {
+            OnboardingView()
+                .environmentObject(profileModel)
+                .environmentObject(adminAuthenticationModel)
+//                .onAppear{
+//                    // As soon as the page loads check if user is already logged In
+//                    profileModel.checkLogin()
+//                }
         }
         else {
             // If logged In
@@ -165,7 +142,7 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             ContentView()
                 .previewDisplayName("iPhone 13 Pro Max")
-            .previewDevice("iPhone 13 Pro Max")
+                .previewDevice("iPhone 13 Pro Max")
             ContentView()
                 .previewDisplayName("iPhone 13 Mini")
                 .previewDevice("iPhone 13 Mini")
