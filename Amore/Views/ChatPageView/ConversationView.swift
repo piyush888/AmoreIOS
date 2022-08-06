@@ -51,12 +51,14 @@ struct ConversationView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Menu {
+                    // Report Button
                     Button  {
                         allcardsActiveSheet = .reportProfileSheet
                     } label: {
                         Label("Report User", systemImage: "shield.fill")
                             .font(.system(size: 60))
                     }
+                    // Unmatch Button
                     Button  {
                         navigateToChatView.toggle()
                         FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
@@ -82,7 +84,18 @@ struct ConversationView: View {
             }
         })
         .onChange(of: selectedChatIndex, perform: { newValue in
-            navigateToChatView = false
+            /*
+            ErrorSolved: sending new message rearranged positions of chats in "recentChats" array
+            causing change in selectedChatIndex, further causing exit from ConversationView
+             
+            SolvedBy: Condition to check if new value of selectedChatIndex is negative(removed chat) or not
+            */
+            if (newValue < 0) {
+                /* When Unmatched from chat, other user should exit chat automatically.
+                 selectedChatIndex for other user in this case becomes -1, since the chat doesn't exist anymore.
+                 */
+                navigateToChatView = false
+            }
         })
         /// Use Report User List view for Reporting
         .sheet(item: $allcardsActiveSheet) { item in
@@ -97,6 +110,7 @@ struct ConversationView: View {
                 )
             }
         }
+        // Profile Card on tap on Profile Picture
         .sheet(isPresented: $presentProfileCard) {
             if let userId = toUser.id {
                 CardDetail(selectedItem: mainMessagesModel.getProfile(profileId: userId), show: $presentProfileCard, animation: animation)
@@ -124,6 +138,7 @@ struct ConversationView: View {
                 }
                 .padding(.top, 10)
             }
+            // Scroll to Bottom code
             .onChange(of: scrollToBottomOnSend) { newValue in
                 if newValue == true {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
