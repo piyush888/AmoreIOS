@@ -49,7 +49,6 @@ struct SelectSingleItem : View {
                 
                 Spacer()
             }
-            .padding(20)
             .navigationTitle("\(filterName)")
             .navigationBarTitleDisplayMode(.inline)
         

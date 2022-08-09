@@ -1,43 +1,43 @@
 //
-//  ShowMe.swift
+//  IAmA.swift
 //  Amore
 //
-//  Created by Kshitiz Sharma on 9/29/21.
+//  Created by Kshitiz Sharma on 9/25/21.
 //
-
-// Show me Male, Female or Both
 
 import SwiftUI
 
-struct ShowMe: View {
+struct Gender: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     
-    let showMeList = ["Women", "Men", "Non Binary","Everyone"]
-    @State var selectShowMe: String? = nil
-    @State var formComplete: Bool = false
+    let genders = ["Male", "Female", "Non Binary"]
+    @State var selectedGender: String? = nil
+    @State var customGender: String = ""
     @State var showAlert: Bool = false
-    @State var errorDesc: String = ""
     
-    func checkShowMeIsNil () {
-        if let showMeTemp = selectShowMe {
-            profileModel.userProfile.showMePreference = showMeTemp
-            formComplete = true
-        }
-        else {
-            formComplete = false
-            self.showAlert =  true
-            self.errorDesc = "Please select atleast one Show Me gender types"
+    @State private var validationError = false
+    @State var errorDesc: String = ""
+    @State var isGenderSet = false
+    
+    func addInputToProfile() {
+        self.errorDesc = ""
+        self.showAlert = false
+        if(selectedGender != nil) {
+            profileModel.userProfile.genderIdentity = selectedGender
+            self.isGenderSet = true
+        } else {
+            self.errorDesc =  "Please choose atleast one gender"
+            self.showAlert = true
         }
     }
-    
     
     var body: some View {
         
         VStack(alignment:.leading) {
             
-            SelectSingleItem(selection: $selectShowMe.bound,
-                             optionsList: showMeList,
-                             filterName: "Show Me")
+            SelectSingleItem(selection: $selectedGender.bound,
+                             optionsList: genders,
+                             filterName: "Gender")
                 .padding(.vertical,10)
                 .padding(.horizontal,20)
                 
@@ -49,16 +49,17 @@ struct ShowMe: View {
                   message: Text("\(errorDesc)"), dismissButton: .default(Text("OK"))
             )
         }
+        
     }
     
     var navigationButton: some View {
         NavigationLink(
-            destination: AddWork()
+            destination: SexualOrientation()
                 .environmentObject(profileModel),
-            isActive: $formComplete,
+            isActive: $isGenderSet,
             label: {
                 Button{
-                    self.checkShowMeIsNil()
+                    self.addInputToProfile()
                 } label : {
                     ContinueButtonDesign()
                 }
@@ -66,12 +67,12 @@ struct ShowMe: View {
                 .padding(.bottom, 10)
             })
     }
+    
 }
 
-
-struct ShowMe_Previews: PreviewProvider {
+struct Gender_Previews: PreviewProvider {
     static var previews: some View {
-        ShowMe()
+        Gender()
             .environmentObject(ProfileViewModel())
     }
 }

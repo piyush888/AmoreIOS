@@ -10,14 +10,23 @@ import SwiftUI
 struct SelectionForm: View {
     
     @Binding var selection: String
+    @State private var searchTerm: String = ""
     @State var formName: String
     @State var selectionsList: [String]
     @Binding var formUpdated: Bool
     
+    
+    var filteredSelectionList: [String] {
+        self.selectionsList.filter {
+            searchTerm.isEmpty ? true : $0.lowercased().contains(searchTerm.lowercased())
+        }
+    }
+    
     var body: some View {
         
          Picker("\(formName)", selection: $selection) {
-                ForEach(selectionsList, id: \.self) {
+                SearchBar(text: $searchTerm, placeholder: "Search \(formName)")
+                ForEach(filteredSelectionList, id: \.self) {
                     Text($0).tag($0)
                 }
                 .navigationBarTitle("\(formName)") // for picker navigation title
@@ -37,6 +46,43 @@ struct SelectionForm_Previews: PreviewProvider {
                           formName:"Test",
                           selectionsList:["Red","Yellow","Blue"],
                           formUpdated:Binding.constant(false))
+        }
+    }
+}
+
+struct SearchBar: UIViewRepresentable {
+
+    @Binding var text: String
+    var placeholder: String
+
+    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = context.coordinator
+
+        searchBar.placeholder = placeholder
+        searchBar.autocapitalizationType = .none
+        searchBar.searchBarStyle = .minimal
+        return searchBar
+    }
+
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
+        uiView.text = text
+    }
+
+    func makeCoordinator() -> SearchBar.Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    class Coordinator: NSObject, UISearchBarDelegate {
+
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
         }
     }
 }

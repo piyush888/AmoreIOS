@@ -242,6 +242,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     else {
                         if let authRes = authResult {
                             UserDefaults.standard.set(authRes.user.uid, forKey: "userUID")
+                            
+                            /// If the app is not exited after logout & the user signs In with another number, the new profile for the new number isn't
+                            /// fetched and ready, hence we set it to false
                             if self.profileFetchedAndReady {
                                 self.profileFetchedAndReady = false
                             }
@@ -276,7 +279,8 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.editUserProfile = self.userProfile
                 // Set profileFetchedAndReady = True, right after profile creation.
                 self.profileFetchedAndReady = true
-                
+                // profile creation done or not done
+                self.profileCreationDone = true
                 // New Profile Create Document for user in IAPPurchase
                 // Default Consumable & Free Subscription
                 // Current Free Consumables Limit 20th March 22
@@ -343,6 +347,8 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                     try viewContext.save()
                                 }
                                 self.profileFetchedAndReady = true
+                                // profile creation done or not done
+                                self.profileCreationDone = self.userProfile.email != nil ? true : false
                                 print("Profile Refresh done...")
                             }
                             catch {

@@ -10,25 +10,52 @@ import FirebaseAuth
 
 struct BasicUserInfoForm: View {
     
+    @EnvironmentObject var profileModel: ProfileViewModel
+    
+    @State var lastName: String? = ""
+    @State var firstName: String? = ""
+    @State var email: String? = ""
+    @State var dateOfBirth: Date = Date()
+    
+    @State var allFieldsFilled: Bool = false
+    @State var errorDesc: String = ""
+    @State var showAlert: Bool = false
+    
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
     }
     
-    @EnvironmentObject var profileModel: ProfileViewModel
-    
-    @State var lastName: String = ""
-    @State var firstName: String = ""
-    @State var email: String = ""
-    @State var dateOfBirth: Date = Date()
-    @State var allFieldsFilled: Bool = false
-    @State var errorDesc: String?
-    
     var isEmailValid: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
+        let isEmailValid = emailPredicate.evaluate(with: email)
+        if !isEmailValid {
+            self.errorDesc = "Invalid Email"
+        }
+        return isEmailValid
+    }
+    
+    
+    var isDOBValid: Bool {
+        // Age can't be more than 110 years and more than 18 year
+        let now = Date()
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)
+        let age = ageComponents.year!
+        
+        // Age can't be more than 70 years
+        if((age > 70) || (age<18)) {
+            if(age>70) {
+                self.errorDesc = "Your age can't be more than 80 years"
+            } else {
+                self.errorDesc = "Minimum age of 18 years is required to signup."
+            }
+            return false
+        } else {
+            return true
+        }
     }
     
     func addInputToProfile() {
@@ -44,146 +71,130 @@ struct BasicUserInfoForm: View {
     }
     
     func checkallFieldsFilled () {
-        firstName = whitespaceTrimmer(str: firstName)
-        lastName = whitespaceTrimmer(str: lastName)
-        email = whitespaceTrimmer(str: email)
-        if lastName=="" || firstName=="" || email=="" {
-            allFieldsFilled = false
-            errorDesc = "Please fill all the above details"
-        }
-        else if !isEmailValid {
-            allFieldsFilled = false
-            errorDesc = "Invalid Email"
-        }
-        else {
-            errorDesc = nil
+        self.errorDesc = ""
+        self.showAlert = false
+        firstName = whitespaceTrimmer(str: firstName ?? "")
+        lastName = whitespaceTrimmer(str: lastName ?? "")
+        email = whitespaceTrimmer(str: email ?? "")
+        
+        
+        if firstName != "" && lastName != "" && email != "" && isEmailValid && isDOBValid {
             addInputToProfile()
-            allFieldsFilled = true
+            self.allFieldsFilled = true
+        } else {
+            self.showAlert = true
+            if isEmailValid && isDOBValid {
+                self.errorDesc = "Please fill all the above details"
+            }
         }
     }
     
     var body: some View {
         
-        NavigationView {
-            VStack {
-                
-                Text("Let's create your profile")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 50)
-                
-                Spacer()
-                
-                // Upload a pic
-                Spacer()
-                
-                // First Name
-                ZStack{
-                    Rectangle()
-                        .cornerRadius(5.0)
-                        .frame(height:45)
-                        .foregroundColor(.white)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.pink, lineWidth: 1))
-                    
-                    TextField("First name", text: $firstName)
-                        .textContentType(.givenName)
-                        .padding()
-                }
-                
-                // Second Name
-                ZStack{
-                    Rectangle()
-                        .cornerRadius(5.0)
-                        .frame(height:45)
-                        .foregroundColor(.white)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.pink, lineWidth: 1))
-                    
-                    TextField("Last name", text: $lastName)
-                        .textContentType(.familyName)
-                        .padding()
-                }
-                
-                // User Email
-                ZStack{
-                    Rectangle()
-                        .cornerRadius(5.0)
-                        .frame(height:45)
-                        .foregroundColor(.white)
-                        .overlay(RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.pink, lineWidth: 1))
-                    
-                    TextField("Email", text: $email)
-                        .textContentType(.emailAddress)
-                        .padding()
-                }
-                
-                // Birthday picker
-                VStack {
-                    ZStack{
-                        Rectangle()
-                            .cornerRadius(5.0)
-                            .frame(height:45)
-                            .foregroundColor(.white)
-                            .overlay(RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.pink, lineWidth: 1))
-                        
-                        DatePicker(selection: $dateOfBirth, in: ...Date(), displayedComponents: .date) {
-                            
-                            HStack {
-                                Image(systemName:"calendar")
-                                    .foregroundColor(.pink)
-                                Text("Choose Birth Date")
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                        }
-                        .padding()
-                    }
-                    Spacer()
-                    if errorDesc != nil {
-                        Section {
-                            Text(errorDesc!)
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: Passions()
-                        .environmentObject(profileModel),
-                    isActive: $allFieldsFilled,
-                    label: {
-                        Button{
-                            checkallFieldsFilled()
-                        } label : {
-                            ZStack{
-                                Rectangle()
-                                    .frame(height:45)
-                                    .cornerRadius(5.0)
-                                    .foregroundColor(.pink)
-                                
-                                Text("Continue")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .font(.BoardingButton)
-                            }
-                        }.padding(.bottom, 10)
-                    })
-                
-                
-                }
-            .padding(40)
-            .navigationBarHidden(true)
-        }
         
+            NavigationView {
+                VStack {
+                
+                    Form {
+                        Group {
+                            Section(header: Text("Name")) {
+                                EditCardForm(formHeight: 40.0,
+                                                formHeadLine: "First Name",
+                                                formInput: $firstName)
+                                
+                                EditCardForm(formHeight: 40.0,
+                                                formHeadLine: "Last Name",
+                                                formInput: $lastName)
+                            }
+                            
+                            Section(header:Text("Date of Birth")) {
+                                DatePicker(selection: $dateOfBirth, in: ...Date(), displayedComponents: .date) {
+                                        HStack {
+                                            Image(systemName:"calendar")
+                                                .foregroundColor(.accentColor)
+                                        }
+                                    }
+                            }
+                            
+                            Section(header: Text("Email")) {
+                                EditCardForm(formHeight: 40.0,
+                                                formHeadLine: "Email address",
+                                                formInput: $email)
+                            }
+                            
+
+                            
+                        }
+                    }
+                 
+                    if errorDesc != "" {
+                        Text("\(errorDesc)")
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.pink)
+                            .padding(.horizontal,40)
+                    }
+                    
+                    // Navigate or continue to next view
+                    navigationButton
+                        .padding(.horizontal,20)
+                }
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Alert"),
+                          message: Text("\(self.errorDesc)"),
+                          dismissButton: Alert.Button.default(
+                              Text("OK"), action: {
+                                  self.errorDesc = ""
+                              })
+                    )
+                }
+                .navigationTitle("Create profile")
+                .navigationBarTitleDisplayMode(.inline)
+                .padding(.bottom,20)
+
+                
+        }
+    }
+    
+    var navigationButton: some View {
+        NavigationLink(
+            destination: Passions()
+                .environmentObject(profileModel),
+            isActive: $allFieldsFilled,
+            label: {
+                Button{
+                    DispatchQueue.main.async {
+                        checkallFieldsFilled()
+                    }
+                } label : {
+                    ContinueButtonDesign()
+                }
+                .padding(.horizontal,30)
+                .padding(.top,10)
+            })
     }
 }
 
 struct BasicUserInfoForm_Previews: PreviewProvider {
     static var previews: some View {
-        BasicUserInfoForm()
+        Group {
+            BasicUserInfoForm()
+                .environmentObject(ProfileViewModel())
+                .previewDisplayName("iPhone 13 Pro Max")
+                .previewDevice("iPhone 13 Pro Max")
+            
+            BasicUserInfoForm()
+                .environmentObject(ProfileViewModel())
+                .previewDisplayName("iPhone 12 Pro")
+                .previewDevice("iPhone 12 Pro")
+            
+            BasicUserInfoForm()
+                .environmentObject(ProfileViewModel())
+                .previewDisplayName("iPhone 11")
+                .previewDevice("iPhone 11")
+        }
     }
 }

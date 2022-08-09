@@ -28,7 +28,7 @@ struct PreviewProfile: View {
                         Group {
                             ZStack {
                                 if profileModel.editUserProfile.image1?.imageURL != nil  {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                     
@@ -64,7 +64,7 @@ struct PreviewProfile: View {
 
                             if profileModel.editUserProfile.image2?.imageURL != nil  {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image2, photo: $photoModel.photo2, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image2, photo: $photoModel.photo2, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                 }
@@ -80,7 +80,7 @@ struct PreviewProfile: View {
 
                             if profileModel.editUserProfile.image3?.imageURL != nil {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image3, photo: $photoModel.photo3, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image3, photo: $photoModel.photo3, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                 }
@@ -106,7 +106,7 @@ struct PreviewProfile: View {
                             
                             if profileModel.editUserProfile.image4?.imageURL != nil {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image4, photo: $photoModel.photo4, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image4, photo: $photoModel.photo4, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                 }
@@ -132,7 +132,7 @@ struct PreviewProfile: View {
                         
                             if profileModel.editUserProfile.image5?.imageURL != nil  {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image5, photo: $photoModel.photo5, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image5, photo: $photoModel.photo5, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                 }
@@ -140,7 +140,7 @@ struct PreviewProfile: View {
                         
                             if profileModel.editUserProfile.image6?.imageURL != nil  {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image6, photo: $photoModel.photo6, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: geometry.size.height/2))
+                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image6, photo: $photoModel.photo6, customModifier: PreviewProfileModifier(width: geometry.size.width-10, height: .infinity))
                                         .cornerRadius(20)
                                         .padding(5)
                                 }

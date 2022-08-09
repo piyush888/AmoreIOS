@@ -42,10 +42,12 @@ struct ContentView: View {
         else {
             // If logged In
             // If User Profile Data pulled from Firestore
+            
             if profileModel.profileFetchedAndReady {
                 ZStack {
-                    // If User profile already created
-                    if profileModel.userProfile.email != nil {
+                    // If User profile already created  or onboarding is done
+//                    if profileModel.userProfile.email != nil {
+                    if profileModel.profileCreationDone {
                         // If 2 or more photos already added
                         if profileModel.minPhotosAdded {
                             // If filter and location data is fetched and ready
@@ -118,7 +120,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
             
             
             // Pull profile data first
