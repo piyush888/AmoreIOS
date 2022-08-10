@@ -217,7 +217,7 @@ struct EditCardInfo: View {
 
 struct EditCardInfo_Previews: PreviewProvider {
     static var previews: some View {
-        EditCardInfo(careerField:Binding.constant("Fashion"),
+        EditCardInfo(careerField:Binding.constant("Company Name"),
                      religion:Binding.constant("Atheism"),
                      politics:Binding.constant("Far Left"),
                      education:Binding.constant("High School"),

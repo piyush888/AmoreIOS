@@ -227,7 +227,7 @@ struct ChildCardView_Previews: PreviewProvider {
                                                 headline: "Hey Pumpkin",
                                                 profileDistanceFromUser: 0,
                                                 jobTitle: "VP",
-                                                careerField: "Career Field", // *
+                                                careerField: "Company Name", // *
                                                 height: 5.6,
                                                 education: "Masters in Science",
                                                 religion: "Hindu",

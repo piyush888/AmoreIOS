@@ -53,7 +53,7 @@ struct ShowMe: View {
     
     var navigationButton: some View {
         NavigationLink(
-            destination: AddWork()
+            destination: WorkSchoolCareer()
                 .environmentObject(profileModel),
             isActive: $formComplete,
             label: {
