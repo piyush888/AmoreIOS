@@ -23,8 +23,6 @@ class CardProfileModel: ObservableObject {
     @Published var profilesBeingFetched: Bool = false
     
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    @Published var lastSwipedCard: CardProfileWithPhotos? = nil
-    @Published var lastSwipeInfo: AllCardsView.LikeDislike? = nil
     @Published var filterRadius: CGFloat? = 2
     
     var apiURL = "http://127.0.0.1:5040"
@@ -101,6 +99,43 @@ class CardProfileModel: ObservableObject {
         
     }
     
+    static func cardProfileToCardProfileWithPhotos(card: CardProfile) -> CardProfileWithPhotos {
+        return CardProfileWithPhotos(id: card.id,
+                                     firstName: card.firstName,
+                                     lastName: card.lastName,
+                                     dateOfBirth: card.dateOfBirth,
+                                     interests: card.interests,
+                                     sexualOrientation: card.sexualOrientation,
+                                     sexualOrientationVisible: card.sexualOrientationVisible,
+                                     showMePreference: card.showMePreference,
+                                     work: card.work,
+                                     school: card.school,
+                                     age: card.age,
+                                     headline: card.headline,
+                                     profileDistanceFromUser: card.profileDistanceFromUser,
+                                     jobTitle: card.jobTitle,
+                                     careerField: card.careerField,
+                                     height: card.height,
+                                     education: card.education,
+                                     religion: card.religion,
+                                     community: card.community,
+                                     politics: card.politics,
+                                     location: card.location,
+                                     description: card.description,
+                                     country: card.country,
+                                     image1: card.image1,
+                                     image2: card.image2,
+                                     image3: card.image3,
+                                     image4: card.image4,
+                                     image5: card.image5,
+                                     image6: card.image6,
+                                     doYouWorkOut: card.doYouWorkOut,
+                                     doYouDrink: card.doYouDrink,
+                                     doYouSmoke: card.doYouSmoke,
+                                     doYouWantBabies: card.doYouWantBabies,
+                                     profileCompletion:card.profileCompletion)
+    }
+    
     func updateCardProfilesWithPhotos() {
         var tempCardsWithPhotos = [CardProfileWithPhotos]()
         
@@ -111,41 +146,10 @@ class CardProfileModel: ObservableObject {
                                             longitude: location.longitude.boundDouble)
             }
             
-            let cardProfileWithPhoto = CardProfileWithPhotos(id: card.id,
-                                                         firstName: card.firstName,
-                                                         lastName: card.lastName,
-                                                         dateOfBirth: card.dateOfBirth,
-                                                         interests: card.interests,
-                                                         sexualOrientation: card.sexualOrientation,
-                                                         sexualOrientationVisible: card.sexualOrientationVisible,
-                                                         showMePreference: card.showMePreference,
-                                                         work: card.work,
-                                                         school: card.school,
-                                                         age: card.age,
-                                                         headline: card.headline,
-                                                         profileDistanceFromUser: card.profileDistanceFromUser,
-                                                         jobTitle: card.jobTitle,
-                                                         careerField: card.careerField,
-                                                         height: card.height,
-                                                         education: card.education,
-                                                         religion: card.religion,
-                                                         community: card.community,
-                                                         politics: card.politics,
-                                                         location: card.location,
-                                                         description: card.description,
-                                                         country: card.country,
-                                                         image1: card.image1,
-                                                         image2: card.image2,
-                                                         image3: card.image3,
-                                                         image4: card.image4,
-                                                         image5: card.image5,
-                                                         image6: card.image6,
-                                                         doYouWorkOut: card.doYouWorkOut,
-                                                         doYouDrink: card.doYouDrink,
-                                                         doYouSmoke: card.doYouSmoke,
-                                                         doYouWantBabies: card.doYouWantBabies,
-                                                         profileCompletion:card.profileCompletion)
+            let cardProfileWithPhoto = CardProfileModel.cardProfileToCardProfileWithPhotos(card: card)
+            // Append in Array
             tempCardsWithPhotos.append(cardProfileWithPhoto)
+            // Append in Dict
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
@@ -156,7 +160,7 @@ class CardProfileModel: ObservableObject {
         if allCardsWithPhotosDeck.count < 10 && self.profilesBeingFetched == false {
             self.fetchProfile(filterData:filterData)
         } else {
-            print("No data is required in deck")
+//            print("No data is required in deck")
         }
     }
     

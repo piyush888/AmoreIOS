@@ -41,7 +41,7 @@ struct AllCardsView: View {
             // Progress Block
         } completed: { completed, skipped in
             // On Complete Block
-//            print("Prefetched image for ", card.id as Any)
+            //            print("Prefetched image for ", card.id as Any)
         }
     }
     
@@ -70,29 +70,37 @@ struct AllCardsView: View {
                 // Show all cards that user can swipe
                 ForEach(getCards()) { profile in
                     // Normal Card View being rendered here.
-                    SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
-                                   $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
-                                   singleProfile: profile,
-                                   onRemove: { removedUser in
-                                        // Remove that user from our array
-                                        cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
-                                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                                        self.buttonSwipeStatus = .none
-                                        cardProfileModel.lastSwipedCard = removedUser
-                            }
-                        )
-                        .animation(.spring())
-                        .frame(width: geometry.size.width)
-                        .environmentObject(photoModel)
-                        .environmentObject(cardProfileModel)
-                        .environmentObject(profileModel)
-                        .environmentObject(receivedGivenEliteModel)
-                        .environmentObject(filterModel)
+                    //                    SingleCardView(currentSwipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ?
+                    //                                   $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
+                    //                                   singleProfile: profile,
+                    //                                   cardSwipeDone: $cardSwipeDone,
+                    //                                   onRemove: { removedUser in
+                    //                                        // Remove that user from our array
+                    //                                        cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                    //                                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                    //                                        self.buttonSwipeStatus = .none
+                    ////                                        self.cardSwipeDone = true
+                    //                            }
+                    //                        )
+                    SingleCard(cardSwipeDone: $cardSwipeDone, swipeStatus: cardProfileModel.allCardsWithPhotosDeck.last == profile ? $buttonSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none), singleProfile: profile, onRemove: { removedUser in
+                        // Remove that user from Array of CardProfileWithPhotos O(n)
+                        cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                        // Remove that user from Dictionary: [ID: CardProfileWithPhotos] O(1)
+                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                        self.buttonSwipeStatus = .none
+                    })
+                    .animation(.spring())
+                    .frame(width: geometry.size.width)
+                    .environmentObject(photoModel)
+                    .environmentObject(cardProfileModel)
+                    .environmentObject(profileModel)
+                    .environmentObject(receivedGivenEliteModel)
+                    .environmentObject(filterModel)
                     
                 }
-                .onChange(of: cardProfileModel.allCardsWithPhotosDeck) { _ in
-                    self.cardSwipeDone = true
-                }
+                //                .onChange(of: cardProfileModel.allCardsWithPhotosDeck.count) { _ in
+                //                    self.cardSwipeDone = true
+                //                }
                 
                 // Buttons and other interaction on top of cards
                 VStack {
@@ -145,7 +153,9 @@ struct AllCardsView: View {
                                                 profileId: profile.id.bound,
                                                 showingAlert:self.$showingAlert,
                                                 onRemove: { profileId in
+                                                    // Remove from Array
                                                     cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == profileId }
+                                                    // Remove from Dict
                                                     cardProfileModel.cardsDictionary.removeValue(forKey: profileId)
                                                 }
                                             )

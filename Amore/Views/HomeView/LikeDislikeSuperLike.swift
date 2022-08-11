@@ -23,13 +23,22 @@ struct LikeDislikeSuperLike: View {
         HStack {
             // Rewind Button
             Button {
-                if cardProfileModel.lastSwipedCard != nil && cardProfileModel.lastSwipeInfo != nil {
-                    cardProfileModel.allCardsWithPhotosDeck.append(cardProfileModel.lastSwipedCard!)
-                    cardProfileModel.cardsDictionary[cardProfileModel.lastSwipedCard!.id!] = cardProfileModel.lastSwipedCard!
-                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {}, swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
-                    receivedGivenEliteModel.rewindAction(swipedUserId: cardProfileModel.lastSwipedCard?.id, swipeInfo: cardProfileModel.lastSwipeInfo!)
-                    cardProfileModel.lastSwipedCard = nil
-                    cardProfileModel.lastSwipeInfo = nil
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {
+                        rewindedUserCard in
+                        let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
+                        
+                        // Append rewinded user in Array
+                        cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
+                        
+                        // Append rewinded user in Dict
+                        if let rewindedUserId = cardProfileWithPhotos.id {
+                            cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
+                            receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
+                        }
+                        cardSwipeDone = true
+                    })
                 }
             } label: {
                 Image(systemName: "arrowshape.turn.up.backward.circle.fill")
@@ -37,14 +46,16 @@ struct LikeDislikeSuperLike: View {
                     .frame(width:35, height:35)
                     .foregroundColor(.orange)
             }
+            .disabled(!cardSwipeDone)
 
             Spacer()
             
             // Dislike Button
             Button {
+                // If card swiping action is finished
                 if cardSwipeDone {
-                    buttonSwipeStatus = AllCardsView.LikeDislike.dislike
                     cardSwipeDone = false
+                    buttonSwipeStatus = AllCardsView.LikeDislike.dislike
                 }
             } label: {
                 Image(systemName: "xmark.circle.fill")
@@ -62,8 +73,8 @@ struct LikeDislikeSuperLike: View {
             // Superlike Button
             Button {
                 if cardSwipeDone {
-                    buttonSwipeStatus = AllCardsView.LikeDislike.superlike
                     cardSwipeDone = false
+                    buttonSwipeStatus = AllCardsView.LikeDislike.superlike
                 }
             } label: {
                 Image(systemName: "star.circle.fill")
@@ -79,8 +90,8 @@ struct LikeDislikeSuperLike: View {
             // Like Button
             Button {
                 if cardSwipeDone {
-                    buttonSwipeStatus = AllCardsView.LikeDislike.like
                     cardSwipeDone = false
+                    buttonSwipeStatus = AllCardsView.LikeDislike.like
                 }
             } label: {
                 Image(systemName: "heart.circle.fill")

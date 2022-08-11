@@ -23,7 +23,7 @@ struct HomeView: View {
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     @EnvironmentObject var storeManager: StoreManager
     @EnvironmentObject var chatModel: ChatModel
-    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
+    @StateObject var mainMessagesModel = MainMessagesViewModel()
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
     
@@ -128,7 +128,6 @@ struct HomeView_Previews: PreviewProvider {
                 .environmentObject(ReportActivityModel())
                 .environmentObject(StoreManager())
                 .environmentObject(ChatModel())
-                .environmentObject(MainMessagesViewModel())
             HomeView()
                 .previewDisplayName("iPhone 13 Mini")
                 .previewDevice("iPhone 13 Mini")
@@ -141,7 +140,6 @@ struct HomeView_Previews: PreviewProvider {
                 .environmentObject(ReportActivityModel())
                 .environmentObject(StoreManager())
                 .environmentObject(ChatModel())
-                .environmentObject(MainMessagesViewModel())
             HomeView()
                 .previewDisplayName("iPhone 12 Mini")
                 .previewDevice("iPhone 12 Mini")
@@ -154,7 +152,6 @@ struct HomeView_Previews: PreviewProvider {
                 .environmentObject(ReportActivityModel())
                 .environmentObject(StoreManager())
                 .environmentObject(ChatModel())
-                .environmentObject(MainMessagesViewModel())
             HomeView()
                 .previewDisplayName("iPhone 12 Pro")
                 .previewDevice("iPhone 12 Pro")
@@ -167,7 +164,6 @@ struct HomeView_Previews: PreviewProvider {
                 .environmentObject(ReportActivityModel())
                 .environmentObject(StoreManager())
                 .environmentObject(ChatModel())
-                .environmentObject(MainMessagesViewModel())
             HomeView()
                 .previewDisplayName("iPhone 11")
                 .previewDevice("iPhone 11")
@@ -180,7 +176,6 @@ struct HomeView_Previews: PreviewProvider {
                 .environmentObject(ReportActivityModel())
                 .environmentObject(StoreManager())
                 .environmentObject(ChatModel())
-                .environmentObject(MainMessagesViewModel())
         }
     }
 }

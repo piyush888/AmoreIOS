@@ -196,13 +196,13 @@ class ReceivedGivenEliteModel: ObservableObject {
         }
     }
     
-    func rewindAction(swipedUserId: String?, swipeInfo: AllCardsView.LikeDislike) {
+    func rewindAction(swipedUserId: String?) {
         if let swipedUserId = swipedUserId {
-            if swipeInfo == .like {
+            if likesGivenPhotos_Dict[swipedUserId] != nil {
                 likesGivenPhotos.removeAll { $0.id == swipedUserId }
                 likesGivenPhotos_Dict.removeValue(forKey: swipedUserId)
             }
-            else if swipeInfo == .superlike {
+            else if superLikesGivenPhotos_Dict[swipedUserId] != nil {
                 superLikesGivenPhotos.removeAll { $0.id == swipedUserId }
                 superLikesGivenPhotos_Dict.removeValue(forKey: swipedUserId)
             }
