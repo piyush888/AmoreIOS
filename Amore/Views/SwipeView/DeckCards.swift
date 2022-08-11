@@ -67,7 +67,10 @@ struct SingleCard: View {
     
     @State var singleProfile: CardProfileWithPhotos
     @State var translation: CGSize = .zero
+    @GestureState var dragOffset: CGSize = .zero
+    
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
+    @State var isScrollable: AllCardsView.LikeDislike = .none
     
     var onRemove: (_ user: CardProfileWithPhotos) -> Void
     
@@ -109,6 +112,16 @@ struct SingleCard: View {
         self.onRemove(self.singleProfile)
     }
     
+    func checkSwipeGesture(geometry:GeometryProxy, value: DragGesture.Value) {
+        if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
+                self.dragSwipeStatus = .like
+            } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
+                self.dragSwipeStatus = .dislike
+            } else {
+                self.dragSwipeStatus = .none
+            }
+        
+    }
     
     var body: some View {
         
@@ -119,23 +132,18 @@ struct SingleCard: View {
                 ChildCardView(singleProfile: getProfile(),
                               testing:false)
                 .animation(.interactiveSpring())
-                .offset(x: self.translation.width, y: 0)
+                .offset(x: self.translation.width + self.dragOffset.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
                 // Dragging from UI
                 .gesture(
                     DragGesture()
-                        .onChanged { value in
-                            self.translation = value.translation
-                            
-                            if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
-                                self.dragSwipeStatus = .like
-                            } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
-                                self.dragSwipeStatus = .dislike
-                            } else {
-                                self.dragSwipeStatus = .none
+                        .updating($dragOffset, body: { (value, state, transaction) in
+                            state = value.translation
+                            DispatchQueue.main.async {
+                                self.checkSwipeGesture(geometry:geometry,value:value)
                             }
-                            
-                    }.onEnded { value in
+                        })
+                        .onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                             let cardGesturePct = self.getGesturePercentage(geometry, from: value)
                             if abs(cardGesturePct) > self.thresholdPercentage {
@@ -144,10 +152,10 @@ struct SingleCard: View {
                                     // For smoother swipe of the card
                                     self.translation = cardGesturePct < 0 ? CGSize(width: -500, height: 0) : CGSize(width: 500, height: 0)
                                 }
-//                                cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                             } else {
                                 self.translation = .zero
                             }
+                            print("Translation on ended \(self.translation)")
                         }
                 )
                 // Buttons
@@ -163,10 +171,15 @@ struct SingleCard: View {
                     else if newValue == AllCardsView.LikeDislike.superlike {
                         self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {}
                     }
-//                    cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                 }
+                
                 .environmentObject(profileModel)
                 
+                
+                
+                
+                
+                // Animation
                 if self.swipeStatus == .like || self.dragSwipeStatus == .like {
                     // Animation for like given
                     LottieView(name: "LikeLottie", loopMode: .playOnce)
