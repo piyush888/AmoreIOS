@@ -131,62 +131,57 @@ class FirestoreServices {
         }
     }
     
-    public static func undoLikeDislikeFirestore(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, swipedUserId: String?, swipeInfo: AllCardsView.LikeDislike) {
-        var subCollection: String? {
-            switch swipeInfo{
-            case .like: return "Likes"
-            case .dislike: return "Dislikes"
-            case .superlike: return "Superlikes"
-            case .none: return nil
+    public static func undoLikeDislikeFirestore(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: CardProfile) -> Void) {
+        var rewindedUserCard = CardProfile(CardProfileWithPhotos())
+        requestInProcessing = true
+        guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                return
             }
-        }
-        
-        if let swipedUserId = swipedUserId {
-            if let subCollection = subCollection {
-                requestInProcessing = true
-                guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
-                        return
-                    }
-                let body: [String: String] = ["currentUserID": Auth.auth().currentUser!.uid, "swipeInfo": subCollection, "swipedUserID": swipedUserId]
-                let finalBody = try! JSONSerialization.data(withJSONObject: body)
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                request.httpBody = finalBody
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let body: [String: String] = ["currentUserID": Auth.auth().currentUser!.uid]
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-                
-                URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                print("Error in API \(apiToBeUsed): \(error)")
+                onFailure()
+                return
+            }
+            
+            if let data = data {
+                // Check if you receive a valid httpresponse
+                if let httpResponse = response as? HTTPURLResponse {
                     
-                    if let error = error {
-                        print("Error in API \(apiToBeUsed): \(error)")
-                        onFailure()
-                        return
-                    }
-                    
-                    if let _ = data {
-                        // Check if you receive a valid httpresponse
-                        if let httpResponse = response as? HTTPURLResponse {
-                            
-                            if httpResponse.statusCode == 200 {
-                                DispatchQueue.main.async {
-                                    onSuccess()
-                                    print("Rewind Operation Successful")
-                                    self.requestInProcessing = false
-                                    return
-                                }
+                    if httpResponse.statusCode == 200 {
+                        DispatchQueue.main.async {
+                            do {
+                                rewindedUserCard = try JSONDecoder().decode(CardProfile.self, from: data)
+                                onSuccess(rewindedUserCard)
+                                print("Rewind Operation Successful")
                             }
-                            else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
-                                print("Unable to undo LikeDislike Firestore: \(apiToBeUsed), swipedUserId:\(swipedUserId)")
-                                DispatchQueue.main.async {
-                                    onFailure()
-                                    self.requestInProcessing = false
-                                }
+                            catch let jsonError as NSError {
+                              print("JSON decode failed Rewind Swipe: \(jsonError.localizedDescription)")
+                                onFailure()
                             }
+                            self.requestInProcessing = false
+                            return
                         }
                     }
-                }.resume()
+                    else if [400, 401, 403, 404, 500].contains(httpResponse.statusCode) {
+                        print("Unable to undo LikeDislike Firestore: \(apiToBeUsed), currentUserId:\(Auth.auth().currentUser?.uid)")
+                        DispatchQueue.main.async {
+                            onFailure()
+                            self.requestInProcessing = false
+                        }
+                    }
+                }
             }
-        }
+        }.resume()
     }
     
     public static func unmatchUser(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, otherUserId: String?) {

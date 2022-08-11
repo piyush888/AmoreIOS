@@ -16,18 +16,21 @@ struct SingleCardView: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var filterModel: FilterModel
     
-    @State private var translation: CGSize = .zero
+    @Binding var cardSwipeDone: Bool
     @Binding var swipeStatus: AllCardsView.LikeDislike
+    
+    @State private var translation: CGSize = .zero
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
+    
     var singleProfile: CardProfileWithPhotos
     private var onRemove: (_ user: CardProfileWithPhotos) -> Void
-    
     private var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
-    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: CardProfileWithPhotos, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
+    init(currentSwipeStatus: Binding<AllCardsView.LikeDislike>, singleProfile: CardProfileWithPhotos, cardSwipeDone: Binding<Bool>, onRemove: @escaping (_ user: CardProfileWithPhotos) -> Void) {
         self.singleProfile = singleProfile
         self.onRemove = onRemove
         _swipeStatus = currentSwipeStatus
+        _cardSwipeDone = cardSwipeDone
     }
     
     /// What percentage of our own width have we swipped
@@ -56,10 +59,11 @@ struct SingleCardView: View {
             }, onSuccess: {
                 onSuccess()
                 receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile,
-                                                                       swipeInfo: cardProfileModel.lastSwipeInfo ?? AllCardsView.LikeDislike.none)
+                                                                       swipeInfo: dragSwipeStatus == .none ? swipeStatus : dragSwipeStatus)
+                self.cardSwipeDone = true
             }, swipedUserId: self.singleProfile.id, swipeInfo: swipeInfo)
-            self.onRemove(self.singleProfile)
         })
+        self.onRemove(self.singleProfile)
     }
     
     
@@ -92,9 +96,7 @@ struct SingleCardView: View {
                         // determine snap distance > 0.5 aka half the width of the screen
                             let cardGesturePct = self.getGesturePercentage(geometry, from: value)
                             if abs(cardGesturePct) > self.thresholdPercentage {
-                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {
-                                    cardProfileModel.lastSwipeInfo = self.dragSwipeStatus
-                                }
+                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {}
                                 withAnimation {
                                     // For smoother swipe of the card
                                     self.translation = cardGesturePct < 0 ? CGSize(width: -500, height: 0) : CGSize(width: 500, height: 0)
@@ -109,23 +111,14 @@ struct SingleCardView: View {
                 .onChange(of: self.swipeStatus) { newValue in
                     if newValue == AllCardsView.LikeDislike.like {
                         self.translation = CGSize(width: 500, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.like
-                        }
-                        
+                        self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {}
                     }
                     else if newValue == AllCardsView.LikeDislike.dislike {
                         self.translation = CGSize(width: -500, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.dislike
-                        }
-                        
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {}
                     }
                     else if newValue == AllCardsView.LikeDislike.superlike {
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {
-                            cardProfileModel.lastSwipeInfo = AllCardsView.LikeDislike.superlike
-                        }
-                        
+                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {}
                     }
                     cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
                 }

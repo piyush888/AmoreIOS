@@ -12,6 +12,7 @@ import CoreLocation
 // Changes made in Child Card View have to be also reflected in the Preview Profile
 struct ChildCardView: View {
     
+    // Binding so that change in Profile while loading photos is reflected in View
     @Binding var singleProfile: CardProfileWithPhotos
     @EnvironmentObject var profileModel: ProfileViewModel
     @State var testing: Bool
