@@ -31,8 +31,6 @@ struct AmoreApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    @AppStorage("log_Status") var logStatus = false
-    
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // 1 - Configures app to work with Firebase.

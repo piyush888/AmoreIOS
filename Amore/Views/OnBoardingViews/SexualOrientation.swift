@@ -9,77 +9,42 @@ import SwiftUI
 
 struct SexualOrientation: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var profileModel: ProfileViewModel
     
+    @State var errorDesc: String = ""
+    @State var showAlert: Bool = false
+
     var selectionOrientationList = ["Straight","Gay","Lesbian","Bisexual",
                                     "Asexual","Demisexual","Pansexual",
-                                    "Queer","Questioning"]
+                                    "Queer","Questioning","Other"]
     
     @State var orientationsSelected = [String]()
     @State var showMyOrientation: Bool = false
     @State var sexualOrientationDataTaken: Bool = false
     
-    func checkInputDone () {
+    func checkSexualOrientation () {
         if (orientationsSelected.count > 0) {
             sexualOrientationDataTaken = true
-            addInputToProfile()
+            profileModel.userProfile.sexualOrientation = orientationsSelected
+            profileModel.userProfile.sexualOrientationVisible = showMyOrientation
         }
         else {
             sexualOrientationDataTaken = false
+            self.showAlert = true
+            self.errorDesc = "Please select atleast one Sexual Orientation"
         }
-    }
-    
-    func addInputToProfile () {
-        profileModel.userProfile.sexualOrientation = orientationsSelected
-        profileModel.userProfile.sexualOrientationVisible = showMyOrientation
     }
     
     var body: some View {
         
         VStack(alignment:.leading) {
             
-//            HStack {
-//                Text("My Sexual Orientation")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
+            SelectMultipleItems(selectionList:$orientationsSelected,
+                        optionsList:selectionOrientationList,
+                        filterName:"Sexual Orientation")
+                .padding(.horizontal,20)
             
-            HStack {
-                Text("Select up to 3")
-                    .font(.BoardingSubHeading)
-                    .padding(.bottom, 10)
-                Spacer()
-            }.padding(.bottom, 30)
-            
-            
-            // LazyVGrid
-            ForEach(selectionOrientationList, id: \.self) { item in
-                
-                let orientationChoosen = orientationsSelected.contains("\(item)")
-                
-                Button(action: {
-                    // Add/Remove to passionSelected
-                    if orientationsSelected.contains("\(item)") {
-                        // Remove if button clicked again
-                        if let index = orientationsSelected.firstIndex(of: item) {
-                            orientationsSelected.remove(at: index)
-                        }
-                    } else if(orientationsSelected.count < 3) {
-                        // Add if passion doesn't exist in list
-                        orientationsSelected.append(item)
-                    }
-                    // Load the passionSelected to firebase
-                }) {
-                    ZStack {
-                        Text("\(item)")
-                            .foregroundColor(orientationChoosen == true ? .black : .pink)
-                            .bold()
-                            .font(.BoardingSubHeading)
-                            .padding(.bottom, 10)
-                    }
-                }
-            }
             
             Spacer()
             
@@ -93,30 +58,31 @@ struct SexualOrientation: View {
             .toggleStyle(CheckboxStyle())
             
             // Continue to next view
-            NavigationLink(destination: ShowMe()
-                            .environmentObject(profileModel),
-                           isActive: $sexualOrientationDataTaken,
-                           label: {
-                Button{
-                    checkInputDone()
-                } label : {
-                    ZStack{
-                        Rectangle()
-                            .frame(height:45)
-                            .cornerRadius(5.0)
-                            .foregroundColor(.pink)
-                        
-                        Text("Continue")
-                            .foregroundColor(.white)
-                            .bold()
-                            .font(.BoardingButton)
-                    }
-                }.padding(.bottom, 10)
-            })
-
+            navigationButton
+                .padding(.horizontal,20)
         }
-        .padding(20)
-        .navigationBarTitle("My Sexual Orientation")
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Alert"),
+                  message: Text("\(errorDesc)"), dismissButton: .default(Text("OK"))
+            )
+        }
+
+    }
+    
+    var navigationButton: some View {
+        NavigationLink(
+            destination: ShowMe()
+                .environmentObject(profileModel),
+            isActive: $sexualOrientationDataTaken,
+            label: {
+                Button{
+                    checkSexualOrientation()
+                } label : {
+                    ContinueButtonDesign()
+                }
+                .padding(.horizontal,30)
+                .padding(.top,10)
+            })
     }
 }
 

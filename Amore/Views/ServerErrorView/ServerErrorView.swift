@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct ServerErrorView: View {
     
-    @AppStorage("log_Status") var logStatus = false
+    @AppStorage("log_Status") var log_Status = false
     @EnvironmentObject var photoModel: PhotoModel
     let email = "support@aidronesoftware.com"
     
@@ -59,7 +59,7 @@ struct ServerErrorView: View {
                                 photoModel.resetPhotosOnLogout()
                             }
                             try! Auth.auth().signOut()
-                            logStatus = false
+                            log_Status = false
                         } label : {
                             ZStack {
                                 Capsule()

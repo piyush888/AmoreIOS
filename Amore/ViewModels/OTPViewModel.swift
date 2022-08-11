@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+
 class OTPViewModel: ObservableObject {
-    
-    var verificationCode: Binding<String> = .constant("")
-    
+
+    var otpVerificationCode: String = ""
+
     func updateEnteredVerificationCode() {
-        self.verificationCode.wrappedValue = String(Array(otpField))
+        self.otpVerificationCode = String(Array(otpField))
     }
-    
+
     @Published var otpField = "" {
         didSet {
             guard otpField.count <= 6,
@@ -60,11 +61,11 @@ class OTPViewModel: ObservableObject {
         }
         return String(Array(otpField)[5])
     }
-   
+
     @Published var borderColor: Color = .pink
     @Published var isTextFieldDisabled = false
     var successCompletionHandler: (()->())?
-    
+
     @Published var showResendText = false
 
 }

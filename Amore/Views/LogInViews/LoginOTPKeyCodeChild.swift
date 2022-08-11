@@ -9,8 +9,9 @@ import SwiftUI
 
 struct LoginOTPKeyCodeChild: View {
     
-    @Binding var verificationCode: String
-    @StateObject var viewModel = OTPViewModel()
+    @EnvironmentObject var otpViewModel: OTPViewModel
+    
+//    @Binding var otpVerificationCode: String
     @State var isFocused = false
   
     let textBoxWidth = UIScreen.main.bounds.width / 10
@@ -28,18 +29,18 @@ struct LoginOTPKeyCodeChild: View {
                   
                   HStack (spacing: spaceBetweenBoxes){
                       
-                      otpText(text: viewModel.otp1)
-                      otpText(text: viewModel.otp2)
-                      otpText(text: viewModel.otp3)
-                      otpText(text: viewModel.otp4)
-                      otpText(text: viewModel.otp5)
-                      otpText(text: viewModel.otp6)
+                      otpText(text: otpViewModel.otp1)
+                      otpText(text: otpViewModel.otp2)
+                      otpText(text: otpViewModel.otp3)
+                      otpText(text: otpViewModel.otp4)
+                      otpText(text: otpViewModel.otp5)
+                      otpText(text: otpViewModel.otp6)
                   }
                   
                   
-                  TextField("", text: $viewModel.otpField)
-                  .frame(width: isFocused ? 0 : textFieldOriginalWidth, height: textBoxHeight)
-                  .disabled(viewModel.isTextFieldDisabled)
+                  TextField("", text: $otpViewModel.otpField)
+                  .frame(height: textBoxHeight)
+                  .disabled(otpViewModel.isTextFieldDisabled)
                   .textContentType(.oneTimeCode)
                   .foregroundColor(.clear)
                   .accentColor(.clear)
@@ -52,10 +53,10 @@ struct LoginOTPKeyCodeChild: View {
     }
     
     private func otpText(text: String) -> some View {
-        viewModel.verificationCode = $verificationCode
+//              otpViewModel.otpVerificationCode = $otpVerificationCode
               return Text(text)
                   .font(.title)
-                .foregroundColor(.pink)
+                  .foregroundColor(.pink)
                   .frame(width: textBoxWidth, height: textBoxHeight)
                   .background(VStack{
                     Spacer()
@@ -71,6 +72,7 @@ struct LoginOTPKeyCodeChild: View {
 
 struct NumberCode2_Previews: PreviewProvider {
     static var previews: some View {
-        LoginOTPKeyCodeChild(verificationCode: Binding.constant(""))
+        LoginOTPKeyCodeChild()
+            .environmentObject(OTPViewModel())
     }
 }

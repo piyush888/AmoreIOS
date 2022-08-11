@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct UserSettingView: View {
     
-    @AppStorage("log_Status") var logStatus = false
+    @AppStorage("log_Status") var log_Status = false
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
@@ -58,7 +58,7 @@ struct UserSettingView: View {
                     adminAuthenticationModel.removeCookies()
                     // Firestore logout
                     try! Auth.auth().signOut()
-                    logStatus = false
+                    log_Status = false
                 } label : {
                     ZStack {
                         Capsule()

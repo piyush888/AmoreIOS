@@ -11,121 +11,72 @@ import FirebaseFirestoreSwift
 struct Passions: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
-    
     @State var isPassionsSelectionDone: Bool = false
+    @State var showAlert: Bool = false
+    @State var errorDesc: String = ""
+    @Environment(\.colorScheme) var colorScheme
     
-    var passions = ["Photography", "Shopping", "Yoga","Cooking",
-                    "Travelling","Cricket","Running","Swimming","Art","Extreme",
-                    "Music","Drink","Gaming","Partying","Workout","Pets","Sports",
-                    "Reading","Volunteering","Singing","Movies","Nature","Entrepreneurship",
-                    "Programming"]
+    var passions = ["Animals", "Art", "Business", "Comedy", "Community Service", "Cooking", "Cricket", "Dancing", "Drink", "Entrepreneurship", "Extreme", "Fashion", "Fitness", "Introvert", "Gaming", "Gardening", "Healthy Eating", "Hiking", "Meditation", "Movies", "Music", "Nature", "Nature", "Partying", "Personal Growth", "Pets", "Photography", "Programming", "Reading", "Relationship", "Relaxation", "Running", "Shopping", "Singing", "Social Engagement", "Social Media", "Spirituality", "Sports", "Swimming", "Travelling", "Trekking", "Volunteering", "Walking", "Workout", "Yoga", "Sleeping","Other"]
     
     @State var passionSelected = [String]()
     
-    let adaptivecolumns = Array(repeating:
-                                    GridItem(.adaptive(minimum: 150),
-                                             spacing: 5,
-                                             alignment: .center),count: 2)
     
     func checkPassionsSelectionDone() {
-        if (passionSelected.count > 0) {
-            addInputToProfile()
+        self.errorDesc = ""
+        showAlert = false
+        if (passionSelected.count > 2) {
+            profileModel.userProfile.interests = passionSelected
             isPassionsSelectionDone = true
         }
         else {
             isPassionsSelectionDone = false
+            self.errorDesc =  "Please choose atleast 3 passions"
+            self.showAlert = true
         }
     }
     
-    func addInputToProfile() {
-        profileModel.userProfile.interests = passionSelected
-    }
     
     var body: some View {
         
         VStack(alignment:.leading) {
             
-//            HStack {
-//                Text("Choose 5 interest")
-//                    .font(.BoardingTitle)
-//                    .padding(.bottom, 10)
-//                Spacer()
-//            }
-            
             Text("Select a few of your interests and let everyone know what you're passionate about")
-                .font(.BoardingSubHeading)
-                .padding(.bottom,40)
+                .padding(.top,5)
+                .padding(.horizontal,30)
+                .foregroundColor(colorScheme == .dark ? Color.white: Color.gray)
+                .font(.caption)
             
-            // LazyVGrid
-            ScrollView(showsIndicators:false) {
+            SelectMultipleItems(selectionList:$passionSelected,
+                        optionsList:passions,
+                        filterName:"Passions")
+                .padding(.horizontal,20)
                 
-                LazyVGrid(columns: adaptivecolumns, content: {
-                    
-                    ForEach(passions, id: \.self) { item in
-                        
-                        let passionChoosen = passionSelected.contains("\(item)")
-                        
-                        Button(action: {
-                            // Add/Remove to passionSelected
-                            if passionSelected.contains("\(item)") {
-                                // Remove if button clicked again
-                                if let index = passionSelected.firstIndex(of: item) {
-                                    passionSelected.remove(at: index)
-                                }
-                            } else if(passionSelected.count < 5) {
-                                // Add if passion doesn't exist in list
-                                passionSelected.append(item)
-                            }
-                            
-                            // Load the passionSelected to firebase
-                        }) {
-                            ZStack {
-                                Rectangle()
-                                    .frame(height:45)
-                                    .cornerRadius(5.0)
-                                    .foregroundColor(passionChoosen == true ? .pink : .white)
-                                    .overlay(RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.pink, lineWidth: 1))
-                                    
-                                
-                                Text("\(item)")
-                                    .foregroundColor(passionChoosen == true ? .white : .black)
-                                    .font(.BoardingSubHeading)
-                            }
-                        }
-                    }
-                })
-            }.padding(.bottom,85)
-            
-            Spacer()
-            
+    
             // Continue to next view
-            
-            NavigationLink(
-                destination: IAmA()
-                    .environmentObject(profileModel),
-                isActive: $isPassionsSelectionDone,
-                label: {
-                    Button{
-                        checkPassionsSelectionDone()
-                    } label : {
-                        ZStack{
-                            Rectangle()
-                                .frame(height:45)
-                                .cornerRadius(5.0)
-                                .foregroundColor(.pink)
-                                
-                            Text("Continue")
-                                .foregroundColor(.white)
-                                .bold()
-                                .font(.BoardingButton)
-                        }
-                    }.padding(.bottom, 10)
-                })
-            
+            navigationButton
+                .padding(.horizontal,20)
         }
-        .padding(20)
-        .navigationBarTitle("Choose upto 5 interests")
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Alert"),
+                  message: Text("\(self.errorDesc)"), dismissButton: .default(Text("OK"))
+            )
+        }
+    }
+    
+    var navigationButton: some View {
+        NavigationLink(
+            destination: Gender()
+                .environmentObject(profileModel),
+            isActive: $isPassionsSelectionDone,
+            label: {
+                Button{
+                    checkPassionsSelectionDone()
+                } label : {
+                    ContinueButtonDesign()
+                }
+                .padding(.horizontal,30)
+                .padding(.bottom, 10)
+            })
     }
 }
 

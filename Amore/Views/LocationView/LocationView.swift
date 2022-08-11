@@ -11,7 +11,6 @@ import SwiftUI
 struct LocationView: View {
     
     // LocationModel is an observable object
-//    @EnvironmentObject var locationModel: LocationModel
     @EnvironmentObject var profileModel: ProfileViewModel
     
     var body: some View {
@@ -76,5 +75,6 @@ struct LocationView: View {
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         LocationView()
+            .environmentObject(ProfileViewModel())
     }
 }

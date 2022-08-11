@@ -11,78 +11,119 @@ import FirebaseAuth
 
 struct LoginOTPKeyCodeParent: View {
     
+    @EnvironmentObject var firebaseSvcObj: FirebaseServices
     @EnvironmentObject var profileModel: ProfileViewModel
-//    @EnvironmentObject var streamModel: StreamViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @StateObject var otpViewModel = OTPViewModel()
     
-    @Binding var otpGeneratedOnce: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
-        VStack {
-            
-            VStack(alignment: .leading) {
-                Text("Type the verification code we've sent ")
-                    .font(.BoardingTitle)
-                    .padding(.bottom, 10)
-                
-                HStack {
-                        
-                    Button {
-                        otpGeneratedOnce = false
-                    } label: {
-                        Text("\(profileModel.phoneNumber)")
-                            .foregroundColor(.pink)
+            VStack {
+                    
+                    // Verification headline
+                    // "Please enter the OTP..." comment
+                    viewHeader
+                        .padding(.top, 30)
+                        .padding(.bottom, 100)
+                        .onTapGesture {
+                            self.hideKeyboard()
+                        }
+                    
+                    // OTP Text Field
+                    VStack(alignment: .center) {
+//                        LoginOTPKeyCodeChild(otpVerificationCode: $otpVerificationCode)
+                        LoginOTPKeyCodeChild()
+                            .environmentObject(otpViewModel)
                     }
+                    
+                    // OTP Submit button
+                    submitFormButton
+                        .padding(.top, 50)
+                    
+                    // Send again button
+                    sendAgainButton
                     
                     Spacer()
-                    
-                    Button {
-                        profileModel.currentVerificationId = FirebaseServices.requestOtp(phoneNumber: profileModel.phoneNumber)
-                    } label: {
-                        Text("Send Again")
-                         .foregroundColor(.black)
-                    }
-                }.padding(.top,20)
+                }
+            .alert(isPresented: $profileModel.showAlert) {
+                Alert(title: Text("Incorrect OTP"),
+                      message: Text("The SMS verification code used to create the phone auth credential is invalid. Please resend the verification code SMS and be sure to use the verification code provided by the user."), dismissButton: .default(Text("OK"))
+                )
             }
-            .padding(.top, 100)
-            
-            // OTP Text Field
-            VStack(alignment: .center) {
-                LoginOTPKeyCodeChild(verificationCode: $profileModel.verificationCode)
-            }
-            .padding(.top, 130)
-            
-            // OTP Submit button
-            Button(action: {
-//                profileModel.signIn(streamObj: streamModel, adminAuthenticationObj: adminAuthenticationModel)
-                profileModel.signIn(adminAuthenticationObj: adminAuthenticationModel)
-            }) {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(.pink)
-                    
-                    Text("Log In")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
+            .padding(.horizontal,20)
+            .navigationBarTitle("Verify OTP")
+            .navigationBarTitleDisplayMode(.inline)
+        
+    }
+    
+    
+    
+    var viewHeader: some View {
+        VStack(alignment:.leading) {
+
+            Text("Please enter the OTP sent to your number \(profileModel.phoneNumber) to complete the verification")
+                .font(.body)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(colorScheme == .dark ? Color.white: Color.gray)
+        }
+    }
+    
+    // button to send the OTP again
+    var sendAgainButton: some View {
+        
+        Button {
+            firebaseSvcObj.requestOtp(phoneNumber: profileModel.phoneNumber)
+        } label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(Color(hex: 0xe8f4f8))
+                    .frame(width:200, height:50)
+                
+                HStack {
+                    Image(systemName:"repeat.circle.fill")
+                        .resizable()
+                        .frame(width:30,height:30)
+                    Text("Re-send OTP")
                 }
             }
-            .padding(.top, 80)
-            Spacer()
         }
-        .alert(isPresented: $profileModel.showAlert) {
-            Alert(title: Text(""), message: Text("The SMS verification code used to create the phone auth credential is invalid. Please resend the verification code SMS and be sure to use the verification code provided by the user."), dismissButton: .default(Text("OK")))
-        }
-        .padding(.horizontal,40)
     }
+    
+    
+    // OTP Submit button
+    var submitFormButton: some View {
+        Button(action: {
+            profileModel.signIn(adminAuthenticationObj: adminAuthenticationModel,
+                                otpVerificationCode: otpViewModel.otpVerificationCode)
+        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(Color.pink)
+                    .frame(width:200, height:50)
+            
+                Text("Log In")
+                    .bold()
+                    .foregroundColor(.white)
+            }
+        }
+        
+    }
+    
+    
 }
 
 
 struct LoginOTPKeyCodeParent_Previews: PreviewProvider {
     static var previews: some View {
-        LoginOTPKeyCodeParent(otpGeneratedOnce: Binding.constant(true))
+        NavigationView {
+            ForEach(ColorScheme.allCases, id: \.self) {
+                LoginOTPKeyCodeParent()
+                    .preferredColorScheme($0)
+                    .environmentObject(ProfileViewModel())
+                    .environmentObject(AdminAuthenticationViewModel())
+            }
+        }
     }
 }

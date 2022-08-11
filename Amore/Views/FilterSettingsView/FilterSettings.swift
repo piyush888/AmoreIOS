@@ -10,10 +10,8 @@ import SwiftUI
 struct FilterSettings: View {
     
     
-    var careerList = ["Media & Entertainment", "Fashion", "Arts, Entertainment and Recreation", "Education", "Healthcare",
-                     "Accommodation and Food Services", "Technology", "Construction", "Real Estate", "Retail Trade", "Energy",
-                      "Finance", "Information", "Mining", "Manufacturing", "Government", "Automobile", "Consumer Services", "Transportation",
-                     "Law Professional", "All (Default)"]
+    var careerList = ["Accommodation and Food Services", "Arts, Entertainment and Recreation", "Automobile", "Construction", "Consumer Services", "Education", "Energy", "Fashion", "Finance", "Government", "Healthcare", "Information", "Law Professional", "Manufacturing", "Media & Entertainment", "Mining", "Real Estate", "Retail Trade", "Space", "Start Up", "Student","Technology", "Transportation","All (Default)"]
+    
     
     var religionsList = ["Atheism", "Bahá'í", "Buddhism", "Christianity", "Confucianism", "Druze", "Gnosticism", "Hinduism",
                          "Islam", "Jainism", "Judaism", "Rastafarianism", "Shinto", "Sikhism", "Zoroastrianism",
@@ -85,7 +83,7 @@ struct FilterSettings: View {
                     NavigationLink(
                           destination: SelectSingleItem(selection:$filterModel.filterData.genderPreference.bound,
                                                         optionsList:["Male", "Female", "All (Default)"],
-                                                        filterName:"Gender"),
+                                                        filterName:"Gender").padding(20),
                           label: {
                                   FilterCommonContainer(filterName:"Gender",
                                                         filteredValue:"Modify")
@@ -100,7 +98,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.religionPreference.boundStringArray,
                                                         optionsList:religionsList,
-                                                        filterName:"Religion"),
+                                                        filterName:"Religion").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Religion",
                                                       filteredValue:"Modify")
@@ -110,7 +108,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.careerPreference.boundStringArray,
                                                         optionsList:careerList,
-                                                         filterName:"Career"),
+                                                         filterName:"Career").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Career",
                                                       filteredValue:"Modify")
@@ -120,7 +118,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.educationPreference.boundStringArray,
                                                         optionsList:educationList,
-                                                         filterName:"Education"),
+                                                         filterName:"Education").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Education",
                                                       filteredValue:"Modify")
@@ -130,7 +128,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.countryPreference.boundStringArray,
                                                         optionsList:countryPreferenceList,
-                                                         filterName:"Raised In"),
+                                                         filterName:"Raised In").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Raised In",
                                                       filteredValue:"Modify")
@@ -144,7 +142,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.politicalPreference.boundStringArray,
                                                         optionsList:politicalPreferenceList,
-                                                         filterName:"Politics"),
+                                                         filterName:"Politics").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Politics",
                                                       filteredValue:"Modify")
@@ -154,7 +152,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.smoker.boundStringArray,
                                                         optionsList:smokerPreferenceList,
-                                                         filterName:"Smoker"),
+                                                         filterName:"Smoker").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Smoker",
                                                       filteredValue:"Modify")
@@ -164,7 +162,7 @@ struct FilterSettings: View {
                     NavigationLink(
                         destination: SelectMultipleItems(selectionList:$filterModel.filterData.drink.boundStringArray,
                                                         optionsList:drinkPreferenceList,
-                                                         filterName:"Drink"),
+                                                         filterName:"Drink").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Drink",
                                                       filteredValue:"Modify")

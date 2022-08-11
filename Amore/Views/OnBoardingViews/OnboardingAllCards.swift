@@ -27,7 +27,6 @@ struct OnboardingAllCards: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
-            
             HStack(spacing: 4) {
                 ForEach(0..<onboardingModel.onboardingsData.count) { index in
                     Capsule()
@@ -36,8 +35,9 @@ struct OnboardingAllCards: View {
                         .animation(.easeInOut, value: tabSelectionIndex)
                 }
             }
+            .padding(.bottom,30)
         }
-        .frame(height: UIScreen.main.bounds.size.height * 0.75, alignment: .center)
+//        .frame(height: UIScreen.main.bounds.size.height * 0.75, alignment: .center)
     }
 }
 
