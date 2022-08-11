@@ -39,12 +39,12 @@ struct AddPhotosView: View {
                 
             
             // Give the user options to add photos
-            ZStack{
+            ZStack {
                 // Display Photos
                 LazyVGrid(columns: adaptivecolumns, content: {
                     UploadWindowsGroup()
                         .environmentObject(photoModel)
-                })
+                    })
                     .disabled(photoModel.photoAction)
                     .grayscale(photoModel.photoAction ? 0.5 : 0)
                 
@@ -57,41 +57,50 @@ struct AddPhotosView: View {
          
             Spacer()
             
-            Button{
-                // Store the images in the firestore database
-                if profileModel.numOfUserPhotosAdded() >= 2 {
-                    // Update to firestore
-                    print("Continue to HomePage...")
-                    profileModel.checkMinNumOfPhotosUploaded()
-                } else {
-                    showsAlert = true
-                    print("Alert atleast 2 photos are required")
-                }
-            } label : {
-                ZStack{
-                    Rectangle()
-                        .frame(height:45)
-                        .cornerRadius(5.0)
-                        .foregroundColor(profileModel.numOfUserPhotosAdded() < 2 ? .gray : .pink)
-                        
-                    Text("Continue")
-                        .foregroundColor(.white)
-                        .bold()
-                        .font(.BoardingButton)
-                }
-            }
-            .disabled(profileModel.numOfUserPhotosAdded() < 2)
-            .padding(.horizontal,50)
+            buttonView
+            
         }
         .alert(isPresented: self.$showsAlert) {
                    Alert(title: Text(""),message: Text("Atleast 2 photos are required"))
                }
         .padding(20)
     }
+    
+    
+    var buttonView: some View {
+        
+        Button{
+            // Store the images in the firestore database
+            if profileModel.numOfUserPhotosAdded() >= 2 {
+                // Update to firestore
+                print("Continue to HomePage...")
+                profileModel.checkMinNumOfPhotosUploaded()
+            } else {
+                showsAlert = true
+                print("Alert atleast 2 photos are required")
+            }
+        } label : {
+            ZStack{
+                Rectangle()
+                    .frame(height:45)
+                    .cornerRadius(10.0)
+                    .foregroundColor(profileModel.numOfUserPhotosAdded() < 2 ? .gray : .pink)
+                
+                Text("Continue")
+                    .foregroundColor(.white)
+                    
+            }
+        }
+        .disabled(profileModel.numOfUserPhotosAdded() < 2)
+        .padding(.horizontal,50)
+    }
+    
 }
 
 struct AddPhotosView_Previews: PreviewProvider {
     static var previews: some View {
         AddPhotosView()
+            .environmentObject(ProfileViewModel())
+            .environmentObject(PhotoModel())
     }
 }
