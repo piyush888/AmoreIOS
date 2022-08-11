@@ -65,15 +65,16 @@ struct EditCardInfo: View {
     }
     
     var body: some View {
-        
-        Form {
-                
+        GeometryReader { geo in
+            Form {
                 // Photos only
                 Section(header: Text("Photos")) {
                     ZStack{
                         // Display Photos
                         LazyVGrid(columns: adaptivecolumns, content: {
-                            UploadWindowsGroup()
+                            UploadWindowsGroup(width:geo.size.width/3.8,
+                                               height:geo.size.height/4.8)
+                                .environmentObject(profileModel)
                                 .environmentObject(photoModel)
                         })
                         .disabled(photoModel.photoAction)
@@ -211,12 +212,13 @@ struct EditCardInfo: View {
                 .navigationBarTitle("Others")
                 .navigationBarTitleDisplayMode(.inline)
             }
-        
+        }
     }
 }
 
 struct EditCardInfo_Previews: PreviewProvider {
     static var previews: some View {
+        
         EditCardInfo(careerField:Binding.constant("Company Name"),
                      religion:Binding.constant("Atheism"),
                      politics:Binding.constant("Far Left"),
@@ -228,6 +230,57 @@ struct EditCardInfo_Previews: PreviewProvider {
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
+            .previewDisplayName("iPhone 13 Pro Max")
+            .previewDevice("iPhone 13 Pro Max")
+        
+        
+        
+        EditCardInfo(careerField:Binding.constant("Company Name"),
+                     religion:Binding.constant("Atheism"),
+                     politics:Binding.constant("Far Left"),
+                     education:Binding.constant("High School"),
+                     countryRaisedIn:Binding.constant("India"),
+                     doYouSmoke:Binding.constant("Socially"),
+                     doYouDrink:Binding.constant("Socially"),
+                     doYouWorkOut:Binding.constant("Socially"),
+                     formUpdated:Binding.constant(false))
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
+            .previewDisplayName("iPhone 13 Mini")
+            .previewDevice("iPhone 13 Mini")
+        
+        
+        
+        EditCardInfo(careerField:Binding.constant("Company Name"),
+                     religion:Binding.constant("Atheism"),
+                     politics:Binding.constant("Far Left"),
+                     education:Binding.constant("High School"),
+                     countryRaisedIn:Binding.constant("India"),
+                     doYouSmoke:Binding.constant("Socially"),
+                     doYouDrink:Binding.constant("Socially"),
+                     doYouWorkOut:Binding.constant("Socially"),
+                     formUpdated:Binding.constant(false))
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
+            .previewDisplayName("iPhone 12 Pro")
+            .previewDevice("iPhone 12 Pro")
+        
+        
+        
+        EditCardInfo(careerField:Binding.constant("Company Name"),
+                     religion:Binding.constant("Atheism"),
+                     politics:Binding.constant("Far Left"),
+                     education:Binding.constant("High School"),
+                     countryRaisedIn:Binding.constant("India"),
+                     doYouSmoke:Binding.constant("Socially"),
+                     doYouDrink:Binding.constant("Socially"),
+                     doYouWorkOut:Binding.constant("Socially"),
+                     formUpdated:Binding.constant(false))
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
+            .previewDisplayName("iPhone 11")
+            .previewDevice("iPhone 11")
     
+
     }
 }

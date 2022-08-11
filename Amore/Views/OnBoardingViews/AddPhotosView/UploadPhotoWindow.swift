@@ -23,6 +23,10 @@ struct UploadPhotoWindow: View {
     @State private var showSheet = false
     @State var activeSheet: ActiveSheet? = .imageChoose
     @State var newPhotoChosen: Bool = false
+    
+    @State var width: CGFloat
+    @State var height: CGFloat
+
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     
@@ -31,7 +35,8 @@ struct UploadPhotoWindow: View {
     
     func imageCropped(image: UIImage){
         self.photoStruct.image = image
-        self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+//        self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+        self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: width, height: height))
         showSheet = false
         var oldImagePath = ""
         photoModel.photoAction = true
@@ -115,7 +120,7 @@ struct UploadPhotoWindow: View {
                 return
             }
 //            photoStruct.image = image
-            photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+            photoStruct.downsampledImage = image.downsample(to: CGSize(width: width, height: height))
             
 //            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
             
@@ -138,12 +143,12 @@ struct UploadPhotoWindow: View {
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 115, height: 170, alignment: .center)
+                    .frame(width: width, height: height, alignment: .center)
                     .cornerRadius(10.0)
                     .clipped()
             } else {
                 Image(uiImage: UIImage())
-                    .frame(width: 115, height: 170, alignment: .center)
+                    .frame(width: width, height: height, alignment: .center)
                     .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
                     .cornerRadius(10.0)
                     .clipped()
@@ -229,6 +234,9 @@ struct UploadPhotoWindow: View {
 
 struct UploadPhotoWindow_Previews: PreviewProvider {
     static var previews: some View {
-        UploadPhotoWindow(profileImage: Binding.constant(ProfileImage()), photoStruct: Binding.constant(Photo()))
+        UploadPhotoWindow(profileImage: Binding.constant(ProfileImage()),
+                          photoStruct: Binding.constant(Photo()),
+                          width:110,
+                          height:170)
     }
 }

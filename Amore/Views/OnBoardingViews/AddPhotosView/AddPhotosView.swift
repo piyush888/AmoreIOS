@@ -18,31 +18,25 @@ struct AddPhotosView: View {
     
     @State var showsAlert = false
     
-    let adaptivecolumns = Array(repeating:
-                                GridItem(.adaptive(minimum: 150),spacing: 5,
+    let adaptivecolumns = Array(repeating: GridItem(.adaptive(minimum: 150),spacing: 5,
                                          alignment: .center),count: 3)
     
     
     var body: some View {
         
+        GeometryReader { geo in
+        
         VStack {
             
-            Text("Add photos")
-                .font(.BoardingTitle)
-                .padding(.top,70)
-            
-            Text("Add at least 2 photos to continue")
-                .font(.BoardingSubHeading)
-                .padding(.horizontal,20)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 40)
-                
+            uploadPhotosText
             
             // Give the user options to add photos
             ZStack {
                 // Display Photos
                 LazyVGrid(columns: adaptivecolumns, content: {
-                    UploadWindowsGroup()
+                    UploadWindowsGroup(width:geo.size.width/3.5,
+                                       height:geo.size.height/4.8)
+                        .environmentObject(profileModel)
                         .environmentObject(photoModel)
                     })
                     .disabled(photoModel.photoAction)
@@ -53,19 +47,32 @@ struct AddPhotosView: View {
                         .scaleEffect(x: 3, y: 3, anchor: .center)
                 }
             }
-            .padding(.horizontal)
-         
+            
             Spacer()
-            
             buttonView
-            
+        
         }
         .alert(isPresented: self.$showsAlert) {
                    Alert(title: Text(""),message: Text("Atleast 2 photos are required"))
                }
         .padding(20)
+        }
     }
     
+    var uploadPhotosText: some View {
+        
+        VStack {
+            Text("Add photos")
+                .font(.title)
+                
+            Text("Add at least 2 photos to continue")
+                .font(.footnote)
+                .foregroundColor(Color.gray)
+        }
+        .multilineTextAlignment(.center)
+        .padding(.bottom, 10)
+        
+    }
     
     var buttonView: some View {
         
@@ -99,8 +106,33 @@ struct AddPhotosView: View {
 
 struct AddPhotosView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPhotosView()
-            .environmentObject(ProfileViewModel())
-            .environmentObject(PhotoModel())
+        
+        Group {
+            AddPhotosView()
+                .environmentObject(ProfileViewModel())
+                .environmentObject(PhotoModel())
+                .previewDisplayName("iPhone 13 Pro Max")
+                .previewDevice("iPhone 13 Pro Max")
+            
+            AddPhotosView()
+                .environmentObject(ProfileViewModel())
+                .environmentObject(PhotoModel())
+                .previewDisplayName("iPhone 13 Mini")
+                .previewDevice("iPhone 13 Mini")
+            
+            AddPhotosView()
+                .environmentObject(ProfileViewModel())
+                .environmentObject(PhotoModel())
+                .previewDisplayName("iPhone 12 Pro")
+                .previewDevice("iPhone 12 Pro")
+            
+            AddPhotosView()
+                .environmentObject(ProfileViewModel())
+                .environmentObject(PhotoModel())
+                .previewDisplayName("iPhone 11")
+                .previewDevice("iPhone 11")
+        }
+        
+        
     }
 }
