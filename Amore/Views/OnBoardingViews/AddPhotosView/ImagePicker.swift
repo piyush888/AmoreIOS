@@ -43,8 +43,14 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                let heightInPoints = image.size.height
+//                let heightInPixels = heightInPoints * image.scale
+                let widthInPoints = image.size.width
+//                let widthInPixels = widthInPoints * image.scale
+                
                 parent.selectedPhoto.image = image.fixedOrientation
-                parent.selectedPhoto.downsampledImage = image.fixedOrientation.downsample(to: CGSize(width: 115, height: 170))
+                parent.selectedPhoto.downsampledImage = image.fixedOrientation.downsample(to: CGSize(width: widthInPoints/5,
+                                                                                                     height: heightInPoints/5))
                 parent.newPhotoChosen = true
                 parent.done()
             }

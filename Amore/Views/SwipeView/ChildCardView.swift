@@ -27,16 +27,15 @@ struct ChildCardView: View {
                         
                         // Image 1
                         // Profile Name, distance and age
-                        Group {
+                        VStack(spacing:5) {
                             ZStack {
                                 if self.singleProfile.image1?.imageURL != nil  {
                                     CardImages(profileImage: $singleProfile.image1,
                                                photoStruct: $singleProfile.photo1.boundPhoto,
-                                               width:geometry.size.width-10,
-                                               height:geometry.size.height/2,
-                                               testing:testing)
-                                        .cornerRadius(20)
-                                        .padding(5)
+                                               width:geometry.size.width,
+                                               height: .infinity)
+                                        .padding(10)
+                                        .cornerRadius(10)
                                     
                                     VStack {
                                         Spacer()
@@ -44,8 +43,7 @@ struct ChildCardView: View {
                                                         lastName: self.singleProfile.lastName.bound,
                                                         age: self.singleProfile.age.boundInt,
                                                         profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
-                                                        geometry: geometry,
-                                                        isPreviewProfile:true)
+                                                        geometry: geometry)
                                             .onAppear {
                                                 if singleProfile.location != nil {
                                                     let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
@@ -70,7 +68,7 @@ struct ChildCardView: View {
                         
                         // Profile Height, Education, Job, Religion, Location
                         // Image 2
-                        Group {
+                        VStack(spacing:5) {
                             CardBasicInfo(height: self.singleProfile.height.boundDouble,
                                           work: self.singleProfile.jobTitle.bound,
                                           education: self.singleProfile.education.bound,
@@ -85,19 +83,17 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image2,
                                                photoStruct: $singleProfile.photo2.boundPhoto,
-                                               width:geometry.size.width-10,
-                                               height:geometry.size.height/2,
-                                               testing:testing)
-                                        .cornerRadius(20)
-                                        .padding(5)
+                                               width:geometry.size.width,
+                                               height:.infinity)
+                                        .padding(.vertical,5)
                                 }
                             }
                         }
                         
                         
-                        // Profile Passion
+                        // Profile Bio
                         // Image 3
-                        Group {
+                        VStack(spacing:5) {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
                                                headlineText:"Bio")
                                                 .padding(5)
@@ -106,11 +102,9 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image3,
                                                photoStruct: $singleProfile.photo3.boundPhoto,
-                                               width:geometry.size.width-10,
-                                               height:geometry.size.height/2,
-                                               testing:testing)
-                                        .cornerRadius(20)
-                                        .padding(5)
+                                               width:geometry.size.width,
+                                               height:.infinity)
+                                        .padding(.vertical,5)
                                 }
                             }
                         }
@@ -118,7 +112,7 @@ struct ChildCardView: View {
                         
                         // Work and School
                         // Image 4
-                        Group {
+                        VStack(spacing:5) {
                             // Profile Passions
                             CardPassions(passions: self.singleProfile.interests.boundStringArray)
                                 .padding(15)
@@ -136,18 +130,16 @@ struct ChildCardView: View {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image4,
                                                photoStruct: $singleProfile.photo4.boundPhoto,
-                                               width:geometry.size.width-10,
-                                               height:geometry.size.height/2,
-                                               testing:testing)
-                                        .cornerRadius(20)
-                                        .padding(5)
+                                               width:geometry.size.width,
+                                               height:.infinity)
+                                        .padding(.vertical,2.5)
                                 }
                             }
                         }
                         
                         
                         // Card User Information like child_care, smooking_
-                        Group {
+                        VStack(spacing:5) {
                             UserOtherInformation(iconNameUserDataList:[FontIcon.text(.materialIcon(code: .child_care)),
                                                                        FontIcon.text(.materialIcon(code: .smoking_rooms)),
                                                                        FontIcon.text(.materialIcon(code: .fitness_center)),
@@ -161,16 +153,16 @@ struct ChildCardView: View {
                                                                     self.singleProfile.doYouDrink.bound
                                                                     ]
                                                 )
-                        
+                                .padding(.vertical,2.5)
+                            
                             if self.singleProfile.image5?.imageURL != nil  {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image5,
                                                photoStruct: $singleProfile.photo5.boundPhoto,
-                                               width:geometry.size.width-10,
-                                               height:geometry.size.height/2,
-                                               testing:testing)
-                                        .cornerRadius(20)
-                                        .padding(5)
+                                               width:geometry.size.width,
+                                               height:.infinity)
+                                        .padding(.top,2.5)
+                                        .padding(.bottom,5)
                                 }
                             }
                         }
@@ -179,11 +171,9 @@ struct ChildCardView: View {
                             VStack {
                                 CardImages(profileImage: $singleProfile.image6,
                                            photoStruct: $singleProfile.photo6.boundPhoto,
-                                           width:geometry.size.width-10,
-                                           height:geometry.size.height/2,
-                                           testing:testing)
-                                    .cornerRadius(20)
-                                    .padding(5)
+                                           width:geometry.size.width,
+                                           height:.infinity)
+                                    .padding(.vertical,5)
                             }
                             
                         }
@@ -193,18 +183,19 @@ struct ChildCardView: View {
                         VStack {
                             Text("")
                         }
-                        .frame(height: 80)
+                        .frame(height: 60)
                         .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
                         .cornerRadius(15)
                         .blur(radius: 30)
                         
                     }
                 }
-//                .padding(.horizontal,10)
                 .background(colorScheme == .dark ? Color.black: Color.white)
                 .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
             }
             .cornerRadius(10)
+            .padding(.horizontal,10)
+            
         }
         
     }
@@ -237,8 +228,9 @@ struct ChildCardView_Previews: PreviewProvider {
                                                 location: Location(longitude: 0.0, latitude: 0.0),
                                                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                                                 country: "India",
-                                                image1: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
-                                                image2: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                                image1: ProfileImage(imageURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/amore-f8cd6.appspot.com/o/images%2FQvV4OoZmZ3QWHhMNaZrr7lkqmLF3%2Fimage1637162606.404443.heic?alt=media&token=b91a59f4-1b39-4b28-b972-9d4d5252fd76"),
+                                                                     firebaseImagePath: "images/QvV4OoZmZ3QWHhMNaZrr7lkqmLF3/image1637162606.404443.heic"),
+                                                image2: ProfileImage(imageURL: URL(string: "SampleImage2"),firebaseImagePath: "SampleImage2"),
                                                 image3: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
                                                 image4: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
                                                 image5: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),

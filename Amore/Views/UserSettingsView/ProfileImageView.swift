@@ -8,11 +8,13 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct ProfileImageView<V>: View where V: ViewModifier {
+struct ProfileImageView: View {
     
     @Binding var profileImage: ProfileImage?
     @Binding var photo: Photo
-    var customModifier: V
+    @State var width: CGFloat
+    @State var height: CGFloat
+    
     
     func getImage(onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
         SDWebImageManager.shared.loadImage(with: profileImage?.imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
@@ -38,7 +40,9 @@ struct ProfileImageView<V>: View where V: ViewModifier {
         
         Image(uiImage: photo.downsampledImage ?? UIImage())
             .resizable()
-            .modifier(customModifier)
+            .scaledToFill()
+            .frame(width: width, height:height, alignment:.top)
+            .clipped()
             .onAppear(perform: {
                 if photo.downsampledImage == nil {
                     if profileImage?.imageURL != nil {
@@ -46,8 +50,11 @@ struct ProfileImageView<V>: View where V: ViewModifier {
                             photo.image = nil
                             photo.downsampledImage = nil
                         } onSuccess: { image in
-//                            photo.image = image
-                            photo.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+                            let heightInPoints = image.size.height
+                            let widthInPoints = image.size.width
+//                              photo.image = image
+                            photo.downsampledImage = image.downsample(to: CGSize(width: widthInPoints/5,
+                                                                                 height: heightInPoints/5))
                         }
                     }
                 }
@@ -58,7 +65,10 @@ struct ProfileImageView<V>: View where V: ViewModifier {
                     photo.downsampledImage = nil
                 } onSuccess: { image in
 //                    photo.image = image
-                    photo.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
+                    let heightInPoints = image.size.height
+                    let widthInPoints = image.size.width
+                    photo.downsampledImage = image.downsample(to: CGSize(width: widthInPoints/5,
+                                                                         height: heightInPoints/5))
                 }
             }
     }

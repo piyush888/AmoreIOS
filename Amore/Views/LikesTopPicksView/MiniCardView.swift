@@ -26,8 +26,7 @@ struct MiniCardView: View {
                             CardImages(profileImage: $singleProfile.image1,
                                        photoStruct: $singleProfile.photo1.boundPhoto,
                                        width:miniCardWidth,
-                                       height:miniCardHeight,
-                                       testing:false)
+                                       height:miniCardHeight)
                                     .matchedGeometryEffect(id: "image\(singleProfile.id.bound)", in: animation)
                                     .cornerRadius(10)
                                     

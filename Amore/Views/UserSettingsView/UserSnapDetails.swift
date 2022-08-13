@@ -16,7 +16,13 @@ struct UserSnapDetails: View {
     var body: some View {
         
         VStack {
-            ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: UserSnapDetailsModifier(width:200, height:200))
+            ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
+                             photo: $photoModel.photo1,
+                             width:200,
+                             height: 200)
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
             
             Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
                 .font(.title2)

@@ -104,7 +104,13 @@ struct BoostUserProfile: View {
                         Button {
                             // Nothing happens here
                         } label: {
-                            ProfileImageView(profileImage: $profileModel.editUserProfile.image1, photo: $photoModel.photo1, customModifier: UserSnapDetailsModifier(width:80, height:80))
+                            ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
+                                             photo: $photoModel.photo1,
+                                             width: 100,
+                                             height:100)
+                                .scaledToFill()
+                                .clipShape(Circle())
+                                .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
                         }
                     }
                     

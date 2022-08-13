@@ -35,7 +35,6 @@ struct UploadPhotoWindow: View {
     
     func imageCropped(image: UIImage){
         self.photoStruct.image = image
-//        self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: 115, height: 170))
         self.photoStruct.downsampledImage = image.downsample(to: CGSize(width: width, height: height))
         showSheet = false
         var oldImagePath = ""

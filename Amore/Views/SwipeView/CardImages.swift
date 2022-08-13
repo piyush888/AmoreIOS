@@ -14,7 +14,6 @@ struct CardImages: View {
     @Binding var photoStruct: Photo
     @State var width: CGFloat
     @State var height: CGFloat
-    @State var testing: Bool
     
     
     func getImage(imageURL: URL, onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
@@ -37,29 +36,17 @@ struct CardImages: View {
     
     var body: some View {
         VStack {
-            
-            if testing {
-                // If testing for UI building
-                
-                Image("onboarding_girl4")
-                  .resizable()
-                  .scaledToFill()
-                  .frame(width: width, height:height)
-                  .cornerRadius(20)
-            } else {
-                
-                // If we are not testing
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
                     .frame(width: width, height:height)
+                    .clipped()
                     .onAppear {
                         if photoStruct.downsampledImage == nil {
                             if let imageURL = profileImage?.imageURL {
                                 getImage(imageURL: imageURL) {
                                     return
                                 } onSuccess: { downloadedImage in
-//                                    photoStruct = Photo(image: nil, downsampledImage: downloadedImage.downsample(to: CGSize(width: geometry.size.width, height: geometry.size.height/1.5)), inProgress: false)
                                     photoStruct = Photo(image: nil, downsampledImage: downloadedImage, inProgress: false)
                                     SDImageCache.shared.removeImage(forKey: imageURL.absoluteString) {
 //                                        print("Successfully deleted card image cache for : ", profileImage?.firebaseImagePath?.split(separator: "/")[1])
@@ -69,9 +56,6 @@ struct CardImages: View {
                         }
                     }
                  
-            }
-            
-            
         }
     }
 }
@@ -114,11 +98,10 @@ struct CardImages_Previews: PreviewProvider {
                               doYouWantBabies: "No")
         
         GeometryReader { geometry in
-            CardImages(profileImage: Binding.constant(tempProfile.image6),
-                       photoStruct: Binding.constant(tempProfile.photo6.boundPhoto),
+            CardImages(profileImage: Binding.constant(tempProfile.image3),
+                       photoStruct: Binding.constant(tempProfile.photo3.boundPhoto),
                        width:geometry.size.width-10,
-                       height:geometry.size.height/2,
-                       testing:true)
+                       height:geometry.size.height/2)
                 .padding()
         }
         
