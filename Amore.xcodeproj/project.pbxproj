@@ -400,7 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				1BBB485327035B2F004D42A3 /* HomeView.swift */,
-				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
 				E298BA132713A85500C82174 /* ControlCenter.swift */,
 				E221EAAA2714F79A00769234 /* ViewRouter.swift */,
 				E221EAAC2714F84F00769234 /* Helper.swift */,
@@ -536,6 +535,7 @@
 				E2DBFE26275EC05200250686 /* RequestData.swift */,
 				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
 				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
+				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";

@@ -5,6 +5,10 @@
 //  Created by Kshitiz Sharma on 10/9/21.
 //
 
+// ***************************
+// LEGACY FILE - NOT IN USE - MOVED TO DECK CARDS
+// ***************************
+
 import SwiftUI
 import CoreLocation
 

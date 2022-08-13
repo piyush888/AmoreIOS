@@ -4,57 +4,11 @@
 ////
 ////  Created by Kshitiz Sharma on 11/26/21.
 ////
-//
-//import SwiftUI
-//
-//struct DeckCards: View {
-//
-//    @EnvironmentObject var cardProfileModel: CardProfileModel
-//    @EnvironmentObject var photoModel: PhotoModel
-//
-//    @Binding var cardDecks: [CardProfileWithPhotos]
-//    @State var cardWidth: CGFloat
-//    @Binding var curSwipeStatus: AllCardsView.LikeDislike
-//
-//
-//    var body: some View {
-//
-////        ForEach(self.cardDecks) { profile in
-////            // Normal Card View being rendered here.
-////            SingleCardView(currentSwipeStatus: self.cardDecks.last == profile ?
-////                           $curSwipeStatus : Binding.constant(AllCardsView.LikeDislike.none),
-////                           singleProfile: profile,
-////                           onRemove: { removedUser in
-////                                // Remove that user from our array
-////                self.cardDecks.removeAll { $0.id == removedUser.id }
-////                                self.curSwipeStatus = .none
-////                            }
-////            )
-////            .animation(.spring())
-////            .frame(width: cardWidth)
-////            .environmentObject(photoModel)
-////            .environmentObject(cardProfileModel)
-////
-////        }
-//        Text("")
-//
-//    }
-//}
-//
-//
-
-
-//
-//  SingleCardView.swift
-//  Amore
-//
-//  Created by Kshitiz Sharma on 10/9/21.
-//
 
 import SwiftUI
 import CoreLocation
 
-struct SingleCard: View {
+struct DeckCards: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
@@ -63,14 +17,12 @@ struct SingleCard: View {
     @EnvironmentObject var filterModel: FilterModel
     
     @Binding var cardSwipeDone: Bool
-    @Binding var swipeStatus: AllCardsView.LikeDislike
     
     @State var singleProfile: CardProfileWithPhotos
     @State var translation: CGSize = .zero
     @GestureState var dragOffset: CGSize = .zero
     
     @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
-    @State var isScrollable: AllCardsView.LikeDislike = .none
     
     var onRemove: (_ user: CardProfileWithPhotos) -> Void
     
@@ -103,13 +55,12 @@ struct SingleCard: View {
                 return
             }, onSuccess: {
                 onSuccess()
-                receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile,
-                                                                       swipeInfo: dragSwipeStatus == .none ? swipeStatus : dragSwipeStatus)
-                cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
+                receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile, swipeInfo: swipeInfo)
+                self.onRemove(self.singleProfile)
                 self.cardSwipeDone = true
+                cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)
             }, swipedUserId: self.singleProfile.id, swipeInfo: swipeInfo)
         })
-        self.onRemove(self.singleProfile)
     }
     
     func checkSwipeGesture(geometry:GeometryProxy, value: DragGesture.Value) {
@@ -122,6 +73,7 @@ struct SingleCard: View {
             }
         
     }
+    
     
     var body: some View {
         
@@ -144,7 +96,7 @@ struct SingleCard: View {
                             }
                         })
                         .onEnded { value in
-                        // determine snap distance > 0.5 aka half the width of the screen
+                            // determine snap distance > 0.5 aka half the width of the screen
                             let cardGesturePct = self.getGesturePercentage(geometry, from: value)
                             if abs(cardGesturePct) > self.thresholdPercentage {
                                 self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {}
@@ -158,46 +110,128 @@ struct SingleCard: View {
                             print("Translation on ended \(self.translation)")
                         }
                 )
-                // Buttons
-                .onChange(of: self.swipeStatus) { newValue in
-                    if newValue == AllCardsView.LikeDislike.like {
-                        self.translation = CGSize(width: 500, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {}
-                    }
-                    else if newValue == AllCardsView.LikeDislike.dislike {
-                        self.translation = CGSize(width: -500, height: 0)
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {}
-                    }
-                    else if newValue == AllCardsView.LikeDislike.superlike {
-                        self.saveLikeSuperlikeDislike(swipeInfo:self.swipeStatus) {}
-                    }
-                }
-                
                 .environmentObject(profileModel)
                 
+//                Group {
+//                    // Lottie animation - TODO fix animation
+//                    if self.buttonSwipeStatus == .like || self.dragSwipeStatus == .like {
+//                        // Animation for like given
+//                        LottieView(name: "LikeLottie", loopMode: .playOnce)
+//                            .frame(width: 220,height: 220)
+//
+//                    } else if self.buttonSwipeStatus == .dislike || self.dragSwipeStatus == .dislike {
+//                        // Animation for dislike given
+//                        LottieView(name: "DislikeLottie", loopMode: .playOnce)
+//                            .frame(width: 140, height: 140)
+//                    }
+//                    else if self.buttonSwipeStatus == .superlike || self.dragSwipeStatus == .superlike {
+//                       // Animation for superlike given
+//                       LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
+//                            .frame(width: 400, height: 400)
+//                   }
+//                }
                 
                 
                 
-                
-                // Animation
-                if self.swipeStatus == .like || self.dragSwipeStatus == .like {
-                    // Animation for like given
-                    LottieView(name: "LikeLottie", loopMode: .playOnce)
-                        .frame(width: 220,height: 220)
-                    
-                } else if self.swipeStatus == .dislike || self.dragSwipeStatus == .dislike {
-                    // Animation for dislike given
-                    LottieView(name: "DislikeLottie", loopMode: .playOnce)
-                        .frame(width: 140, height: 140)
+                VStack {
+                    Spacer()
+                    LikesDislikesButtons
+                        .padding(10)
                 }
-                else if self.swipeStatus == .superlike || self.dragSwipeStatus == .superlike {
-                   // Animation for superlike given
-                   LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
-                        .frame(width: 400, height: 400)
-               }
-                
+                .frame(maxWidth: geometry.size.width * 0.5, alignment:.center)
             }
             
         }
     }
+    
+    var LikesDislikesButtons : some View {
+        
+        
+        HStack(spacing:10) {
+            
+            Button {
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {
+                        rewindedUserCard in
+                        let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
+                        
+                        // Append rewinded user in Array
+                        cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
+                        
+                        // Append rewinded user in Dict
+                        if let rewindedUserId = cardProfileWithPhotos.id {
+                            cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
+                            receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
+                        }
+                        cardSwipeDone = true
+                    })
+                }
+            } label: {
+                Image(systemName: "arrowshape.turn.up.backward.circle.fill")
+                    .resizable()
+                    .frame(width:35, height:35)
+                    .foregroundColor(.orange)
+            }
+            .disabled(!cardSwipeDone)
+
+            Spacer()
+            
+            // Dislike Button
+            Button {
+                // If card swiping action is finished
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    self.translation = CGSize(width: -500, height: 0)
+                    self.saveLikeSuperlikeDislike(swipeInfo:.dislike) {
+                        print("Button Dislike: \(singleProfile.id)")
+                    }
+                }
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .frame(width:55, height:55)
+                    .foregroundColor(.gray)
+            }
+            .disabled(!cardSwipeDone)
+            
+            Spacer()
+            
+            // Superlike Button
+            Button {
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    self.saveLikeSuperlikeDislike(swipeInfo:.superlike) {
+                        print("Button Dislike: \(singleProfile.id)")
+                    }
+                }
+            } label: {
+                Image(systemName: "star.circle.fill")
+                    .resizable()
+                    .frame(width:40, height:40)
+                    .foregroundColor(Color("gold-star"))
+            }
+
+            Spacer()
+            
+            // Like Button
+            Button {
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    self.translation = CGSize(width: 500, height: 0)
+                    self.saveLikeSuperlikeDislike(swipeInfo: .like) {
+                        print("Button like: \(singleProfile.id)")
+                    }
+                }
+            } label: {
+                Image(systemName: "heart.circle.fill")
+                    .resizable()
+                    .frame(width:55, height:55)
+                    .foregroundColor(.pink)
+            }
+            .disabled(!cardSwipeDone)
+        }
+        
+    }
+    
 }
