@@ -171,7 +171,7 @@ struct DirectMessageCardView: View {
                     VStack {
                         if let pricingData = storeManager.messagesPricing {
                             // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
-                            BoostBuyButton(boostType:5.0,
+                            DirectMessageBuyButton(messageCount:5.0,
                                            totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
                                            currency: pricingData["5 Messages"]?.localizedPrice?.first ?? "$",
                                            skProductObj: pricingData["5 Messages"] ?? SKProduct())
@@ -179,7 +179,7 @@ struct DirectMessageCardView: View {
                                 .environmentObject(storeManager)
                         
 
-                            BoostBuyButton(boostType:10.0,
+                            DirectMessageBuyButton(messageCount:10.0,
                                            totalCost: Float(truncating: pricingData["10 Messages"]?.price ?? 0.0),
                                            currency: pricingData["10 Messages"]?.localizedPrice?.first ?? "$",
                                            skProductObj: pricingData["10 Messages"] ?? SKProduct())
@@ -245,4 +245,38 @@ struct DirectMessageCardView_Previews: PreviewProvider {
             .environmentObject(StoreManager())
             .environmentObject(ChatModel())
     }
+}
+
+
+struct DirectMessageBuyButton: View {
+    @EnvironmentObject var storeManager: StoreManager
+    // Recieves [5, 10, 15] which is used to refer 5 Messages, 10 Messages and 15 Messages
+    @State var messageCount: Float = 0.0
+    @State var totalCost:Float = 0.0
+    @State var currency: Character // Receives Dollar Sign
+    @State var skProductObj: SKProduct = SKProduct()
+    var body: some View {
+        
+        
+            Button {
+                if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount,
+                   let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount {
+                        self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
+                        self.storeManager.oldpurchaseDataDetails.totalMessagesCount = totalMessagesCount + Int(messageCount)
+                    // Purchase the product by passing in the Sk Product Object
+                    storeManager.purchaseProduct(product:skProductObj)
+                }
+            } label : {
+                
+                VStack {
+                        HStack {
+                            Text("Buy \(messageCount, specifier: "%.2f")")
+                            Image(systemName: "message.circle.fill")
+                            Text("for \(String(currency))\(totalCost, specifier: "%.2f")")
+                        }
+                    }
+                    .purcahseButton()
+            }
+
+        }
 }

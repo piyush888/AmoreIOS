@@ -17,12 +17,14 @@ struct DeckCards: View {
     @EnvironmentObject var filterModel: FilterModel
     
     @Binding var cardSwipeDone: Bool
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
     @State var singleProfile: CardProfileWithPhotos
     @State var translation: CGSize = .zero
     @GestureState var dragOffset: CGSize = .zero
     
-    @State var dragSwipeStatus: AllCardsView.LikeDislike = .none
+    @State var swipeStatus: AllCardsView.LikeDislike = .none
+    @State var cardColor: Color = Color.clear
     
     var onRemove: (_ user: CardProfileWithPhotos) -> Void
     
@@ -65,11 +67,13 @@ struct DeckCards: View {
     
     func checkSwipeGesture(geometry:GeometryProxy, value: DragGesture.Value) {
         if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
-                self.dragSwipeStatus = .like
+                self.swipeStatus = .like
+                self.cardColor = .green
             } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
-                self.dragSwipeStatus = .dislike
+                self.swipeStatus = .dislike
+                self.cardColor = .red
             } else {
-                self.dragSwipeStatus = .none
+                self.swipeStatus = .none
             }
         
     }
@@ -82,7 +86,8 @@ struct DeckCards: View {
             ZStack {
             
                 ChildCardView(singleProfile: getProfile(),
-                              testing:false)
+                              swipeStatus:$swipeStatus,
+                              cardColor:$cardColor)
                 .animation(.interactiveSpring())
                 .offset(x: self.translation.width + self.dragOffset.width, y: 0)
                 .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
@@ -99,7 +104,7 @@ struct DeckCards: View {
                             // determine snap distance > 0.5 aka half the width of the screen
                             let cardGesturePct = self.getGesturePercentage(geometry, from: value)
                             if abs(cardGesturePct) > self.thresholdPercentage {
-                                self.saveLikeSuperlikeDislike(swipeInfo: self.dragSwipeStatus) {}
+                                self.saveLikeSuperlikeDislike(swipeInfo: self.swipeStatus) {}
                                 withAnimation {
                                     // For smoother swipe of the card
                                     self.translation = cardGesturePct < 0 ? CGSize(width: -500, height: 0) : CGSize(width: 500, height: 0)
@@ -112,24 +117,14 @@ struct DeckCards: View {
                 )
                 .environmentObject(profileModel)
                 
-//                Group {
-//                    // Lottie animation - TODO fix animation
-//                    if self.buttonSwipeStatus == .like || self.dragSwipeStatus == .like {
-//                        // Animation for like given
-//                        LottieView(name: "LikeLottie", loopMode: .playOnce)
-//                            .frame(width: 220,height: 220)
-//
-//                    } else if self.buttonSwipeStatus == .dislike || self.dragSwipeStatus == .dislike {
-//                        // Animation for dislike given
-//                        LottieView(name: "DislikeLottie", loopMode: .playOnce)
-//                            .frame(width: 140, height: 140)
-//                    }
-//                    else if self.buttonSwipeStatus == .superlike || self.dragSwipeStatus == .superlike {
-//                       // Animation for superlike given
-//                       LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
-//                            .frame(width: 400, height: 400)
-//                   }
-//                }
+                
+                Group {
+                     if self.swipeStatus == .superlike  {
+                       // Animation for superlike given
+                       LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
+                            .frame(width: 400, height: 400)
+                   }
+                }
                 
                 
                 
@@ -199,10 +194,12 @@ struct DeckCards: View {
             
             // Superlike Button
             Button {
+                self.cardColor = .yellow
+                self.swipeStatus = .superlike
                 if cardSwipeDone {
                     cardSwipeDone = false
                     self.saveLikeSuperlikeDislike(swipeInfo:.superlike) {
-                        print("Button Dislike: \(singleProfile.id)")
+                        print("Button Superlike: \(singleProfile.id)")
                     }
                 }
             } label: {
@@ -230,6 +227,21 @@ struct DeckCards: View {
                     .foregroundColor(.pink)
             }
             .disabled(!cardSwipeDone)
+            
+            Spacer()
+            
+            // DM Button
+            Button {
+                allcardsActiveSheet = .directMessageSheet
+            } label: {
+                Image(systemName: "message.circle.fill")
+                    .resizable()
+                    .frame(width:35, height:35)
+                    .foregroundColor(Color(hex:0xFA86C4))
+                    .shadow(color: .blue,
+                            radius: 0.1, x: 1, y: 1)
+            }
+            
         }
         
     }

@@ -27,16 +27,15 @@ struct TopPicksChild: View {
         
         if dataArray.count == 0 {
             VStack {
-                
+                Spacer()
                     Text(stringNoDataPresent)
                         .foregroundColor(Color.gray)
-                        .padding([.top,.bottom],20)
-                        .font(.headline)
-                    
-                    Image(systemName: "suit.heart.fill")
-                        .foregroundColor(Color.red)
-                        .font(.title)
+                        .font(.caption)
+                    Image(systemName: viewHeadIcon)
+                        .foregroundColor(iconColor)
+                Spacer()
             }
+            .padding(.horizontal,20)
         }
         else {
             VStack {
@@ -48,7 +47,7 @@ struct TopPicksChild: View {
                     
                     Image(systemName: viewHeadIcon)
                         .foregroundColor(iconColor)
-                        .font(.title3)
+                        
                 }
                 
                 // Shows card vertically arranged . - KTZ

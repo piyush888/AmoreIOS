@@ -70,13 +70,12 @@ struct AllCardsView: View {
                 
                 // Show all cards that user can swipe
                 ForEach(getCards()) { profile in
-                    DeckCards(cardSwipeDone: $cardSwipeDone, singleProfile: profile, onRemove: { removedUser in
+                    DeckCards(cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet, singleProfile: profile, onRemove: { removedUser in
                         // Remove that user from Array of CardProfileWithPhotos O(n)
                         cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
                         // Remove that user from Dictionary: [ID: CardProfileWithPhotos] O(1)
                         cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                        self.buttonSwipeStatus = .none
-                    })
+                        self.buttonSwipeStatus = .none })
                     .animation(.spring())
                     .frame(width: geometry.size.width)
                     .environmentObject(photoModel)

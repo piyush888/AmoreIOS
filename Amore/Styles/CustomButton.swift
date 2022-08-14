@@ -51,10 +51,12 @@ extension View {
 struct ReportProfileButton: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(20)
+            .padding(10)
             .frame(maxWidth: .infinity)
             .background(LinearGradient(gradient: Gradient(colors: [Color(hex: 0xFF5F6D),
-                                                                   Color(hex: 0xFFC371)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                                                   Color(hex: 0xFFC371)]),
+                                       startPoint: .topLeading,
+                                       endPoint: .bottomTrailing))
             .foregroundColor(.white)
             .mask(RoundedCorner(radius: 20, corners: [.topRight, .bottomLeft, .bottomRight]))
             .mask(RoundedRectangle(cornerRadius: 8))

@@ -278,9 +278,6 @@ struct BoostBuyButton: View {
                             Text("Buy \(boostType, specifier: "%.2f")")
                             Image(systemName: "bolt.circle.fill")
                             Text("for \(String(currency))\(totalCost, specifier: "%.2f")")
-                            Text("/ \(String(currency))\(totalCost/boostType, specifier: "%.2f") each")
-                                .customFont(.footnote2)
-                                .opacity(0.8)
                         }
                     }
                     .purcahseButton()

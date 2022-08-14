@@ -24,13 +24,13 @@ struct CardPassions: View {
                     
                     Text("#\(passion)")
                        .font(.subheadline)
+                       .foregroundColor(Color.white)
                        .padding(10)
                        .background(
                            Rectangle()
-                               .stroke(Color.yellow)
-                               .background(Color.yellow)
+                               .stroke(Color.blue)
+                               .background(Color.blue)
                                .cornerRadius(10.0)
-                               .opacity(0.1)
                        )
                 }
             }

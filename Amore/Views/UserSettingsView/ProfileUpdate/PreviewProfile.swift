@@ -29,8 +29,7 @@ struct PreviewProfile: View {
                                                      photo: $photoModel.photo1,
                                                      width: geometry.size.width,
                                                      height: .infinity)
-                                        .padding(10)
-                                        .cornerRadius(10)
+                                        
                                     
                                     VStack {
                                         Spacer()

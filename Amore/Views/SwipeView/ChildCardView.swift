@@ -9,15 +9,18 @@ import SwiftUI
 import SwiftUIFontIcon
 import CoreLocation
 
-// Changes made in Child Card View have to be also reflected in the Preview Profile
+// Changes made in Child Card View have to be also reflected in the Preview
 struct ChildCardView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
     
     // Binding so that change in Profile while loading photos is reflected in View
     @Binding var singleProfile: CardProfileWithPhotos
+    @Binding var swipeStatus: AllCardsView.LikeDislike
+    @Binding var cardColor: Color
+    
     @EnvironmentObject var profileModel: ProfileViewModel
-    @State var testing: Bool
-    @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
@@ -34,8 +37,7 @@ struct ChildCardView: View {
                                                photoStruct: $singleProfile.photo1.boundPhoto,
                                                width:geometry.size.width,
                                                height: .infinity)
-                                        .padding(10)
-                                        .cornerRadius(10)
+                                        
                                     
                                     VStack {
                                         Spacer()
@@ -190,8 +192,8 @@ struct ChildCardView: View {
                         
                     }
                 }
-                .background(colorScheme == .dark ? Color.black: Color.white)
-                .foregroundColor(colorScheme == .dark ? Color.white: Color.black)
+                .background(swipeStatus == .none ? colorScheme == .dark ? Color.black: Color.white : cardColor)
+                .foregroundColor(swipeStatus == .none ? colorScheme == .dark ? Color.white: Color.black: Color.white)
             }
             .cornerRadius(10)
             .padding(.horizontal,10)
@@ -241,7 +243,9 @@ struct ChildCardView_Previews: PreviewProvider {
                                                 doYouWantBabies: "No" // * show this later
         )
         
-        ChildCardView(singleProfile: Binding.constant(tempProfile), testing: true)
+        ChildCardView(singleProfile: Binding.constant(tempProfile),
+                      swipeStatus: Binding.constant(AllCardsView.LikeDislike.dislike),
+                      cardColor: Binding.constant(Color.green))
             .environmentObject(ProfileViewModel())
         
     }

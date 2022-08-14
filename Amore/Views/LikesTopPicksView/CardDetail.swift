@@ -42,7 +42,9 @@ struct CardDetail: View {
                 
             }.padding()
             
-            ChildCardView(singleProfile: $selectedItem, testing: false)
+            ChildCardView(singleProfile: $selectedItem,
+                          swipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
+                          cardColor: Binding.constant(Color.pink))
             
             // delay loading the content for smooth animation...
             VStack{

@@ -56,10 +56,14 @@ struct AllConversationsView: View {
                 }
                 
                 if (mainMessagesModel.recentChats.count == 0) {
-                        HStack{
-                            Spacer()
-                        }
+                    VStack {
+                        Spacer()
+                        Text("Oh oh!! You don't have any matches yet.")
+                            .foregroundColor(Color.gray)
+                        Spacer()
                     }
+                    .padding(25)
+                }
             }
             
             NavigationLink("", isActive: $navigateToChatView) {

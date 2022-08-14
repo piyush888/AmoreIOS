@@ -61,7 +61,7 @@ struct TextSlider: View {
                             .frame(maxWidth: .infinity)
                             .padding(.top, 20)
                             .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
-                            .shadow(color: Color("Shadow").opacity(0.3), radius: 7, x: 0, y: 7)
+//                            .shadow(color: Color("Shadow").opacity(0.3), radius: 7, x: 0, y: 7)
                             .blur(radius: abs(minX / 40))
                             .overlay(
                                 Image(safety.illustration)

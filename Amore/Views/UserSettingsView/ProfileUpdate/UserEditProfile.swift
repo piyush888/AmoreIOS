@@ -74,7 +74,7 @@ struct EditProfile: View {
                
                 // get the tab buttons here
                 // Edit Info
-                // Preview Profile
+                // Preview
                 tabButtons
                 
                 // Tab Views
@@ -121,11 +121,11 @@ struct EditProfile: View {
 
             Spacer()
 
-            EditProfileButtons(buttonName:"Preview Profile",
+            EditProfileButtons(buttonName:"Preview",
                                selectedTab:$selectedTab)
             .onTapGesture {
                 currentPage = .previewProfile
-                selectedTab = "Preview Profile"
+                selectedTab = "Preview"
             }
             .padding(.horizontal,20)
 

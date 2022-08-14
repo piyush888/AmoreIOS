@@ -14,7 +14,6 @@
 		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
 		1B39493627D3263100793431 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493527D3263100793431 /* CustomScrollView.swift */; };
 		1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED871270F345E00290FFF /* CardPassions.swift */; };
-		1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
 		1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */; };
@@ -86,7 +85,6 @@
 		E23BAA992741D8A700F619D6 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = E23BAA982741D8A700F619D6 /* WrappingStack */; };
 		E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */; };
 		E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F15271256C4001640CA /* AllCardsView.swift */; };
-		E24A0F1827125727001640CA /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A0F1727125727001640CA /* SingleCardView.swift */; };
 		E251737328A170B00092C55A /* OnBoardingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E251737228A170B00092C55A /* OnBoardingUtils.swift */; };
 		E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2530F59277CB0760040CAB2 /* RadiusFilter.swift */; };
 		E2591199287A001200028152 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E2591198287A001200028152 /* Lottie */; };
@@ -100,6 +98,7 @@
 		E25D15A128675FE8001330DB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25D15A028675FE8001330DB /* CustomButton.swift */; };
 		E25D15A32867613F001330DB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25D15A22867613F001330DB /* Extensions.swift */; };
 		E25D15A528676155001330DB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25D15A428676155001330DB /* CustomFont.swift */; };
+		E261B31B28A94D3100BF4DDF /* SwiftAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E261B31A28A94D3100BF4DDF /* SwiftAnimation.swift */; };
 		E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268A46B2747DB9A0045F264 /* CardProfiles.swift */; };
 		E26B4A962868B9FB0020C81D /* radiate.riv in Resources */ = {isa = PBXBuildFile; fileRef = E26B4A952868B9FB0020C81D /* radiate.riv */; };
 		E271ADF72889E540001ACD31 /* SelectMultipleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E271ADF62889E540001ACD31 /* SelectMultipleItems.swift */; };
@@ -201,7 +200,6 @@
 		1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardExtension.swift; sourceTree = "<group>"; };
 		1B39493527D3263100793431 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		1B4ED871270F345E00290FFF /* CardPassions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPassions.swift; sourceTree = "<group>"; };
-		1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDislikeSuperLike.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 		E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAgeDistance.swift; sourceTree = "<group>"; };
 		E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCardView.swift; sourceTree = "<group>"; };
 		E24A0F15271256C4001640CA /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
-		E24A0F1727125727001640CA /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
 		E251737228A170B00092C55A /* OnBoardingUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUtils.swift; sourceTree = "<group>"; };
 		E2530F59277CB0760040CAB2 /* RadiusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusFilter.swift; sourceTree = "<group>"; };
 		E259119E287A04D600028152 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -286,6 +283,7 @@
 		E25D15A028675FE8001330DB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E25D15A22867613F001330DB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E25D15A428676155001330DB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		E261B31A28A94D3100BF4DDF /* SwiftAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAnimation.swift; sourceTree = "<group>"; };
 		E268A46B2747DB9A0045F264 /* CardProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfiles.swift; sourceTree = "<group>"; };
 		E26B4A952868B9FB0020C81D /* radiate.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = radiate.riv; sourceTree = "<group>"; };
 		E271ADF62889E540001ACD31 /* SelectMultipleItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMultipleItems.swift; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 			isa = PBXGroup;
 			children = (
 				E24A0F15271256C4001640CA /* AllCardsView.swift */,
-				E24A0F1727125727001640CA /* SingleCardView.swift */,
 				E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */,
 				E298BA0D2713350900C82174 /* CardBasicInfo.swift */,
 				1B4ED871270F345E00290FFF /* CardPassions.swift */,
@@ -535,7 +532,6 @@
 				E2DBFE26275EC05200250686 /* RequestData.swift */,
 				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
 				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
-				1B4ED876270F345E00290FFF /* LikeDislikeSuperLike.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -793,6 +789,7 @@
 		E2F8AA6426F9488300CC7A72 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E261B31A28A94D3100BF4DDF /* SwiftAnimation.swift */,
 				E2F8AA6526F948BD00CC7A72 /* Fonts.swift */,
 				1B58A44E27144FA800565429 /* UIImageExtension.swift */,
 				1B58A4502715E35300565429 /* ImageServices.swift */,
@@ -1046,8 +1043,8 @@
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E25B0F3C285FB14800411BDA /* BoostUserProfile.swift in Sources */,
 				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,
-				E24A0F1827125727001640CA /* SingleCardView.swift in Sources */,
 				E2BE415C283AA7AC00AD42CE /* ProfileViewModelFlask.swift in Sources */,
+				E261B31B28A94D3100BF4DDF /* SwiftAnimation.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
 				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
@@ -1099,7 +1096,6 @@
 				E25D15A32867613F001330DB /* Extensions.swift in Sources */,
 				1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */,
 				E259119F287A04D600028152 /* LottieView.swift in Sources */,
-				1B4ED87D270F345E00290FFF /* LikeDislikeSuperLike.swift in Sources */,
 				E24A0F16271256C4001640CA /* AllCardsView.swift in Sources */,
 				E2FE49BE275177C500744930 /* DeckCards.swift in Sources */,
 				E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */,
