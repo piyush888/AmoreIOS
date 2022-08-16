@@ -20,7 +20,7 @@ struct MyAmoreCard: View {
         ZStack{
             Rectangle()
                 .fill(LinearGradient(
-                    gradient: Gradient(colors: [Color.purple, Color.blue,  Color.white, Color.white]),
+                    gradient: Gradient(colors: [Color(hex:0x83489e), Color(hex:0xc5302e)]),
                     startPoint: .top,
                     endPoint: .bottom)
                 )
@@ -37,24 +37,18 @@ struct MyAmoreCard: View {
                     if subscriptionTypeId.contains("Free") {
                         Text("If you like Amore Free")
                             .font(.title2)
-                            .foregroundColor(Color.white)
                         Text("Consider upgrading to Amore Gold or Platinum")
                             .font(.caption)
-                            .foregroundColor(Color.white)
                     } else if subscriptionTypeId.contains("Gold") {
                         Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Gold plan")
                             .font(.title2)
-                            .foregroundColor(Color.white)
                         Text("Consider upgrading to Amore 3 Month Platinum")
                             .font(.caption)
-                            .foregroundColor(Color.white)
                     } else if subscriptionTypeId.contains("Platinum") {
                         Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Platinum plan")
                             .font(.title2)
-                            .foregroundColor(Color.white)
                         Text("We hope you are enjoying the app")
                             .font(.caption)
-                            .foregroundColor(Color.white)
                     }
                     
                 }
@@ -67,32 +61,35 @@ struct MyAmoreCard: View {
                                         showModal:$showModal)
                         .frame(width: UIScreen.main.bounds.width-50, height:90)
                         .padding(.horizontal,30)
-                    
                 }
                 
                 
                 Spacer()
                 
+                // Gold Subscription
                 if subscriptionTypeId.contains("Free") {
                 
                     Button {
                         //TODO redirect to payment page
+                        self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = "Amore.ProductId.3M.Gold.v2"
+                        self.storeManager.purchaseProduct(product: self.storeManager.amoreGoldPricing["Amore Gold 3 Month"] ?? SKProduct())
                     } label: {
-                        ZStack{
+                        
+                        ZStack {
                             Capsule()
                                 .fill(LinearGradient(
                                     gradient: Gradient(colors: [Color.yellow, Color.red]),
                                     startPoint: .leading,
                                     endPoint: .trailing)
                                 )
-                                .frame(width:UIScreen.main.bounds.width - 150, height:80)
+                                .frame(height:80)
                             
                             VStack {
                                 Text("Upgrade to Amore Gold")
                                     .foregroundColor(Color.white)
                                     .font(.headline)
                                 if let pricingData = storeManager.amoreGoldPricing {
-                                    Text("3 month for \(Float(truncating: pricingData["Amore Gold 1 Month"]?.price ?? 0.0))")
+                                    Text("3 month for \(Float(truncating: pricingData["Amore Gold 3 Month"]?.price ?? 0.0), specifier: "%.2f")")
                                         .italic()
                                         .foregroundColor(Color.white)
                                         .font(.subheadline)
@@ -100,7 +97,6 @@ struct MyAmoreCard: View {
                                 Text("Don't make them wait")
                                     .font(.caption)
                                     .foregroundColor(Color.white)
-                                    
                             }
                         }
                         .padding(.top,15)
@@ -108,18 +104,22 @@ struct MyAmoreCard: View {
                     }
                 }
                 
+                // Or Text
                 if subscriptionTypeId.contains("Free") {
-                    Spacer()
                     Text("Or")
                         .font(.headline)
                         .foregroundColor(Color.white)
-                    Spacer()
+                        .padding(.vertical,10)
                 }
                 
+                
+                // Platinum Subscription
                 if subscriptionTypeId.contains("Free") || subscriptionTypeId.contains("Gold") {
                 
                     Button {
                         //TODO redirect to payment page
+                        self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = "Amore.ProductId.3M.Platinum.v2"
+                        self.storeManager.purchaseProduct(product: self.storeManager.amorePlatinumPricing["Amore Platinum 3 Month"] ?? SKProduct())
                     } label: {
                         ZStack{
                             Capsule()
@@ -128,19 +128,21 @@ struct MyAmoreCard: View {
                                     startPoint: .leading,
                                     endPoint: .trailing)
                                 )
-                                .frame(width:UIScreen.main.bounds.width - 150, height:80)
+                                .frame(height:80)
                             
                             VStack {
                                 Text("Upgrade to Platinum")
                                     .foregroundColor(Color.white)
                                     .font(.headline)
+                                
                                 if let pricingData = storeManager.amorePlatinumPricing {
-                                    Text("3 month for \(Float(truncating: pricingData["Amore Platinum 1 Month"]?.price ?? 0.0), specifier: "%.2f")")
+                                    Text("3 month for \(Float(truncating: pricingData["Amore Platinum 3 Month"]?.price ?? 0.0), specifier: "%.2f")")
                                         .italic()
                                         .foregroundColor(Color.white)
                                         .font(.subheadline)
                                 }
-                                                                Text("Top picks, super stars, boosts, messages")
+                                    
+                                Text("Top picks, super stars, boosts, messages")
                                     .foregroundColor(Color.white)
                                     .font(.caption)
                             }
@@ -150,19 +152,27 @@ struct MyAmoreCard: View {
                 
                 Spacer()
                 
-                HStack {
-                    Spacer()
-                    Button("Rate us") {
+                
+                HStack(spacing:60) {
+                    
+                    Button {
                         storeManager.writeReview()
+                    } label : {
+                        Text("Rate us")
+                            .foregroundColor(Color.white)
+                            .bold()
                     }
-                    .buttonStyle(GrowingButton(buttonColor:Color.yellow, fontColor: Color.white))
-                    Spacer()
-                    Button("Close") {
+                    
+                    Button {
                         showModal.toggle()
+                    } label : {
+                        Text("Close")
+                            .foregroundColor(Color.white)
+                            .bold()
                     }
-                    .buttonStyle(GrowingButton(buttonColor:Color.blue, fontColor: Color.white))
-                    Spacer()
+                    
                 }
+                .padding(.top,10)
                 
             }
             .padding(10)
@@ -170,7 +180,7 @@ struct MyAmoreCard: View {
             .clipped()
             .frame(width: UIScreen.main.bounds.width-50, height: 400)
         }
-        
+        .foregroundColor(Color.white)
       
         
     }

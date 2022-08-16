@@ -170,7 +170,7 @@ struct BasicUserInfoForm: View {
                         checkallFieldsFilled()
                     }
                 } label : {
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
                 .padding(.horizontal,30)
                 .padding(.top,10)

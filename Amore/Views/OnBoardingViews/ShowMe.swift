@@ -60,7 +60,7 @@ struct ShowMe: View {
                 Button{
                     self.checkShowMeIsNil()
                 } label : {
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
                 .padding(.horizontal,30)
                 .padding(.bottom, 10)

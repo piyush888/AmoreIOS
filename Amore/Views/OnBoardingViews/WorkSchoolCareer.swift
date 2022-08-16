@@ -100,7 +100,7 @@ struct WorkSchoolCareer: View {
                 self.checkWorkSchoolCareerFilled()
             } label : {
                 ZStack{
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
             }
             .padding(.horizontal,30)

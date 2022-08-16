@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContinueButtonDesign: View {
+    
+    @State var buttonText: String
+    
     var body: some View {
         ZStack{
             Rectangle()
@@ -15,7 +18,7 @@ struct ContinueButtonDesign: View {
                 .cornerRadius(10.0)
                 .foregroundColor(.accentColor)
             
-            Text("Continue")
+            Text(buttonText)
                 .foregroundColor(.white)
         }
     }

@@ -45,16 +45,97 @@ struct UserProfile: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    
     var body: some View {
         
-        NavigationView {
+        GeometryReader { geometry in
             
-            GeometryReader { geometry in
-                
+        
+            NavigationView {
+            
                 ZStack {
                         
-                    content
+                    VStack(alignment:.center, spacing:2) {
+                        Spacer()
+                        
+                        // User Data
+                        /// Image
+                        /// Where user works
+                        /// School Attended
+                        UserSnapDetails(geometry: geometry)
+                            .environmentObject(photoModel)
+                            .environmentObject(profileModel)
+                            
+                        // User Setttings View
+                        /// Settings
+                        /// Edit Profile
+                        /// Safety
+                        SettingEditProfileSafety(settingsDone:$settingsDone,
+                                                 profileEditingToBeDone:$profileEditingToBeDone)
+                            .environmentObject(photoModel)
+                            .environmentObject(profileModel)
+                            .environmentObject(adminAuthenticationModel)
+                            .padding(.bottom,10)
+                            
+                        // Subscription details
+                        /// SuperLike : Show count or option to buy
+                        /// Boosts: Show count or option to buy
+                        /// Messages: Show count and option to buy
+                        /// Restore: Restore Purchase
+                        SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                            showModal:$showModal)
+                            .environmentObject(storeManager)
+                            .padding(.bottom,10)
+                            
+                        // Subscription Options
+                        /// User subscription amore
+                        /// Amore Platinum Information
+                        ///  Amore Gold Information
+                        ZStack {
+                            Spacer()
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                            VStack(spacing:8) {
+                                
+                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
+                                                        height: geometry.size.height * 0.09,
+                                                        popUpCardSelection:$popUpCardSelection,
+                                                        showModal: $showModal,
+                                                        selectionType:.myAmorecards,
+                                                        buttonMainText:"My Amore",
+                                                        buttonSubText:"",
+                                                        buttonColor:[Color(hex:0x83489e), Color(hex:0xc5302e)])
+                                
+                                
+                                
+                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
+                                                        height: geometry.size.height * 0.09,
+                                                        popUpCardSelection:$popUpCardSelection,
+                                                        showModal: $showModal,
+                                                        selectionType:.amorePlatinum,
+                                                        buttonMainText:"Amore Platinum",
+                                                        buttonSubText:"",
+                                                        buttonColor:[Color(hex:0x0b3866), Color(hex:0x83f5e5)])
+                                
+                                
+                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
+                                                        height: geometry.size.height * 0.09,
+                                                        popUpCardSelection:$popUpCardSelection,
+                                                        showModal: $showModal,
+                                                        selectionType:.amoreGold,
+                                                        buttonMainText:"Amore Gold",
+                                                        buttonSubText:"",
+                                                        buttonColor:[Color(hex:0x59d102),Color(hex:0xf3f520)])
+                            }
+                            .padding(.vertical,20)
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal,20)
+                    .navigationBarHidden(true)
                     
                     if showModal {
                         
@@ -150,16 +231,16 @@ struct UserProfile: View {
                                     
                                 case .amorePlatinum:
                                     if let pricingData = storeManager.amorePlatinumPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.black,Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color(hex:0x0b3866),Color(hex:0x83f5e5),],
                                                           cardName: "Month",
                                                           cardHeaderSymbol: "bolt.heart.fill",
                                                           cardHeaderSymbolColor: Color.white,
                                                           headerText:"Platinum Subscription",
                                                           subScriptText1:"Top Picks",
-                                                          subScriptText2:"Unlimited Likes",
-                                                          subScriptText3:"10 Super likes everyday",
+                                                          subScriptText2:"",
+                                                          subScriptText3:"7 Super likes everyday",
                                                           subScriptText4:"5 Boost a month",
-                                                          subScriptText5:"2 messages everyday",
+                                                          subScriptText5:"3 messages everyday",
                                                           showModal: $showModal,
                                                           geometry: geometry,
                                                           priceTabs: pricingData,
@@ -187,10 +268,10 @@ struct UserProfile: View {
                                                       cardHeaderSymbolColor: Color("gold-star"),
                                                       headerText:"Gold Subscription",
                                                       subScriptText1:"Top Picks",
-                                                      subScriptText2:"500 Likes everyday",
-                                                      subScriptText3:"5 Super likes everyday",
+                                                      subScriptText2:"",
+                                                      subScriptText3:"3 Super likes everyday",
                                                       subScriptText4:"2 Boost a month",
-                                                      subScriptText5:"1 messages everyday",
+                                                      subScriptText5:"2 messages everyday",
                                                       showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
@@ -213,83 +294,13 @@ struct UserProfile: View {
                                 } // switch statement
                         } // show modal
                         
-                        
                 } // Zstack
-                .navigationBarTitle("Settings")
-                .navigationBarTitleDisplayMode(.inline)
                 
             } // geometry reader
         } // navigation view
     }
     
     
-    var content: some View {
-        
-        ScrollView{
-            VStack(alignment:.center) {
-                
-                // User Data
-                /// Image
-                /// Where user works
-                /// School Attended
-                UserSnapDetails()
-                    .environmentObject(photoModel)
-                    .environmentObject(profileModel)
-                
-                
-                // User Setttings View
-                /// Settings
-                /// Edit Profile
-                /// Safety
-                SettingEditProfileSafety(settingsDone:$settingsDone,
-                                         profileEditingToBeDone:$profileEditingToBeDone)
-                    .environmentObject(photoModel)
-                    .environmentObject(profileModel)
-                    .environmentObject(adminAuthenticationModel)
-                    .padding(.bottom,5)
-                
-                // Subscription details
-                /// SuperLike : Show count or option to buy
-                /// Boosts: Show count or option to buy
-                /// Messages: Show count and option to buy
-                /// Restore: Restore Purchase
-                SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                    showModal:$showModal)
-                    .environmentObject(storeManager)
-                    
-                
-                Spacer()
-                
-                // Subscription Options
-                /// User subscription amore
-                /// Amore Platinum Information
-                ///  Amore Gold Information
-                ZStack {
-                    Spacer()
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                    VStack {
-                        MyAmore(width: 300,
-                                popUpCardSelection:$popUpCardSelection,
-                                showModal: $showModal)
-                        AmorePlatinum(width:300,
-                                      popUpCardSelection:$popUpCardSelection,
-                                      showModal:$showModal)
-                        AmoreGold(width:300,
-                                  popUpCardSelection:$popUpCardSelection,
-                                  showModal:$showModal)
-                            .padding(.bottom,10)
-                    }
-                    
-                    Spacer()
-                }
-                
-            }
-            .padding(.horizontal,20)
-            .navigationBarHidden(true)
-        }
-    }
     
 }
 
@@ -450,7 +461,7 @@ struct BuySubscriptionOrItemsCard : View {
                                 } else {
                                     Button(action: {
                                         self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
-                                        storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
+                                        self.storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                     }) {
                                         PayButton(buttonText: "\(currency)",
                                            cardName: storeManager.purchaseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
@@ -593,7 +604,7 @@ struct PayButton: View {
                     startPoint: .leading,
                     endPoint: .trailing)
                 )
-                .frame(width:UIScreen.main.bounds.width - 150, height:50)
+                .frame(width:UIScreen.main.bounds.width * 0.45, height:50)
             
             VStack {
                 if totalCost == 0.0 {

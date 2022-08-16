@@ -145,8 +145,6 @@
 		E2A94C68276B93090069F814 /* ButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C67276B93090069F814 /* ButtonIcon.swift */; };
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
 		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
-		E2A960FB27C1F268009108F0 /* AmorePlatinum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */; };
-		E2A960FD27C1F280009108F0 /* AmoreGold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FC27C1F280009108F0 /* AmoreGold.swift */; };
 		E2A960FF27C345D6009108F0 /* SubsriptionItemPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */; };
 		E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A9610027CB4660009108F0 /* StoreKit.framework */; };
 		E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9610227CC89FF009108F0 /* StoreManager.swift */; };
@@ -328,8 +326,6 @@
 		E2A94C67276B93090069F814 /* ButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonIcon.swift; sourceTree = "<group>"; };
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
 		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
-		E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmorePlatinum.swift; sourceTree = "<group>"; };
-		E2A960FC27C1F280009108F0 /* AmoreGold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmoreGold.swift; sourceTree = "<group>"; };
 		E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsriptionItemPricing.swift; sourceTree = "<group>"; };
 		E2A9610027CB4660009108F0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2A9610227CC89FF009108F0 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -636,7 +632,6 @@
 			children = (
 				E29B293A27234B6B00C38035 /* UserSettingView.swift */,
 				E2DBC024272B3621000630F5 /* ContactCommunityLegal.swift */,
-				E2DBC02A272CA85D000630F5 /* MyAmore.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -666,8 +661,7 @@
 			isa = PBXGroup;
 			children = (
 				E2DBC037272DFC9C000630F5 /* MyAmoreCard.swift */,
-				E2A960FA27C1F268009108F0 /* AmorePlatinum.swift */,
-				E2A960FC27C1F280009108F0 /* AmoreGold.swift */,
+				E2DBC02A272CA85D000630F5 /* MyAmore.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -974,7 +968,6 @@
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
-				E2A960FD27C1F280009108F0 /* AmoreGold.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
@@ -1054,7 +1047,6 @@
 				1BB36D3A27ADBD3000F4029C /* AllConversationsView.swift in Sources */,
 				1BB36D3227ACE91A00F4029C /* MainMessagesViewModel.swift in Sources */,
 				1BB36D3827ADBC1C00F4029C /* customNavBar.swift in Sources */,
-				E2A960FB27C1F268009108F0 /* AmorePlatinum.swift in Sources */,
 				1BF55ECB272025860027F78F /* (null) in Sources */,
 				E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,

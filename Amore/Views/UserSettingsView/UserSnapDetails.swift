@@ -12,14 +12,15 @@ struct UserSnapDetails: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
+    @State var geometry: GeometryProxy
     
     var body: some View {
         
         VStack {
             ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
-                             photo: $photoModel.photo1,
-                             width:200,
-                             height: 200)
+                                photo: $photoModel.photo1,
+                                width: geometry.size.height/4.0,
+                                height: geometry.size.height/4.0)
                             .scaledToFill()
                             .clipShape(Circle())
                             .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
@@ -34,13 +35,13 @@ struct UserSnapDetails: View {
                 .font(.caption)
             
             Spacer()
-        }.padding(.top,50)
+        }
         
     }
 }
 
-struct UserSnapDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        UserSnapDetails()
-    }
-}
+//struct UserSnapDetails_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserSnapDetails(circularImageSize:400)
+//    }
+//}

@@ -72,7 +72,7 @@ struct Passions: View {
                 Button{
                     checkPassionsSelectionDone()
                 } label : {
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
                 .padding(.horizontal,30)
                 .padding(.bottom, 10)

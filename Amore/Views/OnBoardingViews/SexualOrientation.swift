@@ -78,7 +78,7 @@ struct SexualOrientation: View {
                 Button{
                     checkSexualOrientation()
                 } label : {
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
                 .padding(.horizontal,30)
                 .padding(.top,10)

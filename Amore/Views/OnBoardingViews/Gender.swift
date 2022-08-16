@@ -61,7 +61,7 @@ struct Gender: View {
                 Button{
                     self.addInputToProfile()
                 } label : {
-                    ContinueButtonDesign()
+                    ContinueButtonDesign(buttonText:"Continue")
                 }
                 .padding(.horizontal,30)
                 .padding(.bottom, 10)

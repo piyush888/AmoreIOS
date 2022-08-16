@@ -82,7 +82,7 @@ struct FilterSettings: View {
                     // Gender Filter
                     NavigationLink(
                           destination: SelectSingleItem(selection:$filterModel.filterData.genderPreference.bound,
-                                                        optionsList:["Male", "Female", "All (Default)"],
+                                                        optionsList:["Male", "Female", "Non Binary", "All (Default)"],
                                                         filterName:"Gender").padding(20),
                           label: {
                                   FilterCommonContainer(filterName:"Gender",

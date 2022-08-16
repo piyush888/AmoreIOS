@@ -20,23 +20,21 @@ struct LocationView: View {
             VStack {
                 
                 Spacer()
-                
-                Image(systemName: "location.fill.viewfinder")
-                    .resizable()
-                    .frame(width:100, height:100)
-                    .foregroundColor(.pink)
-                    .padding(.bottom, 20)
+                Image(systemName: "location.circle.fill")
+                                    .resizable()
+                                    .frame(width:80, height:80)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, 20)
+                                    .padding(.top, 20)
                 
                 Text("Enable Location")
-                    .font(.BoardingTitle)
-                Text("You'll need to enable your location in order to user Amore")
-                    .font(.BoardingSubHeading)
-                    .padding(.horizontal,60)
+                    .font(.title2)
+                Text("Please enable your location in order to user Amore")
+                    .font(.caption)
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 400)
-                
+                                    
                 Spacer()
-                
+
                 
                 NavigationLink(
                     destination: LocationHomeView()
@@ -53,21 +51,12 @@ struct LocationView: View {
                             profileModel.requestPermission()
                             profileModel.getLocationOnce()
                         } label : {
-                            ZStack{
-                                Rectangle()
-                                    .frame(height:45)
-                                    .cornerRadius(5.0)
-                                    .foregroundColor(.pink)
-                                
-                                Text("Allow Location")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .font(.BoardingButton)
-                            }
+                            ContinueButtonDesign(buttonText:"Continue")
                         }.padding(.bottom, 10)
                     })
                 
             }
+            .navigationBarHidden(true)
         }.padding(20)
     }
 }
