@@ -18,7 +18,7 @@ enum ViewTypes {
 enum TopPicksLikesView: String {
     case likesReceived = "Likes Received"
     case superLikesAndLikesGiven = "Likes Given"
-    case elitePicks = "Elites"
+    case elitePicks = "Top Picks"
 }
 
 enum TopPicksLikesSubView: String {
