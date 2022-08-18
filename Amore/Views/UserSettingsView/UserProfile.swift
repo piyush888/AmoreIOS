@@ -108,14 +108,14 @@ struct UserProfile: View {
                                 
                                 
                                 
-                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
-                                                        height: geometry.size.height * 0.09,
-                                                        popUpCardSelection:$popUpCardSelection,
-                                                        showModal: $showModal,
-                                                        selectionType:.amorePlatinum,
-                                                        buttonMainText:"Amore Platinum",
-                                                        buttonSubText:"",
-                                                        buttonColor:[Color(hex:0x0b3866), Color(hex:0x83f5e5)])
+//                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
+//                                                        height: geometry.size.height * 0.09,
+//                                                        popUpCardSelection:$popUpCardSelection,
+//                                                        showModal: $showModal,
+//                                                        selectionType:.amorePlatinum,
+//                                                        buttonMainText:"Amore Platinum",
+//                                                        buttonSubText:"",
+//                                                        buttonColor:[Color(hex:0x0b3866), Color(hex:0x83f5e5)])
                                 
                                 
                                 SubscriptionCardButtons(width: geometry.size.width * 0.75,
@@ -125,7 +125,7 @@ struct UserProfile: View {
                                                         selectionType:.amoreGold,
                                                         buttonMainText:"Amore Gold",
                                                         buttonSubText:"",
-                                                        buttonColor:[Color(hex:0x59d102),Color(hex:0xf3f520)])
+                                                        buttonColor:[Color(hex:0x59d102)])
                             }
                             .padding(.vertical,20)
                             
@@ -143,10 +143,10 @@ struct UserProfile: View {
                                 
                                 case .superLikeCards :
                                     if let pricingData = storeManager.superLikesPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color.blue, Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat: [Color.orange, Color.orange, Color.white],
                                                           cardName: "Super Likes",
                                                           cardHeaderSymbol: "star.circle",
-                                                          cardHeaderSymbolColor: Color("gold-star"),
+                                                                   cardHeaderSymbolColor: Color.white,
                                                           headerText: "Stand out with Super Like",
                                                           subHeaderText: "You're 3x likely to get a match!!",
                                                           showModal: $showModal,
@@ -171,10 +171,10 @@ struct UserProfile: View {
                                 
                                 case .boostCards :
                                     if let pricingData = storeManager.boostsPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.yellow, Color.orange, Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color.blue, Color.white],
                                                           cardName: "Boosts",
                                                           cardHeaderSymbol: "bolt.circle.fill",
-                                                          cardHeaderSymbolColor: Color.blue,
+                                                          cardHeaderSymbolColor: Color.white,
                                                           headerText: "Skip the queue",
                                                           subHeaderText: "Be on top of the deck for 30 minutes",
                                                           showModal: $showModal,
@@ -376,7 +376,6 @@ struct BuySubscriptionOrItemsCard : View {
                         // Sub headline text for item or subscription
                         if let text = self.subHeaderText {
                             Text(text)
-                                .font(.headline)
                                 .foregroundColor(Color.white)
                         }
                         
@@ -457,7 +456,8 @@ struct BuySubscriptionOrItemsCard : View {
                                     PayButton(buttonText: "Purchased",
                                          cardName: "",
                                          totalCost: Binding.constant(Float(0.0)),
-                                         buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                         buttonColor: [Color.blue])
+//                                buttonColor: [cardColorFormat[0],cardColorFormat[1]]
                                 } else {
                                     Button(action: {
                                         self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
@@ -466,9 +466,9 @@ struct BuySubscriptionOrItemsCard : View {
                                         PayButton(buttonText: "\(currency)",
                                            cardName: storeManager.purchaseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
                                            totalCost: $totalCost,
-                                           buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                           buttonColor: [Color.blue])
+//                                buttonColor: [cardColorFormat[0],cardColorFormat[1]]
                                     }
-                                    .foregroundColor(.blue)
                                 }
                                     
                             } else {
@@ -498,22 +498,19 @@ struct BuySubscriptionOrItemsCard : View {
                                     PayButton(buttonText: "\(currency)",
                                        cardName: "Buy for",
                                        totalCost: $totalCost,
-                                       buttonColor: [cardColorFormat[0],cardColorFormat[1]])
+                                       buttonColor: [Color.blue])
                                 }
-                                .foregroundColor(.blue)
+//                                .foregroundColor(.blue)
                             }
                             
                          }
                         
                         Spacer()
                         
-                        // Close the card
-                        Text("No thanks")
-                            .foregroundColor(Color.gray)
-                            .onTapGesture {
-                                showModal.toggle()
-                            }
-                            .padding(.top,10)
+                        NoThanksButton(showModal:$showModal,
+                                       buttonColor:Color.clear,
+                                       fontColor:Color.gray)
+                            .padding(.bottom,10)
                     }
                     
                     
@@ -562,12 +559,12 @@ struct PriceTab: View {
                     .font(.title)
                 
                 Text(description)
-                    .font(.headline)
+//                    .font(.headline)
                 
                 Divider()
                 
                 Text("\(currency)")
-                    .bold()
+//                    .bold()
             }
             .padding(5)
             .background(
@@ -614,12 +611,12 @@ struct PayButton: View {
                 }
             }
             .foregroundColor(Color.white)
-            .font(.headline)
         }
         .padding(.top,15)
         
     }
     
 }
+
 
 
