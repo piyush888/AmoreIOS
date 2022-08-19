@@ -24,6 +24,8 @@ struct EditProfile: View {
     @State var doYouSmoke: String?
     @State var doYouDrink: String?
     @State var doYouWorkOut: String?
+    @State var food: String?
+    
     @State var formUpdated: Bool = false
     
     
@@ -42,6 +44,7 @@ struct EditProfile: View {
             profileModel.editUserProfile.doYouSmoke = doYouSmoke
             profileModel.editUserProfile.doYouDrink = doYouDrink
             profileModel.editUserProfile.doYouWorkOut = doYouWorkOut
+            profileModel.editUserProfile.food = food
         } else {
             print("Edit Profile was closed without updating profile")
         }
@@ -89,6 +92,7 @@ struct EditProfile: View {
                                      doYouSmoke:$doYouSmoke,
                                      doYouDrink:$doYouDrink,
                                      doYouWorkOut:$doYouWorkOut,
+                                     food:$food,
                                      formUpdated:$formUpdated)
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)

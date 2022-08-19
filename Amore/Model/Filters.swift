@@ -20,8 +20,9 @@ struct Filters: Identifiable, Codable, Hashable, Equatable {
     var educationPreference: [String]? = ["All (Default)"]
     var countryPreference: [String]? = ["All (Default)"]
     var politicalPreference: [String]? = ["All (Default)"]
-    var smoker: [String]? = ["All (Default)"]
-    var drink: [String]? = ["All (Default)"]
+    var smokerPreference: [String]? = ["All (Default)"]
+    var drinkPreference: [String]? = ["All (Default)"]
+    var foodPreference: [String]? = ["All (Default)"]
     var howAreYouFeelingToday: [String]? = ["All (Default)"]
     var radiusDistance: CGFloat? = 100
 }

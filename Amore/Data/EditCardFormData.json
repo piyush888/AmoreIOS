@@ -35,6 +35,10 @@
     {
         "selectionFormName":"Workout",
         "selectionLists": ["Everyday","Sometimes","Never"]
+    },
+    {
+        "selectionFormName":"Food",
+        "selectionLists": ["Vegan","Vegetarian","Pescatarian","Flexitarian","Omnivores"]
     }
     
 ]

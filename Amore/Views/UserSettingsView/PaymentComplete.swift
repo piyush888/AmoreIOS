@@ -12,73 +12,32 @@ struct PaymentComplete: View {
     @State var subscriptionTypeId: String
     @State var time = 0.0
     @State var scale = 0.1
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     let duration = 5.0
+    
+    var subscriptionDetailColor: Binding<Color> {
+        return colorScheme == .dark ? Binding.constant(Color(hex: 0x24244A)): Binding.constant(Color(hex: 0xe8f4f8))
+    }
     
     var body: some View {
         
         ZStack {
-            Image(systemName: "heart.fill")
-                .frame(width:60, height:60)
-                    .foregroundColor(.pink)
-                    .modifier(ParticlesModifier())
-                    .offset(x: -100, y : -50)
-                
-            Image(systemName: "heart.fill")
-                    .frame(width:60, height:60)
-                    .foregroundColor(.blue)
-                    .modifier(ParticlesModifier())
-                    .offset(x: 60, y : 70)
-            
+           
             VStack {
                 
-                Image(systemName: "gift.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.blue)
+                // Thank the user for buying the application
+                thanksForBuying
                 
-                
-                Text("Thanks for being part of community, Purchas was complete.")
-                    .padding(20)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                
-                
-                Image(systemName: "bolt.heart.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.red)
-                
-                
-                if subscriptionTypeId.contains("Free") {
-                    Text("If you like Amore Free")
-                        .font(.title2)
-                        .foregroundColor(Color.black)
-                    Text("Consider upgrading to Amore Gold or Platinum")
-                        .font(.caption)
-                        .foregroundColor(Color.black)
-                } else if subscriptionTypeId.contains("Gold") {
-                    Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Gold plan")
-                        .font(.title2)
-                        .foregroundColor(Color.black)
-                    Text("We hope you are enjoying the app")
-                        .font(.caption)
-                        .foregroundColor(Color.black)
-                } else if subscriptionTypeId.contains("Platinum") {
-                    Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Platinum plan")
-                        .font(.title2)
-                        .foregroundColor(Color.black)
-                    Text("We hope you are enjoying the app")
-                        .font(.caption)
-                        .foregroundColor(Color.black)
-                }
+                // Describe the plan user has or ofer them to upgrade it to a better plan
+                planDescription
                 
                 SubscriptionDetails(popUpCardSelection:Binding.constant(PopUpCards.myAmorecards),
-                                    showModal:Binding.constant(false))
+                                    showModal:Binding.constant(false),
+                                    backgroundColor:subscriptionDetailColor)
                     .frame(width: UIScreen.main.bounds.width-50, height:90)
                     .padding(.horizontal,30)
-                
                 
                 
                 HStack {
@@ -88,23 +47,87 @@ struct PaymentComplete: View {
                     Button("Rate us") {
                         storeManager.writeReview()
                     }
-                    .buttonStyle(GrowingButton(buttonColor:Color.yellow, fontColor: Color.white))
+                    .buttonStyle(GrowingButton(buttonColor:Color.pink, fontColor: Color.white))
                     
                     Spacer()
                     
                     Button("Keep Swiping") {
                         storeManager.paymentCompleteDisplayMyAmore = false
                     }
-                    .buttonStyle(GrowingButton(buttonColor:Color.pink, fontColor: Color.white))
+                    .buttonStyle(GrowingButton(buttonColor:Color.blue, fontColor: Color.white))
                     
                     Spacer()
                 }
                 .padding()
                 
             }
+            
+            // Particle modifiers
+            Image(systemName: "heart.fill")
+                .frame(width:60, height:60)
+                    .foregroundColor(.pink)
+                    .modifier(ParticlesModifier())
+                    .offset(x: -100, y : -50)
+            
+            // Particle modifiers
+            Image(systemName: "heart.fill")
+                    .frame(width:60, height:60)
+                    .foregroundColor(.blue)
+                    .modifier(ParticlesModifier())
+                    .offset(x: 60, y : 70)
+            
         }
         
     }
+    
+    var thanksForBuying: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+            
+            VStack {
+                Image(systemName: "gift.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.blue)
+                
+                Text("Thanks for being part of community, Purchase was complete.")
+                    .padding(20)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal,30)
+        .frame(height:180)
+    }
+    
+    
+    var planDescription: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+            
+            VStack {
+                Image(systemName: "bolt.heart.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.red)
+                
+                if subscriptionTypeId.contains("Free") {
+                    Text("If you like Amore Free").font(.title2)
+                    Text("Consider upgrading to Amore Gold").font(.caption)
+                } else if subscriptionTypeId.contains("Gold") {
+                    Text("Amore \(subscriptionTypeId.components(separatedBy: ".")[2]) Gold plan").font(.title2)
+                    Text("We hope you are enjoying the app").font(.caption)
+                }
+            }
+        }
+        .padding(.horizontal,30)
+        .frame(height:180)
+    }
+    
+    
 }
 
 struct PaymentComplete_Previews: PreviewProvider {

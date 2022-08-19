@@ -22,7 +22,6 @@ struct ContentView: View {
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
     @StateObject var reportActivityModel = ReportActivityModel()
     @StateObject var storeManager = StoreManager()
-    @StateObject var storeProfileV2 = ProfileViewModelV2()
     @StateObject var chatModel = ChatModel()
     @Environment(\.colorScheme) var colorScheme
     
@@ -80,10 +79,6 @@ struct ContentView: View {
                                             SKPaymentQueue.default().add(storeManager)
                                             storeManager.getProducts()
                                             storeManager.getPurchase()
-                                            
-                                            // July 23: Below func is replicated through listeners
-                                            // Since it's not a write throuh cache, when user imports profile for the first time, we write that profile to backend too
-//                                            storeProfileV2.writeUserProfileToBackend(userProfile:profileModel.editUserProfile)
                                         }
                                 }
                                 // Else get location permission

@@ -23,8 +23,6 @@ struct MyAmoreCard: View {
     }
     
     
-    
-    
     var body: some View {
         
         ZStack {
@@ -62,13 +60,22 @@ struct MyAmoreCard: View {
                         }
                     }
                     
+                    SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
+                                        showModal:$showModal,
+                                        backgroundColor:Binding.constant(Color.clear))
+                        .environmentObject(storeManager)
+                        .padding(.vertical,10)
+                        .padding(.horizontal,20)
+                        
+                    
+                    
                     Button {
                         UIApplication.shared.open(URL(string: "https://apps.apple.com/account/billing")!)
                     } label: {
                         Text("Manage Subscription")
                     }
-                    .buttonStyle(GrowingButton(buttonColor:Color(hex: 0xbc556f), fontColor: Color.white))
-                    .padding(.top,30)
+                    .buttonStyle(GrowingButton(buttonColor:Color.clear, fontColor: Color.white))
+                    .padding(.top,20)
                     
                 }
                 //If the user has Free Subscription show the following
@@ -97,7 +104,7 @@ struct MyAmoreCard: View {
     var cardBackground: some View {
         Rectangle()
             .fill(LinearGradient(
-                gradient: Gradient(colors: [Color(hex:0x83489e), Color(hex:0xc5302e)]),
+                gradient: Gradient(colors: [Color(hex:0xf492f0), Color(hex:0xf9c58d)]),
                 startPoint: .top,
                 endPoint: .bottom)
             )
@@ -109,7 +116,7 @@ struct MyAmoreCard: View {
         ZStack {
             Capsule()
                 .fill(LinearGradient(
-                    gradient: Gradient(colors: [Color.yellow, Color.red]),
+                    gradient: Gradient(colors: [Color(hex:0xf86ca7), Color(hex:0xf4d444)]),
                     startPoint: .leading,
                     endPoint: .trailing)
                 )

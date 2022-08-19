@@ -14,13 +14,14 @@ struct SubscriptionDetails: View {
     @EnvironmentObject var storeManager: StoreManager
     @Environment(\.colorScheme) var colorScheme
     
+    @Binding var backgroundColor: Color
     
     var body: some View {
         
         ZStack {
             
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                .foregroundColor(backgroundColor ?? Color.clear)
 
             HStack(spacing:20) {
             

@@ -19,7 +19,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userProfile = Profile()
     @Published var editUserProfile = Profile()
     @Published var storeManagerObj = StoreManager() // Object
-    @Published var storeProfileV2 = ProfileViewModelV2() // Object
     
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
@@ -387,8 +386,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
                     self.userProfile = self.editUserProfile
                     // July 23: Below func is replicated through listeners
-                    // also updating cache and backend
-//                    _ = storeProfileV2.writeUserProfileToBackend(userProfile:self.editUserProfile)
+                    
                     
                 }
                 catch {

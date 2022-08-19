@@ -52,7 +52,8 @@ struct SettingEditProfileSafety: View {
                                    countryRaisedIn:profileModel.editUserProfile.countryRaisedIn,
                                    doYouSmoke:profileModel.editUserProfile.doYouSmoke,
                                    doYouDrink:profileModel.editUserProfile.doYouDrink,
-                                   doYouWorkOut:profileModel.editUserProfile.doYouWorkOut)
+                                   doYouWorkOut:profileModel.editUserProfile.doYouWorkOut,
+                                   food:profileModel.editUserProfile.food)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
             } label: {

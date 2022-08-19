@@ -148,7 +148,6 @@
 		E2A960FF27C345D6009108F0 /* SubsriptionItemPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */; };
 		E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A9610027CB4660009108F0 /* StoreKit.framework */; };
 		E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9610227CC89FF009108F0 /* StoreManager.swift */; };
-		E2BE415C283AA7AC00AD42CE /* ProfileViewModelFlask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BE415B283AA7AB00AD42CE /* ProfileViewModelFlask.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2D00E0C286647460037DC07 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E2D00E0B286647460037DC07 /* button.riv */; };
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
@@ -329,7 +328,6 @@
 		E2A960FE27C345D6009108F0 /* SubsriptionItemPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsriptionItemPricing.swift; sourceTree = "<group>"; };
 		E2A9610027CB4660009108F0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2A9610227CC89FF009108F0 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
-		E2BE415B283AA7AB00AD42CE /* ProfileViewModelFlask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelFlask.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2D00E0B286647460037DC07 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
@@ -765,7 +763,6 @@
 				E291A1EB26FF5BF8000D8A2C /* OTPViewModel.swift */,
 				E283678026FAB85400EEA049 /* OnboardingModel.swift */,
 				1B72A54F2707274A0074F144 /* ProfileViewModel.swift */,
-				E2BE415B283AA7AB00AD42CE /* ProfileViewModelFlask.swift */,
 				E2347139271DC5640006F336 /* TopPicksProfiles.swift */,
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
 				1B6273CF274B82FD00590DD1 /* FilterModel.swift */,
@@ -1036,7 +1033,6 @@
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E25B0F3C285FB14800411BDA /* BoostUserProfile.swift in Sources */,
 				E2851CB227277A6B005B19E1 /* DeleteProfileButton.swift in Sources */,
-				E2BE415C283AA7AC00AD42CE /* ProfileViewModelFlask.swift in Sources */,
 				E261B31B28A94D3100BF4DDF /* SwiftAnimation.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,

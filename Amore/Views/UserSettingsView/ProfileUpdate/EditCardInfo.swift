@@ -27,6 +27,8 @@ struct EditCardInfo: View {
     @Binding var doYouSmoke: String?
     @Binding var doYouDrink: String?
     @Binding var doYouWorkOut: String?
+    @Binding var food: String?
+    
     @Binding var formUpdated: Bool
     // User Height
     @State var height: Double = 0.0
@@ -58,7 +60,10 @@ struct EditCardInfo: View {
             
             case "Workout":
                 return $doYouWorkOut.bound
-
+            
+            case "Food":
+                return $food.bound
+            
             default:
                 return Binding.constant("")
         }
@@ -227,6 +232,7 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouSmoke:Binding.constant("Socially"),
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
+                     food:Binding.constant("Vegetarian"),
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
@@ -243,6 +249,7 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouSmoke:Binding.constant("Socially"),
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
+                     food:Binding.constant("Vegetarian"),
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
@@ -259,6 +266,7 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouSmoke:Binding.constant("Socially"),
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
+                     food:Binding.constant("Vegetarian"),
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
@@ -275,6 +283,7 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouSmoke:Binding.constant("Socially"),
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
+                     food:Binding.constant("Vegetarian"),
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())

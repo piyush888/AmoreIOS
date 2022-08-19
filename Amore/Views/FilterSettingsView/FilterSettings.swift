@@ -46,6 +46,7 @@ struct FilterSettings: View {
     var politicalPreferenceList = ["Far Left","Left Wing","Moderate Left","Independent","Moderate Right","Right Wing","Far Right","All (Default)"]
     var smokerPreferenceList = ["Socially","Sometimes","Never","All (Default)"]
     var drinkPreferenceList = ["Socially","Sometimes","Never","All (Default)"]
+    var foodPreferenceList = ["Vegan","Vegetarian","Pescatarian","Flexitarian","Omnivores","All (Default)"]
     
     var countries: [String] = []
     
@@ -150,7 +151,7 @@ struct FilterSettings: View {
                     
                     // Smoker Filter
                     NavigationLink(
-                        destination: SelectMultipleItems(selectionList:$filterModel.filterData.smoker.boundStringArray,
+                        destination: SelectMultipleItems(selectionList:$filterModel.filterData.smokerPreference.boundStringArray,
                                                         optionsList:smokerPreferenceList,
                                                          filterName:"Smoker").padding(20),
                         label: {
@@ -160,11 +161,21 @@ struct FilterSettings: View {
                     
                     // Drinks Filter
                     NavigationLink(
-                        destination: SelectMultipleItems(selectionList:$filterModel.filterData.drink.boundStringArray,
+                        destination: SelectMultipleItems(selectionList:$filterModel.filterData.drinkPreference.boundStringArray,
                                                         optionsList:drinkPreferenceList,
                                                          filterName:"Drink").padding(20),
                         label: {
                                 FilterCommonContainer(filterName:"Drink",
+                                                      filteredValue:"Modify")
+                    })
+                    
+                    // Food filter
+                    NavigationLink(
+                        destination: SelectMultipleItems(selectionList:$filterModel.filterData.foodPreference.boundStringArray,
+                                                        optionsList:foodPreferenceList,
+                                                         filterName:"Food").padding(20),
+                        label: {
+                                FilterCommonContainer(filterName:"Food",
                                                       filteredValue:"Modify")
                     })
                         

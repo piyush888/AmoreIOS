@@ -45,6 +45,10 @@ struct UserProfile: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    var subscriptionDetailColor: Binding<Color> {
+        return colorScheme == .dark ? Binding.constant(Color(hex: 0x24244A)): Binding.constant(Color(hex: 0xe8f4f8))
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -82,10 +86,12 @@ struct UserProfile: View {
                         /// Messages: Show count and option to buy
                         /// Restore: Restore Purchase
                         SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                            showModal:$showModal)
+                                            showModal:$showModal,
+                                            backgroundColor:subscriptionDetailColor)
                             .environmentObject(storeManager)
                             .padding(.bottom,10)
-                            
+                        
+                        
                         // Subscription Options
                         /// User subscription amore
                         /// Amore Platinum Information
@@ -104,7 +110,7 @@ struct UserProfile: View {
                                                         selectionType:.myAmorecards,
                                                         buttonMainText:"My Amore",
                                                         buttonSubText:"",
-                                                        buttonColor:[Color(hex:0x83489e), Color(hex:0xc5302e)])
+                                                        buttonColor:[Color(hex:0xf492f0), Color(hex:0xf9c58d)])
                                 
                                 
                                 
@@ -125,7 +131,7 @@ struct UserProfile: View {
                                                         selectionType:.amoreGold,
                                                         buttonMainText:"Amore Gold",
                                                         buttonSubText:"",
-                                                        buttonColor:[Color(hex:0x59d102)])
+                                                        buttonColor:[Color(hex:0xf86ca7), Color(hex:0xf4d444)])
                             }
                             .padding(.vertical,20)
                             
@@ -143,7 +149,9 @@ struct UserProfile: View {
                                 
                                 case .superLikeCards :
                                     if let pricingData = storeManager.superLikesPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat: [Color.orange, Color.orange, Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat: [Color(hex:0xf86ca7),
+                                                                                     Color(hex:0xf4d444),
+                                                                                     Color.white],
                                                           cardName: "Super Likes",
                                                           cardHeaderSymbol: "star.circle",
                                                                    cardHeaderSymbolColor: Color.white,
@@ -171,7 +179,7 @@ struct UserProfile: View {
                                 
                                 case .boostCards :
                                     if let pricingData = storeManager.boostsPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color.blue, Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.purple, Color(hex:0xf55a9b), Color.white],
                                                           cardName: "Boosts",
                                                           cardHeaderSymbol: "bolt.circle.fill",
                                                           cardHeaderSymbolColor: Color.white,
@@ -198,7 +206,7 @@ struct UserProfile: View {
                                 
                                 case .messagesCards:
                                     if let pricingData = storeManager.messagesPricing {
-                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.red, Color.pink, Color.white],
+                                        BuySubscriptionOrItemsCard(cardColorFormat:[Color.red, Color(hex:0xf7a6f5), Color.white],
                                                           cardName: "Messages",
                                                           cardHeaderSymbol: "message.circle.fill",
                                                           cardHeaderSymbolColor: Color.white,
@@ -262,7 +270,7 @@ struct UserProfile: View {
                                 
                                 case .amoreGold:
                                 if let pricingData = storeManager.amoreGoldPricing {
-                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.red,Color.yellow],
+                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color(hex:0xf86ca7), Color(hex:0xf4d444)],
                                                       cardName: "Month",
                                                       cardHeaderSymbol: "bolt.heart.fill",
                                                       cardHeaderSymbolColor: Color("gold-star"),
