@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 import CoreGraphics
 import FirebaseAuth
+import SDWebImageSwiftUI
 
 class CardProfileModel: ObservableObject {
     
@@ -26,6 +27,22 @@ class CardProfileModel: ObservableObject {
     @Published var filterRadius: CGFloat? = 2
     
     var apiURL = "http://127.0.0.1:5040"
+    
+    func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
+        DispatchQueue.global(qos: .background).async {
+            var urls: [URL] = []
+            for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
+                if url != nil {
+                    urls.append(url!)
+                }
+            }
+            SDWebImagePrefetcher.shared.prefetchURLs(urls) { completed, total in
+                // Progress Block
+            } completed: { completed, skipped in
+                // On Complete Block
+            }
+        }
+    }
     
     func fetchProfile(filterData: Filters) {
         profilesBeingFetched = true
@@ -153,6 +170,9 @@ class CardProfileModel: ObservableObject {
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
+        let _ = self.allCardsWithPhotosDeck.map { card in
+            self.prefetchNextCardPhotos(card: card)
+        }
     }
     
     func areMoreCardsNeeded(filterData: Filters) {
@@ -166,6 +186,17 @@ class CardProfileModel: ObservableObject {
     
     func removeCard() {
       allCardsWithPhotosDeck.removeLast()
+    }
+    
+    func resetDeck() {
+        self.allCards = self.allCards.suffix(5)
+        self.allCardsWithPhotosDeck = self.allCardsWithPhotosDeck.suffix(5)
+        self.cardsDictionary = [:]
+        for card in self.allCardsWithPhotosDeck {
+            if let id = card.id {
+                self.cardsDictionary[id] = card
+            }
+        }
     }
     
 }

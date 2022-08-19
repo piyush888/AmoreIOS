@@ -26,6 +26,7 @@ struct HomeView: View {
     @StateObject var mainMessagesModel = MainMessagesViewModel()
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
+    @State var filtersChanged: Bool = false
     
     func checkIfDataIsComing() {
         if (cardProfileModel.timeOutRetriesCount > 1) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
@@ -59,16 +60,32 @@ struct HomeView: View {
                                         
                                         
                                 case .swipeView:
-                                    AllCardsView()
-                                        
-                                        .environmentObject(photoModel)
-                                        .environmentObject(cardProfileModel)
-                                        .environmentObject(reportActivityModel)
-                                        .environmentObject(profileModel)
-                                        .environmentObject(filterModel)
-                                        .environmentObject(storeManager)
-                                        .environmentObject(chatModel)
-                                        .environmentObject(mainMessagesModel)
+                                    if profileModel.editUserProfile.discoveryStatus.boundBool {
+                                        AllCardsView()
+                                            
+                                            .environmentObject(photoModel)
+                                            .environmentObject(cardProfileModel)
+                                            .environmentObject(reportActivityModel)
+                                            .environmentObject(profileModel)
+                                            .environmentObject(filterModel)
+                                            .environmentObject(storeManager)
+                                            .environmentObject(chatModel)
+                                            .environmentObject(mainMessagesModel)
+                                            .onAppear {
+                                                if filtersChanged {
+                                                    /// If change in filters is detected when switching to this view
+                                                    /// Flush the existing deck, but keep the top 5 cards
+                                                    /// Fetch new profiles, with new filters
+                                                    cardProfileModel.resetDeck()
+                                                    cardProfileModel.fetchProfile(filterData: filterModel.filterData)
+                                                    filtersChanged = false
+                                                }
+                                            }
+                                    }
+                                    else {
+                                        DiscoveryDisabled()
+                                            .environmentObject(profileModel)
+                                    }
                                         
                                     
                                 case .filterSettingsView:
@@ -77,6 +94,8 @@ struct HomeView: View {
                                         .environmentObject(cardProfileModel)
                                         .onChange(of: filterModel.filterData) { _ in
                                             filterModel.updateFilter()
+                                            // Update cards in the deck when view switches to Swipe View
+                                            filtersChanged = true
                                         }
                                         
                                     

@@ -36,7 +36,7 @@ class ReceivedGivenEliteModel: ObservableObject {
     @Published var fetchDataObj = FetchDataModel()
     
     func getLikesGivenData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesGiven"]) {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesGiven", "noOfLastRecords": 20]) {
             print("Error while fetching /likesGiven")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
@@ -49,7 +49,7 @@ class ReceivedGivenEliteModel: ObservableObject {
     }
     
     func getSuperLikesGivenData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "superLikesGiven"]) {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "superLikesGiven", "noOfLastRecords": 20]) {
             print("Error while fetching /superLikesGiven")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
@@ -62,7 +62,7 @@ class ReceivedGivenEliteModel: ObservableObject {
     }
     
     func getLikesReceivedData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesReceived"]) {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesReceived", "noOfLastRecords": 20]) {
             print("Error while fetching /likesReceived")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
@@ -74,8 +74,10 @@ class ReceivedGivenEliteModel: ObservableObject {
         }
     }
     
-    func elitesData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "elitePicks"]) {
+    func elitesData(profilesAlreadySwiped: [CardProfileWithPhotos]) {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "elitePicks", "noOfLastRecords": 10, "profilesAlreadySwiped": profilesAlreadySwiped.map({ profile in
+            return profile.id
+        })]) {
             print("Error while fetching elitePicks")
         } onSuccess: { tempData in
             _ = tempData.map{ card in

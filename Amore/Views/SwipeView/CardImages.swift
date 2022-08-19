@@ -39,7 +39,7 @@ struct CardImages: View {
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
-                    .frame(width: width, height:height)
+                    .frame(width: width)
                     .clipped()
                     .onAppear {
                         if photoStruct.downsampledImage == nil {

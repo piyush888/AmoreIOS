@@ -74,7 +74,7 @@ struct ContentView: View {
                                             receivedGivenEliteModel.getLikesReceivedData()
                                             receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getSuperLikesGivenData()
-                                            receivedGivenEliteModel.elitesData()
+                                            receivedGivenEliteModel.elitesData(profilesAlreadySwiped: [])
                                             receivedGivenEliteModel.loadMatches()
                                             // Observing the storemanager payment queue and responds to the changes.
                                             SKPaymentQueue.default().add(storeManager)
