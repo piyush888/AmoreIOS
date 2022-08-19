@@ -47,6 +47,7 @@
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
 		1BDABE8D27AF7D6000772D6A /* ChatConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */; };
+		1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBB64D28ACDB9B006DC890 /* DiscoveryDisabled.swift */; };
 		1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */; };
 		1BF55ECB272025860027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1BF55ECD272025CC0027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -231,6 +232,7 @@
 		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
 		1BC8BE0D2705CD7C00F0137E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversation.swift; sourceTree = "<group>"; };
+		1BDBB64D28ACDB9B006DC890 /* DiscoveryDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryDisabled.swift; sourceTree = "<group>"; };
 		1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadWindowsGroup.swift; sourceTree = "<group>"; };
 		5C14CAF4D2E16E20C370CD03 /* Pods_Amore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E3F776CBF90AA220142739 /* Pods-Amore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release.xcconfig"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				E298BA132713A85500C82174 /* ControlCenter.swift */,
 				E221EAAA2714F79A00769234 /* ViewRouter.swift */,
 				E221EAAC2714F84F00769234 /* Helper.swift */,
+				1BDBB64D28ACDB9B006DC890 /* DiscoveryDisabled.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -1057,6 +1060,7 @@
 				1B8983702895BCEB00DE1FEF /* MessageForm.swift in Sources */,
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */,
+				1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */,
 				1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */,

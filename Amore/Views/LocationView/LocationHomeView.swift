@@ -60,5 +60,6 @@ struct LocationHomeView: View {
 struct LocationHomeView_Previews: PreviewProvider {
     static var previews: some View {
         LocationHomeView()
+            .environmentObject(ProfileViewModel())
     }
 }
