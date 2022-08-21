@@ -15,6 +15,18 @@ struct PreviewProfile: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @Environment(\.colorScheme) var colorScheme
     
+    // About You Variables
+    @Binding var careerField: String?
+    @Binding var religion: String?
+    @Binding var politics: String?
+    @Binding var education: String?
+    @Binding var countryRaisedIn: String?
+    @Binding var doYouSmoke: String?
+    @Binding var doYouDrink: String?
+    @Binding var doYouWorkOut: String?
+    @Binding var food: String?
+    @Binding var passions: [String]
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
@@ -48,18 +60,19 @@ struct PreviewProfile: View {
                         }
 
                         
-                        // Profile Height, Education, Job, Religion, Location
+                        // Height, Education, Raised In, Religion, Political, Industry,
                         // Image 2
-                        VStack(spacing:5) {
+                        VStack {
+                            
                             CardBasicInfo(height: profileModel.editUserProfile.height.boundDouble,
-                                          work: profileModel.editUserProfile.jobTitle.bound,
-                                          education: profileModel.editUserProfile.education.bound,
-                                          religion: profileModel.editUserProfile.religion.bound,
-                                          profileCompletion: profileModel.editUserProfile.profileCompletion.boundDouble,
-                                          countryRaisedIn: profileModel.editUserProfile.countryRaisedIn.bound)
+                                          education: self.education.bound,
+                                          countryRaisedIn: self.countryRaisedIn.bound,
+                                          religion: self.religion.bound,
+                                          industry: self.careerField.bound,
+                                          politics: self.politics.bound,
+                                          food: self.food.bound)
                                 .padding(.horizontal,15)
-                                .padding(.top,10)
-
+                                
 
                             if profileModel.editUserProfile.image2?.imageURL != nil  {
                                 ProfileImageView(profileImage: $profileModel.editUserProfile.image2,
@@ -182,13 +195,13 @@ struct PreviewProfile: View {
 }
 
 struct PreviewProfile_Previews: PreviewProvider {
+    
     static var previews: some View {
         Group {
-            PreviewProfile()
+            previewCall
                 .previewDisplayName("iPhone 13 Pro Max")
                 .previewDevice("iPhone 13 Pro Max")
-                .environmentObject(PhotoModel())
-                .environmentObject(ProfileViewModel())
+                
 //            PreviewProfile()
 //                .previewDisplayName("iPhone 13 Mini")
 //                .previewDevice("iPhone 13 Mini")
@@ -205,5 +218,20 @@ struct PreviewProfile_Previews: PreviewProvider {
 //                .environmentObject(PhotoModel())
 //                .environmentObject(ProfileViewModel())
         }
+    }
+    
+    static var previewCall : some View {
+        PreviewProfile(careerField:Binding.constant("Technology"),
+                       religion:Binding.constant(""),
+                       politics:Binding.constant(""),
+                       education:Binding.constant(""),
+                       countryRaisedIn:Binding.constant(""),
+                       doYouSmoke:Binding.constant(""),
+                       doYouDrink:Binding.constant(""),
+                       doYouWorkOut:Binding.constant(""),
+                       food:Binding.constant(""),
+                       passions:Binding.constant([""]))
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
     }
 }

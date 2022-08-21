@@ -31,6 +31,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var religion: String?
     var community: String?
     var politics: String?
+    var food: String?
     var location: Location?
     var geohash: String?
     var geohash1: String?
@@ -52,7 +53,6 @@ struct Profile: Identifiable, Codable, Equatable {
     var doYouDrink: String?
     var doYouSmoke: String?
     var doYouWantBabies: String?
-    var food: String?
     var profileCompletion: Double?
     var countryRaisedIn: String?
     var wasProfileUpdated: Bool?
@@ -82,6 +82,7 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.religion == rhs.religion &&
                lhs.community == rhs.community &&
                lhs.politics == rhs.politics &&
+               lhs.food == rhs.food &&
                lhs.location == rhs.location &&
                lhs.description == rhs.description &&
                lhs.country == rhs.country &&

@@ -28,6 +28,7 @@ struct EditCardInfo: View {
     @Binding var doYouDrink: String?
     @Binding var doYouWorkOut: String?
     @Binding var food: String?
+    @Binding var passions: [String]
     
     @Binding var formUpdated: Bool
     // User Height
@@ -37,7 +38,7 @@ struct EditCardInfo: View {
     func aboutYouVariablesBinding(formName:String) -> Binding<String> {
         switch formName {
             
-            case "Career":
+            case "Industry":
                 return $careerField.bound
             
             case "Religion":
@@ -174,10 +175,22 @@ struct EditCardInfo: View {
                 .navigationBarTitle("About you")
                 .navigationBarTitleDisplayMode(.inline)
                 
-                    
-
-                // Height
                 // Passion or Interests
+                Section(header:Text("Passions")) {
+                    Picker("Passions", selection: Binding.constant("Multiple")) {
+                        SelectMultipleItems(selectionList: $passions,
+                                        optionsList:passionsList,
+                                        filterName:"Passions")
+                       }
+                       .navigationBarTitle("Passions")
+                       .navigationBarTitleDisplayMode(.inline)
+                       .onChange(of: passions) { _ in
+                           self.formUpdated = true
+                    }
+                }
+                       
+                    
+                
                 
                 // Discoverty and Notifications
                 Section(header: Text("Card Settings")) {
@@ -224,57 +237,27 @@ struct EditCardInfo: View {
 struct EditCardInfo_Previews: PreviewProvider {
     static var previews: some View {
         
-        EditCardInfo(careerField:Binding.constant("Company Name"),
-                     religion:Binding.constant("Atheism"),
-                     politics:Binding.constant("Far Left"),
-                     education:Binding.constant("High School"),
-                     countryRaisedIn:Binding.constant("India"),
-                     doYouSmoke:Binding.constant("Socially"),
-                     doYouDrink:Binding.constant("Socially"),
-                     doYouWorkOut:Binding.constant("Socially"),
-                     food:Binding.constant("Vegetarian"),
-                     formUpdated:Binding.constant(false))
-            .environmentObject(PhotoModel())
-            .environmentObject(ProfileViewModel())
+        sampleCard
             .previewDisplayName("iPhone 13 Pro Max")
             .previewDevice("iPhone 13 Pro Max")
         
         
-        
-        EditCardInfo(careerField:Binding.constant("Company Name"),
-                     religion:Binding.constant("Atheism"),
-                     politics:Binding.constant("Far Left"),
-                     education:Binding.constant("High School"),
-                     countryRaisedIn:Binding.constant("India"),
-                     doYouSmoke:Binding.constant("Socially"),
-                     doYouDrink:Binding.constant("Socially"),
-                     doYouWorkOut:Binding.constant("Socially"),
-                     food:Binding.constant("Vegetarian"),
-                     formUpdated:Binding.constant(false))
-            .environmentObject(PhotoModel())
-            .environmentObject(ProfileViewModel())
+        sampleCard
             .previewDisplayName("iPhone 13 Mini")
             .previewDevice("iPhone 13 Mini")
         
         
-        
-        EditCardInfo(careerField:Binding.constant("Company Name"),
-                     religion:Binding.constant("Atheism"),
-                     politics:Binding.constant("Far Left"),
-                     education:Binding.constant("High School"),
-                     countryRaisedIn:Binding.constant("India"),
-                     doYouSmoke:Binding.constant("Socially"),
-                     doYouDrink:Binding.constant("Socially"),
-                     doYouWorkOut:Binding.constant("Socially"),
-                     food:Binding.constant("Vegetarian"),
-                     formUpdated:Binding.constant(false))
-            .environmentObject(PhotoModel())
-            .environmentObject(ProfileViewModel())
+        sampleCard
             .previewDisplayName("iPhone 12 Pro")
             .previewDevice("iPhone 12 Pro")
         
-        
-        
+        sampleCard
+            .previewDisplayName("iPhone 11")
+            .previewDevice("iPhone 11")
+    }
+    
+    
+    static var sampleCard: some View {
         EditCardInfo(careerField:Binding.constant("Company Name"),
                      religion:Binding.constant("Atheism"),
                      politics:Binding.constant("Far Left"),
@@ -284,12 +267,9 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
                      food:Binding.constant("Vegetarian"),
+                     passions: Binding.constant(["Animals", "Art", "Business", "Comedy"]),
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
-            .previewDisplayName("iPhone 11")
-            .previewDevice("iPhone 11")
-    
-
     }
 }

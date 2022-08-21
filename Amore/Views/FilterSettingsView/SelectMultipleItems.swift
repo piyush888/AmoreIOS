@@ -34,10 +34,6 @@ struct SelectMultipleItems : View {
                                     if let index = self.selectionList.firstIndex(of: option) {
                                         self.selectionList.remove(at: index)
                                     }
-                                    // Check if selection list is null
-                                    /// if true assign it anu value
-        //                            self.selectionList = self.selectionList.count == 0 ? [""] : self.selectionList
-                                    
                                 } else {
                                     // Add if selection doesn't exist in list, add it to list
                                     self.selectionList.append(option)
@@ -54,12 +50,9 @@ struct SelectMultipleItems : View {
                                         Text(option)
                                             .font(.subheadline)
                                             .padding(.horizontal,20)
-                                        
                                         Spacer()
-                                        
                                         if self.selectionList.contains("\(option)") {
-                                            Image(systemName: "checkmark")
-                                                .padding(.horizontal,10)
+                                            Image(systemName: "checkmark").padding(.horizontal,10)
                                         }
                                     }
                                 }

@@ -71,12 +71,14 @@ struct ChildCardView: View {
                         // Profile Height, Education, Job, Religion, Location
                         // Image 2
                         VStack(spacing:5) {
+                            
                             CardBasicInfo(height: self.singleProfile.height.boundDouble,
-                                          work: self.singleProfile.jobTitle.bound,
                                           education: self.singleProfile.education.bound,
+                                          countryRaisedIn: self.singleProfile.countryRaisedIn.bound,
                                           religion: self.singleProfile.religion.bound,
-                                          profileCompletion:self.singleProfile.profileCompletion.boundDouble,
-                                          countryRaisedIn: self.singleProfile.countryRaisedIn.bound)
+                                          industry: self.singleProfile.careerField.bound,
+                                          politics: self.singleProfile.politics.bound,
+                                          food: self.singleProfile.food.bound)
                                 .padding(.horizontal,15)
                                 .padding(.top,10)
 

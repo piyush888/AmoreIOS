@@ -28,6 +28,7 @@ struct CardProfile: Identifiable, Codable, Equatable {
     var religion: String?
     var community: String?
     var politics: String?
+    var food: String?
     var location: Location?
     var geohash: String?
     var geohash1: String?
@@ -72,6 +73,7 @@ struct CardProfile: Identifiable, Codable, Equatable {
         religion = cardProfileWithPhotos.religion
         community = cardProfileWithPhotos.community
         politics = cardProfileWithPhotos.politics
+        food = cardProfileWithPhotos.food
         location = cardProfileWithPhotos.location
         geohash = cardProfileWithPhotos.geohash
         geohash1 = cardProfileWithPhotos.geohash1
@@ -144,6 +146,7 @@ struct CardProfileWithPhotos: Identifiable, Hashable, Equatable {
     var doYouWantBabies: String?
     var countryRaisedIn: String?
     var profileCompletion: Double?
+    var food: String?
     
     static func ==(lhs: CardProfileWithPhotos, rhs: CardProfileWithPhotos) -> Bool {
         return(lhs.id == rhs.id &&
@@ -169,6 +172,7 @@ struct CardProfileWithPhotos: Identifiable, Hashable, Equatable {
                lhs.location == rhs.location &&
                lhs.description == rhs.description &&
                lhs.country == rhs.country &&
+               lhs.food == rhs.food &&
                lhs.image1 == rhs.image1 &&
                lhs.image2 == rhs.image2 &&
                lhs.image3 == rhs.image3 &&

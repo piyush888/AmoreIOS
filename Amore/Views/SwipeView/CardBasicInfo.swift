@@ -10,51 +10,80 @@ import SwiftUI
 struct CardBasicInfo: View {
     
     let height: Double
-    let work: String
     let education: String
-    let religion: String
-    let profileCompletion: Double
     let countryRaisedIn: String
+    let religion: String
+    let industry: String
+    let politics: String
+    let food: String
     
-    let adaptivecolumns = Array(repeating:
-                                    GridItem(.adaptive(minimum: 150),
+    let adaptivecolumns = Array(repeating:GridItem(.adaptive(minimum: 150),
                                              spacing: 5,
                                              alignment: .center),count: 2)
+    var showHeadline: Bool {
+        if(height != 0.0 || education != "" || countryRaisedIn != "" || industry != "" || politics != "" || food != "") {
+            return true
+        }
+        return false
+    }
+    
     var body: some View {
         
         VStack(alignment:.leading) {
             
-            Text("About me")
-                .bold()
+            if showHeadline {
+                Text("About me")
+                    .bold()
+            }
                 
             LazyVGrid(columns: adaptivecolumns, alignment: .leading, spacing: 8, content: {
                 
                 // Height of the profile
-                ChildCardBasicInfo(iconStringName: "arrow.up.square.fill",
-                                   // cm to feet
-                                   data: String(format:"%.1f", height/30.48),
-                                   fieldName:"Height")
+                if(height != 0.0){
+                    ChildCardBasicInfo(iconStringName: "arrow.up.square.fill",
+                                       data: String(format: "%.1f",height*0.0328) + " ft",
+                                       fieldName:"Height")
+                }
+                
                 // Work
-                ChildCardBasicInfo(iconStringName: "bag.fill",
-                                   data: work,
-                                   fieldName:"Work")
+                if(industry != "") {
+                    ChildCardBasicInfo(iconStringName:  "bag.fill",
+                                       data: industry,
+                                       fieldName:"Work")
+                }
+                
                 // Bachelors
-                ChildCardBasicInfo(iconStringName: "graduationcap.fill",
-                                   data: education,
-                                   fieldName:"Education")
-                // Religion
-                ChildCardBasicInfo(iconStringName: "book.fill",
-                                   data: religion,
-                                   fieldName:"Religion")
+                if(education != "") {
+                    ChildCardBasicInfo(iconStringName: "graduationcap.fill",
+                                       data: education,
+                                       fieldName:"Education")
+                }
+                
+                // Location
+                if(countryRaisedIn != "") {
+                    ChildCardBasicInfo(iconStringName: "globe",
+                                       data: countryRaisedIn,
+                                       fieldName:"Home")
+                }
                 
                 // Politics
-                ChildCardBasicInfo(iconStringName: "speedometer",
-                                   data: String(format:"%.2f",profileCompletion) + "%",
-                                   fieldName:"Profile Completed")
-                // Location
-                ChildCardBasicInfo(iconStringName: "house.fill",
-                                   data: countryRaisedIn,
-                                   fieldName:"Home")
+                if(politics != "") {
+                    ChildCardBasicInfo(iconStringName: "person.3.fill",
+                                       data: politics,
+                                   fieldName:"Politics")
+                }
+                
+                // Food
+                if(food != "") {
+                    ChildCardBasicInfo(iconStringName: "fork.knife",
+                                       data: food,
+                                       fieldName:"Food")
+                }
+                
+//                // Religion
+//                ChildCardBasicInfo(iconStringName: "book.fill",
+//                                   data: religion,
+//                                   fieldName:"Religion")
                 
             })
             
@@ -70,31 +99,25 @@ struct ChildCardBasicInfo : View {
     @State var fieldName: String
     
     var body: some View {
-        
-            HStack {
-                Image(systemName: self.iconStringName)
-                    .foregroundColor(Color.blue)
-                Text(self.data)
-                    .font(.caption)
-                Spacer()
-            }.onAppear {
-                if self.data == "" {
-                    self.data = "No \(self.fieldName)"
-                }
-            }
-        
+        HStack {
+            Image(systemName: self.iconStringName)
+                .foregroundColor(Color.blue)
+                .help(fieldName)
+            Text(self.data)
+                .font(.caption)
+            Spacer()
+        }
     }
-    
 }
 
 struct CardBasicInfo_Previews: PreviewProvider {
     static var previews: some View {
-        
         CardBasicInfo(height: 0.0,
-                      work: "",
                       education: "",
+                      countryRaisedIn: "",
                       religion: "",
-                      profileCompletion: 0.0,
-                      countryRaisedIn: "")
+                      industry: "",
+                      politics: "",
+                      food: "")
     }
 }

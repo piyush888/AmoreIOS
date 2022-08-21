@@ -8,6 +8,9 @@
 import SwiftUI
 import FirebaseFirestoreSwift
 
+
+var passionsList = ["Animals", "Art", "Business", "Comedy", "Community Service", "Cooking", "Cricket", "Dancing", "Drink", "Entrepreneurship", "Extreme", "Fashion", "Fitness", "Introvert", "Gaming", "Gardening", "Healthy Eating", "Hiking", "Meditation", "Movies", "Music", "Nature", "Nature", "Partying", "Personal Growth", "Pets", "Photography", "Programming", "Reading", "Relationship", "Relaxation", "Running", "Shopping", "Singing", "Social Engagement", "Social Media", "Spirituality", "Sports", "Swimming", "Travelling", "Trekking", "Volunteering", "Walking", "Workout", "Yoga", "Sleeping","Other"]
+
 struct Passions: View {
     
     @EnvironmentObject var profileModel: ProfileViewModel
@@ -16,7 +19,6 @@ struct Passions: View {
     @State var errorDesc: String = ""
     @Environment(\.colorScheme) var colorScheme
     
-    var passions = ["Animals", "Art", "Business", "Comedy", "Community Service", "Cooking", "Cricket", "Dancing", "Drink", "Entrepreneurship", "Extreme", "Fashion", "Fitness", "Introvert", "Gaming", "Gardening", "Healthy Eating", "Hiking", "Meditation", "Movies", "Music", "Nature", "Nature", "Partying", "Personal Growth", "Pets", "Photography", "Programming", "Reading", "Relationship", "Relaxation", "Running", "Shopping", "Singing", "Social Engagement", "Social Media", "Spirituality", "Sports", "Swimming", "Travelling", "Trekking", "Volunteering", "Walking", "Workout", "Yoga", "Sleeping","Other"]
     
     @State var passionSelected = [String]()
     
@@ -47,7 +49,7 @@ struct Passions: View {
                 .font(.caption)
             
             SelectMultipleItems(selectionList:$passionSelected,
-                        optionsList:passions,
+                        optionsList:passionsList,
                         filterName:"Passions")
                 .padding(.horizontal,20)
                 
@@ -79,6 +81,7 @@ struct Passions: View {
             })
     }
 }
+
 
 struct Passions_Previews: PreviewProvider {
     static var previews: some View {
