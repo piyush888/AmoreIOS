@@ -53,6 +53,7 @@ struct SettingEditProfileSafety: View {
                                    doYouSmoke:profileModel.editUserProfile.doYouSmoke,
                                    doYouDrink:profileModel.editUserProfile.doYouDrink,
                                    doYouWorkOut:profileModel.editUserProfile.doYouWorkOut,
+                                   doYouWantBabies:profileModel.editUserProfile.doYouWantBabies,
                                    food:profileModel.editUserProfile.food,
                                    passions:profileModel.editUserProfile.interests ?? [String]())
                     .environmentObject(photoModel)

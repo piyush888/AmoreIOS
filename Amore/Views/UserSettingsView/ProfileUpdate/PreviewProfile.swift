@@ -24,6 +24,7 @@ struct PreviewProfile: View {
     @Binding var doYouSmoke: String?
     @Binding var doYouDrink: String?
     @Binding var doYouWorkOut: String?
+    @Binding var doYouWantBabies: String?
     @Binding var food: String?
     @Binding var passions: [String]
     
@@ -85,12 +86,21 @@ struct PreviewProfile: View {
                         }
                         
                         
-                        // Profile Passion
+                        // ProfileBioHeadline
+                        // Work & School
                         // Image 3
                         VStack(spacing:5) {
                             ProfileBioHeadline(description: profileModel.editUserProfile.description.bound,
                                        headlineText:"Bio")
-
+                            
+                            // Show User Work and School At
+                            WorkAndSchool(jobTitle:profileModel.editUserProfile.jobTitle.bound,
+                                         work: profileModel.editUserProfile.work.bound,
+                                          education:self.education.bound,
+                                          school:profileModel.editUserProfile.school.bound
+                            )
+                            
+                            
                             if profileModel.editUserProfile.image3?.imageURL != nil {
                                 VStack {
                                     ProfileImageView(profileImage: $profileModel.editUserProfile.image3,
@@ -104,22 +114,13 @@ struct PreviewProfile: View {
                         }
                         
                         
-                        // Work and School
+                        // CardPassions
                         // Image 4
                         VStack(spacing:5) {
                             // Profile Passions
-                            CardPassions(passions: profileModel.editUserProfile.interests.boundStringArray)
+                            CardPassions(passions: self.passions)
                                 .padding(15)
 
-
-                            // Show User Work and School At
-                            WorkAndSchool(jobTitle:profileModel.editUserProfile.jobTitle.bound,
-                                         work: profileModel.editUserProfile.work.bound,
-                                          education:profileModel.editUserProfile.education.bound,
-                                          school:profileModel.editUserProfile.school.bound
-                            )
-                            
-                            
                             if profileModel.editUserProfile.image4?.imageURL != nil {
                                 VStack {
                                     ProfileImageView(profileImage: $profileModel.editUserProfile.image4,
@@ -137,14 +138,12 @@ struct PreviewProfile: View {
                             UserOtherInformation(iconNameUserDataList:[FontIcon.text(.materialIcon(code: .child_care)),
                                                                        FontIcon.text(.materialIcon(code: .smoking_rooms)),
                                                                        FontIcon.text(.materialIcon(code: .fitness_center)),
-                                                                       FontIcon.text(.materialIcon(code: .school)),
                                                                        FontIcon.text(.materialIcon(code: .local_bar)),
                                                                        ],
-                                                 userInfoFieldData:[profileModel.editUserProfile.doYouWantBabies.bound,
-                                                                    profileModel.editUserProfile.doYouSmoke.bound,
-                                                                    profileModel.editUserProfile.doYouWorkOut.bound,
-                                                                    profileModel.editUserProfile.education.bound,
-                                                                    profileModel.editUserProfile.doYouDrink.bound
+                                                 userInfoFieldData:[self.doYouWantBabies.bound,
+                                                                    self.doYouSmoke.bound,
+                                                                    self.doYouWorkOut.bound,
+                                                                    self.doYouDrink.bound
                                                                     ]
                                                 )
                         
@@ -229,6 +228,7 @@ struct PreviewProfile_Previews: PreviewProvider {
                        doYouSmoke:Binding.constant(""),
                        doYouDrink:Binding.constant(""),
                        doYouWorkOut:Binding.constant(""),
+                       doYouWantBabies:Binding.constant(""),
                        food:Binding.constant(""),
                        passions:Binding.constant([""]))
             .environmentObject(PhotoModel())

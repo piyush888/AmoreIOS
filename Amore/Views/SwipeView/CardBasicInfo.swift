@@ -39,17 +39,10 @@ struct CardBasicInfo: View {
             LazyVGrid(columns: adaptivecolumns, alignment: .leading, spacing: 8, content: {
                 
                 // Height of the profile
-                if(height != 0.0){
+                if(height != 0.0) {
                     ChildCardBasicInfo(iconStringName: "arrow.up.square.fill",
                                        data: String(format: "%.1f",height*0.0328) + " ft",
                                        fieldName:"Height")
-                }
-                
-                // Work
-                if(industry != "") {
-                    ChildCardBasicInfo(iconStringName:  "bag.fill",
-                                       data: industry,
-                                       fieldName:"Work")
                 }
                 
                 // Bachelors
@@ -72,6 +65,14 @@ struct CardBasicInfo: View {
                                        data: politics,
                                    fieldName:"Politics")
                 }
+                
+                // Work
+                if(industry != "") {
+                    ChildCardBasicInfo(iconStringName:  "bag.fill",
+                                       data: industry,
+                                       fieldName:"Work")
+                }
+                
                 
                 // Food
                 if(food != "") {

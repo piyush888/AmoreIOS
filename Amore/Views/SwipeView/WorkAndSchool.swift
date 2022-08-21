@@ -34,7 +34,7 @@ struct WorkAndSchool: View {
                     // If only job title is available
                     if self.work == "" && self.jobTitle != "" {
                         WorkSchoolDescription(icon: "building.2.fill",
-                                              details: "Job title \(jobTitle)")
+                                              details: "\(jobTitle)")
                     } else if self.jobTitle == ""  && self.work != "" {
                         // If only work is available
                         WorkSchoolDescription(icon: "building.2.fill",
@@ -56,7 +56,7 @@ struct WorkAndSchool: View {
                     } else if self.school == "" && self.education != "" {
                         // If only education is present
                         WorkSchoolDescription(icon: "building.columns.fill",
-                                              details: "Highest education \(self.education)")
+                                              details: "\(self.education)")
                     }
                 }
             

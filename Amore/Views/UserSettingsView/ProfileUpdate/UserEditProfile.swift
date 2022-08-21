@@ -24,6 +24,7 @@ struct EditProfile: View {
     @State var doYouSmoke: String?
     @State var doYouDrink: String?
     @State var doYouWorkOut: String?
+    @State var doYouWantBabies: String?
     @State var food: String?
     @State var passions = [String]()
     
@@ -45,6 +46,7 @@ struct EditProfile: View {
             profileModel.editUserProfile.doYouSmoke = doYouSmoke
             profileModel.editUserProfile.doYouDrink = doYouDrink
             profileModel.editUserProfile.doYouWorkOut = doYouWorkOut
+            profileModel.editUserProfile.doYouWantBabies = doYouWantBabies
             profileModel.editUserProfile.food = food
             profileModel.editUserProfile.interests = passions
         } else {
@@ -94,6 +96,7 @@ struct EditProfile: View {
                                      doYouSmoke:$doYouSmoke,
                                      doYouDrink:$doYouDrink,
                                      doYouWorkOut:$doYouWorkOut,
+                                     doYouWantBabies:$doYouWantBabies,
                                      food:$food,
                                      passions:$passions,
                                      formUpdated:$formUpdated)
@@ -109,6 +112,7 @@ struct EditProfile: View {
                                        doYouSmoke:$doYouSmoke,
                                        doYouDrink:$doYouDrink,
                                        doYouWorkOut:$doYouWorkOut,
+                                       doYouWantBabies:$doYouWantBabies,
                                        food:$food,
                                        passions:$passions)
                             .environmentObject(photoModel)

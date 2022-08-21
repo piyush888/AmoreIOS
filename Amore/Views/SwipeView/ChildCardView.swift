@@ -101,7 +101,14 @@ struct ChildCardView: View {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
                                                headlineText:"Bio")
                                                 .padding(5)
-
+                            
+                            // Show User Work and School At
+                            WorkAndSchool(jobTitle:self.singleProfile.jobTitle.bound,
+                                         work: self.singleProfile.work.bound,
+                                          education:self.singleProfile.education.bound,
+                                          school:self.singleProfile.school.bound)
+                                
+                            
                             if self.singleProfile.image3?.imageURL != nil {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image3,
@@ -114,22 +121,13 @@ struct ChildCardView: View {
                         }
                         
                         
-                        // Work and School
+                        // Profile Passions
                         // Image 4
                         VStack(spacing:5) {
                             // Profile Passions
                             CardPassions(passions: self.singleProfile.interests.boundStringArray)
                                 .padding(15)
 
-
-                            // Show User Work and School At
-                            WorkAndSchool(jobTitle:self.singleProfile.jobTitle.bound,
-                                         work: self.singleProfile.work.bound,
-                                          education:self.singleProfile.education.bound,
-                                          school:self.singleProfile.school.bound)
-                                
-                            
-                            
                             if self.singleProfile.image4?.imageURL != nil {
                                 VStack {
                                     CardImages(profileImage: $singleProfile.image4,
@@ -147,13 +145,11 @@ struct ChildCardView: View {
                             UserOtherInformation(iconNameUserDataList:[FontIcon.text(.materialIcon(code: .child_care)),
                                                                        FontIcon.text(.materialIcon(code: .smoking_rooms)),
                                                                        FontIcon.text(.materialIcon(code: .fitness_center)),
-                                                                       FontIcon.text(.materialIcon(code: .school)),
                                                                        FontIcon.text(.materialIcon(code: .local_bar)),
                                                                        ],
                                                  userInfoFieldData:[self.singleProfile.doYouWantBabies.bound,
                                                                     self.singleProfile.doYouSmoke.bound,
                                                                     self.singleProfile.doYouWorkOut.bound,
-                                                                    self.singleProfile.education.bound,
                                                                     self.singleProfile.doYouDrink.bound
                                                                     ]
                                                 )

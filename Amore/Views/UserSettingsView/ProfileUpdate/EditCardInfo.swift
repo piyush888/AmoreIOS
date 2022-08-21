@@ -27,6 +27,7 @@ struct EditCardInfo: View {
     @Binding var doYouSmoke: String?
     @Binding var doYouDrink: String?
     @Binding var doYouWorkOut: String?
+    @Binding var doYouWantBabies: String?
     @Binding var food: String?
     @Binding var passions: [String]
     
@@ -61,6 +62,9 @@ struct EditCardInfo: View {
             
             case "Workout":
                 return $doYouWorkOut.bound
+            
+            case "Babies":
+                return $doYouWantBabies.bound
             
             case "Food":
                 return $food.bound
@@ -266,6 +270,7 @@ struct EditCardInfo_Previews: PreviewProvider {
                      doYouSmoke:Binding.constant("Socially"),
                      doYouDrink:Binding.constant("Socially"),
                      doYouWorkOut:Binding.constant("Socially"),
+                     doYouWantBabies:Binding.constant("Yes"),
                      food:Binding.constant("Vegetarian"),
                      passions: Binding.constant(["Animals", "Art", "Business", "Comedy"]),
                      formUpdated:Binding.constant(false))
