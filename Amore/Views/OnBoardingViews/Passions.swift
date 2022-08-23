@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseFirestoreSwift
 
 
-var passionsList = ["Animals", "Art", "Business", "Comedy", "Community Service", "Cooking", "Cricket", "Dancing", "Drink", "Entrepreneurship", "Extreme", "Fashion", "Fitness", "Introvert", "Gaming", "Gardening", "Healthy Eating", "Hiking", "Meditation", "Movies", "Music", "Nature", "Nature", "Partying", "Personal Growth", "Pets", "Photography", "Programming", "Reading", "Relationship", "Relaxation", "Running", "Shopping", "Singing", "Social Engagement", "Social Media", "Spirituality", "Sports", "Swimming", "Travelling", "Trekking", "Volunteering", "Walking", "Workout", "Yoga", "Sleeping","Other"]
+var passionsList = ["Animals", "Art", "Business", "Comedy", "Community Service", "Cooking", "Cricket", "Dancing", "Drink", "Entrepreneurship", "Extreme", "Fashion", "Fitness", "Introvert", "Gaming", "Gardening", "Healthy Eating", "Hiking", "Meditation", "Movies", "Music", "Nature", "Partying", "Personal Growth", "Pets", "Photography", "Programming", "Reading", "Relationship", "Relaxation", "Running", "Shopping", "Singing", "Social Engagement", "Social Media", "Spirituality", "Sports", "Swimming", "Travelling", "Trekking", "Volunteering", "Walking", "Workout", "Yoga", "Sleeping","Other"]
 
 struct Passions: View {
     
