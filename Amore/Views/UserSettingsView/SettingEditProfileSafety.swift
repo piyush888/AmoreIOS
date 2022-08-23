@@ -55,7 +55,7 @@ struct SettingEditProfileSafety: View {
                                    doYouWorkOut:profileModel.editUserProfile.doYouWorkOut,
                                    doYouWantBabies:profileModel.editUserProfile.doYouWantBabies,
                                    food:profileModel.editUserProfile.food,
-                                   passions:profileModel.editUserProfile.interests ?? [String]())
+                            passions:profileModel.editUserProfile.interests.boundStringArray)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
             } label: {

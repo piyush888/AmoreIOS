@@ -25,41 +25,43 @@ struct SelectMultipleItems : View {
             
             VStack {
                 ScrollView(showsIndicators: false) {
+                    
                     SearchBar(text: $searchTerm, placeholder: "Search \(filterName)")
-                        ForEach(filteredOptionsList, id: \.self) { option in
-                            Button {
-                                // Add/Remove to selection list
-                                if self.selectionList.contains("\(option)") {
-                                    // Remove if button clicked again
-                                    if let index = self.selectionList.firstIndex(of: option) {
-                                        self.selectionList.remove(at: index)
-                                    }
-                                } else {
-                                    // Add if selection doesn't exist in list, add it to list
-                                    self.selectionList.append(option)
+                    
+                    ForEach(filteredOptionsList, id: \.self) { option in
+                        Button {
+                            // Add/Remove to selection list
+                            if self.selectionList.contains("\(option)") {
+                                // Remove if button clicked again
+                                if let index = self.selectionList.firstIndex(of: option) {
+                                    self.selectionList.remove(at: index)
                                 }
-                                
-                            } label : {
-                                ZStack {
-                                    
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                                        .frame(height:45)
-                                        
-                                    HStack {
-                                        Text(option)
-                                            .font(.subheadline)
-                                            .padding(.horizontal,20)
-                                        Spacer()
-                                        if self.selectionList.contains("\(option)") {
-                                            Image(systemName: "checkmark").padding(.horizontal,10)
-                                        }
-                                    }
-                                }
-                                .foregroundColor(.accentColor)
+                            } else {
+                                // Add if selection doesn't exist in list, add it to list
+                                self.selectionList.append(option)
                             }
+                            
+                        } label : {
+                            ZStack {
+                                
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                                    .frame(height:45)
+                                
+                                HStack {
+                                    Text(option)
+                                        .font(.subheadline)
+                                        .padding(.horizontal,20)
+                                    Spacer()
+                                    if self.selectionList.contains("\(option)") {
+                                        Image(systemName: "checkmark").padding(.horizontal,10)
+                                    }
+                                }
+                            }
+                            .foregroundColor(.accentColor)
+                        }
                     }
-            }
+                }
         }
         .navigationTitle("\(filterName)")
         .navigationBarTitleDisplayMode(.inline)
