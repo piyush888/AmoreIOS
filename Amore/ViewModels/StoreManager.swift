@@ -30,11 +30,20 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         "Amore.ProductId.3M.Platinum.v2",
         "Amore.ProductId.6M.Platinum.v2"]
     
+    let db = Firestore.firestore()
+    
+    // Initalized from the Apples In App Purchase Model.
     @Published var superLikesPricing: [String: SKProduct] = [:]
     @Published var boostsPricing: [String: SKProduct] = [:]
     @Published var messagesPricing: [String: SKProduct] = [:]
     @Published var amoreGoldPricing: [String: SKProduct] = [:]
     @Published var amorePlatinumPricing: [String: SKProduct] = [:]
+    
+    // Initalized with data from firestore
+    @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
+    @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
+    @Published var paymentCompleteDisplayMyAmore : Bool = false
+    var purchaseDataFetched = false
     
     // SKProductsRequest property in our StoreManager, which we will use to start the fetching process
     var request: SKProductsRequest!
@@ -146,19 +155,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     }
     
     
-    // ******************************************** //
-    // ******************************************** //
-    // ******************************************** //
-    // ************ Purchase to Firestore ********** //
-    // ******************************************** //
-    // ******************************************** //
-    // ******************************************** //
-    
-    let db = Firestore.firestore()
-    @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
-    @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
-    @Published var paymentCompleteDisplayMyAmore : Bool = false
-    var purchaseDataFetched = false
+    // ************ Save Purchase to Firestore ********** //
     
     // Call this function to store the user purchase data into firebase
     func storePurchase(product: ConsumableCountAndSubscriptionModel) -> Bool {
@@ -211,7 +208,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         return self.storePurchase(product:product)
     }
     
-    // Save the purchase data to firebase
+    // Get the purchase data to firebase
     func getPurchase() {
         
         self.purchaseDataFetched = false
@@ -233,7 +230,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                         }
                         catch {
                             print(error)
-                            self.purchaseDataFetched = true
+                            self.purchaseDataFetched = false
                         }
                     } // if document
                 } // else
@@ -242,17 +239,23 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     } // getPurchase
     
     
-    func writeReview() {
-      let productURL = URL(string: "https://itunes.apple.com/app/id958625272")!
-      var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-      components?.queryItems = [
-        URLQueryItem(name: "action", value: "write-review")
-      ]
-     guard let writeReviewURL = components?.url else {
+    // Call this function when you want to check if the subscription of the user qualifies for a daily increment on Super Likes, No of messages and Boost count.
+    // A User on Free Subscription will not get an increment on their consumables
+    // A User with Paid Subscription will get a increment on cosumables
+    // Under Amore Gold Plan a user will get
+    /// 5 Super likes everyday
+    /// 2 Boost a month
+    /// 3 messages everyday
+    func checkDailySubscriptionIncrement() {
+        // Check if the plan is a Paid Plan like Amore Gold
+        // if True:
+        // Check if the InAppPurchase collection was already updated for today
+        // if False:
+        // update the InAppPurchase for the user
+        
         return
-      }
-     UIApplication.shared.open(writeReviewURL)
     }
+    
     
 }
 
