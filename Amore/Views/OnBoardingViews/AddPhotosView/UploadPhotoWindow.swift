@@ -162,6 +162,7 @@ struct UploadPhotoWindow: View {
                     .onTapGesture {
                         showSheet = true
                         activeSheet = .imageChoose
+                        print("Beginning Image Selection Flow")
                     }
                 
                 // Don't show if the image is nil

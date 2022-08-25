@@ -41,7 +41,7 @@ struct ProfileImageView: View {
         Image(uiImage: photo.downsampledImage ?? UIImage())
             .resizable()
             .scaledToFill()
-            .frame(width: width, height:height, alignment:.top)
+            .frame(width: width)
             .clipped()
             .onAppear(perform: {
                 if photo.downsampledImage == nil {

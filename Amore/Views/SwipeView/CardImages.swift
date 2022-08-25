@@ -35,7 +35,7 @@ struct CardImages: View {
     }
     
     var body: some View {
-        VStack {
+        
                 Image(uiImage: photoStruct.downsampledImage ?? UIImage())
                     .resizable()
                     .scaledToFill()
@@ -56,7 +56,7 @@ struct CardImages: View {
                         }
                     }
                  
-        }
+        
     }
 }
 
@@ -100,7 +100,7 @@ struct CardImages_Previews: PreviewProvider {
         GeometryReader { geometry in
             CardImages(profileImage: Binding.constant(tempProfile.image3),
                        photoStruct: Binding.constant(tempProfile.photo3.boundPhoto),
-                       width:geometry.size.width-10,
+                       width:geometry.size.width,
                        height:geometry.size.height/2)
                 .padding()
         }

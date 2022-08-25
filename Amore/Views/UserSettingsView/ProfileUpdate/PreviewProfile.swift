@@ -35,31 +35,32 @@ struct PreviewProfile: View {
                 LazyVStack{
                         // Image 1
                         // Profile Name, distance and age
-                    VStack(spacing:10) {
-                            ZStack {
-                                if profileModel.editUserProfile.image1?.imageURL != nil  {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
-                                                     photo: $photoModel.photo1,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
-                                        
-                                    
-                                    VStack {
-                                        Spacer()
-                                        NameAgeDistance(firstName: profileModel.editUserProfile.firstName.bound,
-                                                        lastName: profileModel.editUserProfile.lastName.bound,
-                                                        age: profileModel.editUserProfile.age.boundInt,
-                                                        profileDistanceFromUser: $profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
-                                                        geometry: geometry)
-                                    }
-                                }
-                            }
+//                    VStack(spacing:10) {
+//                            
+//                        }
+                        
+                    ZStack {
+                        if profileModel.editUserProfile.image1?.imageURL != nil  {
+                            ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
+                                             photo: $photoModel.photo1,
+                                             width: geometry.size.width,
+                                             height: .infinity)
+                                
                             
-                            ProfileBioHeadline(description: profileModel.editUserProfile.headline.bound,
-                                       headlineText:"Headline")
-                                .padding(5)
+                            VStack {
+                                Spacer()
+                                NameAgeDistance(firstName: profileModel.editUserProfile.firstName.bound,
+                                                lastName: profileModel.editUserProfile.lastName.bound,
+                                                age: profileModel.editUserProfile.age.boundInt,
+                                                profileDistanceFromUser: $profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
+                                                geometry: geometry)
+                            }
                         }
-
+                    }
+                    
+                    ProfileBioHeadline(description: profileModel.editUserProfile.headline.bound,
+                               headlineText:"Headline")
+                        .padding(5)
                         
                         // Height, Education, Raised In, Religion, Political, Industry,
                         // Image 2

@@ -27,46 +27,40 @@ struct ChildCardView: View {
 
                 LazyVStack {
                     VStack {
-                        
-                        // Image 1
-                        // Profile Name, distance and age
-                        VStack(spacing:5) {
-                            ZStack {
-                                if self.singleProfile.image1?.imageURL != nil  {
-                                    CardImages(profileImage: $singleProfile.image1,
-                                               photoStruct: $singleProfile.photo1.boundPhoto,
-                                               width:geometry.size.width,
-                                               height: .infinity)
-                                        
+
+                        ZStack {
+                            if self.singleProfile.image1?.imageURL != nil  {
+                                CardImages(profileImage: $singleProfile.image1,
+                                           photoStruct: $singleProfile.photo1.boundPhoto,
+                                           width:geometry.size.width,
+                                           height: .infinity)
                                     
-                                    VStack {
-                                        Spacer()
-                                        NameAgeDistance(firstName: self.singleProfile.firstName.bound,
-                                                        lastName: self.singleProfile.lastName.bound,
-                                                        age: self.singleProfile.age.boundInt,
-                                                        profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
-                                                        geometry: geometry)
-                                            .onAppear {
-                                                if singleProfile.location != nil {
-                                                    let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
-                                                                                     longitude: singleProfile.location!.longitude.boundDouble)
-                                                    // Calculates distance between user and profile
-                                                    if profileModel.lastSeenLocation != nil {
-                                                        self.singleProfile.profileDistanceFromUser = profileModel.lastSeenLocation!.distance(from: profileLocation) / 1000
-                                                    }
+                                
+                                VStack {
+                                    Spacer()
+                                    NameAgeDistance(firstName: self.singleProfile.firstName.bound,
+                                                    lastName: self.singleProfile.lastName.bound,
+                                                    age: self.singleProfile.age.boundInt,
+                                                    profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
+                                                    geometry: geometry)
+                                        .onAppear {
+                                            if singleProfile.location != nil {
+                                                let profileLocation = CLLocation(latitude: singleProfile.location!.latitude.boundDouble,
+                                                                                 longitude: singleProfile.location!.longitude.boundDouble)
+                                                // Calculates distance between user and profile
+                                                if profileModel.lastSeenLocation != nil {
+                                                    self.singleProfile.profileDistanceFromUser = profileModel.lastSeenLocation!.distance(from: profileLocation) / 1000
                                                 }
-                                                
                                             }
-                                    }
+                                            
+                                        }
                                 }
                             }
-                            
-                            ProfileBioHeadline(description: self.singleProfile.headline.bound,
-                                               headlineText:"Headline")
-                                .padding(5)
-                    
                         }
 
+                        ProfileBioHeadline(description: singleProfile.headline.bound,
+                                   headlineText:"Headline")
+                            .padding(5)
                         
                         // Profile Height, Education, Job, Religion, Location
                         // Image 2
