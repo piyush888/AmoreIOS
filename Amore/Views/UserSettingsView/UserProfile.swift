@@ -483,22 +483,16 @@ struct BuySubscriptionOrItemsCard : View {
                                 // Consumables
                                 Button(action: {
                                     if cardName == "Boosts" {
-                                        if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount,
-                                           let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount {
+                                        if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount {
                                          self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
-                                         self.storeManager.oldpurchaseDataDetails.totalBoostCount = totalBoostCount + selectedItemCount
                                         }
                                     } else if cardName == "Messages" {
-                                        if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount,
-                                           let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount {
+                                        if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount {
                                             self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
-                                            self.storeManager.oldpurchaseDataDetails.totalMessagesCount = totalMessagesCount + selectedItemCount
                                         }
                                     } else if cardName == "Super Likes" {
-                                        if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount,
-                                           let totalSuperLikesCount =  storeManager.oldpurchaseDataDetails.totalSuperLikesCount {
+                                        if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount {
                                             self.storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
-                                            self.storeManager.oldpurchaseDataDetails.totalSuperLikesCount = totalSuperLikesCount + selectedItemCount
                                         }
                                     }
                                     storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())

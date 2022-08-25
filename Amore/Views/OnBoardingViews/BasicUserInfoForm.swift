@@ -39,7 +39,7 @@ struct BasicUserInfoForm: View {
     
     
     var isDOBValid: Bool {
-        // Age can't be more than 110 years and more than 18 year
+        // Age can't be more than 110 years and less than 18 year
         let now = Date()
         let calendar = Calendar.current
         let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)

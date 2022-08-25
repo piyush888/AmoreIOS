@@ -23,11 +23,32 @@ struct DirectMessageCardView: View {
     @State private var info: AlertInfo?
     
     private var MessageCountView: some View {
-        Text("\(storeManager.purchaseDataDetails.totalMessagesCount.boundInt)")
+        Text("\(storeManager.purchaseDataDetails.purchasedMessagesCount.boundInt + storeManager.purchaseDataDetails.subscriptionMessageCount.boundInt)")
     }
     
     private var buttonGradient: Array<Color> {
-        return storeManager.purchaseDataDetails.totalMessagesCount.boundInt == 0 ? [Color.gray] : [Color.red, Color.pink, Color.white]
+        return (storeManager.purchaseDataDetails.purchasedMessagesCount.boundInt + storeManager.purchaseDataDetails.subscriptionMessageCount.boundInt) == 0 ? [Color.gray] : [Color.red, Color.pink, Color.white]
+    }
+    
+    var totalMessagesCount: Int {
+        let purchasedMessagesCount =  self.storeManager.purchaseDataDetails.purchasedMessagesCount.boundInt
+        let subscriptionMessageCount =  self.storeManager.purchaseDataDetails.subscriptionMessageCount.boundInt
+        return purchasedMessagesCount+subscriptionMessageCount
+    }
+    
+    func consumeAMessage() {
+        // Since Subscriptions expire everyday, make sure to consume the dail subscriptions first before consuming the purcahses
+        if let subscriptionMessageCount = storeManager.purchaseDataDetails.subscriptionMessageCount {
+            if subscriptionMessageCount > 0 {
+                storeManager.purchaseDataDetails.subscriptionMessageCount.boundInt -= 1
+            } else {
+                if let purchasedMessagesCount = storeManager.purchaseDataDetails.purchasedMessagesCount {
+                    if purchasedMessagesCount > 0 {
+                        storeManager.purchaseDataDetails.purchasedMessagesCount.boundInt -= 1
+                    }
+                }
+            }
+        }
     }
     
     var body: some View {
@@ -119,10 +140,10 @@ struct DirectMessageCardView: View {
                             }
                             else {
                                 // if the message count is not 0
-                                if storeManager.purchaseDataDetails.totalMessagesCount.boundInt > 0 {
+                                if self.totalMessagesCount > 0 {
                                     chatModel.chatText = directMessage
                                     chatModel.handleSend(fromUser: fromUser, toUser: toUser, directMessage: true)
-                                    storeManager.purchaseDataDetails.totalMessagesCount.boundInt -= 1
+                                    self.consumeAMessage()
                                     _ = storeManager.storePurchaseNoParams()
                                     directMessage = ""
                                     info = AlertInfo(
@@ -255,14 +276,19 @@ struct DirectMessageBuyButton: View {
     @State var totalCost:Float = 0.0
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
+    
+    var totalMessagesCount: Int {
+        let purchasedMessagesCount =  self.storeManager.purchaseDataDetails.purchasedMessagesCount ?? 0
+        let subscriptionMessageCount =  self.storeManager.purchaseDataDetails.subscriptionMessageCount ?? 0
+        return purchasedMessagesCount+subscriptionMessageCount
+    }
+    
     var body: some View {
         
         
             Button {
-                if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount,
-                   let totalMessagesCount =  storeManager.oldpurchaseDataDetails.totalMessagesCount {
-                        self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
-                        self.storeManager.oldpurchaseDataDetails.totalMessagesCount = totalMessagesCount + Int(messageCount)
+                if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount {
+                    self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
                     // Purchase the product by passing in the Sk Product Object
                     storeManager.purchaseProduct(product:skProductObj)
                 }
