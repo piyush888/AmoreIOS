@@ -7,7 +7,8 @@
 import SwiftUI
 
 struct PaymentComplete: View {
-        
+    
+    @StateObject var appReview = AppReview()
     @EnvironmentObject var storeManager: StoreManager
     @State var subscriptionTypeId: String
     @State var time = 0.0
@@ -45,7 +46,7 @@ struct PaymentComplete: View {
                     
                     // Rate Us
                     Button("Rate us") {
-                        storeManager.writeReview()
+                        appReview.writeReview()
                     }
                     .buttonStyle(GrowingButton(buttonColor:Color.pink, fontColor: Color.white))
                     

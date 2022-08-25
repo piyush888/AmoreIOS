@@ -10,6 +10,7 @@ import StoreKit
 
 struct MyAmoreCard: View {
     
+    @StateObject var appReview = AppReview()
     @EnvironmentObject var storeManager: StoreManager
     @Binding var showModal: Bool
     @Binding var popUpCardSelection: PopUpCards
@@ -168,7 +169,7 @@ struct MyAmoreCard: View {
     var rateUsAndCollapseView: some View {
         HStack(spacing:60) {
             Button {
-                storeManager.writeReview()
+                appReview.writeReview()
             } label : {
                 Text("Rate us")
             }

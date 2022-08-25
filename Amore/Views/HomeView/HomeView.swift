@@ -135,66 +135,38 @@ struct HomeView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            HomeView()
+            commonPreview
                 .previewDisplayName("iPhone 13 Pro Max")
                 .previewDevice("iPhone 13 Pro Max")
-                .environmentObject(ProfileViewModel())
-                .environmentObject(PhotoModel())
-                .environmentObject(AdminAuthenticationViewModel())
-                .environmentObject(FilterModel())
-                .environmentObject(CardProfileModel())
-                .environmentObject(ReceivedGivenEliteModel())
-                .environmentObject(ReportActivityModel())
-                .environmentObject(StoreManager())
-                .environmentObject(ChatModel())
-            HomeView()
+               
+            commonPreview
                 .previewDisplayName("iPhone 13 Mini")
                 .previewDevice("iPhone 13 Mini")
-                .environmentObject(ProfileViewModel())
-                .environmentObject(PhotoModel())
-                .environmentObject(AdminAuthenticationViewModel())
-                .environmentObject(FilterModel())
-                .environmentObject(CardProfileModel())
-                .environmentObject(ReceivedGivenEliteModel())
-                .environmentObject(ReportActivityModel())
-                .environmentObject(StoreManager())
-                .environmentObject(ChatModel())
-            HomeView()
+               
+            commonPreview
                 .previewDisplayName("iPhone 12 Mini")
                 .previewDevice("iPhone 12 Mini")
-                .environmentObject(ProfileViewModel())
-                .environmentObject(PhotoModel())
-                .environmentObject(AdminAuthenticationViewModel())
-                .environmentObject(FilterModel())
-                .environmentObject(CardProfileModel())
-                .environmentObject(ReceivedGivenEliteModel())
-                .environmentObject(ReportActivityModel())
-                .environmentObject(StoreManager())
-                .environmentObject(ChatModel())
-            HomeView()
+               
+            commonPreview
                 .previewDisplayName("iPhone 12 Pro")
                 .previewDevice("iPhone 12 Pro")
-                .environmentObject(ProfileViewModel())
-                .environmentObject(PhotoModel())
-                .environmentObject(AdminAuthenticationViewModel())
-                .environmentObject(FilterModel())
-                .environmentObject(CardProfileModel())
-                .environmentObject(ReceivedGivenEliteModel())
-                .environmentObject(ReportActivityModel())
-                .environmentObject(StoreManager())
-                .environmentObject(ChatModel())
-            HomeView()
+                
+            commonPreview
                 .previewDisplayName("iPhone 11")
                 .previewDevice("iPhone 11")
-                .environmentObject(ProfileViewModel())
-                .environmentObject(PhotoModel())
-                .environmentObject(AdminAuthenticationViewModel())
-                .environmentObject(FilterModel())
-                .environmentObject(CardProfileModel())
-                .environmentObject(ReceivedGivenEliteModel())
-                .environmentObject(ReportActivityModel())
-                .environmentObject(StoreManager())
-                .environmentObject(ChatModel())
         }
+    }
+    
+    static var commonPreview: some View {
+        HomeView()
+            .environmentObject(ProfileViewModel())
+            .environmentObject(PhotoModel())
+            .environmentObject(AdminAuthenticationViewModel())
+            .environmentObject(FilterModel())
+            .environmentObject(CardProfileModel())
+            .environmentObject(ReceivedGivenEliteModel())
+            .environmentObject(ReportActivityModel())
+            .environmentObject(StoreManager())
+            .environmentObject(ChatModel())
     }
 }
