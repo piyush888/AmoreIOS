@@ -167,6 +167,7 @@
 		E2DBFE27275EC05200250686 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBFE26275EC05200250686 /* RequestData.swift */; };
 		E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176C277A804300527E24 /* TopPicksChild.swift */; };
 		E2E0176F277A859C00527E24 /* LikesTopPicksButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */; };
+		E2ED201A28B981F800BFD32C /* SampleGUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED201928B981F800BFD32C /* SampleGUI.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -349,6 +350,7 @@
 		E2DBFE26275EC05200250686 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		E2E0176C277A804300527E24 /* TopPicksChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksChild.swift; sourceTree = "<group>"; };
 		E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksButtons.swift; sourceTree = "<group>"; };
+		E2ED201928B981F800BFD32C /* SampleGUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGUI.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				E2DBFE26275EC05200250686 /* RequestData.swift */,
 				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
 				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
+				E2ED201928B981F800BFD32C /* SampleGUI.swift */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
+				E2ED201A28B981F800BFD32C /* SampleGUI.swift in Sources */,
 				E2723F8228823A4D00C0E3B1 /* NavigationBar.swift in Sources */,
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
 				E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */,

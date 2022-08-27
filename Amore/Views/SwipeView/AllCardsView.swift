@@ -83,7 +83,7 @@ struct AllCardsView: View {
                     .environmentObject(profileModel)
                     .environmentObject(receivedGivenEliteModel)
                     .environmentObject(filterModel)
-                    
+                    .environmentObject(storeManager)
                 }
                 
                 // Buttons and other interaction on top of cards

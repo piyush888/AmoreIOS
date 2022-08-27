@@ -62,7 +62,6 @@ struct HomeView: View {
                                 case .swipeView:
                                     if profileModel.editUserProfile.discoveryStatus.boundBool {
                                         AllCardsView()
-                                            
                                             .environmentObject(photoModel)
                                             .environmentObject(cardProfileModel)
                                             .environmentObject(reportActivityModel)

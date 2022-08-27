@@ -15,6 +15,7 @@ struct DeckCards: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var filterModel: FilterModel
+    @EnvironmentObject var storeManager: StoreManager
     
     @Binding var cardSwipeDone: Bool
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
@@ -30,6 +31,11 @@ struct DeckCards: View {
     
     var thresholdPercentage: CGFloat = 0.15 // when the user has draged 50% the width of the screen in either direction
     
+    var totalSuperCount: Int {
+        let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount ?? 0
+        let subscriptionSuperLikeCount =  self.storeManager.purchaseDataDetails.subscriptionSuperLikeCount ?? 0
+        return purchasedSuperLikesCount+subscriptionSuperLikeCount
+    }
     
     /// What percentage of our own width have we swipped
     /// - Parameters:
@@ -174,6 +180,7 @@ struct DeckCards: View {
             
             // Dislike Button
             Button {
+                self.cardColor = .red
                 // If card swiping action is finished
                 if cardSwipeDone {
                     cardSwipeDone = false
@@ -203,16 +210,30 @@ struct DeckCards: View {
                     }
                 }
             } label: {
-                Image(systemName: "star.circle.fill")
-                    .resizable()
-                    .frame(width:40, height:40)
-                    .foregroundColor(Color("gold-star"))
+                if self.swipeStatus == .superlike  {
+                    ZStack {
+                        Circle()
+                            .fill(Color("gold-star"))
+                            .frame(width: 45, height: 45)
+                        
+                        Text("\(self.totalSuperCount)")
+                            .foregroundColor(Color.white)
+                            .bold()
+                            .font(.title2)
+                    }
+                } else {
+                    Image(systemName: "star.circle.fill")
+                        .resizable()
+                        .frame(width:45, height:45)
+                        .foregroundColor(Color("gold-star"))
+                }
             }
 
             Spacer()
             
             // Like Button
             Button {
+                self.cardColor = .green
                 if cardSwipeDone {
                     cardSwipeDone = false
                     self.translation = CGSize(width: 500, height: 0)
