@@ -58,6 +58,7 @@ struct SettingEditProfileSafety: View {
                             passions:profileModel.editUserProfile.interests.boundStringArray)
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
+                    .environmentObject(adminAuthenticationModel)
             } label: {
                 
                 LinearGradient(

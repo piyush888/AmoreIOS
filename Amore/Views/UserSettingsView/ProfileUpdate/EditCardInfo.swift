@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct EditCardInfo: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     
     let adaptivecolumns = Array(repeating:
                                     GridItem(.adaptive(minimum: 150),spacing: 5,
@@ -222,17 +223,6 @@ struct EditCardInfo: View {
                 .navigationBarTitle("Card Settings")
                 .navigationBarTitleDisplayMode(.inline)
                 
-                
-                
-                Section(header: Text("Others")) {
-                    // Contact Support
-                    ContactSupport()
-                    
-                    // Delete Profile
-                    DeleteProfileButton()
-                }
-                .navigationBarTitle("Others")
-                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
@@ -276,5 +266,6 @@ struct EditCardInfo_Previews: PreviewProvider {
                      formUpdated:Binding.constant(false))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
+            .environmentObject(AdminAuthenticationViewModel())
     }
 }
