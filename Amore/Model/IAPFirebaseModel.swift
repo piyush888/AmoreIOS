@@ -14,9 +14,10 @@ struct ConsumableCountAndSubscriptionModel: Identifiable, Codable, Hashable {
     var purchasedBoostCount: Int?
     var purchasedSuperLikesCount: Int?
     var purchasedMessagesCount: Int?
-    var totalBoostCount: Int?
-    var totalSuperLikesCount: Int?
-    var totalMessagesCount:  Int?
+    var subscriptonBoostCount: Int?
+    var subscriptionSuperLikeCount: Int?
+    var subscriptionMessageCount:  Int?
     var subscriptionTypeId: String?
+    var subscriptionUpdateDateTime: Date?
 }
 

@@ -247,12 +247,18 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     /// 2 Boost a month
     /// 3 messages everyday
     func checkDailySubscriptionIncrement() {
-        // Check if the plan is a Paid Plan like Amore Gold
-        // if True:
-        // Check if the InAppPurchase collection was already updated for today
         // if False:
         // update the InAppPurchase for the user
+        let subscriptionId = self.purchaseDataDetails.subscriptionTypeId ?? ""
         
+        // Check if the plan is a Paid Plan like Amore Gold
+        if subscriptionId.contains("Gold") {
+            // Check if the InAppPurchase collection was already updated for today
+            // Update the InAppPurchase for the user
+            
+        } else {
+            print("User has free subscription and doesn't IAP doesn't needs to be updated")
+        }
         return
     }
     

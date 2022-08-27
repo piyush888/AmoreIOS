@@ -15,17 +15,24 @@ struct BoostUserProfile: View {
     @EnvironmentObject var storeManager: StoreManager
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
-    
+    @State private var info: AlertInfo?
     
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
     private var BoostCountView: some View {
-        Text("\(storeManager.purchaseDataDetails.totalBoostCount.boundInt)")
+        Text("\(storeManager.purchaseDataDetails.purchasedBoostCount.boundInt + storeManager.purchaseDataDetails.subscriptonBoostCount.boundInt)")
     }
     
     private var boostBalanceIsZero: Bool {
-        return storeManager.purchaseDataDetails.totalBoostCount.boundInt == 0 ? true : false
+        return (storeManager.purchaseDataDetails.purchasedBoostCount.boundInt + storeManager.purchaseDataDetails.subscriptonBoostCount.boundInt) == 0 ? true : false
+    }
+    
+    
+    var totalBoostCount: Int {
+        let purchasedBoostCount =  self.storeManager.purchaseDataDetails.purchasedBoostCount ?? 0
+        let subscriptonBoostCount =  self.storeManager.purchaseDataDetails.subscriptonBoostCount ?? 0
+        return purchasedBoostCount+subscriptonBoostCount
     }
     
     @State var boostSecondsRemaining: Int = 0
@@ -51,6 +58,21 @@ struct BoostUserProfile: View {
     static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
     static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
     
+    
+    func consumeABoost() {
+        // Since Subscriptions expire everyday, make sure to consume the dail subscriptions first before consuming the purcahses
+        if let subscriptonBoostCount = storeManager.purchaseDataDetails.subscriptonBoostCount {
+            if subscriptonBoostCount > 0 {
+                storeManager.purchaseDataDetails.subscriptonBoostCount.boundInt -= 1
+            } else {
+                if let purchasedBoostCount = storeManager.purchaseDataDetails.purchasedBoostCount {
+                    if purchasedBoostCount > 0 {
+                        storeManager.purchaseDataDetails.purchasedBoostCount.boundInt -= 1
+                    }
+                }
+            }
+        }
+    }
     
     // Boot Page
     var body: some View {
@@ -106,9 +128,8 @@ struct BoostUserProfile: View {
                         } label: {
                             ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
                                              photo: $photoModel.photo1,
-                                             width: 100,
-                                             height:100)
-                                .scaledToFill()
+                                             width: 150,
+                                             height:150)
                                 .clipShape(Circle())
                                 .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
                         }
@@ -169,16 +190,26 @@ struct BoostUserProfile: View {
                             if isBoostActive == false {
                                 DispatchQueue.main.async {
                                     // Check if the total boost count is not none
-                                    if storeManager.purchaseDataDetails.totalBoostCount.boundInt > 0 {
+                                    if self.totalBoostCount > 0 {
                                         profileModel.editUserProfile.boostTime = NSDate().timeIntervalSince1970
                                         profileModel.updateUserProfile(profileId:  Auth.auth().currentUser?.uid)
-                                        storeManager.purchaseDataDetails.totalBoostCount.boundInt -= 1
+                                        self.consumeABoost()
                                         _ = storeManager.storePurchaseNoParams()
                                         isBoostActive = true
                                         self.activateBoost()
                                         print("User Boost was activated")
                                     } else {
-                                        print("User has no boosts left")
+                                        // If the message count is 0
+                                        info = AlertInfo(
+                                                id: .two,
+                                                title: "Oh Oh You are out of boosts",
+                                                message: "Please considering purchasing some boosts",
+                                                dismissButton: Alert.Button.default(
+                                                    Text("Okay"),
+                                                    action: {
+                                                        print("Do Nothing")
+                                                    })
+                                                )
                                     }
                                 }
                             }
@@ -227,19 +258,18 @@ struct BoostUserProfile: View {
                 Image("Spline")
                     .blur(radius: 50)
                     .offset(x: 200, y: 100)
-//                    RiveViewModel(fileName: "shapes").view()
-//                            .ignoresSafeArea()
-//                            .blur(radius: 30)
-//                            .background(
-//                                Image("Spline")
-//                                    .blur(radius: 50)
-//                                    .offset(x: 200, y: 100)
-//                            )
             )
             .onAppear {
                 self.activateBoost()
             }
-    }
+            .alert(item: $info, content: { info in
+                        Alert(title: Text(info.title),
+                              message: Text(info.message),
+                              dismissButton:info.dismissButton
+                        )
+                }
+            )
+        }
 }
 
 //struct BoostUserProfile_Previews: PreviewProvider {
@@ -265,10 +295,8 @@ struct BoostBuyButton: View {
         
         
             Button {
-                if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount,
-                   let totalBoostCount =  storeManager.oldpurchaseDataDetails.totalBoostCount {
+                if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount {
                         self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + Int(boostType)
-                        self.storeManager.oldpurchaseDataDetails.totalBoostCount = totalBoostCount + Int(boostType)
                         _ = storeManager.purchaseProduct(product:skProductObj)
                 }
             } label : {

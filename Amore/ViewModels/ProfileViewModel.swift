@@ -283,14 +283,16 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 // New Profile Create Document for user in IAPPurchase
                 // Default Consumable & Free Subscription
                 // Current Free Consumables Limit 20th March 22
+                
                 _ = self.storeManagerObj.storePurchaseWithParams(product:ConsumableCountAndSubscriptionModel(
-                                                purchasedBoostCount:0,
-                                                purchasedSuperLikesCount:0,
-                                                purchasedMessagesCount:0,
-                                                totalBoostCount: 1,
-                                                totalSuperLikesCount: 2,
-                                                totalMessagesCount: 1,
-                                                subscriptionTypeId: "Amore.ProductId.12M.Free.v1"))
+                                                purchasedBoostCount:2,
+                                                purchasedSuperLikesCount:3,
+                                                purchasedMessagesCount:2,
+                                                subscriptonBoostCount: 0,
+                                                subscriptionSuperLikeCount: 0,
+                                                subscriptionMessageCount: 0,
+                                                subscriptionTypeId: "Amore.ProductId.12M.Free.v1",
+                                                subscriptionUpdateDateTime: Date()))
                 
                 return true
             }

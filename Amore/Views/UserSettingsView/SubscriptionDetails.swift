@@ -14,6 +14,24 @@ struct SubscriptionDetails: View {
     @EnvironmentObject var storeManager: StoreManager
     @Environment(\.colorScheme) var colorScheme
     
+    var totalSuperLikesCount: Int {
+        let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount ?? 0
+        let subscriptionSuperLikeCount =  self.storeManager.purchaseDataDetails.subscriptionSuperLikeCount ?? 0
+        return purchasedSuperLikesCount+subscriptionSuperLikeCount
+    }
+    
+    var totalBoostCount: Int {
+        let purchasedBoostCount =  self.storeManager.purchaseDataDetails.purchasedBoostCount ?? 0
+        let subscriptonBoostCount =  self.storeManager.purchaseDataDetails.subscriptonBoostCount ?? 0
+        return purchasedBoostCount+subscriptonBoostCount
+    }
+    
+    var totalMessagesCount: Int {
+        let purchasedMessagesCount =  self.storeManager.purchaseDataDetails.purchasedMessagesCount ?? 0
+        let subscriptionMessageCount =  self.storeManager.purchaseDataDetails.subscriptionMessageCount ?? 0
+        return purchasedMessagesCount+subscriptionMessageCount
+    }
+    
     @Binding var backgroundColor: Color
     
     var body: some View {
@@ -35,7 +53,7 @@ struct SubscriptionDetails: View {
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(Color("gold-star"))
-                        Text("\(storeManager.purchaseDataDetails.totalSuperLikesCount ?? 0) Super Likes")
+                        Text("\(self.totalSuperLikesCount) Super Likes")
                         .font(.caption2)
                     }
                 }
@@ -51,7 +69,7 @@ struct SubscriptionDetails: View {
                             .frame(width:50, height:50)
                             .foregroundColor(.blue)
                             .shadow(color: .blue, radius: 0.1, x: 1, y: 1)
-                        Text("\(storeManager.purchaseDataDetails.totalBoostCount  ?? 0) Boost")
+                        Text("\(self.totalBoostCount) Boost")
                             .font(.caption2)
                     }
                 }
@@ -67,7 +85,7 @@ struct SubscriptionDetails: View {
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(.pink)
-                        Text("\(storeManager.purchaseDataDetails.totalMessagesCount  ?? 0) Messages")
+                        Text("\(self.totalMessagesCount) Messages")
                             .font(.caption2)
                     }
                 }
