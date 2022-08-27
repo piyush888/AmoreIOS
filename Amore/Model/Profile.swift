@@ -41,7 +41,7 @@ struct Profile: Identifiable, Codable, Equatable {
     var geohash5: String?
     var description: String?
     var country: String?
-    var discoveryStatus: Bool? = false
+    var discoveryStatus: Bool? = true
     var notificationsStatus: Bool? = false
     var image1: ProfileImage? = ProfileImage()
     var image2: ProfileImage? = ProfileImage()
@@ -58,6 +58,8 @@ struct Profile: Identifiable, Codable, Equatable {
     var wasProfileUpdated: Bool?
     var isProfileActive: Bool? = true
     var boostTime: TimeInterval? = 0
+    var userCreationDate: Date?
+    var deleteInitiatedDate: Date?
     
     
     static func ==(lhs: Profile, rhs: Profile) -> Bool {
@@ -84,6 +86,12 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.politics == rhs.politics &&
                lhs.food == rhs.food &&
                lhs.location == rhs.location &&
+               lhs.geohash == rhs.geohash &&
+               lhs.geohash1 == rhs.geohash1 &&
+               lhs.geohash2 == rhs.geohash2 &&
+               lhs.geohash3 == rhs.geohash3 &&
+               lhs.geohash4 == rhs.geohash4 &&
+               lhs.geohash5 == rhs.geohash5 &&
                lhs.description == rhs.description &&
                lhs.country == rhs.country &&
                lhs.discoveryStatus == rhs.discoveryStatus &&
@@ -98,16 +106,13 @@ struct Profile: Identifiable, Codable, Equatable {
                lhs.doYouDrink == rhs.doYouDrink &&
                lhs.doYouSmoke == rhs.doYouSmoke &&
                lhs.doYouWantBabies == rhs.doYouWantBabies  &&
-               lhs.food == rhs.food  &&
+               lhs.profileCompletion == rhs.profileCompletion  &&
                lhs.countryRaisedIn == rhs.countryRaisedIn &&
-               lhs.location == rhs.location &&
-               lhs.geohash == rhs.geohash &&
-               lhs.geohash1 == rhs.geohash1 &&
-               lhs.geohash2 == rhs.geohash2 &&
-               lhs.geohash3 == rhs.geohash3 &&
-               lhs.geohash4 == rhs.geohash4 &&
-               lhs.geohash5 == rhs.geohash5 &&
-               lhs.boostTime == rhs.boostTime
+               lhs.wasProfileUpdated == rhs.wasProfileUpdated &&
+               lhs.isProfileActive == rhs.isProfileActive &&
+               lhs.boostTime == rhs.boostTime &&
+               lhs.userCreationDate == rhs.userCreationDate &&
+               lhs.deleteInitiatedDate == rhs.deleteInitiatedDate
         )
     }
 }

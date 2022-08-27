@@ -353,6 +353,18 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             catch {
                                 print("Core Data Storing failed during profile fetch...:\(error)")
                             }
+                            
+                            /// 3 - Profile Resumption after Deactivation/Deletion
+                            /// If user is logging in "after deactivation" or "within 30 days of delete initiation",
+                            if !self.editUserProfile.isProfileActive.boundBool || self.editUserProfile.deleteInitiatedDate != nil {
+                                /// Reactivate profile
+                                self.editUserProfile.isProfileActive = true
+                                /// Reset deletion timer
+                                self.editUserProfile.deleteInitiatedDate = nil
+                                /// Update the changes in database
+                                self.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
+                            }
+                            
                         }
                         catch {
                             print(error)
@@ -365,7 +377,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    func updateUserProfile(profileId: String?) {
+    func updateUserProfile(profileId: String?, completion: (() -> Void)? = nil) {
         if let profileId = profileId {
             editUserProfile.location = Location(longitude: lastSeenLocation?.coordinate.longitude, latitude: lastSeenLocation?.coordinate.latitude)
             if let geohash = self.lastSeenLocationGeohash?.geohash {
@@ -384,6 +396,11 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     self.calculateProfileCompletion()
                     self.editUserProfile.wasProfileUpdated = true
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
+                    try db.collection("Profiles").document(profileId).setData(from: editUserProfile, completion: { error in
+                        if let completion = completion {
+                            completion()
+                        }
+                    })
                     self.userProfile = self.editUserProfile
                     // July 23: Below func is replicated through listeners
                     

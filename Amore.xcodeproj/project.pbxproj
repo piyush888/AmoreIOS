@@ -30,6 +30,7 @@
 		1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73E272A95840009683A /* OptionalExtension.swift */; };
 		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
 		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
+		1B9EDFE828B72A9F0082E95C /* DeleteDisableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */; };
 		1BA0A67428592C510032DE4E /* ReverseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0A67328592C510032DE4E /* ReverseScrollView.swift */; };
 		1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */; };
 		1BB36D3027ACE88200F4029C /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2F27ACE88200F4029C /* ChatUser.swift */; };
@@ -214,6 +215,7 @@
 		1B96B73E272A95840009683A /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDisableView.swift; sourceTree = "<group>"; };
 		1BA0A67328592C510032DE4E /* ReverseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseScrollView.swift; sourceTree = "<group>"; };
 		1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
 		1BB36D2F27ACE88200F4029C /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				E2851CAD272711C5005B19E1 /* PreviewProfile.swift */,
 				E2851CB127277A6B005B19E1 /* DeleteProfileButton.swift */,
 				E2D4318A2891FA6F005AFBE0 /* UserHeight.swift */,
+				1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */,
 			);
 			path = ProfileUpdate;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */,
 				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,
 				E2925E822883460A006FDAF6 /* SelectSingleItem.swift in Sources */,
+				1B9EDFE828B72A9F0082E95C /* DeleteDisableView.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,

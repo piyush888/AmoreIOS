@@ -9,18 +9,29 @@ import SwiftUI
 
 struct DeleteProfileButton: View {
     
+    @EnvironmentObject var photoModel: PhotoModel
+    @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    
     var body: some View {
         
-        Button{
-            // TODO
-        } label : {
-            HStack {
-                Image(systemName: "trash.fill")
-                Text("Delete Account")
+        NavigationLink {
+            DeleteDisableView()
+                .environmentObject(profileModel)
+                .environmentObject(photoModel)
+                .environmentObject(adminAuthenticationModel)
+        } label: {
+            Button{
+                // TODO
+            } label : {
+                HStack {
+                    Image(systemName: "trash.fill")
+                    Text("Delete Account")
+                }
+                .foregroundColor(.pink)
             }
-            .foregroundColor(.pink)
+            .padding(.bottom, 10)
         }
-        .padding(.bottom, 10)
         
     }
 }
@@ -28,5 +39,8 @@ struct DeleteProfileButton: View {
 struct DeleteProfileButton_Previews: PreviewProvider {
     static var previews: some View {
         DeleteProfileButton()
+            .environmentObject(ProfileViewModel())
+            .environmentObject(PhotoModel())
+            .environmentObject(AdminAuthenticationViewModel())
     }
 }

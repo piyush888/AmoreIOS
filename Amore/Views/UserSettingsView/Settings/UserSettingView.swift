@@ -44,7 +44,9 @@ struct UserSettingView: View {
                 // Section
                 /// Help & Support, Legal and Privacy Policy
                 ContactCommunityLegal()
+                    .environmentObject(photoModel)
                     .environmentObject(profileModel)
+                    .environmentObject(adminAuthenticationModel)
                 
                 
                 Spacer()
@@ -83,7 +85,7 @@ struct UserSettingView: View {
             .navigationBarHidden(true)
             
         }
-        .padding(20)
+        .padding()
     }
 }
 

@@ -12,6 +12,7 @@ struct EditProfile: View {
     
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @Binding var profileEditingToBeDone: Bool
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var selectedTab = "Edit Info"
@@ -102,6 +103,7 @@ struct EditProfile: View {
                                      formUpdated:$formUpdated)
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
+                            .environmentObject(adminAuthenticationModel)
 
                     case .previewProfile:
                         PreviewProfile(careerField:$careerField,
@@ -186,6 +188,7 @@ struct EditProfile_Previews: PreviewProvider {
         EditProfile(profileEditingToBeDone: Binding.constant(true))
             .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
+            .environmentObject(AdminAuthenticationViewModel())
     }
 }
 
