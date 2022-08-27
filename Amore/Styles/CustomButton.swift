@@ -85,3 +85,27 @@ struct DoneButton: View {
         
     }
 }
+
+
+
+struct QuickSuperLikeBuyButton: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(20)
+            .frame(maxWidth: .infinity)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(hex:0xf86ca7),
+                                                                   Color(hex:0xf4d444)]), startPoint: .leading, endPoint: .trailing))
+            .background(Color(hex: 0xF77D8E))
+            .foregroundColor(.white)
+            .mask(RoundedCorner(radius: 20, corners: [.topRight, .bottomLeft, .bottomRight]))
+            .mask(RoundedRectangle(cornerRadius: 8))
+            .shadow(color: Color(hex: 0xF77D8E).opacity(0.5), radius: 20, x: 0, y: 10)
+    }
+}
+
+
+extension View {
+    func quickSuperLikePurchase() -> some View {
+        modifier(QuickSuperLikeBuyButton())
+    }
+}

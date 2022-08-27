@@ -138,7 +138,6 @@
 		E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */; };
 		E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */; };
 		E2925E822883460A006FDAF6 /* SelectSingleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2925E812883460A006FDAF6 /* SelectSingleItem.swift */; };
-		E295F37B274877840003A1E1 /* NoPhotoProvided.swift in Sources */ = {isa = PBXBuildFile; fileRef = E295F37A274877840003A1E1 /* NoPhotoProvided.swift */; };
 		E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA0D2713350900C82174 /* CardBasicInfo.swift */; };
 		E298BA142713A85500C82174 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298BA132713A85500C82174 /* ControlCenter.swift */; };
 		E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B29382722B09400C38035 /* UserEditProfile.swift */; };
@@ -165,10 +164,11 @@
 		E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC02C272D8844000630F5 /* UserSnapDetails.swift */; };
 		E2DBC02F272D8E06000630F5 /* SettingEditProfileSafety.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */; };
 		E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBC037272DFC9C000630F5 /* MyAmoreCard.swift */; };
-		E2DBFE27275EC05200250686 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBFE26275EC05200250686 /* RequestData.swift */; };
 		E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176C277A804300527E24 /* TopPicksChild.swift */; };
 		E2E0176F277A859C00527E24 /* LikesTopPicksButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */; };
-		E2ED201A28B981F800BFD32C /* SampleGUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED201928B981F800BFD32C /* SampleGUI.swift */; };
+		E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED201E28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift */; };
+		E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */; };
+		E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202228BAA38600BFD32C /* BGImagesModel.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -322,7 +322,6 @@
 		E291A1ED26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPKeyCodeChild.swift; sourceTree = "<group>"; };
 		E291A1F126FF98B3000D8A2C /* BasicUserInfoForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUserInfoForm.swift; sourceTree = "<group>"; };
 		E2925E812883460A006FDAF6 /* SelectSingleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSingleItem.swift; sourceTree = "<group>"; };
-		E295F37A274877840003A1E1 /* NoPhotoProvided.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPhotoProvided.swift; sourceTree = "<group>"; };
 		E298BA0D2713350900C82174 /* CardBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBasicInfo.swift; sourceTree = "<group>"; };
 		E298BA132713A85500C82174 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E29B29382722B09400C38035 /* UserEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditProfile.swift; sourceTree = "<group>"; };
@@ -349,10 +348,11 @@
 		E2DBC02C272D8844000630F5 /* UserSnapDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSnapDetails.swift; sourceTree = "<group>"; };
 		E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEditProfileSafety.swift; sourceTree = "<group>"; };
 		E2DBC037272DFC9C000630F5 /* MyAmoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAmoreCard.swift; sourceTree = "<group>"; };
-		E2DBFE26275EC05200250686 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		E2E0176C277A804300527E24 /* TopPicksChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPicksChild.swift; sourceTree = "<group>"; };
 		E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksButtons.swift; sourceTree = "<group>"; };
-		E2ED201928B981F800BFD32C /* SampleGUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGUI.swift; sourceTree = "<group>"; };
+		E2ED201E28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyMoreSuperLikesSheet.swift; sourceTree = "<group>"; };
+		E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundGraphics.swift; sourceTree = "<group>"; };
+		E2ED202228BAA38600BFD32C /* BGImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGImagesModel.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -522,20 +522,10 @@
 			children = (
 				E24A0F15271256C4001640CA /* AllCardsView.swift */,
 				E23BAA9A2741DF1300F619D6 /* ChildCardView.swift */,
-				E298BA0D2713350900C82174 /* CardBasicInfo.swift */,
-				1B4ED871270F345E00290FFF /* CardPassions.swift */,
 				E273C3192740740A00AA3359 /* LikeDislikeButtons.swift */,
-				E273C31B27415FE900AA3359 /* CardImages.swift */,
-				E273C31D274170D200AA3359 /* ProfileBioHeadline.swift */,
-				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
-				E295F37A274877840003A1E1 /* NoPhotoProvided.swift */,
+				E2ED201B28BA51B400BFD32C /* Sheets */,
 				E2FE49BD275177C500744930 /* DeckCards.swift */,
-				E22D55632755828400852D70 /* WorkAndSchool.swift */,
-				E22328D22755A726000ABBA6 /* UserOtherInformation.swift */,
-				E2DBFE26275EC05200250686 /* RequestData.swift */,
-				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
-				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
-				E2ED201928B981F800BFD32C /* SampleGUI.swift */,
+				E2ED201D28BA526D00BFD32C /* ChildCardView */,
 			);
 			path = SwipeView;
 			sourceTree = "<group>";
@@ -675,6 +665,30 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
+		E2ED201B28BA51B400BFD32C /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
+				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
+				E2ED201E28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		E2ED201D28BA526D00BFD32C /* ChildCardView */ = {
+			isa = PBXGroup;
+			children = (
+				E298BA0D2713350900C82174 /* CardBasicInfo.swift */,
+				1B4ED871270F345E00290FFF /* CardPassions.swift */,
+				E273C31B27415FE900AA3359 /* CardImages.swift */,
+				E22328D22755A726000ABBA6 /* UserOtherInformation.swift */,
+				E273C31D274170D200AA3359 /* ProfileBioHeadline.swift */,
+				E23BAA952741BB7B00F619D6 /* NameAgeDistance.swift */,
+				E22D55632755828400852D70 /* WorkAndSchool.swift */,
+			);
+			path = ChildCardView;
+			sourceTree = "<group>";
+		};
 		E2F8AA4426F9427F00CC7A72 = {
 			isa = PBXGroup;
 			children = (
@@ -743,6 +757,7 @@
 				1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */,
 				E27CCEB527E44130006278EB /* IAPFirebaseModel.swift */,
 				E20CFEED2875044C00EF7EB1 /* TabModel.swift */,
+				E2ED202228BAA38600BFD32C /* BGImagesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -808,6 +823,7 @@
 				E259119E287A04D600028152 /* LottieView.swift */,
 				E203885828B3CE16000704F2 /* WriteReview.swift */,
 				E203885C28B4374F000704F2 /* Playground.swift */,
+				E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1003,17 +1019,16 @@
 				1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
-				E295F37B274877840003A1E1 /* NoPhotoProvided.swift in Sources */,
 				1B39493627D3263100793431 /* CustomScrollView.swift in Sources */,
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
-				E2ED201A28B981F800BFD32C /* SampleGUI.swift in Sources */,
 				E2723F8228823A4D00C0E3B1 /* NavigationBar.swift in Sources */,
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
 				E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
+				E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */,
 				E27CCEB627E44130006278EB /* IAPFirebaseModel.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,
@@ -1086,9 +1101,9 @@
 				1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
+				E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */,
 				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,
 				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
-				E2DBFE27275EC05200250686 /* RequestData.swift in Sources */,
 				E271ADF72889E540001ACD31 /* SelectMultipleItems.swift in Sources */,
 				E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */,
 				E251737328A170B00092C55A /* OnBoardingUtils.swift in Sources */,
@@ -1109,6 +1124,7 @@
 				E27AC5492720CB5400EB50F7 /* PhotoModel.swift in Sources */,
 				E2DBC025272B3621000630F5 /* ContactCommunityLegal.swift in Sources */,
 				E2347136271DC4E50006F336 /* MiniCardView.swift in Sources */,
+				E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */,
 				1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 				1BB36D3E27AE744800F4029C /* ChatText.swift in Sources */,

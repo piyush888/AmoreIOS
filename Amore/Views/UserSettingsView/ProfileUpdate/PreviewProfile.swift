@@ -59,7 +59,8 @@ struct PreviewProfile: View {
                     }
                     
                     ProfileBioHeadline(description: profileModel.editUserProfile.headline.bound,
-                               headlineText:"Headline")
+                               headlineText:"Headline",
+                               swipeStatus:Binding.constant(AllCardsView.LikeDislike.none))
                         .padding(5)
                         
                         // Height, Education, Raised In, Religion, Political, Industry,
@@ -92,7 +93,8 @@ struct PreviewProfile: View {
                         // Image 3
                         VStack(spacing:5) {
                             ProfileBioHeadline(description: profileModel.editUserProfile.description.bound,
-                                       headlineText:"Bio")
+                                       headlineText:"Bio",
+                                       swipeStatus:Binding.constant(AllCardsView.LikeDislike.none))
                             
                             // Show User Work and School At
                             WorkAndSchool(jobTitle:profileModel.editUserProfile.jobTitle.bound,

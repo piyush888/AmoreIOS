@@ -149,7 +149,10 @@ struct AllCardsView: View {
                                 buttonSwipeStatus: $buttonSwipeStatus)
                             .environmentObject(chatModel)
                         }
-                        
+                    
+                    case .buyMoreSuperLikesSheet:
+                        BuyMoreSuperLikesSheet(allcardsActiveSheet:$allcardsActiveSheet)
+                            .environmentObject(storeManager)
                 }
                 
             }
@@ -166,7 +169,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, boostProfileSheet, directMessageSheet
+    case reportProfileSheet, boostProfileSheet, directMessageSheet, buyMoreSuperLikesSheet
     var id: Int {
         hashValue
     }

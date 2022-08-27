@@ -59,7 +59,8 @@ struct ChildCardView: View {
                         }
 
                         ProfileBioHeadline(description: singleProfile.headline.bound,
-                                   headlineText:"Headline")
+                                   headlineText:"Headline",
+                                   swipeStatus:$swipeStatus)
                             .padding(5)
                         
                         // Profile Height, Education, Job, Religion, Location
@@ -93,7 +94,8 @@ struct ChildCardView: View {
                         // Image 3
                         VStack(spacing:5) {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
-                                               headlineText:"Bio")
+                                               headlineText:"Bio",
+                                               swipeStatus:$swipeStatus)
                                                 .padding(5)
                             
                             // Show User Work and School At

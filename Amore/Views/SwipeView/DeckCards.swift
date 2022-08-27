@@ -81,7 +81,22 @@ struct DeckCards: View {
             } else {
                 self.swipeStatus = .none
             }
-        
+    }
+    
+    
+    func consumeASuperlike() {
+        // Since Subscriptions expire everyday, make sure to consume the dail subscriptions first before consuming the purcahses
+        if let subscriptionSuperLikeCount = storeManager.purchaseDataDetails.subscriptionSuperLikeCount {
+            if subscriptionSuperLikeCount > 0 {
+                storeManager.purchaseDataDetails.subscriptionSuperLikeCount.boundInt -= 1
+            } else {
+                if let purchasedSuperLikesCount = storeManager.purchaseDataDetails.purchasedSuperLikesCount {
+                    if purchasedSuperLikesCount > 0 {
+                        storeManager.purchaseDataDetails.purchasedSuperLikesCount.boundInt -= 1
+                    }
+                }
+            }
+        }
     }
     
     
@@ -132,8 +147,6 @@ struct DeckCards: View {
                    }
                 }
                 
-                
-                
                 VStack {
                     Spacer()
                     LikesDislikesButtons
@@ -146,125 +159,141 @@ struct DeckCards: View {
     }
     
     var LikesDislikesButtons : some View {
-        
-        
-        HStack(spacing:10) {
-            
-            Button {
-                if cardSwipeDone {
-                    cardSwipeDone = false
-                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {
-                        rewindedUserCard in
-                        let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
-                        
-                        // Append rewinded user in Array
-                        cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
-                        
-                        // Append rewinded user in Dict
-                        if let rewindedUserId = cardProfileWithPhotos.id {
-                            cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
-                            receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
-                        }
-                        cardSwipeDone = true
-                    })
-                }
-            } label: {
-                Image(systemName: "arrowshape.turn.up.backward.circle.fill")
-                    .resizable()
-                    .frame(width:35, height:35)
-                    .foregroundColor(.orange)
-            }
-            .disabled(!cardSwipeDone)
-
-            Spacer()
-            
-            // Dislike Button
-            Button {
-                self.cardColor = .red
-                // If card swiping action is finished
-                if cardSwipeDone {
-                    cardSwipeDone = false
-                    self.translation = CGSize(width: -500, height: 0)
-                    self.saveLikeSuperlikeDislike(swipeInfo:.dislike) {
-                        print("Button Dislike: \(singleProfile.id)")
-                    }
-                }
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .frame(width:55, height:55)
-                    .foregroundColor(.gray)
-            }
-            .disabled(!cardSwipeDone)
-            
-            Spacer()
-            
-            // Superlike Button
-            Button {
-                self.cardColor = .yellow
-                self.swipeStatus = .superlike
-                if cardSwipeDone {
-                    cardSwipeDone = false
-                    self.saveLikeSuperlikeDislike(swipeInfo:.superlike) {
-                        print("Button Superlike: \(singleProfile.id)")
-                    }
-                }
-            } label: {
-                if self.swipeStatus == .superlike  {
-                    ZStack {
-                        Circle()
-                            .fill(Color("gold-star"))
-                            .frame(width: 45, height: 45)
-                        
-                        Text("\(self.totalSuperCount)")
-                            .foregroundColor(Color.white)
-                            .bold()
-                            .font(.title2)
-                    }
-                } else {
-                    Image(systemName: "star.circle.fill")
-                        .resizable()
-                        .frame(width:45, height:45)
-                        .foregroundColor(Color("gold-star"))
-                }
-            }
-
-            Spacer()
-            
-            // Like Button
-            Button {
-                self.cardColor = .green
-                if cardSwipeDone {
-                    cardSwipeDone = false
-                    self.translation = CGSize(width: 500, height: 0)
-                    self.saveLikeSuperlikeDislike(swipeInfo: .like) {
-                        print("Button like: \(singleProfile.id)")
-                    }
-                }
-            } label: {
-                Image(systemName: "heart.circle.fill")
-                    .resizable()
-                    .frame(width:55, height:55)
-                    .foregroundColor(.pink)
-            }
-            .disabled(!cardSwipeDone)
-            
-            Spacer()
-            
-            // DM Button
-            Button {
-                allcardsActiveSheet = .directMessageSheet
-            } label: {
-                Image(systemName: "message.circle.fill")
-                    .resizable()
-                    .frame(width:35, height:35)
-                    .foregroundColor(Color(hex:0xFA86C4))
-                    .shadow(color: .blue,
-                            radius: 0.1, x: 1, y: 1)
-            }
-            
+        HStack(spacing:20) {
+            RewindButton
+            DislikeButton
+            SuperLikeButton
+            LikeButton
+            DMButton
         }
         
     }
     
+    // Rewind BUtton
+    var RewindButton : some View {
+        // RewindButton
+        Button {
+            if cardSwipeDone {
+                cardSwipeDone = false
+                FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {
+                    rewindedUserCard in
+                    let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
+                    
+                    // Append rewinded user in Array
+                    cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
+                    
+                    // Append rewinded user in Dict
+                    if let rewindedUserId = cardProfileWithPhotos.id {
+                        cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
+                        receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
+                    }
+                    cardSwipeDone = true
+                })
+            }
+        } label: {
+            Image(systemName: "arrowshape.turn.up.backward.circle.fill")
+                .resizable()
+                .frame(width:35, height:35)
+                .foregroundColor(.orange)
+        }
+        .disabled(!cardSwipeDone)
+    }
+    
+    // Dislike Button
+    var DislikeButton : some View {
+        Button {
+            self.cardColor = .red
+            // If card swiping action is finished
+            if cardSwipeDone {
+                cardSwipeDone = false
+                self.translation = CGSize(width: -500, height: 0)
+                self.saveLikeSuperlikeDislike(swipeInfo:.dislike) {
+                    print("Button Dislike: \(String(describing: singleProfile.id))")
+                }
+            }
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .resizable()
+                .frame(width:55, height:55)
+                .foregroundColor(.gray)
+        }
+        .disabled(!cardSwipeDone)
+    }
+    
+    // SuperLike Button
+    var SuperLikeButton : some View {
+        
+        Button {
+            // Check if user has a superlike count
+            if self.totalSuperCount > 0 {
+                self.cardColor = .yellow
+                // Consume the super like and it will reduce the super like count
+                self.consumeASuperlike()
+                _ = storeManager.storePurchaseNoParams()
+                self.swipeStatus = .superlike
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    self.saveLikeSuperlikeDislike(swipeInfo:.superlike) {
+                        print("Button Superlike: \(singleProfile.id ?? "")")
+                    }
+                }
+            } else {
+                // User doesn't have any superlikes yet, display a sheet to buy more super likes for user
+                allcardsActiveSheet = .buyMoreSuperLikesSheet
+            }
+        } label: {
+            if self.swipeStatus == .superlike  {
+                ZStack {
+                    Circle()
+                        .fill(Color("gold-star"))
+                        .frame(width: 45, height: 45)
+                    
+                    Text("\(self.totalSuperCount)")
+                        .foregroundColor(Color.white)
+                        .bold()
+                        .font(.title2)
+                }
+            } else {
+                Image(systemName: "star.circle.fill")
+                    .resizable()
+                    .frame(width:45, height:45)
+                    .foregroundColor(Color("gold-star"))
+            }
+        }
+    }
+    
+    // Like Button
+    var LikeButton : some View {
+        Button {
+            self.cardColor = .green
+            if cardSwipeDone {
+                cardSwipeDone = false
+                self.translation = CGSize(width: 500, height: 0)
+                self.saveLikeSuperlikeDislike(swipeInfo: .like) {
+                    print("Button like: \(singleProfile.id ?? "")")
+                }
+            }
+        } label: {
+            Image(systemName: "heart.circle.fill")
+                .resizable()
+                .frame(width:55, height:55)
+                .foregroundColor(.pink)
+        }
+        .disabled(!cardSwipeDone)
+        
+    }
+ 
+    // DM Button
+    var DMButton: some View {
+        Button {
+            allcardsActiveSheet = .directMessageSheet
+        } label: {
+            Image(systemName: "message.circle.fill")
+                .resizable()
+                .frame(width:35, height:35)
+                .foregroundColor(Color(hex:0xFA86C4))
+                .shadow(color: .blue,
+                        radius: 0.1, x: 1, y: 1)
+        }
+    }
 }

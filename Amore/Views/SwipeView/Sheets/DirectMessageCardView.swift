@@ -218,14 +218,6 @@ struct DirectMessageCardView: View {
                 Image("Spline")
                     .blur(radius: 50)
                     .offset(x: 200, y: 100)
-//                    RiveViewModel(fileName: "shapes").view()
-//                            .ignoresSafeArea()
-//                            .blur(radius: 30)
-//                            .background(
-//                                Image("Spline")
-//                                    .blur(radius: 50)
-//                                    .offset(x: 200, y: 100)
-//                            )
             )
             .alert(item: $info, content: { info in
                         Alert(title: Text(info.title),
@@ -277,14 +269,7 @@ struct DirectMessageBuyButton: View {
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
     
-    var totalMessagesCount: Int {
-        let purchasedMessagesCount =  self.storeManager.purchaseDataDetails.purchasedMessagesCount ?? 0
-        let subscriptionMessageCount =  self.storeManager.purchaseDataDetails.subscriptionMessageCount ?? 0
-        return purchasedMessagesCount+subscriptionMessageCount
-    }
-    
     var body: some View {
-        
         
             Button {
                 if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount {
