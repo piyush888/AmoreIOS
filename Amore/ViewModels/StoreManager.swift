@@ -41,7 +41,9 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     
     // Initalized with data from firestore
     @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
-    @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
+//    @Published var oldpurchaseDataDetails = ConsumableCountAndSubscriptionModel()
+    // This field is used to hold payment when user initaes a payment but it's not complete
+    @Published var tempPurchaseHold = ConsumableCountAndSubscriptionModel()
     @Published var paymentCompleteDisplayMyAmore : Bool = false
     var purchaseDataFetched = false
     
@@ -125,8 +127,8 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 // Only store data in firebase when payment is successfull
                 // If Purchase is Successfull, update the new purchase data
                 // Check if the object is not nil & the call is being actually done by the user
-                if self.purchaseDataDetails.subscriptionTypeId != nil && self.purchaseDataDetails != self.oldpurchaseDataDetails {
-                    self.purchaseDataDetails = self.oldpurchaseDataDetails
+                if self.purchaseDataDetails.subscriptionTypeId != nil && self.purchaseDataDetails != self.tempPurchaseHold {
+                    self.purchaseDataDetails = self.tempPurchaseHold
                     // Store the details of consumables and subscription to firebase
                     _ = self.storePurchaseNoParams()
                     // Store the transaction in payment activity
@@ -139,7 +141,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 transactionState = .restored
             case .failed, .deferred:
                 print("Store Manager: Payment Queue Error: \(String(describing: transaction.error))")
-                self.oldpurchaseDataDetails = self.purchaseDataDetails
+                self.tempPurchaseHold = self.purchaseDataDetails
                 queue.finishTransaction(transaction)
                 transactionState = .failed
             default:
@@ -168,7 +170,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
             catch let error {
                 print("storePurchase: Can't store the purchase data in firestore: \(error)")
             }
-            
+            self.tempPurchaseHold = self.purchaseDataDetails
         } else {
             print("No User Id")
         }
@@ -224,9 +226,11 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                     if let document = document {
                         do {
                             // Get User Purchase Data from firestore
-                            self.oldpurchaseDataDetails = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
-                            self.purchaseDataDetails = self.oldpurchaseDataDetails
+                            self.purchaseDataDetails = try document.data(as: ConsumableCountAndSubscriptionModel.self) ?? ConsumableCountAndSubscriptionModel()
+                            self.tempPurchaseHold = self.purchaseDataDetails
                             self.purchaseDataFetched = true
+                            // Check user subscription and if user subscriptions need to be updated
+                            self.checkDailySubscriptionIncrement()
                         }
                         catch {
                             print(error)
@@ -244,24 +248,54 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     // A User with Paid Subscription will get a increment on cosumables
     // Under Amore Gold Plan a user will get
     /// 5 Super likes everyday
-    /// 2 Boost a month
+    /// 1 Boost a day
     /// 3 messages everyday
     func checkDailySubscriptionIncrement() {
         // if False:
         // update the InAppPurchase for the user
-        let subscriptionId = self.purchaseDataDetails.subscriptionTypeId ?? ""
-        
-        // Check if the plan is a Paid Plan like Amore Gold
-        if subscriptionId.contains("Gold") {
-            // Check if the InAppPurchase collection was already updated for today
-            // Update the InAppPurchase for the user
-            
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+
+        if let subscriptionUpdatedDateTime = self.purchaseDataDetails.subscriptionUpdateDateTime {
+            let todaysDate = dateFormatter.string(from: Date())
+            let lastFirestoreUpdate = dateFormatter.string(from: subscriptionUpdatedDateTime)
+            // Check if last firestore update wasn't today
+            if todaysDate != lastFirestoreUpdate{
+                // Get the user subscription
+                let subscriptionId = self.purchaseDataDetails.subscriptionTypeId ?? ""
+                // Check if the plan is a Paid Plan like Amore Gold
+                if subscriptionId.contains("Gold") {
+                    // Check if the InAppPurchase collection was already updated for today
+                    // Update the InAppPurchase for the user
+                    self.updateDailySubscriptions(dailySuperLike:5,
+                                                  dailyBoostCount: 1,
+                                                  dailyMessageCount: 3)
+                } else {
+                    print("User has free subscription and doesn't IAP doesn't needs to be updated")
+                    self.updateDailySubscriptions(dailySuperLike:2,
+                                                  dailyBoostCount: 0,
+                                                  dailyMessageCount: 1)
+                }
+            }
         } else {
-            print("User has free subscription and doesn't IAP doesn't needs to be updated")
+            // The User IAP storage doesn't have a date. Error
+            print("Why user doesn't have a date stored in firestore ?")
+            // Adding date and pushing to user IAP Purchases in firestore
+            self.updateDailySubscriptions(dailySuperLike:2,
+                                          dailyBoostCount: 0,
+                                          dailyMessageCount: 1)
         }
-        return
+        
     }
     
+    // User this function to update firestore with new daily subscription counts
+    func updateDailySubscriptions(dailySuperLike:Int, dailyBoostCount:Int, dailyMessageCount:Int) {
+        self.purchaseDataDetails.subscriptionSuperLikeCount = dailySuperLike
+        self.purchaseDataDetails.subscriptionMessageCount = dailyMessageCount
+        self.purchaseDataDetails.subscriptonBoostCount = dailyBoostCount
+        self.purchaseDataDetails.subscriptionUpdateDateTime = Date()
+        _ = self.storePurchaseNoParams()
+    }
     
 }
 

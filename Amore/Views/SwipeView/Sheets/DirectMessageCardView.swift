@@ -272,8 +272,8 @@ struct DirectMessageBuyButton: View {
     var body: some View {
         
             Button {
-                if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount {
-                    self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
+                if let purchasedMessagesCount = storeManager.purchaseDataDetails.purchasedMessagesCount {
+                    self.storeManager.tempPurchaseHold.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
                     // Purchase the product by passing in the Sk Product Object
                     storeManager.purchaseProduct(product:skProductObj)
                 }

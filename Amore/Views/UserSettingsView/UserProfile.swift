@@ -278,7 +278,7 @@ struct UserProfile: View {
                                                       subScriptText1:"Top Picks",
                                                       subScriptText2:"",
                                                       subScriptText3:"5 Super likes everyday",
-                                                      subScriptText4:"2 Boost a month",
+                                                      subScriptText4:"1 Boost a day",
                                                       subScriptText5:"3 messages everyday",
                                                       showModal: $showModal,
                                                       geometry: geometry,
@@ -468,7 +468,7 @@ struct BuySubscriptionOrItemsCard : View {
 //                                buttonColor: [cardColorFormat[0],cardColorFormat[1]]
                                 } else {
                                     Button(action: {
-                                        self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
+                                        self.storeManager.tempPurchaseHold.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
                                         self.storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                     }) {
                                         PayButton(buttonText: "\(currency)",
@@ -483,16 +483,16 @@ struct BuySubscriptionOrItemsCard : View {
                                 // Consumables
                                 Button(action: {
                                     if cardName == "Boosts" {
-                                        if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount {
-                                         self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + selectedItemCount
+                                        if let purchasedBoostCount = storeManager.purchaseDataDetails.purchasedBoostCount {
+                                         self.storeManager.tempPurchaseHold.purchasedBoostCount = purchasedBoostCount + selectedItemCount
                                         }
                                     } else if cardName == "Messages" {
-                                        if let purchasedMessagesCount = storeManager.oldpurchaseDataDetails.purchasedMessagesCount {
-                                            self.storeManager.oldpurchaseDataDetails.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
+                                        if let purchasedMessagesCount = storeManager.purchaseDataDetails.purchasedMessagesCount {
+                                            self.storeManager.tempPurchaseHold.purchasedMessagesCount = purchasedMessagesCount + selectedItemCount
                                         }
                                     } else if cardName == "Super Likes" {
-                                        if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount {
-                                            self.storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
+                                        if let purchasedSuperLikesCount = storeManager.purchaseDataDetails.purchasedSuperLikesCount {
+                                            self.storeManager.tempPurchaseHold.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
                                         }
                                     }
                                     storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())

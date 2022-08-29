@@ -295,8 +295,8 @@ struct BoostBuyButton: View {
         
         
             Button {
-                if let purchasedBoostCount = storeManager.oldpurchaseDataDetails.purchasedBoostCount {
-                        self.storeManager.oldpurchaseDataDetails.purchasedBoostCount = purchasedBoostCount + Int(boostType)
+                if let purchasedBoostCount = storeManager.purchaseDataDetails.purchasedBoostCount {
+                        self.storeManager.tempPurchaseHold.purchasedBoostCount = purchasedBoostCount + Int(boostType)
                         _ = storeManager.purchaseProduct(product:skProductObj)
                 }
             } label : {

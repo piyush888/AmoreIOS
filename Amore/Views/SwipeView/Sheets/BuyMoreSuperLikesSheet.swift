@@ -145,8 +145,8 @@ struct SuperLikeBuyButton: View {
     var body: some View {
         
             Button {
-                if let purchasedSuperLikesCount = storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount {
-                    self.storeManager.oldpurchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount + Int(superLikeCount)
+                if let purchasedSuperLikesCount = storeManager.purchaseDataDetails.purchasedSuperLikesCount {
+                    self.storeManager.tempPurchaseHold.purchasedSuperLikesCount = purchasedSuperLikesCount + Int(superLikeCount)
                     // Purchase the product by passing in the Sk Product Object
                     storeManager.purchaseProduct(product:skProductObj)
                 }

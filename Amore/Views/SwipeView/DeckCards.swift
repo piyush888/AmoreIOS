@@ -64,6 +64,7 @@ struct DeckCards: View {
             }, onSuccess: {
                 onSuccess()
                 receivedGivenEliteModel.addProfileToArrayFromSwipeView(profileCard: singleProfile, swipeInfo: swipeInfo)
+                self.swipeStatus = .none
                 self.onRemove(self.singleProfile)
                 self.cardSwipeDone = true
                 cardProfileModel.areMoreCardsNeeded(filterData:filterModel.filterData)

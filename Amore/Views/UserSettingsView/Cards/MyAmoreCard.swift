@@ -51,7 +51,7 @@ struct MyAmoreCard: View {
                         HStack(spacing:1) {
                             Image(systemName: "bolt.fill")
                                 .foregroundColor(Color.blue)
-                            Text("3 Boost a month")
+                            Text("1 Boost a day")
                         }
                         
                         HStack(spacing:1) {
@@ -82,7 +82,7 @@ struct MyAmoreCard: View {
                 //If the user has Free Subscription show the following
                 else if subscriptionTypeId.contains("Free") {
                     Button {
-                        self.storeManager.oldpurchaseDataDetails.subscriptionTypeId = "Amore.ProductId.3M.Gold.v2"
+                        self.storeManager.tempPurchaseHold.subscriptionTypeId = "Amore.ProductId.3M.Gold.v2"
                         self.storeManager.purchaseProduct(product: self.storeManager.amoreGoldPricing["Amore Gold 3 Month"] ?? SKProduct())
                     } label: {
                         buyAmoreGoldButton
