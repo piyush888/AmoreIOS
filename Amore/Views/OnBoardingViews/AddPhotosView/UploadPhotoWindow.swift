@@ -26,7 +26,7 @@ struct UploadPhotoWindow: View {
     
     @State var width: CGFloat
     @State var height: CGFloat
-
+    
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     
@@ -49,7 +49,7 @@ struct UploadPhotoWindow: View {
             profileModel.defragmentProfileImagesArray()
             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
         } onFinish: {
-//            photoStruct = Photo()
+            //            photoStruct = Photo()
             photoStruct.image = nil
             photoStruct.downsampledImage = nil
             photoStruct.inProgress = false
@@ -73,7 +73,7 @@ struct UploadPhotoWindow: View {
                 profileModel.defragmentProfileImagesArray()
                 profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
             } onFinish: {
-//                photoStruct = Photo()
+                //                photoStruct = Photo()
                 photoStruct.image = nil
                 photoStruct.downsampledImage = nil
                 photoStruct.inProgress = false
@@ -96,7 +96,7 @@ struct UploadPhotoWindow: View {
         } onSuccess: {
             profileImage?.imageURL = nil
             profileImage?.firebaseImagePath = nil
-//            photoStruct = Photo(image: nil, downsampledImage: nil, inProgress: true)
+            //            photoStruct = Photo(image: nil, downsampledImage: nil, inProgress: true)
             photoStruct.image = nil
             photoStruct.downsampledImage = nil
             profileModel.defragmentProfileImagesArray()
@@ -118,16 +118,16 @@ struct UploadPhotoWindow: View {
                 photoModel.photoAction = false
                 return
             }
-//            photoStruct.image = image
+            //            photoStruct.image = image
             photoStruct.downsampledImage = image.downsample(to: CGSize(width: width, height: height))
             
-//            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
+            //            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
             
             if finished {
-//                print("FINISHED LOADING IMAGE...")
+                //                print("FINISHED LOADING IMAGE...")
                 photoModel.photoAction = false
                 SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
-//                    print("Successfully deleted self profile image cache")
+                    //                    print("Successfully deleted self profile image cache")
                 }
             }
         }
@@ -139,55 +139,10 @@ struct UploadPhotoWindow: View {
         VStack {
             
             if photoStruct.downsampledImage != nil {
-                Image(uiImage: photoStruct.downsampledImage ?? UIImage())
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: width, height: height, alignment: .center)
-                    .cornerRadius(10.0)
-                    .clipped()
+                editAvailablePhoto
             } else {
-                Image(uiImage: UIImage())
-                    .frame(width: width, height: height, alignment: .center)
-                    .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                    .cornerRadius(10.0)
-                    .clipped()
+                addANewPhoto
             }
-            
-            
-            HStack {
-                Image(systemName:"plus.circle")
-                    .resizable()
-                    .frame(width:20, height:20)
-                    .foregroundColor(.green)
-                    .onTapGesture {
-                        showSheet = true
-                        activeSheet = .imageChoose
-                        print("Beginning Image Selection Flow")
-                    }
-                
-                // Don't show if the image is nil
-                if photoStruct.downsampledImage != nil {
-                    Image(systemName:"pencil.circle")
-                        .resizable()
-                        .frame(width:20, height:20)
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            showSheet = true
-                            activeSheet = .cropImage
-                        }
-                    if profileModel.numOfUserPhotosAdded() > 2 {
-                        Image(systemName:"trash.circle")
-                            .resizable()
-                            .frame(width:20, height:20)
-                            .foregroundColor(.red)
-                            .onTapGesture {
-                                onDelete()
-                            }
-                    }
-                    
-                }
-            }
-            
         }
         .onAppear(perform: {
             if photoStruct.downsampledImage == nil {
@@ -227,9 +182,70 @@ struct UploadPhotoWindow: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        
-        
     }
+    
+    // When a photo is already available and user wants to edit the photo
+    var editAvailablePhoto: some View {
+        Menu {
+            Button("Change Photo") {
+                showSheet = true
+                activeSheet = .imageChoose
+            }
+            
+            if photoStruct.downsampledImage != nil {
+                Button("Edit Photo") {
+                    showSheet = true
+                    activeSheet = .cropImage
+                }
+                
+                if profileModel.numOfUserPhotosAdded() > 2 {
+                    Button("Delete Photo") {
+                        onDelete()
+                    }
+                }
+            }
+        } label: {
+            ZStack(alignment: .bottomTrailing) {
+                Image(uiImage: photoStruct.downsampledImage ?? UIImage())
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: width, height: height, alignment: .center)
+                    .cornerRadius(10.0)
+                    .clipped()
+                
+                Image(systemName:"pencil.circle")
+                          .resizable()
+                          .frame(width:20, height:20)
+                          .foregroundColor(.white)
+                          .padding(10)
+            }
+            
+        }
+    }
+    
+    
+    // When user wants to add a new photo
+    var addANewPhoto: some View {
+        Menu {
+            Button("Add Photo") {
+                showSheet = true
+                activeSheet = .imageChoose
+            }
+        } label: {
+            ZStack {
+                Image(uiImage: UIImage())
+                    .frame(width: width, height: height, alignment: .center)
+                    .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
+                    .cornerRadius(10.0)
+                    .clipped()
+                
+                Image(systemName:"plus.circle")
+                    .resizable()
+                    .frame(width:25, height:25)
+            }
+        }
+    }
+    
 }
 
 struct UploadPhotoWindow_Previews: PreviewProvider {

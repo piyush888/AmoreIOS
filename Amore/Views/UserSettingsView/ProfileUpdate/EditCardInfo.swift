@@ -84,7 +84,7 @@ struct EditCardInfo: View {
                         // Display Photos
                         LazyVGrid(columns: adaptivecolumns, content: {
                             UploadWindowsGroup(width:geo.size.width/3.8,
-                                               height:geo.size.height/4.8)
+                                               height:geo.size.height/4)
                                 .environmentObject(profileModel)
                                 .environmentObject(photoModel)
                         })
