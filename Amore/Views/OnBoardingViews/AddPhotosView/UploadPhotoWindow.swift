@@ -107,7 +107,7 @@ struct UploadPhotoWindow: View {
     func getImage() {
         SDWebImageManager.shared.loadImage(with: profileImage?.imageURL, options: .continueInBackground, progress: nil) { image, data, error, cacheType, finished, durl in
             if let err = error {
-                print(err)
+                print("Error while loading image UploadPhotoWindow: \(err)")
                 photoModel.photoAction = false
                 return
             }
@@ -118,13 +118,21 @@ struct UploadPhotoWindow: View {
                 photoModel.photoAction = false
                 return
             }
-            //            photoStruct.image = image
-            photoStruct.downsampledImage = image.downsample(to: CGSize(width: width, height: height))
+            /// While downloading photos, if image data is greater than 1 MB, compress to HEIC data and then store image
+            if Double(NSData(data: try! image.heicData(compressionQuality: 1)).count) / 1000.0 > 1000.0 {
+                let compressed = try! image.heicData(compressionQuality: 0.6)
+                photoStruct.image = UIImage(data: compressed)
+            }
+            else {
+                photoStruct.image = image
+            }
             
-            //            photoStruct = Photo(image: image, downsampledImage: image.downsample(to: CGSize(width: 115, height: 170)), inProgress: false)
+            let heightInPoints = photoStruct.image?.size.height
+            let widthInPoints = photoStruct.image?.size.width
+            
+            photoStruct.downsampledImage = image.downsample(to: CGSize(width: (widthInPoints ?? 2000)/10, height: heightInPoints ?? 3000/10))
             
             if finished {
-                //                print("FINISHED LOADING IMAGE...")
                 photoModel.photoAction = false
                 SDImageCache.shared.removeImage(forKey: profileImage?.imageURL!.absoluteString) {
                     //                    print("Successfully deleted self profile image cache")
@@ -178,7 +186,8 @@ struct UploadPhotoWindow: View {
             }
             else if self.activeSheet == .cropImage {
                 // Option to Crop the image
-                ImageCropper(image: self.$photoStruct.downsampledImage, visible: self.$showSheet, done: self.imageCropped)
+                // Use the non-downsampled/original image for cropping.
+                ImageCropper(image: self.$photoStruct.image, visible: self.$showSheet, done: self.imageCropped)
                     .edgesIgnoringSafeArea(.all)
             }
         }

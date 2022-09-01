@@ -92,7 +92,7 @@ extension UIImage {
                     scale: CGFloat = UIScreen.main.scale) -> UIImage? {
         var imageData: Data
         do {
-            imageData = try self.heicData(compressionQuality: 0.6)
+            imageData = try self.heicData(compressionQuality: 1)
         }
         catch {
             imageData = Data()
