@@ -194,3 +194,8 @@ struct CardProfileWithPhotos: Identifiable, Hashable, Equatable {
         )
     }
 }
+
+struct RewindedData: Codable, Equatable {
+    var rewindedUserCard: CardProfile
+    var swipeStatusBetweenUsers: String
+}

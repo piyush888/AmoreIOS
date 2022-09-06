@@ -134,7 +134,6 @@ struct DeckCards: View {
                             } else {
                                 self.translation = .zero
                             }
-                            print("Translation on ended \(self.translation)")
                         }
                 )
                 .environmentObject(profileModel)
@@ -176,7 +175,9 @@ struct DeckCards: View {
         Button {
             if cardSwipeDone {
                 cardSwipeDone = false
-                FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {}, onSuccess: {
+                FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
+                    cardSwipeDone = true
+                }, onSuccess: {
                     rewindedUserCard in
                     let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
                     

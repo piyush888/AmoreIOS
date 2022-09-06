@@ -170,6 +170,8 @@ class CardProfileModel: ObservableObject {
             cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
+        allCardsWithPhotosDeck = NSMutableOrderedSet(array: allCardsWithPhotosDeck).array as! [CardProfileWithPhotos]
+        
         let _ = self.allCardsWithPhotosDeck.map { card in
             self.prefetchNextCardPhotos(card: card)
         }
@@ -186,6 +188,16 @@ class CardProfileModel: ObservableObject {
     
     func removeCard() {
       allCardsWithPhotosDeck.removeLast()
+    }
+    
+    func addCardToDeck(card: CardProfileWithPhotos) {
+        let tempDeck = NSMutableOrderedSet(array: allCardsWithPhotosDeck)
+        tempDeck.add(card)
+        allCardsWithPhotosDeck = tempDeck.array as! [CardProfileWithPhotos]
+        let _ = self.allCardsWithPhotosDeck.map { card in
+            self.prefetchNextCardPhotos(card: card)
+        }
+        cardsDictionary[card.id!] = card
     }
     
     func resetDeck() {

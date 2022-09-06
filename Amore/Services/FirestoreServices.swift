@@ -160,12 +160,15 @@ class FirestoreServices {
                     if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async {
                             do {
-                                rewindedUserCard = try JSONDecoder().decode(CardProfile.self, from: data)
+//                                rewindedUserCard = try JSONDecoder().decode(CardProfile.self, from: data)
+//                                onSuccess(rewindedUserCard)
+                                let rewindedDict = try JSONDecoder().decode(RewindedData.self, from: data)
+                                rewindedUserCard = rewindedDict.rewindedUserCard
                                 onSuccess(rewindedUserCard)
-                                print("Rewind Operation Successful")
+                                print("Rewind Operation Successful: \(rewindedDict.swipeStatusBetweenUsers)")
                             }
                             catch let jsonError as NSError {
-                              print("JSON decode failed Rewind Swipe: \(jsonError.localizedDescription)")
+                              print("JSON decode failed Rewind Swipe: \(jsonError)")
                                 onFailure()
                             }
                             self.requestInProcessing = false

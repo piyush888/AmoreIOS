@@ -42,7 +42,6 @@ struct AllCardsView: View {
             // Progress Block
         } completed: { completed, skipped in
             // On Complete Block
-            //            print("Prefetched image for ", card.id as Any)
         }
     }
     
@@ -162,7 +161,13 @@ struct AllCardsView: View {
                        message: Text("Failed to report user")
                    )
             }
-        
+            .onChange(of: cardProfileModel.allCardsWithPhotosDeck.count) { newValue in
+                print("Change in no. of cards, current count: \(cardProfileModel.allCardsWithPhotosDeck.count)")
+                print("Change: Card Deck:")
+                getCards().map { card in
+                    print("Change: Card in Deck: \(card.id)")
+                }
+            }
         }
     }
 }
