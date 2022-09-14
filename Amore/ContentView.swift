@@ -70,7 +70,7 @@ struct ContentView: View {
                                             cardProfileModel.fetchProfile(filterData:filterModel.filterData)
                                             profileModel.getLocationOnce()
                                             profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
-                                            receivedGivenEliteModel.getLikesReceivedData()
+                                            receivedGivenEliteModel.getSuperLikesReceivedData()
                                             receivedGivenEliteModel.getLikesGivenData()
                                             receivedGivenEliteModel.getSuperLikesGivenData()
                                             receivedGivenEliteModel.elitesData(profilesAlreadySwiped: [])

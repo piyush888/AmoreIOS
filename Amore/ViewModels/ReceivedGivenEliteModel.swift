@@ -61,9 +61,9 @@ class ReceivedGivenEliteModel: ObservableObject {
         }
     }
     
-    func getLikesReceivedData() {
-        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "likesReceived", "noOfLastRecords": 20]) {
-            print("Error while fetching /likesReceived")
+    func getSuperLikesReceivedData() {
+        self.fetchDataObj.fetchData(apiToBeUsed: "/commonfetchprofiles",requestBody:["fromCollection": "superLikesReceived", "noOfLastRecords": 20]) {
+            print("Error while fetching /superLikesReceived")
         } onSuccess: { tempData in
             _ = tempData.map{ card in
                 ImageService.prefetchNextCardPhotos(card: card)
