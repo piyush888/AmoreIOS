@@ -73,7 +73,8 @@ struct AllCardsView: View {
                         // Remove that user from Array of CardProfileWithPhotos O(n)
                         cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
                         // Remove that user from Dictionary: [ID: CardProfileWithPhotos] O(1)
-                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                        /// Commenting the removal of cards from cards dictionary. This fixed the cause of rewind button not working
+//                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
                         self.buttonSwipeStatus = .none })
                     .animation(.spring())
                     .frame(width: geometry.size.width)

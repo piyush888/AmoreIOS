@@ -61,25 +61,33 @@ struct HomeView: View {
                                         
                                 case .swipeView:
                                     if profileModel.editUserProfile.discoveryStatus.boundBool {
-                                        AllCardsView()
-                                            .environmentObject(photoModel)
-                                            .environmentObject(cardProfileModel)
-                                            .environmentObject(reportActivityModel)
-                                            .environmentObject(profileModel)
-                                            .environmentObject(filterModel)
-                                            .environmentObject(storeManager)
-                                            .environmentObject(chatModel)
-                                            .environmentObject(mainMessagesModel)
-                                            .onAppear {
-                                                if filtersChanged {
-                                                    /// If change in filters is detected when switching to this view
-                                                    /// Flush the existing deck, but keep the top 5 cards
-                                                    /// Fetch new profiles, with new filters
-                                                    cardProfileModel.resetDeck()
-                                                    cardProfileModel.fetchProfile(filterData: filterModel.filterData)
-                                                    filtersChanged = false
-                                                }
+                                        if cardProfileModel.allCardsWithPhotosDeck.count==0 {
+                                            VStack {
+                                                Spacer()
+                                                Text("Oh oh, we ran out of profiles, consider expanding your filters.")
+                                                Spacer()
                                             }
+                                        } else {
+                                            AllCardsView()
+                                                .environmentObject(photoModel)
+                                                .environmentObject(cardProfileModel)
+                                                .environmentObject(reportActivityModel)
+                                                .environmentObject(profileModel)
+                                                .environmentObject(filterModel)
+                                                .environmentObject(storeManager)
+                                                .environmentObject(chatModel)
+                                                .environmentObject(mainMessagesModel)
+                                                .onAppear {
+                                                    if filtersChanged {
+                                                        /// If change in filters is detected when switching to this view
+                                                        /// Flush the existing deck, but keep the top 5 cards
+                                                        /// Fetch new profiles, with new filters
+                                                        cardProfileModel.resetDeck()
+                                                        cardProfileModel.fetchProfile(filterData: filterModel.filterData)
+                                                        filtersChanged = false
+                                                    }
+                                                }
+                                        }
                                     }
                                     else {
                                         DiscoveryDisabled()
@@ -127,6 +135,8 @@ struct HomeView: View {
                     .environmentObject(photoModel)
                 }
         }
+    
+    
     }
 
 
