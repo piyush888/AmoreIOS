@@ -93,7 +93,7 @@ struct EditCardInfo: View {
                     
                         if photoModel.photoAction {
                             ProgressView()
-                                .scaleEffect(x: 3, y: 3, anchor: .center)
+                                .scaleEffect(x: 2, y: 2, anchor: .center)
                         }
                     }
                     .padding(.vertical,10)

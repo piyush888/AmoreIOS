@@ -57,6 +57,8 @@ struct HomeView: View {
                                     LikesTopPicksHome(selectedTab:$selectedTab)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
+                                        .environmentObject(profileModel)
+                                        .environmentObject(storeManager)
                                         
                                         
                                 case .swipeView:
@@ -64,7 +66,8 @@ struct HomeView: View {
                                         if cardProfileModel.allCardsWithPhotosDeck.count==0 {
                                             VStack {
                                                 Spacer()
-                                                Text("Oh oh, we ran out of profiles, consider expanding your filters.")
+//                                                Text("Fetching profiles, consider expanding filters for more profiles")
+                                                ProgressView()
                                                 Spacer()
                                             }
                                         } else {

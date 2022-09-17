@@ -148,6 +148,7 @@ struct AllCardsView: View {
                                 allcardsActiveSheet: $allcardsActiveSheet,
                                 buttonSwipeStatus: $buttonSwipeStatus)
                             .environmentObject(chatModel)
+                            .environmentObject(storeManager)
                         }
                     
                     case .buyMoreSuperLikesSheet:

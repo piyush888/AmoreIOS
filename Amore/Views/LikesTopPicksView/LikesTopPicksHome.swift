@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LikesTopPicksHome: View {
     
     @Namespace var animation
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
+    @EnvironmentObject var profileModel: ProfileViewModel
+    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var storeManager: StoreManager
     
     @Binding var selectedTab: TopPicksLikesView
     @State var selectedTabSubView: TopPicksLikesSubView = .likesGivenTab
@@ -21,7 +25,10 @@ struct LikesTopPicksHome: View {
     @State var show = false
     @State var showingAlert: Bool = false
     @State var alertMessage: String = ""
-        
+    @State var allcardsActiveSheet: AllCardsActiveSheet?
+    
+    @State var profileForChat: CardProfileWithPhotos = CardProfileWithPhotos()
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -50,7 +57,7 @@ struct LikesTopPicksHome: View {
                     
                     // Views to be displayed for each of the above tab selected
                     switch selectedTab {
-                        
+                         
                         case .likesReceived:
                             // Likes Received Vertical Scroll
                             TopPicksChild(selectedItem: $selectedItem,
@@ -121,11 +128,13 @@ struct LikesTopPicksHome: View {
                 .opacity(show ? 0 : 1)
                 
                 // Button functionalities for each of the above views
-                if show{
+                if show {
                     if let selectedItemVar = selectedItem {
                         ZStack {
                             // Open the pop up window which expand every Mini Card
-                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,selectedTab: selectedTab, selectedTabSubView:selectedTabSubView),
+                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,
+                                                                                        selectedTab: selectedTab,
+                                                                                        selectedTabSubView:selectedTabSubView),
                                    show: $show,
                                    animation: animation)
                             
@@ -135,7 +144,7 @@ struct LikesTopPicksHome: View {
                                 switch selectedTab {
                                     // Show all dislike, superlike and like button
                                     case .likesReceived:
-                                        HStack(alignment:.center) {
+                                        HStack(spacing:20) {
                                             
                                             DislikeButton(profileId:selectedItemVar.id!,
                                                           show: $show,
@@ -166,7 +175,7 @@ struct LikesTopPicksHome: View {
                                     
                                         switch selectedTabSubView {
                                             case .likesGivenTab:
-                                                HStack(alignment:.center) {
+                                                HStack(spacing:20) {
                                                     SuperLikeButton(profileId:selectedItemVar.id!,
                                                                     show: $show,
                                                                     showingAlert:$showingAlert,
@@ -185,13 +194,7 @@ struct LikesTopPicksHome: View {
                                     
                                     // Show all dislike, superlike and like button
                                     case .elitePicks:
-                                        HStack(alignment:.center) {
-                                            DislikeButton(profileId:selectedItemVar.id!,
-                                                          show: $show,
-                                                          showingAlert:$showingAlert,
-                                                          alertMessage:$alertMessage,
-                                                          selectedTab:selectedTab)
-                                                .environmentObject(receivedGivenEliteModel)
+                                    HStack(spacing:20) {
                                             
                                             SuperLikeButton(profileId:selectedItemVar.id!,
                                                             show: $show,
@@ -200,12 +203,19 @@ struct LikesTopPicksHome: View {
                                                             selectedTab:selectedTab)
                                                 .environmentObject(receivedGivenEliteModel)
                                             
-                                            LikeButton(profileId: selectedItemVar.id!,
-                                                       show: $show,
-                                                       showingAlert:$showingAlert,
-                                                       alertMessage:$alertMessage,
-                                                       selectedTab:selectedTab)
-                                                .environmentObject(receivedGivenEliteModel)
+                                            
+                                            Button {
+                                                self.profileForChat = self.receivedGivenEliteModel.elitesPhotos_Dict[selectedItemVar.id ?? ""] ?? CardProfileWithPhotos()
+                                                self.allcardsActiveSheet = .directMessageSheet
+                                            } label: {
+                                                Image(systemName: "message.circle.fill")
+                                                    .resizable()
+                                                    .frame(width:35, height:35)
+                                                    .foregroundColor(Color(hex:0xFA86C4))
+                                                    .shadow(color: .blue,
+                                                            radius: 0.1, x: 1, y: 1)
+                                            }
+                                            
                                         }
                                         .padding(.bottom, 30)
                                 }
@@ -221,8 +231,38 @@ struct LikesTopPicksHome: View {
                        message: Text(self.alertMessage)
                    )
             }
-            
+            .sheet(item: $allcardsActiveSheet) { item in
+                
+                switch item {
+                    case .buyMoreSuperLikesSheet:
+                        Text("Empty View buyMoreSuperLikesSheet")
+                    
+                    case .reportProfileSheet:
+                        Text("Empty View reportProfileSheet")
+                    
+                    case .boostProfileSheet:
+                        Text("Empty View boostProfileSheet")
+                    
+                    case .directMessageSheet:
+                        DirectMessageCardView(
+                            fromUser: ChatUser(id: Auth.auth().currentUser?.uid,
+                                               firstName: profileModel.editUserProfile.firstName,
+                                               lastName: profileModel.editUserProfile.lastName,
+                                               image1: profileModel.editUserProfile.image1),
+                            toUser: ChatUser(id: profileForChat.id,
+                                             firstName: profileForChat.firstName,
+                                             lastName: profileForChat.lastName,
+                                             image1: profileForChat.image1),
+                            allcardsActiveSheet: $allcardsActiveSheet,
+                            buttonSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none))
+                            .environmentObject(chatModel)
+                            .environmentObject(storeManager)
+                }
+            }
         }
     }
+    
+    
 }
+
 

@@ -159,7 +159,7 @@ struct ConversationView: View {
             return "Enter Message"
         }
         else {
-            return "You made your move, now it's a waiting game"
+            return "You made your move, cheers !!"
         }
     }
     
