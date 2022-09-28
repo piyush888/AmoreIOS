@@ -21,7 +21,7 @@ struct UserSnapDetails: View {
                                 photo: $photoModel.photo1,
                                 width: geometry.size.height/4.0,
                                 height: geometry.size.height/4.0)
-//                            .scaledToFill()
+                            .frame(height: geometry.size.height/4.0)
                             .clipShape(Circle())
                             .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
             

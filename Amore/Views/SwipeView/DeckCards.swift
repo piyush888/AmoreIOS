@@ -178,16 +178,28 @@ struct DeckCards: View {
                 FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
                     cardSwipeDone = true
                 }, onSuccess: {
-                    rewindedUserCard in
-                    let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
+                    rewindedDict in
                     
+                    // Append the rewinded card back to the dictionary
+                    let rewindedUserCard = rewindedDict.rewindedUserCard
+                    
+                    let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
                     // Append rewinded user in Array
                     cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
-                    
                     // Append rewinded user in Dict
                     if let rewindedUserId = cardProfileWithPhotos.id {
                         cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
                         receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
+                    }
+                    
+                    // Find the kind of rewind, like, dislike or superlike
+                    // if superlike increment the superlike
+                    let swipeStatusBetweenUsers = rewindedDict.swipeStatusBetweenUsers
+                    if swipeStatusBetweenUsers == "Superlikes" {
+                        if let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount {
+                            self.storeManager.purchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount+1
+                            _ = self.storeManager.storePurchaseNoParams()
+                        }
                     }
                     cardSwipeDone = true
                 })

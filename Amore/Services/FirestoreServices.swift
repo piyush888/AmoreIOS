@@ -131,7 +131,7 @@ class FirestoreServices {
         }
     }
     
-    public static func undoLikeDislikeFirestore(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: CardProfile) -> Void) {
+    public static func undoLikeDislikeFirestore(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: RewindedData) -> Void) {
         var rewindedUserCard = CardProfile(CardProfileWithPhotos())
         requestInProcessing = true
         guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
@@ -160,12 +160,9 @@ class FirestoreServices {
                     if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async {
                             do {
-//                                rewindedUserCard = try JSONDecoder().decode(CardProfile.self, from: data)
-//                                onSuccess(rewindedUserCard)
                                 let rewindedDict = try JSONDecoder().decode(RewindedData.self, from: data)
-                                rewindedUserCard = rewindedDict.rewindedUserCard
-                                onSuccess(rewindedUserCard)
-                                print("Rewind Operation Successful: \(rewindedDict.swipeStatusBetweenUsers)")
+                                onSuccess(rewindedDict)
+                                print("Rewind Operation Successful: \(rewindedDict)")
                             }
                             catch let jsonError as NSError {
                               print("JSON decode failed Rewind Swipe: \(jsonError)")
