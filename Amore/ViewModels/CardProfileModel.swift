@@ -26,7 +26,7 @@ class CardProfileModel: ObservableObject {
     @Published var adminAuthModel = AdminAuthenticationViewModel()
     @Published var filterRadius: CGFloat? = 2
     
-    var apiURL = "http://127.0.0.1:5040"
+//    var apiURL = "http://127.0.0.1:5040"
     
     func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
         DispatchQueue.global(qos: .background).async {
@@ -48,7 +48,7 @@ class CardProfileModel: ObservableObject {
         profilesBeingFetched = true
         print("Calling fetchProfile")
         
-        guard let url = URL(string: self.apiURL + "/fetchGeoRecommendations") else { return }
+        guard let url = URL(string: apiURL + "/fetchGeoRecommendations") else { return }
         
         let genderPreference = filterData.genderPreference ?? ""
         let minAgePreference = String(filterData.minAgePreference ?? 21)

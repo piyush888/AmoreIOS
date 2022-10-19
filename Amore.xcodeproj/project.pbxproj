@@ -78,7 +78,7 @@
 		E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D555D27540D5700852D70 /* ServerErrorView.swift */; };
 		E22D5562275532B800852D70 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D5561275532B800852D70 /* ColorExtension.swift */; };
 		E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D55632755828400852D70 /* WorkAndSchool.swift */; };
-		E2347122271BE10E0006F336 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* Credentials.swift */; };
+		E2347122271BE10E0006F336 /* ConnectivityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347121271BE10E0006F336 /* ConnectivityDetails.swift */; };
 		E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234712F271C972F0006F336 /* LoadingScreen.swift */; };
 		E2347132271DC3A00006F336 /* TabButtonMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347131271DC3A00006F336 /* TabButtonMenu.swift */; };
 		E2347134271DC4C30006F336 /* CardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2347133271DC4C30006F336 /* CardDetail.swift */; };
@@ -266,7 +266,7 @@
 		E22D555D27540D5700852D70 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E22D5561275532B800852D70 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E22D55632755828400852D70 /* WorkAndSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAndSchool.swift; sourceTree = "<group>"; };
-		E2347121271BE10E0006F336 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		E2347121271BE10E0006F336 /* ConnectivityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDetails.swift; sourceTree = "<group>"; };
 		E234712F271C972F0006F336 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		E2347131271DC3A00006F336 /* TabButtonMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonMenu.swift; sourceTree = "<group>"; };
 		E2347133271DC4C30006F336 /* CardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetail.swift; sourceTree = "<group>"; };
@@ -731,7 +731,7 @@
 				1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */,
 				E2F8AA5626F9428100CC7A72 /* Preview Content */,
 				E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */,
-				E2347121271BE10E0006F336 /* Credentials.swift */,
+				E2347121271BE10E0006F336 /* ConnectivityDetails.swift */,
 			);
 			path = Amore;
 			sourceTree = "<group>";
@@ -1053,7 +1053,7 @@
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
 				E2D43187288F4980005AFBE0 /* SelectionForm.swift in Sources */,
 				E273C31A2740740A00AA3359 /* LikeDislikeButtons.swift in Sources */,
-				E2347122271BE10E0006F336 /* Credentials.swift in Sources */,
+				E2347122271BE10E0006F336 /* ConnectivityDetails.swift in Sources */,
 				E2925E822883460A006FDAF6 /* SelectSingleItem.swift in Sources */,
 				1B9EDFE828B72A9F0082E95C /* DeleteDisableView.swift in Sources */,
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,

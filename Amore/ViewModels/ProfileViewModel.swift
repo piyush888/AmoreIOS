@@ -48,7 +48,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // time out after continious error from backend
     @Published var timeOutRetriesCount: Int = 0
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    var apiURL = "http://127.0.0.1:5040"
+//    var apiURL = "http://127.0.0.1:5040"
     
     let viewContext = PersistenceController.shared.container.viewContext
     
@@ -125,7 +125,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func getGeohash(apiToBeUsed:String, precision: Int, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void)  -> Void {
         var geohash = Geohash()
         requestInProcessing = true
-        guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+        guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                 return
         }
         let body: [String: Any] = ["latitude": lastSeenLocation?.coordinate.latitude as Any, "longitude": lastSeenLocation?.coordinate.longitude as Any, "precision": precision]

@@ -14,7 +14,7 @@ class FirestoreServices {
     public static var requestInProcessing: Bool = false
     // time out after continious error from backend
     public static var adminAuthModel = AdminAuthenticationViewModel()
-    public static var apiURL = "http://127.0.0.1:5040"
+//    public static var apiURL = "http://127.0.0.1:5040"
     
     public static func storeLikesDislikes(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, swipedUserId: String?, swipeInfo: AllCardsView.LikeDislike) {
         var subCollection: String? {
@@ -29,7 +29,7 @@ class FirestoreServices {
         if let swipedUserId = swipedUserId {
             if let subCollection = subCollection {
                 requestInProcessing = true
-                guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                         return
                     }
                 let body: [String: String] = ["currentUserID": Auth.auth().currentUser!.uid, "swipeInfo": subCollection, "swipedUserID": swipedUserId]
@@ -87,7 +87,7 @@ class FirestoreServices {
         if let swipedUserId = swipedUserId {
             if let subCollection = subCollection {
                 requestInProcessing = true
-                guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+                guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                         return
                     }
                 let body: [String: String] = ["currentUserID": Auth.auth().currentUser!.uid, "swipeInfo": subCollection, "swipedUserID": swipedUserId]
@@ -134,7 +134,7 @@ class FirestoreServices {
     public static func undoLikeDislikeFirestore(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: RewindedData) -> Void) {
         var rewindedUserCard = CardProfile(CardProfileWithPhotos())
         requestInProcessing = true
-        guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+        guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                 return
             }
         let body: [String: String] = ["currentUserID": Auth.auth().currentUser!.uid]
@@ -187,7 +187,7 @@ class FirestoreServices {
     public static func unmatchUser(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, otherUserId: String?) {
         if let otherUserId = otherUserId {
             requestInProcessing = true
-            guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+            guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                     return
                 }
             let body: [String: String] = ["current_user_id": Auth.auth().currentUser!.uid, "other_user_id": otherUserId]
@@ -245,7 +245,7 @@ class FirestoreServices {
     public static func directMessageMatchUsers(apiToBeUsed:String, onFailure: @escaping () -> Void, onSuccess: @escaping () -> Void, otherUserId: String?) {
         if let otherUserId = otherUserId {
             requestInProcessing = true
-            guard let url = URL(string: self.apiURL + apiToBeUsed) else { onFailure()
+            guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
                     return
                 }
             let body: [String: String] = ["currentUserId": Auth.auth().currentUser!.uid, "otherUserId": otherUserId]

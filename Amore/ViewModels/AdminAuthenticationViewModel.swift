@@ -24,7 +24,7 @@ class AdminAuthenticationViewModel: ObservableObject {
     // Cards Data
     @Published var allCards = [CardProfile]()
     
-    var apiURL = "http://127.0.0.1:5040"
+//    var apiURL = "http://127.0.0.1:5040"
     
     // Authenticate the user in the backend
     /// Makes use of Client ID Token, This token will be sent to backend to authenticate the client to backend
@@ -45,7 +45,7 @@ class AdminAuthenticationViewModel: ObservableObject {
             }
             
             // sessionLogin is the api where the user will be authenticated
-            guard let url = URL(string: self.apiURL + "/sessionLogin") else { return }
+            guard let url = URL(string: apiURL + "/sessionLogin") else { return }
             // add the pay load to the request
             let body: [String: String] = ["idToken": idToken!]
             
