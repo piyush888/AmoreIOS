@@ -11,7 +11,6 @@ class FetchDataModel {
     
     @Published var requestInProcessing: Bool = false
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-//    var apiURL = "http://127.0.0.1:5040"
 
     /**
      Common API Call function to fetch likes, superlikes, elite picks.
@@ -28,7 +27,7 @@ class FetchDataModel {
     func fetchData(apiToBeUsed:String, requestBody:[String: Any], onFailure: @escaping () -> Void, onSuccess: @escaping (_ tempData: [CardProfile]) -> Void)  -> Void {
         var tempData = [CardProfile]()
         requestInProcessing = true
-        guard let url = URL(string: apiURL + apiToBeUsed) else { onFailure()
+        guard let url = URL(string: ProjectConfig.apiBaseURL.absoluteString + apiToBeUsed) else { onFailure()
                 return
         }
         let finalBody = try! JSONSerialization.data(withJSONObject: requestBody)
