@@ -16,13 +16,20 @@ import CoreLocation
 class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @AppStorage("log_Status") var log_Status = false
+    
     var userProfile = Profile()
     @Published var editUserProfile = Profile()
-    @Published var storeManagerObj = StoreManager() // Object
+    
+    // Obj to create a default InAppPurchase document for the user
+    @Published var storeManagerObj = StoreManager()
+    
+    // Obj to create a default FilterAndLocation document for the user
+    @Published var filterModeObj = FilterModel()
     
     let db = Firestore.firestore()
     var profileCores = [ProfileCore]()
     
+    // Phone number authentication
     @Published var phoneNumber = String()
     @Published var countryCode = String()
     
@@ -293,6 +300,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 subscriptionMessageCount: 0,
                                                 subscriptionTypeId: "Amore.ProductId.12M.Free.v1",
                                                 subscriptionUpdateDateTime: Date()))
+                
+                // Create default filters for the users
+                _ = filterModeObj.createFilter()
                 
                 return true
             }

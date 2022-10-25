@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D3227274E36E50096B40B /* CardProfileModel.swift */; };
-		1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
 		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
@@ -169,8 +168,6 @@
 		E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED201E28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift */; };
 		E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */; };
 		E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202228BAA38600BFD32C /* BGImagesModel.swift */; };
-		E2F6C0382905883B00D6823D /* GoogleService-Info Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F6C0362905883A00D6823D /* GoogleService-Info Staging.plist */; };
-		E2F6C0392905883B00D6823D /* GoogleService-Info Development.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F6C0372905883A00D6823D /* GoogleService-Info Development.plist */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -867,6 +864,7 @@
 				FE00DC5B4C29B71A28A20053 /* [CP] Check Pods Manifest.lock */,
 				E2F8AA4926F9427F00CC7A72 /* Sources */,
 				E2F8AA4A26F9427F00CC7A72 /* Frameworks */,
+				E2F6C03B2905A4F500D6823D /* Google plist */,
 				E2F8AA4B26F9427F00CC7A72 /* Resources */,
 				E237CEE626FD531F004F20AB /* Embed Frameworks */,
 				A9479CF1E6D7593E8F3E0764 /* [CP] Embed Pods Frameworks */,
@@ -932,7 +930,6 @@
 				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
 				E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
-				E2F6C0382905883B00D6823D /* GoogleService-Info Staging.plist in Resources */,
 				E283677C26FAA7B700EEA049 /* Onboarding.json in Resources */,
 				E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */,
 				E2869322287B2D900079701F /* DislikeLottie.json in Resources */,
@@ -941,12 +938,10 @@
 				E2F8AA5826F9428100CC7A72 /* Preview Assets.xcassets in Resources */,
 				E2D00E0C286647460037DC07 /* button.riv in Resources */,
 				E283677526F9534200EEA049 /* Sk-Modernist-Bold.otf in Resources */,
-				E2F6C0392905883B00D6823D /* GoogleService-Info Development.plist in Resources */,
 				E2D43189288F60AF005AFBE0 /* EditCardFormData.json in Resources */,
 				E283677626F9534200EEA049 /* Sk-Modernist-Mono.otf in Resources */,
 				E275356328662AD800F04BD3 /* shapes.riv in Resources */,
 				E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */,
-				1B374DDB2701D5F300DFE639 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +964,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Amore/Pods-Amore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E2F6C03B2905A4F500D6823D /* Google plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Google plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Information: Google plist file now running\"\nPATH_TO_GOOGLE_PLISTS=\"${PROJECT_DIR}/Amore/InfoPlist\"\n\ncase \"${CONFIGURATION}\" in\n\n    \"Debug\"  )\n        echo \"Information: Copying the developer google service info file\"\n        cp -r \"$PATH_TO_GOOGLE_PLISTS/GoogleService-Info Development.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n\n    \"Debug Staging\" | \"Release Staging\" )\n        echo \"Information: Copying the Staging google service info file\"\n        cp -r \"$PATH_TO_GOOGLE_PLISTS/GoogleService-Info Staging.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n\n    *)\n        ;;\nesac\n";
 		};
 		FE00DC5B4C29B71A28A20053 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1227,6 +1241,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
+				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.781210790800-4jq1ubjfnlcu3bkeqv6bgadec18fie53";
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1363,7 +1378,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */;
 			buildSettings = {
-				APP_NAME = "Amore Dev";
+				APP_NAME = "Amore Development";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Amore/AmoreDebug.entitlements;
@@ -1371,6 +1386,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
+				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.1074161216434-mhkcg98rvrft1bih5mpce6kufl7c7kss";
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1399,6 +1415,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
+				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.781210790800-4jq1ubjfnlcu3bkeqv6bgadec18fie53";
 				INFOPLIST_FILE = Amore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

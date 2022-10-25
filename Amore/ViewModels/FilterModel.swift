@@ -16,22 +16,22 @@ class FilterModel: ObservableObject {
     @Published var filterDataFetched = false
 
     func createFilter() -> Bool {
+        
         // Firestore Write
-        let collectionRef = db.collection("FilterAndLocation")
-        if let id = oldFilterData.id {
-            do {
-                let newDocReference = try collectionRef.document(id).setData(from: oldFilterData)
-                print("filterData stored in firestore with new document reference: \(newDocReference)")
-                self.filterData = self.oldFilterData
-                return true
+        if let userId = Auth.auth().currentUser?.uid {
+                do {
+                    _ = try db.collection("FilterAndLocation").document(userId).setData(from:oldFilterData)
+                    self.filterData = self.oldFilterData
+                    print("Created a FilterAndLocation record for a user")
+                    return true
+                }
+                catch let error {
+                    print("Error writing document to Firestore: \(error)")
+                }
             }
-            catch let error {
-                print("Error writing document to Firestore: \(error)")
+            else{
+                print("No user uid")
             }
-        }
-        else{
-            print("No user uid")
-        }
         return false
     }
     
