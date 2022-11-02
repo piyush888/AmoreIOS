@@ -45,13 +45,13 @@ struct MyAmoreCard: View {
                         HStack(spacing:1) {
                             Image(systemName: "star.fill")
                                 .foregroundColor(Color("gold-star"))
-                            Text("3 Super likes everyday")
+                            Text("5 Super likes everyday")
                         }
                         
                         HStack(spacing:1) {
                             Image(systemName: "bolt.fill")
                                 .foregroundColor(Color.blue)
-                            Text("1 Boost a day")
+                            Text("1 Boost a month")
                         }
                         
                         HStack(spacing:1) {
@@ -82,7 +82,7 @@ struct MyAmoreCard: View {
                 //If the user has Free Subscription show the following
                 else if subscriptionTypeId.contains("Free") {
                     Button {
-                        self.storeManager.tempPurchaseHold.subscriptionTypeId = "Amore.ProductId.3M.Gold.v2"
+                        self.storeManager.tempPurchaseHold.subscriptionTypeId = "Amore.ProductId.3M.Gold.v3"
                         self.storeManager.purchaseProduct(product: self.storeManager.amoreGoldPricing["Amore Gold 3 Month"] ?? SKProduct())
                     } label: {
                         buyAmoreGoldButton
@@ -180,8 +180,44 @@ struct MyAmoreCard: View {
         }
         .padding(.top,10)
     }
+}
+
+struct NoThanksButton: View {
+    
+    @Binding var showModal: Bool
+    @State var buttonColor: Color = Color.clear
+    @State var fontColor: Color = Color.gray
     
     
+    var body: some View {
+        Button {
+            showModal.toggle()
+        } label : {
+            Text("No thanks")
+        }
+        .buttonStyle(GrowingButton(buttonColor:self.buttonColor, fontColor: self.fontColor))
+        .opacity(0.8)
+    }
+}
+
+struct GrowingButton: ButtonStyle {
+    
+    @State var buttonColor: Color
+    @State var fontColor: Color
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(self.buttonColor)
+            .foregroundColor(self.fontColor)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+
+
+
 //    // Not being used anywhere 08.18.22
 //    var platinumSubscription: some View {
 //        Group {
@@ -232,39 +268,3 @@ struct MyAmoreCard: View {
 //            }
 //        }
 //    }
-    
-}
-
-struct NoThanksButton: View {
-    
-    @Binding var showModal: Bool
-    @State var buttonColor: Color = Color.clear
-    @State var fontColor: Color = Color.gray
-    
-    
-    var body: some View {
-        Button {
-            showModal.toggle()
-        } label : {
-            Text("No thanks")
-        }
-        .buttonStyle(GrowingButton(buttonColor:self.buttonColor, fontColor: self.fontColor))
-        .opacity(0.8)
-    }
-}
-
-struct GrowingButton: ButtonStyle {
-    
-    @State var buttonColor: Color
-    @State var fontColor: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(self.buttonColor)
-            .foregroundColor(self.fontColor)
-            .clipShape(Capsule())
-            .scaleEffect(configuration.isPressed ? 1.2 : 1)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
-    }
-}

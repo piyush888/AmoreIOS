@@ -134,7 +134,7 @@ struct PaymentComplete: View {
 struct PaymentComplete_Previews: PreviewProvider {
     
     static var previews: some View {
-        PaymentComplete(subscriptionTypeId:"Amore.ProductId.12M.Platinum.v1")
+        PaymentComplete(subscriptionTypeId:"Amore.ProductId.1M.Gold.v3")
             .environmentObject(StoreManager())
     }
 }

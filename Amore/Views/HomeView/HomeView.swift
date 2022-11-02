@@ -119,7 +119,7 @@ struct HomeView: View {
                                         .environmentObject(adminAuthenticationModel)
                                         .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
                                                onDismiss: didDimiss){
-                                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")
+                                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
                                                 .environmentObject(storeManager)
                                         }
                                 }

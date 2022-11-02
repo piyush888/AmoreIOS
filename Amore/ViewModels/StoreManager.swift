@@ -14,21 +14,18 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     
     var productIDs = [
         //Use your product IDs instead
-        "Amore.ProductId.5.SuperLikes.v1",
-        "Amore.ProductId.15.SuperLikes.v1",
-        "Amore.ProductId.30.SuperLikes.v1",
-        "Amore.ProductId.2.Boosts.v1",
-        "Amore.ProductId.5.Boosts.v1",
-        "Amore.ProductId.10.Boosts.v1",
-        "Amore.ProductId.5.Messages.v1",
-        "Amore.ProductId.10.Messages.v1",
-        "Amore.ProductId.15.Messages.v1",
-        "Amore.ProductId.1M.Gold.v2",
-        "Amore.ProductId.3M.Gold.v2",
-        "Amore.ProductId.6M.Gold.v2",
-        "Amore.ProductId.1M.Platinum.v2",
-        "Amore.ProductId.3M.Platinum.v2",
-        "Amore.ProductId.6M.Platinum.v2"]
+        "Amore.ProductId.3.SuperLikes.v3",
+        "Amore.ProductId.5.SuperLikes.v3",
+        "Amore.ProductId.10.SuperLikes.v3",
+        "Amore.ProductId.1.Boosts.v3",
+        "Amore.ProductId.2.Boosts.v3",
+        "Amore.ProductId.3.Boosts.v3",
+        "Amore.ProductId.5.Messages.v3",
+        "Amore.ProductId.10.Messages.v3",
+        "Amore.ProductId.15.Messages.v3",
+        "Amore.ProductId.1M.Gold.v3",
+        "Amore.ProductId.3M.Gold.v3",
+        "Amore.ProductId.6M.Gold.v3"]
     
     let db = Firestore.firestore()
     
@@ -269,21 +266,21 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                     // Update the InAppPurchase for the user
                     self.updateDailySubscriptions(dailySuperLike:5,
                                                   dailyBoostCount: 1,
-                                                  dailyMessageCount: 3)
+                                                  dailyMessageCount: 2)
                 } else {
                     print("User has free subscription and doesn't IAP doesn't needs to be updated")
-                    self.updateDailySubscriptions(dailySuperLike:2,
+                    self.updateDailySubscriptions(dailySuperLike:1,
                                                   dailyBoostCount: 0,
-                                                  dailyMessageCount: 1)
+                                                  dailyMessageCount: 0)
                 }
             }
         } else {
             // The User IAP storage doesn't have a date. Error
             print("Why user doesn't have a date stored in firestore ?")
             // Adding date and pushing to user IAP Purchases in firestore
-            self.updateDailySubscriptions(dailySuperLike:2,
+            self.updateDailySubscriptions(dailySuperLike:1,
                                           dailyBoostCount: 0,
-                                          dailyMessageCount: 1)
+                                          dailyMessageCount: 0)
         }
         
     }

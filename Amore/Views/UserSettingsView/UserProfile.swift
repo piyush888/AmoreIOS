@@ -164,12 +164,12 @@ struct UserProfile: View {
                                                           selectedDictIndex: "5 Super Likes",
                                                           currency: pricingData["5 Super Likes"]?.localizedPrice ?? "USD",
                                                           totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
-                                                          firstTabKey: "5 Super Likes",
-                                                          firstTabCount: 5,
-                                                          secondTabKey: "15 Super Likes",
-                                                          secondTabCount: 15,
-                                                          thirdTabKey: "30 Super Likes",
-                                                          thirdTabCount: 30,
+                                                          firstTabKey: "3 Super Likes",
+                                                          firstTabCount: 3,
+                                                          secondTabKey: "5 Super Likes",
+                                                          secondTabCount: 5,
+                                                          thirdTabKey: "10 Super Likes",
+                                                          thirdTabCount: 10,
                                                           selectedItemCount: 5,
                                                           popUpCardSelection:$popUpCardSelection
                                                         )
@@ -192,12 +192,12 @@ struct UserProfile: View {
                                                           selectedDictIndex: "2 Boosts",
                                                           currency: pricingData["2 Boosts"]?.localizedPrice ?? "USD",
                                                           totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
-                                                          firstTabKey: "2 Boosts",
-                                                          firstTabCount: 2,
-                                                          secondTabKey: "5 Boosts",
-                                                          secondTabCount: 5,
-                                                          thirdTabKey: "10 Boosts",
-                                                          thirdTabCount: 10,
+                                                          firstTabKey: "1 Boosts",
+                                                          firstTabCount: 1,
+                                                          secondTabKey: "2 Boosts",
+                                                          secondTabCount: 2,
+                                                          thirdTabKey: "3 Boosts",
+                                                          thirdTabCount: 3,
                                                           selectedItemCount: 2,
                                                           popUpCardSelection:$popUpCardSelection
                                                         )
@@ -215,17 +215,17 @@ struct UserProfile: View {
                                                           showModal: $showModal,
                                                           geometry: geometry,
                                                           priceTabs: pricingData,
-                                                          selectedPriceTabId: pricingData["5 Messages"]?.productIdentifier ?? "NoId",
-                                                          selectedDictIndex: "5 Messages",
-                                                          currency: pricingData["5 Messages"]?.localizedPrice ?? "USD",
-                                                          totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
+                                                          selectedPriceTabId: pricingData["10 Messages"]?.productIdentifier ?? "NoId",
+                                                          selectedDictIndex: "10 Messages",
+                                                          currency: pricingData["10 Messages"]?.localizedPrice ?? "USD",
+                                                          totalCost: Float(truncating: pricingData["10 Messages"]?.price ?? 0.0),
                                                           firstTabKey: "5 Messages",
                                                           firstTabCount: 5,
                                                           secondTabKey: "10 Messages",
                                                           secondTabCount: 10,
                                                           thirdTabKey: "15 Messages",
                                                           thirdTabCount: 15,
-                                                          selectedItemCount: 5,
+                                                          selectedItemCount: 10,
                                                           popUpCardSelection:$popUpCardSelection
                                                         )
                                                         .environmentObject(storeManager)
@@ -234,7 +234,7 @@ struct UserProfile: View {
                                 case .myAmorecards:
                                     MyAmoreCard(showModal: $showModal,
                                                 popUpCardSelection:$popUpCardSelection,
-                                                subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v1")
+                                                subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
                                     .environmentObject(storeManager)
                                     
                                 case .amorePlatinum:
@@ -278,22 +278,22 @@ struct UserProfile: View {
                                                       subScriptText1:"Top Picks",
                                                       subScriptText2:"",
                                                       subScriptText3:"5 Super likes everyday",
-                                                      subScriptText4:"1 Boost a day",
-                                                      subScriptText5:"3 messages everyday",
+                                                      subScriptText4:"1 Boost a month",
+                                                      subScriptText5:"2 messages everyday",
                                                       showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
-                                                      selectedPriceTabId: pricingData["Amore Gold 1 Month"]?.productIdentifier ?? "NoId",
-                                                      selectedDictIndex: "Amore Gold 1 Month",
-                                                      currency: pricingData["Amore Gold 1 Month"]?.localizedPrice ?? "USD",
-                                                      totalCost: Float(truncating: pricingData["Amore Gold 1 Month"]?.price ?? 0.0),
+                                                      selectedPriceTabId: pricingData["Amore Gold 3 Month"]?.productIdentifier ?? "NoId",
+                                                      selectedDictIndex: "Amore Gold 3 Month",
+                                                      currency: pricingData["Amore Gold 3 Month"]?.localizedPrice ?? "USD",
+                                                      totalCost: Float(truncating: pricingData["Amore Gold 3 Month"]?.price ?? 0.0),
                                                       firstTabKey: "Amore Gold 1 Month",
                                                       firstTabCount: 1,
                                                       secondTabKey: "Amore Gold 3 Month",
                                                       secondTabCount: 3,
                                                       thirdTabKey: "Amore Gold 6 Month",
                                                       thirdTabCount: 6,
-                                                      selectedItemCount: 1,
+                                                      selectedItemCount: 3,
                                                       popUpCardSelection:$popUpCardSelection
                                                     )
                                                    .environmentObject(storeManager)
@@ -465,17 +465,15 @@ struct BuySubscriptionOrItemsCard : View {
                                          cardName: "",
                                          totalCost: Binding.constant(Float(0.0)),
                                          buttonColor: [Color.blue])
-//                                buttonColor: [cardColorFormat[0],cardColorFormat[1]]
                                 } else {
                                     Button(action: {
                                         self.storeManager.tempPurchaseHold.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
                                         self.storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                     }) {
                                         PayButton(buttonText: "\(currency)",
-                                           cardName: storeManager.purchaseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v1" ? "Buy for" : "Update plan",
+                                           cardName: storeManager.purchaseDataDetails.subscriptionTypeId == "Amore.ProductId.12M.Free.v3" ? "Buy for" : "Update plan",
                                            totalCost: $totalCost,
                                            buttonColor: [Color.blue])
-//                                buttonColor: [cardColorFormat[0],cardColorFormat[1]]
                                     }
                                 }
                                     

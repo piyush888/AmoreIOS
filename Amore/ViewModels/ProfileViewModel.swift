@@ -297,7 +297,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 subscriptonBoostCount: 0,
                                                 subscriptionSuperLikeCount: 0,
                                                 subscriptionMessageCount: 0,
-                                                subscriptionTypeId: "Amore.ProductId.12M.Free.v1",
+                                                subscriptionTypeId: "Amore.ProductId.12M.Free.v3",
                                                 subscriptionUpdateDateTime: Date()))
                 
                 // Create default filters for the users
