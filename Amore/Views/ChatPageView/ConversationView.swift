@@ -29,6 +29,10 @@ struct ConversationView: View {
     @State var presentProfileCard: Bool = false
     @Binding var navigateToChatView: Bool
     
+    // Show the gif and sticker selections
+    @State var isShowingGifPicker = false
+    
+    
     var body: some View {
         GeometryReader { geo in
             VStack{
@@ -41,7 +45,9 @@ struct ConversationView: View {
                     .padding([.horizontal, .bottom])
                     .ignoresSafeArea()
             }
-            
+            .fullScreenCover(isPresented: $isShowingGifPicker, content:{
+                GiphyView(isShowingGifPicker: $isShowingGifPicker)
+            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -156,7 +162,7 @@ struct ConversationView: View {
     
     private var emptyTextBoxPlaceHolder: String {
         if allowDirectMessageSendCondition {
-            return "Enter Message"
+            return ""
         }
         else {
             return "You made your move, cheers !!"
@@ -212,6 +218,13 @@ struct ConversationView: View {
     
     private var MessageSendField: some View {
         HStack(spacing: 16) {
+            
+            Button {
+                self.isShowingGifPicker.toggle()
+            } label:{
+                Text("Gif")
+            }
+            
             /**
              New Text box Implementation with Placeholder and auto expanding Text Box
              */

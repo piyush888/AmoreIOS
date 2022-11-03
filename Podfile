@@ -16,4 +16,5 @@ target 'Amore' do
   pod 'SwiftUIFontIcon'
   pod 'FirebaseMessaging'
   pod 'RiveRuntime'
+  pod 'Giphy'
 end
