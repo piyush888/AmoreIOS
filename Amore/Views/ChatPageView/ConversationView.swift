@@ -31,7 +31,9 @@ struct ConversationView: View {
     
     // Show the gif and sticker selections
     @State var isShowingGifPicker = false
-    
+    @State var giphyURL: String = ""
+    @State var giphyId: String = ""
+    @State var gifData: [String] = []
     
     var body: some View {
         GeometryReader { geo in
@@ -41,13 +43,30 @@ struct ConversationView: View {
                     .onTapGesture {
                         self.hideKeyboard()
                     }
+                
+                
+                ScrollView(.vertical, showsIndicators:false, content:{
+                    ForEach(gifData,id:\.self){ url in
+                        Spacer(minLength: 0)
+                        AnimatedImage(url:URL(string:url)!)
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(GipyCustomShape())
+                    }
+                })
+                
+            
                 MessageSendField
                     .padding([.horizontal, .bottom])
                     .ignoresSafeArea()
             }
-            .fullScreenCover(isPresented: $isShowingGifPicker, content:{
-                GiphyView(isShowingGifPicker: $isShowingGifPicker)
-            })
+            .fullScreenCover(isPresented: $isShowingGifPicker,
+                             onDismiss: gipgyViewDismissed,
+                             content:{
+                                GiphyVCRepresentable(giphyURL:$giphyURL,
+                                                     giphyId:$giphyId,
+                                                     isShowingGifPicker:$isShowingGifPicker)
+                                .padding(.bottom, 20.0)
+                            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -77,9 +96,9 @@ struct ConversationView: View {
                             .font(.system(size: 60))
                     }
                 }
-                label: {
-                    Label("Options", systemImage: "ellipsis.circle")
-                }
+            label: {
+                Label("Options", systemImage: "ellipsis.circle")
+            }
             }
         }
         .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
@@ -91,11 +110,11 @@ struct ConversationView: View {
         })
         .onChange(of: selectedChatIndex, perform: { newValue in
             /*
-            ErrorSolved: sending new message rearranged positions of chats in "recentChats" array
-            causing change in selectedChatIndex, further causing exit from ConversationView
+             ErrorSolved: sending new message rearranged positions of chats in "recentChats" array
+             causing change in selectedChatIndex, further causing exit from ConversationView
              
-            SolvedBy: Condition to check if new value of selectedChatIndex is negative(removed chat) or not
-            */
+             SolvedBy: Condition to check if new value of selectedChatIndex is negative(removed chat) or not
+             */
             if (newValue < 0) {
                 /* When Unmatched from chat, other user should exit chat automatically.
                  selectedChatIndex for other user in this case becomes -1, since the chat doesn't exist anymore.
@@ -122,11 +141,6 @@ struct ConversationView: View {
                 CardDetail(selectedItem: mainMessagesModel.getProfile(profileId: userId), show: $presentProfileCard, animation: animation)
             }
         }
-        //            .onChange(of: mainMessagesModel.recentChats[selectedChatIndex]) { newValue in
-        //                if newValue.fromId != Auth.auth().currentUser?.uid {
-        //                    mainMessagesModel.markMessageRead(index: selectedChatIndex)
-        //                }
-        //            }
     }
     
     private var AllMessagesForUser: some View {
@@ -151,7 +165,7 @@ struct ConversationView: View {
                         withAnimation {
                             scrollViewProxy.scrollTo(chatModel.chatMessages.last?.id)
                         }
-                        print("Chat: Checkpoint 8")
+                        print ("Chat: Checkpoint 8")
                     }
                     print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
                     scrollToBottomOnSend = false
@@ -220,10 +234,14 @@ struct ConversationView: View {
         HStack(spacing: 16) {
             
             Button {
-                self.isShowingGifPicker.toggle()
+                self.isShowingGifPicker = true
             } label:{
-                Text("Gif")
+                Image(systemName:"paperclip")
+                    .resizable()
+                    .frame(width:20, height:20)
+                    .foregroundColor(sendButtonColor)
             }
+            .disabled(!allowDirectMessageSendCondition)
             
             /**
              New Text box Implementation with Placeholder and auto expanding Text Box
@@ -250,6 +268,25 @@ struct ConversationView: View {
         }
     }
     
+    // Once the giphy disappears
+    // If giphyURL != nil and giphyId !=nil
+    /// Store the data in the firestore
+    // Else: User didn't select a GIF and no need to update the messages
+    func gipgyViewDismissed() {
+        if((self.giphyId != "") && (self.giphyURL != "")) {
+            // Create a chat model obejct and push the document on it
+            print("Store data in firestore")
+            self.gifData.append(self.giphyURL)
+            self.giphyId = ""
+            self.giphyURL = ""
+            // Create a ChatModel object
+            // Handle the send
+            // Update the recent messages
+            // Load the GIF content in chat
+        }
+        
+    }
+    
 }
 
 struct MessageView: View {
@@ -261,6 +298,7 @@ struct MessageView: View {
     
     var body: some View {
         VStack {
+            // For User - whose chat will appear on right
             if message.fromId == Auth.auth().currentUser?.uid {
                 ChatBubble(direction: .right) {
                     Text(message.text.bound)
@@ -269,6 +307,7 @@ struct MessageView: View {
                         .background(Color.blue)
                 }
             } else {
+                // Profile
                 HStack(alignment: .bottom, spacing: 10) {
                     WebImage(url: toUser.image1?.imageURL)
                         .resizable()

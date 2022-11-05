@@ -14,23 +14,23 @@ struct GiphyVCRepresentable : UIViewControllerRepresentable {
     
     public typealias UIViewControllerType = GiphyViewController
     
-    // gif, width, height
-    var onSelectedGif: (GiphyYYImage, CGFloat, CGFloat) -> Void
-    var onShouldDismissGifPicker: () -> Void
+    @Binding var giphyURL: String
+    @Binding var giphyId: String
+    @Binding var isShowingGifPicker: Bool
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        return Coordinator(parent:self)
     }
     
     public func makeUIViewController(context: UIViewControllerRepresentableContext<GiphyVCRepresentable>) -> GiphyViewController {
         Giphy.configure(apiKey: "KBFvAPfuBMVktOiaV4bJrSRrNFwSPi5z")
-        let gvc = GiphyViewController()
-        gvc.delegate = context.coordinator
-        
-        gvc.mediaTypeConfig = [.gifs, .stickers, .recents]
-        gvc.theme = CustomGiphyTheme(type:.automatic)
+        let giphy = GiphyViewController()
+        giphy.delegate = context.coordinator
+        giphy.showConfirmationScreen = true
+        giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
+        giphy.theme = CustomGiphyTheme(type:.automatic)
         GiphyViewController.trayHeightMultiplier = 1.05 // This causes the tray to start at the screen's full height
-        return gvc
+        return giphy
     }
     
     public func updateUIViewController(_ giphyViewController: GiphyViewController, context: UIViewControllerRepresentableContext<GiphyVCRepresentable>) {
@@ -39,7 +39,8 @@ struct GiphyVCRepresentable : UIViewControllerRepresentable {
     
     class Coordinator: NSObject, GiphyDelegate {
         let parent: GiphyVCRepresentable
-        init(_ parent: GiphyVCRepresentable) {
+        
+        init(parent: GiphyVCRepresentable) {
             self.parent = parent
         }
         
@@ -48,28 +49,20 @@ struct GiphyVCRepresentable : UIViewControllerRepresentable {
         }
         
         func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
-            giphyViewController.dismiss(animated: true, completion: { [weak self] in
-                let url = media.url(rendition: giphyViewController.renditionType, fileType: .webp) ?? ""
-                GPHCache.shared.downloadAsset(url) { (image, error) in
-                    DispatchQueue.main.async {
-                        //let imageView = GiphyYYAnimatedImageView()
-                        let width = CGFloat(media.images?.fixedWidth?.width ?? 0)
-                        let height = CGFloat(media.images?.fixedWidth?.height ?? 0)
-                        if let _giphyYYImage = image, let _coordinator = self {
-                            _coordinator.parent.onSelectedGif(_giphyYYImage, width, height)
-                        }
-                    }
-                }
-            })
+            self.parent.giphyURL = media.url(rendition: giphyViewController.renditionType, fileType: .gif) ?? ""
+            self.parent.giphyId = media.id
+            self.parent.isShowingGifPicker = false
         }
         
         func didDismiss(controller: GiphyViewController?) {
-            self.parent.onShouldDismissGifPicker()
+            self.parent.isShowingGifPicker = false
         }
     }
 }
 
 public class CustomGiphyTheme: GPHTheme {
+    @Environment(\.colorScheme) var colorScheme
+    
     public override init() {
         super.init()
         self.type = .darkBlur
@@ -80,8 +73,15 @@ public class CustomGiphyTheme: GPHTheme {
     }
 
     public override var textColor: UIColor {
-        return .white
+        return colorScheme == .dark ? .white: .black
     }
 }
 
 
+struct GipyCustomShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width:35, height:35))
+        return Path(path.cgPath)
+    }
+    
+}
