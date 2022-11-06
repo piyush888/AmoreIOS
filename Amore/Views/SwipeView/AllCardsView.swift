@@ -20,7 +20,7 @@ struct AllCardsView: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var filterModel: FilterModel
     @EnvironmentObject var storeManager: StoreManager
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     
@@ -147,7 +147,7 @@ struct AllCardsView: View {
                                 toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
                                 allcardsActiveSheet: $allcardsActiveSheet,
                                 buttonSwipeStatus: $buttonSwipeStatus)
-                            .environmentObject(chatModel)
+                            .environmentObject(chatViewModel)
                             .environmentObject(storeManager)
                         }
                     

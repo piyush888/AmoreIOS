@@ -8,14 +8,16 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import GiphyUISDK
 
-class ChatModel: ObservableObject {
+class ChatViewModel: ObservableObject {
     let db = Firestore.firestore()
     var errorMessage = ""
     @Published var chatText = ""
-    @Published var chatMessages = [ChatText]()
+    @Published var chatMessages = [ChatModel]()
     @Published var count = 0
     @Published var chatDocuments: [DocumentSnapshot] = []
+    var giphyId: String = ""
     var lastSnapshot: DocumentSnapshot?
     var firestoreListener: ListenerRegistration?
     var fetchMoreFirestoreListener: ListenerRegistration?
@@ -30,33 +32,49 @@ class ChatModel: ObservableObject {
      
      Returns: None
      */
-    func handleSend(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool) {
-        chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
-        if chatText.isEmpty {
-            return
-        }
-        print("Chat: Checkpoint 3")
-        print("Chat: "+chatText)
-        guard let fromId = Auth.auth().currentUser?.uid else { return }
-
-        guard let toId = toUser.id else { return }
+    func handleSend(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool, type:String) {
         
-        // Save the text message with Sender's ID
-
-        let messageData = ChatText(fromId: fromId, toId: toId, text: chatText, timestamp: Date())
-
+        guard let fromId = Auth.auth().currentUser?.uid else { return }
+        guard let toId = toUser.id else { return }
+        var payLoad = ChatModel()
+        // Check if message send request is a normal text or a GIF
+        switch type {
+            
+            case "text":
+                chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
+                if chatText.isEmpty {return}
+                // Save the text message with Sender's ID
+                payLoad = ChatModel(fromId: fromId,
+                                        toId: toId,
+                                        text: chatText,
+                                        timestamp: Date(),
+                                        type:type)
+            case "giphy":
+                if self.giphyId == "" {return}
+                // Save the gif id with message with Sender's ID
+                payLoad = ChatModel(fromId: fromId,
+                                        toId: toId,
+                                        timestamp: Date(),
+                                        type:type,
+                                        giphyId: self.giphyId)
+                
+            default:
+                print("Error in handling a messagae send request \(type)")
+        }
+        
+        // Store payload in firestore
         do {
             _ = try db.collection("Messages")
                 .document(fromId)
                 .collection(toId)
-                .document().setData(from: messageData) { error in
+                .document().setData(from: payLoad) { error in
                         if let error = error {
                             print("Chat: \(error)")
                             self.errorMessage = "Failed to save message into Firestore: \(error)"
                             return
                         }
                             
-                        self.persistRecentMessage(fromUser: fromUser, toUser: toUser, directMessage: directMessage)
+                    self.persistRecentMessage(fromUser: fromUser, toUser: toUser, directMessage: directMessage, type:type)
                         print("Chat: Successfully saved current user sending message")
                         self.chatText = ""
                         self.count += 1
@@ -73,11 +91,11 @@ class ChatModel: ObservableObject {
      Check whether pagination is needed.
      If second last message has appeared, fetch next page of messagesr
      - Parameter:
-        - message: ChatText for the current message in view
+        - message: ChatModel for the current message in view
 
      - Returns: Boolean indicating pagination needed or not
      */
-    func shouldFetchMoreMessages(message: ChatText) -> Bool {
+    func shouldFetchMoreMessages(message: ChatModel) -> Bool {
         guard chatDocuments.count > 2 && message.id == chatDocuments[chatDocuments.index(chatDocuments.endIndex, offsetBy: -2)].documentID else { return false }
         return true
     }
@@ -113,7 +131,7 @@ class ChatModel: ObservableObject {
                 querySnapshot?.documentChanges.forEach({ change in
                     if change.type == .added {
                         do {
-                            if let data = try change.document.data(as: ChatText.self) {
+                            if let data = try change.document.data(as: ChatModel.self) {
                                 DispatchQueue.main.async {
                                     self.chatMessages.append(data)
                                     print("Chat: Paginating chatMessage in ChatLogView: \(Date())")
@@ -169,7 +187,7 @@ class ChatModel: ObservableObject {
                 querySnapshot.documentChanges.forEach({ change in
                     if change.type == .added {
                         do {
-                            if let data = try change.document.data(as: ChatText.self) {
+                            if let data = try change.document.data(as: ChatModel.self) {
                                 DispatchQueue.main.async {
                                     self.chatMessages.append(data)
                                     print("Chat: Appending chatMessage in ChatLogView: \(Date())")
@@ -204,12 +222,29 @@ class ChatModel: ObservableObject {
      
      Returns: None
      */
-    private func persistRecentMessage(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool) {
+    private func persistRecentMessage(fromUser: ChatUser, toUser: ChatUser, directMessage: Bool, type:String) {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let toId = toUser.id else { return }
-
-        let senderData = ChatConversation(fromId: uid, toId: toId, user: toUser, lastText: self.chatText, timestamp: Date(), directMessageApproved: !directMessage)
+        var lastText = ""
+        
+        switch type {
+            case "text":
+                lastText = self.chatText
+            
+            case "giphy":
+                lastText = "Media"
+            
+            default:
+                lastText = self.chatText
+        }
+        
+        let senderData = ChatConversation(fromId: uid,
+                                          toId: toId,
+                                          user: toUser,
+                                          lastText: lastText,
+                                          timestamp: Date(),
+                                          directMessageApproved: !directMessage)
         
         
         do {

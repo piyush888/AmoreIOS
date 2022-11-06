@@ -11,3 +11,4 @@ import Combine
 class TabModel: ObservableObject {
     @Published var showDetail: Bool = false
 }
+

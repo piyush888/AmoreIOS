@@ -41,16 +41,6 @@ class MainMessagesViewModel: ObservableObject {
                 .collection("Messages")
                 .document(otherUserId).updateData(["msgRead": chat.msgRead])
         }
-//
-//        db.collection("RecentChats")
-//            .document(fromId)
-//            .setData(["wasUpdated": true]) { error in
-//            if let error = error {
-//                self.errorMessage = "Failed to save recent message: \(error)"
-//                print("Chat: Failed to save recent message: \(error)")
-//                return
-//            }
-//        }
     }
     
     func markMessageRead(chat: ChatConversation) {

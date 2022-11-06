@@ -32,13 +32,12 @@
 		1B9EDFE828B72A9F0082E95C /* DeleteDisableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */; };
 		1BA0A67428592C510032DE4E /* ReverseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0A67328592C510032DE4E /* ReverseScrollView.swift */; };
 		1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */; };
-		1BB36D3027ACE88200F4029C /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2F27ACE88200F4029C /* ChatUser.swift */; };
 		1BB36D3227ACE91A00F4029C /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */; };
 		1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3327ADB9DB00F4029C /* ConversationView.swift */; };
 		1BB36D3827ADBC1C00F4029C /* customNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3727ADBC1C00F4029C /* customNavBar.swift */; };
 		1BB36D3A27ADBD3000F4029C /* AllConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */; };
-		1BB36D3C27AE302200F4029C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3B27AE302200F4029C /* ChatModel.swift */; };
-		1BB36D3E27AE744800F4029C /* ChatText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3D27AE744800F4029C /* ChatText.swift */; };
+		1BB36D3C27AE302200F4029C /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3B27AE302200F4029C /* ChatViewModel.swift */; };
+		1BB36D3E27AE744800F4029C /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D3D27AE744800F4029C /* MessagesModel.swift */; };
 		1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB485327035B2F004D42A3 /* HomeView.swift */; };
 		1BC8BE072705CC5E00F0137E /* WorkSchoolCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE012705CC5D00F0137E /* WorkSchoolCareer.swift */; };
 		1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE022705CC5E00F0137E /* SexualOrientation.swift */; };
@@ -46,7 +45,6 @@
 		1BC8BE0A2705CC5E00F0137E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE042705CC5E00F0137E /* Gender.swift */; };
 		1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE062705CC5E00F0137E /* Passions.swift */; };
 		1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8BE0D2705CD7C00F0137E /* Profile.swift */; };
-		1BDABE8D27AF7D6000772D6A /* ChatConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */; };
 		1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBB64D28ACDB9B006DC890 /* DiscoveryDisabled.swift */; };
 		1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */; };
 		1BF55ECB272025860027F78F /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -56,7 +54,6 @@
 		E203885D28B4374F000704F2 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E203885C28B4374F000704F2 /* Playground.swift */; };
 		E205F6792764351700196A06 /* ReceivedGivenEliteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */; };
 		E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205F67C2766A3D600196A06 /* FetchDataModel.swift */; };
-		E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20CFEED2875044C00EF7EB1 /* TabModel.swift */; };
 		E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAA2714F79A00769234 /* ViewRouter.swift */; };
 		E221EAAD2714F84F00769234 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAC2714F84F00769234 /* Helper.swift */; };
 		E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserProfile.swift */; };
@@ -169,6 +166,7 @@
 		E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */; };
 		E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202228BAA38600BFD32C /* BGImagesModel.swift */; };
 		E2F7076F2913E85700DB1FA7 /* GiphyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */; };
+		E2F707752917E43800DB1FA7 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F707742917E43800DB1FA7 /* TabModel.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -219,13 +217,12 @@
 		1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDisableView.swift; sourceTree = "<group>"; };
 		1BA0A67328592C510032DE4E /* ReverseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseScrollView.swift; sourceTree = "<group>"; };
 		1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
-		1BB36D2F27ACE88200F4029C /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		1BB36D3327ADB9DB00F4029C /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		1BB36D3727ADBC1C00F4029C /* customNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customNavBar.swift; sourceTree = "<group>"; };
 		1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllConversationsView.swift; sourceTree = "<group>"; };
-		1BB36D3B27AE302200F4029C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
-		1BB36D3D27AE744800F4029C /* ChatText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatText.swift; sourceTree = "<group>"; };
+		1BB36D3B27AE302200F4029C /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		1BB36D3D27AE744800F4029C /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
 		1BBB485027022DE2004D42A3 /* AmoreDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmoreDebug.entitlements; sourceTree = "<group>"; };
 		1BBB485127031F65004D42A3 /* Amore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amore.entitlements; sourceTree = "<group>"; };
 		1BBB485327035B2F004D42A3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -235,7 +232,6 @@
 		1BC8BE042705CC5E00F0137E /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		1BC8BE062705CC5E00F0137E /* Passions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passions.swift; sourceTree = "<group>"; };
 		1BC8BE0D2705CD7C00F0137E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversation.swift; sourceTree = "<group>"; };
 		1BDBB64D28ACDB9B006DC890 /* DiscoveryDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryDisabled.swift; sourceTree = "<group>"; };
 		1BF29D2C2732714E00455A2F /* UploadWindowsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadWindowsGroup.swift; sourceTree = "<group>"; };
 		230E8B0A769F4496F9ECB6E8 /* Pods-Amore.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amore.release staging.xcconfig"; path = "Target Support Files/Pods-Amore/Pods-Amore.release staging.xcconfig"; sourceTree = "<group>"; };
@@ -247,7 +243,6 @@
 		E203885C28B4374F000704F2 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedGivenEliteModel.swift; sourceTree = "<group>"; };
 		E205F67C2766A3D600196A06 /* FetchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataModel.swift; sourceTree = "<group>"; };
-		E20CFEED2875044C00EF7EB1 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E221EAAA2714F79A00769234 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		E221EAAC2714F84F00769234 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E221EAAE2714FBDA00769234 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -358,6 +353,7 @@
 		E2F6C0362905883A00D6823D /* GoogleService-Info Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info Staging.plist"; sourceTree = "<group>"; };
 		E2F6C0372905883A00D6823D /* GoogleService-Info Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info Development.plist"; sourceTree = "<group>"; };
 		E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyViewModel.swift; sourceTree = "<group>"; };
+		E2F707742917E43800DB1FA7 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -769,12 +765,10 @@
 				1BC8BE0D2705CD7C00F0137E /* Profile.swift */,
 				1B6273CD274B7B9A00590DD1 /* Filters.swift */,
 				E268A46B2747DB9A0045F264 /* CardProfiles.swift */,
-				1BB36D2F27ACE88200F4029C /* ChatUser.swift */,
-				1BB36D3D27AE744800F4029C /* ChatText.swift */,
-				1BDABE8C27AF7D6000772D6A /* ChatConversation.swift */,
+				1BB36D3D27AE744800F4029C /* MessagesModel.swift */,
 				E27CCEB527E44130006278EB /* IAPFirebaseModel.swift */,
-				E20CFEED2875044C00EF7EB1 /* TabModel.swift */,
 				E2ED202228BAA38600BFD32C /* BGImagesModel.swift */,
+				E2F707742917E43800DB1FA7 /* TabModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -813,7 +807,7 @@
 				E205F67C2766A3D600196A06 /* FetchDataModel.swift */,
 				E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */,
 				1BB36D3127ACE91A00F4029C /* MainMessagesViewModel.swift */,
-				1BB36D3B27AE302200F4029C /* ChatModel.swift */,
+				1BB36D3B27AE302200F4029C /* ChatViewModel.swift */,
 				E2A9610227CC89FF009108F0 /* StoreManager.swift */,
 				E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */,
 			);
@@ -1025,7 +1019,7 @@
 				E22D5562275532B800852D70 /* ColorExtension.swift in Sources */,
 				E25D15A128675FE8001330DB /* CustomButton.swift in Sources */,
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
-				1BB36D3C27AE302200F4029C /* ChatModel.swift in Sources */,
+				1BB36D3C27AE302200F4029C /* ChatViewModel.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBioHeadline.swift in Sources */,
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
@@ -1062,7 +1056,6 @@
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
 				E2723F8228823A4D00C0E3B1 /* NavigationBar.swift in Sources */,
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
-				E20CFEEE2875044D00EF7EB1 /* TabModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */,
@@ -1082,6 +1075,7 @@
 				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* WorkSchoolCareer.swift in Sources */,
 				E2F7076F2913E85700DB1FA7 /* GiphyViewModel.swift in Sources */,
+				E2F707752917E43800DB1FA7 /* TabModel.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
 				E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */,
@@ -1115,7 +1109,6 @@
 				E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */,
 				E2347130271C972F0006F336 /* LoadingScreen.swift in Sources */,
 				1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */,
-				1BB36D3027ACE88200F4029C /* ChatUser.swift in Sources */,
 				E205F6792764351700196A06 /* ReceivedGivenEliteModel.swift in Sources */,
 				E2F968A52897FDD20000695E /* OnboardingView.swift in Sources */,
 				E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */,
@@ -1131,7 +1124,6 @@
 				1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
 				E203885928B3CE16000704F2 /* WriteReview.swift in Sources */,
-				1BDABE8D27AF7D6000772D6A /* ChatConversation.swift in Sources */,
 				E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
@@ -1165,7 +1157,7 @@
 				E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */,
 				1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
-				1BB36D3E27AE744800F4029C /* ChatText.swift in Sources */,
+				1BB36D3E27AE744800F4029C /* MessagesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,7 +1229,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B1FF18565C553FCD6193EC3 /* Pods-Amore.debug staging.xcconfig */;
 			buildSettings = {
-				API_BASE_URL = "http://34.172.205.119:5040";
+				API_BASE_URL = "https://client.luvamore.com";
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1417,7 +1409,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 230E8B0A769F4496F9ECB6E8 /* Pods-Amore.release staging.xcconfig */;
 			buildSettings = {
-				API_BASE_URL = "http://34.172.205.119:5040";
+				API_BASE_URL = "https://client.luvamore.com";
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

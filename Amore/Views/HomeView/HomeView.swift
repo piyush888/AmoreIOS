@@ -22,7 +22,7 @@ struct HomeView: View {
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
     @EnvironmentObject var storeManager: StoreManager
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @StateObject var mainMessagesModel = MainMessagesViewModel()
     
     @State var selectedTab: TopPicksLikesView = .likesReceived
@@ -49,10 +49,10 @@ struct HomeView: View {
                                 
                                 case .messagingView:
                                     MainMessagesView()
-                                        .environmentObject(chatModel)
+                                        .environmentObject(chatViewModel)
                                         .environmentObject(mainMessagesModel)
                                         .environmentObject(tabModel)
-                                        
+                                    
                                 case .likesTopPicksView:
                                     LikesTopPicksHome(selectedTab:$selectedTab)
                                         .environmentObject(cardProfileModel)
@@ -78,7 +78,7 @@ struct HomeView: View {
                                                 .environmentObject(profileModel)
                                                 .environmentObject(filterModel)
                                                 .environmentObject(storeManager)
-                                                .environmentObject(chatModel)
+                                                .environmentObject(chatViewModel)
                                                 .environmentObject(mainMessagesModel)
                                                 .onAppear {
                                                     if filtersChanged {
@@ -179,6 +179,6 @@ struct HomeView_Previews: PreviewProvider {
             .environmentObject(ReceivedGivenEliteModel())
             .environmentObject(ReportActivityModel())
             .environmentObject(StoreManager())
-            .environmentObject(ChatModel())
+            .environmentObject(ChatViewModel())
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainMessagesView: View {
-
+    
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -18,7 +18,7 @@ struct MainMessagesView: View {
     
     @State var shouldShowLogOutOptions = false
     @State var navigateToChatView: Bool = false
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @EnvironmentObject var tabModel: TabModel
 
@@ -27,7 +27,7 @@ struct MainMessagesView: View {
 
             VStack {
                 AllConversationsView(navigateToChatView: $navigateToChatView)
-                    .environmentObject(chatModel)
+                    .environmentObject(chatViewModel)
                     .environmentObject(mainMessagesModel)
                     .environmentObject(tabModel)
             }

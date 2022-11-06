@@ -14,7 +14,7 @@ struct LikesTopPicksHome: View {
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var receivedGivenEliteModel: ReceivedGivenEliteModel
     @EnvironmentObject var profileModel: ProfileViewModel
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var storeManager: StoreManager
     
     @Binding var selectedTab: TopPicksLikesView
@@ -255,7 +255,7 @@ struct LikesTopPicksHome: View {
                                              image1: profileForChat.image1),
                             allcardsActiveSheet: $allcardsActiveSheet,
                             buttonSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none))
-                            .environmentObject(chatModel)
+                            .environmentObject(chatViewModel)
                             .environmentObject(storeManager)
                 }
             }

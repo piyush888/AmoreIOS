@@ -8,14 +8,14 @@
 import SwiftUI
 import Firebase
 import SDWebImageSwiftUI
-
+import GiphyUISDK
 
 struct ConversationView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
     @Namespace var animation
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @Binding var toUser: ChatUser
     @Binding var selectedChat: ChatConversation
@@ -33,6 +33,8 @@ struct ConversationView: View {
     @State var isShowingGifPicker = false
     @State var giphyURL: String = ""
     @State var giphyId: String = ""
+    
+    // TO BE DELETED - KTZ. 
     @State var gifData: [String] = []
     
     var body: some View {
@@ -44,17 +46,16 @@ struct ConversationView: View {
                         self.hideKeyboard()
                     }
                 
-                
-                ScrollView(.vertical, showsIndicators:false, content:{
-                    ForEach(gifData,id:\.self){ url in
-                        Spacer(minLength: 0)
-                        AnimatedImage(url:URL(string:url)!)
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(GipyCustomShape())
-                    }
-                })
-                
-            
+                // TO BE DELETED - KTZ.
+//                ScrollView(.vertical, showsIndicators:false, content:{
+//                    ForEach(gifData,id:\.self){ url in
+//                        Spacer(minLength: 0)
+//                        AnimatedImage(url:URL(string:url)!)
+//                            .aspectRatio(contentMode: .fit)
+//                            .clipShape(GipyCustomShape())
+//                    }
+//                })
+
                 MessageSendField
                     .padding([.horizontal, .bottom])
                     .ignoresSafeArea()
@@ -65,7 +66,6 @@ struct ConversationView: View {
                                 GiphyVCRepresentable(giphyURL:$giphyURL,
                                                      giphyId:$giphyId,
                                                      isShowingGifPicker:$isShowingGifPicker)
-                                .padding(.bottom, 20.0)
                             })
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -146,13 +146,14 @@ struct ConversationView: View {
     private var AllMessagesForUser: some View {
         ScrollViewReader { scrollViewProxy in
             ReverseScrollView(.vertical) {
-                ForEach(chatModel.chatMessages.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}), id: \.self) { message in
+                ForEach(chatViewModel.chatMessages.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}), id: \.self) { message in
                     MessageView(message: message, toUser: toUser)
+                        .environmentObject(chatViewModel)
                         .id(message.id)
                         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         .onAppear {
-                            if chatModel.shouldFetchMoreMessages(message: message) {
-                                chatModel.fetchMoreMessages(toUser: toUser)
+                            if chatViewModel.shouldFetchMoreMessages(message: message) {
+                                chatViewModel.fetchMoreMessages(toUser: toUser)
                             }
                         }
                 }
@@ -163,11 +164,11 @@ struct ConversationView: View {
                 if newValue == true {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         withAnimation {
-                            scrollViewProxy.scrollTo(chatModel.chatMessages.last?.id)
+                            scrollViewProxy.scrollTo(chatViewModel.chatMessages.last?.id)
                         }
                         print ("Chat: Checkpoint 8")
                     }
-                    print("Chat: chatMessages Count = \(chatModel.chatMessages.count)")
+                    print("Chat: ChatMessages Count = \(chatViewModel.chatMessages.count)")
                     scrollToBottomOnSend = false
                 }
             }
@@ -246,12 +247,12 @@ struct ConversationView: View {
             /**
              New Text box Implementation with Placeholder and auto expanding Text Box
              */
-            TextEditorWithPlaceholder(text: $chatModel.chatText, placeholder: emptyTextBoxPlaceHolder)
+            TextEditorWithPlaceholder(text: $chatViewModel.chatText, placeholder: emptyTextBoxPlaceHolder)
                 .disabled(!allowDirectMessageSendCondition)
             
             Button {
                 scrollToBottomOnSend = true
-                chatModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser, directMessage: false)
+                chatViewModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser, directMessage: false, type:"text")
                 if triggerMatchOnDirectMessageCondition {
                     print("Triggering Match on DM")
                     FirestoreServices.directMessageMatchUsers(apiToBeUsed: "/matchondirectmessage", onFailure: {}, onSuccess: {}, otherUserId: mainMessagesModel.recentChats[selectedChatIndex].fromId)
@@ -276,15 +277,18 @@ struct ConversationView: View {
         if((self.giphyId != "") && (self.giphyURL != "")) {
             // Create a chat model obejct and push the document on it
             print("Store data in firestore")
-            self.gifData.append(self.giphyURL)
-            self.giphyId = ""
-            self.giphyURL = ""
+            chatViewModel.giphyId = self.giphyId
+            chatViewModel.handleSend(fromUser: mainMessagesModel.fromUser, toUser: self.toUser, directMessage: false, type:"giphy")
+            
             // Create a ChatModel object
             // Handle the send
             // Update the recent messages
             // Load the GIF content in chat
+            
+            self.gifData.append(self.giphyURL) // TO BE DELETED - KTZ.
+            self.giphyId = ""
+            self.giphyURL = ""
         }
-        
     }
     
 }
@@ -292,39 +296,88 @@ struct ConversationView: View {
 struct MessageView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var chatViewModel: ChatViewModel
     
-    let message: ChatText
+    let message: ChatModel
     var toUser: ChatUser
     
     var body: some View {
+        
         VStack {
-            // For User - whose chat will appear on right
-            if message.fromId == Auth.auth().currentUser?.uid {
-                ChatBubble(direction: .right) {
-                    Text(message.text.bound)
-                        .foregroundColor(.white)
-                        .padding(.all, 20)
-                        .background(Color.blue)
-                }
-            } else {
-                // Profile
-                HStack(alignment: .bottom, spacing: 10) {
-                    WebImage(url: toUser.image1?.imageURL)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 40, height: 40)
-                        .clipped()
-                        .cornerRadius(40)
-                        .shadow(radius: 1)
+            switch message.type {
+                case "text":
+                    // Cirremt User
+                    if message.fromId == Auth.auth().currentUser?.uid {
+                        ChatBubble(direction: .right) {
+                            Text(message.text.bound)
+                                .foregroundColor(.white)
+                                .padding(.all, 20)
+                                .background(Color.blue)
+                        }
+                    } else {
+                        // Messages received from other user
+                        HStack(alignment: .bottom, spacing: 10) {
+                            WebImage(url: toUser.image1?.imageURL)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .clipped()
+                                .cornerRadius(40)
+                                .shadow(radius: 1)
+                            ChatBubble(direction: .left) {
+                                Text(message.text.bound)
+                                    .padding(.all, 20)
+                                    .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
+                            }
+                        }
+                    } // end of switch case
                     
-                    ChatBubble(direction: .left) {
-                        Text(message.text.bound)
-                            .padding(.all, 20)
-                            .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
+                case "giphy":
+                    if let gifMediaId = message.giphyId {
+                        if message.fromId == Auth.auth().currentUser?.uid {
+                            ChatBubble(direction: .right) {
+                                Text(gifMediaId ?? "")
+                                    .padding(.all, 20)
+                                // TODO : MAKE use of the mediaId to load the gif here.
+                                
+//                                AnimatedImage(url:chatViewModel.loadGifURL(giphyID: gifMediaId))
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .clipShape(GipyCustomShape())
+                                
+// TODO - THIS IS THE FUNCTION WE MADE FOR FETCING PROFILE FROM GIPHY USING ID
+//        func loadGifURL(giphyID:String) -> URL{
+//            GiphyCore.shared.gifByID(giphyID) { (response, error) in
+//                if let media = response?.data {
+//                    DispatchQueue.main.sync {
+//                        let gifURL = media.url(rendition: giphyViewController.renditionType, fileType: .gif) ?? ""
+//                        return URL(string: gifURL ?? "")
+//
+//                    }
+//                }
+//            }
+//        }
+                        }
                     }
+                        else {
+                        // Messages received from other user
+                        HStack(alignment: .bottom, spacing: 10) {
+                            WebImage(url: toUser.image1?.imageURL)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .clipped()
+                                .cornerRadius(40)
+                                .shadow(radius: 1)
+                            // TODO : MAKE use of the mediaId to load the gif here.
+//                            AnimatedImage(url:chatViewModel.loadGifURL(giphyID: gifMediaId))
+//                                .aspectRatio(contentMode: .fit)
+//                                .clipShape(GipyCustomShape())
+                        }
+                    }
+                } // end of switch case
                     
-                }
-                
+                default:
+                    Text("")
             }
         }
         .padding(.horizontal)
@@ -334,7 +387,7 @@ struct MessageView: View {
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
         ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation(id: "1", fromId: "123", toId: "456", user: ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage()), lastText: "abc", timestamp: Date(), msgRead: true, otherUserUpdated: true, directMessageApproved: true)), navigateToChatView: Binding.constant(true))
-            .environmentObject(ChatModel())
+            .environmentObject(ChatViewModel())
             .environmentObject(MainMessagesViewModel())
     }
 }

@@ -12,7 +12,7 @@ import RiveRuntime
 struct DirectMessageCardView: View {
     
     @EnvironmentObject var storeManager: StoreManager
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @State var fromUser: ChatUser
     @State var toUser: ChatUser
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
@@ -141,8 +141,8 @@ struct DirectMessageCardView: View {
                             else {
                                 // if the message count is not 0
                                 if self.totalMessagesCount > 0 {
-                                    chatModel.chatText = directMessage
-                                    chatModel.handleSend(fromUser: fromUser, toUser: toUser, directMessage: true)
+                                    chatViewModel.chatText = directMessage
+                                    chatViewModel.handleSend(fromUser: fromUser, toUser: toUser, directMessage: true, type:"text")
                                     self.consumeAMessage()
                                     _ = storeManager.storePurchaseNoParams()
                                     directMessage = ""
@@ -256,7 +256,7 @@ struct DirectMessageCardView_Previews: PreviewProvider {
                               allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.directMessageSheet),
                               buttonSwipeStatus:Binding.constant(AllCardsView.LikeDislike.none))
             .environmentObject(StoreManager())
-            .environmentObject(ChatModel())
+            .environmentObject(ChatViewModel())
     }
 }
 

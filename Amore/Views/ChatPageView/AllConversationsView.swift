@@ -14,7 +14,7 @@ struct AllConversationsView: View {
     @Binding var navigateToChatView: Bool
     @State var toUser: ChatUser = ChatUser()
     @State var selectedChat = ChatConversation()
-    @EnvironmentObject var chatModel: ChatModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     @EnvironmentObject var tabModel: TabModel
     
@@ -27,7 +27,7 @@ struct AllConversationsView: View {
                     VStack {
                         Button {
                             self.toUser = recentMessage.user ?? ChatUser()
-                            self.chatModel.fetchMessages(toUser: toUser)
+                            self.chatViewModel.fetchMessages(toUser: toUser)
                             self.navigateToChatView = true
                             self.selectedChat = recentMessage
                             mainMessagesModel.markMessageRead(chat: recentMessage)
@@ -68,13 +68,11 @@ struct AllConversationsView: View {
             
             NavigationLink("", isActive: $navigateToChatView) {
                 ConversationView(toUser: $toUser, selectedChat: $selectedChat, navigateToChatView: $navigateToChatView)
-                    .environmentObject(chatModel)
+                    .environmentObject(chatViewModel)
                     .environmentObject(mainMessagesModel)
                     .onDisappear {
-                        chatModel.firestoreListener?.remove()
-                        withAnimation(.easeInOut) {
-                            tabModel.showDetail.toggle()
-                        }
+                        chatViewModel.firestoreListener?.remove()
+                        tabModel.showDetail.toggle()
                     }
             }
         }
@@ -132,7 +130,8 @@ struct IndividualMessageRow: View {
 struct AllConversationsView_Previews: PreviewProvider {
     static var previews: some View {
         AllConversationsView(navigateToChatView: Binding.constant(false))
-            .environmentObject(ChatModel())
+            .environmentObject(ChatViewModel())
             .environmentObject(MainMessagesViewModel())
+            .environmentObject(TabModel())
     }
 }
