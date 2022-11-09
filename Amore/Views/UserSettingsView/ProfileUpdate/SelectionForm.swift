@@ -22,21 +22,31 @@ struct SelectionForm: View {
         }
     }
     
+    
     var body: some View {
-        
-         Picker("\(formName)", selection: $selection) {
-                SearchBar(text: $searchTerm, placeholder: "Search \(formName)")
-                ForEach(filteredSelectionList, id: \.self) {
-                    Text($0).tag($0)
-                }
-                .navigationBarTitle("\(formName)") // for picker navigation title
-                .navigationBarTitleDisplayMode(.inline)
-            }
-            .onChange(of: selection) { _ in
-                print("Tag Value selected: \(selection) for \(formName)")
-                self.formUpdated = true
-            }
+        if #available(iOS 16.0, *) {
+            pickerBody
+                .pickerStyle(.navigationLink)
+        } else {
+            pickerBody
+        }
     }
+    
+    var pickerBody: some View {
+        Picker("\(formName)", selection: $selection) {
+//               SearchBar(text: $searchTerm, placeholder: "Search \(formName)")
+               ForEach(filteredSelectionList, id: \.self) {
+                   Text($0).tag($0)
+               }
+               .navigationBarTitle("\(formName)") // for picker navigation title
+               .navigationBarTitleDisplayMode(.inline)
+           }
+           .onChange(of: selection) { _ in
+               print("Tag Value selected: \(selection) for \(formName)")
+               self.formUpdated = true
+           }
+    }
+    
 }
 
 struct SelectionForm_Previews: PreviewProvider {

@@ -182,17 +182,20 @@ struct EditCardInfo: View {
                 
                 // Passion or Interests
                 Section(header:Text("Passions")) {
-                    Picker("Passions", selection: Binding.constant("Multiple")) {
-                        SelectMultipleItems(selectionList: $passions,
-                                        optionsList:passionsList,
-                                        filterName:"Passions")
-                       }
-                       .navigationBarTitle("Passions")
-                       .navigationBarTitleDisplayMode(.inline)
-                       .onChange(of: passions) { _ in
-                           self.formUpdated = true
-                    }
+                    NavigationLink(
+                        destination: SelectMultipleItems(selectionList: $passions, optionsList:passionsList,filterName:"Passions"),
+                        label: {
+                            Text("Pasions")
+                    })
                 }
+//                    Picker("Passions", selection: Binding.constant("Multiple")) {
+//
+//                       }
+//                       .navigationBarTitle("Passions")
+//                       .navigationBarTitleDisplayMode(.inline)
+//                       .onChange(of: passions) { _ in
+//                           self.formUpdated = true
+//                        }
                        
                     
                 
