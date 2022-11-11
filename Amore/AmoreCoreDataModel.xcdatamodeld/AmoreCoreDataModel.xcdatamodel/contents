@@ -1,24 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
-    <entity name="ProfileCore" representedClassName="ProfileCore" syncable="YES">
-        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="genderIdentity" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="interests" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="lastName" optional="YES" attributeType="String"/>
-        <attribute name="school" optional="YES" attributeType="String"/>
-        <attribute name="sexualOrientation" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="sexualOrientationVisible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="showMePreference" optional="YES" attributeType="String"/>
-        <attribute name="work" optional="YES" attributeType="String"/>
-    </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="ProfileCore" positionX="-63" positionY="-9" width="128" height="209"/>
-    </elements>
-</model>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier=""/>

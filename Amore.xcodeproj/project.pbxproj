@@ -27,8 +27,6 @@
 		1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */; };
 		1B8983702895BCEB00DE1FEF /* MessageForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B89836F2895BCEB00DE1FEF /* MessageForm.swift */; };
 		1B96B73F272A95840009683A /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96B73E272A95840009683A /* OptionalExtension.swift */; };
-		1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */; };
-		1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */; };
 		1B9EDFE828B72A9F0082E95C /* DeleteDisableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */; };
 		1BA0A67428592C510032DE4E /* ReverseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0A67328592C510032DE4E /* ReverseScrollView.swift */; };
 		1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */; };
@@ -67,10 +65,7 @@
 		E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF492709F76800FC5129 /* AddPhotosView.swift */; };
 		E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF4D2709FD9A00FC5129 /* ImagePicker.swift */; };
 		E226CF50270A178600FC5129 /* UploadPhotoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF4F270A178600FC5129 /* UploadPhotoWindow.swift */; };
-		E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF76270B3FEA00FC5129 /* Persistence.swift */; };
 		E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E226CF7C270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodeld */; };
-		E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */; };
-		E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */; };
 		E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D555D27540D5700852D70 /* ServerErrorView.swift */; };
 		E22D5562275532B800852D70 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D5561275532B800852D70 /* ColorExtension.swift */; };
 		E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D55632755828400852D70 /* WorkAndSchool.swift */; };
@@ -212,8 +207,6 @@
 		1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageCardView.swift; sourceTree = "<group>"; };
 		1B89836F2895BCEB00DE1FEF /* MessageForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageForm.swift; sourceTree = "<group>"; };
 		1B96B73E272A95840009683A /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
-		1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1B9EDFE728B72A9F0082E95C /* DeleteDisableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDisableView.swift; sourceTree = "<group>"; };
 		1BA0A67328592C510032DE4E /* ReverseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseScrollView.swift; sourceTree = "<group>"; };
 		1BB36D2D27ACE6EA00F4029C /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
@@ -256,10 +249,7 @@
 		E226CF492709F76800FC5129 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
 		E226CF4D2709FD9A00FC5129 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E226CF4F270A178600FC5129 /* UploadPhotoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoWindow.swift; sourceTree = "<group>"; };
-		E226CF76270B3FEA00FC5129 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E226CF7D270B596F00FC5129 /* AmoreCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AmoreCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E22D555D27540D5700852D70 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E22D5561275532B800852D70 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E22D55632755828400852D70 /* WorkAndSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAndSchool.swift; sourceTree = "<group>"; };
@@ -579,10 +569,6 @@
 		E283677A26FAA6E200EEA049 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				1B9848B5270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift */,
-				1B9848B6270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift */,
-				E226CF94270BA7C700FC5129 /* Item+CoreDataClass.swift */,
-				E226CF95270BA7C700FC5129 /* Item+CoreDataProperties.swift */,
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
 				E2D43188288F60AF005AFBE0 /* EditCardFormData.json */,
 			);
@@ -734,7 +720,6 @@
 				E2F8AA6126F947CA00CC7A72 /* ViewModels */,
 				E283677126F9531E00EEA049 /* Fonts */,
 				E2F8AA5226F9427F00CC7A72 /* ContentView.swift */,
-				E226CF76270B3FEA00FC5129 /* Persistence.swift */,
 				E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */,
 				E2F8AA5426F9428100CC7A72 /* Assets.xcassets */,
 				E25D159F28675DE1001330DB /* Styles */,
@@ -1042,7 +1027,6 @@
 				E25911AB287B24D600028152 /* LottieTest.swift in Sources */,
 				E298BA0E2713350900C82174 /* CardBasicInfo.swift in Sources */,
 				E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */,
-				1B9848B7270C96DA00C2F98D /* ProfileCore+CoreDataClass.swift in Sources */,
 				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
@@ -1071,7 +1055,6 @@
 				E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */,
 				1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* Gender.swift in Sources */,
-				E226CF97270BA7C700FC5129 /* Item+CoreDataProperties.swift in Sources */,
 				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,
 				1BC8BE072705CC5E00F0137E /* WorkSchoolCareer.swift in Sources */,
 				E2F7076F2913E85700DB1FA7 /* GiphyViewModel.swift in Sources */,
@@ -1098,7 +1081,6 @@
 				E261B31B28A94D3100BF4DDF /* SwiftAnimation.swift in Sources */,
 				E226CF93270B910900FC5129 /* AmoreCoreDataModel.xcdatamodeld in Sources */,
 				E221EAB32715066000769234 /* FilterSettings.swift in Sources */,
-				E226CF77270B3FEA00FC5129 /* Persistence.swift in Sources */,
 				E2530F5A277CB0760040CAB2 /* RadiusFilter.swift in Sources */,
 				1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */,
 				E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */,
@@ -1127,13 +1109,11 @@
 				E2DBC038272DFC9C000630F5 /* MyAmoreCard.swift in Sources */,
 				1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */,
 				E291A1F226FF98B3000D8A2C /* BasicUserInfoForm.swift in Sources */,
-				E226CF96270BA7C700FC5129 /* Item+CoreDataClass.swift in Sources */,
 				1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */,
 				E234713A271DC5640006F336 /* TopPicksProfiles.swift in Sources */,
 				1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */,
 				E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */,
 				1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */,
-				1B9848B8270C96DA00C2F98D /* ProfileCore+CoreDataProperties.swift in Sources */,
 				E271ADF72889E540001ACD31 /* SelectMultipleItems.swift in Sources */,
 				E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */,
 				E251737328A170B00092C55A /* OnBoardingUtils.swift in Sources */,

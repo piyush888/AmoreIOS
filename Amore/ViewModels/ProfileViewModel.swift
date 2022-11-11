@@ -27,7 +27,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var filterModeObj = FilterModel()
     
     let db = Firestore.firestore()
-    var profileCores = [ProfileCore]()
     
     // Phone number authentication
     @Published var phoneNumber = String()
@@ -55,8 +54,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // time out after continious error from backend
     @Published var timeOutRetriesCount: Int = 0
     @Published var adminAuthModel = AdminAuthenticationViewModel()
-    
-    let viewContext = PersistenceController.shared.container.viewContext
     
     override init() {
         locationManager = CLLocationManager()
@@ -194,43 +191,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
         self.userProfile.age = ageComponents.year!
     }
-    
-    func fetchProfileCoreData () {
-        let request = ProfileCore.profileFetchRequest()
-        request.sortDescriptors = []
-        if let id = Auth.auth().currentUser?.uid {
-            request.predicate = NSPredicate(format: "id contains %@", id)
-        }
-        do {
-            let results = try viewContext.fetch(request)
-            self.profileCores = results
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func updateProfileCore (profileCore: ProfileCore) {
-        calculateUserAge()
-        if self.userProfile.id == nil {
-            self.userProfile.id = Auth.auth().currentUser?.uid
-        }
-        
-        profileCore.id = userProfile.id
-        profileCore.firstName = userProfile.firstName
-        profileCore.lastName = userProfile.lastName
-        profileCore.email = userProfile.email
-        profileCore.dateOfBirth = userProfile.dateOfBirth
-        profileCore.interests = userProfile.interests
-        profileCore.genderIdentity = userProfile.genderIdentity
-        profileCore.sexualOrientation = userProfile.sexualOrientation
-        profileCore.sexualOrientationVisible = userProfile.sexualOrientationVisible ?? true
-        profileCore.showMePreference = userProfile.showMePreference
-        profileCore.work = userProfile.work
-        profileCore.school = userProfile.school
-    }
-    
-
+  
     func signIn(adminAuthenticationObj:AdminAuthenticationViewModel, otpVerificationCode:String) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {
@@ -266,14 +227,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func createUserProfile() -> Bool {
-        do {
-            let profileCore = ProfileCore(context: viewContext)
-            self.updateProfileCore(profileCore: profileCore)
-            try viewContext.save()
-        }
-        catch {
-            print("Core Data Storing failed during profile creation...:\(error)")
-        }
+        
         // Firestore Write
         let collectionRef = db.collection("Profiles")
         if let id = userProfile.id {
@@ -337,33 +291,11 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             // 1 - Get User Profile from Firestore.
                             self.userProfile = try document.data(as: Profile.self) ?? Profile()
                             self.editUserProfile = self.userProfile
-
-                            // 2 - Storing Profile Data to Core
-                            self.fetchProfileCoreData()
-                            do {
-                                var profileCore: ProfileCore?
-                                // If Core Data already exists, update Core Data
-                                if (self.profileCores.count>0) {
-                                    profileCore = self.profileCores[0]
-                                }
-                                // Create new Core Data Record -- When profile data available in Firestore but not yet stored in Core Data
-                                // Example: User Registered -> Profile Exists in Firestore -> Uninstalled -> Installed -> Signed In
-                                else {
-                                    profileCore = ProfileCore(context: viewContext)
-                                }
-                                self.updateProfileCore(profileCore: profileCore!)
-                                // Save Profile data in Core Data Store only if Profile not empty
-                                if profileCore?.email != nil {
-                                    try viewContext.save()
-                                }
-                                self.profileFetchedAndReady = true
-                                // profile creation done or not done
-                                self.profileCreationDone = self.userProfile.email != nil ? true : false
-                                print("Profile Refresh done...")
-                            }
-                            catch {
-                                print("Core Data Storing failed during profile fetch...:\(error)")
-                            }
+                            
+                            self.profileFetchedAndReady = true
+                            // profile creation done or not done
+                            self.profileCreationDone = self.userProfile.email != nil ? true : false
+                            print("Profile Refresh done...")
                             
                             /// 3 - Profile Resumption after Deactivation/Deletion
                             /// If user is logging in "after deactivation" or "within 30 days of delete initiation",

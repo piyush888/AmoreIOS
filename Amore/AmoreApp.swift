@@ -15,7 +15,6 @@ struct AmoreApp: App {
 //    
     // Makes SwiftUI aware of the newly created app delegate(AppDelegate)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         
@@ -23,7 +22,6 @@ struct AmoreApp: App {
             
             /* Starts the application with Onboarding View*/
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
