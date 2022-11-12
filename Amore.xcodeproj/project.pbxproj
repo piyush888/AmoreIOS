@@ -22,6 +22,7 @@
 		1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CF274B82FD00590DD1 /* FilterModel.swift */; };
 		1B64588B285300BD00D5AD6E /* TextEditorWithPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */; };
 		1B6AB336271DBE9600A45A82 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1B6FF6F5291C843000AAD03A /* CustomGiphyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF6F4291C842F00AAD03A /* CustomGiphyView.swift */; };
 		1B72A54E270724F10074F144 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54D270724F10074F144 /* FirestoreServices.swift */; };
 		1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72A54F2707274A0074F144 /* ProfileViewModel.swift */; };
 		1B7C1D69284B0F8B0020A874 /* DirectMessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */; };
@@ -207,6 +208,7 @@
 		1B6273CD274B7B9A00590DD1 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		1B6273CF274B82FD00590DD1 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		1B64588A285300BD00D5AD6E /* TextEditorWithPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithPlaceholder.swift; sourceTree = "<group>"; };
+		1B6FF6F4291C842F00AAD03A /* CustomGiphyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGiphyView.swift; sourceTree = "<group>"; };
 		1B72A54D270724F10074F144 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		1B72A54F2707274A0074F144 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageCardView.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */,
 				1B38DFC127B8C1A0009B905F /* ChatBubble.swift */,
 				1B89836F2895BCEB00DE1FEF /* MessageForm.swift */,
+				1B6FF6F4291C842F00AAD03A /* CustomGiphyView.swift */,
 			);
 			path = ChatPageView;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
+				1B6FF6F5291C843000AAD03A /* CustomGiphyView.swift in Sources */,
 				E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */,
 				E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */,
 				1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */,

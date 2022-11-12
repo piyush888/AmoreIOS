@@ -333,29 +333,12 @@ struct MessageView: View {
                     } // end of switch case
                     
                 case "giphy":
-                    if let gifMediaId = message.giphyId {
+                if let giphyMediaId = message.giphyId {
                         if message.fromId == Auth.auth().currentUser?.uid {
                             ChatBubble(direction: .right) {
-                                Text(gifMediaId ?? "")
-                                    .padding(.all, 20)
-                                // TODO : MAKE use of the mediaId to load the gif here.
-                                
-//                                AnimatedImage(url:chatViewModel.loadGifURL(giphyID: gifMediaId))
-//                                    .aspectRatio(contentMode: .fit)
-//                                    .clipShape(GipyCustomShape())
-                                
-// TODO - THIS IS THE FUNCTION WE MADE FOR FETCING PROFILE FROM GIPHY USING ID
-//        func loadGifURL(giphyID:String) -> URL{
-//            GiphyCore.shared.gifByID(giphyID) { (response, error) in
-//                if let media = response?.data {
-//                    DispatchQueue.main.sync {
-//                        let gifURL = media.url(rendition: giphyViewController.renditionType, fileType: .gif) ?? ""
-//                        return URL(string: gifURL ?? "")
-//
-//                    }
-//                }
-//            }
-//        }
+                                CustomGiphyView(giphyMediaId: giphyMediaId)
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(GipyCustomShape())
                         }
                     }
                         else {
@@ -368,14 +351,14 @@ struct MessageView: View {
                                 .clipped()
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
-                            // TODO : MAKE use of the mediaId to load the gif here.
-//                            AnimatedImage(url:chatViewModel.loadGifURL(giphyID: gifMediaId))
-//                                .aspectRatio(contentMode: .fit)
-//                                .clipShape(GipyCustomShape())
+                            
+                            CustomGiphyView(giphyMediaId: giphyMediaId)
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(GipyCustomShape())
                         }
                     }
-                } // end of switch case
-                    
+                }
+                
                 default:
                     Text("")
             }

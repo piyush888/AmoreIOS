@@ -131,11 +131,10 @@ class ChatViewModel: ObservableObject {
                 querySnapshot?.documentChanges.forEach({ change in
                     if change.type == .added {
                         do {
-                            if let data = try change.document.data(as: ChatModel.self) {
-                                DispatchQueue.main.async {
-                                    self.chatMessages.append(data)
-                                    print("Chat: Paginating chatMessage in ChatLogView: \(Date())")
-                                }
+                            let data = try change.document.data(as: ChatModel.self)
+                            DispatchQueue.main.async {
+                                self.chatMessages.append(data)
+                                print("Chat: Paginating chatMessage in ChatLogView: \(Date())")
                             }
                         }
                         catch {
@@ -187,12 +186,11 @@ class ChatViewModel: ObservableObject {
                 querySnapshot.documentChanges.forEach({ change in
                     if change.type == .added {
                         do {
-                            if let data = try change.document.data(as: ChatModel.self) {
-                                DispatchQueue.main.async {
-                                    self.chatMessages.append(data)
-                                    print("Chat: Appending chatMessage in ChatLogView: \(Date())")
-                                    print("Chat: Checkpoint 4")
-                                }
+                            let data = try change.document.data(as: ChatModel.self)
+                            DispatchQueue.main.async {
+                                self.chatMessages.append(data)
+                                print("Chat: Appending chatMessage in ChatLogView: \(Date())")
+                                print("Chat: Checkpoint 4")
                             }
                         }
                         catch {
