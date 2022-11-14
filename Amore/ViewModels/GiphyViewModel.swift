@@ -30,6 +30,8 @@ struct GiphyVCRepresentable : UIViewControllerRepresentable {
         giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
         giphy.theme = CustomGiphyTheme(type:.automatic)
         GiphyViewController.trayHeightMultiplier = 1.05 // This causes the tray to start at the screen's full height
+        GPHCache.shared.cache.diskCapacity = 300 * 1000 * 1000
+        GPHCache.shared.cache.memoryCapacity = 100 * 1000 * 1000
         return giphy
     }
     

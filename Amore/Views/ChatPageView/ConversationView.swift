@@ -289,8 +289,24 @@ struct ConversationView: View {
             self.giphyId = ""
             self.giphyURL = ""
         }
+        GPHCache.shared.clear()
     }
     
+}
+
+struct TimestampView: View {
+    @State var timestampToDisplay: String
+    @State var fontColor: Color
+    
+    var body: some View {
+        Text(timestampToDisplay)
+            .font(.footnote)
+            .fontWeight(.medium)
+            .foregroundColor(fontColor)
+            .frame(alignment: .bottomTrailing)
+            .padding([.trailing, .leading], 20)
+            .padding(.bottom, 10)
+    }
 }
 
 struct MessageView: View {
@@ -301,6 +317,16 @@ struct MessageView: View {
     let message: ChatModel
     var toUser: ChatUser
     
+    var timestampToDisplay : String {
+        guard let timestamp = message.timestamp else {
+            return ""
+        }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: timestamp)
+    }
+    
     var body: some View {
         
         VStack {
@@ -309,10 +335,13 @@ struct MessageView: View {
                     // Cirremt User
                     if message.fromId == Auth.auth().currentUser?.uid {
                         ChatBubble(direction: .right) {
-                            Text(message.text.bound)
-                                .foregroundColor(.white)
-                                .padding(.all, 20)
-                                .background(Color.blue)
+                            VStack(alignment: .trailing, spacing: 10) {
+                                Text(message.text.bound)
+                                    .foregroundColor(.white)
+                                    .padding(.all, 20)
+                                TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
+                            }
+                            .background(Color.blue)
                         }
                     } else {
                         // Messages received from other user
@@ -325,9 +354,12 @@ struct MessageView: View {
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
                             ChatBubble(direction: .left) {
-                                Text(message.text.bound)
-                                    .padding(.all, 20)
-                                    .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text(message.text.bound)
+                                        .padding(.all, 20)
+                                    TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color.gray)
+                                }
+                                .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                             }
                         }
                     } // end of switch case
@@ -336,9 +368,18 @@ struct MessageView: View {
                 if let giphyMediaId = message.giphyId {
                         if message.fromId == Auth.auth().currentUser?.uid {
                             ChatBubble(direction: .right) {
-                                CustomGiphyView(giphyMediaId: giphyMediaId)
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(GipyCustomShape())
+                                ZStack(alignment: .leading) {
+                                    CustomGiphyView(giphyMediaId: giphyMediaId)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: 200)
+                                        .padding(.vertical, 5)
+                                    VStack(alignment: .trailing, spacing: 10) {
+                                        Spacer()
+                                        TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
+                                        
+                                    }
+                                }
+                                .background(Color.blue)
                         }
                     }
                         else {
@@ -352,9 +393,17 @@ struct MessageView: View {
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
                             
-                            CustomGiphyView(giphyMediaId: giphyMediaId)
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(GipyCustomShape())
+                            ZStack(alignment: .leading) {
+                                CustomGiphyView(giphyMediaId: giphyMediaId)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 200)
+                                    .padding(.vertical, 5)
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Spacer()
+                                    TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color.gray)
+                                }
+                            }
+                            .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                         }
                     }
                 }
