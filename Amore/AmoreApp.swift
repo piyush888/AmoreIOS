@@ -15,7 +15,6 @@ struct AmoreApp: App {
 //    
     // Makes SwiftUI aware of the newly created app delegate(AppDelegate)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         
@@ -23,7 +22,6 @@ struct AmoreApp: App {
             
             /* Starts the application with Onboarding View*/
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
@@ -38,7 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // 2 - Sets how much Firebase will log. Setting this to min reduces the amount of data you’ll see in your debugger.
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         
-        // APNs(Apple Push Notification) will generate and register a token when a user grants permission for push notifications. This token identifies the individual device so you can send notifications to it. You’ll use Firebase to distribute your notifications, and this code makes that token available in Firebase.
+        // APNs(Apple Push Notification) will generate and register a token when a user grants permission for push notifications. This token identifies the individual device so you can send notifications to it. You’ll use Firebase to distribute your notifications, and this code makes that token available in Firebase. Which is further pushed to Apple's Push Notification used to push a notification to iOS device
         // 3 - Sets AppDelegate as the delegate for UNUserNotificationCenter. The necessary delegate methods is implemented on step 3.2
         UNUserNotificationCenter.current().delegate = self
         // 4 - Creates options related to what kind of push notification permissions your app will request. In this case, you’re asking for alerts, badges and sound.

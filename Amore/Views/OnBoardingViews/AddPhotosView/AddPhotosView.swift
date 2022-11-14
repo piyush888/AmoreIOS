@@ -87,16 +87,7 @@ struct AddPhotosView: View {
                 print("Alert atleast 2 photos are required")
             }
         } label : {
-            ZStack{
-                Rectangle()
-                    .frame(height:45)
-                    .cornerRadius(10.0)
-                    .foregroundColor(profileModel.numOfUserPhotosAdded() < 2 ? .gray : .pink)
-                
-                Text("Continue")
-                    .foregroundColor(.white)
-                    
-            }
+            ContinueButtonDesign(buttonText: "Continue")
         }
         .disabled(profileModel.numOfUserPhotosAdded() < 2)
         .padding(.horizontal,50)
