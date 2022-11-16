@@ -27,130 +27,121 @@ struct AgeSettings: View {
 
 
 struct ShowAge: View {
+    @Environment(\.colorScheme) var colorScheme
+    @State private var showingAlert = false
+    @ObservedObject var slider: CustomSlider = CustomSlider(start: 18.0, end: 60.0, lhSP:0.0, hHSP:1.0)
     
     @Binding var minAgeFilter: Int
     @Binding var maxAgeFilter: Int
     
-    @State private var showingAlert = false
-    @State private var tempMinAgeFilter: Int = 18
-    @State private var tempMaxAgeFilter: Int = 60
-    @State private var minAgeBoundary: Int = 18
-    @State private var maxAgeBoundary: Int = 61
-    @Environment(\.colorScheme) var colorScheme
+    var lhSP:Double = 0.0
+    var hHSP:Double = 1.0
+    
+    init(minAgeFilter:Binding<Int>, maxAgeFilter:Binding<Int>){
+        self._minAgeFilter = minAgeFilter
+        self._maxAgeFilter = maxAgeFilter
+        // lhsp Pct % * (Max Age - Min Age) + Min Age = minAgeFilter
+        // hHSP Pct % * (Max Age - Min Age) + Min Age = maxAgeFilter
+        self.lhSP = (Double(self.minAgeFilter) - 18.0)/42.0
+        self.hHSP = (Double(self.maxAgeFilter) - 18.0)/42.0
+        self.slider = CustomSlider(start: 18.0, end: 60.0, lhSP:self.lhSP, hHSP:self.hHSP)
+    }
     
     var body: some View {
         
-        GeometryReader { geometry in
+        Group {
+            Spacer()
+            HStack {
+                Text("Min Age \(Int(self.slider.lowHandle.currentValue))")
+                Spacer()
+                Text("Max Age \(Int(self.slider.highHandle.currentValue))")
+            }
+            .padding()
             
-            VStack {
-                
-                Spacer()
-                
-                HStack {
-                        
-                    Spacer()
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                            .frame(height:400)
-                        AgePicker(agePickerTitle:"Min Age",
-                                  selectionFilter: $tempMinAgeFilter,
-                                  startForLoop: $minAgeBoundary,
-                                  endForLoop: $maxAgeBoundary,
-                                  geometry: geometry)
-                                  .onChange(of: self.tempMinAgeFilter) { _ in
-                                      if self.tempMinAgeFilter < self.tempMaxAgeFilter {
-                                          self.minAgeFilter =  self.tempMinAgeFilter
-                                      } else {
-                                          self.showingAlert = true
-                                          self.tempMinAgeFilter = self.minAgeFilter
-                                      }
-                                  }
-                    }
-                        
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
-                            .frame(height:400)
-                        
-                        AgePicker(agePickerTitle:"Max Age",
-                                  selectionFilter: $tempMaxAgeFilter,
-                                  startForLoop: $minAgeBoundary,
-                                  endForLoop: $maxAgeBoundary,
-                                  geometry: geometry)
-                                  .onChange(of: self.tempMaxAgeFilter) { _ in
-                                      if self.tempMinAgeFilter < self.tempMaxAgeFilter {
-                                          self.maxAgeFilter = self.tempMaxAgeFilter
-                                      } else {
-                                          self.showingAlert = true
-                                          self.tempMaxAgeFilter = self.maxAgeFilter
-                                      }
-                                  }
-                    }
-                    
-                    
-                    Spacer()
-                }
-                .padding(.top,5)
-                
-                Spacer()
-            }
-            .foregroundColor(.accentColor)
-            .onAppear {
-                self.tempMinAgeFilter = minAgeFilter
-                self.tempMaxAgeFilter = maxAgeFilter
-            }
+            SliderView(slider: self.slider)
+            Spacer()
         }
+        .foregroundColor(.accentColor)
+        .onChange(of: self.slider.lowHandle.currentValue, perform: { newValue in
+            let newAgeFilter = Int(newValue)
+            if newAgeFilter >= self.maxAgeFilter {
+                self.showingAlert = true
+                // Revert to original value before dragging
+                self.slider.lowHandleStartPercentage = 0.20
+            } else {
+                self.minAgeFilter = newAgeFilter
+            }
+        })
+        .onChange(of: self.slider.highHandle.currentValue, perform: { newValue in
+            let newAgeFilter = Int(newValue)
+            if newAgeFilter <= self.minAgeFilter {
+                self.showingAlert = true
+                // Revert to original value before dragging
+                self.slider.highHandleStartPercentage = 0.80
+            } else {
+                self.maxAgeFilter = newAgeFilter
+            }
+        })
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Incorrect range"),
                   message: Text("Min age should be less than max age."),
                   dismissButton: .default(Text("OK"))
             )
         }
-        .navigationTitle("Age")
+        .navigationTitle("Age Preference")
             
     }
 }
 
-struct AgePicker : View {
-        
-    @State var agePickerTitle: String
-    @Binding var selectionFilter: Int
-    @Binding var startForLoop: Int
-    @Binding var endForLoop: Int
-    @State var geometry: GeometryProxy
-    @State var unit = 0
+
+struct SliderView: View {
+    @ObservedObject var slider: CustomSlider
     
-    var body : some View {
-        
-        VStack {
-            
-            Text(self.agePickerTitle)
-                .font(.headline)
-            
-            Text("\(self.selectionFilter)")
-            
-            Picker(self.agePickerTitle, selection: $selectionFilter) {
-                ForEach(self.startForLoop ..< self.endForLoop) { age in
-                    Text("\(age)")
-                        .tag(age)
+    var body: some View {
+        RoundedRectangle(cornerRadius: slider.lineWidth)
+            .fill(Color.gray.opacity(0.2))
+            .frame(width: slider.width, height: slider.lineWidth)
+            .overlay(
+                ZStack {
+                    //Path between both handles
+                    SliderPathBetweenView(slider: slider)
+                    
+                    //Low Handle
+                    SliderHandleView(handle: slider.lowHandle)
+                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
+                    
+                    //High Handle
+                    SliderHandleView(handle: slider.highHandle)
+                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
                 }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: geometry.size.width/3)
-            .clipped()
-            .compositingGroup()
-        
-        }
-        
+            )
     }
-    
 }
 
-struct AgeSettings_Previews: PreviewProvider {
-    static var previews: some View {
-        AgeSettings(minAgeFilter: Binding.constant(30),
-                     maxAgeFilter: Binding.constant(40))
+struct SliderHandleView: View {
+    @ObservedObject var handle: SliderHandle
+    
+    var body: some View {
+        Circle()
+            .frame(width: handle.diameter, height: handle.diameter)
+            .foregroundColor(.white)
+            .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 0)
+            .scaleEffect(handle.onDrag ? 1.3 : 1)
+            .contentShape(Rectangle())
+            .position(x: handle.currentLocation.x, y: handle.currentLocation.y)
     }
 }
+
+struct SliderPathBetweenView: View {
+    @ObservedObject var slider: CustomSlider
+    
+    var body: some View {
+        Path { path in
+            path.move(to: slider.lowHandle.currentLocation)
+            path.addLine(to: slider.highHandle.currentLocation)
+        }
+        .stroke(Color.green, lineWidth: slider.lineWidth)
+    }
+}
+
+

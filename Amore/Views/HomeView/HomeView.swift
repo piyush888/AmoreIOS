@@ -102,7 +102,7 @@ struct HomeView: View {
                                     FilterSettings()
                                         .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
-                                        .onChange(of: filterModel.filterData) { _ in
+                                        .onDisappear {
                                             filterModel.updateFilter()
                                             // Update cards in the deck when view switches to Swipe View
                                             filtersChanged = true

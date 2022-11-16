@@ -162,6 +162,7 @@
 		E2ED202328BAA38600BFD32C /* BGImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED202228BAA38600BFD32C /* BGImagesModel.swift */; };
 		E2F7076F2913E85700DB1FA7 /* GiphyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */; };
 		E2F707752917E43800DB1FA7 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F707742917E43800DB1FA7 /* TabModel.swift */; };
+		E2F7077729246A2100DB1FA7 /* AgeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077629246A2000DB1FA7 /* AgeSlider.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -344,6 +345,7 @@
 		E2F6C0372905883A00D6823D /* GoogleService-Info Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info Development.plist"; sourceTree = "<group>"; };
 		E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyViewModel.swift; sourceTree = "<group>"; };
 		E2F707742917E43800DB1FA7 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
+		E2F7077629246A2000DB1FA7 /* AgeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSlider.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				E2723F8128823A4D00C0E3B1 /* NavigationBar.swift */,
 				E2925E812883460A006FDAF6 /* SelectSingleItem.swift */,
 				E271ADF62889E540001ACD31 /* SelectMultipleItems.swift */,
+				E2F7077629246A2000DB1FA7 /* AgeSlider.swift */,
 			);
 			path = FilterSettingsView;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
 				E226CF4E2709FD9A00FC5129 /* ImagePicker.swift in Sources */,
 				E205F67D2766A3D600196A06 /* FetchDataModel.swift in Sources */,
+				E2F7077729246A2100DB1FA7 /* AgeSlider.swift in Sources */,
 				1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */,
 				1BC8BE0A2705CC5E00F0137E /* Gender.swift in Sources */,
 				E2851CAE272711C5005B19E1 /* PreviewProfile.swift in Sources */,

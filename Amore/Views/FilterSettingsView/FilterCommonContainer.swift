@@ -16,21 +16,16 @@ struct FilterCommonContainer: View {
         
         HStack {
             Text("\(filterName)")
-                .bold()
                 .padding(.horizontal)
-                .font(.headline)
                 
             Spacer()
             Text("\(filteredValue)")
-                .bold()
                 .padding()
-                .font(.headline)
-        
         }
         .padding(10)
-        .frame(height: 60)
+        .frame(height: 50)
         .background(
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color(hex:0x452A7B), Color(hex:0xFF6EE0)]),
                                      startPoint: .bottomLeading,
                                        endPoint: .top))

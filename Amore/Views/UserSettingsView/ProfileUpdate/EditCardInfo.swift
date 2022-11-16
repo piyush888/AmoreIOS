@@ -188,17 +188,6 @@ struct EditCardInfo: View {
                             Text("Pasions")
                     })
                 }
-//                    Picker("Passions", selection: Binding.constant("Multiple")) {
-//
-//                       }
-//                       .navigationBarTitle("Passions")
-//                       .navigationBarTitleDisplayMode(.inline)
-//                       .onChange(of: passions) { _ in
-//                           self.formUpdated = true
-//                        }
-                       
-                    
-                
                 
                 // Discoverty and Notifications
                 Section(header: Text("Card Settings")) {
