@@ -139,10 +139,9 @@ class MainMessagesViewModel: ObservableObject {
                             }
                             
                             do {
-                                if let rm = try change.document.data(as: ChatConversation.self) {
-                                    print("Chat: Checkpoint 2")
-                                    self.recentChats.insert(rm, at: 0)
-                                }
+                                let rm = try change.document.data(as: ChatConversation.self)
+                                print("Chat: Checkpoint 2")
+                                self.recentChats.insert(rm, at: 0)
                             } catch {
                                 print("Chat: Error Decoding Recent Message: \(error)")
                             }
