@@ -44,7 +44,7 @@ class CardProfileModel: ObservableObject {
     
     func fetchProfile(filterData: Filters) {
         profilesBeingFetched = true
-        print("Calling fetchProfile")
+//        print("Calling fetchProfile")
         
         guard let url = URL(string: ProjectConfig.apiBaseURL.absoluteString + "/fetchGeoRecommendations") else { return }
         

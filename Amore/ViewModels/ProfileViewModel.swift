@@ -295,7 +295,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             self.profileFetchedAndReady = true
                             // profile creation done or not done
                             self.profileCreationDone = self.userProfile.email != nil ? true : false
-                            print("Profile Refresh done...")
                             
                             /// 3 - Profile Resumption after Deactivation/Deletion
                             /// If user is logging in "after deactivation" or "within 30 days of delete initiation",
@@ -354,9 +353,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     print(error.localizedDescription)
                 }
             }
-            else {
-                print("No change in Profile Info...")
-            }
+//            else {
+//                print("No change in Profile Info...")
+//            }
         }
     }
     

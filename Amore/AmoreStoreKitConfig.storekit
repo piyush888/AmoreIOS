@@ -1,0 +1,238 @@
+{
+  "identifier" : "D7C3E77C",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "12.99",
+      "familyShareable" : false,
+      "internalID" : "6444081176",
+      "localizations" : [
+        {
+          "description" : "DM your crush and increase your match chances",
+          "displayName" : "15 Messages",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.15.Messages.v3",
+      "referenceName" : "Amore.Fifteen.Messages.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "6.99",
+      "familyShareable" : false,
+      "internalID" : "1652219096",
+      "localizations" : [
+        {
+          "description" : "DM your crush and increase your match chances",
+          "displayName" : "5 Messages",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.5.Messages.v3",
+      "referenceName" : "Amore.Five.Messages.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "1652223381",
+      "localizations" : [
+        {
+          "description" : "Show your love and get noticed",
+          "displayName" : "5 Super Likes",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.5.SuperLikes.v3",
+      "referenceName" : "Amore.Five.SuperLikes.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "1652219251",
+      "localizations" : [
+        {
+          "description" : "Skip the line and be under the spotlight",
+          "displayName" : "1 Boosts",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.1.Boosts.v3",
+      "referenceName" : "Amore.One.Boosts.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10.99",
+      "familyShareable" : false,
+      "internalID" : "1652218652",
+      "localizations" : [
+        {
+          "description" : "DM your crush and increase your match chances",
+          "displayName" : "10 Messages",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.10.Messages.v3",
+      "referenceName" : "Amore.Ten.Messages.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6444088766",
+      "localizations" : [
+        {
+          "description" : "Show your love and get noticed",
+          "displayName" : "10 Super Likes",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.10.SuperLikes.v3",
+      "referenceName" : "Amore.Ten.SuperLikes.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "8.99",
+      "familyShareable" : false,
+      "internalID" : "1652220426",
+      "localizations" : [
+        {
+          "description" : "Skip the line and be under the spotlight",
+          "displayName" : "3 Boosts",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.3.Boosts.v3",
+      "referenceName" : "Amore.Three.Boosts.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "1652223241",
+      "localizations" : [
+        {
+          "description" : "Show your love and get noticed",
+          "displayName" : "3 Super Likes",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.3.SuperLikes.v3",
+      "referenceName" : "Amore.Three.SuperLikes.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "6.99",
+      "familyShareable" : false,
+      "internalID" : "6444088642",
+      "localizations" : [
+        {
+          "description" : "Skip the line and be under the spotlight",
+          "displayName" : "2 Boosts",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.2.Boosts.v3",
+      "referenceName" : "Amore.Two.Boosts.v3",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6444069278",
+    "_developerTeamID" : "292QG86ZUY",
+    "_lastSynchronizedDate" : 690403849.02661896
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21041137",
+      "localizations" : [
+
+      ],
+      "name" : "Amore.Group.Subscription.v3",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "8.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1652224000",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Gold Subscription",
+              "displayName" : "Amore Gold 1 Month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Amore.ProductId.1M.Gold.v3",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Amore.OneMonth.Gold.v3",
+          "subscriptionGroupID" : "21041137",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "1652224049",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Amore Gold Subscription",
+              "displayName" : "Amore Gold 6 Month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Amore.ProductId.6M.Gold.v3",
+          "recurringSubscriptionPeriod" : "P6M",
+          "referenceName" : "Amore.SixMonth.Gold.v3",
+          "subscriptionGroupID" : "21041137",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6444089807",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Amore Gold Subscription",
+              "displayName" : "Amore Gold 3 Month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Amore.ProductId.3M.Gold.v3",
+          "recurringSubscriptionPeriod" : "P3M",
+          "referenceName" : "Amore.ThreeMonth.Gold.v3",
+          "subscriptionGroupID" : "21041137",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

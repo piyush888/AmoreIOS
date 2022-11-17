@@ -50,7 +50,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     // Sends a request to the Apple servers based on given product IDs. At the same time we use the StoreManager class itself as the delegate of the request  so that the request knows that the didReceive response method should be called as soon as the Apple servers send a response.
     // Get Products from IAP
     func getProducts() {
-        print("Store Manager: Start requesting products ...")
+//        print("Store Manager: Start requesting products ...")
         let request = SKProductsRequest(productIdentifiers: Set(productIDs))
         request.delegate = self
         request.start()

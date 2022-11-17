@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FLAnimatedImage
 import GiphyUISDK
 
 struct CustomGiphyView: UIViewRepresentable {
