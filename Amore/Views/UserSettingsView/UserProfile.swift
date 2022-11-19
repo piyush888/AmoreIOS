@@ -230,6 +230,33 @@ struct UserProfile: View {
                                                         )
                                                         .environmentObject(storeManager)
                                     }
+                            
+                            case .rewindCards:
+                                if let pricingData = storeManager.rewindsPricing {
+                                    BuySubscriptionOrItemsCard(cardColorFormat:[Color.orange, Color(hex:0xf7a6f5), Color.white],
+                                                      cardName: "Rewinds",
+                                                      cardHeaderSymbol: "arrowshape.turn.up.backward.circle.fill",
+                                                      cardHeaderSymbolColor: Color.white,
+                                                      headerText: "Accidental swipe?",
+                                                      subHeaderText: "Don't let them get away, use a rewind",
+                                                      showModal: $showModal,
+                                                      geometry: geometry,
+                                                      priceTabs: pricingData,
+                                                      selectedPriceTabId: pricingData["5 Rewinds"]?.productIdentifier ?? "NoId",
+                                                      selectedDictIndex: "5 Rewinds",
+                                                      currency: pricingData["5 Rewinds"]?.localizedPrice ?? "USD",
+                                                      totalCost: Float(truncating: pricingData["5 Rewinds"]?.price ?? 0.0),
+                                                      firstTabKey: "2 Rewinds",
+                                                      firstTabCount: 2,
+                                                      secondTabKey: "5 Rewinds",
+                                                      secondTabCount: 5,
+                                                      thirdTabKey: "10 Rewinds",
+                                                      thirdTabCount: 10,
+                                                      selectedItemCount: 5,
+                                                      popUpCardSelection:$popUpCardSelection
+                                                    )
+                                                    .environmentObject(storeManager)
+                                }
                                     
                                 case .myAmorecards:
                                     MyAmoreCard(showModal: $showModal,
@@ -276,10 +303,10 @@ struct UserProfile: View {
                                                       cardHeaderSymbolColor: Color("gold-star"),
                                                       headerText:"Gold Subscription",
                                                       subScriptText1:"Top Picks",
-                                                      subScriptText2:"",
-                                                      subScriptText3:"5 Super likes everyday",
-                                                      subScriptText4:"1 Boost a month",
-                                                      subScriptText5:"2 messages everyday",
+                                                      subScriptText2:"5 Super likes everyday",
+                                                      subScriptText3:"1 Boost a month",
+                                                      subScriptText4:"2 Messages everyday",
+                                                      subScriptText5:"2 Rewinds everyday",
                                                       showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
@@ -468,6 +495,13 @@ struct BuySubscriptionOrItemsCard : View {
                                 } else {
                                     Button(action: {
                                         self.storeManager.tempPurchaseHold.subscriptionTypeId = priceTabs[selectedDictIndex]?.productIdentifier
+                                        self.storeManager.tempPurchaseHold.subscriptionMessageCount = 2
+                                        self.storeManager.tempPurchaseHold.subscriptonBoostCount = 1
+                                        self.storeManager.tempPurchaseHold.subscriptionRewindsCount = 2
+                                        self.storeManager.tempPurchaseHold.subscriptionSuperLikeCount = 5
+                                        self.storeManager.tempPurchaseHold.subscriptionUpdateDateTime = Date()
+                                        self.storeManager.tempPurchaseHold.subscriptionPurchaseDateTime = Date()
+                                        self.storeManager.tempPurchaseHold.subscriptionUpdatedForMonth = 1
                                         self.storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())
                                     }) {
                                         PayButton(buttonText: "\(currency)",
@@ -491,6 +525,10 @@ struct BuySubscriptionOrItemsCard : View {
                                     } else if cardName == "Super Likes" {
                                         if let purchasedSuperLikesCount = storeManager.purchaseDataDetails.purchasedSuperLikesCount {
                                             self.storeManager.tempPurchaseHold.purchasedSuperLikesCount = purchasedSuperLikesCount + selectedItemCount
+                                        }
+                                    } else if cardName == "Rewinds" {
+                                        if let purchasedRewindsCount = storeManager.purchaseDataDetails.purchasedRewindsCount {
+                                            self.storeManager.tempPurchaseHold.purchasedRewindsCount = purchasedRewindsCount + selectedItemCount
                                         }
                                     }
                                     storeManager.purchaseProduct(product: priceTabs[selectedDictIndex] ?? SKProduct())

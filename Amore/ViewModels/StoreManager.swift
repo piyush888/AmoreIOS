@@ -23,6 +23,9 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         "Amore.ProductId.5.Messages.v3",
         "Amore.ProductId.10.Messages.v3",
         "Amore.ProductId.15.Messages.v3",
+        "Amore.ProductId.2.Rewinds.v3",
+        "Amore.ProductId.5.Rewinds.v3",
+        "Amore.ProductId.10.Rewinds.v3",
         "Amore.ProductId.1M.Gold.v3",
         "Amore.ProductId.3M.Gold.v3",
         "Amore.ProductId.6M.Gold.v3"]
@@ -33,8 +36,10 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     @Published var superLikesPricing: [String: SKProduct] = [:]
     @Published var boostsPricing: [String: SKProduct] = [:]
     @Published var messagesPricing: [String: SKProduct] = [:]
+    @Published var rewindsPricing: [String: SKProduct] = [:]
     @Published var amoreGoldPricing: [String: SKProduct] = [:]
     @Published var amorePlatinumPricing: [String: SKProduct] = [:]
+    
     
     // Initalized with data from firestore
     @Published var purchaseDataDetails = ConsumableCountAndSubscriptionModel()
@@ -65,7 +70,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         if !response.products.isEmpty {
             // If we are sure that we have received products, we can add any of these products to our myProducts array using a for-in loop.
             for fetchedProduct in response.products {
-                print("Product List " + fetchedProduct.localizedTitle)
+//                print("Product List " + fetchedProduct.localizedTitle)
                 DispatchQueue.main.async {
                     // Localized Titles Are Stored in Apple InApp Purchase Developer account
                     // Please make sure Localized Titles are always same even when you create new products
@@ -76,6 +81,8 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                         self.boostsPricing[fetchedProduct.localizedTitle] = fetchedProduct
                     } else if fetchedProduct.localizedTitle.contains("Messages") {
                         self.messagesPricing[fetchedProduct.localizedTitle] = fetchedProduct
+                    } else if fetchedProduct.localizedTitle.contains("Rewinds") {
+                        self.rewindsPricing[fetchedProduct.localizedTitle] = fetchedProduct
                     } else if fetchedProduct.localizedTitle.contains("Amore Gold") {
                         self.amoreGoldPricing[fetchedProduct.localizedTitle] = fetchedProduct
                     } else if fetchedProduct.localizedTitle.contains("Amore Platinum") {
@@ -262,16 +269,35 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 let subscriptionId = self.purchaseDataDetails.subscriptionTypeId ?? ""
                 // Check if the plan is a Paid Plan like Amore Gold
                 if subscriptionId.contains("Gold") {
-                    // Check if the InAppPurchase collection was already updated for today
-                    // Update the InAppPurchase for the user
-                    self.updateDailySubscriptions(dailySuperLike:5,
-                                                  dailyBoostCount: 1,
-                                                  dailyMessageCount: 2)
+                    // Boosts are only update once a month therefore it's necessary to only update once a month if subscription is active
+                    // Check when was subcription purchased to count current month from upgrade to perform monthly consumables upgrade
+                    if let subscriptionPurchaseDateTime = self.purchaseDataDetails.subscriptionPurchaseDateTime {
+                        var monthlyBoostCount = self.purchaseDataDetails.subscriptonBoostCount ?? 0
+                        // Calculate number of months passed since sunscription was purchased
+                        let dateDiffs = Calendar.current.dateComponents([.year, .month, .day],
+                                                                           from: subscriptionPurchaseDateTime,
+                                                                           to: Date())
+                        var subscriptionUpdatedForMonth = self.purchaseDataDetails.subscriptionUpdatedForMonth ?? 0
+                        let monthsAfterSubscription = (dateDiffs.month ?? 0)+1 //+1 for first month; otherwise differnece is 0
+                        if monthsAfterSubscription > (self.purchaseDataDetails.subscriptionUpdatedForMonth ?? 0) {
+                            // Only update monthly consumables
+                            monthlyBoostCount = 1
+                        }
+                        
+                        // monthlyBoostCount will be either 0 or 1 depending if it's a new month
+                        self.updateDailySubscriptions(dailySuperLike:5,
+                                                      monthlyBoostCount: monthlyBoostCount,
+                                                      dailyMessageCount: 2,
+                                                      dailyRewindCount:3,
+                                                      subscriptionUpdatedForMonth:monthsAfterSubscription)
+                    }
                 } else {
                     print("User has free subscription and doesn't IAP doesn't needs to be updated")
                     self.updateDailySubscriptions(dailySuperLike:1,
-                                                  dailyBoostCount: 0,
-                                                  dailyMessageCount: 0)
+                                                  monthlyBoostCount: 0,
+                                                  dailyMessageCount: 0,
+                                                  dailyRewindCount:1,
+                                                  subscriptionUpdatedForMonth:self.purchaseDataDetails.subscriptionUpdatedForMonth ?? 0)
                 }
             }
         } else {
@@ -279,17 +305,21 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
             print("Why user doesn't have a date stored in firestore ?")
             // Adding date and pushing to user IAP Purchases in firestore
             self.updateDailySubscriptions(dailySuperLike:1,
-                                          dailyBoostCount: 0,
-                                          dailyMessageCount: 0)
+                                          monthlyBoostCount: 0,
+                                          dailyMessageCount: 0,
+                                          dailyRewindCount:1,
+                                          subscriptionUpdatedForMonth:self.purchaseDataDetails.subscriptionUpdatedForMonth ?? 0)
         }
         
     }
     
     // User this function to update firestore with new daily subscription counts
-    func updateDailySubscriptions(dailySuperLike:Int, dailyBoostCount:Int, dailyMessageCount:Int) {
+    func updateDailySubscriptions(dailySuperLike:Int, monthlyBoostCount:Int, dailyMessageCount:Int, dailyRewindCount:Int, subscriptionUpdatedForMonth:Int) {
         self.purchaseDataDetails.subscriptionSuperLikeCount = dailySuperLike
         self.purchaseDataDetails.subscriptionMessageCount = dailyMessageCount
-        self.purchaseDataDetails.subscriptonBoostCount = dailyBoostCount
+        self.purchaseDataDetails.subscriptonBoostCount = monthlyBoostCount
+        self.purchaseDataDetails.subscriptionRewindsCount = dailyRewindCount
+        self.purchaseDataDetails.subscriptionUpdatedForMonth = subscriptionUpdatedForMonth
         self.purchaseDataDetails.subscriptionUpdateDateTime = Date()
         _ = self.storePurchaseNoParams()
     }

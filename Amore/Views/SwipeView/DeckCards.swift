@@ -37,6 +37,12 @@ struct DeckCards: View {
         return purchasedSuperLikesCount+subscriptionSuperLikeCount
     }
     
+    var totalRewindCount: Int {
+        let purchasedRewindsCount =  self.storeManager.purchaseDataDetails.purchasedRewindsCount ?? 0
+        let subscriptionRewindsCount =  self.storeManager.purchaseDataDetails.subscriptionRewindsCount ?? 0
+        return purchasedRewindsCount+subscriptionRewindsCount
+    }
+    
     /// What percentage of our own width have we swipped
     /// - Parameters:
     ///   - geometry: The geometry
@@ -97,6 +103,15 @@ struct DeckCards: View {
                     }
                 }
             }
+        }
+    }
+    
+    func consumeARewind() {
+        // Since Subscriptions expire everyday, make sure to consume the dail subscriptions first before consuming the purcahses
+        if let subscriptionRewindsCount = storeManager.purchaseDataDetails.subscriptionRewindsCount,subscriptionRewindsCount > 0 {
+                storeManager.purchaseDataDetails.subscriptionRewindsCount.boundInt -= 1
+        } else if let purchasedRewindsCount = storeManager.purchaseDataDetails.purchasedRewindsCount,purchasedRewindsCount > 0  {
+                storeManager.purchaseDataDetails.purchasedRewindsCount.boundInt -= 1
         }
     }
     
@@ -173,36 +188,48 @@ struct DeckCards: View {
     var RewindButton : some View {
         // RewindButton
         Button {
-            if cardSwipeDone {
-                cardSwipeDone = false
-                FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
-                    cardSwipeDone = true
-                }, onSuccess: {
-                    rewindedDict in
-                    
-                    // Append the rewinded card back to the dictionary
-                    let rewindedUserCard = rewindedDict.rewindedUserCard
-                    
-                    let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
-                    // Append rewinded user in Array
-                    cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
-                    // Append rewinded user in Dict
-                    if let rewindedUserId = cardProfileWithPhotos.id {
-                        cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
-                        receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
-                    }
-                    
-                    // Find the kind of rewind, like, dislike or superlike
-                    // if superlike increment the superlike
-                    let swipeStatusBetweenUsers = rewindedDict.swipeStatusBetweenUsers
-                    if swipeStatusBetweenUsers == "Superlikes" {
-                        if let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount {
-                            self.storeManager.purchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount+1
-                            _ = self.storeManager.storePurchaseNoParams()
+            
+            // Check if today's rewind count > 0
+            if self.totalRewindCount > 0 {
+                if cardSwipeDone {
+                    cardSwipeDone = false
+                    FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
+                        cardSwipeDone = true
+                    }, onSuccess: {
+                        rewindedDict in
+                        
+                        // Append the rewinded card back to the dictionary
+                        let rewindedUserCard = rewindedDict.rewindedUserCard
+                        
+                        let cardProfileWithPhotos = CardProfileModel.cardProfileToCardProfileWithPhotos(card: rewindedUserCard)
+                        // Append rewinded user in Array
+                        cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
+                        // Append rewinded user in Dict
+                        if let rewindedUserId = cardProfileWithPhotos.id {
+                            cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
+                            receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
                         }
-                    }
-                    cardSwipeDone = true
-                })
+                        
+                        // Find the kind of rewind, like, dislike or superlike
+                        // if superlike increment the superlike
+                        let swipeStatusBetweenUsers = rewindedDict.swipeStatusBetweenUsers
+                        if swipeStatusBetweenUsers == "Superlikes" {
+                            if let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount {
+                                self.storeManager.purchaseDataDetails.purchasedSuperLikesCount = purchasedSuperLikesCount+1
+//                                _ = self.storeManager.storePurchaseNoParams()
+                            }
+                        }
+                        cardSwipeDone = true
+                        
+                        _ = self.consumeARewind()
+                        _ = storeManager.storePurchaseNoParams()
+                        
+                    })
+                }
+            }
+            else {
+                // User ran out of rewinds
+                allcardsActiveSheet = .buyMoreRewindsSheet
             }
         } label: {
             Image(systemName: "arrowshape.turn.up.backward.circle.fill")

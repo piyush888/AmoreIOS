@@ -248,9 +248,11 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 purchasedBoostCount:2,
                                                 purchasedSuperLikesCount:3,
                                                 purchasedMessagesCount:2,
+                                                purchasedRewindsCount:1,
                                                 subscriptonBoostCount: 0,
                                                 subscriptionSuperLikeCount: 0,
                                                 subscriptionMessageCount: 0,
+                                                subscriptionRewindsCount:0,
                                                 subscriptionTypeId: "Amore.ProductId.12M.Free.v3",
                                                 subscriptionUpdateDateTime: Date()))
                 

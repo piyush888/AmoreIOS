@@ -107,10 +107,10 @@ struct BoostUserProfile: View {
                         }.font(.largeTitle)
                         
                         Text("Boost your profile for next 60 min")
-                        Text("Once profile boost is triggered, the Amore recommendation engine pushes your profile to relevant users nearby, giving you a better prospect of finding a potential match.")
-                            .customFont(.footnote)
-                            .opacity(0.7)
-                            .padding(.horizontal,20)
+//                        Text("Once profile boost is triggered, the Amore recommendation engine pushes your profile to relevant users nearby, giving you a better prospect of finding a potential match.")
+//                            .customFont(.footnote)
+//                            .opacity(0.7)
+//                            .padding(.horizontal,10)
                     }
                     
                     Spacer()
@@ -121,17 +121,17 @@ struct BoostUserProfile: View {
                         // Radiant Animation
                         radiateAnimation
                             .view()
-                            .frame(width:geometry.size.width/1.5)
+                            .frame(width:geometry.size.width/1.75)
                         // User Profile act as a button
                         Button {
                             // Nothing happens here
                         } label: {
                             ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
                                              photo: $photoModel.photo1,
-                                             width: 150,
-                                             height:150)
+                                             width: 125,
+                                             height:125)
                                 .clipShape(Circle())
-                                .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
+                                .shadow(color: Color.pink, radius: 4.75, x: 0.5, y: 0.5)
                         }
                     }
                     
@@ -152,7 +152,7 @@ struct BoostUserProfile: View {
                     // Activate boost button
                     button
                         .view()
-                        .frame(width:330, height:80)
+                        .frame(width:330, height:70)
                         .background(
                             Color.black
                                 .cornerRadius(30)
@@ -173,7 +173,7 @@ struct BoostUserProfile: View {
                                                }
                                         Image(systemName: "clock")
                                     }
-                                    .font(.title)
+                                    .font(.title3)
                                     
                                 } else {
                                     Text("Boost me").fontWeight(.bold)
@@ -232,18 +232,18 @@ struct BoostUserProfile: View {
                     VStack {
                         if let pricingData = storeManager.boostsPricing {
                             
-                            BoostBuyButton(boostType:2.0,
-                                           totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
-                                           currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["2 Boosts"] ?? SKProduct())
+                            BoostBuyButton(boostType:1.0,
+                                           totalCost: Float(truncating: pricingData["1 Boosts"]?.price ?? 0.0),
+                                           currency: pricingData["1 Boosts"]?.localizedPrice?.first ?? "$",
+                                           skProductObj: pricingData["1 Boosts"] ?? SKProduct())
                                 .frame(width: geometry.size.width*0.80)
                                 .environmentObject(storeManager)
                         
 
-                            BoostBuyButton(boostType:5.0,
-                                           totalCost: Float(truncating: pricingData["5 Boosts"]?.price ?? 0.0),
-                                           currency: pricingData["5 Boosts"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["5 Boosts"] ?? SKProduct())
+                            BoostBuyButton(boostType:2.0,
+                                           totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
+                                           currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
+                                           skProductObj: pricingData["2 Boosts"] ?? SKProduct())
                                 .frame(width: geometry.size.width*0.80)
                                 .environmentObject(storeManager)
                         }

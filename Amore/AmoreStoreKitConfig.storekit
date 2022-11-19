@@ -35,6 +35,21 @@
       "type" : "Consumable"
     },
     {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6444585179",
+      "localizations" : [
+        {
+          "description" : "Don't let the get away, use a rewind",
+          "displayName" : "5 Rewinds",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.5.Rewinds.v3",
+      "referenceName" : "Amore.Five.Rewinds.v3",
+      "type" : "Consumable"
+    },
+    {
       "displayPrice" : "2.99",
       "familyShareable" : false,
       "internalID" : "1652223381",
@@ -77,6 +92,21 @@
       ],
       "productID" : "Amore.ProductId.10.Messages.v3",
       "referenceName" : "Amore.Ten.Messages.v3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "6444585118",
+      "localizations" : [
+        {
+          "description" : "Don't let the get away, use a rewind",
+          "displayName" : "10 Rewinds",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.10.Rewinds.v3",
+      "referenceName" : "Amore.Ten.Rewinds.v3",
       "type" : "Consumable"
     },
     {
@@ -138,12 +168,27 @@
       "productID" : "Amore.ProductId.2.Boosts.v3",
       "referenceName" : "Amore.Two.Boosts.v3",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6444585030",
+      "localizations" : [
+        {
+          "description" : "Don't let the get away, use a rewind",
+          "displayName" : "2 Rewinds",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Amore.ProductId.2.Rewinds.v3",
+      "referenceName" : "Amore.Two.Rewinds.v3",
+      "type" : "Consumable"
     }
   ],
   "settings" : {
     "_applicationInternalID" : "6444069278",
     "_developerTeamID" : "292QG86ZUY",
-    "_lastSynchronizedDate" : 690403849.02661896
+    "_lastSynchronizedDate" : 690559805.86902499
   },
   "subscriptionGroups" : [
     {

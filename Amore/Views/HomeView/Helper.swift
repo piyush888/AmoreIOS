@@ -42,6 +42,7 @@ enum PopUpCards {
     case superLikeCards
     case boostCards
     case messagesCards
+    case rewindCards
     case myAmorecards
     case amorePlatinum
     case amoreGold

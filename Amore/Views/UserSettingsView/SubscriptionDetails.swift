@@ -32,6 +32,12 @@ struct SubscriptionDetails: View {
         return purchasedMessagesCount+subscriptionMessageCount
     }
     
+    var totalRewindsCount: Int {
+        let purchasedRewindsCount =  self.storeManager.purchaseDataDetails.purchasedRewindsCount ?? 0
+        let subscriptionRewindsCount =  self.storeManager.purchaseDataDetails.subscriptionRewindsCount ?? 0
+        return purchasedRewindsCount+subscriptionRewindsCount
+    }
+    
     @Binding var backgroundColor: Color
     
     var body: some View {
@@ -92,14 +98,16 @@ struct SubscriptionDetails: View {
                 
                 //Restore products already purchased
                 Button {
-                    storeManager.restoreProducts()
+//                    storeManager.restoreProducts() - TODO KTZ Move the restore inside settings view
+                    popUpCardSelection = .rewindCards
+                    showModal = true
                 } label: {
                     VStack {
                         Image(systemName: "arrow.counterclockwise.circle.fill")
                             .resizable()
                             .frame(width:50, height:50)
-                            .foregroundColor(.green)
-                        Text("Restore")
+                            .foregroundColor(.orange)
+                        Text("\(self.totalRewindsCount) Rewinds")
                             .font(.caption2)
                     }
                 }

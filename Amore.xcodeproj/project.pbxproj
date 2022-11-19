@@ -165,6 +165,7 @@
 		E2F707752917E43800DB1FA7 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F707742917E43800DB1FA7 /* TabModel.swift */; };
 		E2F7077729246A2100DB1FA7 /* AgeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077629246A2000DB1FA7 /* AgeSlider.swift */; };
 		E2F707792926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = E2F707782926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit */; };
+		E2F7077B29283C6D00DB1FA7 /* BuyMoreRewinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077A29283C6D00DB1FA7 /* BuyMoreRewinds.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -350,6 +351,7 @@
 		E2F707742917E43800DB1FA7 /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E2F7077629246A2000DB1FA7 /* AgeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSlider.swift; sourceTree = "<group>"; };
 		E2F707782926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = AmoreStoreKitConfig.storekit; sourceTree = "<group>"; };
+		E2F7077A29283C6D00DB1FA7 /* BuyMoreRewinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyMoreRewinds.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				E25B0F3B285FB14800411BDA /* BoostUserProfile.swift */,
 				1B7C1D68284B0F8B0020A874 /* DirectMessageCardView.swift */,
 				E2ED201E28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift */,
+				E2F7077A29283C6D00DB1FA7 /* BuyMoreRewinds.swift */,
 			);
 			path = Sheets;
 			sourceTree = "<group>";
@@ -1015,6 +1018,7 @@
 				E22D5562275532B800852D70 /* ColorExtension.swift in Sources */,
 				E25D15A128675FE8001330DB /* CustomButton.swift in Sources */,
 				1BF29D2D2732714E00455A2F /* UploadWindowsGroup.swift in Sources */,
+				E2F7077B29283C6D00DB1FA7 /* BuyMoreRewinds.swift in Sources */,
 				1BB36D3C27AE302200F4029C /* ChatViewModel.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBioHeadline.swift in Sources */,
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
@@ -1221,7 +1225,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B1FF18565C553FCD6193EC3 /* Pods-Amore.debug staging.xcconfig */;
 			buildSettings = {
-				API_BASE_URL = "https://client.luvamore.com";
+				API_BASE_URL = "http://127.0.0.1:5040";
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
