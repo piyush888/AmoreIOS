@@ -306,7 +306,7 @@ struct UserProfile: View {
                                                       subScriptText2:"5 Super likes everyday",
                                                       subScriptText3:"1 Boost a month",
                                                       subScriptText4:"2 Messages everyday",
-                                                      subScriptText5:"2 Rewinds everyday",
+                                                      subScriptText5:"3 Rewinds everyday",
                                                       showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
