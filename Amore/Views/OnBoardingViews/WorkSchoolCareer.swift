@@ -29,8 +29,10 @@ struct WorkSchoolCareer: View {
     func checkWorkSchoolCareerFilled () {
         if (self.industry != "") && (self.education != "") {
             DispatchQueue.main.async {
+                profileModel.userProfile.careerField = industry
+                
                 profileModel.userProfile.jobTitle = jobTitle
-                profileModel.userProfile.careerField = companyName
+                profileModel.userProfile.work = companyName
                 
                 profileModel.userProfile.education = education
                 profileModel.userProfile.school = schoolName

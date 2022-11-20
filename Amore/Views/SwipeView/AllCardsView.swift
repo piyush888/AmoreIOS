@@ -154,6 +154,10 @@ struct AllCardsView: View {
                     case .buyMoreSuperLikesSheet:
                         BuyMoreSuperLikesSheet(allcardsActiveSheet:$allcardsActiveSheet)
                             .environmentObject(storeManager)
+                    
+                    case .buyMoreRewindsSheet:
+                        BuyMoreRewinds(allcardsActiveSheet:$allcardsActiveSheet)
+                        .environmentObject(storeManager)
                 }
                 
             }
@@ -176,7 +180,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, boostProfileSheet, directMessageSheet, buyMoreSuperLikesSheet
+    case reportProfileSheet, boostProfileSheet, directMessageSheet, buyMoreSuperLikesSheet, buyMoreRewindsSheet
     var id: Int {
         hashValue
     }

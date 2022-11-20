@@ -248,9 +248,11 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                                 purchasedBoostCount:2,
                                                 purchasedSuperLikesCount:3,
                                                 purchasedMessagesCount:2,
+                                                purchasedRewindsCount:1,
                                                 subscriptonBoostCount: 0,
                                                 subscriptionSuperLikeCount: 0,
                                                 subscriptionMessageCount: 0,
+                                                subscriptionRewindsCount:0,
                                                 subscriptionTypeId: "Amore.ProductId.12M.Free.v3",
                                                 subscriptionUpdateDateTime: Date()))
                 
@@ -295,7 +297,6 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             self.profileFetchedAndReady = true
                             // profile creation done or not done
                             self.profileCreationDone = self.userProfile.email != nil ? true : false
-                            print("Profile Refresh done...")
                             
                             /// 3 - Profile Resumption after Deactivation/Deletion
                             /// If user is logging in "after deactivation" or "within 30 days of delete initiation",
@@ -354,9 +355,9 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     print(error.localizedDescription)
                 }
             }
-            else {
-                print("No change in Profile Info...")
-            }
+//            else {
+//                print("No change in Profile Info...")
+//            }
         }
     }
     

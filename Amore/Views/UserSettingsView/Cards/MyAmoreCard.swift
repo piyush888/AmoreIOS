@@ -59,6 +59,12 @@ struct MyAmoreCard: View {
                                 .foregroundColor(Color.red)
                             Text("2 messages everyday")
                         }
+                        
+                        HStack(spacing:1) {
+                            Image(systemName: "arrow.counterclockwise.circle.fill")
+                                .foregroundColor(Color.orange)
+                            Text("3 rewinds everyday")
+                        }
                     }
                     
                     SubscriptionDetails(popUpCardSelection:$popUpCardSelection,

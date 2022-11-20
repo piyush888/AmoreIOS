@@ -257,6 +257,9 @@ struct LikesTopPicksHome: View {
                             buttonSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none))
                             .environmentObject(chatViewModel)
                             .environmentObject(storeManager)
+                
+                    case .buyMoreRewindsSheet:
+                        Text("Empty view .buyMoreRewindsSheet")
                 }
             }
         }

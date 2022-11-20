@@ -24,7 +24,7 @@ class MainMessagesViewModel: ObservableObject {
     @Published var allChatPhotos_Dict: [String: CardProfileWithPhotos] = [:]
 
     init() {
-        print("Chat: Init called at \(Date())")
+//        print("Chat: Init called at \(Date())")
         fetchCurrentUser()
         fetchRecentChats()
     }
@@ -114,14 +114,14 @@ class MainMessagesViewModel: ObservableObject {
                             if let index = self.recentChats.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-                                print("Chat: Checkpoint 0.1")
+//                                print("Chat: Checkpoint 0.1")
                                 self.recentChats.remove(at: index)
                             }
                             // Remove profile of the removed chat
                             if let index = self.allChatPhotos.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-                                print("Chat: Checkpoint 0.2")
+//                                print("Chat: Checkpoint 0.2")
                                 self.allChatPhotos.remove(at: index)
                                 self.allChatPhotos_Dict.removeValue(forKey: docId)
                             }
@@ -134,13 +134,13 @@ class MainMessagesViewModel: ObservableObject {
                             if let index = self.recentChats.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-                                print("Chat: Checkpoint 1")
+//                                print("Chat: Checkpoint 1")
                                 self.recentChats.remove(at: index)
                             }
                             
                             do {
                                 let rm = try change.document.data(as: ChatConversation.self)
-                                print("Chat: Checkpoint 2")
+//                                print("Chat: Checkpoint 2")
                                 self.recentChats.insert(rm, at: 0)
                             } catch {
                                 print("Chat: Error Decoding Recent Message: \(error)")
@@ -173,7 +173,7 @@ class MainMessagesViewModel: ObservableObject {
     }
     
     func loadAllChatProfiles(allChatUserIds: [String]) {
-        print("Chat: Fetching Chat Profiles")
+//        print("Chat: Fetching Chat Profiles")
         self.fetchDataObj.fetchData(apiToBeUsed: "/loadallchatprofiles",requestBody:["allChatUserIds": allChatUserIds]) {
             print("Error while loading matches profiles")
         } onSuccess: { tempData in

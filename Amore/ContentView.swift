@@ -63,7 +63,7 @@ struct ContentView: View {
                                         .environmentObject(storeManager)
                                         .environmentObject(chatViewModel)
                                         .onAppear {
-                                            print("Content View on appear triggered, all data is being intialized")
+//                                            print("Content View on appear triggered, all data is being intialized")
 //                                            profileModel.getUserProfile()
                                             profileModel.checkMinNumOfPhotosUploaded()
                                             cardProfileModel.filterRadius = filterModel.filterData.radiusDistance

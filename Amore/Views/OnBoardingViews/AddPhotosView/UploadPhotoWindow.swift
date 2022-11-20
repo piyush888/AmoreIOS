@@ -156,7 +156,6 @@ struct UploadPhotoWindow: View {
             if photoStruct.downsampledImage == nil {
                 if profileImage?.imageURL != nil {
                     getImage()
-                    print("On Appear: Upload Photo Window")
                 }
             }
             else {
