@@ -23,7 +23,7 @@ struct AllConversationsView: View {
             Divider()
                 .opacity(0)
             ScrollView {
-                ForEach(mainMessagesModel.recentChats.sorted(by: { $0.timeAgo < $1.timeAgo })) { recentMessage in
+                ForEach(mainMessagesModel.recentChats.sorted(by: { $0.timestamp.boundDate > $1.timestamp.boundDate })) { recentMessage in
                     VStack {
                         Button {
                             self.toUser = recentMessage.user ?? ChatUser()
@@ -120,7 +120,7 @@ struct IndividualMessageRow: View {
             }
             Spacer()
             
-            Text(recentMessage.timeAgo)
+            Text(recentMessage.timestamp?.descriptiveStringForDate() ?? "")
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(Color(.label))
         }

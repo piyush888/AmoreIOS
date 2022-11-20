@@ -11,6 +11,7 @@ import Foundation
 struct ReverseScrollView<Content: View>: View {
     var axis: Axis.Set
     var content: Content
+    var customPinnedViews: PinnedScrollableViews
     
     func minWidth(in proxy: GeometryProxy, for axis: Axis.Set) -> CGFloat? {
         axis.contains(.horizontal) ? proxy.size.width : nil
@@ -20,8 +21,9 @@ struct ReverseScrollView<Content: View>: View {
         axis.contains(.vertical) ? proxy.size.height : nil
     }
     
-    init(_ axis: Axis.Set = .horizontal, @ViewBuilder builder: @escaping () -> Content) {
+    init(_ axis: Axis.Set = .horizontal, customPinnedViews: PinnedScrollableViews = [], @ViewBuilder builder: @escaping () -> Content) {
         self.axis = axis
+        self.customPinnedViews = customPinnedViews
         self.content = builder()
     }
     
@@ -32,12 +34,12 @@ struct ReverseScrollView<Content: View>: View {
             ScrollView(axis) {
                 Stack(axis) {
                     if axis == .horizontal {
-                        LazyHStack(alignment: .center, spacing: nil, pinnedViews: [], content: {
+                        LazyHStack(alignment: .center, spacing: nil, pinnedViews: customPinnedViews, content: {
                             content
                         })
                     }
                     else {
-                        LazyVStack(alignment: .center, spacing: nil, pinnedViews: [], content: {
+                        LazyVStack(alignment: .center, spacing: nil, pinnedViews: customPinnedViews, content: {
                             content
                         })
                     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B03B0432925FC220012222B /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B03B0422925FC220012222B /* DateHelpers.swift */; };
 		1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D3227274E36E50096B40B /* CardProfileModel.swift */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
@@ -189,6 +190,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1B03B0422925FC220012222B /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		1B1D3227274E36E50096B40B /* CardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfileModel.swift; sourceTree = "<group>"; };
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 				E203885828B3CE16000704F2 /* WriteReview.swift */,
 				E203885C28B4374F000704F2 /* Playground.swift */,
 				E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */,
+				1B03B0422925FC220012222B /* DateHelpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1024,6 +1027,7 @@
 				E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */,
 				1BBB485427035B2F004D42A3 /* HomeView.swift in Sources */,
 				E283678126FAB85400EEA049 /* OnboardingModel.swift in Sources */,
+				1B03B0432925FC220012222B /* DateHelpers.swift in Sources */,
 				E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */,
 				E2E0176F277A859C00527E24 /* LikesTopPicksButtons.swift in Sources */,
 				E221EAAD2714F84F00769234 /* Helper.swift in Sources */,

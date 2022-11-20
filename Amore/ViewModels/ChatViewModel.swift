@@ -15,12 +15,14 @@ class ChatViewModel: ObservableObject {
     var errorMessage = ""
     @Published var chatText = ""
     @Published var chatMessages = [ChatModel]()
+    @Published var sectionedMessages = [[ChatModel]]()
     @Published var count = 0
     @Published var chatDocuments: [DocumentSnapshot] = []
     var giphyId: String = ""
     var lastSnapshot: DocumentSnapshot?
     var firestoreListener: ListenerRegistration?
     var fetchMoreFirestoreListener: ListenerRegistration?
+    var chatMessageIndex: [String: ChatModel] = [String: ChatModel]()
 
     /**
      Function to write each text message from chat to the Messages Collection in firestore for the current user.
@@ -41,7 +43,8 @@ class ChatViewModel: ObservableObject {
         switch type {
             
             case "text":
-                chatText = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
+                chatText = chatText.trimmingCharacters(in: .whitespaces)
+                chatText = chatText.trimmingCharacters(in: .newlines)
                 if chatText.isEmpty {return}
                 // Save the text message with Sender's ID
                 payLoad = ChatModel(fromId: fromId,
@@ -133,7 +136,14 @@ class ChatViewModel: ObservableObject {
                         do {
                             let data = try change.document.data(as: ChatModel.self)
                             DispatchQueue.main.async {
-                                self.chatMessages.append(data)
+                                
+                                if let chatID = data.id {
+                                    if self.chatMessageIndex[chatID] == nil {
+                                        self.chatMessages.append(data)
+                                        self.chatMessageIndex[chatID] = data
+                                    }
+                                }
+//                                self.chatMessages.append(data)
                                 print("Chat: Paginating chatMessage in ChatLogView: \(Date())")
                             }
                         }
@@ -166,6 +176,7 @@ class ChatViewModel: ObservableObject {
         guard let toId = toUser.id else { return }
         firestoreListener?.remove()
         chatMessages.removeAll()
+        chatMessageIndex.removeAll()
         firestoreListener = db.collection("Messages")
             .document(fromId)
             .collection(toId)
@@ -188,7 +199,13 @@ class ChatViewModel: ObservableObject {
                         do {
                             let data = try change.document.data(as: ChatModel.self)
                             DispatchQueue.main.async {
-                                self.chatMessages.append(data)
+                                if let chatID = data.id {
+                                    if self.chatMessageIndex[chatID] == nil {
+                                        self.chatMessages.append(data)
+                                        self.chatMessageIndex[chatID] = data
+                                    }
+                                }
+//                                self.chatMessages.append(data)
                                 print("Chat: Appending chatMessage in ChatLogView: \(Date())")
                                 print("Chat: Checkpoint 4")
                             }
@@ -273,6 +290,31 @@ class ChatViewModel: ObservableObject {
         catch {
             print("Chat: \(error)")
             return
+        }
+        
+    }
+    
+    func getSectionedMessages(for messages: [ChatModel]) {
+        DispatchQueue.main.async {
+            self.sectionedMessages.removeAll()
+            var messagesForDate = [ChatModel]()
+            for message in messages {
+                if let firstMessage = messagesForDate.first, let firstMessageTimestamp = firstMessage.timestamp {
+                    let daysBetween = firstMessageTimestamp.daysBetween(date: message.timestamp ?? Date())
+                    if -daysBetween >= 1 {
+                        self.sectionedMessages.append(messagesForDate)
+                        messagesForDate.removeAll()
+                        messagesForDate.append(message)
+                    }
+                    else {
+                        messagesForDate.append(message)
+                    }
+                }
+                else {
+                    messagesForDate.append(message)
+                }
+            }
+            self.sectionedMessages.append(messagesForDate)
         }
         
     }

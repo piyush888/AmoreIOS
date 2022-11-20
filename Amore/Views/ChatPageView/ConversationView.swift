@@ -143,20 +143,43 @@ struct ConversationView: View {
         }
     }
     
+    func sectionHeaderForMessages(message: ChatModel) -> some View {
+        
+        HStack {
+            ZStack {
+                Text((message.timestamp?.descriptiveStringForDate(dateStyle: .medium))!)
+                    .foregroundColor(.white)
+                    .font(.caption)
+                    .fontWeight(.regular)
+                    .frame(width: 120)
+                    .padding(.vertical, 5)
+                    .background(Capsule().foregroundColor(.blue))
+            }
+            .padding(.vertical, 5)
+            .frame(maxWidth: .infinity)
+        }
+        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+        .frame(maxWidth: UIScreen.main.bounds.width * 0.75)
+    }
+    
     private var AllMessagesForUser: some View {
         ScrollViewReader { scrollViewProxy in
-            ReverseScrollView(.vertical) {
-                ForEach(chatViewModel.chatMessages.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}), id: \.self) { message in
-                    MessageView(message: message, toUser: toUser)
-                        .environmentObject(chatViewModel)
-                        .id(message.id)
-                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                        .onAppear {
-                            if chatViewModel.shouldFetchMoreMessages(message: message) {
-                                chatViewModel.fetchMoreMessages(toUser: toUser)
-                            }
+            ReverseScrollView(.vertical, customPinnedViews: [.sectionFooters]) {
+                ForEach(chatViewModel.sectionedMessages.indices, id: \.self) { sectionIndex in
+                    Section(footer: sectionHeaderForMessages(message: chatViewModel.sectionedMessages[sectionIndex].first ?? ChatModel())) {
+                        ForEach(chatViewModel.sectionedMessages[sectionIndex].sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}), id: \.self) { message in
+                            MessageView(message: message, toUser: toUser)
+                               .environmentObject(chatViewModel)
+                               .id(message.id)
+                               .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                               .onAppear {
+                                   if chatViewModel.shouldFetchMoreMessages(message: message) {
+                                       chatViewModel.fetchMoreMessages(toUser: toUser)
+                                   }
+                               }
                         }
-                }
+                    }
+               }
                 .padding(.top, 10)
             }
             // Scroll to Bottom code
@@ -166,11 +189,14 @@ struct ConversationView: View {
                         withAnimation {
                             scrollViewProxy.scrollTo(chatViewModel.chatMessages.last?.id)
                         }
-                        print ("Chat: Checkpoint 8")
+//                        print ("Chat: Checkpoint 8")
                     }
-                    print("Chat: ChatMessages Count = \(chatViewModel.chatMessages.count)")
+//                    print("Chat: ChatMessages Count = \(chatViewModel.chatMessages.count)")
                     scrollToBottomOnSend = false
                 }
+            }
+            .onChange(of: chatViewModel.chatMessages.count) { _ in
+                chatViewModel.getSectionedMessages(for: chatViewModel.chatMessages.sorted(by: { $0.timestamp ?? Date() > $1.timestamp ?? Date()}))
             }
         }
     }
@@ -303,7 +329,6 @@ struct TimestampView: View {
             .font(.footnote)
             .fontWeight(.medium)
             .foregroundColor(fontColor)
-            .frame(alignment: .bottomTrailing)
             .padding([.trailing, .leading], 20)
             .padding(.bottom, 10)
     }
@@ -322,7 +347,7 @@ struct MessageView: View {
             return ""
         }
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+//        formatter.dateStyle = .short
         formatter.timeStyle = .short
         return formatter.string(from: timestamp)
     }
@@ -338,8 +363,11 @@ struct MessageView: View {
                             VStack(alignment: .trailing, spacing: 10) {
                                 Text(message.text.bound)
                                     .foregroundColor(.white)
-                                    .padding(.all, 20)
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 10)
+                                    .frame(alignment: .leading)
                                 TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
+                                    .frame(alignment: .trailing)
                             }
                             .background(Color.blue)
                         }
@@ -354,10 +382,13 @@ struct MessageView: View {
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
                             ChatBubble(direction: .left) {
-                                VStack(alignment: .leading, spacing: 10) {
+                                VStack(alignment: .trailing, spacing: 10) {
                                     Text(message.text.bound)
-                                        .padding(.all, 20)
+                                        .padding(.horizontal, 20)
+                                        .padding(.top, 10)
+                                        .frame(alignment: .leading)
                                     TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color.gray)
+                                        .frame(alignment: .trailing)
                                 }
                                 .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                             }
@@ -368,15 +399,13 @@ struct MessageView: View {
                 if let giphyMediaId = message.giphyId {
                         if message.fromId == Auth.auth().currentUser?.uid {
                             ChatBubble(direction: .right) {
-                                ZStack(alignment: .leading) {
+                                ZStack(alignment: .trailing) {
                                     CustomGiphyView(giphyMediaId: giphyMediaId)
                                         .aspectRatio(contentMode: .fit)
                                         .frame(maxWidth: 200)
-                                        .padding(.vertical, 5)
-                                    VStack(alignment: .trailing, spacing: 10) {
+                                    VStack(spacing: 10) {
                                         Spacer()
                                         TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
-                                        
                                     }
                                 }
                                 .background(Color.blue)
@@ -392,18 +421,18 @@ struct MessageView: View {
                                 .clipped()
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
-                            
-                            ZStack(alignment: .leading) {
-                                CustomGiphyView(giphyMediaId: giphyMediaId)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(maxWidth: 200)
-                                    .padding(.vertical, 5)
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Spacer()
-                                    TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color.gray)
+                            ChatBubble(direction: .left) {
+                                ZStack(alignment: .trailing) {
+                                    CustomGiphyView(giphyMediaId: giphyMediaId)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: 200)
+                                    VStack(spacing: 10) {
+                                        Spacer()
+                                        TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
+                                    }
                                 }
+                                .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                             }
-                            .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                         }
                     }
                 }
