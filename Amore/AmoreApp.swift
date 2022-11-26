@@ -106,6 +106,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
         ) {
             print("\(#function)")
+            
             Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
             Messaging.messaging().apnsToken = deviceToken
         }
@@ -120,16 +121,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 // 6 - Messaging is Firebase’s class that manages everything related to push notifications. Like a lot of iOS APIs, it features a delegate called MessagingDelegate, which you implement in the code above. Whenever your app starts up or Firebase updates your token, Firebase will call the method you just added to keep the app in sync with it.
 extension AppDelegate: MessagingDelegate {
-  func messaging(
-    _ messaging: Messaging,
-    didReceiveRegistrationToken fcmToken: String?
-  ) {
-    let tokenDict = ["token": fcmToken ?? ""]
-    NotificationCenter.default.post(
-      name: Notification.Name("FCMToken"),
-      object: nil,
-      userInfo: tokenDict)
-  }
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        let tokenDict = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+          name: Notification.Name("FCMToken"),
+          object: nil,
+          userInfo: tokenDict)
+        
+        UserDefaults.standard.set(fcmToken ?? "", forKey: "FCMToken")
+    }
 }
 
 extension UINavigationController {

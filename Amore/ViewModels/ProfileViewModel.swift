@@ -10,6 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+// CoreData Needed for Location Manager
 import CoreData
 import CoreLocation
 
@@ -339,16 +340,13 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     print("Update Profile Information on Firestore...")
                     self.calculateProfileCompletion()
                     self.editUserProfile.wasProfileUpdated = true
-                    try db.collection("Profiles").document(profileId).setData(from: editUserProfile)
+                    
                     try db.collection("Profiles").document(profileId).setData(from: editUserProfile, completion: { error in
                         if let completion = completion {
                             completion()
                         }
                     })
                     self.userProfile = self.editUserProfile
-                    // July 23: Below func is replicated through listeners
-                    
-                    
                 }
                 catch {
                     print("Error while updating Profile in Firestore: ")

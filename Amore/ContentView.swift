@@ -17,6 +17,7 @@ struct ContentView: View {
     @StateObject var profileModel = ProfileViewModel()
     @StateObject var photoModel = PhotoModel()
     @StateObject var adminAuthenticationModel = AdminAuthenticationViewModel()
+    @StateObject var notificatonViewModel = NotificatonViewModel()
     @StateObject var filterModel = FilterModel()
     @StateObject var cardProfileModel = CardProfileModel()
     @StateObject var receivedGivenEliteModel = ReceivedGivenEliteModel()
@@ -79,6 +80,7 @@ struct ContentView: View {
                                             SKPaymentQueue.default().add(storeManager)
                                             storeManager.getProducts()
                                             storeManager.getPurchase()
+                                            notificatonViewModel.storeFCMTokenFirestore()
                                         }
                                 }
                                 // Else get location permission

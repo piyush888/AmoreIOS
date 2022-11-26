@@ -167,6 +167,8 @@
 		E2F7077729246A2100DB1FA7 /* AgeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077629246A2000DB1FA7 /* AgeSlider.swift */; };
 		E2F707792926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = E2F707782926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit */; };
 		E2F7077B29283C6D00DB1FA7 /* BuyMoreRewinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077A29283C6D00DB1FA7 /* BuyMoreRewinds.swift */; };
+		E2F7077E29323A1800DB1FA7 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077D29323A1800DB1FA7 /* NotificationModel.swift */; };
+		E2F70780293249DB00DB1FA7 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F7077F293249DB00DB1FA7 /* NotificationViewModel.swift */; };
 		E2F8AA5126F9427F00CC7A72 /* AmoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */; };
 		E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA5226F9427F00CC7A72 /* ContentView.swift */; };
 		E2F8AA5526F9428100CC7A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5426F9428100CC7A72 /* Assets.xcassets */; };
@@ -354,6 +356,8 @@
 		E2F7077629246A2000DB1FA7 /* AgeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSlider.swift; sourceTree = "<group>"; };
 		E2F707782926B9F100DB1FA7 /* AmoreStoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = AmoreStoreKitConfig.storekit; sourceTree = "<group>"; };
 		E2F7077A29283C6D00DB1FA7 /* BuyMoreRewinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyMoreRewinds.swift; sourceTree = "<group>"; };
+		E2F7077D29323A1800DB1FA7 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		E2F7077F293249DB00DB1FA7 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		E2F8AA4D26F9427F00CC7A72 /* Amore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F8AA5026F9427F00CC7A72 /* AmoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmoreApp.swift; sourceTree = "<group>"; };
 		E2F8AA5226F9427F00CC7A72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -768,6 +772,7 @@
 				E27CCEB527E44130006278EB /* IAPFirebaseModel.swift */,
 				E2ED202228BAA38600BFD32C /* BGImagesModel.swift */,
 				E2F707742917E43800DB1FA7 /* TabModel.swift */,
+				E2F7077D29323A1800DB1FA7 /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -809,6 +814,7 @@
 				1BB36D3B27AE302200F4029C /* ChatViewModel.swift */,
 				E2A9610227CC89FF009108F0 /* StoreManager.swift */,
 				E2F7076E2913E85700DB1FA7 /* GiphyViewModel.swift */,
+				E2F7077F293249DB00DB1FA7 /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1017,6 +1023,7 @@
 				1B6FF6F5291C843000AAD03A /* CustomGiphyView.swift in Sources */,
 				E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */,
 				E29B29392722B09400C38035 /* UserEditProfile.swift in Sources */,
+				E2F70780293249DB00DB1FA7 /* NotificationViewModel.swift in Sources */,
 				1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */,
 				E22D5562275532B800852D70 /* ColorExtension.swift in Sources */,
 				E25D15A128675FE8001330DB /* CustomButton.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				E27CCEB627E44130006278EB /* IAPFirebaseModel.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,
+				E2F7077E29323A1800DB1FA7 /* NotificationModel.swift in Sources */,
 				E203885D28B4374F000704F2 /* Playground.swift in Sources */,
 				E2DBC02F272D8E06000630F5 /* SettingEditProfileSafety.swift in Sources */,
 				E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */,
@@ -1229,13 +1237,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B1FF18565C553FCD6193EC3 /* Pods-Amore.debug staging.xcconfig */;
 			buildSettings = {
-				API_BASE_URL = "http://127.0.0.1:5040";
+				API_BASE_URL = "https://client.luvamore.com";
+				APN_TOKEN_TYPE = .sandbox;
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Amore/AmoreDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
@@ -1378,12 +1387,13 @@
 			baseConfigurationReference = D57268028368768172EC4C62 /* Pods-Amore.debug.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "http://127.0.0.1:5040";
+				APN_TOKEN_TYPE = .sandbox;
 				APP_NAME = "Amore Dev";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Amore/AmoreDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;
@@ -1410,12 +1420,13 @@
 			baseConfigurationReference = 230E8B0A769F4496F9ECB6E8 /* Pods-Amore.release staging.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "https://client.luvamore.com";
+				APN_TOKEN_TYPE = .prod;
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Amore/Amore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Amore/Preview Content\"";
 				DEVELOPMENT_TEAM = 292QG86ZUY;
 				ENABLE_PREVIEWS = YES;

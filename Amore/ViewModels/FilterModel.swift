@@ -67,7 +67,7 @@ class FilterModel: ObservableObject {
         
     }
     
-    func updateFilter() {
+    func updateFilter() -> Bool {
         if let profileId = Auth.auth().currentUser?.uid {
             if filterData != oldFilterData {
                 do {
@@ -75,16 +75,21 @@ class FilterModel: ObservableObject {
                     try db.collection("FilterAndLocation").document(profileId).setData(from: filterData)
                     print(filterData)
                     oldFilterData = filterData
+                    return true
                 }
                 catch {
-//                    print("Location: Error while updating FilterData in Firestore: ")
+                    print("Location: Error while updating FilterData in Firestore: ")
                     print(error.localizedDescription)
+                    return false
                 }
+                
             }
             else {
 //                print("Location: No change in Filter Data...")
+                return false
             }
         }
+        return false
     }
     
 }

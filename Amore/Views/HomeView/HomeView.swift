@@ -28,11 +28,6 @@ struct HomeView: View {
     @State var selectedTab: TopPicksLikesView = .likesReceived
     @State var filtersChanged: Bool = false
     
-    func checkIfDataIsComing() {
-        if (cardProfileModel.timeOutRetriesCount > 1) && (cardProfileModel.allCardsWithPhotosDeck.count == 0) {
-            serviceErrorView = .serverErrorView
-        }
-    }
     
     func didDimiss() {
         storeManager.paymentCompleteDisplayMyAmore = false
@@ -103,9 +98,8 @@ struct HomeView: View {
                                         .environmentObject(filterModel)
                                         .environmentObject(cardProfileModel)
                                         .onDisappear {
-                                            filterModel.updateFilter()
                                             // Update cards in the deck when view switches to Swipe View
-                                            filtersChanged = true
+                                            filtersChanged = filterModel.updateFilter()
                                         }
                                         
                                     
