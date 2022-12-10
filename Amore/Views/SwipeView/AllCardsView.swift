@@ -26,32 +26,27 @@ struct AllCardsView: View {
     @State var buttonSwipeStatus: LikeDislike = .none
     // Used to track if the swipe given task is complete before allowing user to swipe the next card in deck by disabling the buttons
     @State var cardSwipeDone: Bool = true
-    @State private var safetyButton = false
-    @State private var showingAlert = false
+    @State private var safetyButton: Bool = false
+    @State private var showingAlert: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
+    @State var allCardsWithPhotosDeck: [CardProfileWithPhotos]
     
-    @State private var cardIncrementCount: Int = 0
     
-    func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
-        var urls: [URL] = []
-        for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
-            if url != nil {
-                urls.append(url!)
-            }
-        }
-        SDWebImagePrefetcher.shared.prefetchURLs(urls) { completed, total in
-            // Progress Block
-        } completed: { completed, skipped in
-            // On Complete Block
-        }
-    }
+    @StateObject private var weakCardProfileModel: WeakCardProfileModel
     
-    // Cards Throttler in Swipe View
-    /// Controls the number of cards currently in users swipe view
-    func getCards() -> [CardProfileWithPhotos] {
-        // Returns only 2 cards in first load and after the first load it returns 5 cards
-        /// You want the first load to be faster so that Swipe loads quickly
-        return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(3+self.cardIncrementCount))
+    init(allCardsWithPhotosDeck:[CardProfileWithPhotos]) {
+        self.buttonSwipeStatus = .none
+        self.cardSwipeDone = true
+        self.safetyButton = false
+        self.showingAlert = false
+        self.allcardsActiveSheet = .none
+        self.allCardsWithPhotosDeck = allCardsWithPhotosDeck
+        // When the view load first time you only want the loading of view to be quick hence you only load 3 cards
+        /// In the first swipe we update the increment number of cards to be displayed by setting cardIncrementCount=2
+        /// In total there are 5 cards displayed at any time
+        _weakCardProfileModel = StateObject(wrappedValue: WeakCardProfileModel(cardsInDeck: allCardsWithPhotosDeck,
+                                                    cardIncrementCount:0,
+                                                    initializeSwipeViewWithCards:3))
     }
     
     enum LikeDislike: Int {
@@ -63,8 +58,12 @@ struct AllCardsView: View {
         GeometryReader { geometry in
             ZStack {
                 
-                // Show all cards that user can swipe
-                ForEach(getCards()) { profile in
+                // Swipe View Cards Display
+                /// First Load: 2 cards are loaded
+                /// After first Swipe: 5 cards are loaded in the view at any time
+                /// For every swipe a card is prefetched
+                /// Show all cards that user can swipe
+                ForEach(weakCardProfileModel.cardsInSwipeViewDisplay ?? []) { profile in
                     DeckCards(cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet, singleProfile: profile, onRemove: { removedUser in
                         // Remove that user from Array of CardProfileWithPhotos O(n)
                         cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
@@ -78,7 +77,13 @@ struct AllCardsView: View {
                         
                         // Returns only 2 cards in first load and after the first swipe throttler returns 5 cards
                         /// You want the first load to be faster so that Swipe loads quickly
-                        self.cardIncrementCount = 2
+                        weakCardProfileModel.cardIncrementCount = 2
+                            
+                        // Once user has seen a profile remove the cached images and NSData for image from phone
+                        weakCardProfileModel.deleteCardImages(singleProfile: profile)
+                        
+                        // Prefetch the next photo in the deck
+                         weakCardProfileModel.prefetchNextCardPhotos()
                     })
                     .animation(.spring())
                     .frame(width: geometry.size.width)
@@ -172,11 +177,11 @@ struct AllCardsView: View {
                    )
             }
             .onChange(of: cardProfileModel.allCardsWithPhotosDeck.count) { newValue in
+                // On Change responssible for listening any addition or deletion of cards from the deck
+                /// Once this onchange listens to changes it updates the Swipe View by updating the parameters of the WeakCardProfileModel
                 print("Change in no. of cards, current count: \(cardProfileModel.allCardsWithPhotosDeck.count)")
-                print("Change: Card Deck:")
-                getCards().map { card in
-                    print("Change: Card in Deck: \(card.id)")
-                }
+                self.weakCardProfileModel.cardsInDeck = cardProfileModel.allCardsWithPhotosDeck
+                self.weakCardProfileModel.getCardsToDisplay()
             }
         }
     }

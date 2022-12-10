@@ -138,6 +138,7 @@
 		E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293C27234B8900C38035 /* UserSafetyView.swift */; };
 		E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293E272461F400C38035 /* SubscriptionDetails.swift */; };
 		E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B2940272637B400C38035 /* EditCardInfo.swift */; };
+		E2A1B1362945218F00422BA4 /* WeakCardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1B1352945218F00422BA4 /* WeakCardProfileModel.swift */; };
 		E2A94C68276B93090069F814 /* ButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C67276B93090069F814 /* ButtonIcon.swift */; };
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
 		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
@@ -324,6 +325,7 @@
 		E29B293C27234B8900C38035 /* UserSafetyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSafetyView.swift; sourceTree = "<group>"; };
 		E29B293E272461F400C38035 /* SubscriptionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetails.swift; sourceTree = "<group>"; };
 		E29B2940272637B400C38035 /* EditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardInfo.swift; sourceTree = "<group>"; };
+		E2A1B1352945218F00422BA4 /* WeakCardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakCardProfileModel.swift; sourceTree = "<group>"; };
 		E2A94C67276B93090069F814 /* ButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonIcon.swift; sourceTree = "<group>"; };
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
 		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 				E273C317273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift */,
 				1B6273CF274B82FD00590DD1 /* FilterModel.swift */,
 				1B1D3227274E36E50096B40B /* CardProfileModel.swift */,
+				E2A1B1352945218F00422BA4 /* WeakCardProfileModel.swift */,
 				E205F6782764351700196A06 /* ReceivedGivenEliteModel.swift */,
 				E205F67C2766A3D600196A06 /* FetchDataModel.swift */,
 				E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */,
@@ -1016,6 +1019,7 @@
 			files = (
 				E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */,
 				E283677F26FAB79800EEA049 /* Onboarding.swift in Sources */,
+				E2A1B1362945218F00422BA4 /* WeakCardProfileModel.swift in Sources */,
 				E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */,
 				1B6FF6F5291C843000AAD03A /* CustomGiphyView.swift in Sources */,
 				E2DBC02D272D8845000630F5 /* UserSnapDetails.swift in Sources */,

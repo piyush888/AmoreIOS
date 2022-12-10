@@ -81,6 +81,7 @@ struct ContentView: View {
                                             storeManager.getProducts()
                                             storeManager.getPurchase()
                                             notificatonViewModel.storeFCMTokenFirestore()
+                                            photoModel.setSDImageCacheCofigs()
                                         }
                                 }
                                 // Else get location permission

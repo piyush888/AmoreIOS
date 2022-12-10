@@ -51,11 +51,6 @@ struct DeckCards: View {
         gesture.translation.width / geometry.size.width
     }
     
-    // O(1)
-    func getProfile() -> CardProfileWithPhotos {
-        return cardProfileModel.cardsDictionary[singleProfile.id!] ?? CardProfileWithPhotos()
-    }
-    
     func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike, onSuccess: @escaping () -> Void) {
         
         let timeDelay = swipeInfo == .superlike ? 1.5 : 0.5
@@ -119,7 +114,7 @@ struct DeckCards: View {
             ZStack {
                 
                 
-                ChildCardView(singleProfile: getProfile(),
+                ChildCardView(singleProfile: singleProfile,
                               swipeStatus:$swipeStatus,
                               cardColor:$cardColor)
                 .animation(.interactiveSpring())

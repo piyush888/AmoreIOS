@@ -66,7 +66,7 @@ struct HomeView: View {
                                                 Spacer()
                                             }
                                         } else {
-                                            AllCardsView()
+                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck)
                                                 .environmentObject(photoModel)
                                                 .environmentObject(cardProfileModel)
                                                 .environmentObject(reportActivityModel)

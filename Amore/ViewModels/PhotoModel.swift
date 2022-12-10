@@ -171,6 +171,26 @@ class PhotoModel: ObservableObject {
 //        SDImageCache.shared.clearDisk(onCompletion: nil)
     }
     
+    func setSDImageCacheCofigs() {
+        
+        // 1 KB = 1024 Bytes. 1 MB = 1024 * 1024 Bytes.
+        SDImageCache.shared.config.maxMemoryCost = 200 * 1024 * 1024
+        SDImageCache.shared.config.maxDiskSize = 1000000 * 20 // 20 MB
+        
+        SDImageCache.shared.config.maxDiskAge = 3600 * 24 * 7 // 1 Week
+        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 4 * 30 // 20 images (1024 * 1024 pixels)
+        SDImageCache.shared.config.shouldCacheImagesInMemory = false // Disable memory cache, may cause cell-reusing flash because disk query is async
+        SDImageCache.shared.config.shouldUseWeakMemoryCache = false // Disable weak cache, may see blank when return from background because memory cache is purged under pressure
+        SDImageCache.shared.config.diskCacheReadingOptions = .mappedIfSafe // Use mmap for disk cache query
+        SDWebImageManager.shared.optionsProcessor = SDWebImageOptionsProcessor() { url, options, context in
+            // Disable Force Decoding in global, may reduce the frame rate
+            var mutableOptions = options
+            mutableOptions.insert(.avoidDecodeImage)
+            return SDWebImageOptionsResult(options: mutableOptions, context: context)
+        }
+    }
+    
+    
     func resetPhotosOnLogout() {
         photo1 = Photo()
         photo2 = Photo()
