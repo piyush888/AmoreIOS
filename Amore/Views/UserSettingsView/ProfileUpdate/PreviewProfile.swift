@@ -52,7 +52,7 @@ struct PreviewProfile: View {
                                 NameAgeDistance(firstName: profileModel.editUserProfile.firstName.bound,
                                                 lastName: profileModel.editUserProfile.lastName.bound,
                                                 age: profileModel.editUserProfile.age.boundInt,
-                                                profileDistanceFromUser: $profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
+                                                profileDistanceFromUser: profileModel.editUserProfile.profileDistanceFromUser.boundDouble,
                                                 geometry: geometry)
                             }
                         }

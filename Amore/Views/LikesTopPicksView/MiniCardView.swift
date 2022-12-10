@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MiniCardView: View {
     
-    @Binding var singleProfile: CardProfileWithPhotos
+    @State var singleProfile: CardProfileWithPhotos
     var animation: Namespace.ID
     @State var geometry: GeometryProxy
     @State var miniCardWidth: CGFloat
@@ -23,8 +23,7 @@ struct MiniCardView: View {
                     
                     ZStack {
                         if self.singleProfile.image1?.imageURL != nil  {
-                            CardImages(profileImage: $singleProfile.image1,
-                                       photoStruct: $singleProfile.photo1.boundPhoto,
+                            CardImages(profileImage: singleProfile.image1,
                                        width:miniCardWidth,
                                        height:miniCardHeight)
                             .frame(height: miniCardHeight)

@@ -12,7 +12,6 @@ import Firebase
 
 struct AllCardsView: View {
     
-    @State var numberOfProfilesSwiped = 0
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var cardProfileModel: CardProfileModel
     @EnvironmentObject var reportActivityModel: ReportActivityModel
@@ -31,6 +30,8 @@ struct AllCardsView: View {
     @State private var showingAlert = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     
+    @State private var cardIncrementCount: Int = 0
+    
     func prefetchNextCardPhotos(card: CardProfileWithPhotos) {
         var urls: [URL] = []
         for url in [card.image1?.imageURL, card.image2?.imageURL, card.image3?.imageURL, card.image4?.imageURL, card.image5?.imageURL, card.image6?.imageURL] {
@@ -45,17 +46,12 @@ struct AllCardsView: View {
         }
     }
     
+    // Cards Throttler in Swipe View
+    /// Controls the number of cards currently in users swipe view
     func getCards() -> [CardProfileWithPhotos] {
-        if cardProfileModel.allCardsWithPhotosDeck.count>20 {
-            Array(cardProfileModel.allCardsWithPhotosDeck.suffix(20)).map{
-                card in
-                prefetchNextCardPhotos(card: card)
-            }
-            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(10))
-        }
-        else {
-            return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(cardProfileModel.allCardsWithPhotosDeck.count))
-        }
+        // Returns only 2 cards in first load and after the first load it returns 5 cards
+        /// You want the first load to be faster so that Swipe loads quickly
+        return Array(cardProfileModel.allCardsWithPhotosDeck.suffix(3+self.cardIncrementCount))
     }
     
     enum LikeDislike: Int {
@@ -72,10 +68,18 @@ struct AllCardsView: View {
                     DeckCards(cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet, singleProfile: profile, onRemove: { removedUser in
                         // Remove that user from Array of CardProfileWithPhotos O(n)
                         cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
+                        
                         // Remove that user from Dictionary: [ID: CardProfileWithPhotos] O(1)
                         /// Commenting the removal of cards from cards dictionary. This fixed the cause of rewind button not working
-//                        cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
-                        self.buttonSwipeStatus = .none })
+                        /// cardProfileModel.cardsDictionary.removeValue(forKey: removedUser.id ?? "")
+                        
+                        // Once a user card is swipped from the deck you would want to reset the swipeStatus to none
+                        self.buttonSwipeStatus = .none
+                        
+                        // Returns only 2 cards in first load and after the first swipe throttler returns 5 cards
+                        /// You want the first load to be faster so that Swipe loads quickly
+                        self.cardIncrementCount = 2
+                    })
                     .animation(.spring())
                     .frame(width: geometry.size.width)
                     .environmentObject(photoModel)

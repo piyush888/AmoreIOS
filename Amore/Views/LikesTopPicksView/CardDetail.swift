@@ -12,7 +12,7 @@ import SwiftUI
 
 struct CardDetail: View {
     
-    @Binding var selectedItem: CardProfileWithPhotos
+    @State var selectedProfile: CardProfileWithPhotos
     @Binding var show: Bool
     
     var animation: Namespace.ID
@@ -42,7 +42,7 @@ struct CardDetail: View {
                 
             }.padding()
             
-            ChildCardView(singleProfile: $selectedItem,
+            ChildCardView(singleProfile: selectedProfile,
                           swipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
                           cardColor: Binding.constant(Color.pink))
             

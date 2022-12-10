@@ -102,36 +102,21 @@ class ReceivedGivenEliteModel: ObservableObject {
         }
     }
     
-    func getProfile(profileId:String, selectedTab:TopPicksLikesView, selectedTabSubView:TopPicksLikesSubView) -> Binding<CardProfileWithPhotos> {
+    func getProfile(profileId:String, selectedTab:TopPicksLikesView, selectedTabSubView:TopPicksLikesSubView) -> CardProfileWithPhotos {
         switch selectedTab {
             case .likesReceived:
-                return Binding {
-                    self.superLikesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                } set: { newCard in
-                    self.superLikesReceivedPhotos_Dict[profileId] = newCard
-                }
+                return self.superLikesReceivedPhotos_Dict[profileId] ?? CardProfileWithPhotos()
+                
             case .superLikesAndLikesGiven:
                 // Eihther the profile will be in self.likesGivenPhotos_Dict or superLikesGivenPhotos_Dict
                 if self.likesGivenPhotos_Dict[profileId] != nil {
-                    return Binding {
-                        self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                    } set: { newCard in
-                        self.likesGivenPhotos_Dict[profileId] = newCard
-                    }
+                    return self.likesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
                 } else {
-                    return Binding {
-                        self.superLikesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                    } set: { newCard in
-                        self.superLikesGivenPhotos_Dict[profileId] = newCard
-                    }
+                    return self.superLikesGivenPhotos_Dict[profileId] ?? CardProfileWithPhotos()
                 }
                 
             case .elitePicks:
-                return Binding {
-                    self.elitesPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-                } set: { newCard in
-                    self.elitesPhotos_Dict[profileId] = newCard
-                }
+                return self.elitesPhotos_Dict[profileId] ?? CardProfileWithPhotos()
         }
     }
     

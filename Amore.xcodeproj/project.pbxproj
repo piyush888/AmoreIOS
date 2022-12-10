@@ -1246,7 +1246,7 @@
 				ENABLE_PREVIEWS = YES;
 				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.781210790800-4jq1ubjfnlcu3bkeqv6bgadec18fie53";
 				INFOPLIST_FILE = Amore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1395,7 +1395,7 @@
 				ENABLE_PREVIEWS = YES;
 				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.1074161216434-mhkcg98rvrft1bih5mpce6kufl7c7kss";
 				INFOPLIST_FILE = Amore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1428,7 +1428,7 @@
 				ENABLE_PREVIEWS = YES;
 				GOOGLE_SERVICE_REVERSE_CLIENT_ID = "com.googleusercontent.apps.781210790800-4jq1ubjfnlcu3bkeqv6bgadec18fie53";
 				INFOPLIST_FILE = Amore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

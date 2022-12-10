@@ -138,7 +138,8 @@ struct ConversationView: View {
         // Profile Card on tap on Profile Picture
         .sheet(isPresented: $presentProfileCard) {
             if let userId = toUser.id {
-                CardDetail(selectedItem: mainMessagesModel.getProfile(profileId: userId), show: $presentProfileCard, animation: animation)
+                CardDetail(selectedProfile: mainMessagesModel.getProfile(profileId: userId),
+                           show: $presentProfileCard, animation: animation)
             }
         }
     }

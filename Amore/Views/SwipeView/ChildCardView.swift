@@ -15,7 +15,7 @@ struct ChildCardView: View {
     @Environment(\.colorScheme) var colorScheme
     
     // Binding so that change in Profile while loading photos is reflected in View
-    @Binding var singleProfile: CardProfileWithPhotos
+    @State var singleProfile: CardProfileWithPhotos
     @Binding var swipeStatus: AllCardsView.LikeDislike
     @Binding var cardColor: Color
     
@@ -30,8 +30,7 @@ struct ChildCardView: View {
 
                         ZStack {
                             if self.singleProfile.image1?.imageURL != nil  {
-                                CardImages(profileImage: $singleProfile.image1,
-                                           photoStruct: $singleProfile.photo1.boundPhoto,
+                                CardImages(profileImage: singleProfile.image1,
                                            width:geometry.size.width,
                                            height: .infinity)
                                     
@@ -41,7 +40,7 @@ struct ChildCardView: View {
                                     NameAgeDistance(firstName: self.singleProfile.firstName.bound,
                                                     lastName: self.singleProfile.lastName.bound,
                                                     age: self.singleProfile.age.boundInt,
-                                                    profileDistanceFromUser: self.$singleProfile.profileDistanceFromUser.boundDouble,
+                                                    profileDistanceFromUser: self.singleProfile.profileDistanceFromUser.boundDouble,
                                                     geometry: geometry)
                                         .onAppear {
                                             if singleProfile.location != nil {
@@ -80,8 +79,7 @@ struct ChildCardView: View {
 
                             if self.singleProfile.image2?.imageURL != nil  {
                                 VStack {
-                                    CardImages(profileImage: $singleProfile.image2,
-                                               photoStruct: $singleProfile.photo2.boundPhoto,
+                                    CardImages(profileImage: singleProfile.image2,
                                                width:geometry.size.width,
                                                height:.infinity)
                                         .padding(.vertical,5)
@@ -107,8 +105,7 @@ struct ChildCardView: View {
                             
                             if self.singleProfile.image3?.imageURL != nil {
                                 VStack {
-                                    CardImages(profileImage: $singleProfile.image3,
-                                               photoStruct: $singleProfile.photo3.boundPhoto,
+                                    CardImages(profileImage: singleProfile.image3,
                                                width:geometry.size.width,
                                                height:.infinity)
                                         .padding(.vertical,5)
@@ -126,8 +123,7 @@ struct ChildCardView: View {
 
                             if self.singleProfile.image4?.imageURL != nil {
                                 VStack {
-                                    CardImages(profileImage: $singleProfile.image4,
-                                               photoStruct: $singleProfile.photo4.boundPhoto,
+                                    CardImages(profileImage: singleProfile.image4,
                                                width:geometry.size.width,
                                                height:.infinity)
                                         .padding(.vertical,2.5)
@@ -153,8 +149,7 @@ struct ChildCardView: View {
                             
                             if self.singleProfile.image5?.imageURL != nil  {
                                 VStack {
-                                    CardImages(profileImage: $singleProfile.image5,
-                                               photoStruct: $singleProfile.photo5.boundPhoto,
+                                    CardImages(profileImage: singleProfile.image5,
                                                width:geometry.size.width,
                                                height:.infinity)
                                         .padding(.top,2.5)
@@ -165,8 +160,7 @@ struct ChildCardView: View {
                         
                         if self.singleProfile.image6?.imageURL != nil  {
                             VStack {
-                                CardImages(profileImage: $singleProfile.image6,
-                                           photoStruct: $singleProfile.photo6.boundPhoto,
+                                CardImages(profileImage: singleProfile.image6,
                                            width:geometry.size.width,
                                            height:.infinity)
                                     .padding(.vertical,5)
@@ -237,7 +231,7 @@ struct ChildCardView_Previews: PreviewProvider {
                                                 doYouWantBabies: "No" // * show this later
         )
         
-        ChildCardView(singleProfile: Binding.constant(tempProfile),
+        ChildCardView(singleProfile:tempProfile,
                       swipeStatus: Binding.constant(AllCardsView.LikeDislike.dislike),
                       cardColor: Binding.constant(Color.green))
             .environmentObject(ProfileViewModel())

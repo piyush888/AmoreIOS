@@ -52,12 +52,8 @@ struct DeckCards: View {
     }
     
     // O(1)
-    func getProfile() -> Binding<CardProfileWithPhotos> {
-        return Binding {
-            cardProfileModel.cardsDictionary[singleProfile.id!] ?? CardProfileWithPhotos()
-        } set: { newCard in
-            cardProfileModel.cardsDictionary[singleProfile.id!] = newCard
-        }
+    func getProfile() -> CardProfileWithPhotos {
+        return cardProfileModel.cardsDictionary[singleProfile.id!] ?? CardProfileWithPhotos()
     }
     
     func saveLikeSuperlikeDislike(swipeInfo:AllCardsView.LikeDislike, onSuccess: @escaping () -> Void) {
@@ -121,7 +117,8 @@ struct DeckCards: View {
         GeometryReader { geometry in
             
             ZStack {
-            
+                
+                
                 ChildCardView(singleProfile: getProfile(),
                               swipeStatus:$swipeStatus,
                               cardColor:$cardColor)
@@ -153,7 +150,7 @@ struct DeckCards: View {
                 )
                 .environmentObject(profileModel)
                 
-                
+                // Lottie super star animation
                 Group {
                      if self.swipeStatus == .superlike  {
                        // Animation for superlike given
@@ -162,6 +159,12 @@ struct DeckCards: View {
                    }
                 }
                 
+                // Butttons
+                /// Rewind
+                ///  Dislike
+                ///  Star
+                ///  Heart
+                ///  Messages
                 VStack {
                     Spacer()
                     LikesDislikesButtons

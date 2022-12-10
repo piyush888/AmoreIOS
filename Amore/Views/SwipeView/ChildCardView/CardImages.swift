@@ -10,20 +10,25 @@ import SDWebImageSwiftUI
 
 struct CardImages: View {
     
-    @Binding var profileImage: ProfileImage?
-    @Binding var photoStruct: Photo
+    @State var profileImage: ProfileImage?
     @State var width: CGFloat
     @State var height: CGFloat
     
+    @State private var image:UIImage?
     
     func getImage(imageURL: URL, onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
-        SDWebImageManager.shared.loadImage(with: imageURL, options: [.continueInBackground], progress: nil) { image, data, error, cacheType, finished, durl in
+        
+        SDWebImageManager.shared.loadImage(with: imageURL,
+                                           options: [.scaleDownLargeImages,.continueInBackground],
+                                           progress: nil) { image, data, error, cacheType, finished, durl in
             if let err = error {
                 print(err)
                 return
             }
             guard let image = image else {
                 // No image handle this error
+                print("No Image fetched for \(error), CacheType:\(cacheType)")
+                print(error)
                 onFailure()
                 return
             }
@@ -36,27 +41,21 @@ struct CardImages: View {
     
     var body: some View {
         
-                Image(uiImage: photoStruct.downsampledImage ?? UIImage())
+                Image(uiImage: self.image ?? UIImage())
                     .resizable()
                     .scaledToFill()
                     .frame(width: width)
                     .clipped()
                     .onAppear {
-                        if photoStruct.downsampledImage == nil {
                             if let imageURL = profileImage?.imageURL {
                                 getImage(imageURL: imageURL) {
                                     return
-                                } onSuccess: { downloadedImage in
-                                    photoStruct = Photo(image: nil, downsampledImage: downloadedImage, inProgress: false)
-                                    SDImageCache.shared.removeImage(forKey: imageURL.absoluteString) {
-//                                        print("Successfully deleted card image cache for : ", profileImage?.firebaseImagePath?.split(separator: "/")[1])
-                                    }
+                                } onSuccess: { fetchedImage in
+                                    image = fetchedImage
                                 }
                             }
-                        }
                     }
                  
-        
     }
 }
 
@@ -98,8 +97,7 @@ struct CardImages_Previews: PreviewProvider {
                               doYouWantBabies: "No")
         
         GeometryReader { geometry in
-            CardImages(profileImage: Binding.constant(tempProfile.image3),
-                       photoStruct: Binding.constant(tempProfile.photo3.boundPhoto),
+            CardImages(profileImage: tempProfile.image3,
                        width:geometry.size.width,
                        height:geometry.size.height/2)
                 .padding()

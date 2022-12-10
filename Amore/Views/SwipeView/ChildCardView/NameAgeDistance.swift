@@ -12,7 +12,7 @@ struct NameAgeDistance: View {
     @State var firstName: String
     @State var lastName: String
     @State var age: Int
-    @Binding var profileDistanceFromUser: Double
+    @State var profileDistanceFromUser: Double
     @State var geometry: GeometryProxy
     
     
@@ -76,7 +76,7 @@ struct NameAgeDistance_Previews: PreviewProvider {
             NameAgeDistance(firstName: "Hello",
                             lastName: "World",
                             age: 24,
-                            profileDistanceFromUser: Binding.constant(17),
+                            profileDistanceFromUser: 17.0,
                             geometry: geometry)
         }
     }

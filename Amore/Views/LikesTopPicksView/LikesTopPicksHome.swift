@@ -132,7 +132,7 @@ struct LikesTopPicksHome: View {
                     if let selectedItemVar = selectedItem {
                         ZStack {
                             // Open the pop up window which expand every Mini Card
-                            CardDetail(selectedItem: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,
+                            CardDetail(selectedProfile: receivedGivenEliteModel.getProfile(profileId:selectedItemVar.id!,
                                                                                         selectedTab: selectedTab,
                                                                                         selectedTabSubView:selectedTabSubView),
                                    show: $show,

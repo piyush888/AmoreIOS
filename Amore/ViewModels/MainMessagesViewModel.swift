@@ -164,12 +164,8 @@ class MainMessagesViewModel: ObservableObject {
         return userIds
     }
     
-    func getProfile(profileId: String) -> Binding<CardProfileWithPhotos> {
-        return Binding {
-            self.allChatPhotos_Dict[profileId] ?? CardProfileWithPhotos()
-        } set: { newCard in
-            self.allChatPhotos_Dict[profileId] = newCard
-        }
+    func getProfile(profileId: String) -> CardProfileWithPhotos {
+        return self.allChatPhotos_Dict[profileId] ?? CardProfileWithPhotos()
     }
     
     func loadAllChatProfiles(allChatUserIds: [String]) {
