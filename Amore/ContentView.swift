@@ -33,15 +33,10 @@ struct ContentView: View {
             OnboardingView()
                 .environmentObject(profileModel)
                 .environmentObject(adminAuthenticationModel)
-//                .onAppear{
-//                    // As soon as the page loads check if user is already logged In
-//                    profileModel.checkLogin()
-//                }
         }
         else {
             // If logged In
             // If User Profile Data pulled from Firestore
-            
             if profileModel.profileFetchedAndReady {
                 ZStack {
                     // If User profile already created  or onboarding is done

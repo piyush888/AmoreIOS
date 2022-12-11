@@ -16,7 +16,6 @@ class CardProfileModel: ObservableObject {
     // Cards Data
     @Published var allCards = [CardProfile]()
     @Published var allCardsWithPhotosDeck = [CardProfileWithPhotos]()
-    @Published var cardsDictionary: [String: CardProfileWithPhotos] = [:]
     // Number of Profiles to be fetched per pull
     @Published var userAdjustedFetchProfiles: Int = 10
     // time out after continious error from backend
@@ -164,8 +163,6 @@ class CardProfileModel: ObservableObject {
             let cardProfileWithPhoto = CardProfileModel.cardProfileToCardProfileWithPhotos(card: card)
             // Append in Array
             tempCardsWithPhotos.append(cardProfileWithPhoto)
-            // Append in Dict
-            cardsDictionary[card.id!] = cardProfileWithPhoto
         }
         allCardsWithPhotosDeck = tempCardsWithPhotos + allCardsWithPhotosDeck
         allCardsWithPhotosDeck = NSMutableOrderedSet(array: allCardsWithPhotosDeck).array as! [CardProfileWithPhotos]
@@ -195,18 +192,11 @@ class CardProfileModel: ObservableObject {
         let _ = self.allCardsWithPhotosDeck.map { card in
             self.prefetchNextCardPhotos(card: card)
         }
-        cardsDictionary[card.id!] = card
     }
     
     func resetDeck() {
         self.allCards = self.allCards.suffix(5)
         self.allCardsWithPhotosDeck = self.allCardsWithPhotosDeck.suffix(5)
-        self.cardsDictionary = [:]
-        for card in self.allCardsWithPhotosDeck {
-            if let id = card.id {
-                self.cardsDictionary[id] = card
-            }
-        }
     }
     
 }

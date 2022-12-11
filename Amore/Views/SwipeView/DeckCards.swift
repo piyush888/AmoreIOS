@@ -204,7 +204,6 @@ struct DeckCards: View {
                         cardProfileModel.allCardsWithPhotosDeck.append(cardProfileWithPhotos)
                         // Append rewinded user in Dict
                         if let rewindedUserId = cardProfileWithPhotos.id {
-                            cardProfileModel.cardsDictionary[rewindedUserId] = cardProfileWithPhotos
                             receivedGivenEliteModel.rewindAction(swipedUserId: rewindedUserId)
                         }
                         

@@ -117,7 +117,6 @@ struct EditProfile: View {
                                        doYouWantBabies:$doYouWantBabies,
                                        food:$food,
                                        passions:$passions)
-                            .environmentObject(photoModel)
                             .environmentObject(profileModel)
                 }
 

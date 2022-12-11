@@ -11,7 +11,6 @@ import SwiftUIFontIcon
 
 struct PreviewProfile: View {
     
-    @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @Environment(\.colorScheme) var colorScheme
     
@@ -33,20 +32,13 @@ struct PreviewProfile: View {
             ScrollView(showsIndicators: false) {
 
                 LazyVStack{
-                        // Image 1
-                        // Profile Name, distance and age
-//                    VStack(spacing:10) {
-//                            
-//                        }
                         
                     ZStack {
                         if profileModel.editUserProfile.image1?.imageURL != nil  {
-                            ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
-                                             photo: $photoModel.photo1,
-                                             width: geometry.size.width,
-                                             height: .infinity)
-                                
-                            
+                            CardImages(profileImage: profileModel.editUserProfile.image1,
+                                       width:geometry.size.width,
+                                       height: .infinity)
+
                             VStack {
                                 Spacer()
                                 NameAgeDistance(firstName: profileModel.editUserProfile.firstName.bound,
@@ -78,12 +70,9 @@ struct PreviewProfile: View {
                                 
 
                             if profileModel.editUserProfile.image2?.imageURL != nil  {
-                                ProfileImageView(profileImage: $profileModel.editUserProfile.image2,
-                                                     photo: $photoModel.photo2,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
-                                        .padding(.vertical,5)
-                                
+                                CardImages(profileImage: profileModel.editUserProfile.image2,
+                                           width:geometry.size.width,
+                                           height: .infinity)
                             }
                         }
                         
@@ -106,10 +95,10 @@ struct PreviewProfile: View {
                             
                             if profileModel.editUserProfile.image3?.imageURL != nil {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image3,
-                                                     photo: $photoModel.photo3,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
+                                    CardImages(profileImage: profileModel.editUserProfile.image3,
+                                               width:geometry.size.width,
+                                               height: .infinity)
+
                                         .cornerRadius(20)
                                         .padding(.vertical,5)
                                 }
@@ -126,10 +115,9 @@ struct PreviewProfile: View {
 
                             if profileModel.editUserProfile.image4?.imageURL != nil {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image4,
-                                                     photo: $photoModel.photo4,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
+                                    CardImages(profileImage: profileModel.editUserProfile.image4,
+                                               width:geometry.size.width,
+                                               height: .infinity)
                                         .padding(.vertical,5)
                                 }
                             }
@@ -153,20 +141,18 @@ struct PreviewProfile: View {
                            
                             if profileModel.editUserProfile.image5?.imageURL != nil  {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image5,
-                                                     photo: $photoModel.photo5,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
+                                    CardImages(profileImage: profileModel.editUserProfile.image5,
+                                               width:geometry.size.width,
+                                               height: .infinity)
                                         .padding(5)
                                 }
                             }
                         
                             if profileModel.editUserProfile.image6?.imageURL != nil  {
                                 VStack {
-                                    ProfileImageView(profileImage: $profileModel.editUserProfile.image6,
-                                                     photo: $photoModel.photo6,
-                                                     width: geometry.size.width,
-                                                     height: .infinity)
+                                    CardImages(profileImage: profileModel.editUserProfile.image6,
+                                               width:geometry.size.width,
+                                               height: .infinity)
                                         .padding(5)
                                 }
                             }
@@ -207,17 +193,14 @@ struct PreviewProfile_Previews: PreviewProvider {
 //            PreviewProfile()
 //                .previewDisplayName("iPhone 13 Mini")
 //                .previewDevice("iPhone 13 Mini")
-//                .environmentObject(PhotoModel())
 //                .environmentObject(ProfileViewModel())
 //            PreviewProfile()
 //                .previewDisplayName("iPhone 12 Pro")
 //                .previewDevice("iPhone 12 Pro")
-//                .environmentObject(PhotoModel())
 //                .environmentObject(ProfileViewModel())
 //            PreviewProfile()
 //                .previewDisplayName("iPhone 11")
 //                .previewDevice("iPhone 11")
-//                .environmentObject(PhotoModel())
 //                .environmentObject(ProfileViewModel())
         }
     }
@@ -234,7 +217,6 @@ struct PreviewProfile_Previews: PreviewProvider {
                        doYouWantBabies:Binding.constant(""),
                        food:Binding.constant(""),
                        passions:Binding.constant([""]))
-            .environmentObject(PhotoModel())
             .environmentObject(ProfileViewModel())
     }
 }

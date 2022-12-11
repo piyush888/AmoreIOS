@@ -17,13 +17,13 @@ struct UserSnapDetails: View {
     var body: some View {
         
         VStack {
-            ProfileImageView(profileImage: $profileModel.editUserProfile.image1,
-                                photo: $photoModel.photo1,
-                                width: geometry.size.height/4.0,
-                                height: geometry.size.height/4.0)
-                            .frame(height: geometry.size.height/4.0)
-                            .clipShape(Circle())
-                            .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
+            CardImages(profileImage: profileModel.editUserProfile.image1,
+                       width:geometry.size.height/4.0,
+                       height: geometry.size.height/4.0)
+            .frame(height: geometry.size.height/4.0)
+            .clipShape(Circle())
+            .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
+
             
             Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
                 .font(.title2)

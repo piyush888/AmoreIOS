@@ -17,7 +17,6 @@
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
 		1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */; };
-		1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273C9274509D400590DD1 /* ProfileImageView.swift */; };
 		1B6273CC27450D9E00590DD1 /* CustomViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */; };
 		1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CD274B7B9A00590DD1 /* Filters.swift */; };
 		1B6273D0274B82FD00590DD1 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6273CF274B82FD00590DD1 /* FilterModel.swift */; };
@@ -205,7 +204,6 @@
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		1B5D5E0327E98D3B007D4767 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		1B6273C9274509D400590DD1 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		1B6273CB27450D9E00590DD1 /* CustomViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifiers.swift; sourceTree = "<group>"; };
 		1B6273CD274B7B9A00590DD1 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		1B6273CF274B82FD00590DD1 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 				E29B293E272461F400C38035 /* SubscriptionDetails.swift */,
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
 				E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */,
-				1B6273C9274509D400590DD1 /* ProfileImageView.swift */,
 				E25B7493280CAAC700C87855 /* PaymentComplete.swift */,
 			);
 			path = UserSettingsView;
@@ -1057,7 +1054,6 @@
 				E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */,
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
-				1B6273CA274509D400590DD1 /* ProfileImageView.swift in Sources */,
 				1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
