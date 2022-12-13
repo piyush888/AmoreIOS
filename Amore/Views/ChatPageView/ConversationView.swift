@@ -34,8 +34,20 @@ struct ConversationView: View {
     @State var giphyURL: String = ""
     @State var giphyId: String = ""
     
+    // Show unmatch confirmation alert
+    @State var showUnmatchConfirmation = false
+    
     // TO BE DELETED - KTZ. 
     @State var gifData: [String] = []
+    
+    func unmatchButtonHandler() {
+        navigateToChatView.toggle()
+        FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
+            print("Unmatch: API Call Failed")
+        }, onSuccess: {
+            print("Unmatch: API Success")
+        }, otherUserId: toUser.id)
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -85,12 +97,7 @@ struct ConversationView: View {
                     }
                     // Unmatch Button
                     Button  {
-                        navigateToChatView.toggle()
-                        FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
-                            print("Unmatch: API Call Failed")
-                        }, onSuccess: {
-                            print("Unmatch: API Success")
-                        }, otherUserId: toUser.id)
+                        showUnmatchConfirmation.toggle()
                     } label: {
                         Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
                             .font(.system(size: 60))
@@ -141,6 +148,17 @@ struct ConversationView: View {
                 CardDetail(selectedProfile: mainMessagesModel.getProfile(profileId: userId),
                            show: $presentProfileCard, animation: animation)
             }
+        }
+        .alert(isPresented: $showUnmatchConfirmation) {
+            Alert(
+                title: Text("Are you sure you want to unmatch?"),
+                message: Text("You will be unmatched now. This is an irreversible action."),
+                primaryButton: .destructive(
+                    Text("Unmatch"),
+                    action: unmatchButtonHandler
+                ),
+                secondaryButton: .cancel()
+            )
         }
     }
     
