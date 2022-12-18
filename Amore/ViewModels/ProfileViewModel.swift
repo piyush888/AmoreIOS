@@ -183,16 +183,7 @@ class ProfileViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }.resume()
     }
-    
-    func calculateUserAge() {
-        let now = Date()
-        let birthday: Date = self.userProfile.dateOfBirth ?? Date()
-        let calendar = Calendar.current
-        
-        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
-        self.userProfile.age = ageComponents.year!
-    }
-  
+   
     func signIn(adminAuthenticationObj:AdminAuthenticationViewModel, otpVerificationCode:String) {
 
         if let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") {

@@ -52,13 +52,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance()
         return true
     }
-
-    // NOTE - duplicate function is commented & added to 'extension AppDelegate'
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        print("\(#function)")
-//        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
-//    }
-      
+    
+    // Silent Push Notification
     func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("\(#function)")
         if Auth.auth().canHandleNotification(notification) {
@@ -80,22 +75,50 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     // User notification setting are in the Amore > Signing & Capabilities
-    // The user notification center will call these methods when notifications arrive or when the user interacts with them. You’ll be working with them a little later.
+    
       func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler:
         @escaping (UNNotificationPresentationOptions) -> Void
       ) {
-        completionHandler([[.banner, .sound]])
+          // This method is called when a notification is about to be displayed to the user.
+          // You can use this method to customize the way the notification is displayed, or to prevent it from being shown at all.
+//          UNUserNotificationCenter.setBadgeCount(1)
+          completionHandler([.badge, .sound])
       }
 
-    // function overloading for userNotificationCenter
+    // Function overloading for userNotificationCenter
       func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
       ) {
+          // This method is called when a notification has been received and the app is running in the foreground.
+          // You can use this method to take appropriate action based on the notification's content.
+          
+          switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+              // Handle the user tapping on the notification
+              let userInfo = response.notification.request.content.userInfo
+              let notificationCategory = response.notification.request.content.categoryIdentifier
+              
+              // Use the userInfo dictionary to update your app's UI or perform some other action
+              if notificationCategory == "Match" {
+                    print(userInfo["analytics_label"])
+              } else if notificationCategory == "Message" {
+                  print(userInfo["analytics_label"])
+              }
+              break
+              
+            case UNNotificationDismissActionIdentifier:
+                // Handle the user dismissing the notification
+                break
+                      
+            default:
+              break
+          }
+          
         completionHandler()
       }
      

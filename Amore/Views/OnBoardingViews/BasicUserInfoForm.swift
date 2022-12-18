@@ -37,6 +37,14 @@ struct BasicUserInfoForm: View {
         return isEmailValid
     }
     
+    var age: Int {
+        let now = Date()
+        let birthday: Date = profileModel.userProfile.dateOfBirth ?? Date()
+        let calendar = Calendar.current
+        
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+        return ageComponents.year!
+    }
     
     var isDOBValid: Bool {
         // Age can't be more than 110 years and less than 18 year
@@ -63,6 +71,7 @@ struct BasicUserInfoForm: View {
         profileModel.userProfile.firstName = firstName
         profileModel.userProfile.email = email
         profileModel.userProfile.dateOfBirth = dateOfBirth
+        profileModel.userProfile.age = age
         profileModel.userProfile.id = Auth.auth().currentUser?.uid
     }
     

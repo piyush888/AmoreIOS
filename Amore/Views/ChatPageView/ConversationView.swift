@@ -401,7 +401,7 @@ struct MessageView: View {
                                 .cornerRadius(40)
                                 .shadow(radius: 1)
                             ChatBubble(direction: .left) {
-                                VStack(alignment: .trailing, spacing: 10) {
+                                VStack(alignment: .leading, spacing: 10) {
                                     Text(message.text.bound)
                                         .padding(.horizontal, 20)
                                         .padding(.top, 10)

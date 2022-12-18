@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import StoreKit
 import RiveRuntime
+import SDWebImageSwiftUI
 
 struct BoostUserProfile: View {
     
@@ -122,16 +123,14 @@ struct BoostUserProfile: View {
                         radiateAnimation
                             .view()
                             .frame(width:geometry.size.width/1.75)
-                        // User Profile act as a button
-                        Button {
-                            // Nothing happens here
-                        } label: {
-                            CardImages(profileImage: profileModel.editUserProfile.image1,
-                                       width:125,
-                                       height: 125)
-                                .clipShape(Circle())
-                                .shadow(color: Color.pink, radius: 4.75, x: 0.5, y: 0.5)
-                        }
+                        
+                        WebImage(url: profileModel.editUserProfile.image1?.imageURL)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 125, height: 125)
+                            .clipped()
+                            .cornerRadius(40)
+                            .shadow(radius: 1)
                     }
                     
                     VStack{
