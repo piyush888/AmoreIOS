@@ -11,7 +11,7 @@ import FirebaseAuth
 struct HomeView: View {
     
     @State var serviceErrorView: ErrorView = .allServicesAreGoodView
-    @State var currentPage: ViewTypes = .userSettingsView
+    @State var currentPage: ViewTypes = .swipeView
     @StateObject var tabModel = TabModel()
     
     @EnvironmentObject var profileModel: ProfileViewModel
