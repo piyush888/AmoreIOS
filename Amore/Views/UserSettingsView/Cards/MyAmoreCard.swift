@@ -63,7 +63,7 @@ struct MyAmoreCard: View {
                         HStack(spacing:1) {
                             Image(systemName: "arrow.counterclockwise.circle.fill")
                                 .foregroundColor(Color.orange)
-                            Text("3 rewinds everyday")
+                            Text("3 replays everyday")
                         }
                     }
                     

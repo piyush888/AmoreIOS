@@ -12,6 +12,8 @@ struct SettingEditProfileSafety: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @EnvironmentObject var storeManager: StoreManager
+    
     // Close the settings tab
     @Binding var settingsDone: Bool
     // Close the Editing Tab
@@ -22,10 +24,11 @@ struct SettingEditProfileSafety: View {
         HStack(spacing:50) {
             
             NavigationLink(isActive: $settingsDone) {
-                UserSettingView(settingsDone: $settingsDone)
+                UserSettingView()
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
                     .environmentObject(adminAuthenticationModel)
+                    .environmentObject(storeManager)
             } label: {
                 Button {
                     settingsDone = true

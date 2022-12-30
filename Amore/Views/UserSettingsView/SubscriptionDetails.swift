@@ -98,7 +98,6 @@ struct SubscriptionDetails: View {
                 
                 //Restore products already purchased
                 Button {
-//                    storeManager.restoreProducts() - TODO KTZ Move the restore inside settings view
                     popUpCardSelection = .rewindCards
                     showModal = true
                 } label: {
@@ -107,7 +106,7 @@ struct SubscriptionDetails: View {
                             .resizable()
                             .frame(width:50, height:50)
                             .foregroundColor(.orange)
-                        Text("\(self.totalRewindsCount) Rewinds")
+                        Text("\(self.totalRewindsCount) Replays")
                             .font(.caption2)
                     }
                 }

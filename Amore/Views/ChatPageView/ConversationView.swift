@@ -57,16 +57,6 @@ struct ConversationView: View {
                     .onTapGesture {
                         self.hideKeyboard()
                     }
-                
-                // TO BE DELETED - KTZ.
-//                ScrollView(.vertical, showsIndicators:false, content:{
-//                    ForEach(gifData,id:\.self){ url in
-//                        Spacer(minLength: 0)
-//                        AnimatedImage(url:URL(string:url)!)
-//                            .aspectRatio(contentMode: .fit)
-//                            .clipShape(GipyCustomShape())
-//                    }
-//                })
 
                 MessageSendField
                     .padding([.horizontal, .bottom])

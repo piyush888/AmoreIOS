@@ -48,13 +48,13 @@ struct BuyMoreRewinds: View {
                     HStack {
                         Text("You've")
                         Text("\(totalRewindCount)")
-                        Text("Rewinds")
+                        Text("Replays")
                     }.font(.largeTitle)
                     
                     
                     Text("Swiped accidentally?, don't let them get away")
                     
-                    Text("Unwind the swipe and let your love be seen")
+                    Text("Unwind the action and let your love be seen")
                         .customFont(.footnote)
                         .opacity(0.7)
                         .padding(.horizontal,20)

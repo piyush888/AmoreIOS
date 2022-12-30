@@ -14,83 +14,121 @@ struct UserSettingView: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
-    @Binding var settingsDone: Bool
+    @EnvironmentObject var storeManager: StoreManager
+    
+    let currentUser = Auth.auth().currentUser
     @State var showModal = false
     
     var body: some View {
         
-        GeometryReader { geometry in
+        Form {
+            // Phone Number
+            // Email
+            Section(header:Text("Account Settings")) {
+                userDetails
+            }
             
-            VStack {
+            Section(header:Text("Contact Us")) {
+                SettingFormComponents(settingName:"Help and Support",
+                                      urlToOpen:"http://aidronesoftware.com")
+            }
+            
+            
+            Section(header:Text("Community")) {
+                SettingFormComponents(settingName:"Community Guidelines",
+                                      urlToOpen:"http://aidronesoftware.com")
                 
-                // Done will take back to Profile View
-                HStack {
-                    Text("Settings")
-                        .font(.title)
-                    
-                    Spacer()
-                    
-                    Button {
-                        // Take Back to Profile View
-                        settingsDone = false
-                    } label: {
-                        Text("Done")
-                            .font(.title2)
-                            .foregroundColor(.pink)
-                    }
-                    
-                }
+                SettingFormComponents(settingName:"Safety Tips",
+                                      urlToOpen:"http://aidronesoftware.com")
                 
-                // Section
-                /// Help & Support, Legal and Privacy Policy
-                ContactCommunityLegal()
-                    .environmentObject(photoModel)
-                    .environmentObject(profileModel)
-                    .environmentObject(adminAuthenticationModel)
-                
-                
-                Spacer()
-                
-                
-                // Log Out
-                Button{
-                    DispatchQueue.main.async {
-                        photoModel.resetPhotosOnLogout()
-                    }
-                    adminAuthenticationModel.removeCookies()
-                    // Firestore logout
-                    try! Auth.auth().signOut()
-                    log_Status = false
-                } label : {
-                    ZStack {
-                        Capsule()
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [Color.white]),
-                                startPoint: .leading,
-                                endPoint: .trailing)
-                            )
-                            .frame(width:geometry.size.width, height:40)
-                            .shadow(color: Color.black, radius: 1, x: 0.5, y: 0.5)
-                        
-                        Text("Log Out")
-                            .foregroundColor(Color.pink)
-                    }
-                    
-                }
-                
-                
-                
+                SettingFormComponents(settingName:"Safety Center",
+                                      urlToOpen:"http://aidronesoftware.com")
                 
             }
-            .navigationBarHidden(true)
             
+            
+            Section(header:Text("Privacy")) {
+                
+                SettingFormComponents(settingName:"Cookie Policy",
+                                      urlToOpen:"http://aidronesoftware.com")
+                
+                SettingFormComponents(settingName:"Privacy Policy",
+                                      urlToOpen:"http://aidronesoftware.com")
+                
+                SettingFormComponents(settingName:"Privacy Preference",
+                                      urlToOpen:"http://aidronesoftware.com")
+            }
+            
+            Section(header:Text("Legal")) {
+                SettingFormComponents(settingName:"Terms of Service",
+                                      urlToOpen:"http://aidronesoftware.com")
+                
+                SettingFormComponents(settingName:"License",
+                                      urlToOpen:"http://aidronesoftware.com")
+            }
+            
+            
+            Section {
+                Button {
+                    // Restore the purchase
+                    storeManager.restoreProducts()
+                } label:{
+                    Text("Restore Purchases")
+                }
+            }
+            
+            // Logout
+            Section {
+                logoOut
+            }
         }
-        .padding()
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Settings")
     }
+    
+    var logoOut: some View {
+        // Log Out
+        Button{
+            DispatchQueue.main.async {
+                photoModel.resetPhotosOnLogout()
+            }
+            adminAuthenticationModel.removeCookies()
+            // Firestore logout
+            try! Auth.auth().signOut()
+            log_Status = false
+        } label : {
+            Text("Log Out")
+        }
+    }
+    
+    var userDetails: some View {
+        Group {
+            // Phone Number
+            HStack {
+                Text("Phone Number")
+                Spacer()
+                Text("\(currentUser?.phoneNumber ?? "")")
+            }
+            
+            /// Email
+            HStack {
+                Text("Email")
+                Spacer()
+                Text("\(profileModel.userProfile.email ?? "")")
+            }
+        }
+    }
+    
 }
+
+
+
 
 struct UserSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        UserSettingView(settingsDone:Binding.constant(true))
+        UserSettingView()
+            .environmentObject(PhotoModel())
+            .environmentObject(ProfileViewModel())
+            .environmentObject(AdminAuthenticationViewModel())
     }
 }

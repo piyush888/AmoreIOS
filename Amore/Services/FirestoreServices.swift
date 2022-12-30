@@ -161,7 +161,7 @@ class FirestoreServices {
                             do {
                                 let rewindedDict = try JSONDecoder().decode(RewindedData.self, from: data)
                                 onSuccess(rewindedDict)
-                                print("Rewind Operation Successful")
+                                print("Rewind/Replay Operation Successful")
                             }
                             catch let jsonError as NSError {
                               print("JSON decode failed Rewind Swipe: \(jsonError)")

@@ -78,6 +78,7 @@ struct UserProfile: View {
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
                             .environmentObject(adminAuthenticationModel)
+                            .environmentObject(storeManager)
                             .padding(.bottom,10)
                             
                         // Subscription details
@@ -238,7 +239,7 @@ struct UserProfile: View {
                                                       cardHeaderSymbol: "arrowshape.turn.up.backward.circle.fill",
                                                       cardHeaderSymbolColor: Color.white,
                                                       headerText: "Accidental swipe?",
-                                                      subHeaderText: "Don't let them get away, use a rewind",
+                                                      subHeaderText: "Don't let them get away, use a replay",
                                                       showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
