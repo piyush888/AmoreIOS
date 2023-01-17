@@ -15,15 +15,28 @@ struct SettingFormComponents: View {
     @State var urlToOpen: String = ""
     
     var body: some View {
-        HStack {
-            Text(settingName)
-            Spacer()
-            Image(systemName: "chevron.right")
-        }.onTapGesture {
+        Button {
             showSafari.toggle()
-        }.fullScreenCover(isPresented: $showSafari, content: {
+        } label : {
+            HStack{
+                Text(settingName)
+                Spacer()
+                Image(systemName: "chevron.right")
+            }
+            .foregroundColor(.primary)
+        }
+        .fullScreenCover(isPresented: $showSafari, content: {
                 SFSafariViewWrapper(url: URL(string: urlToOpen)!)
         })
-    
     }
 }
+
+
+struct SettingFormComponents_Preview: PreviewProvider {
+    static var previews: some View {
+        SettingFormComponents(settingName:"Cookie Policy",
+                              urlToOpen:"https://www.luvamore.com/cookiepolicy")
+    }
+}
+
+

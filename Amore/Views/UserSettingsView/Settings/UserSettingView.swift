@@ -17,6 +17,7 @@ struct UserSettingView: View {
     @EnvironmentObject var storeManager: StoreManager
     
     let currentUser = Auth.auth().currentUser
+    
     @State var showModal = false
     
     var body: some View {
@@ -36,35 +37,29 @@ struct UserSettingView: View {
             
             Section(header:Text("Community")) {
                 SettingFormComponents(settingName:"Community Guidelines",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/communityguidelines")
                 
                 SettingFormComponents(settingName:"Safety Tips",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/safetytips")
                 
                 SettingFormComponents(settingName:"Safety Center",
                                       urlToOpen:"http://aidronesoftware.com")
-                
             }
             
             
             Section(header:Text("Privacy")) {
                 
                 SettingFormComponents(settingName:"Cookie Policy",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/cookiepolicy")
                 
                 SettingFormComponents(settingName:"Privacy Policy",
-                                      urlToOpen:"http://aidronesoftware.com")
-                
-                SettingFormComponents(settingName:"Privacy Preference",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/privacy")
             }
             
             Section(header:Text("Legal")) {
                 SettingFormComponents(settingName:"Terms of Service",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/termsandconditions")
                 
-                SettingFormComponents(settingName:"License",
-                                      urlToOpen:"http://aidronesoftware.com")
             }
             
             

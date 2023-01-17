@@ -143,6 +143,10 @@
 		E2A94C6C276CF7BC0069F814 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C6B276CF7BC0069F814 /* RadioButton.swift */; };
 		E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A9610027CB4660009108F0 /* StoreKit.framework */; };
 		E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9610227CC89FF009108F0 /* StoreManager.swift */; };
+		E2BEC083296F7E1500549FBC /* SafetyCardView..swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC082296F7E1500549FBC /* SafetyCardView..swift */; };
+		E2BEC0872976127A00549FBC /* SafetyArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BEC0862976127A00549FBC /* SafetyArticles.json */; };
+		E2BEC089297619C500549FBC /* SafetyQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC088297619C500549FBC /* SafetyQuizView.swift */; };
+		E2BEC08B29761E6200549FBC /* SafetyCardWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC08A29761E6200549FBC /* SafetyCardWrapperView.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
 		E2D00E0C286647460037DC07 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E2D00E0B286647460037DC07 /* button.riv */; };
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
@@ -329,6 +333,10 @@
 		E2A94C6B276CF7BC0069F814 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		E2A9610027CB4660009108F0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2A9610227CC89FF009108F0 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		E2BEC082296F7E1500549FBC /* SafetyCardView..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCardView..swift; sourceTree = "<group>"; };
+		E2BEC0862976127A00549FBC /* SafetyArticles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SafetyArticles.json; sourceTree = "<group>"; };
+		E2BEC088297619C500549FBC /* SafetyQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyQuizView.swift; sourceTree = "<group>"; };
+		E2BEC08A29761E6200549FBC /* SafetyCardWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCardWrapperView.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
 		E2D00E0B286647460037DC07 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
@@ -584,6 +592,7 @@
 			children = (
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
 				E2D43188288F60AF005AFBE0 /* EditCardFormData.json */,
+				E2BEC0862976127A00549FBC /* SafetyArticles.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -640,6 +649,9 @@
 			isa = PBXGroup;
 			children = (
 				E29B293C27234B8900C38035 /* UserSafetyView.swift */,
+				E2BEC082296F7E1500549FBC /* SafetyCardView..swift */,
+				E2BEC088297619C500549FBC /* SafetyQuizView.swift */,
+				E2BEC08A29761E6200549FBC /* SafetyCardWrapperView.swift */,
 			);
 			path = Safety;
 			sourceTree = "<group>";
@@ -930,6 +942,7 @@
 				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
 				E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
+				E2BEC0872976127A00549FBC /* SafetyArticles.json in Resources */,
 				E283677C26FAA7B700EEA049 /* Onboarding.json in Resources */,
 				E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */,
 				E2869322287B2D900079701F /* DislikeLottie.json in Resources */,
@@ -1061,6 +1074,7 @@
 				1BC8BE092705CC5E00F0137E /* ShowMe.swift in Sources */,
 				1BF55ECD272025CC0027F78F /* (null) in Sources */,
 				E226CF4A2709F76800FC5129 /* AddPhotosView.swift in Sources */,
+				E2BEC089297619C500549FBC /* SafetyQuizView.swift in Sources */,
 				E2723F8228823A4D00C0E3B1 /* NavigationBar.swift in Sources */,
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
@@ -1098,6 +1112,7 @@
 				1BC8BE082705CC5E00F0137E /* SexualOrientation.swift in Sources */,
 				E23BAA9B2741DF1300F619D6 /* ChildCardView.swift in Sources */,
 				E291A1E726FE8FE6000D8A2C /* LoginOTPKeyCodeParent.swift in Sources */,
+				E2BEC083296F7E1500549FBC /* SafetyCardView..swift in Sources */,
 				1B5D5E0427E98D3B007D4767 /* ViewExtensions.swift in Sources */,
 				E268A46C2747DB9A0045F264 /* CardProfiles.swift in Sources */,
 				E25B0F3C285FB14800411BDA /* BoostUserProfile.swift in Sources */,
@@ -1159,6 +1174,7 @@
 				E2DBC025272B3621000630F5 /* ContactCommunityLegal.swift in Sources */,
 				E2347136271DC4E50006F336 /* MiniCardView.swift in Sources */,
 				E2ED202128BA9FA400BFD32C /* BackGroundGraphics.swift in Sources */,
+				E2BEC08B29761E6200549FBC /* SafetyCardWrapperView.swift in Sources */,
 				1BB36D2E27ACE6EA00F4029C /* MainMessageView.swift in Sources */,
 				E283678426FAB8C800EEA049 /* DataService.swift in Sources */,
 				1BB36D3E27AE744800F4029C /* MessagesModel.swift in Sources */,
