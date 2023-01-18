@@ -14,12 +14,8 @@ struct SafetyCardView: View {
     let maxWidth: Double
     
     // Switch between card color for dark and light mode
-    func safetyCardColor()->Gradient {
-        if colorScheme == .dark {
-            return Gradient(colors: [Color(.systemGray6)])
-        } else {
-            return Gradient(colors: [Color(hex:0xF2E9FE)])
-        }
+    var cardColor: Gradient {
+            colorScheme == .dark ? Gradient(colors: [Color(.systemGray6)]) : Gradient(colors: [Color(hex:0xF2E9FE)])
     }
     
     var body: some View {
@@ -60,7 +56,7 @@ struct SafetyCardView: View {
         .background(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(LinearGradient(
-                    gradient: safetyCardColor(),
+                    gradient: cardColor,
                     startPoint: .leading,
                     endPoint: .trailing)
                 )
@@ -78,15 +74,17 @@ struct SafetyCardView_Previews: PreviewProvider {
                                                   frameHeight:90,
                                                   colorScheme: Color.green),
                        maxWidth:.infinity)
+                        .padding(.horizontal,10)
         
         
         SafetyCardView(cardSafety:SafetyViewModel(id:"3",
-                                                  illustration: "Dalle1",
-                                                  title:"Safety",
-                                                  frameHeight:140,
-                                                  colorScheme: Color.green),
+                                                  illustration: "BlogArticle1",
+                                                  title:"Love at First Sight",
+                                                  body:"Is it still valid in 2023?",
+                                                  frameHeight:120,
+                                                  contentUrl:"https://www.luvamore.com/post/love-at-first-sight"),
                        maxWidth:.infinity)
+                        .padding(.horizontal,10)
         
     }
 }
-

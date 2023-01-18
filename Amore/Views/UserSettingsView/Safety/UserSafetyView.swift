@@ -71,6 +71,8 @@ var quiz = SafetyViewModel(id:"7",
 
 struct UserSafetyView: View {
     
+    @Environment(\.colorScheme) var phoneColorScheme
+    
     @State private var showSafetyTips = false
     @State private var userInput = ""
     @State private var showSafari: Bool = false
@@ -78,6 +80,11 @@ struct UserSafetyView: View {
     // Should be "" here, fix for a bug - KTZ
     @State var urlToOpen: String = "https://www.luvamore.com/safetytips"
     
+    
+    // Card color of the quiz
+    var sheetColor: Gradient {
+        phoneColorScheme == .dark ? Gradient(colors: [Color(.systemGray6)]) : Gradient(colors: [Color(hex:0xF2E9FE)])
+    }
     
     var body: some View {
         
@@ -136,7 +143,7 @@ struct UserSafetyView: View {
                     SFSafariViewWrapper(url: URL(string: urlToOpen)!)
                 })
                 .sheet(isPresented: $showQuiz, content: {
-                    SafetyQuizView()
+                    SafetyQuizView(showQuiz:$showQuiz)
                 })
             }
             .padding(10)

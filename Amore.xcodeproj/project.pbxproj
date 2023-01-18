@@ -144,7 +144,7 @@
 		E2A9610127CB4661009108F0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A9610027CB4660009108F0 /* StoreKit.framework */; };
 		E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9610227CC89FF009108F0 /* StoreManager.swift */; };
 		E2BEC083296F7E1500549FBC /* SafetyCardView..swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC082296F7E1500549FBC /* SafetyCardView..swift */; };
-		E2BEC0872976127A00549FBC /* SafetyArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BEC0862976127A00549FBC /* SafetyArticles.json */; };
+		E2BEC0872976127A00549FBC /* SafetyQuizData.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BEC0862976127A00549FBC /* SafetyQuizData.json */; };
 		E2BEC089297619C500549FBC /* SafetyQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC088297619C500549FBC /* SafetyQuizView.swift */; };
 		E2BEC08B29761E6200549FBC /* SafetyCardWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BEC08A29761E6200549FBC /* SafetyCardWrapperView.swift */; };
 		E2C59093270CA225001F78E7 /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C59092270CA225001F78E7 /* ImageCropper.swift */; };
@@ -334,7 +334,7 @@
 		E2A9610027CB4660009108F0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2A9610227CC89FF009108F0 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		E2BEC082296F7E1500549FBC /* SafetyCardView..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCardView..swift; sourceTree = "<group>"; };
-		E2BEC0862976127A00549FBC /* SafetyArticles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SafetyArticles.json; sourceTree = "<group>"; };
+		E2BEC0862976127A00549FBC /* SafetyQuizData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SafetyQuizData.json; sourceTree = "<group>"; };
 		E2BEC088297619C500549FBC /* SafetyQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyQuizView.swift; sourceTree = "<group>"; };
 		E2BEC08A29761E6200549FBC /* SafetyCardWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyCardWrapperView.swift; sourceTree = "<group>"; };
 		E2C59092270CA225001F78E7 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
@@ -592,7 +592,7 @@
 			children = (
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
 				E2D43188288F60AF005AFBE0 /* EditCardFormData.json */,
-				E2BEC0862976127A00549FBC /* SafetyArticles.json */,
+				E2BEC0862976127A00549FBC /* SafetyQuizData.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -942,7 +942,7 @@
 				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
 				E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
-				E2BEC0872976127A00549FBC /* SafetyArticles.json in Resources */,
+				E2BEC0872976127A00549FBC /* SafetyQuizData.json in Resources */,
 				E283677C26FAA7B700EEA049 /* Onboarding.json in Resources */,
 				E25911A1287B126300028152 /* SuccessfulLottie.json in Resources */,
 				E2869322287B2D900079701F /* DislikeLottie.json in Resources */,

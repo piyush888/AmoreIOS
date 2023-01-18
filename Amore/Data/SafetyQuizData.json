@@ -1,0 +1,60 @@
+
+[
+    {
+        "question": "What should you do if you feel uncomfortable on a date?",
+        "options": ["Leave the date immediately",
+                    "Try to ignore the discomfort",
+                   "Confront the person"],
+         "explanation": "If you ever feel uncomfortable or unsafe on a date, it is important to trust your instincts and leave the date immediately. Your safety and well-being should always be a top priority.",
+         "correctAnswer": 0
+    },
+    {
+        "question": "What should you do if someone asks you for personal information?",
+        "options": ["Never give out personal information",
+                   "Trust everyone you meet online",
+                   "Provide them with your personal information and socials"],
+        "explanation": "One of the best ways to protect yourself from online dating scams is to never give out personal information such as your address, phone number, or financial information. It's also important to be skeptical of anyone who asks for money or gifts.",
+         "correctAnswer": 0
+    },
+    {
+        "question": "What should you do if your date becomes physically aggressive?",
+        "options": ["Try to reason with them",
+                   "Leave the date immediately and call for help",
+                   "Stay and hope the situation improves"],
+         "explanation": "If your date becomes physically aggressive, it is important to leave the date immediately and call for help. Physical aggression is not acceptable behavior and should not be tolerated.",
+         "correctAnswer": 1
+    },
+    {
+        "question": "What is the best way to protect yourself while meeting someone for the first time?",
+        "options": ["Meet in a public place",
+                   "Give them your address and invite them over",
+                   "Meet in a private location"],
+         "explanation":" The best way to protect yourself while meeting someone for the first time is to meet in a public place. This way, there are other people around and you can leave the situation if you feel uncomfortable.",
+         "correctAnswer": 0
+    },
+    {
+        "question": "What should you do if you suspect your date is under the influence of drugs or alcohol?",
+        "options": ["Continue with the date",
+                   "Leave the date immediately",
+                   "Try to intervene and stop them from using drugs or alcohol"],
+         "explanation": " If you suspect your date is under the influence of drugs or alcohol, it is important to leave the date immediately. Being under the influence can impair judgment and increase the risk of unsafe behavior.",
+         "correctAnswer":1
+    },
+    {
+        "question": "How can you protect yourself from unwanted sexual advances on a date?",
+        "options": ["Try to ignore",
+                   "Be polite and avoid confrontation",
+                   "Communicate your boundaries and assertively say no"],
+         "explanation": "The best way to protect yourself from unwanted sexual advances on a date is to communicate your boundaries and assertively say no if someone crosses them. Being clear and firm in your communication can help prevent unwanted advances.",
+         "correctAnswer":2
+    },
+    {
+        "question": "What is the best way to protect yourself while using a dating app?",
+        "options": ["Only use apps recommended by friends",
+                   "Be honest about your identity and intentions",
+                   "Use a fake profile and hide your true identity"],
+         "explanation": "The best way to protect yourself while using a dating app is to be honest about your identity and intentions. Using a fake profile or hiding your true identity can lead to unsafe situations and mistrust.",
+         "correctAnswer": 1
+    }
+]
+
