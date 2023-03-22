@@ -94,6 +94,8 @@ class MainMessagesViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         firestoreListener?.remove()
         self.recentChats.removeAll()
+        // Load all chats profiles
+        self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
         firestoreListener = db
             .collection("RecentChats")
             .document(uid)
@@ -145,8 +147,6 @@ class MainMessagesViewModel: ObservableObject {
                             } catch {
                                 print("Chat: Error Decoding Recent Message: \(error)")
                             }
-                            // Load all chats profiles
-                            self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
                         }
                     }
                     
