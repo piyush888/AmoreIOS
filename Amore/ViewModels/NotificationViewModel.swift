@@ -50,6 +50,27 @@ class NotificatonViewModel: ObservableObject {
         }
     }
     
+    
+    func deleteFCMTokenFromFirestore() {
+        if let profileId = Auth.auth().currentUser?.uid {
+            do {
+                if let deviceToken = UIDevice.current.identifierForVendor?.uuidString {
+                    let docRef = db.collection("FCMTokens").document(profileId)
+                    docRef.collection("Devices").document(deviceToken).delete { error in
+                        if let error = error {
+                            print("Error deleting FCM token: \(error)")
+                        } else {
+                            print("FCMtoken deleted successfully")
+                            docRef.setData(["wasUpdated": true])
+                        }
+                    }
+                }
+            } catch let error {
+                print("Error deleting FCM token: \(error.localizedDescription)")
+            }
+        }
+    }
+    
 }
 
 

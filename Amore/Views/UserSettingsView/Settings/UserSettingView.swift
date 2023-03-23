@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct UserSettingView: View {
     
+    @StateObject var notificatonViewModel = NotificatonViewModel()
     @AppStorage("log_Status") var log_Status = false
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
@@ -86,11 +87,12 @@ struct UserSettingView: View {
         Button{
             DispatchQueue.main.async {
                 photoModel.resetPhotosOnLogout()
+                notificatonViewModel.deleteFCMTokenFromFirestore()
+                adminAuthenticationModel.removeCookies()
+                // Firestore logout
+                try! Auth.auth().signOut()
+                log_Status = false
             }
-            adminAuthenticationModel.removeCookies()
-            // Firestore logout
-            try! Auth.auth().signOut()
-            log_Status = false
         } label : {
             Text("Log Out")
         }

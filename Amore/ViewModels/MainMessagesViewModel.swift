@@ -104,7 +104,8 @@ class MainMessagesViewModel: ObservableObject {
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     self.errorMessage = "Failed to listen for recent messages: \(error)"
-                    print("Chat: \(error)")
+                    print("FetchRecentChats: \(error)")
+                    print("\(self.errorMessage)")
                     return
                 }
                 
