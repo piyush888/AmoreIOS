@@ -86,13 +86,14 @@ struct UserSettingView: View {
         // Log Out
         Button{
             DispatchQueue.main.async {
-                photoModel.resetPhotosOnLogout()
-                notificatonViewModel.deleteFCMTokenFromFirestore()
-                adminAuthenticationModel.removeCookies()
-                // Firestore logout
-                try! Auth.auth().signOut()
-                log_Status = false
-            }
+               notificatonViewModel.deleteFCMTokenFromFirestore {
+                   photoModel.resetPhotosOnLogout()
+                   adminAuthenticationModel.removeCookies()
+                   // Firestore logout
+                   try! Auth.auth().signOut()
+                   log_Status = false
+               }
+           }
         } label : {
             Text("Log Out")
         }
