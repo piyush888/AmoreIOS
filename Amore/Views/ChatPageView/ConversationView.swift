@@ -62,13 +62,13 @@ struct ConversationView: View {
                     .padding([.horizontal, .bottom])
                     .ignoresSafeArea()
             }
-            .fullScreenCover(isPresented: $isShowingGifPicker,
-                             onDismiss: gipgyViewDismissed,
-                             content:{
-                                GiphyVCRepresentable(giphyURL:$giphyURL,
-                                                     giphyId:$giphyId,
-                                                     isShowingGifPicker:$isShowingGifPicker)
-                            })
+            .sheet(isPresented: $isShowingGifPicker,
+                 onDismiss: gipgyViewDismissed,
+                 content:{
+                    GiphyVCRepresentable(giphyURL:$giphyURL,
+                         giphyId:$giphyId,
+                         isShowingGifPicker:$isShowingGifPicker)
+            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
