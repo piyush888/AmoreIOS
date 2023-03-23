@@ -108,17 +108,19 @@ struct ChildCardBasicInfo : View {
                 .font(.caption)
             Spacer()
         }
+        .frame(minWidth: 150, idealWidth: UIScreen.main.bounds.width/2-25, maxWidth: UIScreen.main.bounds.width/2, alignment: .leading)
+        .fixedSize()
     }
 }
 
 struct CardBasicInfo_Previews: PreviewProvider {
     static var previews: some View {
-        CardBasicInfo(height: 0.0,
-                      education: "",
-                      countryRaisedIn: "",
-                      religion: "",
-                      industry: "",
-                      politics: "",
-                      food: "")
+        CardBasicInfo(height: 178,
+                      education: "graduated from masters program at ASU",
+                      countryRaisedIn: "India",
+                      religion: "Hinduism",
+                      industry: "computer/hardware/software",
+                      politics: "Liberal",
+                      food: "Vegetarian")
     }
 }
