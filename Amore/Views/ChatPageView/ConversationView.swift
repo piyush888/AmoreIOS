@@ -417,7 +417,7 @@ struct MessageView: View {
                                         TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
                                     }
                                 }
-                                .background(Color.blue)
+                                
                         }
                     }
                         else {
@@ -440,7 +440,6 @@ struct MessageView: View {
                                         TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
                                     }
                                 }
-                                .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                             }
                         }
                     }
