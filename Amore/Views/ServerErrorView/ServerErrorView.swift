@@ -12,7 +12,7 @@ struct ServerErrorView: View {
     
     @AppStorage("log_Status") var log_Status = false
     @EnvironmentObject var photoModel: PhotoModel
-    let email = "support@aidronesoftware.com"
+    let email = "support@luvamore.com"
     
     var body: some View {
         

@@ -32,7 +32,7 @@ struct UserSettingView: View {
             
             Section(header:Text("Contact Us")) {
                 SettingFormComponents(settingName:"Help and Support",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/about#contact")
             }
             
             
@@ -44,7 +44,7 @@ struct UserSettingView: View {
                                       urlToOpen:"https://www.luvamore.com/safetytips")
                 
                 SettingFormComponents(settingName:"Safety Center",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/safetytips")
             }
             
             
