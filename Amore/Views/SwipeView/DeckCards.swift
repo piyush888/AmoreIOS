@@ -154,6 +154,10 @@ struct DeckCards: View {
                    }
                 }
                 
+                if !cardSwipeDone {
+                    ProgressView()
+                }
+                
                 // Butttons
                 /// Rewind
                 ///  Dislike

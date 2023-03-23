@@ -15,8 +15,11 @@ struct CardImages: View {
     @State var height: CGFloat
     
     @State private var image:UIImage?
+    @State private var isLoading = false // add a state variable to track loading state
     
     func getImage(imageURL: URL, onFailure: @escaping () -> Void, onSuccess: @escaping (_ image: UIImage) -> Void) {
+        
+        isLoading = true // set isLoading to true when starting to load the image
         
         SDWebImageManager.shared.loadImage(with: imageURL,
                                            options: [.scaleDownLargeImages,.continueInBackground],
@@ -34,27 +37,34 @@ struct CardImages: View {
             }
             if finished {
                 onSuccess(image)
+                isLoading = false
             }
 
         }
     }
     
     var body: some View {
-        
-                Image(uiImage: self.image ?? UIImage())
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: width)
-                    .clipped()
-                    .onAppear {
-                            if let imageURL = profileImage?.imageURL {
-                                getImage(imageURL: imageURL) {
-                                    return
-                                } onSuccess: { fetchedImage in
-                                    image = fetchedImage
-                                }
-                            }
+            
+        ZStack {
+            Image(uiImage: self.image ?? UIImage())
+                .resizable()
+                .scaledToFill()
+                .frame(width: width)
+                .clipped()
+                .onAppear {
+                    if let imageURL = profileImage?.imageURL {
+                        getImage(imageURL: imageURL) {
+                            return
+                        } onSuccess: { fetchedImage in
+                            image = fetchedImage
+                        }
                     }
+                }
+            
+            if isLoading { // add the ProgressView
+                ProgressView()
+            }
+        }
                  
     }
 }
