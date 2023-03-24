@@ -20,6 +20,7 @@ struct DeckCards: View {
     @Binding var cardSwipeDone: Bool
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
+    @State var rewindFinished: Bool = true
     @State var singleProfile: CardProfileWithPhotos
     @State var translation: CGSize = .zero
     @GestureState var dragOffset: CGSize = .zero
@@ -154,8 +155,8 @@ struct DeckCards: View {
                    }
                 }
                 
-                if !cardSwipeDone {
-                    ProgressView()
+                if !rewindFinished {
+                    LoadingScreen()
                 }
                 
                 // Butttons
@@ -195,6 +196,7 @@ struct DeckCards: View {
             if self.totalRewindCount > 0 {
                 if cardSwipeDone {
                     cardSwipeDone = false
+                    self.rewindFinished = false
                     FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
                         cardSwipeDone = true
                     }, onSuccess: {
@@ -221,7 +223,7 @@ struct DeckCards: View {
                             }
                         }
                         cardSwipeDone = true
-                        
+                        self.self.rewindFinished = true
                         _ = self.consumeARewind()
                         _ = storeManager.storePurchaseNoParams()
                         
@@ -302,6 +304,7 @@ struct DeckCards: View {
                     .foregroundColor(Color("gold-star"))
             }
         }
+        .disabled(!cardSwipeDone)
     }
     
     // Like Button
