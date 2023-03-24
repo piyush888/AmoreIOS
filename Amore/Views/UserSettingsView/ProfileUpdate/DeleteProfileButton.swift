@@ -30,7 +30,6 @@ struct DeleteProfileButton: View {
                 }
                 .foregroundColor(.pink)
             }
-            .padding(.bottom, 10)
         }
         
     }

@@ -73,6 +73,11 @@ struct UserSettingView: View {
                 }
             }
             
+            Section {
+                    // Deletion of the account
+                    DeleteProfileButton()
+            }
+            
             // Logout
             Section {
                 logoOut
