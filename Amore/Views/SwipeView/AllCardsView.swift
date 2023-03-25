@@ -131,6 +131,7 @@ struct AllCardsView: View {
                             ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                                 profileId: profile.id.bound,
                                                 showingAlert:self.$showingAlert,
+                                                reportingView: ReportingView.swipeView,
                                                 onRemove: { profileId in
                                                     // Remove from Array
                                                     cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == profileId }

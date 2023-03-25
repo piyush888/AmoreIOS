@@ -125,6 +125,7 @@ struct ConversationView: View {
                 ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                     profileId: toUserId,
                                     showingAlert:self.$showingAlert,
+                                    reportingView: ReportingView.conversationView,
                                     onRemove: { user in
                     print("Report From Chat: API Success")
                     navigateToChatView.toggle()
