@@ -30,6 +30,8 @@ struct AllCardsView: View {
     @State private var showingAlert: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     @State var allCardsWithPhotosDeck: [CardProfileWithPhotos]
+    // Use to indicate whether a DM was successfully sent or not. Consequently, use it for swiping the given card
+    @State var directMessageSent: Bool = false
     
     
     @StateObject private var weakCardProfileModel: WeakCardProfileModel
@@ -64,7 +66,7 @@ struct AllCardsView: View {
                 /// For every swipe a card is prefetched
                 /// Show all cards that user can swipe
                 ForEach(weakCardProfileModel.cardsInSwipeViewDisplay ?? []) { profile in
-                    DeckCards(cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet, singleProfile: profile, onRemove: { removedUser in
+                    DeckCards(cardSwipeDone: $cardSwipeDone, allcardsActiveSheet: $allcardsActiveSheet, directMessageSent: $directMessageSent, singleProfile: profile, onRemove: { removedUser in
                         // Remove that user from Array of CardProfileWithPhotos O(n)
                         cardProfileModel.allCardsWithPhotosDeck.removeAll { $0.id == removedUser.id }
                         
@@ -74,12 +76,15 @@ struct AllCardsView: View {
                         // Returns only 2 cards in first load and after the first swipe throttler returns 5 cards
                         /// You want the first load to be faster so that Swipe loads quickly
                         weakCardProfileModel.cardIncrementCount = 2
-                            
+                        
                         // Once user has seen a profile remove the cached images and NSData for image from phone
                         weakCardProfileModel.deleteCardImages(singleProfile: profile)
                         
                         // Prefetch the next photo in the deck
-                         weakCardProfileModel.prefetchNextCardPhotos()
+                        weakCardProfileModel.prefetchNextCardPhotos()
+                        
+                        // Reset directMessageSent to false.
+                        directMessageSent = false
                     })
                     .animation(.spring())
                     .frame(width: geometry.size.width)
@@ -150,7 +155,7 @@ struct AllCardsView: View {
                                 fromUser: ChatUser(id: Auth.auth().currentUser?.uid, firstName: profileModel.editUserProfile.firstName, lastName: profileModel.editUserProfile.lastName, image1: profileModel.editUserProfile.image1),
                                 toUser: ChatUser(id: profile.id, firstName: profile.firstName, lastName: profile.lastName, image1: profile.image1),
                                 allcardsActiveSheet: $allcardsActiveSheet,
-                                buttonSwipeStatus: $buttonSwipeStatus)
+                                directMessageSent: $directMessageSent)
                             .environmentObject(chatViewModel)
                             .environmentObject(storeManager)
                         }

@@ -19,6 +19,7 @@ struct DeckCards: View {
     
     @Binding var cardSwipeDone: Bool
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    @Binding var directMessageSent: Bool
     
     @State var rewindFinished: Bool = true
     @State var singleProfile: CardProfileWithPhotos
@@ -107,6 +108,18 @@ struct DeckCards: View {
         }
     }
     
+    func swipeAction(swipe: AllCardsView.LikeDislike) {
+        self.cardColor = swipe == .like ? .green : .red
+        // If card swiping action is finished
+        if cardSwipeDone {
+            cardSwipeDone = false
+            self.translation = CGSize(width: swipe == .like ? 500 : -500, height: 0)
+            self.saveLikeSuperlikeDislike(swipeInfo:swipe) {
+                print("Button \(swipe == .like ? "Like" : "Dislike"): \(String(describing: singleProfile.id))")
+            }
+        }
+    }
+    
     
     var body: some View {
         
@@ -145,6 +158,13 @@ struct DeckCards: View {
                         }
                 )
                 .environmentObject(profileModel)
+                .onChange(of: directMessageSent) { newValue in
+                    // if directMessageSent is true
+                    if newValue {
+                        cardSwipeDone = true
+                        swipeAction(swipe: .like)
+                    }
+                }
                 
                 // Lottie super star animation
                 Group {
@@ -246,15 +266,7 @@ struct DeckCards: View {
     // Dislike Button
     var DislikeButton : some View {
         Button {
-            self.cardColor = .red
-            // If card swiping action is finished
-            if cardSwipeDone {
-                cardSwipeDone = false
-                self.translation = CGSize(width: -500, height: 0)
-                self.saveLikeSuperlikeDislike(swipeInfo:.dislike) {
-                    print("Button Dislike: \(String(describing: singleProfile.id))")
-                }
-            }
+            swipeAction(swipe: .dislike)
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .resizable()
@@ -310,14 +322,7 @@ struct DeckCards: View {
     // Like Button
     var LikeButton : some View {
         Button {
-            self.cardColor = .green
-            if cardSwipeDone {
-                cardSwipeDone = false
-                self.translation = CGSize(width: 500, height: 0)
-                self.saveLikeSuperlikeDislike(swipeInfo: .like) {
-                    print("Button like: \(singleProfile.id ?? "")")
-                }
-            }
+            swipeAction(swipe: .like)
         } label: {
             Image(systemName: "heart.circle.fill")
                 .resizable()
