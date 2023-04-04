@@ -114,7 +114,7 @@ struct ConversationView: View {
             }
         }
         .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
-            if oldValue.count <= newValue.count {
+            if oldValue.count <= newValue.count && selectedChatIndex >= 0 {
                 if newValue[selectedChatIndex].fromId != Auth.auth().currentUser?.uid {
                     mainMessagesModel.markMessageRead(index: selectedChatIndex)
                 }
@@ -140,7 +140,7 @@ struct ConversationView: View {
                 ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                     profileId: toUserId,
                                     showingAlert:self.$showingAlert,
-                                    reportingView: ReportingView.conversationView,
+                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.swipeView,
                                     onRemove: { user in
                     print("Report From Chat: API Success")
                     navigateToChatView.toggle()
