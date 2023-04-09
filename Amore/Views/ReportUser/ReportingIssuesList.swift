@@ -15,12 +15,14 @@ struct ReportingIssuesCard: View {
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     @State var profileId: String
     @Binding var showingAlert: Bool
+    @State var reportingView: ReportingView
     private var onRemove: (_ user: String) -> Void
     
-    init(allcardsActiveSheet: Binding<AllCardsActiveSheet?>, profileId: String, showingAlert:Binding<Bool>, onRemove: @escaping (_ user: String) -> Void) {
+    init(allcardsActiveSheet: Binding<AllCardsActiveSheet?>, profileId: String, showingAlert:Binding<Bool>, reportingView:ReportingView, onRemove: @escaping (_ user: String) -> Void) {
         _allcardsActiveSheet = allcardsActiveSheet
         self.profileId = profileId
         _showingAlert = showingAlert
+        self.reportingView = reportingView
         self.onRemove = onRemove
     }
     
@@ -81,6 +83,7 @@ struct ReportingIssuesCard: View {
                         ReportActivityModel.reportUserWithReason(otherUserId:self.profileId,
                                                                  reason:selectedReasoning,
                                                                  description:reportUserDescription.bound,
+                                                                 reportingView: reportingView,
                                                                  onFailure:{
                                                                     self.showingAlert = true
                                                                     print("Failed to report user, please try again")
@@ -145,6 +148,10 @@ struct ReportingIssuesCard: View {
     }
 }
 
+enum ReportingView: Int {
+    case conversationView, swipeView
+}
+
 struct ReportingIssuesCard_Previews: PreviewProvider {
     
     @State var allcardsActiveSheet: AllCardsActiveSheet?
@@ -152,7 +159,7 @@ struct ReportingIssuesCard_Previews: PreviewProvider {
     static var previews: some View {
         ReportingIssuesCard(allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.reportProfileSheet),
                             profileId: "TestId",
-                            showingAlert:Binding.constant(false),
+                            showingAlert:Binding.constant(false), reportingView: ReportingView.conversationView,
                             onRemove: { user in
                                 print("Testing reporting issue")
                             }

@@ -19,7 +19,9 @@ struct DeckCards: View {
     
     @Binding var cardSwipeDone: Bool
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    @Binding var directMessageSent: Bool
     
+    @State var rewindFinished: Bool = true
     @State var singleProfile: CardProfileWithPhotos
     @State var translation: CGSize = .zero
     @GestureState var dragOffset: CGSize = .zero
@@ -106,6 +108,18 @@ struct DeckCards: View {
         }
     }
     
+    func swipeAction(swipe: AllCardsView.LikeDislike) {
+        self.cardColor = swipe == .like ? .green : .red
+        // If card swiping action is finished
+        if cardSwipeDone {
+            cardSwipeDone = false
+            self.translation = CGSize(width: swipe == .like ? 500 : -500, height: 0)
+            self.saveLikeSuperlikeDislike(swipeInfo:swipe) {
+                print("Button \(swipe == .like ? "Like" : "Dislike"): \(String(describing: singleProfile.id))")
+            }
+        }
+    }
+    
     
     var body: some View {
         
@@ -144,6 +158,13 @@ struct DeckCards: View {
                         }
                 )
                 .environmentObject(profileModel)
+                .onChange(of: directMessageSent) { newValue in
+                    // if directMessageSent is true
+                    if newValue {
+                        cardSwipeDone = true
+                        swipeAction(swipe: .like)
+                    }
+                }
                 
                 // Lottie super star animation
                 Group {
@@ -152,6 +173,10 @@ struct DeckCards: View {
                        LottieView(name: "SuperLikeLottie", loopMode: .playOnce)
                             .frame(width: 400, height: 400)
                    }
+                }
+                
+                if !rewindFinished {
+                    LoadingScreen()
                 }
                 
                 // Butttons
@@ -191,6 +216,7 @@ struct DeckCards: View {
             if self.totalRewindCount > 0 {
                 if cardSwipeDone {
                     cardSwipeDone = false
+                    self.rewindFinished = false
                     FirestoreServices.undoLikeDislikeFirestore(apiToBeUsed: "/rewindswipesingle", onFailure: {
                         cardSwipeDone = true
                     }, onSuccess: {
@@ -217,7 +243,7 @@ struct DeckCards: View {
                             }
                         }
                         cardSwipeDone = true
-                        
+                        self.self.rewindFinished = true
                         _ = self.consumeARewind()
                         _ = storeManager.storePurchaseNoParams()
                         
@@ -240,15 +266,7 @@ struct DeckCards: View {
     // Dislike Button
     var DislikeButton : some View {
         Button {
-            self.cardColor = .red
-            // If card swiping action is finished
-            if cardSwipeDone {
-                cardSwipeDone = false
-                self.translation = CGSize(width: -500, height: 0)
-                self.saveLikeSuperlikeDislike(swipeInfo:.dislike) {
-                    print("Button Dislike: \(String(describing: singleProfile.id))")
-                }
-            }
+            swipeAction(swipe: .dislike)
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .resizable()
@@ -298,19 +316,13 @@ struct DeckCards: View {
                     .foregroundColor(Color("gold-star"))
             }
         }
+        .disabled(!cardSwipeDone)
     }
     
     // Like Button
     var LikeButton : some View {
         Button {
-            self.cardColor = .green
-            if cardSwipeDone {
-                cardSwipeDone = false
-                self.translation = CGSize(width: 500, height: 0)
-                self.saveLikeSuperlikeDislike(swipeInfo: .like) {
-                    print("Button like: \(singleProfile.id ?? "")")
-                }
-            }
+            swipeAction(swipe: .like)
         } label: {
             Image(systemName: "heart.circle.fill")
                 .resizable()

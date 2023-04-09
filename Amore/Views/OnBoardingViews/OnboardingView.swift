@@ -11,7 +11,7 @@ import UIKit
 struct OnboardingView: View {
     
     @State private var showSafari: Bool = false
-    @State var urlOpenWebPage: String = "https://aidronesoftware.com/education"
+    @State var urlOpenWebPage: String = "http://luvamore.com"
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @StateObject var firebaseSvcObj = FirebaseServices()
@@ -115,7 +115,7 @@ struct TextLabelWithHyperlink: UIViewRepresentable {
         
         let hyperlinkTextAttributes1: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.blue,
-            NSAttributedString.Key.link: "https://aidronesoftware.com"
+            NSAttributedString.Key.link: "https://www.luvamore.com/termsandconditions"
         ]
         let textWithHyperlink1 = NSMutableAttributedString(string: "Terms")
         textWithHyperlink1.addAttributes(hyperlinkTextAttributes1, range: textWithHyperlink1.range)
@@ -128,7 +128,7 @@ struct TextLabelWithHyperlink: UIViewRepresentable {
         
         let hyperlinkTextAttributes2: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.blue,
-            NSAttributedString.Key.link: "https://aidronesoftware.com/education"
+            NSAttributedString.Key.link: "https://www.luvamore.com/privacy"
         ]
         let textWithHyperlink2 = NSMutableAttributedString(string: "Privacy Polocy")
         textWithHyperlink2.addAttributes(hyperlinkTextAttributes2, range: textWithHyperlink2.range)
@@ -142,7 +142,7 @@ struct TextLabelWithHyperlink: UIViewRepresentable {
         
         let hyperlinkTextAttributes3: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.blue,
-            NSAttributedString.Key.link: "https://aidronesoftware.com/contactus"
+            NSAttributedString.Key.link: "https://www.luvamore.com/cookiepolicy"
         ]
         let textWithHyperlink3 = NSMutableAttributedString(string: "Cookies Policy")
         textWithHyperlink3.addAttributes(hyperlinkTextAttributes3, range: textWithHyperlink3.range)

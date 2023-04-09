@@ -242,7 +242,7 @@ struct LikesTopPicksHome: View {
                     
                     case .boostProfileSheet:
                         Text("Empty View boostProfileSheet")
-                    
+//                    TODO: Logic for directMessageSent needs to be implemented
                     case .directMessageSheet:
                         DirectMessageCardView(
                             fromUser: ChatUser(id: Auth.auth().currentUser?.uid,
@@ -254,7 +254,7 @@ struct LikesTopPicksHome: View {
                                              lastName: profileForChat.lastName,
                                              image1: profileForChat.image1),
                             allcardsActiveSheet: $allcardsActiveSheet,
-                            buttonSwipeStatus: Binding.constant(AllCardsView.LikeDislike.none))
+                            directMessageSent: Binding.constant(false))
                             .environmentObject(chatViewModel)
                             .environmentObject(storeManager)
                 

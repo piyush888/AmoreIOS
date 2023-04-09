@@ -17,7 +17,7 @@ struct DeleteDisableView: View {
     @State var showDeleteAlert: Bool = false
     @State var showDeactivateAlert: Bool = false
     
-    func logOutAction() {
+    func logOutAction() { // remove FCM token TODO
         adminAuthenticationModel.removeCookies()
         // Firestore logout
         try! Auth.auth().signOut()
@@ -49,21 +49,20 @@ struct DeleteDisableView: View {
             Image(systemName: "person.crop.circle.fill.badge.xmark")
                 .renderingMode(.original)
                 .resizable()
-                .frame(width:100, height:80)
-            //                .foregroundColor(.accentColor)
+                .frame(width:100, height:85)
                 .padding(.vertical, 20)
             
             Text("We're sad to see you go!")
-                .font(.BoardingTitle2)
+                .font(.title2)
                 .multilineTextAlignment(.center)
-                .padding(.bottom, 10)
+                .padding(.bottom, 20)
             Text("You can also deactivate your account if you want to take a break and not lose all your profile data. If you choose to deactivate, your profile shall be hidden from other users.")
-                .font(.caption)
+                .font(.body)
                 .multilineTextAlignment(.center)
             
             Spacer()
             
-            VStack(spacing: 30) {
+            VStack {
                 // Deactivate Account Button
                 Button{
                     showDeactivateAlert = true
@@ -96,7 +95,7 @@ struct DeleteDisableView: View {
                 .alert(isPresented: $showDeleteAlert) {
                     Alert(
                         title: Text("Are you sure you want to delete the account?"),
-                        message: Text("Deletion of User Account will result in loss of all data including messages, matches and likes received. We will retain a copy of your data for a fixed amount of time. Should you happen to login during that time, you'll be able to resume your account."),
+                        message: Text("Deletion of User Account will result in loss of all data including messages, matches and likes received. We will retain a copy of your data for 30 days. Should you happen to login during that time, you'll be able to resume your account."),
                         primaryButton: .destructive(
                             Text("Delete Account"),
                             action: deleteAction

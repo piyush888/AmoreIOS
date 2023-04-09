@@ -49,6 +49,18 @@ struct ConversationView: View {
         }, otherUserId: toUser.id)
     }
     
+    private var showUnmatchOption: Bool {
+        if selectedChatIndex < 0 {
+            return false
+        }
+        if mainMessagesModel.recentChats[selectedChatIndex].directMessageApproved {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     var body: some View {
         GeometryReader { geo in
             VStack{
@@ -62,13 +74,13 @@ struct ConversationView: View {
                     .padding([.horizontal, .bottom])
                     .ignoresSafeArea()
             }
-            .fullScreenCover(isPresented: $isShowingGifPicker,
-                             onDismiss: gipgyViewDismissed,
-                             content:{
-                                GiphyVCRepresentable(giphyURL:$giphyURL,
-                                                     giphyId:$giphyId,
-                                                     isShowingGifPicker:$isShowingGifPicker)
-                            })
+            .sheet(isPresented: $isShowingGifPicker,
+                 onDismiss: gipgyViewDismissed,
+                 content:{
+                    GiphyVCRepresentable(giphyURL:$giphyURL,
+                         giphyId:$giphyId,
+                         isShowingGifPicker:$isShowingGifPicker)
+            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -85,12 +97,15 @@ struct ConversationView: View {
                         Label("Report User", systemImage: "shield.fill")
                             .font(.system(size: 60))
                     }
-                    // Unmatch Button
-                    Button  {
-                        showUnmatchConfirmation.toggle()
-                    } label: {
-                        Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
-                            .font(.system(size: 60))
+                    
+                    if showUnmatchOption {
+                        // Unmatch Button
+                        Button  {
+                            showUnmatchConfirmation.toggle()
+                        } label: {
+                            Label("Unmatch", systemImage: "person.crop.circle.fill.badge.xmark")
+                                .font(.system(size: 60))
+                        }
                     }
                 }
             label: {
@@ -99,7 +114,7 @@ struct ConversationView: View {
             }
         }
         .performOnChange(of: mainMessagesModel.recentChats, withKey: "selectedChatIndex", capturedValues: { oldValue, newValue in
-            if oldValue.count <= newValue.count {
+            if oldValue.count <= newValue.count && selectedChatIndex >= 0 {
                 if newValue[selectedChatIndex].fromId != Auth.auth().currentUser?.uid {
                     mainMessagesModel.markMessageRead(index: selectedChatIndex)
                 }
@@ -125,6 +140,7 @@ struct ConversationView: View {
                 ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                     profileId: toUserId,
                                     showingAlert:self.$showingAlert,
+                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.swipeView,
                                     onRemove: { user in
                     print("Report From Chat: API Success")
                     navigateToChatView.toggle()
@@ -417,7 +433,7 @@ struct MessageView: View {
                                         TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
                                     }
                                 }
-                                .background(Color.blue)
+                                
                         }
                     }
                         else {
@@ -440,7 +456,6 @@ struct MessageView: View {
                                         TimestampView(timestampToDisplay: timestampToDisplay, fontColor: Color(.init(white: 0.95, alpha: 1)))
                                     }
                                 }
-                                .background(colorScheme == .dark ? Color.gray.opacity(0.4): Color(.init(white: 0.95, alpha: 1)))
                             }
                         }
                     }

@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct UserSettingView: View {
     
+    @StateObject var notificatonViewModel = NotificatonViewModel()
     @AppStorage("log_Status") var log_Status = false
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
@@ -31,7 +32,7 @@ struct UserSettingView: View {
             
             Section(header:Text("Contact Us")) {
                 SettingFormComponents(settingName:"Help and Support",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/about#contact")
             }
             
             
@@ -43,7 +44,7 @@ struct UserSettingView: View {
                                       urlToOpen:"https://www.luvamore.com/safetytips")
                 
                 SettingFormComponents(settingName:"Safety Center",
-                                      urlToOpen:"http://aidronesoftware.com")
+                                      urlToOpen:"https://www.luvamore.com/safetytips")
             }
             
             
@@ -72,6 +73,11 @@ struct UserSettingView: View {
                 }
             }
             
+            Section {
+                    // Deletion of the account
+                    DeleteProfileButton()
+            }
+            
             // Logout
             Section {
                 logoOut
@@ -85,12 +91,14 @@ struct UserSettingView: View {
         // Log Out
         Button{
             DispatchQueue.main.async {
-                photoModel.resetPhotosOnLogout()
-            }
-            adminAuthenticationModel.removeCookies()
-            // Firestore logout
-            try! Auth.auth().signOut()
-            log_Status = false
+               notificatonViewModel.deleteFCMTokenFromFirestore {
+                   photoModel.resetPhotosOnLogout()
+                   adminAuthenticationModel.removeCookies()
+                   // Firestore logout
+                   try! Auth.auth().signOut()
+                   log_Status = false
+               }
+           }
         } label : {
             Text("Log Out")
         }

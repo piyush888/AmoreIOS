@@ -16,7 +16,7 @@ struct DirectMessageCardView: View {
     @State var fromUser: ChatUser
     @State var toUser: ChatUser
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
-    @Binding var buttonSwipeStatus: AllCardsView.LikeDislike
+    @Binding var directMessageSent: Bool
     
     @State var directMessage = ""
     let button = RiveViewModel(fileName: "button", autoPlay: false)
@@ -154,7 +154,7 @@ struct DirectMessageCardView: View {
                                                 Text("Okay"),
                                                 action: {
                                                     allcardsActiveSheet = nil
-                                                    buttonSwipeStatus = .like
+                                                    directMessageSent = true
                                                 })
                                         )
                                 }
@@ -253,8 +253,7 @@ struct DirectMessageCardView_Previews: PreviewProvider {
     static var previews: some View {
         DirectMessageCardView(fromUser: ChatUser(),
                               toUser: ChatUser(),
-                              allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.directMessageSheet),
-                              buttonSwipeStatus:Binding.constant(AllCardsView.LikeDislike.none))
+                              allcardsActiveSheet: Binding.constant(AllCardsActiveSheet.directMessageSheet), directMessageSent: Binding.constant(false))
             .environmentObject(StoreManager())
             .environmentObject(ChatViewModel())
     }

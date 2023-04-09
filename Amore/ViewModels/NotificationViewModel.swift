@@ -28,17 +28,17 @@ class NotificatonViewModel: ObservableObject {
         if let profileId = Auth.auth().currentUser?.uid {
             do {
                 if let deviceToken =  UIDevice.current.identifierForVendor?.uuidString {
-                    
-                    let docref = db.collection("FCMTokens").document(profileId)
-                    let fcmPayLoad:[String:Any] = ["fcmToken":UserDefaults.standard.string(forKey: "FCMToken"),
+                    let docref = db.collection("FCMTokens").document(deviceToken)
+                    let fcmPayLoad:[String:Any] = ["userId":profileId,
+                                                   "fcmToken":UserDefaults.standard.string(forKey: "FCMToken"),
                                                    "deviceType":"iOS",
                                                    "timestamp":Date()]
                     
-                    _ = try docref.collection("Devices").document(deviceToken).setData(fcmPayLoad, merge: true) { error in
+                    _ = try docref.setData(fcmPayLoad, merge: true) { error in
                         if let error = error {
-                            print("\(error)")
+                            print("FCMToken Storage:\(error)")
                         } else {
-                            docref.setData(["wasUpdated": true])
+                            print("FCMToken was updated in firestore")
                         }
                     }
                 }
@@ -46,6 +46,32 @@ class NotificatonViewModel: ObservableObject {
             catch let error {
                 print("Not able to store the FCM token in firestore")
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func deleteFCMTokenFromFirestore(completion: (() -> Void)? = nil) {
+        if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
+            let docRef = db.collection("FCMTokens").document(deviceId)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists, let userId = document.get("userId") as? String, userId == Auth.auth().currentUser?.uid {
+                    docRef.delete { error in
+                        if let error = error {
+                            print("Error deleting FCMToken: \(error.localizedDescription)")
+                        } else {
+                            print("FCMToken deleted successfully")
+                            // Call the completion handler if it exists
+                            completion?()
+                        }
+                    }
+                } else if let error = error {
+                    print("Error deleting FCMToken: \(error.localizedDescription)")
+                    completion?()
+                } else {
+                    print("No matching FCMToken found")
+                    completion?()
+                }
             }
         }
     }

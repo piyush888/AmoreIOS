@@ -26,7 +26,10 @@ class MainMessagesViewModel: ObservableObject {
     init() {
 //        print("Chat: Init called at \(Date())")
         fetchCurrentUser()
-        fetchRecentChats()
+        fetchRecentChats { 
+            // Load all chats profiles when all changes have been fetched
+            self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
+        }
     }
     
     func updateRecentChatsFirestore(chat: ChatConversation) {
@@ -90,12 +93,10 @@ class MainMessagesViewModel: ObservableObject {
         }
     }
     
-    func fetchRecentChats() {
+    func fetchRecentChats(onFinish: @escaping () -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         firestoreListener?.remove()
         self.recentChats.removeAll()
-        // Load all chats profiles
-        self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
         firestoreListener = db
             .collection("RecentChats")
             .document(uid)
@@ -104,55 +105,66 @@ class MainMessagesViewModel: ObservableObject {
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     self.errorMessage = "Failed to listen for recent messages: \(error)"
-                    print("Chat: \(error)")
+                    print("FetchRecentChats: \(error)")
+                    print("\(self.errorMessage)")
                     return
                 }
-                
+
+                var processedChanges = 0
+                let totalChanges = querySnapshot?.documentChanges.count ?? 0
+
                 querySnapshot?.documentChanges.forEach({ change in
-                    
+
                     if (change.type == .removed) {
                         let docId = change.document.documentID
                         DispatchQueue.main.async {
                             if let index = self.recentChats.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-//                                print("Chat: Checkpoint 0.1")
                                 self.recentChats.remove(at: index)
                             }
                             // Remove profile of the removed chat
                             if let index = self.allChatPhotos.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-//                                print("Chat: Checkpoint 0.2")
                                 self.allChatPhotos.remove(at: index)
                                 self.allChatPhotos_Dict.removeValue(forKey: docId)
                             }
+                            processedChanges += 1
+                            // Call onFinish() after all changes have been processed
+                            if processedChanges == totalChanges {
+                                onFinish()
+                            }
                         }
                     }
-                    
+
                     else {
                         let docId = change.document.documentID
                         DispatchQueue.main.async {
                             if let index = self.recentChats.firstIndex(where: { rm in
                                 return rm.id == docId
                             }) {
-//                                print("Chat: Checkpoint 1")
                                 self.recentChats.remove(at: index)
                             }
-                            
+
                             do {
                                 let rm = try change.document.data(as: ChatConversation.self)
-//                                print("Chat: Checkpoint 2")
                                 self.recentChats.insert(rm, at: 0)
                             } catch {
                                 print("Chat: Error Decoding Recent Message: \(error)")
                             }
+                            processedChanges += 1
+                            // Call onFinish() after all changes have been processed
+                            if processedChanges == totalChanges {
+                                onFinish()
+                            }
                         }
                     }
-                    
+
                 })
             }
     }
+
     
     func getAllChatProfileIds() -> [String] {
         var userIds: [String] = []

@@ -26,10 +26,14 @@ struct GiphyVCRepresentable : UIViewControllerRepresentable {
         Giphy.configure(apiKey: "KBFvAPfuBMVktOiaV4bJrSRrNFwSPi5z")
         let giphy = GiphyViewController()
         giphy.delegate = context.coordinator
+        GiphyViewController.trayHeightMultiplier = 1.00 // This causes the tray to start at the screen's full height
+        giphy.swiftUIEnabled = true
+        giphy.shouldLocalizeSearch = true
+        giphy.dimBackground = true
         giphy.showConfirmationScreen = true
         giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
         giphy.theme = CustomGiphyTheme(type:.automatic)
-        GiphyViewController.trayHeightMultiplier = 1.05 // This causes the tray to start at the screen's full height
+        giphy.modalPresentationStyle = .currentContext
         GPHCache.shared.cache.diskCapacity = 300 * 1000 * 1000
         GPHCache.shared.cache.memoryCapacity = 100 * 1000 * 1000
         return giphy
