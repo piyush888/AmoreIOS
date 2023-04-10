@@ -19,7 +19,7 @@ struct LikesTopPicksHome: View {
     
     @Binding var selectedTab: TopPicksLikesView
     @State var selectedTabSubView: TopPicksLikesSubView = .likesGivenTab
-    @State var tabs: [TopPicksLikesView] = [.likesReceived, .superLikesAndLikesGiven, .elitePicks]
+    @State var tabs: [TopPicksLikesView] = [.elitePicks, .likesReceived, .superLikesAndLikesGiven]
     @State var selectedItem : CardProfileWithPhotos? = nil
     
     @State var show = false
