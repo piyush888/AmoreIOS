@@ -133,12 +133,12 @@ struct MyAmoreCard: View {
                 Text("Upgrade to Amore Gold")
                     .foregroundColor(Color.white)
                     .font(.headline)
-                if let pricingData = storeManager.amoreGoldPricing {
-                    Text("3 month for \(Float(truncating: pricingData["Amore Gold 3 Month"]?.price ?? 0.0), specifier: "%.2f")")
-                        .italic()
-                        .foregroundColor(Color.white)
-                        .font(.subheadline)
-                }
+                let pricingData = storeManager.amoreGoldPricing
+                Text("3 month for \(Float(truncating: pricingData["Amore Gold 3 Month"]?.price ?? 0.0), specifier: "%.2f")")
+                    .italic()
+                    .foregroundColor(Color.white)
+                    .font(.subheadline)
+                
                 Text("Don't make them wait")
                     .font(.caption)
                     .foregroundColor(Color.white)
@@ -258,12 +258,12 @@ struct GrowingButton: ButtonStyle {
 //                                .foregroundColor(Color.white)
 //                                .font(.headline)
 //
-//                            if let pricingData = storeManager.amorePlatinumPricing {
+//                            let pricingData = storeManager.amorePlatinumPricing
 //                                Text("3 month for \(Float(truncating: pricingData["Amore Platinum 3 Month"]?.price ?? 0.0), specifier: "%.2f")")
 //                                    .italic()
 //                                    .foregroundColor(Color.white)
 //                                    .font(.subheadline)
-//                            }
+//
 //
 //                            Text("Top picks, super stars, boosts, messages")
 //                                .foregroundColor(Color.white)

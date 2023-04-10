@@ -228,28 +228,23 @@ struct BoostUserProfile: View {
                     
                     // Give user option to buy boost here
                     VStack {
-                        if let pricingData = storeManager.boostsPricing {
-                            
-                            BoostBuyButton(boostType:1.0,
-                                           totalCost: Float(truncating: pricingData["1 Boosts"]?.price ?? 0.0),
-                                           currency: pricingData["1 Boosts"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["1 Boosts"] ?? SKProduct())
-                                .frame(width: geometry.size.width*0.80)
-                                .environmentObject(storeManager)
-                        
-
-                            BoostBuyButton(boostType:2.0,
-                                           totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
-                                           currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["2 Boosts"] ?? SKProduct())
-                                .frame(width: geometry.size.width*0.80)
-                                .environmentObject(storeManager)
-                        }
-                        
-                    }
+                        let pricingData = storeManager.boostsPricing
+                        BoostBuyButton(boostType:1.0,
+                                       totalCost: Float(truncating: pricingData["1 Boosts"]?.price ?? 0.0),
+                                       currency: pricingData["1 Boosts"]?.localizedPrice?.first ?? "$",
+                                       skProductObj: pricingData["1 Boosts"] ?? SKProduct())
+                            .frame(width: geometry.size.width*0.80)
+                            .environmentObject(storeManager)
                     
+
+                        BoostBuyButton(boostType:2.0,
+                                       totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
+                                       currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
+                                       skProductObj: pricingData["2 Boosts"] ?? SKProduct())
+                            .frame(width: geometry.size.width*0.80)
+                            .environmentObject(storeManager)
+                    }
                 }
-                
             }
             .padding()
             .background(
