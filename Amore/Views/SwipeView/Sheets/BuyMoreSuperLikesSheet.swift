@@ -37,36 +37,36 @@ struct BuyMoreSuperLikesSheet: View {
                         .padding(.bottom,50)
                     
                     // Buy Superlikes consumables
-                    if let pricingData = storeManager.superLikesPricing {
+                    let pricingData = storeManager.superLikesPricing
                         // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
                         
-                        Text("Most popular")
-                        SuperLikeBuyButton(superLikeCount:5,
-                                       totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["5 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["5 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                            .padding(.bottom,5)
-                        
-                        
-                        Text("Best Value")
-                        SuperLikeBuyButton(superLikeCount:15,
-                                       totalCost: Float(truncating: pricingData["15 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["15 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["15 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                            .padding(.bottom,5)
+                    Text("Most popular")
+                    SuperLikeBuyButton(superLikeCount:5,
+                                   totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["5 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["5 Super Likes"] ?? SKProduct())
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                        .padding(.bottom,5)
                     
+                    
+                    Text("Best Value")
+                    SuperLikeBuyButton(superLikeCount:15,
+                                   totalCost: Float(truncating: pricingData["15 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["15 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["15 Super Likes"] ?? SKProduct())
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                        .padding(.bottom,5)
+                
 
-                        SuperLikeBuyButton(superLikeCount:30,
-                                       totalCost: Float(truncating: pricingData["30 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["30 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["30 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                    }
+                    SuperLikeBuyButton(superLikeCount:30,
+                                   totalCost: Float(truncating: pricingData["30 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["30 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["30 Super Likes"] ?? SKProduct())
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                
                     
                     Spacer()
                 }
