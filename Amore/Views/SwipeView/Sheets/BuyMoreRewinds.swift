@@ -64,7 +64,7 @@ struct BuyMoreRewinds: View {
                 Spacer()
                 // Give user option to buy messages here
                 VStack {
-                    if let pricingData = storeManager.rewindsPricing {
+                        let pricingData = storeManager.rewindsPricing
                         RewindBuyButton(rewindCount:2.0,
                                        totalCost: Float(truncating: pricingData["2 Rewinds"]?.price ?? 0.0),
                                        currency: pricingData["2 Rewinds"]?.localizedPrice?.first ?? "$",
@@ -79,8 +79,6 @@ struct BuyMoreRewinds: View {
                                        skProductObj: pricingData["5 Rewinds"] ?? SKProduct())
                             .frame(width: geometry.size.width*0.80)
                             .environmentObject(storeManager)
-                    }
-                    
                 }
                 Spacer()
                 
