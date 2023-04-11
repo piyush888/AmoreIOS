@@ -76,10 +76,6 @@ struct LoginOTPKeyCodeParent: View {
         Button {
             firebaseSvcObj.requestOtp(phoneNumber: profileModel.phoneNumber)
         } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(Color(hex: 0xe8f4f8))
-                    .frame(width:200, height:50)
                 
                 HStack {
                     Image(systemName:"repeat.circle.fill")
@@ -87,7 +83,7 @@ struct LoginOTPKeyCodeParent: View {
                         .frame(width:30,height:30)
                     Text("Re-send OTP")
                 }
-            }
+                .padding(.top,10)
         }
     }
     
@@ -100,14 +96,17 @@ struct LoginOTPKeyCodeParent: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
+                    // TODO - Change the color of button when deactivate and activate
                     .foregroundColor(Color.pink)
-                    .frame(width:200, height:50)
+                    .frame(width:150, height:50)
             
                 Text("Log In")
                     .bold()
                     .foregroundColor(.white)
             }
         }
+        // Deactivate
+        .disabled(otpViewModel.otp6 == "" ? true:false)
         
     }
     
