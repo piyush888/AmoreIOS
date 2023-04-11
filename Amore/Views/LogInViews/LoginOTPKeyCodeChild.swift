@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginOTPKeyCodeChild: View {
     
     @EnvironmentObject var otpViewModel: OTPViewModel
+    @Environment(\.colorScheme) var colorScheme
     
 //    @Binding var otpVerificationCode: String
     @State var isFocused = false
@@ -55,19 +56,19 @@ struct LoginOTPKeyCodeChild: View {
     private func otpText(text: String) -> some View {
 //              otpViewModel.otpVerificationCode = $otpVerificationCode
             return ZStack(alignment: .center) {
-            Rectangle()
-                .foregroundColor(.clear)
-                .background(Color.white)
-                .frame(width: textBoxWidth, height: textBoxHeight)
-                .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.pink, lineWidth: 1)
-                            .frame(width: textBoxWidth, height: textBoxHeight)
-                            .shadow(color: .pink, radius: 2, x: 0, y: 0)
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .background(colorScheme == .dark ? Color.black : Color.white)
+                    .frame(width: textBoxWidth, height: textBoxHeight)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.pink, lineWidth: 1)
+                                .frame(width: textBoxWidth, height: textBoxHeight)
+                                .shadow(color: .pink, radius: 2, x: 0, y: 0)
                     )
-            Text(text)
-                .font(.title)
-                .foregroundColor(.pink) // Updated text color to pink
+                Text(text)
+                    .font(.title)
+                    .foregroundColor(.pink) // Updated text color to pink
         }
         .padding(paddingOfBox)
     }
