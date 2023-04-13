@@ -96,13 +96,16 @@ struct LoginOTPKeyCodeParent: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
-                    // TODO - Change the color of button when deactivate and activate
-                    .foregroundColor(Color.pink)
+                    .foregroundColor(otpViewModel.otp6 == "" ? (colorScheme == .dark ? Color.black : Color.white) : .pink)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                // Set stroke color and width based on condition
+                                .stroke(otpViewModel.otp6 == "" ? (colorScheme == .dark ? Color.pink : Color.pink) : Color.white, lineWidth:otpViewModel.otp6 == "" ? 1:0)
+                        )
                     .frame(width:150, height:50)
-            
                 Text("Log In")
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(otpViewModel.otp6 == "" ? (colorScheme == .dark ? Color.pink : Color.pink) : .white)
             }
         }
         // Deactivate
