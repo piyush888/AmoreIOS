@@ -179,8 +179,8 @@ class PhotoModel: ObservableObject {
         
         SDImageCache.shared.config.maxDiskAge = 3600 * 24 * 7 // 1 Week
         SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 4 * 30 // 20 images (1024 * 1024 pixels)
-        SDImageCache.shared.config.shouldCacheImagesInMemory = false // Disable memory cache, may cause cell-reusing flash because disk query is async
-        SDImageCache.shared.config.shouldUseWeakMemoryCache = false // Disable weak cache, may see blank when return from background because memory cache is purged under pressure
+        SDImageCache.shared.config.shouldCacheImagesInMemory = true // Disable memory cache, may cause cell-reusing flash because disk query is async
+        SDImageCache.shared.config.shouldUseWeakMemoryCache = true // Disable weak cache, may see blank when return from background because memory cache is purged under pressure
         SDImageCache.shared.config.diskCacheReadingOptions = .mappedIfSafe // Use mmap for disk cache query
         SDWebImageManager.shared.optionsProcessor = SDWebImageOptionsProcessor() { url, options, context in
             // Disable Force Decoding in global, may reduce the frame rate
