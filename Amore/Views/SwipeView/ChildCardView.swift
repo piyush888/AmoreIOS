@@ -60,7 +60,8 @@ struct ChildCardView: View {
                         ProfileBioHeadline(description: singleProfile.headline.bound,
                                    headlineText:"Headline",
                                    swipeStatus:$swipeStatus)
-                            .padding(5)
+                            .padding(.leading,5)
+                            .padding(.trailing,5)
                         
                         // Profile Height, Education, Job, Religion, Location
                         // Image 2
