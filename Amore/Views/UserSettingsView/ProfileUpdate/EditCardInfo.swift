@@ -221,6 +221,9 @@ struct EditCardInfo: View {
                 .navigationBarTitleDisplayMode(.inline)
                 
             }
+            .onTapGesture {
+                self.hideKeyboard()
+            }
         }
     }
 }
