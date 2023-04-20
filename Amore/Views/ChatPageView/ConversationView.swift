@@ -41,7 +41,7 @@ struct ConversationView: View {
     @State var gifData: [String] = []
     
     func unmatchButtonHandler() {
-        navigateToChatView.toggle()
+        navigateToChatView = false
         FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
             print("Unmatch: API Call Failed")
         }, onSuccess: {
@@ -140,10 +140,10 @@ struct ConversationView: View {
                 ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                     profileId: toUserId,
                                     showingAlert:self.$showingAlert,
-                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.swipeView,
+                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.dmView,
                                     onRemove: { user in
                     print("Report From Chat: API Success")
-                    navigateToChatView.toggle()
+                    navigateToChatView = false
                 }
                 )
             }

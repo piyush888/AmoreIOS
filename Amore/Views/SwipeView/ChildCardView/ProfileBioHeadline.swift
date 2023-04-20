@@ -17,25 +17,21 @@ struct ProfileBioHeadline: View {
     var body: some View {
         
         if self.description != "" {
-            VStack(alignment: .leading) {
-                Spacer()
+            VStack(alignment: .leading, spacing: 0) {
                 Text(headlineText)
-                  .bold()
-                  .padding()
-                    
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(.horizontal, 11)
+                    .padding(.top, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Text(description)
-                    .font(.subheadline)
-                    .padding(.horizontal)
-                    .padding(.bottom)
-                Spacer()
+                    .font(.system(size: 14))
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 8)
+                    .padding(.bottom,5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
             }
-            .frame(
-              minWidth: 0,
-              maxWidth: .infinity,
-              minHeight: 0,
-              maxHeight: .infinity,
-              alignment: .topLeading
-            )
             .background(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
             .foregroundColor(swipeStatus == .none ?
                                 (colorScheme == .dark ? Color.white: Color.black) :
