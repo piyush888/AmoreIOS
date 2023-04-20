@@ -37,6 +37,7 @@ struct UserProfile: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var storeManager: StoreManager
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @EnvironmentObject var tabModel: TabModel
     
     @State var profileEditingToBeDone: Bool = false
     @State var settingsDone: Bool = false
@@ -79,6 +80,7 @@ struct UserProfile: View {
                             .environmentObject(profileModel)
                             .environmentObject(adminAuthenticationModel)
                             .environmentObject(storeManager)
+                            .environmentObject(tabModel)
                             .padding(.bottom,10)
                             
                         // Subscription details
