@@ -22,49 +22,67 @@ class TextBindingManager: ObservableObject {
     }
 }
 
-
 struct EditCardForm: View {
     
     @State var formHeight: CGFloat
     @State var formHeadLine: String
     @Binding var formInput: String?
+    @State var maxChars: Int// maximum number of characters allowed
+        
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-            
-        ZStack {
-            if self.formInput.bound.isEmpty {
-                TextEditor(text:$formHeadLine)
-                        .frame(height: formHeight)
+        
+            ZStack {
+                if self.formInput.bound.isEmpty {
+                    TextEditor(text:$formHeadLine)
+                        .frame(minHeight: formHeight)
                         .foregroundColor(.gray)
                         .disabled(true)
+                }
+                TextEditor(text: $formInput.bound)
+                    .frame(minHeight: formHeight, maxHeight:.infinity)
+                    .background(colorScheme == .dark ? Color.black : Color.white)
+                    .foregroundColor(.primary)
+                    .cornerRadius(6)
+                    .onChange(of: formInput.bound) { newValue in
+                        if newValue.count > maxChars { // limit number of characters
+                            formInput?.removeLast()
+                        }
+                    }
             }
-            TextEditor(text: $formInput.bound)
-                .frame(height: formHeight)
-                .opacity(self.formInput.bound.isEmpty ? 0.25 : 1)
-                
-        }
-        
-//            TextEditor(text: $formInput.bound)
-//                .frame(height: formHeight)
     }
 }
 
-
 struct EditCardForm_Previews: PreviewProvider {
     static var previews: some View {
-        List {
-            EditCardForm(formHeight: 100.0,
-                         formHeadLine: "Name",
-                         formInput: Binding.constant(""))
-                .foregroundColor(Color.black)
-                .padding()
+        
+        Form {
+            Section(header: Text("Headline")) {
+                EditCardForm(formHeight: 40.0,
+                             formHeadLine: "Headline",
+                             formInput:Binding.constant(""),
+                             maxChars:200)
+            }
+            .navigationBarTitle("Headline")
+            .navigationBarTitleDisplayMode(.inline)
             
-            EditCardForm(formHeight: 40.0,
-                         formHeadLine: "About",
-                         formInput: Binding.constant(""))
-                .foregroundColor(Color.black)
-                .padding()
+            Section(header: Text("Description")) {
+                List {
+                    EditCardForm(formHeight: 100.0,
+                                 formHeadLine: "Name",
+                                 formInput: Binding.constant(""),
+                                 maxChars:30)
+                    .foregroundColor(Color.black)
+                    
+                    EditCardForm(formHeight: 40.0,
+                                 formHeadLine: "About",
+                                 formInput: Binding.constant(""),
+                                 maxChars:30)
+                    .foregroundColor(Color.black)
+                    
+                }
+            }
         }
     }
 }
