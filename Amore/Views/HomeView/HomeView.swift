@@ -111,6 +111,7 @@ struct HomeView: View {
                                         .environmentObject(photoModel)
                                         .environmentObject(storeManager)
                                         .environmentObject(adminAuthenticationModel)
+                                        .environmentObject(tabModel)
                                         .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
                                                onDismiss: didDimiss){
                                             PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")

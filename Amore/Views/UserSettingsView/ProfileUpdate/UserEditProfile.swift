@@ -13,6 +13,7 @@ struct EditProfile: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
+    @EnvironmentObject var tabModel: TabModel
     @Binding var profileEditingToBeDone: Bool
     @State var currentPage: EditOrPreviewProfile = .editProfile
     @State var selectedTab = "Edit Info"
@@ -75,6 +76,8 @@ struct EditProfile: View {
                         profileModel.updateUserProfile(profileId: Auth.auth().currentUser?.uid)
                         // Close the Editing Tab
                         profileEditingToBeDone = false
+                        // Show the control center
+                        tabModel.showDetail = false
                     }) {
                         Text("Done")
                     }

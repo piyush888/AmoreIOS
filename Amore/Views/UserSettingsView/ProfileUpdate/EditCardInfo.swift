@@ -105,7 +105,8 @@ struct EditCardInfo: View {
                 Section(header: Text("Headline")) {
                     EditCardForm(formHeight: 40.0,
                                     formHeadLine: "Headline",
-                                    formInput: $profileModel.editUserProfile.headline)
+                                    formInput: $profileModel.editUserProfile.headline,
+                                    maxChars:200)
                 }
                 .navigationBarTitle("Headline")
                 .navigationBarTitleDisplayMode(.inline)
@@ -115,7 +116,8 @@ struct EditCardInfo: View {
                 Section(header: Text("About Me")) {
                     EditCardForm(formHeight: 100.0,
                                     formHeadLine: "About Me",
-                                    formInput: $profileModel.editUserProfile.description)
+                                    formInput: $profileModel.editUserProfile.description,
+                                    maxChars:400)
                 }
                 .navigationBarTitle("About Me")
                 .navigationBarTitleDisplayMode(.inline)
@@ -125,12 +127,14 @@ struct EditCardInfo: View {
                 Section(header: Text("Work")) {
                     EditCardForm(formHeight: 40.0,
                                     formHeadLine: "Job Title",
-                                    formInput: $profileModel.editUserProfile.jobTitle)
+                                    formInput: $profileModel.editUserProfile.jobTitle,
+                                    maxChars:30)
                     
                     // Add Company
                     EditCardForm(formHeight: 40.0,
                                     formHeadLine: "Company Name",
-                                    formInput: $profileModel.editUserProfile.work)
+                                    formInput: $profileModel.editUserProfile.work,
+                                    maxChars:30)
                 }
                 .navigationBarTitle("Work")
                 .navigationBarTitleDisplayMode(.inline)
@@ -152,7 +156,8 @@ struct EditCardInfo: View {
                     // Add School
                     EditCardForm(formHeight: 40.0,
                                     formHeadLine: "School Name",
-                                    formInput: $profileModel.editUserProfile.school)
+                                    formInput: $profileModel.editUserProfile.school,
+                                    maxChars:30)
                 }
                 .navigationBarTitle("Education")
                 .navigationBarTitleDisplayMode(.inline)
@@ -215,6 +220,9 @@ struct EditCardInfo: View {
                 .navigationBarTitle("Card Settings")
                 .navigationBarTitleDisplayMode(.inline)
                 
+            }
+            .onTapGesture {
+                self.hideKeyboard()
             }
         }
     }

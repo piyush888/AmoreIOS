@@ -27,9 +27,3 @@ enum ProjectConfig {
 
 }
 
-
-// Old Configurations
-
-//let apiURL = "http://127.0.0.1:5040"
-//let apiURL = "http://34.172.205.119:5040"
-
