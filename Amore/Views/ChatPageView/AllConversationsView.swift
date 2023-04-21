@@ -31,7 +31,8 @@ struct AllConversationsView: View {
                             self.navigateToChatView = true
                             self.selectedChat = recentMessage
                             mainMessagesModel.markMessageRead(chat: recentMessage)
-                            tabModel.showDetail.toggle()
+                            // Hide control center
+                            tabModel.showDetail = true
                         } label: {
                             if (recentMessage.fromId == Auth.auth().currentUser?.uid) {
                                 IndividualMessageRow(recentMessage: recentMessage)
@@ -72,7 +73,8 @@ struct AllConversationsView: View {
                     .environmentObject(mainMessagesModel)
                     .onDisappear {
                         chatViewModel.firestoreListener?.remove()
-                        tabModel.showDetail.toggle()
+                        // Show Control Center
+                        tabModel.showDetail = false
                     }
             }
         }
