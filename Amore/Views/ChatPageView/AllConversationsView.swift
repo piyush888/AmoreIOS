@@ -20,18 +20,26 @@ struct AllConversationsView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Divider()
-                .opacity(0)
-            ScrollView {
-                ForEach(mainMessagesModel.recentChats.sorted(by: { $0.timestamp.boundDate > $1.timestamp.boundDate })) { recentMessage in
-                    VStack {
-                        Button {
-                            self.toUser = recentMessage.user ?? ChatUser()
-                            self.chatViewModel.fetchMessages(toUser: toUser)
-                            self.navigateToChatView = true
-                            self.selectedChat = recentMessage
-                            mainMessagesModel.markMessageRead(chat: recentMessage)
-                            tabModel.showDetail.toggle()
+            
+            List {
+                ForEach(mainMessagesModel.recentChats) { recentMessage in
+
+                    if let toUser = recentMessage.user {
+                        NavigationLink {
+                            ConversationView(toUser: toUser, selectedChat: recentMessage)
+                                .environmentObject(chatViewModel)
+                                .environmentObject(mainMessagesModel)
+                                .onDisappear {
+                                    chatViewModel.firestoreListener?.remove()
+                                    tabModel.showDetail = false
+                                }
+                                .onAppear {
+                                    tabModel.showDetail = true
+                                    DispatchQueue.main.async {
+                                        mainMessagesModel.markMessageRead(chat: recentMessage)
+                                        self.chatViewModel.fetchMessages(toUser: toUser)
+                                    }
+                                }
                         } label: {
                             if (recentMessage.fromId == Auth.auth().currentUser?.uid) {
                                 IndividualMessageRow(recentMessage: recentMessage)
@@ -43,18 +51,16 @@ struct AllConversationsView: View {
                                 else {
                                     IndividualMessageRow(recentMessage: recentMessage)
                                         .overlay(Text("\(Image(systemName: "suit.heart.fill"))")
-                                                    .foregroundColor(.green)
-                                                    .font(.body), alignment: .bottomTrailing)
+                                            .foregroundColor(.green)
+                                            .font(.body), alignment: .bottomTrailing)
                                 }
                             }
                         }
 
-                        Divider()
-                            .padding(.bottom, 5)
                     }
-                    .padding(.horizontal)
+
                 }
-                
+
                 if (mainMessagesModel.recentChats.count == 0) {
                     VStack {
                         Spacer()
@@ -64,19 +70,12 @@ struct AllConversationsView: View {
                     }
                     .padding(25)
                 }
+
             }
-            
-            NavigationLink("", isActive: $navigateToChatView) {
-                ConversationView(toUser: $toUser, selectedChat: $selectedChat, navigateToChatView: $navigateToChatView)
-                    .environmentObject(chatViewModel)
-                    .environmentObject(mainMessagesModel)
-                    .onDisappear {
-                        chatViewModel.firestoreListener?.remove()
-                        tabModel.showDetail.toggle()
-                    }
-            }
+            .listStyle(PlainListStyle())
+            .background(Color.white)
+
         }
-//        .padding(.top, 10)
         .onAppear {
             print("Chat: USER ID FOR THIS USER: \(Auth.auth().currentUser?.uid)")
         }
@@ -90,13 +89,14 @@ struct IndividualMessageRow: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            WebImage(url: recentMessage.user?.image1?.imageURL)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 64, height: 64)
-                .clipped()
-                .cornerRadius(64)
-                .shadow(radius: 3)
+
+            CustomAsyncImage(url: recentMessage.user?.image1?.imageURL, placeholder: {
+                ProgressView()
+            })
+            .frame(width: 64, height: 64)
+            .clipped()
+            .cornerRadius(64)
+            .shadow(radius: 3)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text((recentMessage.user?.firstName.bound ?? "") + " " + (recentMessage.user?.lastName.bound ?? ""))

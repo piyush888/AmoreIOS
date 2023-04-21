@@ -29,6 +29,7 @@ class MainMessagesViewModel: ObservableObject {
         fetchRecentChats { 
             // Load all chats profiles when all changes have been fetched
             self.loadAllChatProfiles(allChatUserIds: self.getAllChatProfileIds())
+            self.recentChats = self.recentChats.sorted(by: { $0.timestamp.boundDate > $1.timestamp.boundDate })
         }
     }
     

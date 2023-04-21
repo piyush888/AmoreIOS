@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B03B0432925FC220012222B /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B03B0422925FC220012222B /* DateHelpers.swift */; };
 		1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D3227274E36E50096B40B /* CardProfileModel.swift */; };
+		1B31C74529F25B2900D941B6 /* CustomAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
 		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
@@ -200,6 +201,7 @@
 /* Begin PBXFileReference section */
 		1B03B0422925FC220012222B /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		1B1D3227274E36E50096B40B /* CardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfileModel.swift; sourceTree = "<group>"; };
+		1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAsyncImage.swift; sourceTree = "<group>"; };
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		1B38DFC127B8C1A0009B905F /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				E203885C28B4374F000704F2 /* Playground.swift */,
 				E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */,
 				1B03B0422925FC220012222B /* DateHelpers.swift */,
+				1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1056,6 +1059,7 @@
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
+				1B31C74529F25B2900D941B6 /* CustomAsyncImage.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
