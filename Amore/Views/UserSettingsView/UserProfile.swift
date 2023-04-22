@@ -41,7 +41,6 @@ struct UserProfile: View {
     
     @State var profileEditingToBeDone: Bool = false
     @State var settingsDone: Bool = false
-    @State var showModal = false
     @State var popUpCardSelection: PopUpCards = .superLikeCards
     
     @Environment(\.colorScheme) var colorScheme
@@ -89,7 +88,6 @@ struct UserProfile: View {
                         /// Messages: Show count and option to buy
                         /// Restore: Restore Purchase
                         SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                            showModal:$showModal,
                                             backgroundColor:subscriptionDetailColor)
                             .environmentObject(storeManager)
                             .padding(.bottom,10)
@@ -106,21 +104,22 @@ struct UserProfile: View {
                                 .foregroundColor(colorScheme == .dark ? Color(hex: 0x24244A): Color(hex: 0xe8f4f8))
                             VStack(spacing:8) {
                                 
+                                // Shows my amore card
+                                /// Contains user's subscription and consumables
                                 SubscriptionCardButtons(width: geometry.size.width * 0.75,
                                                         height: geometry.size.height * 0.09,
                                                         popUpCardSelection:$popUpCardSelection,
-                                                        showModal: $showModal,
                                                         selectionType:.myAmorecards,
                                                         buttonMainText:"My Amore",
                                                         buttonSubText:"",
                                                         buttonColor:[Color(hex:0xf492f0), Color(hex:0xf9c58d)])
+                                .environmentObject(storeManager)
                                 
                                 
-                                
+                                // Platinum subscription is not in use right now
 //                                SubscriptionCardButtons(width: geometry.size.width * 0.75,
 //                                                        height: geometry.size.height * 0.09,
 //                                                        popUpCardSelection:$popUpCardSelection,
-//                                                        showModal: $showModal,
 //                                                        selectionType:.amorePlatinum,
 //                                                        buttonMainText:"Amore Platinum",
 //                                                        buttonSubText:"",
@@ -130,11 +129,11 @@ struct UserProfile: View {
                                 SubscriptionCardButtons(width: geometry.size.width * 0.75,
                                                         height: geometry.size.height * 0.09,
                                                         popUpCardSelection:$popUpCardSelection,
-                                                        showModal: $showModal,
                                                         selectionType:.amoreGold,
                                                         buttonMainText:"Amore Gold",
                                                         buttonSubText:"",
                                                         buttonColor:[Color(hex:0xf86ca7), Color(hex:0xf4d444)])
+                                .environmentObject(storeManager)
                             }
                             .padding(.vertical,20)
                             
@@ -146,7 +145,10 @@ struct UserProfile: View {
                     .padding(.horizontal,20)
                     .navigationBarHidden(true)
                     
-                    if showModal {
+                    // As soon as we show the PaymentSuccessfull screen, the modal window needs to be closed hence the && condition
+                    // displayProductModalWindow: shows the cards to buy consumables and subscripion
+                    // paymentCompleteDisplayMyAmore: Displays a payment success page
+                    if storeManager.displayProductModalWindow && !storeManager.paymentCompleteDisplayMyAmore {
                         
                             switch popUpCardSelection {
                                 
@@ -160,7 +162,6 @@ struct UserProfile: View {
                                                                cardHeaderSymbolColor: Color.white,
                                                       headerText: "Stand out with Super Like",
                                                       subHeaderText: "You're 3x likely to get a match!!",
-                                                      showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
                                                       selectedPriceTabId: pricingData["5 Super Likes"]?.productIdentifier ?? "NoId",
@@ -188,7 +189,6 @@ struct UserProfile: View {
                                                       cardHeaderSymbolColor: Color.white,
                                                       headerText: "Skip the queue",
                                                       subHeaderText: "Be on top of the deck for 30 minutes",
-                                                      showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
                                                       selectedPriceTabId: pricingData["2 Boosts"]?.productIdentifier ?? "NoId",
@@ -215,7 +215,6 @@ struct UserProfile: View {
                                                       cardHeaderSymbolColor: Color.white,
                                                       headerText: "Be in their DM",
                                                       subHeaderText: "Get noticed, say something nice",
-                                                      showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
                                                       selectedPriceTabId: pricingData["10 Messages"]?.productIdentifier ?? "NoId",
@@ -242,7 +241,6 @@ struct UserProfile: View {
                                                   cardHeaderSymbolColor: Color.white,
                                                   headerText: "Accidental swipe?",
                                                   subHeaderText: "Don't let them get away, use a replay",
-                                                  showModal: $showModal,
                                                   geometry: geometry,
                                                   priceTabs: pricingData,
                                                   selectedPriceTabId: pricingData["5 Rewinds"]?.productIdentifier ?? "NoId",
@@ -261,8 +259,7 @@ struct UserProfile: View {
                                                 .environmentObject(storeManager)
                                     
                                 case .myAmorecards:
-                                    MyAmoreCard(showModal: $showModal,
-                                                popUpCardSelection:$popUpCardSelection,
+                                    MyAmoreCard(popUpCardSelection:$popUpCardSelection,
                                                 subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
                                     .environmentObject(storeManager)
                                     
@@ -278,7 +275,6 @@ struct UserProfile: View {
                                                       subScriptText3:"7 Super likes everyday",
                                                       subScriptText4:"5 Boost a month",
                                                       subScriptText5:"3 messages everyday",
-                                                      showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
                                                       selectedPriceTabId: pricingData["Amore Platinum 1 Month"]?.productIdentifier ?? "NoId",
@@ -309,7 +305,6 @@ struct UserProfile: View {
                                                       subScriptText3:"1 Boost a month",
                                                       subScriptText4:"2 Messages everyday",
                                                       subScriptText5:"3 Rewinds everyday",
-                                                      showModal: $showModal,
                                                       geometry: geometry,
                                                       priceTabs: pricingData,
                                                       selectedPriceTabId: pricingData["Amore Gold 3 Month"]?.productIdentifier ?? "NoId",
@@ -359,7 +354,6 @@ struct BuySubscriptionOrItemsCard : View {
     @State var subScriptText3: String?
     @State var subScriptText4: String?
     @State var subScriptText5: String?
-    @Binding var showModal: Bool
     @State var geometry: GeometryProxy
     // priceTabs received the pricingData
     @State var priceTabs: [String: SKProduct]
@@ -547,10 +541,9 @@ struct BuySubscriptionOrItemsCard : View {
                         
                         Spacer()
                         
-                        NoThanksButton(showModal:$showModal,
-                                       buttonColor:Color.clear,
-                                       fontColor:Color.gray)
+                        NoThanksButton(buttonColor:Color.clear, fontColor:Color.gray)
                             .padding(.bottom,10)
+                            .environmentObject(storeManager)
                     }
                     
                     

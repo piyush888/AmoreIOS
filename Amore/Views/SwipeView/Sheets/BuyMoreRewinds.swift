@@ -68,7 +68,8 @@ struct BuyMoreRewinds: View {
                     RewindBuyButton(rewindCount:2.0,
                                    totalCost: Float(truncating: pricingData["2 Rewinds"]?.price ?? 0.0),
                                    currency: pricingData["2 Rewinds"]?.localizedPrice?.first ?? "$",
-                                   skProductObj: pricingData["2 Rewinds"] ?? SKProduct())
+                                   skProductObj: pricingData["2 Rewinds"] ?? SKProduct(),
+                                    allcardsActiveSheet: $allcardsActiveSheet)
                         .frame(width: geometry.size.width*0.80)
                         .environmentObject(storeManager)
                 
@@ -76,7 +77,8 @@ struct BuyMoreRewinds: View {
                     RewindBuyButton(rewindCount:5.0,
                                    totalCost: Float(truncating: pricingData["5 Rewinds"]?.price ?? 0.0),
                                    currency: pricingData["5 Rewinds"]?.localizedPrice?.first ?? "$",
-                                   skProductObj: pricingData["5 Rewinds"] ?? SKProduct())
+                                   skProductObj: pricingData["5 Rewinds"] ?? SKProduct(),
+                                    allcardsActiveSheet: $allcardsActiveSheet)
                         .frame(width: geometry.size.width*0.80)
                         .environmentObject(storeManager)
                 }
@@ -109,6 +111,7 @@ struct RewindBuyButton: View {
     @State var totalCost:Float = 0.0
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
         
@@ -120,6 +123,7 @@ struct RewindBuyButton: View {
                 }
                 // Purchase the product by passing in the Sk Product Object
                 storeManager.purchaseProduct(product:skProductObj)
+                allcardsActiveSheet = nil
             } label : {
                 
                 VStack {

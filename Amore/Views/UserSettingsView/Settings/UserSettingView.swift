@@ -19,8 +19,6 @@ struct UserSettingView: View {
     
     let currentUser = Auth.auth().currentUser
     
-    @State var showModal = false
-    
     var body: some View {
         
         Form {

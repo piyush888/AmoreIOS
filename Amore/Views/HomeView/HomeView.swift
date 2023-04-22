@@ -31,6 +31,7 @@ struct HomeView: View {
     
     func didDimiss() {
         storeManager.paymentCompleteDisplayMyAmore = false
+        storeManager.displayProductModalWindow = false
     }
     
     var body: some View {
@@ -66,7 +67,8 @@ struct HomeView: View {
                                                 Spacer()
                                             }
                                         } else {
-                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck)
+                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck,
+                                                         currentPage:$currentPage)
                                                 .environmentObject(photoModel)
                                                 .environmentObject(cardProfileModel)
                                                 .environmentObject(reportActivityModel)
@@ -112,11 +114,6 @@ struct HomeView: View {
                                         .environmentObject(storeManager)
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(tabModel)
-                                        .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
-                                               onDismiss: didDimiss){
-                                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
-                                                .environmentObject(storeManager)
-                                        }
                                 }
                             }
                             
@@ -127,6 +124,12 @@ struct HomeView: View {
                             }
                         }
                         .ignoresSafeArea(.all, edges: .bottom)
+                        .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
+                               onDismiss: didDimiss){
+                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3",
+                                            currentPage:$currentPage)
+                                .environmentObject(storeManager)
+                        }
                 
                     case .serverErrorView:
                         ServerErrorView()

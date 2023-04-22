@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct SubscriptionCardButtons: View {
-
+    
+    @EnvironmentObject var storeManager: StoreManager
     @State var width: CGFloat = 0.0
     @State var height: CGFloat = 0.0
     @Binding var popUpCardSelection: PopUpCards
-    @Binding var showModal: Bool
+    
     @State var selectionType: PopUpCards = .myAmorecards
     @State var buttonMainText: String = ""
     @State var buttonSubText: String = ""
@@ -22,7 +23,7 @@ struct SubscriptionCardButtons: View {
         
         VStack {
             Button {
-                self.showModal.toggle()
+                storeManager.displayProductModalWindow = true
                 popUpCardSelection = selectionType
             } label: {
                 // Amore Gold

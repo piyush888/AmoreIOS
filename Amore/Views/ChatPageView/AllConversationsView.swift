@@ -67,7 +67,7 @@ struct AllConversationsView: View {
                 .listStyle(PlainListStyle())
             } else {
                 NoMatchesView(currentPage:$currentPage)
-                    .padding(.top,100)
+                    .padding(.top,70)
             }
             
         }

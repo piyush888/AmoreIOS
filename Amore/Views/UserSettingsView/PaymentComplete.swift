@@ -11,6 +11,8 @@ struct PaymentComplete: View {
     @StateObject var appReview = AppReview()
     @EnvironmentObject var storeManager: StoreManager
     @State var subscriptionTypeId: String
+    @Binding var currentPage: ViewTypes
+    
     @State var time = 0.0
     @State var scale = 0.1
     
@@ -34,8 +36,9 @@ struct PaymentComplete: View {
                 // Describe the plan user has or ofer them to upgrade it to a better plan
                 planDescription
                 
+                // Displays the consumables total count
+                // shodModal is passed as constant since there is no collapsing this view
                 SubscriptionDetails(popUpCardSelection:Binding.constant(PopUpCards.myAmorecards),
-                                    showModal:Binding.constant(false),
                                     backgroundColor:subscriptionDetailColor)
                     .frame(width: UIScreen.main.bounds.width-50, height:90)
                     .padding(.horizontal,30)
@@ -53,7 +56,9 @@ struct PaymentComplete: View {
                     Spacer()
                     
                     Button("Keep Swiping") {
+                        storeManager.displayProductModalWindow = false
                         storeManager.paymentCompleteDisplayMyAmore = false
+                        currentPage = .swipeView
                     }
                     .buttonStyle(GrowingButton(buttonColor:Color.blue, fontColor: Color.white))
                     
@@ -134,7 +139,7 @@ struct PaymentComplete: View {
 struct PaymentComplete_Previews: PreviewProvider {
     
     static var previews: some View {
-        PaymentComplete(subscriptionTypeId:"Amore.ProductId.1M.Gold.v3")
+        PaymentComplete(subscriptionTypeId:"Amore.ProductId.1M.Gold.v3", currentPage: Binding.constant(ViewTypes.swipeView))
             .environmentObject(StoreManager())
     }
 }

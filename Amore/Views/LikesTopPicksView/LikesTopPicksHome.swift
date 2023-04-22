@@ -260,6 +260,9 @@ struct LikesTopPicksHome: View {
                 
                     case .buyMoreRewindsSheet:
                         Text("Empty view .buyMoreRewindsSheet")
+                    
+                    case .purchaseSuccessfull:
+                        Text("Empty view .purchaseSuccessfull")
                 }
             }
         }

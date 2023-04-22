@@ -12,7 +12,6 @@ struct MyAmoreCard: View {
     
     @StateObject var appReview = AppReview()
     @EnvironmentObject var storeManager: StoreManager
-    @Binding var showModal: Bool
     @Binding var popUpCardSelection: PopUpCards
     @State var subscriptionTypeId: String
     
@@ -68,7 +67,6 @@ struct MyAmoreCard: View {
                     }
                     
                     SubscriptionDetails(popUpCardSelection:$popUpCardSelection,
-                                        showModal:$showModal,
                                         backgroundColor:Binding.constant(Color.clear))
                         .environmentObject(storeManager)
                         .padding(.vertical,10)
@@ -181,7 +179,8 @@ struct MyAmoreCard: View {
             }
             .buttonStyle(GrowingButton(buttonColor:Color.pink, fontColor: Color.white))
             
-            NoThanksButton(showModal:$showModal, buttonColor:Color.clear, fontColor:Color.white)
+            NoThanksButton(buttonColor:Color.clear, fontColor:Color.white)
+                .environmentObject(storeManager)
                 
         }
         .padding(.top,10)
@@ -190,14 +189,14 @@ struct MyAmoreCard: View {
 
 struct NoThanksButton: View {
     
-    @Binding var showModal: Bool
+    @EnvironmentObject var storeManager: StoreManager
     @State var buttonColor: Color = Color.clear
     @State var fontColor: Color = Color.gray
     
     
     var body: some View {
         Button {
-            showModal.toggle()
+            storeManager.displayProductModalWindow = false
         } label : {
             Text("No thanks")
         }

@@ -19,7 +19,6 @@ struct BoostUserProfile: View {
     @State private var info: AlertInfo?
     
     @Binding var allcardsActiveSheet: AllCardsActiveSheet?
-    @State var popUpCardSelection: PopUpCards = .superLikeCards
     
     private var BoostCountView: some View {
         Text("\(storeManager.purchaseDataDetails.purchasedBoostCount.boundInt + storeManager.purchaseDataDetails.subscriptonBoostCount.boundInt)")
@@ -232,7 +231,8 @@ struct BoostUserProfile: View {
                         BoostBuyButton(boostType:1.0,
                                        totalCost: Float(truncating: pricingData["1 Boosts"]?.price ?? 0.0),
                                        currency: pricingData["1 Boosts"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["1 Boosts"] ?? SKProduct())
+                                       skProductObj: pricingData["1 Boosts"] ?? SKProduct(),
+                                       allcardsActiveSheet: $allcardsActiveSheet)
                             .frame(width: geometry.size.width*0.80)
                             .environmentObject(storeManager)
                     
@@ -240,7 +240,8 @@ struct BoostUserProfile: View {
                         BoostBuyButton(boostType:2.0,
                                        totalCost: Float(truncating: pricingData["2 Boosts"]?.price ?? 0.0),
                                        currency: pricingData["2 Boosts"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["2 Boosts"] ?? SKProduct())
+                                       skProductObj: pricingData["2 Boosts"] ?? SKProduct(),
+                                       allcardsActiveSheet: $allcardsActiveSheet)
                             .frame(width: geometry.size.width*0.80)
                             .environmentObject(storeManager)
                     }
@@ -284,6 +285,8 @@ struct BoostBuyButton: View {
     @State var totalCost:Float = 0.0
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
+    
     var body: some View {
         
         
@@ -291,6 +294,7 @@ struct BoostBuyButton: View {
                 if let purchasedBoostCount = storeManager.purchaseDataDetails.purchasedBoostCount {
                         self.storeManager.tempPurchaseHold.purchasedBoostCount = purchasedBoostCount + Int(boostType)
                         _ = storeManager.purchaseProduct(product:skProductObj)
+                        allcardsActiveSheet = nil
                 }
             } label : {
                 

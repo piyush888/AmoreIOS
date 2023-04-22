@@ -30,13 +30,14 @@ struct AllCardsView: View {
     @State private var showingAlert: Bool = false
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     @State var allCardsWithPhotosDeck: [CardProfileWithPhotos]
+    @Binding var currentPage: ViewTypes
     // Use to indicate whether a DM was successfully sent or not. Consequently, use it for swiping the given card
     @State var directMessageSent: Bool = false
     
     
     @StateObject private var weakCardProfileModel: WeakCardProfileModel
     
-    init(allCardsWithPhotosDeck:[CardProfileWithPhotos]) {
+    init(allCardsWithPhotosDeck:[CardProfileWithPhotos],currentPage:Binding<ViewTypes>) {
         self.buttonSwipeStatus = .none
         self.cardSwipeDone = true
         self.safetyButton = false
@@ -49,6 +50,7 @@ struct AllCardsView: View {
         _weakCardProfileModel = StateObject(wrappedValue: WeakCardProfileModel(cardsInDeck: allCardsWithPhotosDeck,
                                                     cardIncrementCount:0,
                                                     initializeSwipeViewWithCards:3))
+        _currentPage = currentPage
     }
     
     enum LikeDislike: Int {
@@ -166,7 +168,13 @@ struct AllCardsView: View {
                     
                     case .buyMoreRewindsSheet:
                         BuyMoreRewinds(allcardsActiveSheet:$allcardsActiveSheet)
-                        .environmentObject(storeManager)
+                            .environmentObject(storeManager)
+                    
+                    case .purchaseSuccessfull:
+                        PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3",
+                                        currentPage: $currentPage)
+                            .environmentObject(storeManager)
+                        
                 }
                 
             }
@@ -189,7 +197,7 @@ struct AllCardsView: View {
 
 
 enum AllCardsActiveSheet: Identifiable {
-    case reportProfileSheet, boostProfileSheet, directMessageSheet, buyMoreSuperLikesSheet, buyMoreRewindsSheet
+    case reportProfileSheet, boostProfileSheet, directMessageSheet, buyMoreSuperLikesSheet, buyMoreRewindsSheet, purchaseSuccessfull
     var id: Int {
         hashValue
     }
