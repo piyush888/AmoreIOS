@@ -67,6 +67,7 @@ struct LoginPhoneNumber: View {
                         .onNumberChange(perform: { inputNum in
                             profileModel.countryCode = String(inputNum?.countryCode ?? 1)
                         })
+                        .maximumDigits(15)
                         .frame(height:50)
                         .padding(.leading,10)
                         .background(colorScheme == .dark ? Color.black : Color.white)
