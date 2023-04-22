@@ -154,6 +154,7 @@
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
 		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
 		E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00F27738C51003EDA83 /* AgeSettings.swift */; };
+		E2D3952229F305C000A7B702 /* NoMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3952129F305C000A7B702 /* NoMatchesView.swift */; };
 		E2D43187288F4980005AFBE0 /* SelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D43186288F4980005AFBE0 /* SelectionForm.swift */; };
 		E2D43189288F60AF005AFBE0 /* EditCardFormData.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D43188288F60AF005AFBE0 /* EditCardFormData.json */; };
 		E2D4318B2891FA6F005AFBE0 /* UserHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4318A2891FA6F005AFBE0 /* UserHeight.swift */; };
@@ -346,6 +347,7 @@
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
 		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
 		E2D0F00F27738C51003EDA83 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
+		E2D3952129F305C000A7B702 /* NoMatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchesView.swift; sourceTree = "<group>"; };
 		E2D43186288F4980005AFBE0 /* SelectionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionForm.swift; sourceTree = "<group>"; };
 		E2D43188288F60AF005AFBE0 /* EditCardFormData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EditCardFormData.json; sourceTree = "<group>"; };
 		E2D4318A2891FA6F005AFBE0 /* UserHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeight.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				1BB36D3327ADB9DB00F4029C /* ConversationView.swift */,
 				1BB36D3727ADBC1C00F4029C /* customNavBar.swift */,
 				1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */,
+				E2D3952129F305C000A7B702 /* NoMatchesView.swift */,
 				1B38DFC127B8C1A0009B905F /* ChatBubble.swift */,
 				1B89836F2895BCEB00DE1FEF /* MessageForm.swift */,
 				1B6FF6F4291C842F00AAD03A /* CustomGiphyView.swift */,
@@ -1100,6 +1103,7 @@
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,
 				E203885D28B4374F000704F2 /* Playground.swift in Sources */,
 				E2DBC02F272D8E06000630F5 /* SettingEditProfileSafety.swift in Sources */,
+				E2D3952229F305C000A7B702 /* NoMatchesView.swift in Sources */,
 				E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */,
 				E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,

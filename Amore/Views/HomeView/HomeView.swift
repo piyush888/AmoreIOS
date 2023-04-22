@@ -43,7 +43,7 @@ struct HomeView: View {
                                 switch currentPage {
                                 
                                 case .messagingView:
-                                    MainMessagesView()
+                                    MainMessagesView(currentPage:$currentPage)
                                         .environmentObject(chatViewModel)
                                         .environmentObject(mainMessagesModel)
                                         .environmentObject(tabModel)

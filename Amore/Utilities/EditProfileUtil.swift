@@ -42,8 +42,6 @@ struct EditCardForm: View {
                 }
                 TextEditor(text: $formInput.bound)
                     .frame(minHeight: formHeight, maxHeight:.infinity)
-                    .background(colorScheme == .dark ? Color.black : Color.white)
-                    .foregroundColor(.primary)
                     .cornerRadius(6)
                     .onChange(of: formInput.bound) { newValue in
                         if newValue.count > maxChars { // limit number of characters
