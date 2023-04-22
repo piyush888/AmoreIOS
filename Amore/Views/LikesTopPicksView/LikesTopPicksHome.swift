@@ -2,7 +2,7 @@
 //  Home.swift
 //  Specs
 //
-//  Created by Balaji on 20/11/20.
+//  Created by Ktz on 20/11/20.
 //
 
 import SwiftUI
@@ -75,19 +75,22 @@ struct LikesTopPicksHome: View {
                         
                         case .superLikesAndLikesGiven:
                         VStack {
-                            // Super Likes Given Carousel
-                            TopPicksChild(selectedItem: $selectedItem,
-                                  show: $show,
-                                  dataArray: $receivedGivenEliteModel.superLikesGivenPhotos,
-                                  selectedTab: selectedTab,
-                                  selectedTabSubView:$selectedTabSubView,
-                                  stringNoDataPresent: "You haven't given any Super Likes yet, Keep Swiping!!",
-                                  viewHeadText: "Super likes given by you",
-                                  viewHeadIcon: "star.fill",
-                                  iconColor:Color("gold-star"),
-                                  verticalView:false,
-                                  geometry:geometry)
-                                .environmentObject(receivedGivenEliteModel)
+                            // Only show the superlike give if the superliked profiles is more than 0
+                            if(receivedGivenEliteModel.superLikesGivenPhotos.count > 0){
+                                // Super Likes Given Carousel
+                                TopPicksChild(selectedItem: $selectedItem,
+                                              show: $show,
+                                              dataArray: $receivedGivenEliteModel.superLikesGivenPhotos,
+                                              selectedTab: selectedTab,
+                                              selectedTabSubView:$selectedTabSubView,
+                                              stringNoDataPresent: "You haven't given any Super Likes yet, Keep Swiping!!",
+                                              viewHeadText: "Super likes given by you",
+                                              viewHeadIcon: "star.fill",
+                                              iconColor:Color("gold-star"),
+                                              verticalView:false,
+                                              geometry:geometry)
+                                    .environmentObject(receivedGivenEliteModel)
+                        }
                                 
                             // Likes Given Vertical Scroll
                             TopPicksChild(selectedItem: $selectedItem,
