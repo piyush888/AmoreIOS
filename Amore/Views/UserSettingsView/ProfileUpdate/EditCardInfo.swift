@@ -196,7 +196,9 @@ struct EditCardInfo: View {
                 // Passion or Interests
                 Section(header:Text("Passions")) {
                     NavigationLink(
-                        destination: SelectMultipleItems(selectionList: $passions, optionsList:passionsList,filterName:"Passions"),
+                        destination: SelectMultipleItems(selectionList: $passions,
+                                                         optionsList:passionsList,
+                                                         filterName:"Passions"),
                         label: {
                             Text("Pasions")
                     })

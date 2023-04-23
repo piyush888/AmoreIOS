@@ -51,7 +51,10 @@ struct EditProfile: View {
             profileModel.editUserProfile.doYouWantBabies = doYouWantBabies
             profileModel.editUserProfile.food = food
             profileModel.editUserProfile.interests = passions
-        } else {
+        } else if(profileModel.editUserProfile.interests.boundStringArray.sorted() != passions.sorted()) {
+            profileModel.editUserProfile.interests = passions
+        }
+        else {
             print("Edit Profile was closed without updating profile")
         }
         
