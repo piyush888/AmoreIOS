@@ -23,6 +23,21 @@ struct UserSnapDetails: View {
             .frame(height: geometry.size.height/4.0)
             .clipShape(Circle())
             .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
+            .overlay(
+                    Circle()
+                        .stroke(Color.yellow,lineWidth: 4)
+                        .overlay(
+                            Image(systemName: "crown.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(Color.yellow)
+                                .frame(width: 30, height: 30)
+                                .padding(10)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .offset(x: geometry.size.width/8.0, y: -geometry.size.height/8.0)
+                        )
+                )
 
             
             Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
