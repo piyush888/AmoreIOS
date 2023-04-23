@@ -194,4 +194,8 @@ class MainMessagesViewModel: ObservableObject {
             self.allChatPhotos_Dict = tempResponse.cardsDict
         }
     }
+    
+    func deRegisterRecentChatListener() {
+        self.firestoreListener?.remove()
+    }
 }

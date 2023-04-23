@@ -16,6 +16,7 @@ struct UserSettingView: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     let currentUser = Auth.auth().currentUser
     
@@ -90,6 +91,7 @@ struct UserSettingView: View {
         Button{
             DispatchQueue.main.async {
                notificatonViewModel.deleteFCMTokenFromFirestore {
+                   mainMessagesModel.deRegisterRecentChatListener()
                    photoModel.resetPhotosOnLogout()
                    adminAuthenticationModel.removeCookies()
                    // Firestore logout

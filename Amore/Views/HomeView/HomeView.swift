@@ -114,6 +114,7 @@ struct HomeView: View {
                                         .environmentObject(storeManager)
                                         .environmentObject(adminAuthenticationModel)
                                         .environmentObject(tabModel)
+                                        .environmentObject(mainMessagesModel)
                                 }
                             }
                             

@@ -14,6 +14,7 @@ struct SettingEditProfileSafety: View {
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var storeManager: StoreManager
     @EnvironmentObject var tabModel: TabModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     // Close the settings tab
     @Binding var settingsDone: Bool
@@ -30,6 +31,7 @@ struct SettingEditProfileSafety: View {
                     .environmentObject(profileModel)
                     .environmentObject(adminAuthenticationModel)
                     .environmentObject(storeManager)
+                    .environmentObject(mainMessagesModel)
             } label: {
                 Button {
                     settingsDone = true
