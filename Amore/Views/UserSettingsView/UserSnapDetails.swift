@@ -39,9 +39,53 @@ struct UserSnapDetails: View {
         
     }
 }
+//
+struct UserSnapDetails_Previews: PreviewProvider {
 
-//struct UserSnapDetails_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserSnapDetails(circularImageSize:400)
-//    }
-//}
+    static var previews: some View {
+        let profileModel = ProfileViewModel()
+        
+        profileModel.editUserProfile = Profile(id: "Test123456",  //can't be nil
+                                           firstName: "Neha", //can't be nil
+                                           lastName: "Sharma",  //can't be nil
+                                           dateOfBirth: Date(),  //can't be nil
+                                           interests: ["Running","Gaming","Helping"],  //can't be nil
+                                           sexualOrientation: ["Straight"], // * show sexual orientation if visible is true
+                                           sexualOrientationVisible: true,
+                                           showMePreference: "Women", // Don't show
+                                           work: "Bank of America", // Give in info. Below Passions
+                                           school: "Harvard University", // Show the university name
+                                           age: 25, // Age is shown already
+                                           headline: "Hey Pumpkin",
+                                           profileDistanceFromUser: 0,
+                                           jobTitle: "VP",
+                                           careerField: "Company Name", // *
+                                           height: 5.6,
+                                           education: "Masters in Science",
+                                           religion: "Hindu",
+                                           community: "Brahmin",
+                                           politics: "Liberal",
+                                           location: Location(longitude: 0.0, latitude: 0.0),
+                                           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                                           country: "India",
+                                           image1: ProfileImage(imageURL: URL(string: "https://drive.google.com/file/d/1vAKXuzS0uO-CI_fnCdl9cPOzbGHEicew/view"),
+                                                                firebaseImagePath: "dummy_image"),
+                                           image2: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                           image3: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                           image4: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                           image5: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                           image6: ProfileImage(imageURL: URL(string: "x"),firebaseImagePath: "x"),
+                                           doYouWorkOut: "Yes", // * show this later
+                                           doYouDrink: "No", // * show this later
+                                           doYouSmoke: "", // * show this later
+                                           doYouWantBabies: "No") // * show this later
+        return GeometryReader { geometry in
+             UserSnapDetails(geometry:geometry)
+                .environmentObject(profileModel)
+                .environmentObject(PhotoModel())
+        }
+    }
+}
+
+
+
