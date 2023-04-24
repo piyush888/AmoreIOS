@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NameAgeDistance: View {
+    @Environment(\.colorScheme) var colorScheme
     
     @State var firstName: String
     @State var lastName: String
@@ -54,6 +55,27 @@ struct NameAgeDistance: View {
                             
                         Text(String(format: "%.1f",profileDistanceFromUser) + " km")
                             .font(.headline)
+                        
+                        ZStack {
+                            Circle()
+                                .fill(colorScheme == .dark ? Color.black
+                                      : Color.white)
+                                .frame(width: 22, height: 22)
+                            Image(systemName: "checkmark.seal.fill")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 15))
+                        }
+                        
+                        ZStack {
+                            Circle()
+                                .fill(colorScheme == .dark ? Color.black
+                                      : Color.white)
+                                .frame(width: 22, height: 22)
+                            Image(systemName: "crown.fill")
+                                .foregroundColor(.yellow)
+                                .font(.system(size: 15))
+                        }
+                            
                     }
                     
                     

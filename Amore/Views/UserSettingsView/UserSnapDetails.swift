@@ -13,6 +13,7 @@ struct UserSnapDetails: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @State var geometry: GeometryProxy
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -33,7 +34,7 @@ struct UserSnapDetails: View {
                                 .foregroundColor(Color.yellow)
                                 .frame(width: 30, height: 30)
                                 .padding(10)
-                                .background(Color.white)
+                                .background(colorScheme == .dark ? Color.black: Color.white)
                                 .clipShape(Circle())
                                 .offset(x: geometry.size.width/8.0, y: -geometry.size.height/8.0)
                         )
