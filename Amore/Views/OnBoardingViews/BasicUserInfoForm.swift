@@ -109,11 +109,13 @@ struct BasicUserInfoForm: View {
                             Section(header: Text("Name")) {
                                 EditCardForm(formHeight: 40.0,
                                                 formHeadLine: "First Name",
-                                                formInput: $firstName)
+                                                formInput: $firstName,
+                                                maxChars:30)
                                 
                                 EditCardForm(formHeight: 40.0,
                                                 formHeadLine: "Last Name",
-                                                formInput: $lastName)
+                                                formInput: $lastName,
+                                                maxChars:30)
                             }
                             
                             Section(header:Text("Date of Birth")) {
@@ -128,7 +130,8 @@ struct BasicUserInfoForm: View {
                             Section(header: Text("Email")) {
                                 EditCardForm(formHeight: 40.0,
                                                 formHeadLine: "Email address",
-                                                formInput: $email)
+                                                formInput: $email,
+                                                maxChars:30)
                             }
                             
 

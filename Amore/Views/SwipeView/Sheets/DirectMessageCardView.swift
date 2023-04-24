@@ -190,23 +190,25 @@ struct DirectMessageCardView: View {
                     
                     // Give user option to buy messages here
                     VStack {
-                        if let pricingData = storeManager.messagesPricing {
-                            // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
-                            DirectMessageBuyButton(messageCount:5.0,
-                                           totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
-                                           currency: pricingData["5 Messages"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["5 Messages"] ?? SKProduct())
-                                .frame(width: geometry.size.width*0.80)
-                                .environmentObject(storeManager)
-                        
+                        let pricingData = storeManager.messagesPricing
+                        // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
+                        DirectMessageBuyButton(messageCount:5.0,
+                                       totalCost: Float(truncating: pricingData["5 Messages"]?.price ?? 0.0),
+                                       currency: pricingData["5 Messages"]?.localizedPrice?.first ?? "$",
+                                       skProductObj: pricingData["5 Messages"] ?? SKProduct(),
+                                       allcardsActiveSheet: $allcardsActiveSheet)
+                            .frame(width: geometry.size.width*0.80)
+                            .environmentObject(storeManager)
+                    
 
-                            DirectMessageBuyButton(messageCount:10.0,
-                                           totalCost: Float(truncating: pricingData["10 Messages"]?.price ?? 0.0),
-                                           currency: pricingData["10 Messages"]?.localizedPrice?.first ?? "$",
-                                           skProductObj: pricingData["10 Messages"] ?? SKProduct())
-                                .frame(width: geometry.size.width*0.80)
-                                .environmentObject(storeManager)
-                        }
+                        DirectMessageBuyButton(messageCount:10.0,
+                                       totalCost: Float(truncating: pricingData["10 Messages"]?.price ?? 0.0),
+                                       currency: pricingData["10 Messages"]?.localizedPrice?.first ?? "$",
+                                       skProductObj: pricingData["10 Messages"] ?? SKProduct(),
+                                       allcardsActiveSheet: $allcardsActiveSheet)
+                            .frame(width: geometry.size.width*0.80)
+                            .environmentObject(storeManager)
+                        
                         
                     }
                     
@@ -267,6 +269,7 @@ struct DirectMessageBuyButton: View {
     @State var totalCost:Float = 0.0
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
         
@@ -275,6 +278,7 @@ struct DirectMessageBuyButton: View {
                     self.storeManager.tempPurchaseHold.purchasedMessagesCount = purchasedMessagesCount + Int(messageCount)
                     // Purchase the product by passing in the Sk Product Object
                     storeManager.purchaseProduct(product:skProductObj)
+                    allcardsActiveSheet = nil
                 }
             } label : {
                 

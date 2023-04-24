@@ -70,11 +70,13 @@ struct WorkSchoolCareer: View {
                     Section(header: Text("Work")) {
                             EditCardForm(formHeight: 40.0,
                                     formHeadLine: "Position Title: Sr Manager",
-                                    formInput: $jobTitle)
+                                    formInput: $jobTitle,
+                                    maxChars:30)
                         
                             EditCardForm(formHeight: 40.0,
                                         formHeadLine: "Company Name e.g. Google",
-                                        formInput: $companyName)
+                                        formInput: $companyName,
+                                        maxChars:30)
                     }
                     
                     // Education
@@ -89,7 +91,8 @@ struct WorkSchoolCareer: View {
                         
                             EditCardForm(formHeight: 40.0,
                                         formHeadLine: "School Name e.g. Harvard",
-                                         formInput: $schoolName)
+                                        formInput: $schoolName,
+                                         maxChars:30)
                     }
                 }
                 //Form

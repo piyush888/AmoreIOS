@@ -13,12 +13,13 @@ import GiphyUISDK
 struct ConversationView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Namespace var animation
     @EnvironmentObject var chatViewModel: ChatViewModel
     @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
-    @Binding var toUser: ChatUser
-    @Binding var selectedChat: ChatConversation
+    var toUser: ChatUser
+    var selectedChat: ChatConversation
     var selectedChatIndex: Int {
         mainMessagesModel.returnSelectedChatIndex(chat: selectedChat)
     }
@@ -27,7 +28,6 @@ struct ConversationView: View {
     @State var allcardsActiveSheet: AllCardsActiveSheet?
     @State private var showingAlert = false
     @State var presentProfileCard: Bool = false
-    @Binding var navigateToChatView: Bool
     
     // Show the gif and sticker selections
     @State var isShowingGifPicker = false
@@ -41,7 +41,7 @@ struct ConversationView: View {
     @State var gifData: [String] = []
     
     func unmatchButtonHandler() {
-        navigateToChatView.toggle()
+        self.presentationMode.wrappedValue.dismiss()
         FirestoreServices.unmatchUser(apiToBeUsed: "/unmatch", onFailure: {
             print("Unmatch: API Call Failed")
         }, onSuccess: {
@@ -85,7 +85,7 @@ struct ConversationView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                customNavBar(toUser: $toUser, presentProfileCard: $presentProfileCard)
+                customNavBar(toUser: toUser, presentProfileCard: $presentProfileCard)
                     .environmentObject(mainMessagesModel)
             }
             ToolbarItem(placement: .primaryAction) {
@@ -131,7 +131,7 @@ struct ConversationView: View {
                 /* When Unmatched from chat, other user should exit chat automatically.
                  selectedChatIndex for other user in this case becomes -1, since the chat doesn't exist anymore.
                  */
-                navigateToChatView = false
+                self.presentationMode.wrappedValue.dismiss()
             }
         })
         /// Use Report User List view for Reporting
@@ -140,10 +140,10 @@ struct ConversationView: View {
                 ReportingIssuesCard(allcardsActiveSheet: $allcardsActiveSheet,
                                     profileId: toUserId,
                                     showingAlert:self.$showingAlert,
-                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.swipeView,
+                                    reportingView: self.showUnmatchOption ? ReportingView.conversationView : ReportingView.dmView,
                                     onRemove: { user in
                     print("Report From Chat: API Success")
-                    navigateToChatView.toggle()
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                 )
             }
@@ -171,17 +171,19 @@ struct ConversationView: View {
     func sectionHeaderForMessages(message: ChatModel) -> some View {
         
         HStack {
-            ZStack {
-                Text((message.timestamp?.descriptiveStringForDate(dateStyle: .medium))!)
-                    .foregroundColor(.white)
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .frame(width: 120)
-                    .padding(.vertical, 5)
-                    .background(Capsule().foregroundColor(.blue))
+            if let timestampString = message.timestamp?.descriptiveStringForDate(dateStyle: .medium) {
+                ZStack {
+                    Text(timestampString)
+                        .foregroundColor(.white)
+                        .font(.caption)
+                        .fontWeight(.regular)
+                        .frame(width: 120)
+                        .padding(.vertical, 5)
+                        .background(Capsule().foregroundColor(.blue))
+                }
+                .padding(.vertical, 5)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.vertical, 5)
-            .frame(maxWidth: .infinity)
         }
         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
         .frame(maxWidth: UIScreen.main.bounds.width * 0.75)
@@ -471,7 +473,7 @@ struct MessageView: View {
 
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationView(toUser: Binding.constant(ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage())), selectedChat: Binding.constant(ChatConversation(id: "1", fromId: "123", toId: "456", user: ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage()), lastText: "abc", timestamp: Date(), msgRead: true, otherUserUpdated: true, directMessageApproved: true)), navigateToChatView: Binding.constant(true))
+        ConversationView(toUser: ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage()), selectedChat: ChatConversation(id: "1", fromId: "123", toId: "456", user: ChatUser(id: "123", firstName: "Piyush", lastName: "Garg", image1: ProfileImage()), lastText: "abc", timestamp: Date(), msgRead: true, otherUserUpdated: true, directMessageApproved: true))
             .environmentObject(ChatViewModel())
             .environmentObject(MainMessagesViewModel())
     }

@@ -13,6 +13,8 @@ struct SettingEditProfileSafety: View {
     @EnvironmentObject var photoModel: PhotoModel
     @EnvironmentObject var adminAuthenticationModel: AdminAuthenticationViewModel
     @EnvironmentObject var storeManager: StoreManager
+    @EnvironmentObject var tabModel: TabModel
+    @EnvironmentObject var mainMessagesModel: MainMessagesViewModel
     
     // Close the settings tab
     @Binding var settingsDone: Bool
@@ -29,6 +31,7 @@ struct SettingEditProfileSafety: View {
                     .environmentObject(profileModel)
                     .environmentObject(adminAuthenticationModel)
                     .environmentObject(storeManager)
+                    .environmentObject(mainMessagesModel)
             } label: {
                 Button {
                     settingsDone = true
@@ -62,16 +65,23 @@ struct SettingEditProfileSafety: View {
                     .environmentObject(photoModel)
                     .environmentObject(profileModel)
                     .environmentObject(adminAuthenticationModel)
+                    .environmentObject(tabModel)
             } label: {
-                
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.gray, Color.purple]),
-                    startPoint: .leading,
-                    endPoint: .trailing)
+                Button {
+                    DispatchQueue.main.async {
+                        profileEditingToBeDone = true
+                        // hide the control center
+                        tabModel.showDetail = true
+                    }
+                } label: {
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.gray, Color.purple]),
+                        startPoint: .leading,
+                        endPoint: .trailing)
                     .frame(width:60, height:60)
                     .mask(Image(systemName: "pencil.circle.fill")
-                            .font(.system(size:40)))
-                
+                        .font(.system(size:40)))
+                }
             }
             
             NavigationLink(

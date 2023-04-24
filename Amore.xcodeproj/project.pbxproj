@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B03B0432925FC220012222B /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B03B0422925FC220012222B /* DateHelpers.swift */; };
 		1B1D3228274E36E50096B40B /* CardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D3227274E36E50096B40B /* CardProfileModel.swift */; };
+		1B31C74529F25B2900D941B6 /* CustomAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */; };
 		1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B374DDF27020BB700DFE639 /* FirebaseServices.swift */; };
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
 		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
@@ -137,6 +138,7 @@
 		E29B293D27234B8900C38035 /* UserSafetyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293C27234B8900C38035 /* UserSafetyView.swift */; };
 		E29B293F272461F400C38035 /* SubscriptionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B293E272461F400C38035 /* SubscriptionDetails.swift */; };
 		E29B2941272637B400C38035 /* EditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B2940272637B400C38035 /* EditCardInfo.swift */; };
+		E2A0AA1E29E975C500E9B4D5 /* MatchViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A0AA1D29E975C500E9B4D5 /* MatchViewParent.swift */; };
 		E2A1B1362945218F00422BA4 /* WeakCardProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1B1352945218F00422BA4 /* WeakCardProfileModel.swift */; };
 		E2A94C68276B93090069F814 /* ButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C67276B93090069F814 /* ButtonIcon.swift */; };
 		E2A94C6A276BA9660069F814 /* ReportingIssuesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */; };
@@ -152,6 +154,7 @@
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
 		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
 		E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00F27738C51003EDA83 /* AgeSettings.swift */; };
+		E2D3952229F305C000A7B702 /* NoMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3952129F305C000A7B702 /* NoMatchesView.swift */; };
 		E2D43187288F4980005AFBE0 /* SelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D43186288F4980005AFBE0 /* SelectionForm.swift */; };
 		E2D43189288F60AF005AFBE0 /* EditCardFormData.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D43188288F60AF005AFBE0 /* EditCardFormData.json */; };
 		E2D4318B2891FA6F005AFBE0 /* UserHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4318A2891FA6F005AFBE0 /* UserHeight.swift */; };
@@ -199,6 +202,7 @@
 /* Begin PBXFileReference section */
 		1B03B0422925FC220012222B /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		1B1D3227274E36E50096B40B /* CardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProfileModel.swift; sourceTree = "<group>"; };
+		1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAsyncImage.swift; sourceTree = "<group>"; };
 		1B374DDA2701D5F300DFE639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B374DDF27020BB700DFE639 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
 		1B38DFC127B8C1A0009B905F /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
@@ -327,6 +331,7 @@
 		E29B293C27234B8900C38035 /* UserSafetyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSafetyView.swift; sourceTree = "<group>"; };
 		E29B293E272461F400C38035 /* SubscriptionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetails.swift; sourceTree = "<group>"; };
 		E29B2940272637B400C38035 /* EditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardInfo.swift; sourceTree = "<group>"; };
+		E2A0AA1D29E975C500E9B4D5 /* MatchViewParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewParent.swift; sourceTree = "<group>"; };
 		E2A1B1352945218F00422BA4 /* WeakCardProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakCardProfileModel.swift; sourceTree = "<group>"; };
 		E2A94C67276B93090069F814 /* ButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonIcon.swift; sourceTree = "<group>"; };
 		E2A94C69276BA9660069F814 /* ReportingIssuesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingIssuesList.swift; sourceTree = "<group>"; };
@@ -342,6 +347,7 @@
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
 		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
 		E2D0F00F27738C51003EDA83 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
+		E2D3952129F305C000A7B702 /* NoMatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchesView.swift; sourceTree = "<group>"; };
 		E2D43186288F4980005AFBE0 /* SelectionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionForm.swift; sourceTree = "<group>"; };
 		E2D43188288F60AF005AFBE0 /* EditCardFormData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EditCardFormData.json; sourceTree = "<group>"; };
 		E2D4318A2891FA6F005AFBE0 /* UserHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeight.swift; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 				1BB36D3327ADB9DB00F4029C /* ConversationView.swift */,
 				1BB36D3727ADBC1C00F4029C /* customNavBar.swift */,
 				1BB36D3927ADBD3000F4029C /* AllConversationsView.swift */,
+				E2D3952129F305C000A7B702 /* NoMatchesView.swift */,
 				1B38DFC127B8C1A0009B905F /* ChatBubble.swift */,
 				1B89836F2895BCEB00DE1FEF /* MessageForm.swift */,
 				1B6FF6F4291C842F00AAD03A /* CustomGiphyView.swift */,
@@ -625,6 +632,14 @@
 			path = OnBoardingViews;
 			sourceTree = "<group>";
 		};
+		E2A0AA1C29E9758200E9B4D5 /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+				E2A0AA1D29E975C500E9B4D5 /* MatchViewParent.swift */,
+			);
+			path = MatchView;
+			sourceTree = "<group>";
+		};
 		E2A94C66276B92BF0069F814 /* ReportUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +803,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E2A0AA1C29E9758200E9B4D5 /* MatchView */,
 				1BB36D2C27ACE6C600F4029C /* ChatPageView */,
 				E2A94C66276B92BF0069F814 /* ReportUser */,
 				E22D555C27540D4200852D70 /* ServerErrorView */,
@@ -851,6 +867,7 @@
 				E203885C28B4374F000704F2 /* Playground.swift */,
 				E2ED202028BA9FA400BFD32C /* BackGroundGraphics.swift */,
 				1B03B0422925FC220012222B /* DateHelpers.swift */,
+				1B31C74429F25B2900D941B6 /* CustomAsyncImage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1045,6 +1062,7 @@
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
+				1B31C74529F25B2900D941B6 /* CustomAsyncImage.swift in Sources */,
 				E27AC54B2720CB6200EB50F7 /* Photo.swift in Sources */,
 				1B58A4512715E35300565429 /* ImageServices.swift in Sources */,
 				E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */,
@@ -1085,6 +1103,7 @@
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,
 				E203885D28B4374F000704F2 /* Playground.swift in Sources */,
 				E2DBC02F272D8E06000630F5 /* SettingEditProfileSafety.swift in Sources */,
+				E2D3952229F305C000A7B702 /* NoMatchesView.swift in Sources */,
 				E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */,
 				E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */,
 				E226CF472708C8D500FC5129 /* EnableNotifications.swift in Sources */,
@@ -1141,6 +1160,7 @@
 				E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */,
 				1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
+				E2A0AA1E29E975C500E9B4D5 /* MatchViewParent.swift in Sources */,
 				E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */,
 				1BB36D3427ADB9DC00F4029C /* ConversationView.swift in Sources */,
 				1BC8BE0E2705CD7C00F0137E /* Profile.swift in Sources */,
@@ -1249,7 +1269,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B1FF18565C553FCD6193EC3 /* Pods-Amore.debug staging.xcconfig */;
 			buildSettings = {
-				API_BASE_URL = "https://client.luvamore.com";
+				API_BASE_URL = "http://127.0.0.1:5040";
 				APN_TOKEN_TYPE = .sandbox;
 				APP_NAME = Amore;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

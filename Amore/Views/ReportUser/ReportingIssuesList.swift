@@ -80,6 +80,9 @@ struct ReportingIssuesCard: View {
                     // Report the activity
                     Button {
                         // call this function to report user, if successfully remove the card from deck
+                        if (reportingView == .dmView || reportingView == .conversationView) {
+                            self.onRemove(self.profileId)
+                        }
                         ReportActivityModel.reportUserWithReason(otherUserId:self.profileId,
                                                                  reason:selectedReasoning,
                                                                  description:reportUserDescription.bound,
@@ -89,16 +92,10 @@ struct ReportingIssuesCard: View {
                                                                     print("Failed to report user, please try again")
                                                                 },
                                                                  onSuccess: {
-                                                                    print("Successfully reported user")
-                                                                    // If Success also remove the card from deck
-                                                                    FirestoreServices.storeLikesDislikes(apiToBeUsed: "/storelikesdislikes", onFailure: {
-                                                                        print("Failed to remove card from deck")
-                                                                        self.showingAlert = true
-                                                                        return
-                                                                    }, onSuccess: {
-                                                                        print("Successfully removed card from deck")
-                                                                    }, swipedUserId: self.profileId, swipeInfo: .dislike)
+                                                                    if (reportingView == .swipeView) {
                                                                         self.onRemove(self.profileId)
+                                                                    }
+                                                                    print("Successfully reported user")
                                                                 }
                         )
                         self.allcardsActiveSheet = nil
@@ -148,8 +145,12 @@ struct ReportingIssuesCard: View {
     }
 }
 
+/**
+ conversationView represents Reporting matched user from the chat
+ swipeView represents Reporting non-matched user from either the swipe view or the DM.
+ */
 enum ReportingView: Int {
-    case conversationView, swipeView
+    case conversationView, dmView, swipeView
 }
 
 struct ReportingIssuesCard_Previews: PreviewProvider {

@@ -101,40 +101,49 @@ struct EditCardInfo: View {
                 .navigationBarTitle("Upload Photos")
                 .navigationBarTitleDisplayMode(.inline)
                 
-                // Edit Headline
-                Section(header: Text("Headline")) {
-                    EditCardForm(formHeight: 40.0,
-                                    formHeadLine: "Headline",
-                                    formInput: $profileModel.editUserProfile.headline)
-                }
-                .navigationBarTitle("Headline")
-                .navigationBarTitleDisplayMode(.inline)
-                
-                
-                // Edit About Me
-                Section(header: Text("About Me")) {
-                    EditCardForm(formHeight: 100.0,
-                                    formHeadLine: "About Me",
-                                    formInput: $profileModel.editUserProfile.description)
-                }
-                .navigationBarTitle("About Me")
-                .navigationBarTitleDisplayMode(.inline)
-                
-                
-                // Job title
-                Section(header: Text("Work")) {
-                    EditCardForm(formHeight: 40.0,
-                                    formHeadLine: "Job Title",
-                                    formInput: $profileModel.editUserProfile.jobTitle)
+                Group {
+                    // Edit Headline
+                    Section(header: Text("Headline")) {
+                        EditCardForm(formHeight: 40.0,
+                                     formHeadLine: "Headline",
+                                     formInput: $profileModel.editUserProfile.headline,
+                                     maxChars:200)
+                    }
+                    .navigationBarTitle("Headline")
+                    .navigationBarTitleDisplayMode(.inline)
                     
-                    // Add Company
-                    EditCardForm(formHeight: 40.0,
-                                    formHeadLine: "Company Name",
-                                    formInput: $profileModel.editUserProfile.work)
+                    
+                    // Edit About Me
+                    Section(header: Text("About Me")) {
+                        EditCardForm(formHeight: 100.0,
+                                     formHeadLine: "About Me",
+                                     formInput: $profileModel.editUserProfile.description,
+                                     maxChars:400)
+                    }
+                    .navigationBarTitle("About Me")
+                    .navigationBarTitleDisplayMode(.inline)
+                    
+                    
+                    // Job title
+                    Section(header: Text("Work")) {
+                        EditCardForm(formHeight: 40.0,
+                                     formHeadLine: "Job Title",
+                                     formInput: $profileModel.editUserProfile.jobTitle,
+                                     maxChars:30)
+                        
+                        // Add Company
+                        EditCardForm(formHeight: 40.0,
+                                     formHeadLine: "Company Name",
+                                     formInput: $profileModel.editUserProfile.work,
+                                     maxChars:30)
+                    }
+                    .navigationBarTitle("Work")
+                    .navigationBarTitleDisplayMode(.inline)
+                    
                 }
-                .navigationBarTitle("Work")
-                .navigationBarTitleDisplayMode(.inline)
-                
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
                 
                 Section(header: Text("Education")) {
 //                    // Add Education
@@ -151,8 +160,12 @@ struct EditCardInfo: View {
                     
                     // Add School
                     EditCardForm(formHeight: 40.0,
-                                    formHeadLine: "School Name",
-                                    formInput: $profileModel.editUserProfile.school)
+                                formHeadLine: "School Name",
+                                formInput: $profileModel.editUserProfile.school,
+                                maxChars:30)
+                                .onTapGesture {
+                                    self.hideKeyboard()
+                                }
                 }
                 .navigationBarTitle("Education")
                 .navigationBarTitleDisplayMode(.inline)
@@ -183,7 +196,9 @@ struct EditCardInfo: View {
                 // Passion or Interests
                 Section(header:Text("Passions")) {
                     NavigationLink(
-                        destination: SelectMultipleItems(selectionList: $passions, optionsList:passionsList,filterName:"Passions"),
+                        destination: SelectMultipleItems(selectionList: $passions,
+                                                         optionsList:passionsList,
+                                                         filterName:"Passions"),
                         label: {
                             Text("Pasions")
                     })

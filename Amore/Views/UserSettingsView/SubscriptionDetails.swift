@@ -9,10 +9,12 @@ import SwiftUI
 
 struct SubscriptionDetails: View {
     
-    @Binding var popUpCardSelection: PopUpCards
-    @Binding var showModal: Bool
-    @EnvironmentObject var storeManager: StoreManager
+    
     @Environment(\.colorScheme) var colorScheme
+    
+    @EnvironmentObject var storeManager: StoreManager
+    @Binding var popUpCardSelection: PopUpCards
+    @Binding var backgroundColor: Color
     
     var totalSuperLikesCount: Int {
         let purchasedSuperLikesCount =  self.storeManager.purchaseDataDetails.purchasedSuperLikesCount ?? 0
@@ -38,8 +40,6 @@ struct SubscriptionDetails: View {
         return purchasedRewindsCount+subscriptionRewindsCount
     }
     
-    @Binding var backgroundColor: Color
-    
     var body: some View {
         
         ZStack {
@@ -52,7 +52,7 @@ struct SubscriptionDetails: View {
                 // Buy Super Likes & show the count of the super likes
                 Button {
                     popUpCardSelection = .superLikeCards
-                    showModal = true
+                    storeManager.displayProductModalWindow = true
                 } label: {
                     VStack {
                         Image(systemName: "star.circle.fill")
@@ -67,7 +67,7 @@ struct SubscriptionDetails: View {
                 // Buy Boosts and show the count of boosts
                 Button {
                     popUpCardSelection = .boostCards
-                    showModal = true
+                    storeManager.displayProductModalWindow = true
                 } label: {
                     VStack {
                         Image(systemName: "bolt.circle.fill")
@@ -84,7 +84,7 @@ struct SubscriptionDetails: View {
                 // Buy Message Options
                 Button {
                     popUpCardSelection = .messagesCards
-                    showModal = true
+                    storeManager.displayProductModalWindow = true
                 } label: {
                     VStack {
                         Image(systemName: "message.circle.fill")
@@ -96,10 +96,10 @@ struct SubscriptionDetails: View {
                     }
                 }
                 
-                //Restore products already purchased
+                // Buy Rewinds
                 Button {
                     popUpCardSelection = .rewindCards
-                    showModal = true
+                    storeManager.displayProductModalWindow = true
                 } label: {
                     VStack {
                         Image(systemName: "arrow.counterclockwise.circle.fill")

@@ -31,6 +31,7 @@ struct HomeView: View {
     
     func didDimiss() {
         storeManager.paymentCompleteDisplayMyAmore = false
+        storeManager.displayProductModalWindow = false
     }
     
     var body: some View {
@@ -43,7 +44,7 @@ struct HomeView: View {
                                 switch currentPage {
                                 
                                 case .messagingView:
-                                    MainMessagesView()
+                                    MainMessagesView(currentPage:$currentPage)
                                         .environmentObject(chatViewModel)
                                         .environmentObject(mainMessagesModel)
                                         .environmentObject(tabModel)
@@ -66,7 +67,8 @@ struct HomeView: View {
                                                 Spacer()
                                             }
                                         } else {
-                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck)
+                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck,
+                                                         currentPage:$currentPage)
                                                 .environmentObject(photoModel)
                                                 .environmentObject(cardProfileModel)
                                                 .environmentObject(reportActivityModel)
@@ -111,11 +113,8 @@ struct HomeView: View {
                                         .environmentObject(photoModel)
                                         .environmentObject(storeManager)
                                         .environmentObject(adminAuthenticationModel)
-                                        .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
-                                               onDismiss: didDimiss){
-                                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
-                                                .environmentObject(storeManager)
-                                        }
+                                        .environmentObject(tabModel)
+                                        .environmentObject(mainMessagesModel)
                                 }
                             }
                             
@@ -126,6 +125,12 @@ struct HomeView: View {
                             }
                         }
                         .ignoresSafeArea(.all, edges: .bottom)
+                        .sheet(isPresented: $storeManager.paymentCompleteDisplayMyAmore,
+                               onDismiss: didDimiss){
+                            PaymentComplete(subscriptionTypeId:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3",
+                                            currentPage:$currentPage)
+                                .environmentObject(storeManager)
+                        }
                 
                     case .serverErrorView:
                         ServerErrorView()

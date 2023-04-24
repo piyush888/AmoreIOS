@@ -47,6 +47,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     // This field is used to hold payment when user initaes a payment but it's not complete
     @Published var tempPurchaseHold = ConsumableCountAndSubscriptionModel()
     @Published var paymentCompleteDisplayMyAmore : Bool = false
+    @Published var displayProductModalWindow : Bool = false
     var purchaseDataFetched = false
     
     // SKProductsRequest property in our StoreManager, which we will use to start the fetching process

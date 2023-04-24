@@ -67,6 +67,7 @@ struct LoginPhoneNumber: View {
                         .onNumberChange(perform: { inputNum in
                             profileModel.countryCode = String(inputNum?.countryCode ?? 1)
                         })
+                        .maximumDigits(15)
                         .frame(height:50)
                         .padding(.leading,10)
                         .background(colorScheme == .dark ? Color.black : Color.white)
@@ -113,13 +114,13 @@ struct LoginPhoneNumber: View {
         Button {
             DispatchQueue.main.async {
                 do {
-                    _ = try self.phoneNumberKit.parse(profileModel.phoneNumber)
+                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: " ", with: "")
+                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
                     if !profileModel.phoneNumber.hasPrefix("+") {
                         profileModel.phoneNumber = "+" + profileModel.countryCode + profileModel.phoneNumber
                     }
-                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: "[\\(\\)-]", with: "", options: .regularExpression, range: nil)
-                    profileModel.phoneNumber = profileModel.phoneNumber.replacingOccurrences(of: " ", with: "")
                     print(profileModel.phoneNumber)
+                    _ = try self.phoneNumberKit.parse(profileModel.phoneNumber)
                     // Integrate with firebase signup/login system here when no error occurs
                     firebaseSvcObj.requestOtp(phoneNumber: profileModel.phoneNumber)
                 } catch {

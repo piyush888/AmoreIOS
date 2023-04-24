@@ -60,7 +60,8 @@ struct ChildCardView: View {
                         ProfileBioHeadline(description: singleProfile.headline.bound,
                                    headlineText:"Headline",
                                    swipeStatus:$swipeStatus)
-                            .padding(5)
+                            .padding(.leading,5)
+                            .padding(.trailing,5)
                         
                         // Profile Height, Education, Job, Religion, Location
                         // Image 2
@@ -90,7 +91,7 @@ struct ChildCardView: View {
                         
                         // Profile Bio
                         // Image 3
-                        VStack(spacing:5) {
+                        VStack(spacing:3) {
                             ProfileBioHeadline(description: self.singleProfile.description.bound,
                                                headlineText:"Bio",
                                                swipeStatus:$swipeStatus)
@@ -116,7 +117,7 @@ struct ChildCardView: View {
                         
                         // Profile Passions
                         // Image 4
-                        VStack(spacing:5) {
+                        VStack(spacing:3) {
                             // Profile Passions
                             CardPassions(passions: self.singleProfile.interests.boundStringArray)
                                 .padding(15)

@@ -17,6 +17,7 @@ class ReportActivityModel: ObservableObject  {
         var reportMatchedUser: String? {
             switch reportingView{
             case .conversationView: return "true"
+            case .dmView: return "false"
             case .swipeView: return "false"
             }
         }

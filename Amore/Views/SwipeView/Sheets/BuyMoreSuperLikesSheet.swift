@@ -37,36 +37,38 @@ struct BuyMoreSuperLikesSheet: View {
                         .padding(.bottom,50)
                     
                     // Buy Superlikes consumables
-                    if let pricingData = storeManager.superLikesPricing {
-                        // TODO: Change the name of common class to something more generic from BoostBuyButton to CommonBuyButton - Ktz
-                        
-                        Text("Most popular")
-                        SuperLikeBuyButton(superLikeCount:5,
-                                       totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["5 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["5 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                            .padding(.bottom,5)
-                        
-                        
-                        Text("Best Value")
-                        SuperLikeBuyButton(superLikeCount:15,
-                                       totalCost: Float(truncating: pricingData["15 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["15 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["15 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                            .padding(.bottom,5)
+                    let pricingData = storeManager.superLikesPricing
                     
+                    Text("Most popular")
+                    SuperLikeBuyButton(superLikeCount:5,
+                                   totalCost: Float(truncating: pricingData["5 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["5 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["5 Super Likes"] ?? SKProduct(),
+                                   allcardsActiveSheet: $allcardsActiveSheet)
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                        .padding(.bottom,5)
+                    
+                    
+                    Text("Best Value")
+                    SuperLikeBuyButton(superLikeCount:3,
+                                   totalCost: Float(truncating: pricingData["3 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["3 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["3 Super Likes"] ?? SKProduct(),
+                                   allcardsActiveSheet: $allcardsActiveSheet)
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                        .padding(.bottom,5)
+                
 
-                        SuperLikeBuyButton(superLikeCount:30,
-                                       totalCost: Float(truncating: pricingData["30 Super Likes"]?.price ?? 0.0),
-                                       currency: pricingData["30 Super Likes"]?.localizedPrice?.first ?? "$",
-                                       skProductObj: pricingData["30 Super Likes"] ?? SKProduct())
-                            .frame(width: geometry.size.width*0.80)
-                            .environmentObject(storeManager)
-                    }
+                    SuperLikeBuyButton(superLikeCount:10,
+                                   totalCost: Float(truncating: pricingData["10 Super Likes"]?.price ?? 0.0),
+                                   currency: pricingData["10 Super Likes"]?.localizedPrice?.first ?? "$",
+                                   skProductObj: pricingData["10 Super Likes"] ?? SKProduct(),
+                                  allcardsActiveSheet: $allcardsActiveSheet)
+                        .frame(width: geometry.size.width*0.80)
+                        .environmentObject(storeManager)
+                    
                     
                     Spacer()
                 }
@@ -136,11 +138,11 @@ struct BuyMoreSuperLikesSheet_Previews: PreviewProvider {
 
 struct SuperLikeBuyButton: View {
     @EnvironmentObject var storeManager: StoreManager
-    // Recieves [5, 10, 15] which is used to refer 5 Messages, 10 Messages and 15 Messages
     @State var superLikeCount: Float = 0.0
     @State var totalCost:Float = 0.0
     @State var currency: Character // Receives Dollar Sign
     @State var skProductObj: SKProduct = SKProduct()
+    @Binding var allcardsActiveSheet: AllCardsActiveSheet?
     
     var body: some View {
         
@@ -149,6 +151,7 @@ struct SuperLikeBuyButton: View {
                     self.storeManager.tempPurchaseHold.purchasedSuperLikesCount = purchasedSuperLikesCount + Int(superLikeCount)
                     // Purchase the product by passing in the Sk Product Object
                     storeManager.purchaseProduct(product:skProductObj)
+                    allcardsActiveSheet = nil
                 }
             } label : {
                 VStack {
