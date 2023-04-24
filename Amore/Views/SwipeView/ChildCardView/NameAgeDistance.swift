@@ -56,25 +56,28 @@ struct NameAgeDistance: View {
                         Text(String(format: "%.1f",profileDistanceFromUser) + " km")
                             .font(.headline)
                         
-                        ZStack {
-                            Circle()
-                                .fill(colorScheme == .dark ? Color.black
-                                      : Color.white)
-                                .frame(width: 22, height: 22)
-                            Image(systemName: "checkmark.seal.fill")
-                                .foregroundColor(.blue)
-                                .font(.system(size: 15))
-                        }
+                        // We can't enable this feature right now, without keeping track of users who are premium.
+                        // Verified users as well
+//                        ZStack {
+//                            Circle()
+//                                .fill(colorScheme == .dark ? Color.black
+//                                      : Color.white)
+//                                .frame(width: 22, height: 22)
+//                            Image(systemName: "checkmark.seal.fill")
+//                                .foregroundColor(.blue)
+//                                .font(.system(size: 15))
+//                        }
                         
-                        ZStack {
-                            Circle()
-                                .fill(colorScheme == .dark ? Color.black
-                                      : Color.white)
-                                .frame(width: 22, height: 22)
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(.yellow)
-                                .font(.system(size: 15))
-                        }
+                        
+//                        ZStack {
+//                            Circle()
+//                                .fill(colorScheme == .dark ? Color.black
+//                                      : Color.white)
+//                                .frame(width: 22, height: 22)
+//                            Image(systemName: "crown.fill")
+//                                .foregroundColor(.yellow)
+//                                .font(.system(size: 15))
+//                        }
                             
                     }
                     
