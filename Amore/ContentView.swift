@@ -13,6 +13,7 @@ import StoreKit
 struct ContentView: View {
     
     @AppStorage("log_Status") var log_Status = false
+    @State var showSplash: Bool = true
     
     @StateObject var profileModel = ProfileViewModel()
     @StateObject var photoModel = PhotoModel()
@@ -30,9 +31,23 @@ struct ContentView: View {
         
         // If User is Not Logged In Yet
         if !log_Status {
-            OnboardingView()
-                .environmentObject(profileModel)
-                .environmentObject(adminAuthenticationModel)
+            ZStack {
+                OnboardingView()
+                    .environmentObject(profileModel)
+                    .environmentObject(adminAuthenticationModel)
+                
+                if showSplash {
+                    SplashView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                self.showSplash = false
+                            }
+                            // set this true again to recycle the SplashView for the HomeView Loading.
+                            self.showSplash = true
+                        }
+                    }
+                }
+            
         }
         else {
             // If logged In
@@ -109,13 +124,25 @@ struct ContentView: View {
                         BasicUserInfoForm()
                             .environmentObject(profileModel)
                     }
+                    
+                    // showSplash: is intialized true only once
+                    if showSplash {
+                        SplashView()
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    self.showSplash = false
+                                }
+                            }
+                        }
+                    
                 }
             }
             
             
             // Pull profile data first
             else {
-                ProgressView()
+                // This splash view will stop showing as soon as the profileFetchedAndReady is done.
+                SplashView()
                     .onAppear {
                         profileModel.getUserProfile()
                         profileModel.checkMinNumOfPhotosUploaded()

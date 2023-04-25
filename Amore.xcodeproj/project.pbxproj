@@ -59,6 +59,7 @@
 		E221EAAF2714FBDA00769234 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAAE2714FBDA00769234 /* UserProfile.swift */; };
 		E221EAB12714FD0700769234 /* LikesTopPicksHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */; };
 		E221EAB32715066000769234 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221EAB22715066000769234 /* FilterSettings.swift */; };
+		E223245D29F7FAB400943CFC /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E223245C29F7FAB400943CFC /* SplashView.swift */; };
 		E22328D32755A726000ABBA6 /* UserOtherInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22328D22755A726000ABBA6 /* UserOtherInformation.swift */; };
 		E226CF402707B19800FC5129 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF3E2707B19800FC5129 /* LocationView.swift */; };
 		E226CF422707D78C00FC5129 /* LocationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E226CF412707D78C00FC5129 /* LocationHomeView.swift */; };
@@ -256,6 +257,7 @@
 		E221EAAE2714FBDA00769234 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E221EAB02714FD0700769234 /* LikesTopPicksHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTopPicksHome.swift; sourceTree = "<group>"; };
 		E221EAB22715066000769234 /* FilterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
+		E223245C29F7FAB400943CFC /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		E22328D22755A726000ABBA6 /* UserOtherInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOtherInformation.swift; sourceTree = "<group>"; };
 		E226CF3E2707B19800FC5129 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E226CF412707D78C00FC5129 /* LocationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHomeView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,14 @@
 				E2E0176E277A859C00527E24 /* LikesTopPicksButtons.swift */,
 			);
 			path = LikesTopPicksView;
+			sourceTree = "<group>";
+		};
+		E223245B29F7FA9500943CFC /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				E223245C29F7FAB400943CFC /* SplashView.swift */,
+			);
+			path = SplashView;
 			sourceTree = "<group>";
 		};
 		E226CF3C2707B18A00FC5129 /* LocationView */ = {
@@ -803,6 +813,7 @@
 		E2F8AA6026F947BD00CC7A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E223245B29F7FA9500943CFC /* SplashView */,
 				E2A0AA1C29E9758200E9B4D5 /* MatchView */,
 				1BB36D2C27ACE6C600F4029C /* ChatPageView */,
 				E2A94C66276B92BF0069F814 /* ReportUser */,
@@ -1086,6 +1097,7 @@
 				E226CF442708ADAE00FC5129 /* LocationDenied.swift in Sources */,
 				1B374DE027020BB700DFE639 /* FirebaseServices.swift in Sources */,
 				1B6273CE274B7B9A00590DD1 /* Filters.swift in Sources */,
+				E223245D29F7FAB400943CFC /* SplashView.swift in Sources */,
 				E2DBC02B272CA85D000630F5 /* MyAmore.swift in Sources */,
 				E291A1EC26FF5BF8000D8A2C /* OTPViewModel.swift in Sources */,
 				1B39493627D3263100793431 /* CustomScrollView.swift in Sources */,
