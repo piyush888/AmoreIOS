@@ -71,7 +71,7 @@ struct SettingEditProfileSafety: View {
                     DispatchQueue.main.async {
                         profileEditingToBeDone = true
                         // hide the control center
-                        tabModel.showDetail = true
+                        tabModel.showDetail = false
                     }
                 } label: {
                     LinearGradient(
