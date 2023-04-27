@@ -60,7 +60,7 @@ extension Optional where Wrapped == Bool {
             return _boundBool ?? false
         }
         set {
-            _boundBool = newValue ? newValue : nil
+            _boundBool = newValue ? newValue : false
         }
     }
 }
