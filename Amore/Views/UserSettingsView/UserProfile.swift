@@ -66,7 +66,8 @@ struct UserProfile: View {
                         /// Image
                         /// Where user works
                         /// School Attended
-                        UserSnapDetails(geometry: geometry)
+                        UserSnapDetails(geometry: geometry,
+                                        subsriptionType:storeManager.purchaseDataDetails.subscriptionTypeId ?? "Amore.ProductId.12M.Free.v3")
                             .environmentObject(photoModel)
                             .environmentObject(profileModel)
                             

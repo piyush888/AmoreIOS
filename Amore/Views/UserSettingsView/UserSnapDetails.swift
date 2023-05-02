@@ -13,6 +13,7 @@ struct UserSnapDetails: View {
     @EnvironmentObject var profileModel: ProfileViewModel
     @EnvironmentObject var photoModel: PhotoModel
     @State var geometry: GeometryProxy
+    @State var subsriptionType: String
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -25,6 +26,7 @@ struct UserSnapDetails: View {
             .clipShape(Circle())
             .shadow(color: Color.pink, radius: 5, x: 0.5, y: 0.5)
             .overlay(
+                subsriptionType.contains("Gold") ?
                     Circle()
                         .stroke(Color.yellow,lineWidth: 4)
                         .overlay(
@@ -38,7 +40,8 @@ struct UserSnapDetails: View {
                                 .clipShape(Circle())
                                 .offset(x: geometry.size.width/8.0, y: -geometry.size.height/8.0)
                         )
-                )
+                : nil
+            )
 
             
             Text("\(profileModel.editUserProfile.firstName ?? "Kshitiz"), \(profileModel.editUserProfile.age ?? 25)")
@@ -96,7 +99,7 @@ struct UserSnapDetails_Previews: PreviewProvider {
                                            doYouSmoke: "", // * show this later
                                            doYouWantBabies: "No") // * show this later
         return GeometryReader { geometry in
-             UserSnapDetails(geometry:geometry)
+            UserSnapDetails(geometry:geometry, subsriptionType:"Amore.ProductId.3M.Gold.v3")
                 .environmentObject(profileModel)
                 .environmentObject(PhotoModel())
         }
