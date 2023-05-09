@@ -25,7 +25,18 @@ struct ButtonDesign: View {
                         .font(.system(size: 30))
                         .foregroundColor(Color.red)
                         
-                    Image(systemName: buttonActive ? "heart.slash.fill" : "heart.slash")
+                    Image(systemName: buttonActive ? "message.fill": "message")
+                        .renderingMode(.original)
+                        .font(.system(size: 30))
+                        .foregroundColor(Color.blue)
+                    
+//                    Image(systemName: buttonActive ? "timer.fill": "timer")
+//                        .renderingMode(.original)
+//                        .font(.system(size: 30))
+//                        .foregroundColor(Color.black)
+//                    
+                    
+                    Image(systemName: buttonActive ? "eye.slash" : "eye.slash")
                         .renderingMode(.original)
                         .font(.system(size: 30))
                         .foregroundColor(Color.gray)
@@ -35,16 +46,7 @@ struct ButtonDesign: View {
 //                        .font(.system(size: 30))
 //                        .foregroundColor(buttonActive ? Color("gold-star"): Color.black)
                     
-                    Image(systemName: buttonActive ? "timer.fill": "timer")
-                        .renderingMode(.original)
-                        .font(.system(size: 30))
-                        .foregroundColor(Color.black)
                         
-                    Image(systemName: buttonActive ? "message.fill": "message")
-                        .renderingMode(.original)
-                        .font(.system(size: 30))
-                        .foregroundColor(Color.blue)
-                    
                     Image(systemName: buttonActive ? "shield.fill" : "shield")
                         .renderingMode(.original)
                         .font(.system(size: 30))

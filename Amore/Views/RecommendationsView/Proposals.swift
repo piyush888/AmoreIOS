@@ -83,7 +83,7 @@ struct ProposalsHome: View {
                         case .superLikesAndLikesGiven:
                             ZStack {
                                 ScrollView{
-                                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 10), count: 1),spacing: 10){
+                                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 10), count: 2),spacing: 10){
                                         ForEach(receivedGivenEliteModel.likesGivenPhotos) { profile in
                                             Button{
                                                 withAnimation(.spring()){
@@ -94,8 +94,8 @@ struct ProposalsHome: View {
                                                 MiniCardView(singleProfile: profile,
                                                              animation: animation,
                                                              geometry:geometry,
-                                                             miniCardWidth:geometry.size.width,
-                                                             miniCardHeight:geometry.size.height/4)
+                                                             miniCardWidth:geometry.size.width/2.2,
+                                                             miniCardHeight:geometry.size.height/3)
                                             }
                                         }
                                     }
