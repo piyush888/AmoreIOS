@@ -25,7 +25,8 @@ struct HomeView: View {
     @EnvironmentObject var chatViewModel: ChatViewModel
     @StateObject var mainMessagesModel = MainMessagesViewModel()
     
-    @State var selectedTab: TopPicksLikesView = .likesReceived
+//    @State var selectedTab: TopPicksLikesView = .likesReceived
+    @State var proposalDefaultTab: ProposalsView = .likesReceived
     @State var filtersChanged: Bool = false
     
     
@@ -50,11 +51,17 @@ struct HomeView: View {
                                         .environmentObject(tabModel)
                                     
                                 case .likesTopPicksView:
-                                    LikesTopPicksHome(selectedTab:$selectedTab)
+                                    ProposalsHome(selectedTab:$proposalDefaultTab)
                                         .environmentObject(cardProfileModel)
                                         .environmentObject(receivedGivenEliteModel)
                                         .environmentObject(profileModel)
                                         .environmentObject(storeManager)
+                                    
+//                                    LikesTopPicksHome(selectedTab:$selectedTab)
+//                                        .environmentObject(cardProfileModel)
+//                                        .environmentObject(receivedGivenEliteModel)
+//                                        .environmentObject(profileModel)
+//                                        .environmentObject(storeManager)
                                         
                                         
                                 case .swipeView:
@@ -67,16 +74,19 @@ struct HomeView: View {
                                                 Spacer()
                                             }
                                         } else {
-                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck,
-                                                         currentPage:$currentPage)
-                                                .environmentObject(photoModel)
-                                                .environmentObject(cardProfileModel)
-                                                .environmentObject(reportActivityModel)
-                                                .environmentObject(profileModel)
-                                                .environmentObject(filterModel)
-                                                .environmentObject(storeManager)
-                                                .environmentObject(chatViewModel)
-                                                .environmentObject(mainMessagesModel)
+//                                            AllCardsView(allCardsWithPhotosDeck:cardProfileModel.allCardsWithPhotosDeck,
+//                                                         currentPage:$currentPage)
+//                                                .environmentObject(photoModel)
+//                                                .environmentObject(cardProfileModel)
+//                                                .environmentObject(reportActivityModel)
+//                                                .environmentObject(profileModel)
+//                                                .environmentObject(filterModel)
+//                                                .environmentObject(storeManager)
+//                                                .environmentObject(chatViewModel)
+//                                                .environmentObject(mainMessagesModel)
+                                            
+                                            ReccomendationParent(dataArray:cardProfileModel.allCardsWithPhotosDeck,
+                                                                 currentPage:$currentPage)
                                                 .onAppear {
                                                     if filtersChanged {
                                                         /// If change in filters is detected when switching to this view

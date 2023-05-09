@@ -20,7 +20,7 @@ var tabItems = [
     TabItem(text: "Messages", icon: "text.bubble.fill", tab: .messagingView, color: Color(hex:0x008080)),
     TabItem(text: "History", icon: "sparkles", tab: .likesTopPicksView, color: .blue),
     TabItem(text: "Swipe", icon: "bonjour", tab: .swipeView, color: .red),
-    TabItem(text: "Filter", icon: "slider.vertical.3", tab: .filterSettingsView, color: .purple),
+//    TabItem(text: "Filter", icon: "slider.vertical.3", tab: .filterSettingsView, color: .purple),
     TabItem(text: "Profile", icon: "person.fill", tab: .userSettingsView, color: .pink)
 ]
 
@@ -38,9 +38,9 @@ struct ControlCenter: View {
             .padding(.top, 14)
             .padding(.bottom, 35)
             .background(
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                RoundedRectangle(cornerRadius: 0, style: .continuous)
                     .fill(Color(hex:0xFF6EE0))
-                    .strokeStyle(cornerRadius:35)
+                    .strokeStyle(cornerRadius:0)
                     .opacity(0.2)
             )
             .strokeStyle(cornerRadius:34)

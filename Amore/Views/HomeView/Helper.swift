@@ -15,10 +15,17 @@ enum ViewTypes {
     case userSettingsView
 }
 
+
 enum TopPicksLikesView: String {
     case likesReceived = "Likes Received"
     case superLikesAndLikesGiven = "Likes Given"
     case elitePicks = "Top Picks"
+}
+
+
+enum ProposalsView: String {
+    case likesReceived = "Proposals Received"
+    case superLikesAndLikesGiven = "Proposals Sent"
 }
 
 enum TopPicksLikesSubView: String {

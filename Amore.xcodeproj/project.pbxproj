@@ -155,6 +155,9 @@
 		E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */; };
 		E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */; };
 		E2D0F01027738C51003EDA83 /* AgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0F00F27738C51003EDA83 /* AgeSettings.swift */; };
+		E2D325702A0807E8001DD909 /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3256F2A0807E8001DD909 /* ButtonDesign.swift */; };
+		E2D325732A098AC1001DD909 /* ReccomendationParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D325722A098AC1001DD909 /* ReccomendationParent.swift */; };
+		E2D325792A09A7F2001DD909 /* ButtonDesign2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D325782A09A7F2001DD909 /* ButtonDesign2.swift */; };
 		E2D3952229F305C000A7B702 /* NoMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3952129F305C000A7B702 /* NoMatchesView.swift */; };
 		E2D43187288F4980005AFBE0 /* SelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D43186288F4980005AFBE0 /* SelectionForm.swift */; };
 		E2D43189288F60AF005AFBE0 /* EditCardFormData.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D43188288F60AF005AFBE0 /* EditCardFormData.json */; };
@@ -182,6 +185,7 @@
 		E2F8AA5826F9428100CC7A72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F8AA5726F9428100CC7A72 /* Preview Assets.xcassets */; };
 		E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA6526F948BD00CC7A72 /* Fonts.swift */; };
 		E2F968A52897FDD20000695E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F968A42897FDD20000695E /* OnboardingView.swift */; };
+		E2FC15C72A0A7101000B9990 /* Proposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC15C62A0A7101000B9990 /* Proposals.swift */; };
 		E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */; };
 		E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */; };
 		E2FE49BE275177C500744930 /* DeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE49BD275177C500744930 /* DeckCards.swift */; };
@@ -349,6 +353,9 @@
 		E2D0F00B276E9BB2003EDA83 /* TextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSlider.swift; sourceTree = "<group>"; };
 		E2D0F00D27727FA7003EDA83 /* ReportAcitivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAcitivityModel.swift; sourceTree = "<group>"; };
 		E2D0F00F27738C51003EDA83 /* AgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSettings.swift; sourceTree = "<group>"; };
+		E2D3256F2A0807E8001DD909 /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
+		E2D325722A098AC1001DD909 /* ReccomendationParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReccomendationParent.swift; sourceTree = "<group>"; };
+		E2D325782A09A7F2001DD909 /* ButtonDesign2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign2.swift; sourceTree = "<group>"; };
 		E2D3952129F305C000A7B702 /* NoMatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchesView.swift; sourceTree = "<group>"; };
 		E2D43186288F4980005AFBE0 /* SelectionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionForm.swift; sourceTree = "<group>"; };
 		E2D43188288F60AF005AFBE0 /* EditCardFormData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EditCardFormData.json; sourceTree = "<group>"; };
@@ -380,6 +387,7 @@
 		E2F8AA5926F9428100CC7A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2F8AA6526F948BD00CC7A72 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E2F968A42897FDD20000695E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		E2FC15C62A0A7101000B9990 /* Proposals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proposals.swift; sourceTree = "<group>"; };
 		E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAllCards.swift; sourceTree = "<group>"; };
 		E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButtonSheet.swift; sourceTree = "<group>"; };
 		E2FE49BD275177C500744930 /* DeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCards.swift; sourceTree = "<group>"; };
@@ -661,6 +669,17 @@
 			path = ReportUser;
 			sourceTree = "<group>";
 		};
+		E2D325712A098A77001DD909 /* RecommendationsView */ = {
+			isa = PBXGroup;
+			children = (
+				E2D325722A098AC1001DD909 /* ReccomendationParent.swift */,
+				E2D3256F2A0807E8001DD909 /* ButtonDesign.swift */,
+				E2D325782A09A7F2001DD909 /* ButtonDesign2.swift */,
+				E2FC15C62A0A7101000B9990 /* Proposals.swift */,
+			);
+			path = RecommendationsView;
+			sourceTree = "<group>";
+		};
 		E2DBC01B272B2F95000630F5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,6 +840,7 @@
 				E221EAA72714F3A400769234 /* LikesTopPicksView */,
 				E221EAA62714F39600769234 /* UserSettingsView */,
 				E221EAA32714F37400769234 /* FilterSettingsView */,
+				E2D325712A098A77001DD909 /* RecommendationsView */,
 				E24A0F14271256A7001640CA /* SwipeView */,
 				E226CF452708C8BB00FC5129 /* NotificationsView */,
 				E226CF3C2707B18A00FC5129 /* LocationView */,
@@ -1109,6 +1129,7 @@
 				E2D0F00E27727FA8003EDA83 /* ReportAcitivityModel.swift in Sources */,
 				E22D55642755828400852D70 /* WorkAndSchool.swift in Sources */,
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
+				E2D325792A09A7F2001DD909 /* ButtonDesign2.swift in Sources */,
 				E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */,
 				E27CCEB627E44130006278EB /* IAPFirebaseModel.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
@@ -1130,9 +1151,11 @@
 				E2F707752917E43800DB1FA7 /* TabModel.swift in Sources */,
 				E291A1E526FE3711000D8A2C /* LoginPhoneNumber.swift in Sources */,
 				E2F8AA5326F9427F00CC7A72 /* ContentView.swift in Sources */,
+				E2D325702A0807E8001DD909 /* ButtonDesign.swift in Sources */,
 				E2D0F00C276E9BB3003EDA83 /* TextSlider.swift in Sources */,
 				E221EAAB2714F79A00769234 /* ViewRouter.swift in Sources */,
 				E291A1EE26FF5C06000D8A2C /* LoginOTPKeyCodeChild.swift in Sources */,
+				E2FC15C72A0A7101000B9990 /* Proposals.swift in Sources */,
 				1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */,
 				1B72A5502707274A0074F144 /* ProfileViewModel.swift in Sources */,
 				E2D43187288F4980005AFBE0 /* SelectionForm.swift in Sources */,
@@ -1171,6 +1194,7 @@
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */,
 				1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */,
+				E2D325732A098AC1001DD909 /* ReccomendationParent.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				E2A0AA1E29E975C500E9B4D5 /* MatchViewParent.swift in Sources */,
 				E2E0176D277A804300527E24 /* TopPicksChild.swift in Sources */,

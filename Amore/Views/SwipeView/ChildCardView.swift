@@ -185,7 +185,7 @@ struct ChildCardView: View {
                 .foregroundColor(swipeStatus == .none ? colorScheme == .dark ? Color.white: Color.black: Color.white)
             }
             .cornerRadius(10)
-            .padding(.horizontal,10)
+//            .padding(.horizontal,10)
             
         }
         
