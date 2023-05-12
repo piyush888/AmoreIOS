@@ -14,6 +14,8 @@
 		1B38DFC227B8C1A0009B905F /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B38DFC127B8C1A0009B905F /* ChatBubble.swift */; };
 		1B39493427D2DAF300793431 /* HideKeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */; };
 		1B39493627D3263100793431 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39493527D3263100793431 /* CustomScrollView.swift */; };
+		1B43D7F02A0B59F100D7264C /* CarouselView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B43D7EF2A0B59F100D7264C /* CarouselView1.swift */; };
+		1B43D7F22A0B7F6500D7264C /* CustomCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B43D7F12A0B7F6500D7264C /* CustomCarousel.swift */; };
 		1B4ED878270F345E00290FFF /* CardPassions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4ED871270F345E00290FFF /* CardPassions.swift */; };
 		1B58A44F27144FA800565429 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A44E27144FA800565429 /* UIImageExtension.swift */; };
 		1B58A4512715E35300565429 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B58A4502715E35300565429 /* ImageServices.swift */; };
@@ -213,6 +215,8 @@
 		1B38DFC127B8C1A0009B905F /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		1B39493327D2DAF300793431 /* HideKeyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardExtension.swift; sourceTree = "<group>"; };
 		1B39493527D3263100793431 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		1B43D7EF2A0B59F100D7264C /* CarouselView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView1.swift; sourceTree = "<group>"; };
+		1B43D7F12A0B7F6500D7264C /* CustomCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCarousel.swift; sourceTree = "<group>"; };
 		1B4ED871270F345E00290FFF /* CardPassions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPassions.swift; sourceTree = "<group>"; };
 		1B58A44E27144FA800565429 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1B58A4502715E35300565429 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
@@ -676,6 +680,8 @@
 				E2D3256F2A0807E8001DD909 /* ButtonDesign.swift */,
 				E2D325782A09A7F2001DD909 /* ButtonDesign2.swift */,
 				E2FC15C62A0A7101000B9990 /* Proposals.swift */,
+				1B43D7EF2A0B59F100D7264C /* CarouselView1.swift */,
+				1B43D7F12A0B7F6500D7264C /* CustomCarousel.swift */,
 			);
 			path = RecommendationsView;
 			sourceTree = "<group>";
@@ -1090,6 +1096,7 @@
 				E2F7077B29283C6D00DB1FA7 /* BuyMoreRewinds.swift in Sources */,
 				1BB36D3C27AE302200F4029C /* ChatViewModel.swift in Sources */,
 				E273C31E274170D200AA3359 /* ProfileBioHeadline.swift in Sources */,
+				1B43D7F22A0B7F6500D7264C /* CustomCarousel.swift in Sources */,
 				E25B7494280CAAC700C87855 /* PaymentComplete.swift in Sources */,
 				E22D555E27540D5700852D70 /* ServerErrorView.swift in Sources */,
 				E283677926FAA08B00EEA049 /* OnboardingCards.swift in Sources */,
@@ -1131,6 +1138,7 @@
 				E29B293B27234B6B00C38035 /* UserSettingView.swift in Sources */,
 				E2D325792A09A7F2001DD909 /* ButtonDesign2.swift in Sources */,
 				E2ED201F28BA538000BFD32C /* BuyMoreSuperLikesSheet.swift in Sources */,
+				1B43D7F02A0B59F100D7264C /* CarouselView1.swift in Sources */,
 				E27CCEB627E44130006278EB /* IAPFirebaseModel.swift in Sources */,
 				E273C318273E9CBE00AA3359 /* AdminAuthenticationViewModel.swift in Sources */,
 				E2347134271DC4C30006F336 /* CardDetail.swift in Sources */,

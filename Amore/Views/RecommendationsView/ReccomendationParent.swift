@@ -19,6 +19,7 @@ struct ReccomendationParent: View {
     @GestureState var dragOffset: CGSize = .zero
     
     var body: some View {
+        
         GeometryReader { geometry in
             VStack {
                 
