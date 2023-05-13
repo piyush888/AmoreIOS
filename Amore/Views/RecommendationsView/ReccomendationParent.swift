@@ -26,96 +26,78 @@ struct ReccomendationParent: View {
         
         GeometryReader { geometry in
             
-            CustomCarousel(content: { profile, size in
-                MiniCardView(singleProfile: profile,
-                             animation: animation,
-                             geometry:geometry,
-                             miniCardWidth: size.width,
-                             miniCardHeight: size.height)
-            }, id: \.id, items: dataArray, index: $currentIndex)
-            
-//            VStack {
-//
-//                ButtonDesign2(buttonActive:false)
-//
-//                ZStack {
-//                    ScrollView{
-//                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(),spacing: 10), count: 2),spacing: 10){
-//                            ForEach(dataArray) { profile in
-////                                let profile = dataArray[index]
-//                                let index = dataArray.firstIndex(of: profile)
-////                                Button{
-////                                    withAnimation(.spring()){
-////                                        selectedProfile = profile
-////                                        showCardDetail = true
-////                                    }
-////                                } label : {
-//                                    MiniCardView(singleProfile: profile,
-//                                                 animation: animation,
-//                                                 geometry:geometry,
-//                                                 miniCardWidth:geometry.size.width/2.2,
-//                                                 miniCardHeight:geometry.size.height/3)
-//                                    .animation(.interactiveSpring())
-//                                    .offset(x: self.draggedIndex ?? -1 == index ? self.translation.width + self.dragOffset.width : 0, y: 0)
-//                                    .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
-//                                    .gesture(
-//                                            DragGesture()
-//                                                .updating($dragOffset, body: { (value, state, transaction) in
-//                                                    state = value.translation
+            ZStack {
+                VStack {
+                    ButtonDesign2(buttonActive:false)
+                    Spacer()
+                }
+                .zIndex(2)
+                
+                CustomCarousel(content: { profile, size in
+                    MiniCardView(singleProfile: profile,
+                                 animation: animation,
+    //                             geometry:geometry,
+                                 miniCardWidth: size.width,
+                                 miniCardHeight: size.height)
+//                    let index = dataArray.firstIndex(of: profile)
+//                    MiniCardView(singleProfile: profile,
+//                                 animation: animation,
+//                                 miniCardWidth:size.width,
+//                                 miniCardHeight:size.height)
+//                    .animation(.interactiveSpring())
+//                    .offset(x: self.draggedIndex ?? -1 == index ? self.translation.width + self.dragOffset.width : 0, y: 0)
+//                    .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 5), anchor: .bottom)
+//                    .gesture(
+//                            DragGesture()
+//                                .updating($dragOffset, body: { (value, state, transaction) in
+//                                    state = value.translation
 ////                                                    DispatchQueue.main.async {
 ////                                                            // Do Something In Here
 ////                                                    }
-//                                                })
-//                                                .onChanged { value in
-//                                                    let translation = value.translation
-//                                                    let xTranslation = translation.width
-//                                                    let threshold = geometry.size.width / 2
+//                                })
+//                                .onChanged { value in
+//                                    let translation = value.translation
+//                                    let xTranslation = translation.width
+//                                    let threshold = geometry.size.width / 2
 //
-//                                                    withAnimation {
-//                                                        if self.draggedIndex == nil {
-//                                                            self.draggedIndex = index
-//                                                        }
+//                                    withAnimation {
+//                                        if self.draggedIndex == nil {
+//                                            self.draggedIndex = index
+//                                        }
 //
-//                                                       if xTranslation > threshold || xTranslation < -threshold {
-//                                                           if let index = dataArray.firstIndex(of: profile) {
-//                                                               dataArray.remove(at: index)
-//                                                               self.draggedIndex = nil
-//                                                           }
-//                                                       }
-//                                                   }
-//                                                }
-//                                                .onEnded { _ in
-//                                                        withAnimation {
-//                                                            self.draggedIndex = nil
-//                                                        }
-//                                                    }
-//                                        )
-////                                }
-//                            }
-//                        }
-//                        .padding()
-//                    }
-//
-//                }
-//                .sheet(isPresented: $showCardDetail, content: {
-//                    if let selectedItem = selectedProfile {
-//                        ZStack {
-//                            ChildCardView(singleProfile: selectedItem,
-//                                          swipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
-//                                          cardColor: Binding.constant(Color.pink))
-//                            .ignoresSafeArea(.all, edges: .bottom)
-//
-//                            ButtonDesign(buttonActive:false)
-//                        }
-//                    }
-//                })
-//            }
+//                                       if xTranslation > threshold || xTranslation < -threshold {
+//                                           if let index = dataArray.firstIndex(of: profile) {
+//                                               dataArray.remove(at: index)
+//                                               self.draggedIndex = nil
+//                                           }
+//                                       }
+//                                   }
+//                                }
+//                                .onEnded { _ in
+//                                        withAnimation {
+//                                            self.draggedIndex = nil
+//                                        }
+//                                    }
+//                        )
+                    
+                }, id: \.id, items: dataArray, index: $currentIndex)
+                .frame(width: geometry.size.width - 20, height: geometry.size.height/1.2, alignment: .center)
+                .zIndex(0)
+
+            }
+            .sheet(isPresented: $showCardDetail, content: {
+                if let selectedItem = selectedProfile {
+                    ZStack {
+                        ChildCardView(singleProfile: selectedItem,
+                                      swipeStatus: Binding.constant(AllCardsView.LikeDislike.none),
+                                      cardColor: Binding.constant(Color.pink))
+                        .ignoresSafeArea(.all, edges: .bottom)
+
+                        ButtonDesign(buttonActive:false)
+                    }
+                }
+            })
+            
         }
     }
 }
-
-//struct ReccomendationParent_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReccomendationParent()
-//    }
-//}

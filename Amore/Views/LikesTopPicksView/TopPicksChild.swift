@@ -66,7 +66,7 @@ struct TopPicksChild: View {
                                                                                                            selectedTab:selectedTab,
                                                                                                            selectedTabSubView:selectedTabSubView),
                                                          animation: animation,
-                                                         geometry:geometry,
+//                                                         geometry:geometry,
                                                          miniCardWidth:geometry.size.width/2.2,
                                                          miniCardHeight:geometry.size.height/3)
                                         }
@@ -92,7 +92,7 @@ struct TopPicksChild: View {
                                                                                                         selectedTab:selectedTab,
                                                                                                         selectedTabSubView:selectedTabSubView),
                                                       animation: animation,
-                                                      geometry:geometry,
+//                                                      geometry:geometry,
                                                       miniCardWidth:geometry.size.width/3.5,
                                                       miniCardHeight:geometry.size.height/4.5)
                                      }

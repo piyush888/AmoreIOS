@@ -17,7 +17,7 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
     var items: Item
     @Binding var index: Int
     
-    init(@ViewBuilder content: @escaping (Item.Element, CGSize) -> Content, id: KeyPath<Item.Element, ID>, spacing: CGFloat = 30, cardPadding: CGFloat = 80, items: Item, index: Binding<Int>) {
+    init(@ViewBuilder content: @escaping (Item.Element, CGSize) -> Content, id: KeyPath<Item.Element, ID>, spacing: CGFloat = 5, cardPadding: CGFloat = 80, items: Item, index: Binding<Int>) {
         self.content = content
         self.id = id
         self.spacing = spacing
@@ -36,32 +36,35 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
-            let cardWidth = size.width - (cardPadding - spacing)
-            let cardHeight = size.height/1.5
-            LazyHStack(spacing: spacing) {
+            let cardWidth = size.width
+            let cardHeight = size.height - cardPadding
+            LazyVStack(spacing: spacing) {
                 ForEach (items, id:id) { card in
                     
                     let index = indexOf(item: card)
+                    let scale = 1 + (offsetY(index: index, cardWidth: cardWidth) / cardWidth)
                     
-                    content(card, CGSize(width: cardWidth - cardPadding, height: cardHeight))
-                        .frame(width: size.width - cardPadding, height: cardHeight)
-//                        .rotationEffect(.init(degrees: Double(index) * 5), anchor: .bottom)
-//                        .rotationEffect(.init(degrees: rotation), anchor: .bottom)
-                        .offset(y: offsetY(index: index, cardWidth: cardWidth))
+                    content(card, CGSize(width: cardWidth, height: cardHeight))
+                        .frame(width: cardWidth, height: cardHeight)
+                        .scaleEffect(scale <= 0.88 ? 1 : 0.88, anchor:
+                                .center)
+                        .onChange(of: scale) { newValue in
+                            print("scale: \(scale), index: \(index)")
+                        }
 
                 }
             }
-            .offset(x: limitScroll())
+            .offset(y: limitScroll() - CGFloat(CGFloat(index) * spacing))
             .gesture(
                 DragGesture(minimumDistance: 5)
                     .updating($translation, body: { val, out, _ in
-                        out = val.translation.width
+                        out = val.translation.height
                     })
                     .onChanged({ val in
-                        carouselOnChanged(value: val, cardWidth: cardWidth)
+                        carouselOnChanged(value: val, cardHeight: cardHeight)
                     })
                     .onEnded({ val in
-                        carouselOnEnd(value: val, cardWidth: cardWidth)
+                        carouselOnEnd(value: val, cardHeight: cardHeight)
                     })
             )
         }
@@ -85,6 +88,7 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
         let next = (index + 1) == self.index ? (translation < 0 ? -yOffset : yOffset) : 0
         let In_Between = (index - 1) == self.index ? previous : next
         
+//        print("\(index == self.index ? -60 - yOffset : In_Between), \(yOffset), \(previous), \(next), \(In_Between)")
         return index == self.index ? -60 - yOffset : In_Between
     }
     
@@ -102,27 +106,30 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
     func limitScroll() -> CGFloat {
         let extraSpace = (cardPadding / 2) - spacing
         if index == 0 && translation > 0 {
+//            print("if: \((offset / 4) + extraSpace)")
             return (offset / 4) + extraSpace
         }
         else if index == items.count - 1 && translation < 0 {
+//            print("else if: \(offset - (translation / 2))")
             return offset - (translation / 2)
         }
         else {
+//            print("else: \(offset)")
             return offset
         }
     }
     
-    func carouselOnChanged(value: DragGesture.Value, cardWidth: CGFloat) {
-        let translationX = value.translation.width
-        offset = translationX + lastStordedOffset
-        
-        // Rotation Calculation
-        let progress = offset / cardWidth
-        rotation = progress * 5
+    func carouselOnChanged(value: DragGesture.Value, cardHeight: CGFloat) {
+        let translationY = value.translation.height
+        offset = translationY + lastStordedOffset
+//
+//        // Rotation Calculation
+//        let progress = offset / cardHeight
+//        rotation = progress * 5
     }
     
-    func carouselOnEnd(value: DragGesture.Value, cardWidth: CGFloat) {
-        var _index = (offset / cardWidth).rounded()
+    func carouselOnEnd(value: DragGesture.Value, cardHeight: CGFloat) {
+        var _index = (offset / cardHeight).rounded()
         _index = max(-CGFloat(items.count - 1), _index)
         _index = min(_index, 0)
         
@@ -132,10 +139,10 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
         index = -currentIndex
         withAnimation(.easeInOut(duration: 0.25)) {
             let extraSpace = (cardPadding / 2) - spacing
-            offset = (cardWidth * _index) + extraSpace
+            offset = (cardHeight * _index) + extraSpace
             
             // Rotation Calculation
-            let progress = offset / cardWidth
+            let progress = offset / cardHeight
             // since index starts with 0
             rotation = (progress * 5).rounded() - 1
         }
@@ -143,9 +150,3 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
     }
     
 }
-
-//struct CustomCarousel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomCarousel()
-//    }
-//}

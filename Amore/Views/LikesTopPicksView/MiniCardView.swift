@@ -11,7 +11,7 @@ struct MiniCardView: View {
     
     @State var singleProfile: CardProfileWithPhotos
     var animation: Namespace.ID
-    @State var geometry: GeometryProxy
+//    @State var geometry: GeometryProxy
     @State var miniCardWidth: CGFloat
     @State var miniCardHeight: CGFloat
     

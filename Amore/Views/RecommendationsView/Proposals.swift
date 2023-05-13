@@ -70,7 +70,7 @@ struct ProposalsHome: View {
                                             } label : {
                                                 MiniCardView(singleProfile: profile,
                                                              animation: animation,
-                                                             geometry:geometry,
+//                                                             geometry:geometry,
                                                              miniCardWidth:geometry.size.width/2.2,
                                                              miniCardHeight:geometry.size.height/3)
                                             }
@@ -93,7 +93,7 @@ struct ProposalsHome: View {
                                             } label : {
                                                 MiniCardView(singleProfile: profile,
                                                              animation: animation,
-                                                             geometry:geometry,
+//                                                             geometry:geometry,
                                                              miniCardWidth:geometry.size.width,
                                                              miniCardHeight:geometry.size.height/4)
                                             }
