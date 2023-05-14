@@ -35,7 +35,8 @@ struct UserProfile2: View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(spacing: 10) {
+            VStack {
+                
                 // User info section
                 VStack(spacing: 1) {
                     Image("BlogArticle1")
@@ -80,8 +81,10 @@ struct UserProfile2: View {
                     }
                 }
                 
-//                 Safety and Verify Profiles
-                VStack {
+                Spacer()
+                
+                // Safety and Verify Profiles
+                VStack(spacing: 5) {
                     Text("Safety First")
                         .font(.footnote)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -112,8 +115,10 @@ struct UserProfile2: View {
                     }
                 }
                 
+                Spacer()
+                
                 // Consumables
-                VStack(spacing: 10) {
+                VStack(spacing: 5) {
                     Text("Consumables")
                         .font(.footnote)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -121,6 +126,7 @@ struct UserProfile2: View {
                     ConsumablesGrid(consumables:consumables, boxWidth:(geo.size.width - 20) / 4)
                 }
                 
+                Spacer()
                 
                 // Subscription section
                 VStack(spacing: 5) {
