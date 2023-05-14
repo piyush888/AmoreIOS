@@ -85,8 +85,13 @@ struct HomeView: View {
 //                                                .environmentObject(chatViewModel)
 //                                                .environmentObject(mainMessagesModel)
                                             
-                                            ReccomendationParent(dataArray:cardProfileModel.allCardsWithPhotosDeck,
-                                                                 currentPage:$currentPage)
+                                            ReccomendationParent(currentPage:$currentPage)
+                                            .environmentObject(cardProfileModel)
+                                            .environmentObject(reportActivityModel)
+                                            .environmentObject(profileModel)
+                                            .environmentObject(storeManager)
+                                            .environmentObject(chatViewModel)
+                                            .environmentObject(mainMessagesModel)
                                                 .onAppear {
                                                     if filtersChanged {
                                                         /// If change in filters is detected when switching to this view
