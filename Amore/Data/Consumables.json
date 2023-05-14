@@ -1,0 +1,23 @@
+[
+    {
+      "iconName": "star.circle.fill",
+      "name": "Proposals",
+      "count": "10"
+    },
+    {
+      "iconName": "bolt.circle.fill",
+      "name": "Boosts",
+      "count": "5"
+    },
+    {
+      "iconName": "message.circle.fill",
+      "name": "DMs",
+      "count": "20"
+    },
+    {
+      "iconName": "arrow.counterclockwise.circle.fill",
+      "name": "Replays",
+      "count": "3"
+    }
+]
+

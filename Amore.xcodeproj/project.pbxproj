@@ -188,6 +188,8 @@
 		E2F8AA6626F948BD00CC7A72 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F8AA6526F948BD00CC7A72 /* Fonts.swift */; };
 		E2F968A52897FDD20000695E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F968A42897FDD20000695E /* OnboardingView.swift */; };
 		E2FC15C72A0A7101000B9990 /* Proposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC15C62A0A7101000B9990 /* Proposals.swift */; };
+		E2FC15CB2A0EE435000B9990 /* UserProfile2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC15CA2A0EE435000B9990 /* UserProfile2.swift */; };
+		E2FC15CD2A0EF0BD000B9990 /* Consumables.json in Resources */ = {isa = PBXBuildFile; fileRef = E2FC15CC2A0EF0BD000B9990 /* Consumables.json */; };
 		E2FE1395271B661C005E2BB9 /* OnboardingAllCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */; };
 		E2FE1398271B67E4005E2BB9 /* LogInButtonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */; };
 		E2FE49BE275177C500744930 /* DeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE49BD275177C500744930 /* DeckCards.swift */; };
@@ -392,6 +394,8 @@
 		E2F8AA6526F948BD00CC7A72 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E2F968A42897FDD20000695E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E2FC15C62A0A7101000B9990 /* Proposals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proposals.swift; sourceTree = "<group>"; };
+		E2FC15CA2A0EE435000B9990 /* UserProfile2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile2.swift; sourceTree = "<group>"; };
+		E2FC15CC2A0EF0BD000B9990 /* Consumables.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Consumables.json; sourceTree = "<group>"; };
 		E2FE1394271B661C005E2BB9 /* OnboardingAllCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAllCards.swift; sourceTree = "<group>"; };
 		E2FE1397271B67E4005E2BB9 /* LogInButtonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButtonSheet.swift; sourceTree = "<group>"; };
 		E2FE49BD275177C500744930 /* DeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCards.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 				E2851CB327277D7A005B19E1 /* ContactSupport.swift */,
 				E2DBC02E272D8E06000630F5 /* SettingEditProfileSafety.swift */,
 				E25B7493280CAAC700C87855 /* PaymentComplete.swift */,
+				E2FC15CA2A0EE435000B9990 /* UserProfile2.swift */,
 			);
 			path = UserSettingsView;
 			sourceTree = "<group>";
@@ -620,6 +625,7 @@
 			isa = PBXGroup;
 			children = (
 				E283677B26FAA7B700EEA049 /* Onboarding.json */,
+				E2FC15CC2A0EF0BD000B9990 /* Consumables.json */,
 				E2D43188288F60AF005AFBE0 /* EditCardFormData.json */,
 				E2BEC0862976127A00549FBC /* SafetyQuizData.json */,
 			);
@@ -993,6 +999,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2FC15CD2A0EF0BD000B9990 /* Consumables.json in Resources */,
 				E25911A7287B15C500028152 /* AppLoadingLottie.json in Resources */,
 				E2869324287B86DA0079701F /* SuperLikeLottie.json in Resources */,
 				E26B4A962868B9FB0020C81D /* radiate.riv in Resources */,
@@ -1202,6 +1209,7 @@
 				1BC8BE0C2705CC5E00F0137E /* Passions.swift in Sources */,
 				E2A9610327CC89FF009108F0 /* StoreManager.swift in Sources */,
 				1BDBB64E28ACDB9B006DC890 /* DiscoveryDisabled.swift in Sources */,
+				E2FC15CB2A0EE435000B9990 /* UserProfile2.swift in Sources */,
 				E2D325732A098AC1001DD909 /* ReccomendationParent.swift in Sources */,
 				E237CED926FD391D004F20AB /* SignUp.swift in Sources */,
 				E2A0AA1E29E975C500E9B4D5 /* MatchViewParent.swift in Sources */,
