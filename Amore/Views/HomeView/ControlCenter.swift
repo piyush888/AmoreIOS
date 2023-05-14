@@ -43,6 +43,12 @@ struct ControlCenter: View {
                     .strokeStyle(cornerRadius:0)
                     .opacity(0.2)
             )
+            .background(
+                RoundedRectangle(cornerRadius: 0, style: .continuous)
+                    .fill(Color.white)
+                    .strokeStyle(cornerRadius:0)
+                    .opacity(1)
+            )
             .strokeStyle(cornerRadius:34)
             
     }
