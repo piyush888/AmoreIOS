@@ -45,7 +45,7 @@ struct ControlCenter: View {
             )
             .background(
                 RoundedRectangle(cornerRadius: 0, style: .continuous)
-                    .fill(Color.white)
+                    .fill(Color(UIColor.systemBackground))
                     .strokeStyle(cornerRadius:0)
                     .opacity(1)
             )
