@@ -53,10 +53,17 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
                     let index = indexOf(item: card)
                     let scale = 1 + (offsetY(index: index, cardWidth: cardWidth) / cardWidth)
                     
+                    // Issues
+                    //. Maybe scroll view is obviously a better solution? takes away one degree of translation
+                    /// We don't need to scale down if user is swiping horizontally, solution: add some condition or improve the code
+                    /// Index fuck up may be due the scale effect as height of the card is fluctuating
+                    /// We explore a circular queue or we reduce the padding from the last or first card
+                    /// View gets reset when the tab is changed ~ may be store the index from content view or change design of where this view is loading?
+                    /// Increase the sensitivity of the vertical scroll
                     content(card, CGSize(width: cardWidth, height: cardHeight))
                         .frame(width: cardWidth, height: cardHeight)
-                        .scaleEffect(scale <= 0.88 ? 1 : 0.88, anchor:
-                                .center)
+                        .scaleEffect(scale <= 0.88 ? 1 : 0.88, anchor:.center)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.6))
                         .offset(x: calculateXOffset(index: index), y: 0)
 
                 }
@@ -70,16 +77,19 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
                     .onChanged({ val in
                         if abs(val.translation.width) < abs(val.translation.height) + 30 {
                             carouselOnChanged(value: val, cardHeight: cardHeight)
-                            print("Vertical onChanged: \(val.translation.width), \(val.translation.height)")
+//                            print("Vertical onChanged: \(val.translation.width), \(val.translation.height)")
                         }
                         else{
                             cardSwipeOnChanged(value: val, cardHeight: cardHeight)
-                            print("Horizontal onChanged: \(val.translation.width), \(val.translation.height)")
+//                            print("Horizontal onChanged: \(val.translation.width), \(val.translation.height)")
                         }
                     })
                     .onEnded({ val in
-                        cardSwipeOnEnded(value: val, geometry: proxy)
-                        carouselOnEnd(value: val, cardHeight: cardHeight)
+                        if abs(val.translation.width) > abs(val.translation.height) {
+                            cardSwipeOnEnded(value: val, geometry: proxy)
+                        } else {
+                            carouselOnEnd(value: val, cardHeight: cardHeight)
+                        }
                     })
             )
         }
@@ -101,10 +111,10 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
         // MARK: Checking Previous, Next And In-Between Offsets
         let previous = (index - 1) == self.index ? (translation.width < 0 ? yOffset : -yOffset) : 0
         let next = (index + 1) == self.index ? (translation.width < 0 ? -yOffset : yOffset) : 0
-        let In_Between = (index - 1) == self.index ? previous : next
+        let inBetween = (index - 1) == self.index ? previous : next
         
-//        print("\(index == self.index ? -60 - yOffset : In_Between), \(yOffset), \(previous), \(next), \(In_Between)")
-        return index == self.index ? -60 - yOffset : In_Between
+//        print("\(index == self.index ? -60 - yOffset : inBetween), \(yOffset), \(previous), \(next), \(inBetween)")
+        return index == self.index ? -60 - yOffset : inBetween
     }
     
     func indexOf(item: Item.Element) -> Int {
@@ -135,7 +145,8 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
     }
     
     func calculateXOffset(index: Int) -> CGFloat {
-        let xCalculatedOffset = self.translation.width + self.horizontalTranslation.width
+//        let xCalculatedOffset = self.translation.width + self.horizontalTranslation.width
+        let xCalculatedOffset = self.translation.width
         return self.draggedIndex ?? -1 == index ? xCalculatedOffset : 0
     }
     
@@ -178,14 +189,14 @@ struct CustomCarousel<Content: View, Item, ID>: View where Item: RandomAccessCol
         // Updating Index
         //Since moving on right side, all data will be negative
         index = -currentIndex
-        print("Horizontal onChanged: \(value)")
+//        print("Horizontal onChanged: \(value)")
         if self.draggedIndex == nil {
             self.draggedIndex = self.index
         }
     }
     
     func cardSwipeOnEnded(value: DragGesture.Value, geometry: GeometryProxy){
-        print("Horizontal onEnded: \(value)")
+//        print("Horizontal onEnded: \(value)")
         // determine snap distance > 0.5 aka half the width of the screen
         let cardGesturePct = self.getGesturePercentage(geometry, from: value)
         if abs(cardGesturePct) > 0.5 {

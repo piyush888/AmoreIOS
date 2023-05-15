@@ -221,7 +221,7 @@ struct ConsumablesGrid: View {
                     VStack(spacing:2) {
                         Image(systemName: consumable.iconName ?? "message.circle.fill")
                             .font(.title)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color(hex:0xB8C7F4))
                         Text(consumable.count ?? "")
                     }
                     .padding([.top, .bottom], 10)
